@@ -27,8 +27,8 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../../../assets/logo.jpg" height="55" alt="MDB Logo" loading="lazy" />
+      <a class="navbar-brand logo-in-top" href="#">
+        <img src="../../../assets/logo_.png" height="55" alt="MDB Logo" loading="lazy" />
       </a>
     </div>
   </nav>
@@ -42,13 +42,14 @@
     background-size: cover;">
   <div class="mask cover" style="background-color: rgba(0, 0, 0, 0.880);">
 
-    <div class="row p-5" style="margin-top: 15%; height: 45%; position: relative; background-color: rgba(20, 108, 13, 0.3);">
-     
-      <div class="col-md-8">logomax</div>
+    <div class="row p-5 fundo-verde">
+
+      <div class="col-md-8"> <img src="../../../assets/logo_.png" height="200" class="main-logo" alt="MDB Logo"
+          loading="lazy" /></div>
 
       <div class="col-md-4">
         <div class="card text-white bg-card mb-1 w-60">
-          <div class="card-header border-0">Login</div>
+          <div class="card-header border-0"><!--i class="fas fa-user-circle fa-8x avatar"></i-->Login</div>
           <div class="card-body p-4">
             <div class="input-group input-group-lg mb-3">
               <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
@@ -67,12 +68,13 @@
 
             <div class="row" style="margin-top: 8%;">
               <div class="col-md-6"></div>
-              <div class="col-md-6" style="font-size: 10px;">Esqueceu-se da palavra passe?</div>
+              <div class="col-md-6 forgot-pass" style="font-size: 12px; color: #F2F2F2;"> <a [routerLink]="['/recpass']"
+                  routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a></div>
             </div>
 
           </div>
         </div>
-        <button type="button" class="btn btn-color btn-lg">Entrar</button>
+        <div><button type="button" class="btn btn-color btn-lg">Entrar</button></div>
       </div>
 
     </div>

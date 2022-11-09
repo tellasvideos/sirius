@@ -1,4 +1,8 @@
-.btn-color{
+.avatar{
+    position: relative;
+    margin-top: -21%;
+}
+.btn-color {
     background-color: #146C0D;
     color: #F2F2F2;
     width: 250px;
@@ -6,7 +10,7 @@
     margin-top: 75%;
 }
 
-.bg-card{
+.bg-card {
     background-color: #262626;
     margin-top: -5%;
     position: absolute;
@@ -14,7 +18,186 @@
     width: 30%;
 }
 
-.card-body{
-    margin-top: 14%;
+.card-body {
+    margin-top: 12%;
 }
 
+.fundo-verde {
+    margin-top: 15%;
+    height: 45%;
+    position: relative;
+    background-color: rgba(20, 108, 13, 0.3);
+}
+
+.forgot-pass{
+    color: #F2F2F2;
+}
+
+a{
+    color: #F2F2F2;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 500px) {
+
+    // centralizar logo
+    .logo-in-top {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-logo {
+        display: none;
+    }
+
+    .bg-card {
+        background-color: #262626;
+        margin-top: 0%;
+        //position: absolute;
+        height: 70%;
+        width: 75%;
+    }
+
+    .card-body {
+        margin-top: -10%;
+    }
+
+    .btn-color {
+        margin-top: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+
+    }
+
+    .fundo-verde {
+        margin-top: 20%;
+        height: 60%;
+        position: relative;
+        background-color: rgba(20, 108, 13, 0.3);
+    }
+
+}
+
+@media (min-width: 502px) and (max-width: 767px) {
+
+    // centralizar logo
+    .logo-in-top {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-logo {
+        display: none;
+    }
+
+    .bg-card {
+        background-color: #262626;
+        margin-top: 0%;
+        //position: absolute;
+        height: 80%;
+        width: 80%;
+    }
+
+    .card-body {
+        margin-top: -5%;
+    }
+
+    .btn-color {
+        margin-top: 57%;
+        width: 70%;
+    }
+
+    .fundo-verde {
+        margin-top: 15%;
+        height: 58%;
+        position: relative;
+        background-color: rgba(20, 108, 13, 0.3);
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .main-logo {
+        height: 120px;
+    }
+
+    .btn-color {
+        background-color: #146C0D;
+        color: #F2F2F2;
+        width: 100%;
+        //position: relative;
+        margin-top: 84%;
+        margin-left: 6%;
+    }
+
+    .bg-card {
+        background-color: #262626;
+        margin-top: -5%;
+        position: absolute;
+        height: 90%;
+        width: 30%;
+    }
+
+    .card-body {
+        margin-top: -10%;
+    }
+
+    .fundo-verde {
+        margin-top: 25%;
+        height: 40%;
+        position: relative;
+        background-color: rgba(20, 108, 13, 0.3);
+    }
+
+    .forgot-pass {
+        display: none;
+    }
+
+
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+    .main-logo {
+        height: 120px;
+    }
+
+    .btn-color {
+        background-color: #146C0D;
+        color: #F2F2F2;
+        width: 100%;
+        //position: relative;
+        margin-top: 68%;
+        margin-left: 2%;
+    }
+
+    .bg-card {
+        background-color: #262626;
+        margin-top: -5%;
+        position: absolute;
+        height: 90%;
+        width: 30%;
+    }
+
+    .card-body {
+        margin-top: -10%;
+    }
+
+    .fundo-verde {
+        margin-top: 25%;
+        height: 40%;
+        position: relative;
+        background-color: rgba(20, 108, 13, 0.3);
+    }
+
+    .forgot-pass {
+        display: none;
+    }
+
+}
