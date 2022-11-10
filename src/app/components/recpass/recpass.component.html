@@ -1,1 +1,40 @@
-<p>recpass works!</p>
+<div style="background-image: url('../../assets/fundorecpass.jpg');
+height: 100vh;
+background-repeat: no-repeat;
+background-size: cover;">
+    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
+        <div class="row p-5 ">
+
+            <div class="col-12">
+                <div class="card text-white bg-card mb-1 w-50">
+                    <div class="card-title">
+                        <h6>Recuperar palavra passe</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group input-group-lg mb-4">
+                            <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
+                                <i class="far fa-envelope"></i>
+                            </a>
+                            <input type="email" class="form-control" placeholder=""
+                                aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                        </div>
+                        <div class="btn-position">
+                            <button type="button" class="btn btn-color btn-lg">Enviar código para o meu email</button>
+                        </div>
+
+                        <div class="row" style="margin-top: 8%;">
+                            <div class="col-md-6"> <a
+                                    style="font-size: 12px; color: #005E00; text-transform: uppercase;"
+                                    [routerLink]="['/']" routerLinkActive="router-link-active">Login</a></div>
+                        </div>
+
+                        <div class="col-md-6"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
