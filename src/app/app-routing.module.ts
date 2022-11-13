@@ -18,6 +18,7 @@ import { RecpassComponent } from './components/recpass/recpass.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 
 
 // configuração de rotas
@@ -37,7 +38,8 @@ const routes: Routes = [
   { path: 'recpass', component: RecpassComponent },
   { path: 'usuaio', component: UsuarioComponent },
   { path: 'header', component: HeaderComponent },
-  { path: 'footer', component: FooterComponent }
+  { path: 'footer', component: FooterComponent },
+  {path: 'sidenav', component: SidenavComponent}
 ];
 
 

@@ -21,7 +21,16 @@ import { InqueritoComponent } from './components/inquerito/inquerito.component';
 import { GestaoambientalComponent } from './components/gestaoambiental/gestaoambiental.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 
+
+// Angular Materials
+import { MatSliderModule } from '@angular/material/slider';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 // MDB UI KITS
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
@@ -61,7 +70,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InqueritoComponent,
     GestaoambientalComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +92,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
+    MatSliderModule,
+    MatDividerModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
