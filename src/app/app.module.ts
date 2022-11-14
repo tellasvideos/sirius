@@ -21,7 +21,7 @@ import { InqueritoComponent } from './components/inquerito/inquerito.component';
 import { GestaoambientalComponent } from './components/gestaoambiental/gestaoambiental.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { SidenavComponent } from './layouts/sidenav/sidenav.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 // Angular Materials

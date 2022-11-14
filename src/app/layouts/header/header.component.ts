@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
 
 @Component({
@@ -7,18 +7,21 @@ import { DashboardComponent } from 'src/app/components/dashboard/dashboard.compo
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  //img: any;
-
+  @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter()
+  //logoOn = '../../../assets/logo.jpg';
   constructor() { }
 
   hideImg() {
-   document.getElementById('img')
+    //this.logoOn = '../../../assets/logo.jpg';
   }
   
 
   ngOnInit(): void {
     //this.hideImg();
+  }
+
+  toggleSideBar(){
+    this.toggleSidebarForMe.emit();
   }
 
 }

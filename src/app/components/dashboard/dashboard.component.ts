@@ -8,12 +8,18 @@ import { HeaderComponent } from 'src/app/layouts/header/header.component';
 })
 export class DashboardComponent implements OnInit {
 
-  imgOnheader: any;
+  logoOn: any;
+
+  sideBarOpen = true;
 
   constructor( public img: HeaderComponent ) { }
 
   ngOnInit(): void {
-   //this.img.hideImg() === this.imgOnheader
+   //this.logoOn === this.img.hideImg();
+  }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
   }
 
 }

@@ -1,8 +1,40 @@
 <!-- Just an image -->
-<nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+<!--nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="../../../assets/logo.jpg" height="55" alt="MDB Logo" loading="lazy" />
+            <img [src]="logoOn" height="55" alt="MDB Logo" loading="lazy" />
         </a>
     </div>
-</nav>
+</nav-->
+
+<mat-toolbar>
+    <mat-toolbar-row class="justify-content-between">
+        <button mat-icon-button (click)="toggleSideBar()"><mat-icon>menu</mat-icon></button>
+        <div class="row mr-2 ml-auto">
+            <ul>
+                <li>
+                    <button 
+                    mat-button 
+                    [matMenuTriggerFor]="menu" 
+                    class="user mt-2 d-flex align-items-center"
+                    >
+                        <img 
+                        src="../../../assets/user.jpg" 
+                        alt="" 
+                        class="user-image mr-1 p-2"
+                        />
+                        user Name
+                        <mat-icon class="user-image-icon ml-1">
+                            keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            sair
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

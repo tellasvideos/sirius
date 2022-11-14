@@ -18,7 +18,7 @@ import { RecpassComponent } from './components/recpass/recpass.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { SidenavComponent } from './layouts/sidenav/sidenav.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 // configuração de rotas
