@@ -23,11 +23,12 @@ import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 
 // configuração de rotas
 const routes: Routes = [
+ // { path: '', redirectTo:'dashboard', pathMatch:'full' },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '', component: HomeComponent },
   { path: 'andamentomanifes', component: AndamentomanifesComponent },
   { path: 'cadeiadevalor', component: CadeiadevalorComponent },
   { path: 'cvintesses', component: CvintessesComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'departamento', component: DepartamentoComponent },
   { path: 'gestaoambiental', component: GestaoambientalComponent },
   { path: 'inquerito', component: InqueritoComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
   { path: 'interesses', component: InteressesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recpass', component: RecpassComponent },
-  { path: 'usuaio', component: UsuarioComponent },
+  { path: 'usuario', component: UsuarioComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
   {path: 'sidenav', component: SidenavComponent}
