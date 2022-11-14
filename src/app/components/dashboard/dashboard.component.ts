@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderComponent } from 'src/app/layouts/header/header.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  imgOnheader: any;
+
+  constructor( public img: HeaderComponent ) { }
 
   ngOnInit(): void {
+   //this.img.hideImg() === this.imgOnheader
   }
 
 }
