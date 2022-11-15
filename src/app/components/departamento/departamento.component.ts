@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartamentoComponent implements OnInit {
 
+  sideBarOpen = true;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 }
