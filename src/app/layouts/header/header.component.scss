@@ -2,7 +2,7 @@ mat-toolbar{
     position: sticky;
     top:0;
     z-index: 100;
-    background: #f7f7f7;
+    background: #FAFAFA;
 }
 
 ul{
@@ -38,3 +38,31 @@ button{
         width: 160px;
     }
 }
+
+
+// search-bar ------------------------------------
+
+.form-control{
+    border-color: black;
+    border-radius: 100%;
+}
+
+.form-control {
+  border-color: transparent;
+  color: #2CBF04;
+}
+
+.input-group>.form-control:focus {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.form-control::placeholder {
+  color: #262626;
+}
+
+.fa-search{
+    color: #2CBF04;
+}
+
+// search-bar ------------------------------------
