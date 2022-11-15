@@ -19,6 +19,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 
 // configuração de rotas
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'usuario', component: UsuarioComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  {path: 'sidenav', component: SidenavComponent}
+  {path: 'sidenav', component: SidenavComponent},
+  {path: 'sidebar', component: SidebarComponent}
 ];
 
 

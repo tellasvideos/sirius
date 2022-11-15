@@ -22,6 +22,7 @@ import { GestaoambientalComponent } from './components/gestaoambiental/gestaoamb
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 
 // Angular Materials
@@ -54,6 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +75,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GestaoambientalComponent,
     HeaderComponent,
     FooterComponent,
-    SidenavComponent
+    SidenavComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
