@@ -1,15 +1,26 @@
-:host{
+:host {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-mat-drawer{
+mat-drawer {
     width: 270px;
     background: #F2F2F2;
-   
+
 }
 
-mat-drawer-container{
+mat-drawer-container {
     height: 100%;
+}
+
+.div-border {
+    color: #eaeaea;
+    height: 180px;
+    /*Altura da linha*/
+    border-left: 3px solid;
+    /* Adiciona borda esquerda na div como ser fosse uma linha.*/
+    h5{
+        color: black;
+    }
 }

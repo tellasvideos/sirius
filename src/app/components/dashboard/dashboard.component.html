@@ -1,13 +1,71 @@
-
 <mat-drawer-container>
+    <!-- Sidenav and sidebar-->
     <mat-drawer mode="side" [opened]="sideBarOpen">
         <app-sidenav></app-sidenav>
     </mat-drawer>
     <mat-drawer mode="side" position="end" opened>
         <app-sidebar></app-sidebar>
     </mat-drawer>
+    <!-- Sidenav and sidebar-->
+
+    <!-- Dashboard full content-->
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
         <router-outlet></router-outlet>
+
+
+        <!-- Cadeia de valores e gráico de users-->
+        <div class="row mb-3" style="margin-left: 4%; margin-right: 4%;">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cadeia de Valores</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title text-black ">Ativos</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-title text-black">Total</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cadeia de valores e gráico de users-->
+
+        <!-- Instituições / Departamentos / Manifestação de interesses-->
+        <div class="row" style="margin-left: 4%; margin-right: 4%;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="card-title text-black">Instituições</h5>
+                            </div>
+                            <div class="col-4 div-border">
+                                <h5 class="card-title">Departamentos</h5>
+                            </div>
+                            <div class="col-4 div-border">
+                                <h5 class="card-title">Interesses</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Instituições / Departamentos / Manifestação de interesses-->
+
+        <!-- Ultimas actividades -->
+        
+        <!-- Ultimas actividades -->
+
     </mat-drawer-content>
+    <!-- Dashboard full content... end-->
 </mat-drawer-container>
