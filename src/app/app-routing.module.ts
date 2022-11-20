@@ -20,6 +20,8 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { AddInteressesComponent } from './components/add-interesses/add-interesses.component';
 
 
 // configuração de rotas
@@ -42,7 +44,9 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
   {path: 'sidenav', component: SidenavComponent},
-  {path: 'sidebar', component: SidebarComponent}
+  {path: 'sidebar', component: SidebarComponent},
+  {path: 'create-user', component: CreateUserComponent},
+  {path: 'add-interesses', component: AddInteressesComponent}
 ];
 
 
