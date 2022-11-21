@@ -1,9 +1,9 @@
 <mat-drawer-container>
     <!-- Sidenav and sidebar-->
-    <mat-drawer mode="side" [opened]="sideBarOpen">
+    <mat-drawer class="sidenav" mode="side" [opened]="sideBarOpen">
         <app-sidenav></app-sidenav>
     </mat-drawer>
-    <mat-drawer mode="side" position="end" opened>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
         <app-sidebar></app-sidebar>
     </mat-drawer>
     <!-- Sidenav and sidebar-->
@@ -15,9 +15,9 @@
 
 
         <!-- Cadeia de valores e gráfico de users-->
-        <div class="row mb-3" style="margin-left: 4%; margin-right: 4%;">
+        <div class="row mb-3 cards1" style="margin-left: 4%; margin-right: 4%;">
             <div class="col-4">
-                <div class="card h-100">
+                <div class="card h-100 vch">
                     <div class="card-body">
                         <h5 class="card-title-card text-black mb-4 d-flex justify-content-between px-md-1">Cadeia de
                             Valores<i class="fas fa-ellipsis-h"></i></h5>

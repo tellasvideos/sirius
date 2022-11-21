@@ -19,13 +19,14 @@ mat-drawer-container {
     height: 180px;
     /*Altura da linha*/
     border-left: 3px solid;
+
     /* Adiciona borda esquerda na div como ser fosse uma linha.*/
-    h5{
+    h5 {
         color: black;
     }
 }
 
-.card-title-card{
+.card-title-card {
     font-weight: bold;
     font-size: 14px;
 }
@@ -39,4 +40,98 @@ body {
 .nav-tabs .nav-link.active {
     color: #673ab7;
     border-color: #673ab7;
+}
+
+/* Extra small devices (phones, Galaxy Fold 240px and 450px) */
+@media (min-width: 240px) and (max-width: 450px) {
+    .sidebar{
+        display: none;
+    }
+
+    .cards1{
+        display: block;
+
+        .card{
+            margin-bottom: 10%;
+            width: 100%;
+        }
+
+        .vch{
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 451px) and (max-width: 599px) {
+
+    .sidebar{
+        display: none;
+    }
+
+    .cards1{
+        display: block;
+
+        .card{
+            margin-bottom: 5%;
+            width: 100%;
+        }
+
+        .vch{
+            display: none;
+        }
+    }
+
+}
+
+/* Extra small devices (phones, 600px and 768px) */
+@media (min-width: 600px) and (max-width: 767px) {
+
+    .sidebar{
+        display: none;
+    }
+
+    .cards1{
+
+        .card{
+            margin-bottom: 5%;
+            .fas{
+                display: none;
+            }
+        }
+
+    }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .sidebar{
+        display: none;
+    }
+
+    .cards1{
+
+        .card{
+            margin-bottom: 5%;
+            .fas{
+                display: none;
+            }
+        }
+
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }
