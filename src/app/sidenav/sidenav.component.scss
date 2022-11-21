@@ -1,91 +1,236 @@
-
-.logo{
+.logo {
     text-align: start;
     margin-left: 2.5rem;
     margin-bottom: 1.5%;
 }
 
-.mat-icon{
+.mat-icon {
     vertical-align: center;
 }
 
-.btn{
+.btn {
     //height: 60px;
     padding: 17px;
     color: #F2F2F2;
     background-color: #262626 !important;
 }
 
-button:hover{
+button:hover {
     background: #2CBF04 !important;
 }
 
-.active{
-   background: #2CBF04 !important;
+.active {
+    background: #2CBF04 !important;
 }
 
-.btn-toolbar{
+.btn-toolbar {
     margin-left: 2.5rem;
     color: #F2F2F2 !important;
 }
 
-.title-items{
+.title-items {
     margin-left: 22%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items2{
+.title-items2 {
     margin-left: 11%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items-user{
+.title-items-user {
     margin-left: 17%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items-ManI{
+.title-items-ManI {
     margin-left: 16%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items-Dep{
+.title-items-Dep {
     margin-left: 7.5%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items-CadV{
+.title-items-CadV {
     margin-left: 15%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-item-AndM{
+.title-item-AndM {
     margin-left: 13%;
     font-size: 11px;
-    font-weight: bold;   
+    font-weight: bold;
 }
 
-.title-items-Inst{
+.title-items-Inst {
     margin-left: 7%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-items-Inquir{
+.title-items-Inquir {
     margin-left: 6%;
     font-size: 11px;
     font-weight: bold;
 }
 
-.title-item-Inq{
+.title-item-Inq {
     margin-left: 23%;
-    font-size: 11px; 
-    font-weight: bold; 
+    font-size: 11px;
+    font-weight: bold;
 }
 
+
+
+/* Extra small devices (phones, Galaxy Fold 240px and 450px) */
+@media (min-width: 240px) and (max-width: 450px) {
+    .title-items {
+        display: none;
+    }
+
+    .title-items2 {
+        display: none;
+    }
+
+    .title-items-user {
+        display: none;
+    }
+
+    .title-items-ManI {
+        display: none;
+    }
+
+    .title-items-Dep {
+        display: none;
+    }
+
+    .title-items-CadV {
+        display: none;
+    }
+
+    .title-item-AndM {
+        display: none;
+    }
+
+    .title-items-Inst {
+        display: none;
+
+    }
+
+    .title-items-Inquir {
+        display: none;
+    }
+
+    .title-item-Inq {
+        display: none;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 599px) {
+
+    .title-items {
+        display: none;
+    }
+
+    .title-items2 {
+        display: none;
+    }
+
+    .title-items-user {
+        display: none;
+    }
+
+    .title-items-ManI {
+        display: none;
+    }
+
+    .title-items-Dep {
+        display: none;
+    }
+
+    .title-items-CadV {
+        display: none;
+    }
+
+    .title-item-AndM {
+        display: none;
+    }
+
+    .title-items-Inst {
+        display: none;
+
+    }
+
+    .title-items-Inquir {
+        display: none;
+    }
+
+    .title-item-Inq {
+        display: none;
+    }
+
+}
+
+/* Extra small devices (phones, 600px and 768px) */
+@media (min-width: 600px) and (max-width: 767px) {
+
+    .title-items {
+        display: none;
+    }
+
+    .title-items2 {
+        display: none;
+    }
+
+    .title-items-user {
+        display: none;
+    }
+
+    .title-items-ManI {
+        display: none;
+    }
+
+    .title-items-Dep {
+        display: none;
+    }
+
+    .title-items-CadV {
+        display: none;
+    }
+
+    .title-item-AndM {
+        display: none;
+    }
+
+    .title-items-Inst {
+        display: none;
+
+    }
+
+    .title-items-Inquir {
+        display: none;
+    }
+
+    .title-item-Inq {
+        display: none;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {}
+
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
