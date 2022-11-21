@@ -22,6 +22,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddInteressesComponent } from './components/add-interesses/add-interesses.component';
+import { AddInquiridorComponent } from './components/add-inquiridor/add-inquiridor.component';
 
 
 // configuração de rotas
@@ -46,7 +47,9 @@ const routes: Routes = [
   {path: 'sidenav', component: SidenavComponent},
   {path: 'sidebar', component: SidebarComponent},
   {path: 'create-user', component: CreateUserComponent},
-  {path: 'add-interesses', component: AddInteressesComponent}
+  {path: 'add-interesses', component: AddInteressesComponent},
+  {path: 'add-inquiridor', component: AddInquiridorComponent}
+
 ];
 
 

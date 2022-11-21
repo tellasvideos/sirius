@@ -4,7 +4,12 @@
     height: 100%;
 }
 
+body {
+    overflow: hidden; /* Hide scrollbars */
+  }
+
 mat-drawer{
+    overflow: hidden;
     width: 270px;
     background: #F2F2F2;
 }
@@ -12,3 +17,31 @@ mat-drawer{
 mat-drawer-container{
     height: 100%;
 }
+
+.list-user-text {
+    font-size: 14px;
+    color: #262626;
+    font-weight: bold;
+}
+
+.btn-top{
+    text-transform: capitalize;
+    background-color: #2CBF04;
+    width: 100%;
+}
+
+.linhas1{
+    color: #eaeaea;
+    //border-top: 2px solid;
+    //border-left: 2px solid;
+    //border-right: 2px solid;
+    border: 2px solid;
+   
+}
+
+
+
+.form-check{
+    color: #2CBF04;
+}
+

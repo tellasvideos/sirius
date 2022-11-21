@@ -54,6 +54,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddInteressesComponent } from './components/add-interesses/add-interesses.component';
+import { AddInquiridorComponent } from './components/add-inquiridor/add-inquiridor.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { AddInteressesComponent } from './components/add-interesses/add-interess
     SidenavComponent,
     SidebarComponent,
     CreateUserComponent,
-    AddInteressesComponent
+    AddInteressesComponent,
+    AddInquiridorComponent
   ],
   imports: [
     BrowserModule,

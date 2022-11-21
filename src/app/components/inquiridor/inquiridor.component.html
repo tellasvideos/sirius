@@ -5,7 +5,144 @@
     <mat-drawer mode="side" position="end" opened>
         <app-sidebar></app-sidebar>
     </mat-drawer>
+
+    <!-- Man interesses full content-->
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <!-- Man interesses list-->
+        <div class="row mt-4" style="margin-left: 8%; margin-right: -9%;">
+            <div class="col-4">
+                <h5 class="list-user-text text-black mb-4">Inquiridor</h5>
+            </div>
+            <div class="col-8">
+                <div class="row justify-content-between px-md-1">
+                    <div class="col-2"></div>
+                    <div class="col-10">
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-light text-black"
+                                    style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
+                            </div>
+                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                                <button type="button" class="btn btn-light text-black"
+                                    style="text-transform: capitalize;">Exportar</button>
+                            </div>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                                <button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
+                                        class="fas fa-plus-square text-black"></i> Add Inquiridor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Man interesses list-->
+
+        <!-- Second section or Man-interesse table -->
+        <div class="row mt-3 linhas1" style="margin-left: 1%; margin-right: 1%;">
+            <div class="row mt-2" style="margin-left: 25%; margin-right:25%; display: block;">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                                class="fas fa-industry"></i> Tipo/Produção</button>
+                    </div>
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                                class="fas fa-map-marker-alt"></i> Província</button>
+                    </div>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                                class="fas fa-plus-square text-black"></i> Estado</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between px-mb-1 mt-3 mb-1">
+                <div class="col-6 text-black">
+                    <h5 style="font-size: 10px;  margin-left: 5%;">Mostrando 4 de 100 usuários</h5>
+                </div>
+                <div class="col-6 text-black">
+                    <h5 style="font-size: 10px; margin-left: 70%;">Resultado por página</h5>
+                </div>
+            </div>
+            <div class="col-2 text-black text-center mb-2 d-none">Nome</div>
+            <div class="col-2 text-black text-center mb-2 d-none">Departamento</div>
+            <div class="col-2 text-black text-center mb-2 d-none">Função</div>
+            <div class="col-2 text-black text-center mb-2 d-none">isAdmin</div>
+            <div class="col-2 text-black text-center mb-2 d-none">UserName</div>
+            <div class="col-2 text-black text-center mb-2 d-none">Password</div>
+        </div>
+        <!-- Second section or Man-interesse table -->
+
+        <!-- Man-interesse table -->
+        <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <input class="form-check-input d-none" type="checkbox" value=""
+                                        id="flexCheckDefault" />
+                                </div>
+                            </th>
+                            <th scope="col" class="text-black">Responsável</th>
+                            <th scope="col" class="text-black">Aldeia</th>
+                            <th scope="col" class="text-black">Comuna</th>
+                            <th scope="col" class="text-black">Município</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black"></th>
+                            <th scope="col" class="text-black"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                </div>
+                            </th>
+                            <td>Lurdes Ester</td>
+                            <td>Cambongue</td>
+                            <td>Saco-Mar</td>
+                            <td>Moçâmedes</td>
+                            <td>Namibe</td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button></td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                </div>
+                            </th>
+                            <td>Eliane Dias</td>
+                            <td>Ninho</td>
+                            <td>Aida</td>
+                            <td>Moçâmedes</td>
+                            <td>Namibe</td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button></td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Man-interesse table -->
+
+        <!--select class="select" style=" height:38px; background-color: #36383A; width: 120px;">
+            <option></option>
+            <option>1</option>
+        </select-->
+
     </mat-drawer-content>
+    <!-- Man interesses full content -->
 </mat-drawer-container>
