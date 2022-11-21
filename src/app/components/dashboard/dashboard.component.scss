@@ -60,10 +60,21 @@ body {
             display: none;
         }
     }
+
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    
+    }
 }
 
 @media (min-width: 451px) and (max-width: 599px) {
 
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    
+    }
     .sidebar{
         display: none;
     }
@@ -86,6 +97,11 @@ body {
 /* Extra small devices (phones, 600px and 768px) */
 @media (min-width: 600px) and (max-width: 767px) {
 
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    
+    }
     .sidebar{
         display: none;
     }

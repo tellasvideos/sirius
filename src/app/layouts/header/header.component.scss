@@ -66,3 +66,38 @@ button{
 }
 
 // search-bar ------------------------------------
+
+
+
+/* Extra small devices (phones, Galaxy Fold 240px and 450px) */
+@media (min-width: 240px) and (max-width: 450px) {
+   .card{
+   display: none;
+   }
+}
+
+@media (min-width: 451px) and (max-width: 599px) {
+
+    .card{
+        display: none;
+        }
+
+}
+
+/* Extra small devices (phones, 600px and 768px) */
+@media (min-width: 600px) and (max-width: 767px) {
+
+   
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+   
+}
+
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
