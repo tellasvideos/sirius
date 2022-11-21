@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-add-interesses',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddInteressesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modalRef: MdbModalRef<AddInteressesComponent>) { }
 
   ngOnInit(): void {
   }
