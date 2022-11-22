@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AddInstituicaoComponent } from '../add-instituicao/add-instituicao.component';
 
 @Component({
   selector: 'app-instituicoes',
@@ -9,12 +11,18 @@ export class InstituicoesComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  modalRef: MdbModalRef<AddInstituicaoComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(AddInstituicaoComponent)
   }
 }

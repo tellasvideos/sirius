@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AddInqueritoComponent } from '../add-inquerito/add-inquerito.component';
 
 @Component({
   selector: 'app-inquerito',
@@ -9,12 +11,19 @@ export class InqueritoComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
+
+  openModal() {
+    this.modalRef = this.modalService.open(AddInqueritoComponent)
+  }
+
 }

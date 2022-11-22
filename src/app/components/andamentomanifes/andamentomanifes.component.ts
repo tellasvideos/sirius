@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.component';
 
 @Component({
   selector: 'app-andamentomanifes',
@@ -9,13 +11,19 @@ export class AndamentomanifesComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  modalRef: MdbModalRef<AddAndManifestComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(AddAndManifestComponent)
   }
 
 }

@@ -2,7 +2,7 @@
     <mat-drawer mode="side" [opened]="sideBarOpen">
         <app-sidenav></app-sidenav>
     </mat-drawer>
-    <mat-drawer class="sidebar"  mode="side" position="end" opened>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
         <app-sidebar></app-sidebar>
     </mat-drawer>
 
@@ -29,7 +29,7 @@
                                     style="text-transform: capitalize;">Exportar</button>
                             </div>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
-                                <button type="button" class="btn btn-success btn-top"><i
+                                <button (click)="openModal()" type="button" class="btn btn-success btn-top"><i
                                         class="fas fa-plus-square text-black"></i> Add Inquérito</button>
                             </div>
                         </div>

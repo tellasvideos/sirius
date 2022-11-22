@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AddDepartamentoComponent } from '../add-departamento/add-departamento.component';
 
 @Component({
   selector: 'app-departamento',
@@ -9,12 +11,18 @@ export class DepartamentoComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  modalRef: MdbModalRef<AddDepartamentoComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
   }
 
   sideBarToggler(){
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(AddDepartamentoComponent)
   }
 }

@@ -55,6 +55,11 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddInteressesComponent } from './components/add-interesses/add-interesses.component';
 import { AddInquiridorComponent } from './components/add-inquiridor/add-inquiridor.component';
+import { AddDepartamentoComponent } from './components/add-departamento/add-departamento.component';
+import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadeia-valor.component';
+import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
+import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
+import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.component';
 
 
 @NgModule({
@@ -80,7 +85,12 @@ import { AddInquiridorComponent } from './components/add-inquiridor/add-inquirid
     SidebarComponent,
     CreateUserComponent,
     AddInteressesComponent,
-    AddInquiridorComponent
+    AddInquiridorComponent,
+    AddDepartamentoComponent,
+    AddCadeiaValorComponent,
+    AddInstituicaoComponent,
+    AddAndManifestComponent,
+    AddInqueritoComponent
   ],
   imports: [
     BrowserModule,

@@ -23,11 +23,14 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddInteressesComponent } from './components/add-interesses/add-interesses.component';
 import { AddInquiridorComponent } from './components/add-inquiridor/add-inquiridor.component';
+import { AddDepartamentoComponent } from './components/add-departamento/add-departamento.component';
+import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadeia-valor.component';
+import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
 
 
 // configuração de rotas
 const routes: Routes = [
- // { path: '', redirectTo:'dashboard', pathMatch:'full' },
+  // { path: '', redirectTo:'dashboard', pathMatch:'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: HomeComponent },
   { path: 'andamentomanifes', component: AndamentomanifesComponent },
@@ -44,11 +47,15 @@ const routes: Routes = [
   { path: 'usuario', component: UsuarioComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  {path: 'sidenav', component: SidenavComponent},
-  {path: 'sidebar', component: SidebarComponent},
-  {path: 'create-user', component: CreateUserComponent},
-  {path: 'add-interesses', component: AddInteressesComponent},
-  {path: 'add-inquiridor', component: AddInquiridorComponent}
+  { path: 'sidenav', component: SidenavComponent },
+  { path: 'sidebar', component: SidebarComponent },
+  { path: 'create-user', component: CreateUserComponent },
+  { path: 'add-interesses', component: AddInteressesComponent },
+  { path: 'add-inquiridor', component: AddInquiridorComponent },
+  { path: 'add-departamento', component: AddDepartamentoComponent },
+  { path: 'add-cadeia-valor', component: AddCadeiaValorComponent },
+  { path: 'add-instituicao', component: AddInstituicaoComponent }
+
 
 ];
 

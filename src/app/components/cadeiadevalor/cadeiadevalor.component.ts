@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { AddCadeiaValorComponent } from '../add-cadeia-valor/add-cadeia-valor.component';
 
 @Component({
   selector: 'app-cadeiadevalor',
@@ -9,7 +11,9 @@ export class CadeiadevalorComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  modalRef: MdbModalRef<AddCadeiaValorComponent> | null = null;
+
+  constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +22,7 @@ export class CadeiadevalorComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
+  openModal() {
+    this.modalRef = this.modalService.open(AddCadeiaValorComponent)
+  }
 }
