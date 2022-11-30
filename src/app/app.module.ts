@@ -60,6 +60,7 @@ import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadei
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
 import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
 import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.component';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -119,7 +120,7 @@ import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.
     MatToolbarModule,
     MatGridListModule
   ],
-  providers: [HeaderComponent],
+  providers: [HeaderComponent, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

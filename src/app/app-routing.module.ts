@@ -26,12 +26,15 @@ import { AddInquiridorComponent } from './components/add-inquiridor/add-inquirid
 import { AddDepartamentoComponent } from './components/add-departamento/add-departamento.component';
 import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadeia-valor.component';
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
-
+import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.service';
 
 // configuração de rotas
 const routes: Routes = [
   // { path: '', redirectTo:'dashboard', pathMatch:'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard', component: DashboardComponent
+    //canActivate: [AuthGuard]
+  },
   { path: '', component: HomeComponent },
   { path: 'andamentomanifes', component: AndamentomanifesComponent },
   { path: 'cadeiadevalor', component: CadeiadevalorComponent },
