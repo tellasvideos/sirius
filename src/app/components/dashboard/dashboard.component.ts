@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
     //this.logoOn === this.img.hideImg();
 
     type EChartsOption = echarts.EChartsOption;
+    type EChartsOption2 = echarts.EChartsOption;
+    type EChartsOption3 = echarts.EChartsOption;
 
     var chartDom = document.getElementById('main')!;
     var myChart = echarts.init(chartDom);
@@ -70,10 +72,9 @@ export class DashboardComponent implements OnInit {
 
 
     // segundo Gráfico
-   
     var chartDom2 = document.getElementById('main2')!;
     var myChart2 = echarts.init(chartDom2);
-    var option2: EChartsOption;
+    var option2: EChartsOption2;
 
     option2 = {
       xAxis: {
@@ -92,6 +93,35 @@ export class DashboardComponent implements OnInit {
     };
 
     option2 && myChart2.setOption(option2);
+
+
+    // Terceiro gráico
+    var chartDom3 = document.getElementById('main3')!;
+    var myChart3 = echarts.init(chartDom3);
+    var option3: EChartsOption3;
+
+    option3 = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar',
+          showBackground: true,
+          backgroundStyle: {
+            color: 'rgba(180, 180, 180, 0.2)'
+          }
+        }
+      ]
+    };
+    
+
+    option3 && myChart3.setOption(option3);
   }
 
   sideBarToggler() {
