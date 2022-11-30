@@ -69,6 +69,29 @@ export class DashboardComponent implements OnInit {
     option && myChart.setOption(option);
 
 
+    // segundo Gráfico
+   
+    var chartDom2 = document.getElementById('main2')!;
+    var myChart2 = echarts.init(chartDom2);
+    var option2: EChartsOption;
+
+    option2 = {
+      xAxis: {
+        type: 'category',
+        data: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [1, 2, 1, 4, 4, 5, 3, 4],
+          type: 'line'
+        }
+      ]
+    };
+
+    option2 && myChart2.setOption(option2);
   }
 
   sideBarToggler() {

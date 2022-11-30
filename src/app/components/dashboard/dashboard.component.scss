@@ -16,9 +16,9 @@ mat-drawer-container {
 
 .div-border {
     color: #eaeaea;
-    height: 180px;
+    height: 180px auto;
     /*Altura da linha*/
-    border-left: 3px solid;
+    border-left:  3px solid ;
 
     /* Adiciona borda esquerda na div como ser fosse uma linha.*/
     h5 {
