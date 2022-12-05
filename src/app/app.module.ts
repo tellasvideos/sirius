@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 // Angular Materials
@@ -100,6 +101,7 @@ import { DataService } from './services/data.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     MdbAccordionModule,
     MdbCarouselModule,
     MdbCheckboxModule,

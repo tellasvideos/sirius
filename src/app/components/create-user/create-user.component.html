@@ -3,45 +3,55 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
 </div>
 <div class="modal-body">
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Nome</label>
-    </mdb-form-control>
 
-    <div class="d-flex mb-2">
+    <form [formGroup]="angForm" (ngSubmit)="postdata(angForm)">
+
         <mdb-form-control>
-            <input mdbInput type="text" id="form1" class="form-control" />
-            <label mdbLabel class="form-label" for="form1">Departamento</label>
+            <input mdbInput type="text" formControlName="username" id="form1" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Nome</label>
         </mdb-form-control>
-        <select class="select" style=" height:36px; width: 30px; border-radius: 8%; background: #DFDFDF; border-color: #DFDFDF;">
-            <option></option>
-            <option>Departamento 1</option>
-            <option>Departamento 2</option>
-            <option>Departamento 3</option>
-        </select>
-    </div>
 
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Função</label>
-    </mdb-form-control>
+        <div class="d-flex mb-2">
+            <mdb-form-control>
+                <input mdbInput type="text" formControlName="department" id="form2" class="form-control" />
+                <label mdbLabel class="form-label" for="form1">Departamento</label>
+            </mdb-form-control>
+            <select class="select"
+                style=" height:36px; width: 30px; border-radius: 8%; background: #DFDFDF; border-color: #DFDFDF;">
+                <option></option>
+                <option>Departamento 1</option>
+                <option>Departamento 2</option>
+                <option>Departamento 3</option>
+            </select>
+        </div>
 
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">IsAdmin</label>
-    </mdb-form-control>
+        <mdb-form-control>
+            <input mdbInput type="text" formControlName="work_function" id="form3" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Função</label>
+        </mdb-form-control>
 
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Username</label>
-    </mdb-form-control>
+        <mdb-form-control>
+            <input mdbInput type="text" formControlName="is_admin" id="form4" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">IsAdmin</label>
+        </mdb-form-control>
 
-    <mdb-form-control>
-        <input mdbInput type="password" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Password</label>
-    </mdb-form-control>
+        <mdb-form-control>
+            <input mdbInput type="text" formControlName="username" id="form5" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Username</label>
+        </mdb-form-control>
 
+        <mdb-form-control>
+            <input mdbInput type="email" formControlName="email" id="form6" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Email</label>
+        </mdb-form-control>
+
+        <mdb-form-control>
+            <input mdbInput type="password" formControlName="password" id="form7" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Password</label>
+        </mdb-form-control>
+
+        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+       
+    </form>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-success btn-sm" routerLink="" (click)="modalRef.close()">Guardar</button>
-</div>
+

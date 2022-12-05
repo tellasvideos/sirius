@@ -92,62 +92,23 @@
                             <th scope="col" class="text-black">Função</th>
                             <th scope="col" class="text-black">IsAdmin</th>
                             <th scope="col" class="text-black">UserName</th>
-                            <th scope="col" class="text-black">Password</th>
                             <th scope="col" class="text-black"></th>
                             <th scope="col" class="text-black"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">
+                        <!--*ngFor="let user of users"-->
+                        <tr *ngFor="let usuario of usuarios">
+                            <th scope=" row">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                 </div>
                             </th>
-                            <td>Esdras</td>
-                            <td>Agricultura</td>
-                            <td>Fazendeiro</td>
-                            <td>null</td>
-                            <td>Esdra12</td>
-                            <td>12345p</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                </div>
-                            </th>
-                            <td>Pedro</td>
-                            <td>Agricultura</td>
-                            <td>Finanças</td>
-                            <td>null</td>
-                            <td>Peddro12</td>
-                            <td>12345p</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                </div>
-                            </th>
-                            <td>Osvaldo</td>
-                            <td>Agricultura</td>
-                            <td>Fazendeiro</td>
-                            <td>null</td>
-                            <td>Osva12</td>
-                            <td>12345p</td>
+                            <td> {{usuario.name}} </td>
+                            <td>{{usuario.work_function}}</td>
+                            <td>{{usuario.department}}</td>
+                            <td>{{usuario.is_admin}}</td>
+                            <td>{{usuario.username}}</td>
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
