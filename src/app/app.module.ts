@@ -60,7 +60,11 @@ import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadei
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
 import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
 import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.component';
+
+// Providers
 import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -118,9 +122,10 @@ import { AuthService } from './services/auth.service';
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule
   ],
-  providers: [HeaderComponent, AuthService],
+  providers: [HeaderComponent, AuthService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
