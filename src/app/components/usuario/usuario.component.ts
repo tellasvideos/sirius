@@ -3,6 +3,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DataService } from 'src/app/services/data.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuario',
@@ -38,21 +39,33 @@ export class UsuarioComponent implements OnInit {
     }
   ]
 
+  token: any;
+
   sideBarOpen = true;
   modalRef: MdbModalRef<CreateUserComponent> | null = null;
 
   constructor(
     private modalService: MdbModalService,
-    private dataService: DataService
-  ) { }
+    private dataService: DataService,
+    private http: HttpClient
+  ) { 
+
+    this.dataService.pegarusers().subscribe(resp =>{
+      this.users = resp;
+      console.log('estes são os users: ', this.users)
+    })
+  }
+
+  
 
   ngOnInit(): void {
 
     // to get all users
-    this.fetchUsers();
-    console.log(this.usuarios)
+   // this.fetchUsers();
+    //console.log(this.usuarios)
 
   }
+
 
 
   removeUser(id: any) {
@@ -62,9 +75,9 @@ export class UsuarioComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.dataService.listUsers().subscribe(data => {
+    this.dataService.listUsers(this.token).subscribe(data => {
       this.users = data;
-      console.log('user', this.users)
+      console.log('estes são os users: ', this.users)
     })
   }
 
