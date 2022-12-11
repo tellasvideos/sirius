@@ -64,7 +64,7 @@ import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.
 
 // Providers
 import { AuthService } from './services/auth.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './services/data.service';
 
 
@@ -127,7 +127,7 @@ import { DataService } from './services/data.service';
     MatGridListModule,
     HttpClientModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS, useClass:DataService, multi:true }, HeaderComponent, AuthService, DataService],
+  providers: [HeaderComponent, AuthService, DataService, HttpParams],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

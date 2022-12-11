@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Users } from '../interfaces/users';
@@ -9,39 +9,86 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService implements HttpInterceptor {
+export class DataService {
 
 
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
+
+
+  /*
+  var headers = new HttpHeaders();
+  var params = new HttpParams().set('user_id',user_id.user_id);
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Authorization','Bearer AquiVaiOToken';
+  return this.http.get(this.Project_url ,  { headers: headers, params:params})
+
+  rebootVM(Vm: any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization','Bearer AQUIVAIOTOKEN'));
+    return this.http.post(this.URL, {JSON}, { headers: headers })
+  }
+  */
 
   // To get all users
   API_GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
   getAllUsers = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
-  constructor(private http: HttpClient) { }
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let tokenheadfer = req.clone({
-      setHeaders: {
-        Authorization: "bearer " + this.token
-      }
-    })
+  constructor(
+    private http: HttpClient,
+    private httpParams: HttpParams) { }
 
-    return next.handle(tokenheadfer);
+  
+  /* intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+ 
+     let tokenheadfer = req.clone({
+       setHeaders: {
+         Authorization: "bearer " + this.token
+       }
+     })
+ 
+     return next.handle(tokenheadfer);
+   }*/
+
+
+
+  /**/
+
+  rebootVM() {
+    /* var headers = new HttpHeaders();
+     headers = headers.append('Content-Type', 'application/json');
+     headers = headers.append('Authorization','Bearer AQUIVAIOTOKEN'));
+     return this.http.post(this.URL, {JSON}, { headers: headers })*/
+
+    var headers = new HttpHeaders();
+    var params = new HttpParams().set('user_id', 1);
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer 1c644080bc6af5e8990a30c964157719cbb6576c');
+    return this.http.get('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
   }
 
 
-  pegarusers(){
-    return this.http.get("http://strongboxao.ddns.net:8022/accounts/users/");
+  login() {
+    var headers = new HttpHeaders();
+    var params = new HttpParams().set('user_id', 1);
+
+    return this.http.post('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
+  }
+
+
+
+  pegarusers() {
+    return this.http.get("");
   }
 
 
   // get users
-  listUsers(token: any) {
-    return this.http.get<Users>(this.API_GET_USERS_URL + '&token=' + token);
+  listUsers() {
+    return this.http.get<Users>(this.API_GET_USERS_URL);
   }
 
   // delete users by id

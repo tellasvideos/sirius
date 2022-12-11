@@ -48,20 +48,14 @@ export class UsuarioComponent implements OnInit {
     private modalService: MdbModalService,
     private dataService: DataService,
     private http: HttpClient
-  ) { 
+  ) { }
 
-    this.dataService.pegarusers().subscribe(resp =>{
-      this.users = resp;
-      console.log('estes são os users: ', this.users)
-    })
-  }
 
-  
 
   ngOnInit(): void {
 
     // to get all users
-   // this.fetchUsers();
+    this.fetchUsers();
     //console.log(this.usuarios)
 
   }
@@ -75,7 +69,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.dataService.listUsers(this.token).subscribe(data => {
+    this.dataService.listUsers().subscribe(data => {
       this.users = data;
       console.log('estes são os users: ', this.users)
     })
