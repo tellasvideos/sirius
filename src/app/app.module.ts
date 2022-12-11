@@ -67,6 +67,8 @@ import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './services/data.service';
+import { StatusPnComponent } from './components/status-pn/status-pn.component';
+import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 
 
 @NgModule({
@@ -97,7 +99,9 @@ import { DataService } from './services/data.service';
     AddCadeiaValorComponent,
     AddInstituicaoComponent,
     AddAndManifestComponent,
-    AddInqueritoComponent
+    AddInqueritoComponent,
+    StatusPnComponent,
+    EstatutoPnComponent
   ],
   imports: [
     BrowserModule,
