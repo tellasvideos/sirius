@@ -36,13 +36,17 @@ export class DataService {
 
   getAllUsers = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
+  // Auth Token
+  getToken_url = 'http://strongboxao.ddns.net:8022/token/';
+  
+
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
 
   constructor(
     private http: HttpClient,
     private httpParams: HttpParams) { }
 
-  
+
   /* intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
  
      let tokenheadfer = req.clone({
@@ -72,13 +76,13 @@ export class DataService {
   }
 
 
-  login() {
-    var headers = new HttpHeaders();
-    var params = new HttpParams().set('user_id', 1);
+  userLogin(user: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
+    return this.http.post<any>(this.getToken_url, user, { headers: headers });
+
   }
-
 
 
   pegarusers() {

@@ -48,33 +48,41 @@
           loading="lazy" /></div>
 
       <div class="col-md-4">
-        <div class="card text-white bg-card mb-1 w-60">
-          <div class="card-header border-0" style="text-transform:uppercase; font-weight:bold;"><!--i class="fas fa-user-circle fa-8x avatar"></i-->Login</div>
-          <div class="card-body p-4">
-            <div class="input-group input-group-lg mb-3">
-              <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
-                <i class="far fa-envelope"></i>
-              </a>
-              <input type="email" class="form-control" placeholder="" aria-label="Example text with button addon"
-                aria-describedby="button-addon1" />
-            </div>
-            <div class="input-group input-group-lg mb-3">
-              <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
-                <i class="fas fa-lock"></i>
-              </a>
-              <input type="password" class="form-control" placeholder="" aria-label="Example text with button addon"
-                aria-describedby="button-addon2" />
-            </div>
 
+        <div class="card text-white bg-card mb-1 w-60">
+          <div class="card-header border-0" style="text-transform:uppercase; font-weight:bold;">
+            <!--i class="fas fa-user-circle fa-8x avatar"></i-->Login
+          </div>
+          <div class="card-body p-4">
+            <form>
+              <div class="input-group input-group-lg mb-3">
+                <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
+                  <i class="far fa-envelope"></i>
+                </a>
+                <input type="email" class="form-control" placeholder="" [(ngModel)]="user[0].username" name="email"
+                  aria-label="Example text with button addon" aria-describedby="button-addon1" />
+              </div>
+              <div class="input-group input-group-lg mb-3">
+                <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
+                  <i class="fas fa-lock"></i>
+                </a>
+                <input type="password" class="form-control" placeholder="" [(ngModel)]="user[0].password" name="pass"
+                  aria-label="Example text with button addon" aria-describedby="button-addon2" />
+              </div>
+            </form>
             <div class="row" style="margin-top: 8%;">
               <div class="col-md-6"></div>
               <div class="col-md-6 forgot-pass" style="font-size: 12px; color: #F2F2F2;"> <a [routerLink]="['/recpass']"
-                  routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a></div>
+                  routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a>
+              </div>
             </div>
 
           </div>
+
         </div>
-        <div><button type="button" class="btn btn-color btn-lg" [routerLink]="['/dashboard']" routerLinkActive="router-link-active" >Entrar</button></div>
+        <div><button type="button" class="btn btn-color btn-lg"
+            (click)="login(user[0].email, user[0].pass)">Entrar</button></div>
+
       </div>
 
     </div>
