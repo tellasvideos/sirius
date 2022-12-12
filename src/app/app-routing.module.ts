@@ -27,6 +27,8 @@ import { AddDepartamentoComponent } from './components/add-departamento/add-depa
 import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadeia-valor.component';
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
 import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.service';
+import { StatusPnComponent } from './components/status-pn/status-pn.component';
+import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -57,7 +59,9 @@ const routes: Routes = [
   { path: 'add-inquiridor', component: AddInquiridorComponent },
   { path: 'add-departamento', component: AddDepartamentoComponent },
   { path: 'add-cadeia-valor', component: AddCadeiaValorComponent },
-  { path: 'add-instituicao', component: AddInstituicaoComponent }
+  { path: 'add-instituicao', component: AddInstituicaoComponent },
+  { path: 'status-pn', component: StatusPnComponent },
+  { path: 'estatuto-pn', component: EstatutoPnComponent }
 
 
 ];
