@@ -4,10 +4,10 @@
 </div>
 <div class="modal-body">
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="cadeiaVal" class="form-control mb-2" />
         <label mdbLabel class="form-label" for="form1">Cadeia de valor</label>
     </mdb-form-control>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-sm">Guardar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="salvarCadeiaValor()">Guardar</button>
 </div>

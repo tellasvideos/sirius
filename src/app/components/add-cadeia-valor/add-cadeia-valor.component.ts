@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-add-cadeia-valor',
@@ -7,10 +8,18 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./add-cadeia-valor.component.scss']
 })
 export class AddCadeiaValorComponent implements OnInit {
-
-  constructor(public modalRef: MdbModalRef<AddCadeiaValorComponent>) { }
+  cadeiaVal: any;
+  constructor(public modalRef: MdbModalRef<AddCadeiaValorComponent>, private ds: DataService) { }
 
   ngOnInit(): void {
+  }
+  salvarCadeiaValor(){
+    let description = 'Uma descrição da cadeia'
+    let cadeia = {"name": this.cadeiaVal, "description": description}
+    this.ds.salvaCadeiaDeValor(cadeia).subscribe(data =>{
+      console.log(data)
+      // 
+    })
   }
 
 }
