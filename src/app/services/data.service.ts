@@ -38,7 +38,7 @@ export class DataService {
 
   // Auth Token
   getToken_url = 'http://strongboxao.ddns.net:8022/token/';
-  
+   base =  'http://strongboxao.ddns.net:8022/api/v1';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
 
@@ -79,8 +79,8 @@ export class DataService {
   userLogin(user: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-
-    return this.http.post<any>(this.getToken_url, user, { headers: headers });
+    console.log(user[0])
+    return this.http.post<any>(this.getToken_url, user[0], { headers: headers });
 
   }
 
@@ -110,6 +110,14 @@ export class DataService {
 
   }
 
+ // update users
+ salvaCadeiaDeValor(cadeiaVal: any) {
+  console.log(localStorage.getItem('userToken'), cadeiaVal)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.base + '/valuechains/', cadeiaVal, { headers: headers })
+}
 
   /*getUsersTodos(): Observable<{}> {
     return this.http.get(this.getAllUsers).pipe(
