@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -40,11 +42,19 @@ export class HomeComponent implements OnInit {
         localStorage.setItem("userToken", this.user.token);
         this.route.navigate(['/dashboard'])
       }else{
-        alert('login errado')
+        this.errorLogin()
       }
 
     })
 
+  }
+
+  errorLogin(){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Usuário não autorizado!',
+    })
   }
 
 }
