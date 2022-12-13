@@ -20,14 +20,22 @@ export class CadeiadevalorComponent implements OnInit {
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
   ngOnInit(): void {
+   this.atualizarlista();
+  }
+
+  // atualiza a lista depois de uma ação
+  atualizarlista(){
     this.dataService.getValueChains().subscribe(dados =>{
       this.cadeiaDeValor = dados;
       console.log('array list de todas as cadeias:', dados)
     })
   }
 
-  deleteCadeia(cadeia: any){
-
+  // delete uma cadeia de valor
+  deleteCadeia(id: any){
+    this.dataService.deleteValueChain(id).subscribe(
+      success => this.atualizarlista()
+    )
   }
 
   sideBarToggler(){

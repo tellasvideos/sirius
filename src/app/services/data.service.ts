@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, Htt
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Users } from '../interfaces/users';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, take } from 'rxjs/operators';
 //import 'rxjs/add/observable/throw';
 import { throwError } from 'rxjs';
 import { CadeiaVal } from '../interfaces/cadeiaVal';
@@ -141,8 +141,8 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.delete<Users>(this.delete_ValueChain_url + id + '/');
-  }
+    return this.http.delete(`${this.delete_ValueChain_url}${id}/`, { headers: headers }).pipe(take(1));
+  }            
 
 
   private extrairDados(res: Response) {
