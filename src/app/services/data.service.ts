@@ -34,7 +34,7 @@ export class DataService {
   delete_ValueChain_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
 
   // to create interest expression
-  interest_Express_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+  interest_Express_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'

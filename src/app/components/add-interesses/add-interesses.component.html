@@ -50,6 +50,21 @@
         </select>
     </div>
 
+    <label class="mb-2 mt-2">Condição:</label>
+    <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
+        aria-label="Default select example">
+        <option selected>condicao 1</option>
+        <option value="1">condicao 2</option>
+    </select>
+
+    <label class="mb-2 mt-2">Avaliação:</label>
+    <select class="form-select form-select-sm mb-3" [(ngModel)]="validado" name="condicao"
+        aria-label="Default select example">
+        <option selected>0</option>
+        <option value="1">1</option>
+        <option value="1">2</option>
+    </select>
+
     <mdb-form-control>
         <input mdbInput type="text" id="form2" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form2">PN em Elaboação</label>
@@ -60,25 +75,15 @@
         <label mdbLabel class="form-label" for="form3">PN Elaborado</label>
     </mdb-form-control>
 
-    <mdb-form-control>
-        <input mdbInput type="text" id="form4" [(ngModel)]="validado" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form4">Foi Avaliado</label>
-    </mdb-form-control>
-
-    <mdb-form-control>
-        <input mdbInput type="text" id="form5" [(ngModel)]="condicao" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form5">Condição</label>
-    </mdb-form-control>
-
     <div class="d-flex justify-content-between mb-3">
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form6" [(ngModel)]="areaTotalFaz" class="form-control mb-3"
+            <input mdbInput type="number" id="form6" [(ngModel)]="areaTotalFaz" class="form-control mb-3"
                 style="height:28px;" />
             <label mdbLabel class="form-label" for="form6">Área total da Fazenda</label>
         </mdb-form-control>
 
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form7" [(ngModel)]="areaCultPn" class="form-control mb-3"
+            <input mdbInput type="number" id="form7" [(ngModel)]="areaCultPn" class="form-control mb-3"
                 style="height:28px;" />
             <label mdbLabel class="form-label" for="form7">Área de Cultivo PN</label>
         </mdb-form-control>
@@ -94,13 +99,13 @@
 
         <div class="m-2 d-flex">
             <mdb-form-control>
-                <input mdbInput type="text" id="form9"  class="form-control" disabled />
+                <input mdbInput type="number" id="form9"  class="form-control" disabled />
                 <label mdbLabel class="form-label" for="form9">Custo Total Projecto</label>
             </mdb-form-control>
             <select class="" [(ngModel)]="custTotalProj"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>KZ</option>
-                <option>USD</option>
+                <option>1</option>
+                <option>2</option>
             </select>
         </div>
 
@@ -111,8 +116,8 @@
             </mdb-form-control>
             <select class="" [(ngModel)]="emprestBanc"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>KZ</option>
-                <option>USD</option>
+                <option>1</option>
+                <option>2</option>
             </select>
         </div>
     </div>
@@ -126,8 +131,8 @@
             </mdb-form-control>
             <select class="" [(ngModel)]="financiaPdac"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>KZ</option>
-                <option>USD</option>
+                <option>1</option>
+                <option>2</option>
             </select>
         </div>
 
@@ -138,8 +143,8 @@
             </mdb-form-control>
             <select class="" [(ngModel)]="recursosProp"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>KZ</option>
-                <option>USD</option>
+                <option>1</option>
+                <option>2</option>
             </select>
         </div>
         
@@ -152,13 +157,13 @@
 
     <div class="d-flex justify-content-between mb-2">
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form14" [(ngModel)]="latitude" class="form-control mb-3"
+            <input mdbInput type="number" id="form14" [(ngModel)]="latitude" class="form-control mb-3"
                 style="height:28px;" />
             <label mdbLabel class="form-label" for="form14">Latitude</label>
         </mdb-form-control>
 
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form15" [(ngModel)]="logitude" class="form-control mb-3"
+            <input mdbInput type="number" id="form15" [(ngModel)]="logitude" class="form-control mb-3"
                 style="height:28px;" />
             <label mdbLabel class="form-label" for="form15">Logitude</label>
         </mdb-form-control>

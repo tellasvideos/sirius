@@ -16,18 +16,18 @@ export class AddInteressesComponent implements OnInit {
   provincia: any;
   municipio: any;
   vila: any;
-  condicao: any;
-  validado: any;
+  condicao?: any[];
+  validado?: boolean;
   observation: any;
-  areaTotalFaz: any;
-  areaCultPn: any;
-  custTotalProj: any;
-  financiaPdac: any;
-  emprestBanc: any;
-  recursosProp: any;
+  areaTotalFaz?: number;
+  areaCultPn?: number;
+  custTotalProj?: number;
+  financiaPdac?: any[];
+  emprestBanc?: any[];
+  recursosProp?: any[];
   estatuto: any;
-  latitude: any;
-  logitude: any;
+  latitude?: number;
+  logitude?: number;
   proponent: any;
   cadeiaVal: any;
 
