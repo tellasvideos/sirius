@@ -1,1 +1,11 @@
-http://strongboxao.ddns.net:8022/accounts/users/
+
+
+
+POST http://strongboxao.ddns.net:8022/token
+
+{
+  "username": "andre@andre.com",
+  "password": "andre2022"
+}
+
+GET http://strongboxao.ddns.net:8022/api/v1

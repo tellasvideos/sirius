@@ -5,6 +5,7 @@ import { Users } from '../interfaces/users';
 import { map, catchError } from 'rxjs/operators';
 //import 'rxjs/add/observable/throw';
 import { throwError } from 'rxjs';
+import { CadeiaVal } from '../interfaces/cadeiaVal';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,15 @@ export class DataService {
 
   // Auth Token
   getToken_url = 'http://strongboxao.ddns.net:8022/token/';
-   base =  'http://strongboxao.ddns.net:8022/api/v1';
+
+  // add valuechains
+  base = 'http://strongboxao.ddns.net:8022/api/v1';
+
+  // to get all value chain
+  get_ValueChain_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/'
+
+  // to delete any valueChain
+  delete_ValueChain_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
 
@@ -110,28 +119,31 @@ export class DataService {
 
   }
 
- // update users
- salvaCadeiaDeValor(cadeiaVal: any) {
-  console.log(localStorage.getItem('userToken'), cadeiaVal)
+  // save valuechain
+  salvaCadeiaDeValor(cadeiaVal: any) {
+    console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.base + '/valuechains/', cadeiaVal, { headers: headers })
-}
+  }
 
-  /*getUsersTodos(): Observable<{}> {
-    return this.http.get(this.getAllUsers).pipe(
-      map(this.extrairDados), catchError(this.handleError)
-    );
-  }*/
+  //to get all valueChain
+  getValueChains() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<CadeiaVal[]>(this.get_ValueChain_url, { headers: headers })
+  }
 
-  /*getAllTodos(): Observable<Users[]> {
-    return this.http.get<Users[]>(this.API_GET_USERS_URL + '/users')
-    .pipe(
-      catchError(err => {
-        return this.handleError(err);
-      });
-  }*/
+  // to delete any valuechain
+  deleteValueChain(id:any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete<Users>(this.delete_ValueChain_url + id + '/');
+  }
+
 
   private extrairDados(res: Response) {
     const body = res;
