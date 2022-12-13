@@ -16,22 +16,6 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
-
-  /*
-  var headers = new HttpHeaders();
-  var params = new HttpParams().set('user_id',user_id.user_id);
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization','Bearer AquiVaiOToken';
-  return this.http.get(this.Project_url ,  { headers: headers, params:params})
-
-  rebootVM(Vm: any){
-    var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization','Bearer AQUIVAIOTOKEN'));
-    return this.http.post(this.URL, {JSON}, { headers: headers })
-  }
-  */
-
   // To get all users
   API_GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
@@ -49,34 +33,17 @@ export class DataService {
   // to delete any valueChain
   delete_ValueChain_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
 
+  // to create interest expression
+  interest_Express_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+
+
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
 
   constructor(
     private http: HttpClient,
     private httpParams: HttpParams) { }
 
-
-  /* intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
- 
-     let tokenheadfer = req.clone({
-       setHeaders: {
-         Authorization: "bearer " + this.token
-       }
-     })
- 
-     return next.handle(tokenheadfer);
-   }*/
-
-
-
-  /**/
-
   rebootVM() {
-    /* var headers = new HttpHeaders();
-     headers = headers.append('Content-Type', 'application/json');
-     headers = headers.append('Authorization','Bearer AQUIVAIOTOKEN'));
-     return this.http.post(this.URL, {JSON}, { headers: headers })*/
-
     var headers = new HttpHeaders();
     var params = new HttpParams().set('user_id', 1);
     headers = headers.append('Content-Type', 'application/json');
@@ -127,6 +94,16 @@ export class DataService {
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.base + '/valuechains/', cadeiaVal, { headers: headers })
   }
+
+  // to save interestExpression
+  salvaInterestExpress(interestEx: any) {
+    console.log(localStorage.getItem('userToken'), interestEx)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.interest_Express_url + '/interestexpressions/', interestEx, { headers: headers })
+  }
+
 
   //to get all valueChain
   getValueChains() {

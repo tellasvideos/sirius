@@ -4,44 +4,45 @@
 </div>
 <div class="modal-body">
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="fazenda" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form1">Nome/Fazenda</label>
     </mdb-form-control>
 
-    <mdb-form-control>
-        <select class="form-select form-select-sm mb-3" aria-label="Default select example">
-            <option selected>Proponente</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-    </mdb-form-control>
+    <label class="mb-2 mt-2">Proponente:</label>
+    <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
+        aria-label="Default select example">
+        <option selected>Proponente</option>
+        <option value="1">Proponente 1</option>
+        <option value="2">Proponente 2</option>
+        <option value="3">Proponente 3</option>
+    </select>
 
-    <mdb-form-control>
-        <select class="form-select form-select-sm mb-3" aria-label="Default select example">
-            <option selected>Cadeia de Valor</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-    </mdb-form-control>
+    <label class="mb-2 mt-2">Cadeia de valor:</label>
+    <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
+        aria-label="Default select example">
+        <option selected>Cadeia de Valor</option>
+        <option value="1">cadeia 1</option>
+        <option value="2">cadeia 2</option>
+        <option value="3">cadeia 3</option>
+    </select>
 
+    
     <div class="mb-3 mt-2 d-flex select-group">
-        <select class="form-select form-select-sm" >
+        <select class="form-select form-select-sm" [(ngModel)]="provincia" name="provincia">
             <option>Província</option>
             <option>Luanda</option>
             <option>Namibe</option>
             <option>Malange</option>
         </select>
 
-        <select class="form-select form-select-sm" >
+        <select class="form-select form-select-sm" [(ngModel)]="municipio" name="vila">
             <option>Município</option>
             <option>muni1</option>
             <option>muni2</option>
             <option>muni3</option>
         </select>
 
-        <select class="form-select form-select-sm" >
+        <select class="form-select form-select-sm" [(ngModel)]="vila" name="aldeia">
             <option>Aldeia</option>
             <option>Ald1</option>
             <option>Ald2</option>
@@ -50,50 +51,53 @@
     </div>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">PN em Elaboação</label>
+        <input mdbInput type="text" id="form2" class="form-control mb-3" />
+        <label mdbLabel class="form-label" for="form2">PN em Elaboação</label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">PN Elaborado</label>
+        <input mdbInput type="text" id="form3" class="form-control mb-3" />
+        <label mdbLabel class="form-label" for="form3">PN Elaborado</label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">Foi Avaliado</label>
+        <input mdbInput type="text" id="form4" [(ngModel)]="validado" class="form-control mb-3" />
+        <label mdbLabel class="form-label" for="form4">Foi Avaliado</label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">Condição</label>
+        <input mdbInput type="text" id="form5" [(ngModel)]="condicao" class="form-control mb-3" />
+        <label mdbLabel class="form-label" for="form5">Condição</label>
     </mdb-form-control>
 
     <div class="d-flex justify-content-between mb-3">
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form1" class="form-control mb-3" style="height:28px;" />
-            <label mdbLabel class="form-label" for="form1">Área total da Fazenda</label>
+            <input mdbInput type="text" id="form6" [(ngModel)]="areaTotalFaz" class="form-control mb-3"
+                style="height:28px;" />
+            <label mdbLabel class="form-label" for="form6">Área total da Fazenda</label>
         </mdb-form-control>
 
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form1" class="form-control mb-3" style="height:28px;" />
-            <label mdbLabel class="form-label" for="form1">Área de Cultivo PN</label>
+            <input mdbInput type="text" id="form7" [(ngModel)]="areaCultPn" class="form-control mb-3"
+                style="height:28px;" />
+            <label mdbLabel class="form-label" for="form7">Área de Cultivo PN</label>
         </mdb-form-control>
     </div>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" style="height:70px;" />
-        <label mdbLabel class="form-label" for="form1">Observações</label>
+        <input mdbInput type="text" id="form8" [(ngModel)]="observation" class="form-control mb-3"
+            style="height:70px;" />
+        <label mdbLabel class="form-label" for="form8">Observações</label>
     </mdb-form-control>
 
     <div class="d-flex justify-content-between mb-3">
 
         <div class="m-2 d-flex">
             <mdb-form-control>
-                <input mdbInput type="text" id="form1" class="form-control" />
-                <label mdbLabel class="form-label" for="form1">Custo Total Projecto</label>
+                <input mdbInput type="text" id="form9"  class="form-control" disabled />
+                <label mdbLabel class="form-label" for="form9">Custo Total Projecto</label>
             </mdb-form-control>
-            <select class=""
+            <select class="" [(ngModel)]="custTotalProj"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
                 <option>KZ</option>
                 <option>USD</option>
@@ -102,10 +106,10 @@
 
         <div class="m-2 d-flex">
             <mdb-form-control>
-                <input mdbInput type="text" id="form1" class="form-control" />
-                <label mdbLabel class="form-label" for="form1">Empréstimo Bancário</label>
+                <input mdbInput type="text" id="form10"  class="form-control" disabled />
+                <label mdbLabel class="form-label" for="form10">Empréstimo Bancário</label>
             </mdb-form-control>
-            <select class=""
+            <select class="" [(ngModel)]="emprestBanc"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
                 <option>KZ</option>
                 <option>USD</option>
@@ -117,10 +121,10 @@
 
         <div class="m-2 d-flex">
             <mdb-form-control>
-                <input mdbInput type="text" id="form1" class="form-control" />
-                <label mdbLabel class="form-label" for="form1">Financiamento PDAC</label>
+                <input mdbInput type="text" id="form11"  class="form-control" disabled />
+                <label mdbLabel class="form-label" for="form11">Financiamento PDAC</label>
             </mdb-form-control>
-            <select class=""
+            <select class="" [(ngModel)]="financiaPdac"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
                 <option>KZ</option>
                 <option>USD</option>
@@ -129,38 +133,41 @@
 
         <div class="m-2 d-flex">
             <mdb-form-control>
-                <input mdbInput type="text" id="form1" class="form-control" />
-                <label mdbLabel class="form-label" for="form1">Recursos Próprios</label>
+                <input mdbInput type="text" id="form12"  class="form-control" disabled />
+                <label mdbLabel class="form-label" for="form12">Recursos Próprios</label>
             </mdb-form-control>
-            <select class=""
+            <select class="" [(ngModel)]="recursosProp"
                 style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
                 <option>KZ</option>
                 <option>USD</option>
             </select>
         </div>
+        
     </div>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">Estatuto</label>
+        <input mdbInput type="text" id="form13" [(ngModel)]="estatuto" class="form-control mb-3" />
+        <label mdbLabel class="form-label" for="form13">Estatuto</label>
     </mdb-form-control>
 
     <div class="d-flex justify-content-between mb-2">
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form1" class="form-control mb-3" style="height:28px;" />
-            <label mdbLabel class="form-label" for="form1">Latitude</label>
+            <input mdbInput type="text" id="form14" [(ngModel)]="latitude" class="form-control mb-3"
+                style="height:28px;" />
+            <label mdbLabel class="form-label" for="form14">Latitude</label>
         </mdb-form-control>
 
         <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="text" id="form1" class="form-control mb-3" style="height:28px;" />
-            <label mdbLabel class="form-label" for="form1">Logitude</label>
+            <input mdbInput type="text" id="form15" [(ngModel)]="logitude" class="form-control mb-3"
+                style="height:28px;" />
+            <label mdbLabel class="form-label" for="form15">Logitude</label>
         </mdb-form-control>
     </div>
 
 
 </div>
 <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-success btn-sm">Guardar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="salvarInterestExpress()">Guardar</button>
     <button type="button" class="btn btn-black btn-sm" (click)="modalRef.close()">Fechar</button>
 
 </div>

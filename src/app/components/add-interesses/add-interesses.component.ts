@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { DataService } from 'src/app/services/data.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-interesses',
@@ -9,9 +11,75 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 })
 export class AddInteressesComponent implements OnInit {
 
-  constructor(public modalRef: MdbModalRef<AddInteressesComponent>) { }
+  fazenda: any;
+  proponente: any;
+  provincia: any;
+  municipio: any;
+  vila: any;
+  condicao: any;
+  validado: any;
+  observation: any;
+  areaTotalFaz: any;
+  areaCultPn: any;
+  custTotalProj: any;
+  financiaPdac: any;
+  emprestBanc: any;
+  recursosProp: any;
+  estatuto: any;
+  latitude: any;
+  logitude: any;
+  proponent: any;
+  cadeiaVal: any;
+
+  constructor(
+    public modalRef: MdbModalRef<AddInteressesComponent>,
+    private dataService: DataService,
+  ) { }
 
   ngOnInit(): void {
   }
+
+  salvarInterestExpress() {
+    let interesse = {
+      "farm_name": this.fazenda,
+      "proponent_name": this.proponente,
+      "province": this.provincia,
+      "county": this.municipio,
+      "village": this.vila,
+      "condition": this.condicao,
+      "was_evaluated": this.validado,
+      "observations": this.observation,
+      "total_farm_area": this.areaTotalFaz,
+      "pn_cultivation_area": this.areaCultPn,
+      "total_project_cost": this.custTotalProj,
+      "pdac_financing": this.financiaPdac,
+      "bank_load": this.emprestBanc,
+      "own_resources": this.recursosProp,
+      "statute": this.estatuto,
+      "latitude": this.latitude,
+      "longitude": this.logitude,
+      "proposer": this.proponent,
+      "value_chain": this.cadeiaVal,
+    }
+    this.dataService.salvaInterestExpress(interesse).subscribe(
+      success => { this.atualizardados() },
+      error => { this.alert_error() }
+    )
+   
+    this.modalRef.close();
+  }
+
+  atualizardados() {
+   console.log('atualizar')
+  }
+
+  alert_error() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Alguma coisa correu mal, tente mais tarde.',
+    })
+  }
+
 
 }
