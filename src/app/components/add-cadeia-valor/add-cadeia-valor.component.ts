@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { CadeiaVal } from 'src/app/interfaces/cadeiaVal';
 import { DataService } from 'src/app/services/data.service';
@@ -16,10 +17,19 @@ export class AddCadeiaValorComponent implements OnInit {
 
   valueChain?: CadeiaVal[];
 
+  meuFormGroup!: FormGroup;
+
   constructor(
     public modalRef: MdbModalRef<AddCadeiaValorComponent>,
-    private ds: DataService
-  ) { }
+    private ds: DataService,
+    private formBuilder: FormBuilder
+  ) { 
+
+   /* this.meuFormGroup = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', [Validators.required]],
+    });*/
+  }
 
   ngOnInit(): void {
     this.atualizardados();

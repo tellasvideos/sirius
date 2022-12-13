@@ -24,7 +24,9 @@ export class CadeiadevalorComponent implements OnInit {
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService
-  ) { }
+  ) { 
+    this.atualizarlista()
+  }
 
   ngOnInit(): void {
     this.atualizarlista();
