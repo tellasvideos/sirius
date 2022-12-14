@@ -51,7 +51,7 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
-  proponent_PDAC_url = 'https://kobo.humanitarianresponse.info/api/v2/assets/aECZYJZDHqNXPqemFjTJnf/data.json';
+  proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms';
 
   // To get all users
   API_GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
@@ -99,7 +99,7 @@ export class DataService {
   proponentPDAC(){
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', 'Token a72c4eac16f4bc9e86728c7a5b7f51a4a6dc75bd');
+    headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
 
     return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
   }
