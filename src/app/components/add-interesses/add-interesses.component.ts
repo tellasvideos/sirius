@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { ManInteress } from 'src/app/interfaces/manInteress';
 import { Cidade } from 'src/app/models/cidade';
 import { Condicao } from 'src/app/models/condicao.model';
 import { Pais } from 'src/app/models/pais';
@@ -13,6 +14,8 @@ import Swal from 'sweetalert2'
   preserveWhitespaces: true,
 })
 export class AddInteressesComponent implements OnInit {
+
+  interest?: ManInteress[];
 
   fazenda: any;
   proponente: any;
@@ -40,8 +43,8 @@ export class AddInteressesComponent implements OnInit {
   ) {
     //console.log(this.condicao)
     //this.paises = this.dataService.getPaises();
-    this.condicao = this.dataService.getCondicao();
-
+    //this.condicao = this.dataService.getCondicao();
+    this.atualizardados()
   }
 
   ngOnInit(): void {
@@ -70,15 +73,18 @@ export class AddInteressesComponent implements OnInit {
       "value_chain": this.cadeiaVal,
     }
     this.dataService.salvaInterestExpress(interesse).subscribe(
-      success => { this.atualizardados() },
+      success => { this.alert_success() },
       error => { this.alert_error() }
     )
-
+      this.atualizardados()
     this.modalRef.close();
   }
 
   atualizardados() {
-    console.log('atualizar')
+   this.dataService.getInterestExpress().subscribe(data =>{
+    this.interest = data;
+    console.log(data)
+   })
   }
 
   alert_error() {
@@ -88,15 +94,12 @@ export class AddInteressesComponent implements OnInit {
       text: 'Alguma coisa correu mal, tente mais tarde.',
     })
   }
-
-
-  // Carrega dados da condicao 
-  extractCodicaoFromJson(obj: any) {
-    return obj.valores.condicao;
+  alert_success() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Salvo',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
-
-  extractCreateAtCompFromJson(obj: any) {
-    return obj.valores.created_at;
-  }
-
 }

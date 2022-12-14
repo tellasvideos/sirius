@@ -16,9 +16,9 @@
             <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
                 aria-label="Default select example">
                 <option selected>Proponente</option>
-                <option value="1">Proponente 1</option>
-                <option value="2">Proponente 2</option>
-                <option value="3">Proponente 3</option>
+                <option value="Proponente 1">Proponente 1</option>
+                <option value="Proponente 2">Proponente 2</option>
+                <option value="Proponente 3">Proponente 3</option>
             </select>
         </div>
 
@@ -27,9 +27,9 @@
             <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
                 aria-label="Default select example">
                 <option selected>Cadeia de Valor</option>
-                <option value="1">cadeia 1</option>
-                <option value="2">cadeia 2</option>
-                <option value="3">cadeia 3</option>
+                <option value="cadeia 1">cadeia 1</option>
+                <option value="cadeia 2">cadeia 2</option>
+                <option value="cadeia 3">cadeia 3</option>
             </select>
         </div>
 
@@ -38,10 +38,9 @@
 
             <div class="m-1">
                 <select class="form-select form-select-sm select-prov" [(ngModel)]="provincia" name="provincia">
-                    <option>Província</option>
-                    <option>Luanda</option>
-                    <option>Namibe</option>
-                    <option>Malange</option>
+                    <option value="Luanda">Luanda</option>
+                    <option value="Namibe">Namibe</option>
+                    <option value="Malange">Malange</option>
                 </select>
             </div>
 
@@ -60,15 +59,15 @@
             <label class="mb-2">Condição:</label>
             <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
                 aria-label="Default select example">
-                <option value="1">PN em elaboração</option>
-                <option value="2">PN elaborado</option>
+                <option value="PN em elaboração">PN em elaboração</option>
+                <option value="PN elaborado">PN elaborado</option>
             </select>
 
             <label class="mb-2">Avaliação:</label>
             <select class="form-select form-select-sm" [(ngModel)]="validado" name="validado"
                 aria-label="Default select example">
+                <option value="0">Não</option>
                 <option value="1">Sim</option>
-                <option value="1">Não</option>
             </select>
         </div>
 
@@ -152,7 +151,7 @@
                 aria-label=".form-control-sm example">
         </div>
 
-        <div class="d-flex justify-content-between mb-2">
+        <div class="d-flex justify-content-between mb-1">
 
             <div class="input-group input-group-sm mb-3 m-1">
                 <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude" name="latitude"
