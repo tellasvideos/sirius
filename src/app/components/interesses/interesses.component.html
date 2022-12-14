@@ -96,38 +96,20 @@
                             <th scope="col" class="text-black"></th>
                         </tr>
                     </thead>
+    
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let interest of interest">
                             <th scope="row">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                 </div>
                             </th>
-                            <td>Fazenda Emilia</td>
-                            <td>Proponente</td>
-                            <td>Huambo</td>
-                            <td>Caala</td>
-                            <td>Lomato</td>
-                            <td>AO</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                </div>
-                            </th>
-                            <td>Faznda Luís</td>
-                            <td>Proponente</td>
-                            <td>Bié</td>
-                            <td>Catabola</td>
-                            <td>Catabola Município</td>
-                            <td>AO</td>
+                            <td> {{interest.farm_name}} </td>
+                            <td>{{interest.proponent_name}}</td>
+                            <td>{{interest.province}}</td>
+                            <td>{{interest.county}}</td>
+                            <td>{{interest.village}}</td>
+                            <td>{{interest.condition}}</td>
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
