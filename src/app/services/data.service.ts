@@ -99,10 +99,10 @@ export class DataService {
   proponentPDAC(){
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', 'Token a72c4eac16f4bc9e86728c7a5b7f51a4a6dc75bd' + String(localStorage.getItem('userToken')));
+    headers = headers.append('Authorization', 'Token a72c4eac16f4bc9e86728c7a5b7f51a4a6dc75bd');
 
-    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
-  }
+    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
+  }
 
   // ACCONT USERS -----------------------------------------------------------------------------------------------------------------------------------------
 
