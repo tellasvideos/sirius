@@ -19,15 +19,15 @@ export class AddInteressesComponent implements OnInit {
   provincia: any;
   municipio: any;
   vila: any;
-  condicao: Condicao[];
+  condicao: any;
   validado?: boolean;
   observation: any;
   areaTotalFaz?: number;
   areaCultPn?: number;
   custTotalProj?: number;
-  financiaPdac: any = [{ id: 1, name:'Sim' }, { id: 2, name: 'Não' }];
-  emprestBanc: any = [{ id: 1, name: 'Sim' }, { id: 1, name: 'Não' }];
-  recursosProp: any = [{ id: 1, name: 'Sim' }, { id: 1, name: 'Não' }];
+  financiaPdac: any;
+  emprestBanc: any;
+  recursosProp: any;
   estatuto: any;
   latitude?: number;
   logitude?: number;
@@ -37,12 +37,12 @@ export class AddInteressesComponent implements OnInit {
   constructor(
     public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
-  ) { 
+  ) {
     //console.log(this.condicao)
     //this.paises = this.dataService.getPaises();
     this.condicao = this.dataService.getCondicao();
-  
-    }
+
+  }
 
   ngOnInit(): void {
   }
@@ -90,13 +90,13 @@ export class AddInteressesComponent implements OnInit {
   }
 
 
-    // Carrega dados da condicao 
-    extractCodicaoFromJson(obj: any) {
-      return obj.valores.condicao;
-    }
-    
-    extractCreateAtCompFromJson(obj: any) {
-      return obj.valores.created_at;
-    }
+  // Carrega dados da condicao 
+  extractCodicaoFromJson(obj: any) {
+    return obj.valores.condicao;
+  }
+
+  extractCreateAtCompFromJson(obj: any) {
+    return obj.valores.created_at;
+  }
 
 }

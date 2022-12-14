@@ -7,7 +7,7 @@
     <form>
 
         <div class="input-group input-group-sm mb-3">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" placeholder="Nome/Fazenda"
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" name="fazenda" placeholder="Nome/Fazenda"
                 aria-label=".form-control-sm example">
         </div>
 
@@ -46,12 +46,12 @@
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" placeholder="Município"
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" name="municipio" placeholder="Município"
                     aria-label=".form-control-sm example">
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" placeholder="Aldeia"
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" name="vila" placeholder="Aldeia"
                     aria-label=".form-control-sm example">
             </div>
         </div>
@@ -65,7 +65,7 @@
             </select>
 
             <label class="mb-2">Avaliação:</label>
-            <select class="form-select form-select-sm" [(ngModel)]="validado" name="condicao"
+            <select class="form-select form-select-sm" [(ngModel)]="validado" name="validado"
                 aria-label="Default select example">
                 <option value="1">false</option>
                 <option value="1">true</option>
@@ -82,19 +82,19 @@
         <div class="d-flex justify-content-between mb-3">
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaTotalFaz"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaTotalFaz" name="areaTotalFaz"
                     placeholder="Área total da Fazenda" aria-label=".form-control-sm example">
             </div>
 
-            <div class="input-group input-group-sm m-1 form-floating">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaCultPn"
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaCultPn" name="areaCultPn"
                     placeholder="Área de Cultivo PN" aria-label=".form-control-sm example">
             </div>
 
         </div>
 
         <div class="form-floating mb-3 ">
-            <textarea class="form-control" [(ngModel)]="observation" placeholder="Comente aqui"
+            <textarea class="form-control" [(ngModel)]="observation" placeholder="Comente aqui" name="observation"
                 id="floatingTextarea"></textarea>
             <label for="floatingTextarea">Observações</label>
         </div>
@@ -102,7 +102,7 @@
         <div class="d-flex justify-content-between mb-3">
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj" name="custTotalProj"
                     placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
                 <select class=""
                     style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
@@ -112,7 +112,7 @@
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="emprestBanc"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="emprestBanc" name="emprestBanc"
                     placeholder="Empréstimo Bancário" aria-label=".form-control-sm example">
                 <select class=""
                     style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
@@ -126,7 +126,7 @@
         <div class="d-flex justify-content-between mb-3">
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="financiaPdac"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="financiaPdac" name="financiaPdac"
                     placeholder="Financiamento PDAC" aria-label=".form-control-sm example">
                 <select class=""
                     style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
@@ -136,7 +136,7 @@
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="recursosProp"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="recursosProp" name="recursosProp"
                     placeholder="Recursos Próprios" aria-label=".form-control-sm example">
                 <select class=""
                     style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
@@ -148,19 +148,19 @@
         </div>
 
         <div class="input-group input-group-sm mb-3">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto"
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto" name="estatuto"
                 aria-label=".form-control-sm example">
         </div>
 
         <div class="d-flex justify-content-between mb-2">
 
             <div class="input-group input-group-sm mb-3 m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude" name="latitude"
                     aria-label=".form-control-sm example">
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude"
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude" name="logitude"
                     aria-label=".form-control-sm example">
             </div>
 
