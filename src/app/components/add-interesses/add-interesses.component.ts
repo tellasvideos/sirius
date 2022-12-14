@@ -37,6 +37,8 @@ export class AddInteressesComponent implements OnInit {
   proponent: any;
   cadeiaVal: any;
 
+  PDAC:any;
+
   constructor(
     public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
@@ -48,6 +50,10 @@ export class AddInteressesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataService.proponentPDAC().subscribe(data =>{
+      this.PDAC = data;
+      console.log('proponentes pdac: ', data)
+    })
   }
 
   salvarInterestExpress() {

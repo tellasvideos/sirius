@@ -11,6 +11,7 @@ import { Pais } from '../models/pais'
 
 import { Cidade } from '../models/cidade'
 import { Condicao } from '../models/condicao.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +51,8 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
+  proponent_PDAC_url = 'https://kobo.humanitarianresponse.info/api/v2/assets/aECZYJZDHqNXPqemFjTJnf/data.json';
+
   // To get all users
   API_GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
@@ -81,7 +84,8 @@ export class DataService {
 
   constructor(
     private http: HttpClient,
-    private httpParams: HttpParams) { }
+    private httpParams: HttpParams,
+   ) { }
 
   rebootVM() {
     var headers = new HttpHeaders();
@@ -89,6 +93,15 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Bearer 1c644080bc6af5e8990a30c964157719cbb6576c');
     return this.http.get('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
+  }
+
+  // PROPONENTS FROM PDAC
+  proponentPDAC(){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token a72c4eac16f4bc9e86728c7a5b7f51a4a6dc75bd' + String(localStorage.getItem('userToken')));
+
+    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
   }
 
   // ACCONT USERS -----------------------------------------------------------------------------------------------------------------------------------------
