@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Cidade } from 'src/app/models/cidade';
+import { Condicao } from 'src/app/models/condicao.model';
+import { Pais } from 'src/app/models/pais';
 import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2'
 
@@ -16,15 +19,15 @@ export class AddInteressesComponent implements OnInit {
   provincia: any;
   municipio: any;
   vila: any;
-  condicao?: any[];
+  condicao: Condicao[];
   validado?: boolean;
   observation: any;
   areaTotalFaz?: number;
   areaCultPn?: number;
   custTotalProj?: number;
-  financiaPdac?: any[];
-  emprestBanc?: any[];
-  recursosProp?: any[];
+  financiaPdac: any = [{ id: 1, name:'Sim' }, { id: 2, name: 'Não' }];
+  emprestBanc: any = [{ id: 1, name: 'Sim' }, { id: 1, name: 'Não' }];
+  recursosProp: any = [{ id: 1, name: 'Sim' }, { id: 1, name: 'Não' }];
   estatuto: any;
   latitude?: number;
   logitude?: number;
@@ -34,7 +37,12 @@ export class AddInteressesComponent implements OnInit {
   constructor(
     public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
-  ) { }
+  ) { 
+    //console.log(this.condicao)
+    //this.paises = this.dataService.getPaises();
+    this.condicao = this.dataService.getCondicao();
+  
+    }
 
   ngOnInit(): void {
   }
@@ -65,12 +73,12 @@ export class AddInteressesComponent implements OnInit {
       success => { this.atualizardados() },
       error => { this.alert_error() }
     )
-   
+
     this.modalRef.close();
   }
 
   atualizardados() {
-   console.log('atualizar')
+    console.log('atualizar')
   }
 
   alert_error() {
@@ -81,5 +89,14 @@ export class AddInteressesComponent implements OnInit {
     })
   }
 
+
+    // Carrega dados da condicao 
+    extractCodicaoFromJson(obj: any) {
+      return obj.valores.condicao;
+    }
+    
+    extractCreateAtCompFromJson(obj: any) {
+      return obj.valores.created_at;
+    }
 
 }

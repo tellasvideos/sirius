@@ -3,176 +3,173 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
 </div>
 <div class="modal-body">
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" [(ngModel)]="fazenda" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form1">Nome/Fazenda</label>
-    </mdb-form-control>
 
-    <label class="mb-2 mt-2">Proponente:</label>
-    <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
-        aria-label="Default select example">
-        <option selected>Proponente</option>
-        <option value="1">Proponente 1</option>
-        <option value="2">Proponente 2</option>
-        <option value="3">Proponente 3</option>
-    </select>
+    <form>
 
-    <label class="mb-2 mt-2">Cadeia de valor:</label>
-    <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
-        aria-label="Default select example">
-        <option selected>Cadeia de Valor</option>
-        <option value="1">cadeia 1</option>
-        <option value="2">cadeia 2</option>
-        <option value="3">cadeia 3</option>
-    </select>
+        <div class="input-group input-group-sm mb-3">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" placeholder="Nome/Fazenda"
+                aria-label=".form-control-sm example">
+        </div>
 
-    
-    <div class="mb-3 mt-2 d-flex select-group">
-        <select class="form-select form-select-sm" [(ngModel)]="provincia" name="provincia">
-            <option>Província</option>
-            <option>Luanda</option>
-            <option>Namibe</option>
-            <option>Malange</option>
-        </select>
-
-        <select class="form-select form-select-sm" [(ngModel)]="municipio" name="vila">
-            <option>Município</option>
-            <option>muni1</option>
-            <option>muni2</option>
-            <option>muni3</option>
-        </select>
-
-        <select class="form-select form-select-sm" [(ngModel)]="vila" name="aldeia">
-            <option>Aldeia</option>
-            <option>Ald1</option>
-            <option>Ald2</option>
-            <option>Ald3</option>
-        </select>
-    </div>
-
-    <label class="mb-2 mt-2">Condição:</label>
-    <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
-        aria-label="Default select example">
-        <option selected>condicao 1</option>
-        <option value="1">condicao 2</option>
-    </select>
-
-    <label class="mb-2 mt-2">Avaliação:</label>
-    <select class="form-select form-select-sm mb-3" [(ngModel)]="validado" name="condicao"
-        aria-label="Default select example">
-        <option selected>0</option>
-        <option value="1">1</option>
-        <option value="1">2</option>
-    </select>
-
-    <mdb-form-control>
-        <input mdbInput type="text" id="form2" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form2">PN em Elaboação</label>
-    </mdb-form-control>
-
-    <mdb-form-control>
-        <input mdbInput type="text" id="form3" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form3">PN Elaborado</label>
-    </mdb-form-control>
-
-    <div class="d-flex justify-content-between mb-3">
-        <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="number" id="form6" [(ngModel)]="areaTotalFaz" class="form-control mb-3"
-                style="height:28px;" />
-            <label mdbLabel class="form-label" for="form6">Área total da Fazenda</label>
-        </mdb-form-control>
-
-        <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="number" id="form7" [(ngModel)]="areaCultPn" class="form-control mb-3"
-                style="height:28px;" />
-            <label mdbLabel class="form-label" for="form7">Área de Cultivo PN</label>
-        </mdb-form-control>
-    </div>
-
-    <mdb-form-control>
-        <input mdbInput type="text" id="form8" [(ngModel)]="observation" class="form-control mb-3"
-            style="height:70px;" />
-        <label mdbLabel class="form-label" for="form8">Observações</label>
-    </mdb-form-control>
-
-    <div class="d-flex justify-content-between mb-3">
-
-        <div class="m-2 d-flex">
-            <mdb-form-control>
-                <input mdbInput type="number" id="form9"  class="form-control" disabled />
-                <label mdbLabel class="form-label" for="form9">Custo Total Projecto</label>
-            </mdb-form-control>
-            <select class="" [(ngModel)]="custTotalProj"
-                style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>1</option>
-                <option>2</option>
+        <div class="mb-3">
+            <label class="mb-2">Proponente:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
+                aria-label="Default select example">
+                <option selected>Proponente</option>
+                <option value="1">Proponente 1</option>
+                <option value="2">Proponente 2</option>
+                <option value="3">Proponente 3</option>
             </select>
         </div>
 
-        <div class="m-2 d-flex">
-            <mdb-form-control>
-                <input mdbInput type="text" id="form10"  class="form-control" disabled />
-                <label mdbLabel class="form-label" for="form10">Empréstimo Bancário</label>
-            </mdb-form-control>
-            <select class="" [(ngModel)]="emprestBanc"
-                style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>1</option>
-                <option>2</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between mb-3">
-
-        <div class="m-2 d-flex">
-            <mdb-form-control>
-                <input mdbInput type="text" id="form11"  class="form-control" disabled />
-                <label mdbLabel class="form-label" for="form11">Financiamento PDAC</label>
-            </mdb-form-control>
-            <select class="" [(ngModel)]="financiaPdac"
-                style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>1</option>
-                <option>2</option>
+        <div class="mb-3">
+            <label class="mb-2">Cadeia de valor:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
+                aria-label="Default select example">
+                <option selected>Cadeia de Valor</option>
+                <option value="1">cadeia 1</option>
+                <option value="2">cadeia 2</option>
+                <option value="3">cadeia 3</option>
             </select>
         </div>
 
-        <div class="m-2 d-flex">
-            <mdb-form-control>
-                <input mdbInput type="text" id="form12"  class="form-control" disabled />
-                <label mdbLabel class="form-label" for="form12">Recursos Próprios</label>
-            </mdb-form-control>
-            <select class="" [(ngModel)]="recursosProp"
-                style=" height:50px; width: 50px; border-radius: 8%; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                <option>1</option>
-                <option>2</option>
+        <label class="mb-2">Provincia:</label>
+        <div class="mb-3 d-flex justify-content-between">
+
+            <div class="m-1">
+                <select class="form-select form-select-sm select-prov" [(ngModel)]="provincia" name="provincia">
+                    <option>Província</option>
+                    <option>Luanda</option>
+                    <option>Namibe</option>
+                    <option>Malange</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" placeholder="Município"
+                    aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" placeholder="Aldeia"
+                    aria-label=".form-control-sm example">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2">Condição:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
+                aria-label="Default select example">
+                <option value="1">PN em elaboração</option>
+                <option value="2">PN elaborado</option>
+            </select>
+
+            <label class="mb-2">Avaliação:</label>
+            <select class="form-select form-select-sm" [(ngModel)]="validado" name="condicao"
+                aria-label="Default select example">
+                <option value="1">false</option>
+                <option value="1">true</option>
             </select>
         </div>
-        
-    </div>
-
-    <mdb-form-control>
-        <input mdbInput type="text" id="form13" [(ngModel)]="estatuto" class="form-control mb-3" />
-        <label mdbLabel class="form-label" for="form13">Estatuto</label>
-    </mdb-form-control>
-
-    <div class="d-flex justify-content-between mb-2">
-        <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="number" id="form14" [(ngModel)]="latitude" class="form-control mb-3"
-                style="height:28px;" />
-            <label mdbLabel class="form-label" for="form14">Latitude</label>
-        </mdb-form-control>
-
-        <mdb-form-control class="d-block" style="width: 200px;">
-            <input mdbInput type="number" id="form15" [(ngModel)]="logitude" class="form-control mb-3"
-                style="height:28px;" />
-            <label mdbLabel class="form-label" for="form15">Logitude</label>
-        </mdb-form-control>
-    </div>
 
 
+        <!--  <label class="mb-2 mt-2">Condição:</label>
+        <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
+        aria-label="Default select example">
+        <option *ngFor="let item of condicao" value={{item.id}}> {{item.nome}} </option>
+         </select>-->
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaTotalFaz"
+                    placeholder="Área total da Fazenda" aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1 form-floating">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaCultPn"
+                    placeholder="Área de Cultivo PN" aria-label=".form-control-sm example">
+            </div>
+
+        </div>
+
+        <div class="form-floating mb-3 ">
+            <textarea class="form-control" [(ngModel)]="observation" placeholder="Comente aqui"
+                id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Observações</label>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj"
+                    placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="emprestBanc"
+                    placeholder="Empréstimo Bancário" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="financiaPdac"
+                    placeholder="Financiamento PDAC" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="recursosProp"
+                    placeholder="Recursos Próprios" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto"
+                aria-label=".form-control-sm example">
+        </div>
+
+        <div class="d-flex justify-content-between mb-2">
+
+            <div class="input-group input-group-sm mb-3 m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude"
+                    aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude"
+                    aria-label=".form-control-sm example">
+            </div>
+
+        </div>
+
+    </form>
 </div>
+
 <div class="modal-footer justify-content-between">
     <button type="button" class="btn btn-success btn-sm" (click)="salvarInterestExpress()">Guardar</button>
     <button type="button" class="btn btn-black btn-sm" (click)="modalRef.close()">Fechar</button>
-
 </div>
