@@ -18,11 +18,9 @@ export class ProponentesComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.proponentPDAC().subscribe(data =>{
       this.proponente = data;
-      console.log(data)
-      this.proponente = this.proponente.sort(function(a: any, b: any){
-        return b._submission_time - a._submission_time
-      })
+      this.filterDsc()
     })
+   
   }
 
   sideBarToggler() {
@@ -33,8 +31,10 @@ export class ProponentesComponent implements OnInit {
    
   }
 
-  filterAsc(){
-    
+  filterDsc(){
+    this.proponente = this.proponente.sort(function(a: any, b: any){
+      return b._id - a._id
+    })
   }
 
 }

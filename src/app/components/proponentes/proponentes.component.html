@@ -41,12 +41,6 @@
                     <h5 style="font-size: 10px; margin-left: 70%;">Resultado por página</h5>
                 </div>
             </div>
-            <div class="col-2 text-black text-center mb-2 d-none">Nome</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Departamento</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Função</div>
-            <div class="col-2 text-black text-center mb-2 d-none">isAdmin</div>
-            <div class="col-2 text-black text-center mb-2 d-none">UserName</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Password</div>
         </div>
 
         <!-- List users -->
@@ -55,7 +49,7 @@
                 <table class="table table-hover table-sm">
                     <thead class="linhas2">
                         <tr>
-                            <th scope="col" class="text-black">Nome</th>
+                            <th scope="col"  class="text-black">Nome</th>
                             <th scope="col" class="text-black">Empresa</th>
                             <th scope="col" class="text-black">Nif</th>
 
@@ -63,7 +57,7 @@
                             <th scope="col" class="text-black">Telemovel</th>
                             <th scope="col" class="text-black">Província</th>
 
-                            <th scope="col" class="text-black">Data</th>
+                            <th scope="col" class="text-black" (click)="filterDsc()">Data</th>
                             <th scope="col" class="text-black"></th>
 
 
@@ -90,7 +84,7 @@
                             <td>{{item['s2gp/s2g2/rep_nome']}}</td>
                             <td>{{item['s2gp/s2g2/rep_telemovel']}}</td>
                             <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
-                            <td> {{item._submission_time}} </td>
+                            <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
 
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
