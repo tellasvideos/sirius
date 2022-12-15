@@ -15,8 +15,7 @@
             <label class="mb-2">Proponente:</label>
             <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
                 aria-label="Default select example">
-                <option *ngFor="let item of PDAC" value=" {{PDAC[0]._id}} "> {{PDAC[0].s2gp/s2g1q1/prop_nome}} </option>
-
+                <option *ngFor="let item of PDAC" [value]="item._id"> {{item['s2gp/s2g1q1/prop_nome']}}</option>
             </select>
         </div>
 

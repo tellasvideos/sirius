@@ -69,6 +69,8 @@ import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common
 import { DataService } from './services/data.service';
 import { StatusPnComponent } from './components/status-pn/status-pn.component';
 import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
+import { ProponentesComponent } from './components/proponentes/proponentes.component';
+import { SinglePropComponent } from './single-prop/single-prop.component';
 
 
 @NgModule({
@@ -101,7 +103,9 @@ import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.compon
     AddAndManifestComponent,
     AddInqueritoComponent,
     StatusPnComponent,
-    EstatutoPnComponent
+    EstatutoPnComponent,
+    ProponentesComponent,
+    SinglePropComponent
   ],
   imports: [
     BrowserModule,
