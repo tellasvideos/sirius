@@ -66,21 +66,6 @@ export class AddInteressesComponent implements OnInit {
 
   ngOnInit(): void {
     this.proponestesPDAC();
-
-   /* this.dataService.proponentPDAC().subscribe(data => {
-
-       //this.prop_nome = data['s2gp/s2g1q1/prop_nome'];
-        this.prop_empresa,
-        this.prop_nif,
-        this.prop_categ,
-        this.rep_nome,
-        this.rep_telemovel,
-        this.rep_provincia,
-        this.rep_municipio,
-        this.rep_bairro,
-
-    })*/
-
   }
 
   salvarInterestExpress() {
@@ -139,7 +124,13 @@ export class AddInteressesComponent implements OnInit {
   proponestesPDAC() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.PDAC = data;
-      console.log("proponentes pdac: ", data[0]['s2gp/s2g1q1/prop_nome'])
+      this.filterDsc()
+    })
+  }
+
+  filterDsc(){
+    this.PDAC = this.PDAC.sort(function(a: any, b: any){
+      return b._id - a._id
     })
   }
 }

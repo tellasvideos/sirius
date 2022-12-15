@@ -16,10 +16,7 @@ export class SinglePropComponent implements OnInit {
   //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService) {
-    this.dataService.proponentPDAC().subscribe(data => {
-      this.proponente = data;
-      console.log(data)
-    })
+    
   }
 
   sideBarToggler() {
