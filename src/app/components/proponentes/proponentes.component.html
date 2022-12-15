@@ -2,39 +2,15 @@
     <mat-drawer mode="side" [opened]="sideBarOpen">
         <app-sidenav></app-sidenav>
     </mat-drawer>
-    <mat-drawer class="sidebar" mode="side" position="end" opened>
-        <app-sidebar></app-sidebar>
-    </mat-drawer>
 
     <!-- Man interesses full content-->
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
         <!-- Man interesses list-->
-        <div class="row mt-4" style="margin-left: 8%; margin-right: -9%;">
+        <div class="row mt-4">
             <div class="col-4 esp1">
-                <h5 class="list-user-text text-black mb-4">Proponentes</h5>
-            </div>
-            <div class="col-8">
-                <div class="row justify-content-between px-md-1">
-                    <div class="col-2 esp"></div>
-                    <div class="col-10">
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-light text-black"
-                                    style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
-                            </div>
-                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
-                                <button type="button" class="btn btn-light text-black"
-                                    style="text-transform: capitalize;">Exportar</button>
-                            </div>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
-                                <button (click)="openModal()" type="button" class="btn btn-success btn-top d-none"><i
-                                        class="fas fa-plus-square text-black"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="list-user-text text-black mb-4 m-3">Proponentes</h5>
             </div>
         </div>
         <!-- Man interesses list-->
@@ -104,7 +80,8 @@
                                             prop_provincia:item['s2gp/s2g3/rep_provincia'],
                                             prop_categ:item['s2gp/s2g1q1/prop_categ'],
                                             prop_bairro:item['s2gp/s2g3/rep_bairro'],
-                                            prop_subm:item['_submission_time']
+                                            prop_subm:item['_submission_time'],
+                                            rep_municipio:item['s2gp/s2g3/rep_municipio']
                                            }">
 
                             <td> {{item['s2gp/s2g1q1/prop_nome']}} </td>
@@ -115,18 +92,7 @@
                             <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
                             <td> {{item._submission_time}} </td>
 
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded" routerLink="/single-prop"
-                                    [queryParams]="{_id:item._id, 
-                                                    prop_nome:item['s2gp/s2g1q1/prop_nome'], 
-                                                    prop_empresa:item['s2gp/s2g1q1/prop_empresa'],
-                                                    prop_nif:item['s2gp/s2g1q1/prop_empresa'],
-                                                    rep_nome:item['s2gp/s2g2/rep_nome'],
-                                                    prop_telemovel:item['s2gp/s2g2/rep_telemovel'],
-                                                    prop_provincia:item['s2gp/s2g3/rep_provincia'],
-                                                    prop_categ:item['s2gp/s2g1q1/prop_categ'],
-                                                    prop_bairro:item['s2gp/s2g3/rep_bairro'],
-                                                    prop_subm:item['_submission_time']
-                                                    }">
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
                         </tr>

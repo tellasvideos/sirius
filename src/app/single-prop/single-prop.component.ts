@@ -30,6 +30,7 @@ export class SinglePropComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(res => {
       this.proponente = res;
+      console.log(res)
     })
 
     this.dataService.proponentPDAC().subscribe(data => {

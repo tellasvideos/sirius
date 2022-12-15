@@ -19,6 +19,9 @@ export class ProponentesComponent implements OnInit {
     this.dataService.proponentPDAC().subscribe(data =>{
       this.proponente = data;
       console.log(data)
+      this.proponente = this.proponente.sort(function(a: any, b: any){
+        return b._submission_time - a._submission_time
+      })
     })
   }
 
@@ -28,6 +31,10 @@ export class ProponentesComponent implements OnInit {
 
   openModal() {
    
+  }
+
+  filterAsc(){
+    
   }
 
 }
