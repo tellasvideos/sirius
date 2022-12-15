@@ -30,6 +30,7 @@ import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.servic
 import { StatusPnComponent } from './components/status-pn/status-pn.component';
 import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 import { ProponentesComponent } from './components/proponentes/proponentes.component';
+import { SinglePropComponent } from './single-prop/single-prop.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -63,7 +64,8 @@ const routes: Routes = [
   { path: 'add-instituicao', component: AddInstituicaoComponent },
   { path: 'status-pn', component: StatusPnComponent },
   { path: 'estatuto-pn', component: EstatutoPnComponent },
-  { path: 'proponentes', component: ProponentesComponent }
+  { path: 'proponentes', component: ProponentesComponent },
+  { path: 'single-prop', component: SinglePropComponent }
 
 
 ];

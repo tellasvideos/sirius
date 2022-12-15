@@ -92,7 +92,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of proponente">
+                        <tr *ngFor="let item of proponente" routerLink="/single-prop" routerLinkActive="active" 
+                            [queryParams]="{_id:item._id }" >
+
                             <td> {{item['s2gp/s2g1q1/prop_nome']}} </td>
                             <td>{{item['s2gp/s2g1q1/prop_empresa']}}</td>
                             <td>{{item['s2gp/s2g1q1/prop_nif']}}</td>
