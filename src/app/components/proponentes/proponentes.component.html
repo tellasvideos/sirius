@@ -87,21 +87,33 @@
                             <th scope="col" class="text-black">Telemovel</th>
                             <th scope="col" class="text-black">Província</th>
 
+                            <th scope="col" class="text-black">Data</th>
                             <th scope="col" class="text-black"></th>
+
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of proponente" routerLink="/single-prop" routerLinkActive="active" 
-                            [queryParams]="{_id:item._id }" >
+                        <tr *ngFor="let item of proponente" routerLink="/single-prop" routerLinkActive="active"
+                            [queryParams]="{_id:item._id, 
+                                            prop_nome:item['s2gp/s2g1q1/prop_nome'], 
+                                            prop_empresa:item['s2gp/s2g1q1/prop_empresa'],
+                                            prop_nif:item['s2gp/s2g1q1/prop_empresa'],
+                                            rep_nome:item['s2gp/s2g2/rep_nome'],
+                                            prop_telemovel:item['s2gp/s2g2/rep_telemovel'],
+                                            prop_provincia:item['s2gp/s2g3/rep_provincia'],
+                                            prop_categ:item['s2gp/s2g1q1/prop_categ'],
+                                            prop_bairro:item['s2gp/s2g3/rep_bairro'],
+                                            prop_subm:item['_submission_time']
+                                           }">
 
                             <td> {{item['s2gp/s2g1q1/prop_nome']}} </td>
                             <td>{{item['s2gp/s2g1q1/prop_empresa']}}</td>
                             <td>{{item['s2gp/s2g1q1/prop_nif']}}</td>
-
                             <td>{{item['s2gp/s2g2/rep_nome']}}</td>
                             <td>{{item['s2gp/s2g2/rep_telemovel']}}</td>
                             <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
+                            <td> {{item._submission_time}} </td>
 
 
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
