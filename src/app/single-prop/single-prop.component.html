@@ -1,6 +1,74 @@
-<p>single-prop works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" class="d-none" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
 
-<div class="container">
-    <label> {{proponente._id}} </label>
-    <div>{{proponente['s2gp/s2g2/rep_nome']}}</div>
-</div>
+    <!-- Man interesses full content-->
+    <mat-drawer-content>
+        <app-header class="d-none" (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <!-- Man interesses list-->
+        <div class="row mt-4">
+            <div class="col-4 esp1">
+                <h5 class="list-user-text text-black mb-4 m-4">{{proponente[0]['s2gp/s2g1q1/prop_nome']}}</h5>
+            </div>
+            <div class="col-8">
+                <div class="row justify-content-between px-md-1">
+                    <div class="col-8 esp"></div>
+                    <div class="col-4">
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-light text-black"
+                                    style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
+                            </div>
+                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                                <button type="button" class="btn btn-light text-black"
+                                    style="text-transform: capitalize;">Exportar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Man interesses list-->
+
+
+          <!-- List users -->
+          <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm table-bordered border-success">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Nome</th>
+                            <th scope="col" class="text-black">Empresa</th>
+                            <th scope="col" class="text-black">Nif</th>
+                            <th scope="col" class="text-black">Categoria</th>
+                            <th scope="col" class="text-black">Representante</th>
+                            <th scope="col" class="text-black">Telemovel</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Municipio</th>
+                            <th scope="col" class="text-black">Data de submissão</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{proponente[0]['s2gp/s2g1q1/prop_nome']}} </td>
+                            <td>{{proponente[0]['s2gp/s2g1q1/prop_empresa']}}</td>
+                            <td>{{proponente[0]['s2gp/s2g1q1/prop_nif']}}</td>
+                            <td>{{proponente[0][' s2gp/s2g1q1/prop_categ']}}</td>
+                            <td>{{proponente[0]['s2gp/s2g2/rep_nome']}}</td>
+                            <td>{{proponente[0]['s2gp/s2g2/rep_telemovel']}}</td>
+                            <td>{{proponente[0]['s2gp/s2g3/rep_provincia']}}</td>
+                            <td>{{proponente[0]['s2gp/s2g3/rep_municipio']}}</td>
+                            <td> {{proponente[0]._submission_time}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- List users -->
+
+
+
+    </mat-drawer-content>
+</mat-drawer-container>
