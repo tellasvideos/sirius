@@ -47,13 +47,12 @@ export class AddInteressesComponent implements OnInit {
     //this.paises = this.dataService.getPaises();
     //this.condicao = this.dataService.getCondicao();
     this.atualizardados()
+    this.proponestesPDAC()
+
   }
 
   ngOnInit(): void {
-    this.dataService.proponentPDAC().subscribe(data =>{
-      this.PDAC = data;
-      console.log('proponentes pdac: ', data)
-    })
+   
   }
 
   salvarInterestExpress() {
@@ -106,6 +105,13 @@ export class AddInteressesComponent implements OnInit {
       title: 'Salvo',
       showConfirmButton: false,
       timer: 1500
+    })
+  }
+
+  proponestesPDAC(){
+    this.dataService.proponentPDAC().subscribe(data =>{
+      this.PDAC = data;
+      console.log('proponentes pdac: ', data)
     })
   }
 }

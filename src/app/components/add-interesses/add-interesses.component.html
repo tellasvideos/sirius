@@ -7,18 +7,16 @@
     <form>
 
         <div class="input-group input-group-sm mb-3">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" name="fazenda" placeholder="Nome/Fazenda"
-                aria-label=".form-control-sm example">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" name="fazenda"
+                placeholder="Nome/Fazenda" aria-label=".form-control-sm example">
         </div>
 
         <div class="mb-3">
             <label class="mb-2">Proponente:</label>
             <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
                 aria-label="Default select example">
-                <option selected>Proponente</option>
-                <option value="Proponente 1">Proponente 1</option>
-                <option value="Proponente 2">Proponente 2</option>
-                <option value="Proponente 3">Proponente 3</option>
+                <option *ngFor="let item of PDAC" value=" {{PDAC[0]._id}} "> {{PDAC[0].s2gp/s2g1q1/prop_nome}} </option>
+
             </select>
         </div>
 
@@ -45,13 +43,13 @@
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" name="municipio" placeholder="Município"
-                    aria-label=".form-control-sm example">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" name="municipio"
+                    placeholder="Município" aria-label=".form-control-sm example">
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" name="vila" placeholder="Aldeia"
-                    aria-label=".form-control-sm example">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" name="vila"
+                    placeholder="Aldeia" aria-label=".form-control-sm example">
             </div>
         </div>
 
@@ -101,8 +99,8 @@
         <div class="d-flex justify-content-between mb-3">
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj" name="custTotalProj"
-                    placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj"
+                    name="custTotalProj" placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
                 <select class=""
                     style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
                     <option>KZ</option>
@@ -147,20 +145,20 @@
         </div>
 
         <div class="input-group input-group-sm mb-3">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto" name="estatuto"
-                aria-label=".form-control-sm example">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto"
+                name="estatuto" aria-label=".form-control-sm example">
         </div>
 
         <div class="d-flex justify-content-between mb-1">
 
             <div class="input-group input-group-sm mb-3 m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude" name="latitude"
-                    aria-label=".form-control-sm example">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude"
+                    name="latitude" aria-label=".form-control-sm example">
             </div>
 
             <div class="input-group input-group-sm m-1">
-                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude" name="logitude"
-                    aria-label=".form-control-sm example">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude"
+                    name="logitude" aria-label=".form-control-sm example">
             </div>
 
         </div>
