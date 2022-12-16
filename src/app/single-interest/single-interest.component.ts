@@ -11,27 +11,13 @@ import { DataService } from '../services/data.service';
 })
 export class SingleInterestComponent implements OnInit {
 
- public interest: any
-
   constructor(
-    public modalRef: MdbModalRef<SingleInterestComponent>,
-    private dataService: DataService,
-    private route: ActivatedRoute
   ) {
 
   }
 
   ngOnInit(): void {
-
-    this.route.queryParams.subscribe(res => {
-      this.interest = res;
-      console.log(res)
-    })
-
-    this.dataService.getInterestExpress().subscribe(data =>{
-      this.interest = data;
-      console.log(data)
-    })
+   
   }
 
 }

@@ -18,7 +18,7 @@ export class InteressesComponent implements OnInit {
   sideBarOpen = true;
 
   modalRef: MdbModalRef<AddInteressesComponent> | null = null;
-  modalRef2: MdbModalRef<SingleInterestComponent> | null = null;
+  //modalRef2: MdbModalRef<SingleInterestComponent> | null = null;
 
   //@ViewChild('tel') public tel: ModalDirective;
 
@@ -39,9 +39,7 @@ export class InteressesComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInteressesComponent)
   }
 
-  Ver_Single_interest() {
-    this.modalRef2 = this.modalService.open(SingleInterestComponent)
-  }
+
 
   list_interest(){
     this.dataService.getInterestExpress().subscribe(data =>{

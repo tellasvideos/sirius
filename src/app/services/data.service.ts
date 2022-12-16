@@ -80,7 +80,9 @@ export class DataService {
   delete_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
   // to edit data of interest expression
-  edit_Interest_url = '';
+  edit_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/';
+
+
 
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
@@ -88,7 +90,7 @@ export class DataService {
   constructor(
     private http: HttpClient,
     private httpParams: HttpParams,
-   ) { }
+  ) { }
 
   rebootVM() {
     var headers = new HttpHeaders();
@@ -99,13 +101,13 @@ export class DataService {
   }
 
   // PROPONENTS FROM PDAC
-  proponentPDAC(){
+  proponentPDAC() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
 
-    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
-  }
+    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
+  }
 
   // ACCONT USERS -----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -167,13 +169,22 @@ export class DataService {
     return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  editInterestExpression(){
+  editInterestExpression(interestEx: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
 
-    return 
+    return this.http.put(this.interest_Express_url + '/interestexpressions/', interestEx, { headers: headers })
   }
+
+  // to get interestExpression by id
+  getInterestExpressByid(id:any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
 
 
   // INTEREST EXPRESSION-----------------------------------------------------------------------------------------------------------------------------------------

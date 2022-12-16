@@ -1,0 +1,160 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"></h5>
+</div>
+<div class="modal-body">
+
+    <form>
+
+        <div class="input-group input-group-sm mb-3">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="fazenda" name="fazenda"
+                placeholder="Nome/Fazenda" aria-label=".form-control-sm example">
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2">Proponente:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
+                aria-label="Default select example">
+                <option *ngFor="let item of PDAC" [value]="item._id"> {{item['s2gp/s2g1q1/prop_nome']}}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2">Cadeia de valor:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
+                aria-label="Default select example">
+                <option *ngFor="let item of cadeiaDeValor" [value]="item.id" > {{item.name}} </option>
+            </select>
+        </div>
+
+        <label class="mb-2">Provincia:</label>
+        <div class="mb-3 d-flex justify-content-between">
+
+            <div class="m-1">
+                <select class="form-select form-select-sm select-prov" [(ngModel)]="provincia" name="provincia">
+                    <option value="Luanda">Luanda</option>
+                    <option value="Namibe">Namibe</option>
+                    <option value="Malange">Malange</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="municipio" name="municipio"
+                    placeholder="Município" aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="vila" name="vila"
+                    placeholder="Aldeia" aria-label=".form-control-sm example">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2">Condição:</label>
+            <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
+                aria-label="Default select example">
+                <option value="PN em elaboração">PN em elaboração</option>
+                <option value="PN elaborado">PN elaborado</option>
+            </select>
+
+            <label class="mb-2">Avaliação:</label>
+            <select class="form-select form-select-sm" [(ngModel)]="validado" name="validado"
+                aria-label="Default select example">
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaTotalFaz" name="areaTotalFaz"
+                    placeholder="Área total da Fazenda" aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="areaCultPn" name="areaCultPn"
+                    placeholder="Área de Cultivo PN" aria-label=".form-control-sm example">
+            </div>
+
+        </div>
+
+        <div class="form-floating mb-3 ">
+            <textarea class="form-control" [(ngModel)]="observation" placeholder="Comente aqui" name="observation"
+                id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Observações</label>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="custTotalProj" 
+                    name="custTotalProj" placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="emprestBanc" name="emprestBanc"
+                    placeholder="Empréstimo Bancário" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="financiaPdac" name="financiaPdac"
+                    placeholder="Financiamento PDAC" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="recursosProp" name="recursosProp"
+                    placeholder="Recursos Próprios" aria-label=".form-control-sm example">
+                <select class=""
+                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                    <option>KZ</option>
+                    <option>USD</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="estatuto" placeholder="Estatuto"
+                name="estatuto" aria-label=".form-control-sm example">
+        </div>
+
+        <div class="d-flex justify-content-between mb-1">
+
+            <div class="input-group input-group-sm mb-3 m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="latitude" placeholder="Latitude"
+                    name="latitude" aria-label=".form-control-sm example">
+            </div>
+
+            <div class="input-group input-group-sm m-1">
+                <input class="form-control form-control-sm" type="number" [(ngModel)]="logitude" placeholder="Logitude"
+                    name="logitude" aria-label=".form-control-sm example">
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-success btn-sm">Atualizar</button>
+    <button type="button" class="btn btn-black btn-sm">Fechar</button>
+</div>

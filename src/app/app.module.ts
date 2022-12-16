@@ -9,12 +9,12 @@ import { FormsModule } from '@angular/forms';
 
 // Angular Materials
 import { MatSliderModule } from '@angular/material/slider';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 // MDB UI KITS
@@ -62,16 +62,18 @@ import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadei
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
 import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
 import { AddInqueritoComponent } from './components/add-inquerito/add-inquerito.component';
-
-// Providers
-import { AuthService } from './services/auth.service';
-import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DataService } from './services/data.service';
 import { StatusPnComponent } from './components/status-pn/status-pn.component';
 import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 import { ProponentesComponent } from './components/proponentes/proponentes.component';
 import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
+import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
+
+
+// Providers
+import { AuthService } from './services/auth.service';
+import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -107,7 +109,8 @@ import { SingleInterestComponent } from './single-interest/single-interest.compo
     EstatutoPnComponent,
     ProponentesComponent,
     SinglePropComponent,
-    SingleInterestComponent
+    SingleInterestComponent,
+    EditInterestComponent
   ],
   imports: [
     BrowserModule,

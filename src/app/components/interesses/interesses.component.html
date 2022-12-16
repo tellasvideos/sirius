@@ -40,7 +40,7 @@
         <!-- Man interesses list-->
 
         <!-- Second section or Man-interesse table -->
-        <div class="row mt-3 linhas1" style="margin-left: 1%; margin-right: 1%;">
+        <div class="row mt-3 linhas1 conteiner" style="margin-left: 1%; margin-right: 1%;">
             <div class="row mt-2" style="margin-left: 25%; margin-right:25%; display: block;">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
@@ -77,7 +77,7 @@
         <!-- Man-interesse table -->
         <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="table-responsive">
-                <table class="table table-hover table-sm">
+                <table class="table table-sm">
                     <thead class="linhas2">
                         <tr>
                             <th scope="col" class="text-black">Nome/Fazenda</th>
@@ -99,11 +99,12 @@
                             <td>{{interest.county}}</td>
                             <td>{{interest.village}}</td>
                             <td>{{interest.condition}}</td>
-                            <td><button type="button" class="btn btn-link btn-sm btn-rounded"  >
+                            <td><button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
                             <td>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                <button type="button" [routerLink]="['/edit-interest/', interest.id]"
+                                    class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
