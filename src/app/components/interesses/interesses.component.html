@@ -99,7 +99,7 @@
                             <td>{{interest.county}}</td>
                             <td>{{interest.village}}</td>
                             <td>{{interest.condition}}</td>
-                            <td><button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td><button type="button" [routerLink]="['/single-interest/', interest.id]" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
                             <td>

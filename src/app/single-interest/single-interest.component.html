@@ -1,161 +1,174 @@
+<div class="container-fluid">
+    <div class="row m-4">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    Vizualização
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center"></h5>
+                    <form [formGroup]="angForm">
 
+                        <div class="input-group input-group-sm mb-3">
+                            <input class="form-control form-control-sm" type="text" formControlName="farm_name" 
+                                name="farm_name" placeholder="Nome/Fazenda" value="Disabled readonly input" aria-label="Disabled input example" readonly [attr.disabled]="true">
+                        </div>
 
+                        <div class="mb-3">
+                            <label class="mb-2">Proponente:</label>
+                            <select class="form-select form-select-sm mb-3" formControlName="proponent_name" [attr.disabled]="true" readonly
+                                aria-label="Default select example">
+                                <option *ngFor="let item of PDAC" [value]="item._id"> {{item['s2gp/s2g1q1/prop_nome']}}
+                                </option>
+                            </select>
+                        </div>
 
-<!--div class="modal-dialog modal-dialog-scrollable" id="staticBackdrop" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="mb-3">
+                            <label class="mb-2">Cadeia de valor:</label>
+                            <select class="form-select form-select-sm mb-3" formControlName="value_chain" [attr.disabled]="true" readonly
+                                aria-label="Default select example">
+                                <option *ngFor="let item of cadeiaDeValor" [value]="item.id"> {{item.name}} </option>
+                            </select>
+                        </div>
 
-    <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Manifestação de interesses</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+                        <label class="mb-2">Provincia:</label>
+                        <div class="mb-3 d-flex justify-content-between">
+
+                            <div class="m-1">
+                                <select class="form-select form-select-sm select-prov" formControlName="province" [attr.disabled]="true"> readonly
+                                    <option value="Luanda">Luanda</option>
+                                    <option value="Namibe">Namibe</option>
+                                    <option value="Malange">Malange</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="text" formControlName="county" [attr.disabled]="true" readonly
+                                    placeholder="Município" aria-label=".form-control-sm example">
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="text" formControlName="village" [attr.disabled]="true" readonly
+                                    placeholder="Aldeia" aria-label=".form-control-sm example">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="mb-2">Condição:</label>
+                            <select class="form-select form-select-sm mb-3" formControlName="condition" [attr.disabled]="true" readonly
+                                aria-label="Default select example">
+                                <option value="PN em elaboração">PN em elaboração</option>
+                                <option value="PN elaborado">PN elaborado</option>
+                            </select>
+
+                            <label class="mb-2">Avaliação:</label>
+                            <select class="form-select form-select-sm" formControlName="was_evaluated" [attr.disabled]="true" readonly
+                                aria-label="Default select example">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" [attr.disabled]="true" readonly
+                                    formControlName="total_farm_area" placeholder="Área total da Fazenda"
+                                    aria-label=".form-control-sm example">
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" [attr.disabled]="true" readonly
+                                    formControlName="pn_cultivation_area" placeholder="Área de Cultivo PN"
+                                    aria-label=".form-control-sm example">
+                            </div>
+
+                        </div>
+
+                        <div class="form-floating mb-3 ">
+                            <textarea class="form-control" placeholder="Comente aqui" formControlName="observations" [attr.disabled]="true" readonly
+                                id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Observações</label>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" readonly
+                                    formControlName="total_project_cost" placeholder="Custo Total Projecto"
+                                    aria-label=".form-control-sm example">
+                                <select class="" [attr.disabled]="true"
+                                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                                    <option>KZ</option>
+                                    <option>USD</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" formControlName="bank_load" [attr.disabled]="true" readonly
+                                    placeholder="Empréstimo Bancário" aria-label=".form-control-sm example">
+                                <select class=""
+                                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                                    <option>KZ</option>
+                                    <option>USD</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" [attr.disabled]="true" readonly
+                                    formControlName="pdac_financing" placeholder="Financiamento PDAC"
+                                    aria-label=".form-control-sm example">
+                                <select class="" [attr.disabled]="true"
+                                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                                    <option>KZ</option>
+                                    <option>USD</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" [attr.disabled]="true" readonly
+                                    formControlName="own_resources" placeholder="Recursos Próprios"
+                                    aria-label=".form-control-sm example">
+                                <select class="" [attr.disabled]="true" readonly
+                                    style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
+                                    <option>KZ</option>
+                                    <option>USD</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="input-group input-group-sm mb-3">
+                            <input class="form-control form-control-sm" type="text" placeholder="Estatuto" [attr.disabled]="true" readonly
+                                formControlName="statute" aria-label=".form-control-sm example">
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-1">
+                            <div class="input-group input-group-sm mb-3 m-1">
+                                <input class="form-control form-control-sm" type="number" placeholder="Latitude" [attr.disabled]="true" readonly
+                                    formControlName="latitude" aria-label=".form-control-sm example">
+                            </div>
+
+                            <div class="input-group input-group-sm m-1">
+                                <input class="form-control form-control-sm" type="number" placeholder="Logitude" [attr.disabled]="true" readonly
+                                    formControlName="longitude" aria-label=".form-control-sm example">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2">
+        </div>
     </div>
-    <div class="modal-body">
-
-        <form>
-
-            <div class="input-group input-group-sm mb-3">
-                <input class="form-control form-control-sm" type="text" name="fazenda" placeholder="Nome/Fazenda"
-                    aria-label=".form-control-sm example">
-            </div>
-
-            <div class="mb-3">
-                <label class="mb-2">Proponente:</label>
-                <select class="form-select form-select-sm mb-3" name="proponente" aria-label="Default select example">
-                    <option></option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="mb-2">Cadeia de valor:</label>
-                <select class="form-select form-select-sm mb-3" name="cadeiaVal" aria-label="Default select example">
-                    <option selected></option>
-                </select>
-            </div>
-
-            <label class="mb-2">Provincia:</label>
-            <div class="mb-3 d-flex justify-content-between">
-
-                <div class="m-1">
-                    <select class="form-select form-select-sm select-prov" name="provincia">
-                        <option value="Luanda"></option>
-                    </select>
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="text" name="municipio" placeholder="Município"
-                        aria-label=".form-control-sm example">
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="text" name="vila" placeholder="Aldeia"
-                        aria-label=".form-control-sm example">
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="mb-2">Condição:</label>
-                <select class="form-select form-select-sm mb-3" name="condicao" aria-label="Default select example">
-                    <option value="PN em elaboração">PN em elaboração</option>
-                    <option value="PN elaborado">PN elaborado</option>
-                </select>
-
-                <label class="mb-2">Avaliação:</label>
-                <select class="form-select form-select-sm" name="validado" aria-label="Default select example">
-                    <option value="0"></option>
-                </select>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="areaTotalFaz"
-                        placeholder="Área total da Fazenda" aria-label=".form-control-sm example">
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="areaCultPn"
-                        placeholder="Área de Cultivo PN" aria-label=".form-control-sm example">
-                </div>
-
-            </div>
-
-            <div class="form-floating mb-3 ">
-                <textarea class="form-control" placeholder="Comente aqui" name="observation"
-                    id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Observações</label>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="custTotalProj"
-                        placeholder="Custo Total Projecto" aria-label=".form-control-sm example">
-                    <select class=""
-                        style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                        <option>KZ</option>
-                        <option>USD</option>
-                    </select>
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="emprestBanc"
-                        placeholder="Empréstimo Bancário" aria-label=".form-control-sm example">
-                    <select class=""
-                        style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                        <option>KZ</option>
-                        <option>USD</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="financiaPdac"
-                        placeholder="Financiamento PDAC" aria-label=".form-control-sm example">
-                    <select class=""
-                        style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                        <option>KZ</option>
-                        <option>USD</option>
-                    </select>
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" name="recursosProp"
-                        placeholder="Recursos Próprios" aria-label=".form-control-sm example">
-                    <select class=""
-                        style=" height:30px; width: 50px; background: #262626; border-color: #DFDFDF; color: #DFDFDF;">
-                        <option>KZ</option>
-                        <option>USD</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-                <input class="form-control form-control-sm" type="text" placeholder="Estatuto" name="estatuto"
-                    aria-label=".form-control-sm example">
-            </div>
-
-            <div class="d-flex justify-content-between mb-1">
-
-                <div class="input-group input-group-sm mb-3 m-1">
-                    <input class="form-control form-control-sm" type="number" placeholder="Latitude" name="latitude"
-                        aria-label=".form-control-sm example">
-                </div>
-
-                <div class="input-group input-group-sm m-1">
-                    <input class="form-control form-control-sm" type="number" placeholder="Logitude" name="logitude"
-                        aria-label=".form-control-sm example">
-                </div>
-
-            </div>
-
-        </form>
-
-    </div>
-
-    <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-black btn-sm" (click)="modalRef.close()">Fechar</button>
-    </div>
-</div-->
+</div>

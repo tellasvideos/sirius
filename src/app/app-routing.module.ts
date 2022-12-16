@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'estatuto-pn', component: EstatutoPnComponent },
   { path: 'proponentes', component: ProponentesComponent },
   { path: 'single-prop', component: SinglePropComponent },
-  { path: 'single-interest', component: SingleInterestComponent },
+  { path: 'single-interest/:id', component: SingleInterestComponent },
   { path: 'edit-interest/:id', component: EditInterestComponent }
 
 
