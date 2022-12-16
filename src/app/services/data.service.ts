@@ -182,7 +182,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
+    return this.http.get(`${this.get_Interest_Exp_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
 

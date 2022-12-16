@@ -32,6 +32,7 @@ import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.compon
 import { ProponentesComponent } from './components/proponentes/proponentes.component';
 import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
+import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -68,7 +69,7 @@ const routes: Routes = [
   { path: 'proponentes', component: ProponentesComponent },
   { path: 'single-prop', component: SinglePropComponent },
   { path: 'single-interest', component: SingleInterestComponent },
-  { path: 'edit-interest/:id', component: SingleInterestComponent }
+  { path: 'edit-interest/:id', component: EditInterestComponent }
 
 
 
