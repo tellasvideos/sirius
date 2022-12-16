@@ -79,6 +79,9 @@ export class DataService {
   // to delete any interest espression
   delete_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
+  // to edit data of interest expression
+  edit_Interest_url = '';
+
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c'
 
@@ -162,6 +165,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  editInterestExpression(){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+
+    return 
   }
 
 

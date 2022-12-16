@@ -71,6 +71,7 @@ import { StatusPnComponent } from './components/status-pn/status-pn.component';
 import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 import { ProponentesComponent } from './components/proponentes/proponentes.component';
 import { SinglePropComponent } from './single-prop/single-prop.component';
+import { SingleInterestComponent } from './single-interest/single-interest.component';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { SinglePropComponent } from './single-prop/single-prop.component';
     StatusPnComponent,
     EstatutoPnComponent,
     ProponentesComponent,
-    SinglePropComponent
+    SinglePropComponent,
+    SingleInterestComponent
   ],
   imports: [
     BrowserModule,

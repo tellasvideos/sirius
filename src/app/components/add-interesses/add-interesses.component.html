@@ -23,10 +23,7 @@
             <label class="mb-2">Cadeia de valor:</label>
             <select class="form-select form-select-sm mb-3" [(ngModel)]="cadeiaVal" name="cadeiaVal"
                 aria-label="Default select example">
-                <option selected>Cadeia de Valor</option>
-                <option value="cadeia 1">cadeia 1</option>
-                <option value="cadeia 2">cadeia 2</option>
-                <option value="cadeia 3">cadeia 3</option>
+                <option *ngFor="let item of cadeiaDeValor" [value]="item.id" > {{item.name}} </option>
             </select>
         </div>
 
@@ -67,13 +64,6 @@
                 <option value="1">Sim</option>
             </select>
         </div>
-
-
-        <!--  <label class="mb-2 mt-2">Condição:</label>
-        <select class="form-select form-select-sm mb-3" [(ngModel)]="condicao" name="condicao"
-        aria-label="Default select example">
-        <option *ngFor="let item of condicao" value={{item.id}}> {{item.nome}} </option>
-         </select>-->
 
         <div class="d-flex justify-content-between mb-3">
 

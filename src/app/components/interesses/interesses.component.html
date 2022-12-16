@@ -88,20 +88,27 @@
                             <th scope="col" class="text-black">Estado</th>
                             <th scope="col" class="text-black"></th>
                             <th scope="col" class="text-black"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let interest of interest">
-                            <td> {{interest.farm_name}} </td>
+                            <td>{{interest.farm_name}} </td>
                             <td>{{interest.proponent_name}}</td>
                             <td>{{interest.province}}</td>
                             <td>{{interest.county}}</td>
                             <td>{{interest.village}}</td>
                             <td>{{interest.condition}}</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
+                            <td><button type="button" class="btn btn-link btn-sm btn-rounded"  >
+                                    <i class="far fa-eye"></i>
                                 </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="deleteInterest(interest.id)">
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="deleteInterest(interest.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
                         </tr>
@@ -109,12 +116,6 @@
                 </table>
             </div>
         </div>
-        <!-- Man-interesse table -->
-
-        <!--select class="select" style=" height:38px; background-color: #36383A; width: 120px;">
-            <option></option>
-            <option>1</option>
-        </select-->
 
     </mat-drawer-content>
     <!-- Man interesses full content -->

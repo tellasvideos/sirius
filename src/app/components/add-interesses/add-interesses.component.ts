@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MdbModalRef } from "mdb-angular-ui-kit/modal";
 import { Subscription } from "rxjs";
+import { CadeiaVal } from "src/app/interfaces/cadeiaVal";
 import { ManInteress } from "src/app/interfaces/manInteress";
 import { Cidade } from "src/app/models/cidade";
 import { Condicao } from "src/app/models/condicao.model";
@@ -16,6 +17,7 @@ import Swal from "sweetalert2"
 })
 export class AddInteressesComponent implements OnInit {
 
+  cadeiaDeValor?: CadeiaVal[];
   interest?: ManInteress[];
 
   fazenda: any;
@@ -66,6 +68,7 @@ export class AddInteressesComponent implements OnInit {
 
   ngOnInit(): void {
     this.proponestesPDAC();
+    this.getCadeiaDeValor()
   }
 
   salvarInterestExpress() {
@@ -125,6 +128,13 @@ export class AddInteressesComponent implements OnInit {
     this.dataService.proponentPDAC().subscribe(data => {
       this.PDAC = data;
       this.filterDsc()
+    })
+  }
+
+  getCadeiaDeValor(){
+    this.dataService.getValueChains().subscribe(data =>{
+      this.cadeiaDeValor = data;
+      console.log('cadeia de valor', data)
     })
   }
 
