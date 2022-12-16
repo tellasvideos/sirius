@@ -73,7 +73,7 @@ export class EditInterestComponent implements OnInit {
 
   EditInterestExpress() {
 
-    this.dataService.editInterestExpression(this.angForm.value).subscribe(
+    this.dataService.editInterestExpression(this.id, this.angForm.value).subscribe(
       success => { this.alert_success() },
       error => { this.alert_error() }
     )

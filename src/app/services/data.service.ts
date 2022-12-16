@@ -169,12 +169,12 @@ export class DataService {
     return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  editInterestExpression(interestEx: any) {
+  editInterestExpression(id:number, interestEx: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
 
-    return this.http.put(this.interest_Express_url + '/interestexpressions/', interestEx, { headers: headers })
+    return this.http.put(`${this.get_Interest_Exp_url}${interestEx.id}/`, interestEx, { headers: headers }).pipe(take(1));
   }
 
   // to get interestExpression by id
