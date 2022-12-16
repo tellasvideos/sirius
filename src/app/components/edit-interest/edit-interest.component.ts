@@ -31,32 +31,32 @@ export class EditInterestComponent implements OnInit {
     //this.atualizardados()
 
     this.angForm = this.fb.group({
-      fazenda: ['', Validators.required],
-      proponente: ['', Validators.required],
-      provincia: ['', Validators.required],
-      municipio: ['', Validators.required],
-      vila: ['', Validators.required],
-      condicao: ['', Validators.required],
-      validado: ['', Validators.required],
-      observation: ['', Validators.required],
-      areaTotalFaz: ['', Validators.required],
-      areaCultPn: ['', Validators.required],
-      custTotalProj: ['', Validators.required],
-      financiaPdac: ['', Validators.required],
-      emprestBanc: ['', Validators.required],
-      recursosProp: ['', Validators.required],
-      estatuto: ['', Validators.required],
+      farm_name: ['', Validators.required],
+      proponent_name: ['', Validators.required],
+      province: ['', Validators.required],
+      county: ['', Validators.required],
+      village: ['', Validators.required],
+      condition: ['', Validators.required],
+      was_evaluated: ['', Validators.required],
+      observations: ['', Validators.required],
+      total_farm_area: ['', Validators.required],
+      pn_cultivation_area: ['', Validators.required],
+      total_project_cost: ['', Validators.required],
+      pdac_financing: ['', Validators.required],
+      bank_load: ['', Validators.required],
+      own_resources: ['', Validators.required],
+      statute: ['', Validators.required],
       latitude: ['', Validators.required],
-      logitude: ['', Validators.required],
-      proponent: ['', Validators.required],
-      cadeiaVal: ['', Validators.required]
+      longitude: ['', Validators.required],
+      proposer: ['', Validators.required],
+      value_chain: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
-   //this.proponestesPDAC(),
-      //this.getCadeiaDeValor(),
-      //this.getInterestExpress(),
+   this.proponestesPDAC(),
+      this.getCadeiaDeValor(),
+      this.getInterestExpress(),
 
       this.activatedRoute.paramMap.subscribe(paramId => {
         this.id = paramId.get('id'),
@@ -65,6 +65,7 @@ export class EditInterestComponent implements OnInit {
         this.dataService.getInterestExpressByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
           console.log('dados do id clicado', data)
+          console.log(this.angForm.value)
         });
 
       });
