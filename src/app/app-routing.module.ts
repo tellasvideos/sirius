@@ -33,6 +33,7 @@ import { ProponentesComponent } from './components/proponentes/proponentes.compo
 import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
 import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
+import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -60,12 +61,13 @@ const routes: Routes = [
   { path: 'sidebar', component: SidebarComponent },
   { path: 'create-user', component: CreateUserComponent },
   { path: 'add-interesses', component: AddInteressesComponent },
+  { path: 'add-manifest', component: AddAndManifestComponent },
   { path: 'add-inquiridor', component: AddInquiridorComponent },
   { path: 'add-departamento', component: AddDepartamentoComponent },
   { path: 'add-cadeia-valor', component: AddCadeiaValorComponent },
   { path: 'add-instituicao', component: AddInstituicaoComponent },
-  { path: 'status-pn', component: StatusPnComponent },
-  { path: 'estatuto-pn', component: EstatutoPnComponent },
+  { path: 'status-pn/:id', component: StatusPnComponent },
+  { path: 'estatuto-pn/:id', component: EstatutoPnComponent },
   { path: 'proponentes', component: ProponentesComponent },
   { path: 'single-prop', component: SinglePropComponent },
   { path: 'single-interest/:id', component: SingleInterestComponent },

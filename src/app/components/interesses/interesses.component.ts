@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { AddInteressesComponent } from '../add-interesses/add-interesses.component';
 import Swal from 'sweetalert2';
 import { SingleInterestComponent } from 'src/app/single-interest/single-interest.component';
+import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.component';
 
 @Component({
   selector: 'app-interesses',
@@ -39,6 +40,9 @@ export class InteressesComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInteressesComponent)
   }
 
+  openModaltest(id:any) {
+    this.modalRef = this.modalService.open(AddAndManifestComponent) 
+  }
 
 
   list_interest(){
