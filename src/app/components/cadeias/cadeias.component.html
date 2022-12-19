@@ -11,19 +11,22 @@ background-size: cover;">
                         <h6>Cadeias de valor para Manifestação de interesse</h6>
                     </div>
                     <div class="card-body">
-                        <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
-                        <div class="mb-3">
-                            <select class="form-select form-select-sm" [(ngModel)]="chainsId" name="status">
-                                <option *ngFor="let item of cadeiaDeValor" [value]="item.id"> {{item.name}} </option>
+                        <input type="text" id="form1" [(ngModel)]="id" class="form-control d-none mb-2" />
+                        <input type="text" id="form1" [(ngModel)]="chainsId" class="form-control d-none mb-2" />
 
+                        <div class="mb-3">
+                            <select class="form-select form-select-sm" [(ngModel)]="chains_name" name="chains_name">
+                                <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}} </option>
                             </select>
                         </div>
                         <div class="form-floating mb-3 ">
-                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations" name="observation" id="floatingTextarea"></textarea>
+                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                name="observation" id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Observações</label>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm" (click)="salvarCadeia()">Guardar</button>
+                            <button type="button" class="btn btn-success btn-sm"
+                                (click)="salvarCadeia()">Guardar</button>
                         </div>
 
                     </div>
@@ -49,13 +52,14 @@ background-size: cover;">
                                 <tr *ngFor="let item of _chains | myfilter:'interest_expression': id ">
                                     <td>{{item.id}}</td>
                                     <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
-                                    <td>{{item.value_chain}}</td>
+                                    <td>{{item.name_value_chain}}</td>
                                     <td>{{item.observations}}</td>
                                     <td>{{item.interest_expression}}</td>
                                     <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
-                                    <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button"
+                                            class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-trash-alt" style="color: red;"></i>
                                         </button></td>
                                 </tr>

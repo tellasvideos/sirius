@@ -15,7 +15,7 @@
             <label class="mb-2">Proponente:</label>
             <select class="form-select form-select-sm mb-3" [(ngModel)]="proponente" name="proponente"
                 aria-label="Default select example">
-                <option *ngFor="let item of PDAC" [value]="item._id"> {{item['s2gp/s2g1q1/prop_nome']}}</option>
+                <option *ngFor="let item of PDAC" [value]="item['s2gp/s2g1q1/prop_nome']"> {{item['s2gp/s2g1q1/prop_nome']}}</option>
             </select>
         </div>
 
@@ -25,7 +25,7 @@
             <label class="mb-2">Cadeia de valor:</label>
             <select class="form-select form-select-sm mb-3"  [(ngModel)]="cadeiaVal" name="cadeiaVal"
                 aria-label="Default select example">
-                <option *ngFor="let item of cadeiaDeValor" [value]="item.id" > {{item.name}} </option>
+                <option *ngFor="let item of cadeiaDeValor" [value]="item.name" > {{item.name}} </option>
             </select>
         </div>
 
