@@ -41,6 +41,7 @@ export class AddCadeiaValorComponent implements OnInit {
       success => {this.atualizardados()},
       error => {this.alert_error()}
     )
+    this.atualizardados();
     Swal.fire({
       icon: 'success',
       title: 'Salvo',
