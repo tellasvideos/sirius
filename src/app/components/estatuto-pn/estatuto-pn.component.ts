@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-estatuto-pn',
@@ -11,6 +13,11 @@ export class EstatutoPnComponent implements OnInit {
 
   sb: any;
   id: any;
+  _statutes: any;
+
+  statutes: any;
+  observations: any;
+  interest_expression: any;
 
   constructor(
     private dataService: DataService,
@@ -18,20 +25,39 @@ export class EstatutoPnComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getStatutes();
+    this.getInterestExpress();
 
-    this.getInterestExpress(),
+    this.activatedRoute.paramMap.subscribe(paramId => {
+      this.id = paramId.get('id'),
+        console.log('id clicado', this.id)
 
-      this.activatedRoute.paramMap.subscribe(paramId => {
-        this.id = paramId.get('id'),
-          console.log('id clicado', this.id)
+    });
+  }
 
-        /* this.dataService.getInterestExpressByid(this.id).subscribe(data => {
-           this.angForm.patchValue(data)
-           console.log('dados do id clicado', data)
-           console.log(this.angForm.value)
-         });*/
+  salvarStatutes() {
 
-      });
+    this.activatedRoute.paramMap.subscribe(paramId => {
+      this.id = paramId.get('id')
+      console.log('id man int', this.id)
+
+      //this.passarId()
+
+      let statutes_pn = { "status": this.statutes, "observations": this.observations, "interest_expression": this.id }
+      this.dataService.salvaBusinessPlanStatutos(statutes_pn).subscribe(
+        success => { this.getStatutes() },
+        error => { this.alert_error() }
+      )
+      this.getStatutes();
+      Swal.fire({
+        icon: 'success',
+        title: 'Salvo',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    })
+
   }
 
   getInterestExpress() {
@@ -41,5 +67,19 @@ export class EstatutoPnComponent implements OnInit {
     })
   }
 
+  getStatutes() {
+    this.dataService.get_BusinessPlan_statutos().subscribe(data => {
+      this._statutes = data;
+      console.log('get status', data)
+    })
+  }
+
+  alert_error() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Alguma coisa correu mal, tente mais tarde.',
+    })
+  }
 
 }

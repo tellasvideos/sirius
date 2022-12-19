@@ -51,11 +51,19 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
+   // to get all business plan statutos
+   get_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
+
+   // to save any business plan statutos
+   Save_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1';
+ 
+
+
   // to get all business plan status
-  get_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';  
+  get_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
 
   // to save any business plan status
-  Save_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1';  
+  Save_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
   proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms';
 
@@ -175,7 +183,7 @@ export class DataService {
     return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  editInterestExpression(id:number, interestEx: any) {
+  editInterestExpression(id: number, interestEx: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -184,7 +192,7 @@ export class DataService {
   }
 
   // to get interestExpression by id
-  getInterestExpressByid(id:any) {
+  getInterestExpressByid(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -225,26 +233,50 @@ export class DataService {
 
   // VALUE CHAINS...........................................................................................................................................................
 
-    // BUSINESS PLAN STATUS...........................................................................................................................................................
+  // BUSINESS PLAN STATUS...........................................................................................................................................................
 
-    // To get business plan status
-    get_BusinessPlan_status(){
-      var headers = new HttpHeaders();
-      headers = headers.append('Content-Type', 'application/json');
-      headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-      return this.http.get<any[]>(this.get_BusPlanStatus_url, { headers: headers })
-    }
+  // To get business plan status
+  get_BusinessPlan_status() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_BusPlanStatus_url, { headers: headers })
+  }
 
-    // to save any business plan status
-    salvaBusinessPlanStatus(status:any){
-      //console.log(localStorage.getItem('userToken'), cadeiaVal)
-      var headers = new HttpHeaders();
-      headers = headers.append('Content-Type', 'application/json');
-      headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-      return this.http.post(this.Save_BusPlanStatus_url + '/businessplanstatus/', status, { headers: headers })
-    }
+  // to save any business plan status
+  salvaBusinessPlanStatus(status: any) {
+    //console.log(localStorage.getItem('userToken'), cadeiaVal)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.Save_BusPlanStatus_url + '/businessplanstatus/', status, { headers: headers })
+  }
 
-    // BUSINESS PLAN STATUS...........................................................................................................................................................
+  // BUSINESS PLAN STATUS...........................................................................................................................................................
+
+
+  // BUSINESS PLAN STATUTO...........................................................................................................................................................
+
+   // To get business plan status
+   get_BusinessPlan_statutos() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_BusPlanStatutos_url, { headers: headers })
+  }
+
+  // to save any business plan status
+  salvaBusinessPlanStatutos(statutes: any) {
+    //console.log(localStorage.getItem('userToken'), cadeiaVal)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.Save_BusPlanStatutos_url + '/businessplanstatutes/', statutes, { headers: headers })
+  }
+
+
+  // BUSINESS PLAN STATUTO...........................................................................................................................................................
+
   private extrairDados(res: Response) {
     const body = res;
     return body || {};

@@ -11,10 +11,57 @@ background-size: cover;">
                         <h6>Estatuto de Plano de Negócio</h6>
                     </div>
                     <div class="card-body">
+                        <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
+                        <div class="mb-3">
+                            <select class="form-select form-select-sm" [(ngModel)]="statutes" name="status">
+                                <option value="Entregue">Entregue</option>
+                                <option value="Andamento">Andamento</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                name="observation" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Observações</label>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-success btn-sm"
+                                (click)="salvarStatutes()">Guardar</button>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
 
-                        <div class="col-md-6"></div>
-
+            <div class="row container">
+                <div class="col-12">
+                    <div class="card text-white mb-3">
+                        <table class="table align-middle text-black text-center table-hover table-sm ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Observações</th>
+                                    <th scope="col">Cod. Maniefestação de interesse</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Apagar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of _statutes">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.status}}</td>
+                                    <td>{{item.observations}}</td>
+                                    <td>{{item.interest_expression}}</td>
+                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button></td>
+                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

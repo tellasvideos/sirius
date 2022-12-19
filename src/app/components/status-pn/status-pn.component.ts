@@ -48,13 +48,13 @@ export class StatusPnComponent implements OnInit {
         success => { this.getStatus() },
         error => { this.alert_error() }
       )
+      this.getStatus();
       Swal.fire({
         icon: 'success',
         title: 'Salvo',
         showConfirmButton: false,
         timer: 1500
       })
-      this.getStatus();
 
     })
 
