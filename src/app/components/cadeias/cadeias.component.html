@@ -19,13 +19,11 @@ background-size: cover;">
                             </select>
                         </div>
                         <div class="form-floating mb-3 ">
-                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
-                                name="observation" id="floatingTextarea"></textarea>
+                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations" name="observation" id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Observações</label>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm"
-                                (click)="salvarCadeia()">Guardar</button>
+                            <button type="button" class="btn btn-success btn-sm" (click)="salvarCadeia()">Guardar</button>
                         </div>
 
                     </div>
@@ -48,7 +46,7 @@ background-size: cover;">
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of _chains">
+                                <tr *ngFor="let item of _chains | myfilter:'interest_expression': id ">
                                     <td>{{item.id}}</td>
                                     <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                                     <td>{{item.value_chain}}</td>
@@ -57,8 +55,7 @@ background-size: cover;">
                                     <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
-                                    <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button"
-                                            class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-trash-alt" style="color: red;"></i>
                                         </button></td>
                                 </tr>

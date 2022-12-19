@@ -115,7 +115,7 @@ export class DataService {
   constructor(
     private http: HttpClient,
     private httpParams: HttpParams,
-  ) { }
+  ) { } 
 
   rebootVM() {
     var headers = new HttpHeaders();

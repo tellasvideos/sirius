@@ -76,6 +76,7 @@ import { CadeiasComponent } from './components/cadeias/cadeias.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './services/data.service';
+import { MyfilterPipe } from './myfilter.pipe';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { DataService } from './services/data.service';
     SinglePropComponent,
     SingleInterestComponent,
     EditInterestComponent,
-    CadeiasComponent
+    CadeiasComponent,
+    MyfilterPipe
   ],
   imports: [
     BrowserModule,
