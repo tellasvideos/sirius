@@ -20,14 +20,48 @@ background-size: cover;">
                             </select>
                         </div>
                         <div class="form-floating mb-3 ">
-                            <textarea class="form-control"  placeholder="Comente aqui" [(ngModel)]="observations" name="observation"
-                                id="floatingTextarea"></textarea>
+                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                name="observation" id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Observações</label>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm" (click)="salvarStatus()" >Guardar</button>
+                            <button type="button" class="btn btn-success btn-sm"
+                                (click)="salvarStatus()">Guardar</button>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container">
+                <div class="col-12">
+                    <div class="card text-white bg-card mb-3">
+                        <table class="table align-middle text-white text-center ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Observações</th>
+                                    <th scope="col">Cod. Maniefestação de interesse</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Apagar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of _status">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.status}}</td>
+                                    <td>{{item.observations}}</td>
+                                    <td>{{item.interest_expression}}</td>
+                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button></td>
+                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

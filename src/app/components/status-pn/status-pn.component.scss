@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+div{
+    overflow-y:auto;
+}
+
 .btn-color {
     background-color: #146C0D;
     color: #F2F2F2;
@@ -18,7 +22,7 @@
 }
 
 .card {
-    margin-top: 8%;
+    margin-top: 2%;
     display: block;
     margin-left: auto;
     margin-right: auto;
