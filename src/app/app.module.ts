@@ -68,6 +68,8 @@ import { ProponentesComponent } from './components/proponentes/proponentes.compo
 import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
 import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
+import { CadeiasComponent } from './components/cadeias/cadeias.component';
+
 
 
 // Providers
@@ -110,7 +112,8 @@ import { DataService } from './services/data.service';
     ProponentesComponent,
     SinglePropComponent,
     SingleInterestComponent,
-    EditInterestComponent
+    EditInterestComponent,
+    CadeiasComponent
   ],
   imports: [
     BrowserModule,

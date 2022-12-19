@@ -1,0 +1,71 @@
+<div style="background-image: url('../../assets/fundorecpass.jpg');
+height: 100vh;
+background-repeat: no-repeat;
+background-size: cover;">
+    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
+        <div class="row p-5 ">
+
+            <div class="col-12">
+                <div class="card text-white bg-card mb-1 w-50">
+                    <div class="card-title">
+                        <h6>Estatuto de Plano de Negócio</h6>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
+                        <div class="mb-3">
+                            <select class="form-select form-select-sm" [(ngModel)]="chainsId" name="status">
+                                <option *ngFor="let item of cadeiaDeValor" [value]="item.id" > {{item.name}} </option>
+
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                name="observation" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Observações</label>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-success btn-sm"
+                                (click)="salvarCadeia()">Guardar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container">
+                <div class="col-12">
+                    <div class="card text-white mb-3">
+                        <table class="table align-middle text-black text-center table-hover table-sm ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Observações</th>
+                                    <th scope="col">Cod. Maniefestação de interesse</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Apagar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of _chains">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.chains}}</td>
+                                    <td>{{item.observations}}</td>
+                                    <td>{{item.interest_expression}}</td>
+                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button></td>
+                                    <td> <button (click)="deleteCadeias(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

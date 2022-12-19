@@ -51,6 +51,11 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
+  //
+  get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
+
+  save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1'
+
   // url to delete BP status
   delete_Status_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
 
@@ -295,6 +300,25 @@ export class DataService {
   }
 
   // BUSINESS PLAN STATUTO...........................................................................................................................................................
+
+
+
+
+  get_ValueChainsIE() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_ValueChainsToInterestExpress_url, { headers: headers })
+  }
+
+  salva_ValueChainsIE(statutes: any) {
+    //console.log(localStorage.getItem('userToken'), cadeiaVal)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.Save_BusPlanStatutos_url + '/valuechaintointerestexpressions/', statutes, { headers: headers })
+  }
+
 
   private extrairDados(res: Response) {
     const body = res;

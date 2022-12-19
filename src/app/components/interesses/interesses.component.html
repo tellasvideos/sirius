@@ -65,12 +65,6 @@
                     <h5 style="font-size: 10px; margin-left: 70%;">Resultado por página</h5>
                 </div>
             </div>
-            <div class="col-2 text-black text-center mb-2 d-none">Nome</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Departamento</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Função</div>
-            <div class="col-2 text-black text-center mb-2 d-none">isAdmin</div>
-            <div class="col-2 text-black text-center mb-2 d-none">UserName</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Password</div>
         </div>
         <!-- Second section or Man-interesse table -->
 
@@ -85,10 +79,12 @@
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Aldeia</th>
+                            <th scope="col" class="text-black">Data</th>
                             <th scope="col" class="text-black">Estado</th>
                             <th scope="col" class="text-black">Ver</th>
                             <th scope="col" class="text-black">Progresso</th>
                             <th scope="col" class="text-black">Estatuto</th>
+                            <th scope="col" class="text-black">Cadeias</th>
                             <th scope="col" class="text-black">Editar</th>
                             <th scope="col" class="text-black">Apagar</th>
                         </tr>
@@ -100,6 +96,7 @@
                             <td>{{interest.province}}</td>
                             <td>{{interest.county}}</td>
                             <td>{{interest.village}}</td>
+                            <td></td>
                             <td>{{interest.condition}}</td>
                             <td><button type="button" [routerLink]="['/single-interest/', interest.id]"
                                     class="btn btn-link btn-sm btn-rounded">
@@ -114,7 +111,12 @@
                             <td> <button type="button" [routerLink]="['/estatuto-pn/', interest.id]"
                                     class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-calendar-check"></i>
-                                </button></td>
+                                </button>
+                            </td>
+                            <td> <button type="button" [routerLink]="['/cadeias/', interest.id]"
+                                    class="btn btn-link btn-sm btn-rounded">
+                                    <i class="far fa-lemon"></i> </button></td>
+
                             <td>
 
                                 <button type="button" [routerLink]="['/edit-interest/', interest.id]"

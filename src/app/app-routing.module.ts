@@ -34,6 +34,7 @@ import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
 import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
 import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
+import { CadeiasComponent } from './components/cadeias/cadeias.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -71,7 +72,8 @@ const routes: Routes = [
   { path: 'proponentes', component: ProponentesComponent },
   { path: 'single-prop', component: SinglePropComponent },
   { path: 'single-interest/:id', component: SingleInterestComponent },
-  { path: 'edit-interest/:id', component: EditInterestComponent }
+  { path: 'edit-interest/:id', component: EditInterestComponent },
+  { path: 'cadeias/:id', component: CadeiasComponent }
 
 
 
