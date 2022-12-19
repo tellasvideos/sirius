@@ -40,6 +40,7 @@ background-size: cover;">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
+                                    <th scope="col">Data</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Observações</th>
                                     <th scope="col">Cod. Maniefestação de interesse</th>
@@ -50,13 +51,15 @@ background-size: cover;">
                             <tbody>
                                 <tr *ngFor="let item of _status">
                                     <td>{{item.id}}</td>
+                                    <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                                     <td>{{item.status}}</td>
                                     <td>{{item.observations}}</td>
                                     <td>{{item.interest_expression}}</td>
                                     <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
-                                    <td> <button type="button" (click)="deleteStatus(item.id)" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button type="button" (click)="deleteStatus(item.id)"
+                                            class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-trash-alt" style="color: red;"></i>
                                         </button></td>
                                 </tr>
