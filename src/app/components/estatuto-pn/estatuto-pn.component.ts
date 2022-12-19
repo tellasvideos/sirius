@@ -60,6 +60,14 @@ export class EstatutoPnComponent implements OnInit {
 
   }
 
+  // delete um statutos
+  deleteStatute(id: any) {
+    this.dataService.deleteStatutes(id).subscribe(
+      success => { this.getStatutes(); },
+      error => { this.alert_error(); }
+    )
+  }
+
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.sb = data,

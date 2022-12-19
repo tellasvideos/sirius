@@ -51,13 +51,17 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
-   // to get all business plan statutos
-   get_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
+  // url to delete BP status
+  delete_Status_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
 
-   // to save any business plan statutos
-   Save_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1';
- 
+  // url to delete business plan statute
+  delete_Statutes_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
 
+  // to get all business plan statutos
+  get_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
+
+  // to save any business plan statutos
+  Save_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
   // to get all business plan status
   get_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
@@ -252,13 +256,21 @@ export class DataService {
     return this.http.post(this.Save_BusPlanStatus_url + '/businessplanstatus/', status, { headers: headers })
   }
 
+  // to delete any statute 
+  deleteStatus(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_Status_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
   // BUSINESS PLAN STATUS...........................................................................................................................................................
 
 
   // BUSINESS PLAN STATUTO...........................................................................................................................................................
 
-   // To get business plan status
-   get_BusinessPlan_statutos() {
+  // To get business plan status
+  get_BusinessPlan_statutos() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -274,6 +286,13 @@ export class DataService {
     return this.http.post(this.Save_BusPlanStatutos_url + '/businessplanstatutes/', statutes, { headers: headers })
   }
 
+  // to delete any statute 
+  deleteStatutes(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_Statutes_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
 
   // BUSINESS PLAN STATUTO...........................................................................................................................................................
 

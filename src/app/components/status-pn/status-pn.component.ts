@@ -60,6 +60,14 @@ export class StatusPnComponent implements OnInit {
 
   }
 
+  // delete um status
+  deleteStatus(id: any) {
+    this.dataService.deleteStatus(id).subscribe(
+      success => { this.getStatus(); },
+      error => { this.alert_error(); }
+    )
+  }
+
   passarId() {
     this.dataService.getInterestExpressByid(this.id).subscribe(data => {
       this.id.patchValue(data)
