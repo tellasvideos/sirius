@@ -11,9 +11,22 @@ background-size: cover;">
                         <h6>Progresso da Manifestação de Interesse</h6>
                     </div>
                     <div class="card-body">
-
-
-                        <div class="col-md-6"></div>
+                        <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
+                        <div class="mb-3">
+                            <select class="form-select form-select-sm" [(ngModel)]="status" name="status">
+                                <option value="Entregue">Entregue</option>
+                                <option value="Andamento">Andamento</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3 ">
+                            <textarea class="form-control"  placeholder="Comente aqui" [(ngModel)]="observations" name="observation"
+                                id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Observações</label>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-success btn-sm" (click)="salvarStatus()" >Guardar</button>
+                        </div>
 
                     </div>
                 </div>

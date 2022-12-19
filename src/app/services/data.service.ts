@@ -51,6 +51,12 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
+  // to get all business plan status
+  get_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';  
+
+  // to save any business plan status
+  Save_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1';  
+
   proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms';
 
   // To get all users
@@ -219,7 +225,26 @@ export class DataService {
 
   // VALUE CHAINS...........................................................................................................................................................
 
+    // BUSINESS PLAN STATUS...........................................................................................................................................................
 
+    // To get business plan status
+    get_BusinessPlan_status(){
+      var headers = new HttpHeaders();
+      headers = headers.append('Content-Type', 'application/json');
+      headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+      return this.http.get<any[]>(this.get_BusPlanStatus_url, { headers: headers })
+    }
+
+    // to save any business plan status
+    salvaBusinessPlanStatus(status:any){
+      //console.log(localStorage.getItem('userToken'), cadeiaVal)
+      var headers = new HttpHeaders();
+      headers = headers.append('Content-Type', 'application/json');
+      headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+      return this.http.post(this.Save_BusPlanStatus_url + '/businessplanstatus/', status, { headers: headers })
+    }
+
+    // BUSINESS PLAN STATUS...........................................................................................................................................................
   private extrairDados(res: Response) {
     const body = res;
     return body || {};
