@@ -52,6 +52,8 @@ export class DataService {
   currentMessage = this.messageSource.asObservable();
 
   //
+  delete_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
+
   get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
 
   save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1'
@@ -319,6 +321,13 @@ export class DataService {
     return this.http.post(this.Save_BusPlanStatutos_url + '/valuechaintointerestexpressions/', statutes, { headers: headers })
   }
 
+  // to delete any statute 
+  delete_ValueChainsIExpress(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
 
   private extrairDados(res: Response) {
     const body = res;

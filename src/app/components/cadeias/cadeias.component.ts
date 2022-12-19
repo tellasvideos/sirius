@@ -29,6 +29,7 @@ export class CadeiasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCadeia();
+    this.getCadeiaInterest();
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
@@ -48,7 +49,7 @@ export class CadeiasComponent implements OnInit {
 
       let Cadeias = {"observations": this.observations, "interest_expression": this.id, "value_chain": this.chainsId, }
       this.dataService.salva_ValueChainsIE(Cadeias).subscribe(
-        success => { this.getCadeia() },
+        success => { this.getCadeiaInterest() },
         error => { this.alert_error() }
       )
       this.getCadeia();
@@ -64,9 +65,9 @@ export class CadeiasComponent implements OnInit {
   }
 
   // delete uma cadeia
-  deleteCadeias(id: any) {
-    this.dataService.deleteStatutes(id).subscribe(
-      success => { this.getCadeia(); },
+  delete_ValueChainsIExpress(id: any) {
+    this.dataService.delete_ValueChainsIExpress(id).subscribe(
+      success => { this.getCadeiaInterest(); },
       error => { this.alert_error(); }
     )
   }
@@ -80,7 +81,7 @@ export class CadeiasComponent implements OnInit {
 
   getCadeiaInterest() {
     this.dataService.get_ValueChainsIE().subscribe(data => {
-      this.cadeiaDeValor = data;
+      this._chains = data;
       console.log('get cadeias ManInterest', data)
     })
   }

@@ -8,13 +8,13 @@ background-size: cover;">
             <div class="col-12">
                 <div class="card text-white bg-card mb-1 w-50">
                     <div class="card-title">
-                        <h6>Estatuto de Plano de Negócio</h6>
+                        <h6>Cadeias de valor para Manifestação de interesse</h6>
                     </div>
                     <div class="card-body">
                         <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
                         <div class="mb-3">
                             <select class="form-select form-select-sm" [(ngModel)]="chainsId" name="status">
-                                <option *ngFor="let item of cadeiaDeValor" [value]="item.id" > {{item.name}} </option>
+                                <option *ngFor="let item of cadeiaDeValor" [value]="item.id"> {{item.name}} </option>
 
                             </select>
                         </div>
@@ -39,7 +39,7 @@ background-size: cover;">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Cadeia de valor</th>
                                     <th scope="col">Observações</th>
                                     <th scope="col">Cod. Maniefestação de interesse</th>
                                     <th scope="col">Editar</th>
@@ -49,13 +49,14 @@ background-size: cover;">
                             <tbody>
                                 <tr *ngFor="let item of _chains">
                                     <td>{{item.id}}</td>
-                                    <td>{{item.chains}}</td>
+                                    <td>{{item.value_chain}}</td>
                                     <td>{{item.observations}}</td>
                                     <td>{{item.interest_expression}}</td>
                                     <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
-                                    <td> <button (click)="deleteCadeias(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button"
+                                            class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-trash-alt" style="color: red;"></i>
                                         </button></td>
                                 </tr>
