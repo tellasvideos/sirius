@@ -13,10 +13,18 @@ export class SinglePropComponent implements OnInit {
 
   sideBarOpen = true;
 
+
   //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService) {
-    
+    this.route.queryParams.subscribe(res => {
+      this.proponente = res;
+      console.log(res)
+    })
+
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.proponente = data;
+    })
   }
 
   sideBarToggler() {

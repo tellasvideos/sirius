@@ -50,8 +50,17 @@ export class DataService {
 
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
+  
+  //url to proposal agreeement
+  get_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
 
-  //
+  delete_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
+
+  save_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1';
+
+
+
+  // Value chain to interest expression
   delete_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
 
   get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
@@ -327,6 +336,30 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // PROPORSAL AGREEMENT ............................................................................................
+  get_Proposal_Agreement(){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_Proposal_Agreement_url, { headers: headers })
+  }
+
+  deleteAcordos(id:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, { headers: headers }).pipe(take(1));
+
+  }
+
+  salvaAcordos(acordo:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_Proposal_Agreement_url + '/proposeragreements/', acordo, { headers: headers })
+
   }
 
   private extrairDados(res: Response) {

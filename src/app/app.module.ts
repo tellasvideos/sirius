@@ -69,6 +69,7 @@ import { SinglePropComponent } from './single-prop/single-prop.component';
 import { SingleInterestComponent } from './single-interest/single-interest.component';
 import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
 import { CadeiasComponent } from './components/cadeias/cadeias.component';
+import { AcordosComponent } from './components/acordos/acordos.component';
 
 
 
@@ -115,7 +116,8 @@ import { MyfilterPipe } from './myfilter.pipe';
     SingleInterestComponent,
     EditInterestComponent,
     CadeiasComponent,
-    MyfilterPipe
+    MyfilterPipe,
+    AcordosComponent
   ],
   imports: [
     BrowserModule,
