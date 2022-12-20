@@ -17,6 +17,7 @@ export class AcordosComponent implements OnInit {
 
   agreement_name: any;
   observations: any;
+  proposer_id: any;	
 
   constructor(
     private dataService: DataService,
@@ -28,8 +29,8 @@ export class AcordosComponent implements OnInit {
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id'),
-        console.log('id clicado', this.id)
+      this.proposer_id = paramId.get('id'),
+        console.log('id clicado', this.proposer_id)
 
     });
   }
@@ -37,12 +38,12 @@ export class AcordosComponent implements OnInit {
   salvarStatus() {
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id')
-      console.log('id man int', this.id)
+      this.proposer_id = paramId.get('id')
+      console.log('id proponente', this.proposer_id)
 
       //this.passarId()
 
-      let Acordos = { "agreement_name": this.agreement_name, "observations": this.observations }
+      let Acordos = { "agreement_name": this.agreement_name, "observations": this.observations, "proposer_id": this.proposer_id }
       this.dataService.salvaAcordos(Acordos).subscribe(
         success => { this.getAcordos() },
         error => { this.alert_error() }
