@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
 })
 export class EstatutoPnComponent implements OnInit {
 
-  sideBarOpen = true;
+  sideBarOpen = false;
   sb: any;
   id: any;
   _statutes: any;

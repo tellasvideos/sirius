@@ -10,6 +10,8 @@ import Swal from 'sweetalert2'
   styleUrls: ['./acordos.component.scss']
 })
 export class AcordosComponent implements OnInit {
+  
+  sideBarOpen = false;
 
   sb: any;
   id: any;
@@ -33,6 +35,10 @@ export class AcordosComponent implements OnInit {
         console.log('id clicado', this.proposer_id)
 
     });
+  }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
   }
 
   salvarStatus() {

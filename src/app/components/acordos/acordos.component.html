@@ -1,34 +1,44 @@
-<div style="background-image: url('../../assets/fundorecpass.jpg');
-height: 100vh;
-background-repeat: no-repeat;
-background-size: cover;">
-    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
-        <div class="row p-5 ">
 
-            <div class="col-12">
-                <div class="card text-white bg-card mb-1 w-50">
-                    <div class="card-title">
-                        <h6>Acordo de Proponente</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" type="text" [(ngModel)]="agreement_name" name="agreement_name"/>
-                        </div>
-                        <div class="form-floating mb-3 ">
-                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
-                                name="observation" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Observações</label>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm"
-                                (click)="salvarStatus()">Guardar</button>
-                        </div>
 
+
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="m-3">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-white bg-card mb-1 w-75">
+                        <div class="card-title">
+                            <h6>Acordo de Proponente</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="agreement_name"
+                                    name="agreement_name" />
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Observações</label>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-success btn-sm" (click)="salvarStatus()">Guardar</button>
+                            </div>
+        
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row container">
+        
+            <div class="row">
                 <div class="col-12">
                     <div class="card text-white mb-3">
                         <table class="table align-middle text-black text-center table-hover table-sm ">
@@ -61,8 +71,9 @@ background-size: cover;">
                     </div>
                 </div>
             </div>
-
+        
         </div>
 
-    </div>
-</div>
+    </mat-drawer-content>
+
+</mat-drawer-container>
