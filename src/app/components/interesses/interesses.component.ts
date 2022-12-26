@@ -52,7 +52,7 @@ export class InteressesComponent implements OnInit {
     })
   }
 
-   // delete uma cadeia de valor
+   // delete um interest express
    deleteInterest(id: any) {
     this.dataService.deleteInterestExpress(id).subscribe(
       success => { this.list_interest(); },

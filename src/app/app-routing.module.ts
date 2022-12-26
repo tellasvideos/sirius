@@ -36,6 +36,7 @@ import { EditInterestComponent } from './components/edit-interest/edit-interest.
 import { AddAndManifestComponent } from './components/add-and-manifest/add-and-manifest.component';
 import { CadeiasComponent } from './components/cadeias/cadeias.component';
 import { AcordosComponent } from './components/acordos/acordos.component';
+import { ProvinciasComponent } from './components/provincias/provincias.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -75,10 +76,8 @@ const routes: Routes = [
   { path: 'single-interest/:id', component: SingleInterestComponent },
   { path: 'edit-interest/:id', component: EditInterestComponent },
   { path: 'cadeias/:id', component: CadeiasComponent },
-  { path: 'acordos/:id', component: AcordosComponent }
-
-
-
+  { path: 'acordos/:id', component: AcordosComponent },
+  { path: 'provincias', component: ProvinciasComponent }
 
 ];
 

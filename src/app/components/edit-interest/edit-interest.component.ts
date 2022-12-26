@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 export class EditInterestComponent implements OnInit {
   cadeiaDeValor?: CadeiaVal[];
   interest?: ManInteress[];
-
+  sideBarOpen = true;
   PDAC: any;
 
   id: any;
@@ -51,6 +51,10 @@ export class EditInterestComponent implements OnInit {
       proposer: ['', Validators.required],
       value_chain: ['', Validators.required]
     })
+  }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
   }
 
   ngOnInit(): void {

@@ -34,9 +34,7 @@
 
             <div class="m-1">
                 <select class="form-select form-select-sm select-prov" [(ngModel)]="provincia" name="provincia">
-                    <option value="Luanda">Luanda</option>
-                    <option value="Namibe">Namibe</option>
-                    <option value="Malange">Malange</option>
+                    <option *ngFor="let item of provinces" [value]="item.name" > {{item.name}} </option>
                 </select>
             </div>
 

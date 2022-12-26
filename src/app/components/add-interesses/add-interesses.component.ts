@@ -17,6 +17,8 @@ import Swal from "sweetalert2"
 })
 export class AddInteressesComponent implements OnInit {
 
+  provinces:any;
+
   cadeiaDeValor?: CadeiaVal[];
   interest?: ManInteress[];
 
@@ -68,7 +70,8 @@ export class AddInteressesComponent implements OnInit {
 
   ngOnInit(): void {
     this.proponestesPDAC();
-    this.getCadeiaDeValor()
+    this.getCadeiaDeValor();
+    this.get_provinces();
   }
 
   salvarInterestExpress() {
@@ -135,6 +138,13 @@ export class AddInteressesComponent implements OnInit {
     this.dataService.getValueChains().subscribe(data =>{
       this.cadeiaDeValor = data;
       console.log('cadeia de valor', data)
+    })
+  }
+
+  get_provinces(){
+    this.dataService.get_Provinces().subscribe(data =>{
+      this.provinces = data;
+      console.log('prov', data)
     })
   }
 

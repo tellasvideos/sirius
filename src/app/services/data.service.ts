@@ -50,6 +50,9 @@ export class DataService {
 
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
+
+  // url to get provinces and add an man. interest
+  get_Provinces_url = 'http://strongboxao.ddns.net:8022/api/v1/provinces/';
   
   //url to proposal agreeement
   get_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
@@ -351,7 +354,6 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_Proposal_Agreement_url}${id}/`, { headers: headers }).pipe(take(1));
-
   }
 
   salvaAcordos(acordo:any){
@@ -360,6 +362,21 @@ export class DataService {
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.save_Proposal_Agreement_url + '/proposeragreements/', acordo, { headers: headers })
 
+  }
+
+  // funcion to get pronvices
+  get_Provinces(){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_Provinces_url, { headers: headers })
+  }
+
+  deleteProvinces(id:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.get_Provinces_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   private extrairDados(res: Response) {
