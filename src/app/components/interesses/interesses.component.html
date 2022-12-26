@@ -99,28 +99,28 @@
                             <td>{{interest.created_at | date:"dd/MM/yyyy"}}</td>
                             <td>{{interest.condition}}</td>
                             <td><button type="button" [routerLink]="['/single-interest/', interest.id]"
-                                    class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button>
                             </td>
                             <td> <button type="button" [routerLink]="['/status-pn/', interest.id]"
-                                    class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-clock"></i>
                                 </button></td>
 
                             <td> <button type="button" [routerLink]="['/estatuto-pn/', interest.id]"
-                                    class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-calendar-check"></i>
                                 </button>
                             </td>
                             <td> <button type="button" [routerLink]="['/cadeias/', interest.id]"
-                                    class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-lemon"></i> </button></td>
 
                             <td>
 
                                 <button type="button" [routerLink]="['/edit-interest/', interest.id]"
-                                    class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
