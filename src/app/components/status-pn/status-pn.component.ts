@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 })
 export class StatusPnComponent implements OnInit {
 
+  sideBarOpen = true;
   sb: any;
   id: any;
   _status: any;
@@ -23,6 +24,10 @@ export class StatusPnComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute
   ) { }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 
   ngOnInit(): void {
     this.getStatus();
