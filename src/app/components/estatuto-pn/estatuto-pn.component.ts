@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 })
 export class EstatutoPnComponent implements OnInit {
 
+  sideBarOpen = true;
   sb: any;
   id: any;
   _statutes: any;
@@ -35,6 +36,10 @@ export class EstatutoPnComponent implements OnInit {
     });
   }
 
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+  
   salvarStatutes() {
 
     this.activatedRoute.paramMap.subscribe(paramId => {

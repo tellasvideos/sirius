@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 })
 export class CadeiasComponent implements OnInit {
 
+  sideBarOpen = true;
   cadeiaDeValor?: CadeiaVal[];
 
   sb: any;
@@ -27,6 +28,10 @@ export class CadeiasComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute
   ) { }
+
+  sideBarToggler(){
+    this.sideBarOpen = !this.sideBarOpen;
+  }
 
   ngOnInit(): void {
     this.getCadeia();

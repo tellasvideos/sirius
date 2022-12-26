@@ -1,39 +1,47 @@
-<div style="background-image: url('../../assets/fundorecpass.jpg');
-height: 100vh;
-background-repeat: no-repeat;
-background-size: cover;">
-    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
-        <div class="row p-5 ">
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
 
-            <div class="col-12">
-                <div class="card text-white bg-card mb-1 w-50">
-                    <div class="card-title">
-                        <h6>Cadeias de valor para Manifestação de interesse</h6>
-                    </div>
-                    <div class="card-body">
-                        <input type="text" id="form1" [(ngModel)]="id" class="form-control d-none mb-2" />
-                        <input type="text" id="form1" [(ngModel)]="chainsId" class="form-control d-none mb-2" />
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-                        <div class="mb-3">
-                            <select class="form-select form-select-sm" [(ngModel)]="chains_name" name="chains_name">
-                                <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}} </option>
-                            </select>
+        <div class="m-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card text-white bg-card mb-1 w-75">
+                        <div class="card-title">
+                            <h6>Cadeias de valor para Manifestação de interesse</h6>
                         </div>
-                        <div class="form-floating mb-3 ">
-                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
-                                name="observation" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Observações</label>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm"
-                                (click)="salvarCadeia()">Guardar</button>
-                        </div>
+                        <div class="card-body">
+                            <input type="text" id="form1" [(ngModel)]="id" class="form-control d-none mb-2" />
+                            <input type="text" id="form1" [(ngModel)]="chainsId" class="form-control d-none mb-2" />
 
+                            <div class="mb-3">
+                                <select class="form-select form-select-sm" [(ngModel)]="chains_name" name="chains_name">
+                                    <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Observações</label>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-success btn-sm"
+                                    (click)="salvarCadeia()">Guardar</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row container">
+            <div class="row">
                 <div class="col-12">
                     <div class="card text-white mb-3">
                         <table class="table align-middle text-black text-center table-hover table-sm ">
@@ -43,7 +51,7 @@ background-size: cover;">
                                     <th scope="col">Data</th>
                                     <th scope="col">Cadeia de valor</th>
                                     <th scope="col">Observações</th>
-                                    <th scope="col">Cod. Maniefestação de interesse</th>
+                                    <th scope="col">Cod. Man. de interesse</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Apagar</th>
                                 </tr>
@@ -68,8 +76,8 @@ background-size: cover;">
                     </div>
                 </div>
             </div>
-
         </div>
 
-    </div>
-</div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

@@ -3,9 +3,6 @@
     align-items: center;
 }
 
-div{
-    overflow-y:auto;
-}
 
 .btn-color {
     background-color: #146C0D;
@@ -15,10 +12,10 @@ div{
 }
 
 .card-body {
-    padding: 8%;
+    padding: 5%;
     display: block;
-    margin-left: 80px;
-    margin-right: 80px;
+    //margin-left: 80px;
+    //margin-right: 80px;
 }
 
 .card {
@@ -43,3 +40,192 @@ div{
     text-transform: uppercase;
     font-weight: bold;
 }
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    /* Hide scrollbars */
+}
+
+mat-drawer {
+    overflow: hidden;
+    width: 270px;
+    background: #F2F2F2;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+.list-user-text {
+    font-size: 14px;
+    color: #262626;
+    font-weight: bold;
+}
+
+.btn-top {
+    text-transform: capitalize;
+    background-color: #2CBF04;
+    width: 100%;
+}
+
+.linhas1 {
+    color: #eaeaea;
+    //border-top: 2px solid;
+    //border-left: 2px solid;
+    //border-right: 2px solid;
+    border: 2px solid;
+
+}
+
+
+.form-check {
+    color: #2CBF04;
+}
+
+
+/* Extra small devices (phones, Galaxy Fold 240px and 450px) */
+@media (min-width: 240px) and (max-width: 450px) {
+    .sidebar {
+        display: none;
+    }
+
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    }
+
+    .btn-toolbar {
+        display: block;
+
+        .btn-group {
+            width: 100%;
+            margin: 3%;
+        }
+    }
+
+    .userlist {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .esp1 {
+        display: none;
+    }
+
+    .esp {
+        display: none;
+    }
+
+    .linhas1 {
+        display: none;
+
+    }
+
+}
+
+@media (min-width: 451px) and (max-width: 599px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    }
+
+    .btn-toolbar {
+        display: block;
+
+        .btn-group {
+            width: 100%;
+            margin: 3%;
+        }
+    }
+
+    .userlist {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .esp1 {
+        display: none;
+    }
+
+    .esp {
+        display: none;
+    }
+
+    .linhas1 {
+        display: none;
+
+    }
+
+}
+
+
+/* Extra small devices (phones, 600px and 768px) */
+@media (min-width: 600px) and (max-width: 767px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    mat-drawer {
+        width: 150px;
+        background: #F2F2F2;
+    }
+
+    .btn-toolbar {
+        display: block;
+
+        .btn-group {
+            width: 100%;
+            margin: 3%;
+        }
+    }
+
+    .userlist {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .esp1 {
+        display: flex;
+        max-width: 100%;
+    }
+
+    .esp {
+        display: none;
+    }
+
+    .linhas1 {
+        display: none;
+
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .sidebar {
+        display: none;
+    }
+    mat-drawer {
+        width: 180px;
+        background: #F2F2F2;
+    }
+}
+
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

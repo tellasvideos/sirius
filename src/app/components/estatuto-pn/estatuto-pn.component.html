@@ -1,39 +1,46 @@
-<div style="background-image: url('../../assets/fundorecpass.jpg');
-height: 100vh;
-background-repeat: no-repeat;
-background-size: cover;">
-    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
-        <div class="row p-5 ">
 
-            <div class="col-12">
-                <div class="card text-white bg-card mb-1 w-50">
-                    <div class="card-title">
-                        <h6>Estatuto de Plano de Negócio</h6>
-                    </div>
-                    <div class="card-body">
-                        <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
-                        <div class="mb-3">
-                            <select class="form-select form-select-sm" [(ngModel)]="statutes" name="status">
-                                <option value="Entregue">Entregue</option>
-                                <option value="Andamento">Andamento</option>
-                                <option value="Finalizado">Finalizado</option>
-                            </select>
-                        </div>
-                        <div class="form-floating mb-3 ">
-                            <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
-                                name="observation" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Observações</label>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-success btn-sm"
-                                (click)="salvarStatutes()">Guardar</button>
-                        </div>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
 
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="m-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card text-white bg-card mb-1 w-75">
+                        <div class="card-title">
+                            <h6>Estatuto de Plano de Negócio</h6>
+                        </div>
+                        <div class="card-body">
+                            <input type="text" id="form1" [(ngModel)]="id" class="form-control mb-2 d-none" />
+                            <div class="mb-3">
+                                <select class="form-select form-select-sm" [(ngModel)]="statutes" name="status">
+                                    <option value="Entregue">Entregue</option>
+                                    <option value="Andamento">Andamento</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Observações</label>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-success btn-sm" (click)="salvarStatutes()">Guardar</button>
+                            </div>
+        
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row container">
+        
+            <div class="row">
                 <div class="col-12">
                     <div class="card text-white mb-3">
                         <table class="table align-middle text-black text-center table-hover table-sm ">
@@ -43,7 +50,7 @@ background-size: cover;">
                                     <th scope="col">Data</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Observações</th>
-                                    <th scope="col">Cod. Maniefestação de interesse</th>
+                                    <th scope="col">Cod. Man. de interesse</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Apagar</th>
                                 </tr>
@@ -58,7 +65,8 @@ background-size: cover;">
                                     <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
-                                    <td> <button (click)="deleteStatute(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button (click)="deleteStatute(item.id)" type="button"
+                                            class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-trash-alt" style="color: red;"></i>
                                         </button></td>
                                 </tr>
@@ -67,8 +75,8 @@ background-size: cover;">
                     </div>
                 </div>
             </div>
-
         </div>
 
-    </div>
-</div>
+    </mat-drawer-content>
+
+</mat-drawer-container>
