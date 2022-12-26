@@ -143,7 +143,7 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
 
-    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers })
+    return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers }).pipe(take(1))
   }
 
   // ACCONT USERS -----------------------------------------------------------------------------------------------------------------------------------------

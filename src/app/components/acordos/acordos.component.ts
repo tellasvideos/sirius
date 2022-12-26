@@ -21,6 +21,7 @@ export class AcordosComponent implements OnInit {
   observations: any;
   proposer_id: any;	
 
+
   constructor(
     private dataService: DataService,
     private activatedRoute: ActivatedRoute

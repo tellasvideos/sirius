@@ -18,7 +18,7 @@ export class ProponentesComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.proponentPDAC().subscribe(data =>{
       this.proponente = data;
-      console.log(data)
+      //console.log(data)
       this.filterDsc()
     })
    
