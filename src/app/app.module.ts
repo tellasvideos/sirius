@@ -70,7 +70,7 @@ import { SingleInterestComponent } from './single-interest/single-interest.compo
 import { EditInterestComponent } from './components/edit-interest/edit-interest.component';
 import { CadeiasComponent } from './components/cadeias/cadeias.component';
 import { AcordosComponent } from './components/acordos/acordos.component';
-import { ProvinciasComponent } from './components/provincias/provincias.component';
+import { ProvinciasComponent } from './provincias/provincias.component';
 
 
 

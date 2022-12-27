@@ -42,10 +42,26 @@ export class CadeiadevalorComponent implements OnInit {
 
   // delete uma cadeia de valor
   deleteCadeia(id: any) {
-    this.dataService.deleteValueChain(id).subscribe(
-      success => { this.atualizarlista(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteValueChain(id).subscribe(
+          success => { this.atualizarlista(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
   }
 
   sideBarToggler() {

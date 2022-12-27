@@ -25,7 +25,7 @@ export class StatusPnComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
@@ -54,6 +54,8 @@ export class StatusPnComponent implements OnInit {
         error => { this.alert_error() }
       )
       this.getStatus();
+      this.status = '';
+      this.observations = '';
       Swal.fire({
         icon: 'success',
         title: 'Salvo',
@@ -67,10 +69,27 @@ export class StatusPnComponent implements OnInit {
 
   // delete um status
   deleteStatus(id: any) {
-    this.dataService.deleteStatus(id).subscribe(
-      success => { this.getStatus(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar o Progresso da sua Manifestação de Interesse!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteStatus(id).subscribe(
+          success => { this.getStatus(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
   }
 
   passarId() {

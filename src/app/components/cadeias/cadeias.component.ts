@@ -18,7 +18,7 @@ export class CadeiasComponent implements OnInit {
   sb: any;
   id: any;
   _chains: any;
-  chains_name:any;
+  chains_name: any;
 
   chainsId = 1;
   observations: any;
@@ -29,7 +29,7 @@ export class CadeiasComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
@@ -53,12 +53,19 @@ export class CadeiasComponent implements OnInit {
 
       //this.passarId()
 
-      let Cadeias = {"name_value_chain": this.chains_name, "observations": this.observations, "interest_expression": this.id, "value_chain": this.chainsId}
+      let Cadeias = {
+        "name_value_chain": this.chains_name,
+        "observations": this.observations,
+        "interest_expression": this.id,
+        "value_chain": this.chainsId
+      }
       this.dataService.salva_ValueChainsIE(Cadeias).subscribe(
         success => { this.getCadeiaInterest() },
         error => { this.alert_error() }
       )
       this.getCadeia();
+      this.chains_name = '';
+      this.observations = '';
       Swal.fire({
         icon: 'success',
         title: 'Salvo',
@@ -72,10 +79,28 @@ export class CadeiasComponent implements OnInit {
 
   // delete uma cadeia
   delete_ValueChainsIExpress(id: any) {
-    this.dataService.delete_ValueChainsIExpress(id).subscribe(
-      success => { this.getCadeiaInterest(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar a Cadeia de valor da sua Manifestação de Interesse!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.delete_ValueChainsIExpress(id).subscribe(
+          success => { this.getCadeiaInterest(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
+
   }
 
   getInterestExpress() {

@@ -54,6 +54,8 @@ export class EstatutoPnComponent implements OnInit {
         error => { this.alert_error() }
       )
       this.getStatutes();
+      this.statutes = '';
+      this.observations = '';
       Swal.fire({
         icon: 'success',
         title: 'Salvo',
@@ -67,10 +69,27 @@ export class EstatutoPnComponent implements OnInit {
 
   // delete um statutos
   deleteStatute(id: any) {
-    this.dataService.deleteStatutes(id).subscribe(
-      success => { this.getStatutes(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar o Estatuto da sua Manifestação de Interesse!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteStatutes(id).subscribe(
+          success => { this.getStatutes(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
   }
 
   getInterestExpress() {

@@ -18,6 +18,8 @@ export class InteressesComponent implements OnInit {
 
   sideBarOpen = true;
 
+  apagar = false;
+
   modalRef: MdbModalRef<AddInteressesComponent> | null = null;
   //modalRef2: MdbModalRef<SingleInterestComponent> | null = null;
 
@@ -54,10 +56,28 @@ export class InteressesComponent implements OnInit {
 
    // delete um interest express
    deleteInterest(id: any) {
-    this.dataService.deleteInterestExpress(id).subscribe(
-      success => { this.list_interest(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+     text: "Você está prestes a eliminar a sua Manifestação de Interesse!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteInterestExpress(id).subscribe(
+          success => { this.list_interest(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success'
+        )
+      }
+    })
+   
   }
 
   alert_error() {
