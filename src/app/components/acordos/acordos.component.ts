@@ -42,7 +42,7 @@ export class AcordosComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  salvarStatus() {
+  salvarAcordo() {
 
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.proposer_id = paramId.get('id')
@@ -56,6 +56,8 @@ export class AcordosComponent implements OnInit {
         error => { this.alert_error() }
       )
       this.getAcordos();
+      this.agreement_name = '';
+      this.observations = '';
       Swal.fire({
         icon: 'success',
         title: 'Salvo',
@@ -69,10 +71,27 @@ export class AcordosComponent implements OnInit {
 
   // delete um status
   deleteAcordos(id: any) {
-    this.dataService.deleteAcordos(id).subscribe(
-      success => { this.getAcordos(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar o registo do seu acordo!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteAcordos(id).subscribe(
+          success => { this.getAcordos(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
   }
 
   getInterestExpress() {
