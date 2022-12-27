@@ -28,13 +28,13 @@ export class InteressesComponent implements OnInit {
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-   this.list_interest()
+    this.list_interest()
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
@@ -42,23 +42,23 @@ export class InteressesComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInteressesComponent)
   }
 
-  openModaltest(id:any) {
-    this.modalRef = this.modalService.open(AddAndManifestComponent) 
+  openModaltest(id: any) {
+    this.modalRef = this.modalService.open(AddAndManifestComponent)
   }
 
 
-  list_interest(){
-    this.dataService.getInterestExpress().subscribe(data =>{
+  list_interest() {
+    this.dataService.getInterestExpress().subscribe(data => {
       this.interest = data;
       console.log(data)
     })
   }
 
-   // delete um interest express
-   deleteInterest(id: any) {
+  // delete um interest express
+  deleteInterest(id: any) {
     Swal.fire({
       title: 'De certeza que quer eliminar?',
-     text: "Você está prestes a eliminar a sua Manifestação de Interesse!",
+      text: "Você está prestes a eliminar a sua Manifestação de Interesse!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#2CBF04',
@@ -77,7 +77,7 @@ export class InteressesComponent implements OnInit {
         )
       }
     })
-   
+
   }
 
   alert_error() {

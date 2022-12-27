@@ -56,18 +56,17 @@ export class DataService {
   
   //url to proposal agreeement
   get_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
-
   delete_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
-
   save_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1';
-
-
+  
+  // url to get inquiriers
+  get_inquiriers_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
+  save_inquiriers_url = 'http://strongboxao.ddns.net:8022/api/v1';
+  delete_inquiriers_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
 
   // Value chain to interest expression
   delete_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
-
   get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
-
   save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1'
 
   // url to delete BP status
@@ -361,7 +360,6 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.save_Proposal_Agreement_url + '/proposeragreements/', acordo, { headers: headers })
-
   }
 
   // funcion to get pronvices
@@ -377,6 +375,30 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.get_Provinces_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Funcion to get inquiriers
+  get_Inquiriers(){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_inquiriers_url, { headers: headers })
+  }
+
+  // funcion to save inquiriers
+  salvaInquiriers(inquiridor:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_inquiriers_url + '/inquirers/', inquiridor, { headers: headers })
+  }
+
+  // Funcion to delete Inquiriers
+  deleteInquirier(id:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_inquiriers_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   private extrairDados(res: Response) {

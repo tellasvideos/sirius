@@ -80,12 +80,6 @@
                 <table class="table table-hover table-sm">
                     <thead class="linhas2">
                         <tr>
-                            <th scope="col">
-                                <div class="form-check">
-                                    <input class="form-check-input d-none" type="checkbox" value=""
-                                        id="flexCheckDefault" />
-                                </div>
-                            </th>
                             <th scope="col" class="text-black">Responsável</th>
                             <th scope="col" class="text-black">Aldeia</th>
                             <th scope="col" class="text-black">Comuna</th>
@@ -96,39 +90,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                </div>
-                            </th>
-                            <td>Lurdes Ester</td>
-                            <td>Cambongue</td>
-                            <td>Saco-Mar</td>
-                            <td>Moçâmedes</td>
-                            <td>Namibe</td>
+                        <tr *ngFor="let item of inquiridores">
+                            <td> {{item.responsible}} </td>
+                            <td>{{item.performance_in_village}}</td>
+                            <td> {{item.performance_in_community}} </td>
+                            <td>{{item.performance_in_county}}</td>
+                            <td>{{item.performance_in_province}}</td>
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                </div>
-                            </th>
-                            <td>Eliane Dias</td>
-                            <td>Ninho</td>
-                            <td>Aida</td>
-                            <td>Moçâmedes</td>
-                            <td>Namibe</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td> <button (click)="deleteInquirier(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
                         </tr>
@@ -136,13 +107,6 @@
                 </table>
             </div>
         </div>
-        <!-- Man-interesse table -->
-
-        <!--select class="select" style=" height:38px; background-color: #36383A; width: 120px;">
-            <option></option>
-            <option>1</option>
-        </select-->
-
     </mat-drawer-content>
-    <!-- Man interesses full content -->
+    <!-- full content -->
 </mat-drawer-container>
