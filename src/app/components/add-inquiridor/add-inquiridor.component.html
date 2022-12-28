@@ -4,33 +4,33 @@
 </div>
 <div class="modal-body">
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="responsible" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form1">Responsável</label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="performance_in_village" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form1">Atua na Aldeia</label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="performance_in_community" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form1">Actua na Comuna </label>
     </mdb-form-control>
 
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-3" />
+        <input mdbInput type="text" id="form1" [(ngModel)]="performance_in_county" class="form-control mb-3" />
         <label mdbLabel class="form-label" for="form1">Actua no Município</label>
     </mdb-form-control>
 
-    <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Actua na Província</label>
-    </mdb-form-control>
+    <div class="mb-3">
+        <label class="mb-2">Provincia:</label>
+        <select class="form-select form-select-sm mb-3" [(ngModel)]="performance_in_province" name="provincia" aria-label="Default select example">
+            <option *ngFor="let item of provincias" [value]="item.name">{{item.name}}</option>
+        </select>
+    </div>
 
 </div>
 <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-success btn-sm">Guardar</button>
-    <button type="button" class="btn btn-black btn-sm" (click)="modalRef.close()">Fechar</button>
-
+    <button type="button" class="btn btn-success btn-sm" (click)="save_iquirier()">Guardar</button>
 </div>
