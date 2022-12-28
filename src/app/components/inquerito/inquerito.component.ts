@@ -16,6 +16,7 @@ export class InqueritoComponent implements OnInit {
   constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
+    
   }
 
   sideBarToggler() {

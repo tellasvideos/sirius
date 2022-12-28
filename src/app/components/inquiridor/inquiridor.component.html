@@ -79,6 +79,7 @@
                             <th scope="col" class="text-black">Comuna</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Inquérito</th>
                             <th scope="col" class="text-black">Editar</th>
                             <th scope="col" class="text-black">Apagar</th>
                         </tr>
@@ -91,9 +92,13 @@
                             <td>{{item.performance_in_county}}</td>
                             <td>{{item.performance_in_province}}</td>
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-tasks"></i>
+                                </button></td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
-                            <td> <button (click)="deleteInquirier(item.id)" type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td> <button (click)="deleteInquirier(item.id)" type="button"
+                                    class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
                         </tr>
