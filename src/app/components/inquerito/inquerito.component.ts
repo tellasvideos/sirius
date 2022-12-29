@@ -3,6 +3,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AddInqueritoComponent } from '../add-inquerito/add-inquerito.component';
 import Swal from 'sweetalert2'
 import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inquerito',
@@ -138,7 +139,8 @@ export class InqueritoComponent implements OnInit {
 
   constructor(
     private modalService: MdbModalService,
-    private dataService: DataService
+    private dataService: DataService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -330,6 +332,11 @@ export class InqueritoComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     })
+  }
+
+  goToInquiridor(){
+    this.modalRef?.close();
+    this.route.navigate(['inquiridor'])
   }
 
 }

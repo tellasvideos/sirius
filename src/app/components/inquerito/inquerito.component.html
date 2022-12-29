@@ -86,19 +86,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading text-center" style="font-weight:500;"> <i class="fas fa-info-circle"></i> 
+                <div class="alert alert-light" role="alert">
+                    <h4 class="alert-heading text-center" style="font-weight:500;"> <i
+                            class="fas fa-info-circle d-none"></i>
                         Recolha de Informações Para a
                         Elaboração dos Planos de
-                        Negócios <p class="d-none"> Corredor B - Primeira Visita </p></h4> <br>
+                        Negócios <p class="d-none"> Corredor B - Primeira Visita </p>
+                    </h4> <br>
                     <p>O Formulário de Inquérito está agrupado em quatro fases, de entre as quais temos:</p>
                     <hr>
                     <p class="mb-0">1 - Descrição do Proponente <br> 2 - Descrição da Fazenda <br> 3 - Resultados
                         Financeiros dos últimos anos <br> 4 - Plano de Negócio que se pretende implementar </p>
                 </div>
+
+                <div class="alert alert-light" role="alert">
+                    <h4 class="alert-heading text-center" style="font-weight:500;">
+                        Inquiridor:
+                    </h4>
+                    <div class="mb-4">
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" name="responsible"
+                            aria-label="Default select example">
+                            <option>Inquiridor name</option>
+                        </select>
+                    </div>
+                    <p class="mb-0" style="font-size: 11px;"><i class="fas fa-info-circle"></i> Caso o seu nome não
+                        esteja na lista, por favor faça o seu
+                        cadastramento como Inquiridor <a type="button" data-bs-dismiss="modal"
+                            [routerLink]="['/inquiridor']" routerLinkActive="router-link-active">aqui</a>!</p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -111,16 +129,16 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle3"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -140,9 +158,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle4"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -162,9 +180,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle3"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle5"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -184,9 +202,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle4"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle6"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle6"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -206,9 +224,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle5"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle7"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle7"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -228,9 +246,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle6"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle6"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle8"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -250,9 +268,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle7"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle7"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle9"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -272,9 +290,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle8"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle10"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -294,9 +312,9 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle9"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle11"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle11"
                     data-bs-toggle="modal">Próximo</button>
             </div>
         </div>
@@ -315,26 +333,10 @@
                 Hide this modal and show the first with the button below.
             </div>
             <div class="modal-footer justify-content-between">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle10"
+                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
                     data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-primary">Guardar</button>
+                <button class="btn btn-sm btn-success">Guardar</button>
             </div>
         </div>
     </div>
 </div>
-
-
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol id="check-circle-fill" viewBox="0 0 16 16">
-        <path
-            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-    </symbol>
-    <symbol id="info-fill" viewBox="0 0 16 16">
-        <path
-            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-    </symbol>
-    <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
-        <path
-            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-    </symbol>
-</svg>
