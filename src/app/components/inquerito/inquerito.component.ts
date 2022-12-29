@@ -278,12 +278,57 @@ export class InqueritoComponent implements OnInit {
       "created_at": this.created_at,
       "interest_expression": this.interest_expression
     }
+    this.dataService.salvaInquireForm(InquireForm).subscribe(
+      success => { this.alert_success },
+      error => { this.alert_error }
+    )
+    this.get_inquireForms();
+  }
+
+  deleteInquire(id: any) {
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar este Inquérito!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteInquireForm(id).subscribe(
+          success => { this.get_inquireForms() },
+          error => { this.alert_error() }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
   }
 
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
       console.log(data);
+    })
+  }
+
+  alert_error() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Alguma coisa correu mal, tente mais tarde.",
+    })
+  }
+  alert_success() {
+    Swal.fire({
+      icon: "success",
+      title: "Salvo",
+      showConfirmButton: false,
+      timer: 1500
     })
   }
 
