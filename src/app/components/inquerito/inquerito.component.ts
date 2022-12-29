@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AddInqueritoComponent } from '../add-inquerito/add-inquerito.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-inquerito',
@@ -16,7 +17,7 @@ export class InqueritoComponent implements OnInit {
   constructor(private modalService: MdbModalService) { }
 
   ngOnInit(): void {
-    
+
   }
 
   sideBarToggler() {
