@@ -19,8 +19,8 @@ export class DataService {
 
   getCondicao() {
     return [
-      new Condicao(1, 'PN em elaboração'),
-      new Condicao(2, 'PN elaborado')
+      new Condicao(1, 'Sim'),
+      new Condicao(2, 'nao')
     ]
 
   }

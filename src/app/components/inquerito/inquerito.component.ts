@@ -141,10 +141,12 @@ export class InqueritoComponent implements OnInit {
     private modalService: MdbModalService,
     private dataService: DataService,
     private route: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.get_inquireForms();
+
   }
 
   sideBarToggler() {
@@ -334,7 +336,7 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  goToInquiridor(){
+  goToInquiridor() {
     this.modalRef?.close();
     this.route.navigate(['inquiridor'])
   }
