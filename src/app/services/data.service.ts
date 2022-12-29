@@ -53,12 +53,12 @@ export class DataService {
 
   // url to get provinces and add an man. interest
   get_Provinces_url = 'http://strongboxao.ddns.net:8022/api/v1/provinces/';
-  
+
   //url to proposal agreeement
   get_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
   delete_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
   save_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8022/api/v1';
-  
+
   // url to get inquiriers
   get_inquiriers_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
   save_inquiriers_url = 'http://strongboxao.ddns.net:8022/api/v1';
@@ -68,6 +68,11 @@ export class DataService {
   delete_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
   get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
   save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1'
+
+  // url to inquireform
+  get_inquireForms_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
+  save_inquireForms_url = 'http://strongboxao.ddns.net:8022/api/v1';
+  delete_inquireForms_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
 
   // url to delete BP status
   delete_Status_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
@@ -126,7 +131,7 @@ export class DataService {
   constructor(
     private http: HttpClient,
     private httpParams: HttpParams,
-  ) { } 
+  ) { }
 
   rebootVM() {
     var headers = new HttpHeaders();
@@ -136,7 +141,7 @@ export class DataService {
     return this.http.get('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
   }
 
-  // PROPONENTS FROM PDAC
+  // Method to Get all proponts from PDAC Data-Base
   proponentPDAC() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -144,8 +149,6 @@ export class DataService {
 
     return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers }).pipe(take(1))
   }
-
-  // ACCONT USERS -----------------------------------------------------------------------------------------------------------------------------------------
 
   // login user and generete token
   userLogin(user: any): Observable<any> {
@@ -175,12 +178,8 @@ export class DataService {
   updateUser() {
 
   }
-  // ACCONT USERS -------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-  // INTEREST EXPRESSION-----------------------------------------------------------------------------------------------------------------------------------------
-
-  // to save interestExpression
+  // Method to save an interest Expression
   salvaInterestExpress(interestEx: any) {
     console.log(localStorage.getItem('userToken'), interestEx)
     var headers = new HttpHeaders();
@@ -189,7 +188,7 @@ export class DataService {
     return this.http.post(this.interest_Express_url + '/interestexpressions/', interestEx, { headers: headers })
   }
 
-  // to get all interestExpression
+  // Method to Get all interest Expression
   getInterestExpress() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -197,7 +196,7 @@ export class DataService {
     return this.http.get<any[]>(this.get_Interest_Exp_url, { headers: headers })
   }
 
-  // to delete any interestexpression
+  // Method to Delete any interest Expression
   deleteInterestExpress(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -205,6 +204,7 @@ export class DataService {
     return this.http.delete(`${this.delete_Interest_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
+  // Method to Update any interest Expression
   editInterestExpression(id: number, interestEx: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -213,7 +213,7 @@ export class DataService {
     return this.http.put(`${this.get_Interest_Exp_url}${interestEx.id}/`, interestEx, { headers: headers }).pipe(take(1));
   }
 
-  // to get interestExpression by id
+  // Method to Get an interest Expression by id
   getInterestExpressByid(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -221,14 +221,7 @@ export class DataService {
     return this.http.get(`${this.get_Interest_Exp_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-
-
-  // INTEREST EXPRESSION-----------------------------------------------------------------------------------------------------------------------------------------
-
-
-  // VALUE CHAINS...........................................................................................................................................................
-
-  //to get all valueChain
+  // Method to Get all value Chain
   getValueChains() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -236,7 +229,7 @@ export class DataService {
     return this.http.get<CadeiaVal[]>(this.get_ValueChain_url, { headers: headers })
   }
 
-  // save valuechain
+  // Method to Post a Value Chain
   salvaCadeiaDeValor(cadeiaVal: any) {
     console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
@@ -245,7 +238,7 @@ export class DataService {
     return this.http.post(this.base + '/valuechains/', cadeiaVal, { headers: headers })
   }
 
-  // to delete any valuechain
+  // Method to Delete any Value Chain
   deleteValueChain(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -253,11 +246,7 @@ export class DataService {
     return this.http.delete(`${this.delete_ValueChain_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  // VALUE CHAINS...........................................................................................................................................................
-
-  // BUSINESS PLAN STATUS...........................................................................................................................................................
-
-  // To get business plan status
+  // Method to Get Interest Expression Status
   get_BusinessPlan_status() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -265,16 +254,15 @@ export class DataService {
     return this.http.get<any[]>(this.get_BusPlanStatus_url, { headers: headers })
   }
 
-  // to save any business plan status
+  // Method to save any Interest Expression Status
   salvaBusinessPlanStatus(status: any) {
-    //console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.Save_BusPlanStatus_url + '/businessplanstatus/', status, { headers: headers })
   }
 
-  // to delete any statute 
+  // Method to Delete any Interest Expression Status 
   deleteStatus(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -282,12 +270,7 @@ export class DataService {
     return this.http.delete(`${this.delete_Status_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  // BUSINESS PLAN STATUS...........................................................................................................................................................
-
-
-  // BUSINESS PLAN STATUTO...........................................................................................................................................................
-
-  // To get business plan status
+  // Method to Get Interest Expression Statute
   get_BusinessPlan_statutos() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -295,16 +278,15 @@ export class DataService {
     return this.http.get<any[]>(this.get_BusPlanStatutos_url, { headers: headers })
   }
 
-  // to save any business plan status
+  // Method to save Interest Expression Statute
   salvaBusinessPlanStatutos(statutes: any) {
-    //console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.Save_BusPlanStatutos_url + '/businessplanstatutes/', statutes, { headers: headers })
   }
 
-  // to delete any statute 
+  // Method to Delete Interest Expression Statute
   deleteStatutes(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -312,11 +294,7 @@ export class DataService {
     return this.http.delete(`${this.delete_Statutes_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  // BUSINESS PLAN STATUTO...........................................................................................................................................................
-
-
-
-
+  // Method to Get a Value Chain to Interest Expression
   get_ValueChainsIE() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -324,15 +302,15 @@ export class DataService {
     return this.http.get<any[]>(this.get_ValueChainsToInterestExpress_url, { headers: headers })
   }
 
+  // Method to save a Value Chain to Interest Expression
   salva_ValueChainsIE(statutes: any) {
-    //console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.Save_BusPlanStatutos_url + '/valuechaintointerestexpressions/', statutes, { headers: headers })
   }
 
-  // to delete any statute 
+  // Method to Delete a Value Chain to Interest Expression
   delete_ValueChainsIExpress(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -340,83 +318,93 @@ export class DataService {
     return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  // PROPORSAL AGREEMENT ............................................................................................
-  get_Proposal_Agreement(){
+  // Method to Get all Proposal Agreement
+  get_Proposal_Agreement() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get<any[]>(this.get_Proposal_Agreement_url, { headers: headers })
   }
 
-  deleteAcordos(id:any){
+  // Method to Delete all Proposal Agreement
+  deleteAcordos(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_Proposal_Agreement_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  salvaAcordos(acordo:any){
+  // Method to save any Proposal Agreement
+  salvaAcordos(acordo: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.save_Proposal_Agreement_url + '/proposeragreements/', acordo, { headers: headers })
   }
 
-  // funcion to get pronvices
-  get_Provinces(){
+  // Method to Get pronvices
+  get_Provinces() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get<any[]>(this.get_Provinces_url, { headers: headers })
   }
 
-  deleteProvinces(id:any){
+  // Method to Delete pronvices
+  deleteProvinces(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.get_Provinces_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  // Funcion to get inquiriers
-  get_Inquiriers(){
+  // Method to get inquiriers
+  get_Inquiriers() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get<any[]>(this.get_inquiriers_url, { headers: headers })
   }
 
-  // funcion to save inquiriers
-  salvaInquiriers(inquiridor:any){
+  // Method to save inquiriers
+  salvaInquiriers(inquiridor: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.save_inquiriers_url + '/inquirers/', inquiridor, { headers: headers })
   }
 
-  // Funcion to delete Inquiriers
-  deleteInquirier(id:any){
+  // Method to delete Inquiriers
+  deleteInquirier(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_inquiriers_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  private extrairDados(res: Response) {
-    const body = res;
-    return body || {};
+  // Method to get inquire form
+  get_InquireForm() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_inquireForms_url, { headers: headers })
   }
 
-  //Implement a method to handle errors if any
-  private handleError(err: HttpErrorResponse | any) {
-    console.error('An error occurred', err);
-    return throwError(err.message || err);
+  // Method to save inquire form
+  salvaInquireForm(inquireForm: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_inquireForms_url + '/inquirerforms/', inquireForm, { headers: headers })
   }
 
-  changeMessage(message: any) {
-    this.messageSource.next(message);
+  // Method to delete Inquire form
+  deleteInquireForm(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_inquireForms_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
-  returnMessage() {
-    return this.currentMessage;
-  }
+
 }

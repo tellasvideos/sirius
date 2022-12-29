@@ -14,7 +14,9 @@ export class InqueritoComponent implements OnInit {
 
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
-  constructor(private modalService: MdbModalService) { }
+  constructor(
+    private modalService: MdbModalService
+    ) { }
 
   ngOnInit(): void {
 
