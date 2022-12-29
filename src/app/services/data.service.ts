@@ -123,10 +123,7 @@ export class DataService {
   // to edit data of interest expression
   edit_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/';
 
-
-
-
-  token = '1c644080bc6af5e8990a30c964157719cbb6576c'
+  token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
   constructor(
     private http: HttpClient,
@@ -141,7 +138,7 @@ export class DataService {
     return this.http.get('http://strongboxao.ddns.net:8022/accounts/users/', { headers: headers, params: params })
   }
 
-  // Method to Get all proponts from PDAC Data-Base
+  // Method to Get all proponents from PDAC Data-Base
   proponentPDAC() {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
