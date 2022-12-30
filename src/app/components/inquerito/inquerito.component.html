@@ -138,14 +138,16 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nome da
                             empresa/fazenda/cooperativa:</label>
-                        <input type="text" [(ngModel)]="company_farm_cooperative_name" class="form-control form-control-sm"
-                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                        <input type="text" [(ngModel)]="company_farm_cooperative_name"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput1"
+                            placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">NlF da
                             empresa/fazenda/cooperativa:</label>
-                        <input type="number" [(ngModel)]="company_farm_cooperative_nif" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput2" placeholder="">
+                        <input type="number" [(ngModel)]="company_farm_cooperative_nif"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput2"
+                            placeholder="">
                     </div>
                 </div>
 
@@ -153,13 +155,13 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput3" class="form-label">Nome do candidato/representante
                             (Proponente) legal:</label>
-                        <input type="text"  [(ngModel)]="candidate_name" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput3" placeholder="">
+                        <input type="text" [(ngModel)]="candidate_name" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput3" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput4" class="form-label">Função do candidato na Fazenda:</label>
-                        <input type="text"  [(ngModel)]="candidate_function_on_farm" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput4" placeholder="">
+                        <input type="text" [(ngModel)]="candidate_function_on_farm" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput4" placeholder="">
                     </div>
                 </div>
 
@@ -167,15 +169,17 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput5" class="form-label">Formação académica do
                             proponente:</label>
-                        <input type="text" [(ngModel)]="academic_education_candidate" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput5" placeholder="">
+                        <input type="text" [(ngModel)]="academic_education_candidate"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput5"
+                            placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput5" class="form-label"> Principal actividade profissional do
                             proponente:
                         </label>
-                        <input type="text" [(ngModel)]="proposer_main_professional_activity" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput5" placeholder="">
+                        <input type="text" [(ngModel)]="proposer_main_professional_activity"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput5"
+                            placeholder="">
                     </div>
                 </div>
 
@@ -183,15 +187,16 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput5" class="form-label">Presença continua na fazenda:</label>
                         <div class="m-2" *ngFor="let item of opcoes">
-                            <input type="radio" [(ngModel)]="continuous_presence_on_farm" name="opcoes" value="{{item.name}}" (change)="ChangeHandler($event)">
+                            <input type="radio" name="opcoes" [value]="item.name" (change)="ChangeHandler($event)"
+                                #continuous_presence_on_farm>
                             <i> {{item.name}} </i>
                         </div>
                     </div>
-                    <div class="form-floating" *ngIf="selecionado == 'Não'">
+                    <div class="form-floating" *ngIf="selecionado == 'Não' ">
+                        <textarea [(ngModel)]="continuous_presence_on_farm_if_no_estimatepresence" class="form-control"
+                            placeholder="Comente aqui" name="observation" id="floatingTextarea"></textarea>
                         <label for="exampleFormControlInput5" class="form-label">Estimativa da
                             presença:</label>
-                        <textarea [(ngModel)]="continuous_presence_on_farm_if_no_estimatepresence" class="form-control" placeholder="Comente aqui" name="observation"
-                            id="floatingTextarea"></textarea>
                     </div>
                 </div>
 
@@ -212,11 +217,57 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 3</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Hide this modal and show the first with the button below.
+            <div class="modal-body p-5">
+
+                <div class=" justify-content-between d-flex ">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Idade do candidato/representante
+                            legal:</label>
+                        <input type="number" [(ngModel)]="candidate_age" class="form-control form-control-sm" style="width: 80px;"
+                            id="exampleFormControlInput1" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Bilhete de identidade Nº:</label>
+                        <input type="number" [(ngModel)]="identity_card_numer" class="form-control form-control-sm" style="width: 350px;"
+                            id="exampleFormControlInput1" placeholder="">
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Idade do proponente maior de 60 anos e
+                            tem filhos para assumir?</label>
+                        <div class="m-2" *ngFor="let item of opcoes">
+                            <input type="radio" name="opcoes" [value]="item.name" (change)="ChangeHandler($event)"
+                                #candidate_age_if_over_sixty_has_childen>
+                            <i> {{item.name}} </i>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3" *ngIf="selecionado == 'Sim' ">
+                        <textarea [(ngModel)]="has_children_if_yes" class="form-control" placeholder="Comente aqui"
+                            id="floatingTextarea"></textarea>
+                        <label for="exampleFormControlInput5" class="form-label">Nome, Idade, Telefone e Formação
+                            académica do filho</label>
+                    </div>
+                </div>
+
+                <div class=" justify-content-between d-flex ">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Número de telefone:</label>
+                        <input type="number" [(ngModel)]="phone_number" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput1" placeholder="">
+                    </div>
+                    <div class="">
+                        <label for="exampleFormControlInput1" class="form-label">Endereço permanente:</label>
+                        <input type="number" [(ngModel)]="permanent_address" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput1" placeholder="">
+                    </div>
+                </div>
+
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
