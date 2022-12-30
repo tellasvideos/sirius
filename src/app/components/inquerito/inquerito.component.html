@@ -133,50 +133,67 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5">
-                <div class="">
+
+                <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nome da
                             empresa/fazenda/cooperativa:</label>
-                        <input type="text" class="form-control form-control-sm " id="exampleFormControlInput1"
-                            placeholder="">
+                        <input type="text" [(ngModel)]="company_farm_cooperative_name" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">NlF da
                             empresa/fazenda/cooperativa:</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput2"
-                            placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput3" class="form-label">Nome do candidato/representante
-                            (Proponente) legal:</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput3"
-                            placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput4" class="form-label">Formação académica do
-                            proponente:</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput4"
-                            placeholder="">
+                        <input type="number" [(ngModel)]="company_farm_cooperative_nif" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput2" placeholder="">
                     </div>
                 </div>
 
                 <div class="justify-content-between d-flex">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Presença continua na fazenda:
-                            SIM/NÃO</label>
-                        <select class="form-select form-select-sm mb-3" aria-label="Default select example">
-                            <option>Sim</option>
-                            <option>Não</option>
-                        </select>
+                        <label for="exampleFormControlInput3" class="form-label">Nome do candidato/representante
+                            (Proponente) legal:</label>
+                        <input type="text"  [(ngModel)]="candidate_name" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput3" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Caso Não, estimativa da
-                            presença:</label>
-                        <input type="text" class="form-control form-control-sm" id="exampleFormControlInput5"
-                            placeholder="">
+                        <label for="exampleFormControlInput4" class="form-label">Função do candidato na Fazenda:</label>
+                        <input type="text"  [(ngModel)]="candidate_function_on_farm" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput4" placeholder="">
                     </div>
                 </div>
 
+                <div class="justify-content-between d-flex">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Formação académica do
+                            proponente:</label>
+                        <input type="text" [(ngModel)]="academic_education_candidate" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput5" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label"> Principal actividade profissional do
+                            proponente:
+                        </label>
+                        <input type="text" [(ngModel)]="proposer_main_professional_activity" class="form-control form-control-sm" style="width: 340px;"
+                            id="exampleFormControlInput5" placeholder="">
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Presença continua na fazenda:</label>
+                        <div class="m-2" *ngFor="let item of opcoes">
+                            <input type="radio" [(ngModel)]="continuous_presence_on_farm" name="opcoes" value="{{item.name}}" (change)="ChangeHandler($event)">
+                            <i> {{item.name}} </i>
+                        </div>
+                    </div>
+                    <div class="form-floating" *ngIf="selecionado == 'Não'">
+                        <label for="exampleFormControlInput5" class="form-label">Estimativa da
+                            presença:</label>
+                        <textarea [(ngModel)]="continuous_presence_on_farm_if_no_estimatepresence" class="form-control" placeholder="Comente aqui" name="observation"
+                            id="floatingTextarea"></textarea>
+                    </div>
+                </div>
 
             </div>
             <div class="modal-footer justify-content-between">

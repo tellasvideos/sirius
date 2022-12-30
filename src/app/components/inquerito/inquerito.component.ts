@@ -12,6 +12,17 @@ import { Router } from '@angular/router';
 })
 export class InqueritoComponent implements OnInit {
 
+  selecionado: string = '';
+
+  opcoes: any =[
+    {"name": 'Sim'},
+    {"name": 'Não'}
+  ]
+
+  ChangeHandler(event:any){
+    this.selecionado = event.target.value;
+  }
+
   inqueritos: any;
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
