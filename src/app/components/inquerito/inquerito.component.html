@@ -100,12 +100,12 @@
                 </div>
 
                 <div class="alert alert-light" role="alert">
-                    <h4 class="alert-heading text-center" style="font-weight:500;">
+                    <h4 class="alert-heading" style="font-weight:500;">
                         Inquiridor:
                     </h4>
                     <div class="mb-4">
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" name="responsible"
-                            aria-label="Default select example">
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" style="width: 350px;"
+                            name="responsible" aria-label="Default select example">
                             <option>Inquiridor name</option>
                         </select>
                     </div>
@@ -132,7 +132,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-5">
+            <div class="modal-body">
 
                 <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
@@ -220,19 +220,19 @@
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-5">
+            <div class="modal-body">
 
                 <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Idade do candidato/representante
                             legal:</label>
-                        <input type="number" [(ngModel)]="candidate_age" class="form-control form-control-sm" style="width: 80px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <input type="number" [(ngModel)]="candidate_age" class="form-control form-control-sm"
+                            style="width: 80px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Bilhete de identidade Nº:</label>
-                        <input type="number" [(ngModel)]="identity_card_numer" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <input type="number" [(ngModel)]="identity_card_numer" class="form-control form-control-sm"
+                            style="width: 350px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                 </div>
 
@@ -257,13 +257,13 @@
                 <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Número de telefone:</label>
-                        <input type="number" [(ngModel)]="phone_number" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <input type="number" [(ngModel)]="phone_number" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div class="">
                         <label for="exampleFormControlInput1" class="form-label">Endereço permanente:</label>
-                        <input type="number" [(ngModel)]="permanent_address" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <input type="number" [(ngModel)]="permanent_address" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                 </div>
 
@@ -285,11 +285,99 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 4</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Hide this modal and show the first with the button below.
+
+                <div class=" justify-content-between d-flex ">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Quando é que a fazenda teve o seu
+                            inicio oficial?</label>
+                        <input type="date" [(ngModel)]="when_farm_had_initial_cycle"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput1"
+                            placeholder="">
+                    </div>
+                    <div class="">
+                        <label for="exampleFormControlInput1" class="form-label">Qual documento que prova essa
+                            (data?)</label>
+                        <input type="file" [(ngModel)]="document_to_proves_date" class="form-control form-control-sm"
+                            id="inputGroupFile02">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Que tipo de Empresa:</label>
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="type_of_farm"
+                        aria-label="Default select example">
+                        <option value="fazenda">Fazenda</option>
+                        <option value="empresa">Empresa</option>
+                        <option value="cooperativa">Cooperativa</option>
+                        <option value="agricola">Agrícola</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="justify-content-between d-flex">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Superfície total da Fazenda:</label>
+                        <input type="number" [(ngModel)]="total_farm_surface" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput5" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Superfície pronta para Agricultura:
+                        </label>
+                        <input type="number" [(ngModel)]="land_ready_for_agriculture"
+                            class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput5"
+                            placeholder="">
+                    </div>
+                </div>
+                <div class="justify-content-center text-center text-black m-3">
+                    <h4>Avaliação das potencialidades da fazenda:</h4>
+                </div>
+                <div class="justify-content-between d-flex">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Clima:</label>
+                        <input type="text" [(ngModel)]="potentialit_climate" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput5"
+                            placeholder="Precipitação anual e distribuição">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Solo:
+                        </label>
+                        <input type="text" [(ngModel)]="potentialit_ground" class="form-control form-control-sm"
+                            style="width: 350px;" id="exampleFormControlInput5"
+                            placeholder="Prof, textura, coloração, drenagem, salinidade econfiguração de relevo, cobertura vegetal">
+                    </div>
+                </div>
+
+                <div class="justify-content-between d-flex">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Disponibilidade
+                            de água:</label>
+                        <input type="text" [(ngModel)]="potentialit_water_availability"
+                            class="form-control form-control-sm" style="width: 350px;" id="exampleFormControlInput5"
+                            placeholder="Fonte de água permanente, nascentes, nacas, regadios…">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput5" class="form-label">Existência de culturas perenes
+                            econdições:
+                        </label>
+                        <input type="text" [(ngModel)]="potentialit_perennial_crops"
+                            class="form-control form-control-sm" style="width: 350px;" id="exampleFormControlInput5"
+                            placeholder="Café, outras plantas, idade, condições etc.">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Acesso a Fazenda:</label>
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="potentialit_access_to_farm"
+                        style="width: 350px;" aria-label="Default select example">
+                        <option value="facil">Fácil</option>
+                        <option value="dificil">Difícil</option>
+                        <option value="muito_dificil">Muito difícil</option>
+                    </select>
+                </div>
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
@@ -307,11 +395,13 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 5</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Hide this modal and show the first with the button below.
+
+
+
             </div>
             <div class="modal-footer justify-content-between">
                 <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"

@@ -19,6 +19,14 @@ export class InqueritoComponent implements OnInit {
     {"name": 'Não'}
   ]
 
+  tipo_Empresa:any =[
+    {"name": 'Fazenda'},
+    {"name": 'Cooperativa'},
+    {"name": 'Empresa'},
+    {"name": 'Agrícola'},
+    {"name": 'Outro'}
+  ]
+
   ChangeHandler(event:any){
     this.selecionado = event.target.value;
   }
