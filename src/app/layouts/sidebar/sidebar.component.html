@@ -11,51 +11,25 @@
     </div>
 </div>
 <!-- FIRST SECTION -->
-
+<hr>
 <!-- SECOND SECTION -->
 <div class="container">
     <div class="hello-user">
-        <h5 class="font-user-list word-breack">Usuários</h5>
+        <h5 class="word-breack">Proponentes</h5>
     </div>
 </div>
 <!-- SECOND SECTION -->
 
 <!-- THIRD SECTION -->
 <div class="container mb-3">
-    <div class="card card-user mb-3">
+    <div class="card card-user mb-3" *ngFor="let item of proponents">
         <div class="card-body">
-            <div class="d-flex justify-content-between px-md-1">
-                <div class="align-self-center">
-                    <i class="far fa-user text-success fa-2x"></i>
-                </div>
-                <div>
-                    <h3 class="text-black font-user-list word-breack-users">Kadeu Pimenta</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card card-user mb-3">
-        <div class="card-body">
-            <div class="d-flex justify-content-between px-md-1">
-                <div class="align-self-center">
-                    <i class="far fa-user text-success fa-2x"></i>
-                </div>
-                <div>
-                    <h3 class="text-black font-user-list word-breack-users">Paulo Trindade</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card card-user mb-3">
-        <div class="card-body">
-            <div class="d-flex justify-content-between px-md-1">
-                <div class="align-self-center">
-                    <i class="far fa-user text-success fa-2x"></i>
-                </div>
-                <div>
-                    <h3 class="text-black font-user-list word-breack-users">Edson Barbosa</h3>
+            <div class="d-block">
+                <!--div class="align-self-center">
+                    <i class="far fa-user text-success fa-sm"></i>
+                </!--div-->
+                <div class="row">
+                    <h3 class="text-black font-user-list"> {{item['s2gp/s2g1q1/prop_nome'].substring(0, 36).toUpperCase()}} </h3>
                 </div>
             </div>
         </div>
@@ -66,7 +40,8 @@
 <!-- FOURTH SECTION -->
 <div class="container mb-3">
     <div class="d-grid gap-2 mx-auto">
-        <button class="btn btn-add-user" type="button" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Adicionar Usuário</button>
-      </div>
+        <button class="btn btn-add-user" type="button" [routerLink]="['/usuario']"
+            routerLinkActive="router-link-active">Adicionar Usuário</button>
+    </div>
 </div>
 <!-- FOURTH SECTION -->

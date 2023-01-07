@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
 
 import * as echarts from 'echarts';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -11,16 +12,22 @@ import * as echarts from 'echarts';
 })
 export class DashboardComponent implements OnInit {
 
-
+i:any;
 
   logoOn: any;
-
+  prop: any;
   sideBarOpen = true;
 
-  constructor(public img: HeaderComponent) { }
+  constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
     //this.logoOn === this.img.hideImg();
+    this.proponentes()
+    for ( this.prop = 0; this.prop < this.prop.length; this.prop++) {
+      this.prop[0] *= 2;
+      if(this.prop[0] == 2)
+        this.prop++;
+    }
 
     type EChartsOption = echarts.EChartsOption;
     type EChartsOption2 = echarts.EChartsOption;
@@ -119,15 +126,29 @@ export class DashboardComponent implements OnInit {
         }
       ]
     };
-    
+
 
     option3 && myChart3.setOption(option3);
+
+   
+
+   
   }
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
+  proponentes() {
+    this.ds.proponentPDAC().subscribe(data => {
+      this.prop = data;
+      console.log(data)
+    })
+  }
+
+  getcadeia(){
+    
+  }
 
 
 }

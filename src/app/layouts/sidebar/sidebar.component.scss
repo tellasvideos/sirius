@@ -21,7 +21,8 @@
 .font-user-list{
         font-weight: bold;
         color: #262626;
-        font-size: 14px;
+        font-size: 11px;
+        text-transform: capitalize;
 }
 
 .word-breack {
@@ -32,10 +33,11 @@
 }
 
 .word-breack-users{
+    word-break: break-all;
     width: 100px;
     overflow-wrap: break-word;  
     word-wrap: break-word; 
-    word-break: break-word;
+   // word-break: break-word;
 }
 
 .card-user{
