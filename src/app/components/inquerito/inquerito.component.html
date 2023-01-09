@@ -66,13 +66,45 @@
                     <h5 style="font-size: 10px; margin-left: 70%;">Resultado por página</h5>
                 </div>
             </div>
-            <div class="col-2 text-black text-center mb-2 d-none">Nome</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Departamento</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Função</div>
-            <div class="col-2 text-black text-center mb-2 d-none">isAdmin</div>
-            <div class="col-2 text-black text-center mb-2 d-none">UserName</div>
-            <div class="col-2 text-black text-center mb-2 d-none">Password</div>
         </div>
+
+        <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover text-center">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Inquiridor</th>
+                            <th scope="col" class="text-black">Man. interesse</th>
+                            <th scope="col" class="text-black">Data de emissão</th>
+                            <th scope="col" class="text-black">Observação</th>
+                            <th scope="col" class="text-black">URL</th>
+                            <th scope="col" class="text-black">Editar</th>
+                            <th scope="col" class="text-black">Apagar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of inqueritos">
+                            <td>{{item.responsible}} </td>
+                            <td>{{item.interest_expression}}</td>
+                            <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
+                            <td>{{item.observations}}</td>
+                            <td>
+
+                                <button type="button" [routerLink]="['/edit-inquire/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="deleteInquire(item.id)">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </mat-drawer-content>
 </mat-drawer-container>
 
@@ -86,31 +118,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-        
+
                 <div class="mb-3">
                     <label class="mb-2">Inquiridor:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible"
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" name="responsible"
                         aria-label="Default select example">
-                        <option></option> 
+                        <option *ngFor="let item of inquiridor" [value]="item.name"> {{item.name}} </option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="mb-2">Manifestação de Interesse:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="interest_expression" name="responsible"
-                        aria-label="Default select example">
-                        <option></option> 
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="interest_expression"
+                        name="interest_expression" aria-label="Default select example">
+                        <option *ngFor="let item of manifestacao" [value]="item.name"> {{item.name}} </option>
                     </select>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
-                    <input class="form-control form-control-sm" [(ngModel)]="document_to_proves_date" type="text" name="url"
-                        placeholder="URL" aria-label=".form-control-sm example">
+                    <input class="form-control form-control-sm" [(ngModel)]="document_to_proves_date" type="text"
+                        name="url" placeholder="URL" aria-label=".form-control-sm example">
                 </div>
 
                 <div class="form-floating mb-3 ">
-                    <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations" name="observations"
-                        id="floatingTextarea"></textarea>
+                    <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations"
+                        name="observations" id="floatingTextarea"></textarea>
                     <label for="floatingTextarea">Observações</label>
                 </div>
 
