@@ -79,51 +79,56 @@
 <!-- Primeiro modal -->
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inquérito</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-light" role="alert">
-                    <h4 class="alert-heading text-center" style="font-weight:500;"> <i
-                            class="fas fa-info-circle d-none"></i>
-                        Recolha de Informações Para a
-                        Elaboração dos Planos de
-                        Negócios <p class="d-none"> Corredor B - Primeira Visita </p>
-                    </h4> <br>
-                    <p>O Formulário de Inquérito está agrupado em quatro fases, de entre as quais temos:</p>
-                    <hr>
-                    <p class="mb-0">1 - Descrição do Proponente <br> 2 - Descrição da Fazenda <br> 3 - Resultados
-                        Financeiros dos últimos anos <br> 4 - Plano de Negócio que se pretende implementar </p>
+        
+                <div class="mb-3">
+                    <label class="mb-2">Inquiridor:</label>
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible"
+                        aria-label="Default select example">
+                        <option></option> 
+                    </select>
                 </div>
 
-                <div class="alert alert-light" role="alert">
-                    <h4 class="alert-heading" style="font-weight:500;">
-                        Inquiridor:
-                    </h4>
-                    <div class="mb-4">
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" style="width: 350px;"
-                            name="responsible" aria-label="Default select example">
-                            <option>Inquiridor name</option>
-                        </select>
-                    </div>
+                <div class="mb-3">
+                    <label class="mb-2">Manifestação de Interesse:</label>
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="interest_expression" name="responsible"
+                        aria-label="Default select example">
+                        <option></option> 
+                    </select>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <input class="form-control form-control-sm" [(ngModel)]="document_to_proves_date" type="text" name="url"
+                        placeholder="URL" aria-label=".form-control-sm example">
+                </div>
+
+                <div class="form-floating mb-3 ">
+                    <textarea class="form-control" placeholder="Comente aqui" [(ngModel)]="observations" name="observations"
+                        id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Observações</label>
+                </div>
+
+                <!--div class="alert alert-light" role="alert">
                     <p class="mb-0" style="font-size: 11px;"><i class="fas fa-info-circle"></i> Caso o seu nome não
                         esteja na lista, por favor faça o seu
                         cadastramento como Inquiridor <a type="button" data-bs-dismiss="modal"
                             [routerLink]="['/inquiridor']" routerLinkActive="router-link-active">aqui</a>!</p>
-                </div>
+                </!--div-->
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal">Próximo</button>
+                <button class="btn btn-sm btn-success" data-bs-toggle="modal">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Segundo modal -->
+<!-- Segundo modal >
 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -211,7 +216,7 @@
     </div>
 </div>
 
-<!-- Terceiro modal -->
+< Terceiro modal ->
 <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -279,7 +284,7 @@
     </div>
 </div>
 
-<!-- Quarto modal -->
+< Quarto modal >
 <div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -389,7 +394,7 @@
     </div>
 </div>
 
-<!-- Quinto modal -->
+<! Quinto modal ->
 <div class="modal fade" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -413,7 +418,7 @@
     </div>
 </div>
 
-<!-- Sexto modal -->
+<- Sexto modal ->
 <div class="modal fade" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -435,7 +440,7 @@
     </div>
 </div>
 
-<!-- Sétimo modal -->
+< Sétimo modal ->
 <div class="modal fade" id="exampleModalToggle7" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -457,7 +462,7 @@
     </div>
 </div>
 
-<!-- Oitavo modal -->
+<- Oitavo modal ->
 <div class="modal fade" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -479,7 +484,7 @@
     </div>
 </div>
 
-<!-- Nonu modal -->
+<- Nonu modal ->
 <div class="modal fade" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -501,7 +506,7 @@
     </div>
 </div>
 
-<!-- Décimo modal -->
+<- Décimo modal ->
 <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -523,8 +528,8 @@
     </div>
 </div>
 
-<!-- last modal -->
-<div class="modal fade" id="exampleModalToggle11" aria-hidden="true" aria-labelledby="10" tabindex="-1">
+<- last modal ->
+<div-- class="modal fade" id="exampleModalToggle11" aria-hidden="true" aria-labelledby="10" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -541,4 +546,4 @@
             </div>
         </div>
     </div>
-</div>
+</div-->
