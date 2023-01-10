@@ -88,8 +88,8 @@
                             <td>{{item.interest_expression}}</td>
                             <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                             <td>{{item.observations}}</td>
+                            <td>{{item.document_to_proves_date}}</td>
                             <td>
-
                                 <button type="button" [routerLink]="['/edit-inquire/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
@@ -123,7 +123,8 @@
                     <label class="mb-2">Inquiridor:</label>
                     <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" name="responsible"
                         aria-label="Default select example">
-                        <option *ngFor="let item of inquiridor" [value]="item.responsible"> {{item.responsible}} </option>
+                        <option *ngFor="let item of inquiridor" [value]="item.responsible"> {{item.responsible}}
+                        </option>
                     </select>
                 </div>
 
@@ -131,7 +132,7 @@
                     <label class="mb-2">Manifestação de Interesse:</label>
                     <select class="form-select form-select-sm mb-3" [(ngModel)]="interest_expression"
                         name="interest_expression" aria-label="Default select example">
-                        <option *ngFor="let item of manifestacao" [value]="item.farm_name"> {{item.farm_name}} </option>
+                        <option *ngFor="let item of manifestacao" [value]="item.id"> {{item.farm_name}} </option>
                     </select>
                 </div>
 
@@ -154,7 +155,7 @@
                 </!--div-->
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-success" (click)="save_inquireForm()" >Guardar</button>
+                <button class="btn btn-sm btn-success" (click)="save_inquireForm()" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
