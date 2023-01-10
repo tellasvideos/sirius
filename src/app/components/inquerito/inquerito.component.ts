@@ -131,6 +131,8 @@ export class InqueritoComponent implements OnInit {
   get_interest_express(){
     this.dataService.getInterestExpress().subscribe(data =>{
       this.manifestacao = data;
+      console.log('manifestacao: ', data)
+
     })
 
   }
@@ -138,6 +140,7 @@ export class InqueritoComponent implements OnInit {
   get_inquirier(){
     this.dataService.get_Inquiriers().subscribe(data =>{
       this.inquiridor = data;
+      console.log('inqiridor: ', data)
     })
   }
 

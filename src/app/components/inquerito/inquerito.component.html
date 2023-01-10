@@ -123,7 +123,7 @@
                     <label class="mb-2">Inquiridor:</label>
                     <select class="form-select form-select-sm mb-3" [(ngModel)]="responsible" name="responsible"
                         aria-label="Default select example">
-                        <option *ngFor="let item of inquiridor" [value]="item.name"> {{item.name}} </option>
+                        <option *ngFor="let item of inquiridor" [value]="item.responsible"> {{item.responsible}} </option>
                     </select>
                 </div>
 
@@ -131,7 +131,7 @@
                     <label class="mb-2">Manifestação de Interesse:</label>
                     <select class="form-select form-select-sm mb-3" [(ngModel)]="interest_expression"
                         name="interest_expression" aria-label="Default select example">
-                        <option *ngFor="let item of manifestacao" [value]="item.name"> {{item.name}} </option>
+                        <option *ngFor="let item of manifestacao" [value]="item.farm_name"> {{item.farm_name}} </option>
                     </select>
                 </div>
 
