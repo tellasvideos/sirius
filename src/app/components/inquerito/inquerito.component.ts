@@ -79,6 +79,10 @@ export class InqueritoComponent implements OnInit {
       error => { this.alert_error }
     )
     this.get_inquireForms();
+    this.observations = '';
+    this.responsible = '';
+    this.document_to_proves_date = '';
+    this.interest_expression = '';
   }
 
   deleteInquire(id: any) {

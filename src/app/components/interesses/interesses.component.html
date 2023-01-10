@@ -74,6 +74,7 @@
                 <table class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
+                            <th scope="col" class="text-black">Id</th>
                             <th scope="col" class="text-black">Nome/Fazenda</th>
                             <th scope="col" class="text-black">Proponente</th>
                             <th scope="col" class="text-black">Província</th>
@@ -91,6 +92,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let interest of interest">
+                            <td>{{interest.id}} </td>
                             <td>{{interest.farm_name}} </td>
                             <td>{{interest.proponent_name}}</td>
                             <td>{{interest.province}}</td>

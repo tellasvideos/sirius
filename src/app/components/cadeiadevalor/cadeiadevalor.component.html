@@ -65,7 +65,7 @@
                     <h5 style="font-size: 10px; margin-left: 70%;">Resultado por página</h5>
                 </div>
             </div>
-           
+
         </div>
 
         <!-- List users -->
@@ -74,6 +74,7 @@
                 <table class="table table-hover table-sm text-center">
                     <thead class="linhas2">
                         <tr>
+                            <th scope="col" class="text-black">Id</th>
                             <th scope="col" class="text-black">Cadeia de Valor</th>
                             <th scope="col" class="text-black">Descrição</th>
                             <th scope="col" class="text-black"></th>
@@ -86,7 +87,7 @@
                     <tbody>
                         <!--*ngFor="let user of users"-->
                         <tr *ngFor="let cadeiaDeValor of cadeiaDeValor">
-
+                            <td> {{cadeiaDeValor.id}} </td>
                             <td> {{cadeiaDeValor.name}} </td>
                             <td> {{cadeiaDeValor.description}} </td>
                             <td> {{ ' ' }} </td>
