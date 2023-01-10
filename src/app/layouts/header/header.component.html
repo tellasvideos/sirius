@@ -13,7 +13,7 @@
             <div class="card-body p-2">
                 <div class="input-group input-group-lg" style="margin-top: -1.899%;">
                     <span class="input-group-text border-0" id="basic-addon2"><i class="fas fa-search "></i></span>
-                    <input type="text" class="form-control 
+                    <input type="text"  [(ngModel)]="keyWord" class="form-control 
                         form-control-lg 
                         rounde 
                         bg-transparent 
@@ -21,28 +21,5 @@
                 </div>
             </div>
         </div>
-        <!-- SEARCH-BAR-->
-
-        <!-- RIGHT ELEMENTS -->
-        <!--div class="row mr-2 ml-auto">
-            <ul>
-                <li>
-                    <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
-                        <img src="../../../assets/user.jpg" alt="" class="user-image mr-1 p-2" />
-                        user Name
-                        <mat-icon class="user-image-icon ml-1">
-                            keyboard_arrow_down</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                            <mat-icon>exit_to_app</mat-icon>
-                            sair
-                        </button>
-                    </mat-menu>
-                </li>
-            </ul>
-        </!--div-->
-        <!-- RIGHT ELEMENTS -->
-
     </mat-toolbar-row>
 </mat-toolbar>

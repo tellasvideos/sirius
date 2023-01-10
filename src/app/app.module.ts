@@ -79,6 +79,7 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { MyfilterPipe } from './myfilter.pipe';
+import { SearchPipe } from './search.pipe';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { MyfilterPipe } from './myfilter.pipe';
     CadeiasComponent,
     MyfilterPipe,
     AcordosComponent,
-    ProvinciasComponent
+    ProvinciasComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

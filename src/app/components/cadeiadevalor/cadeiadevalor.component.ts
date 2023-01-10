@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class CadeiadevalorComponent implements OnInit {
 
   // @ViewChild('add-cadeia-valor' AddCadeiaValorComponent);
+  keyWord: string = '';
 
   cadeiaDeValor?: CadeiaVal[];
 
