@@ -9,18 +9,23 @@ import { DataService } from 'src/app/services/data.service';
 export class SidebarComponent implements OnInit {
 
   proponents:any;
-
+i:any;
   constructor(private ds: DataService) { }
 
   ngOnInit(): void {
     this.proponentes()
+
+
+    /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
+      console.log(this.proponents[0]);
+    } */
   }
 
   proponentes(){
     this.ds.proponentPDAC().subscribe(data => {
       this.proponents = data;
       this.filterDsc()
-      console.log(data.length)
+      console.log(data[0], data[1], data[2], data[3])
     })
   }
 
@@ -29,5 +34,7 @@ export class SidebarComponent implements OnInit {
       return b._id - a._id
     })
   }
+
+  
 
 }

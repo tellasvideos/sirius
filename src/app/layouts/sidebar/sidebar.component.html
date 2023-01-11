@@ -4,7 +4,7 @@
         <h5 class="font-user word-breack">Olá, José Sandele</h5>
     </div>
 
-  
+
 
     <div class="card card-size">
         <div class="card-body d-flex flex-row">
@@ -28,15 +28,43 @@
 
 <!-- THIRD SECTION -->
 <div class="container mb-3">
-    <div class="card card-user mb-3" *ngFor="let item of proponents">
+    <div class="card card-user mb-3">
         <div class="card-body">
             <div class="d-block">
                 <!--div class="align-self-center">
                     <i class="far fa-user text-success fa-sm"></i>
                 </!--div-->
                 <div class="row">
-                    <h3 class="text-black font-user-list"> {{item['s2gp/s2g1q1/prop_nome'].substring(0,
-                        36).toUpperCase()}} </h3>
+                    <h3 class="text-black font-user-list"> {{proponents[0]['s2gp/s2g1q1/prop_nome'].substring(0,
+                        36).toUpperCase()}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-user mb-3">
+        <div class="card-body">
+            <div class="d-block">
+                <!--div class="align-self-center">
+                    <i class="far fa-user text-success fa-sm"></i>
+                </!--div-->
+                <div class="row">
+                    <h3 class="text-black font-user-list"> {{proponents[1]['s2gp/s2g1q1/prop_nome'].substring(0,
+                        36).toUpperCase()}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-user mb-3">
+        <div class="card-body">
+            <div class="d-block">
+                <!--div class="align-self-center">
+                    <i class="far fa-user text-success fa-sm"></i>
+                </!--div-->
+                <div class="row">
+                    <h3 class="text-black font-user-list"> {{proponents[2]['s2gp/s2g1q1/prop_nome'].substring(0,
+                        36).toUpperCase()}}</h3>
                 </div>
             </div>
         </div>
