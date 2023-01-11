@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -8,13 +9,22 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() user:any;
+  usuario:any;
   proponents:any;
 i:any;
-  constructor(private ds: DataService) { }
+  constructor(private ds: DataService, 
+    private auth: AuthService) { 
+      this.ds.getUser().subscribe(data =>{
+        this.usuario = data;
+        console.log('olá estas logado: ', data[0].username)
+      })
+    }
 
   ngOnInit(): void {
     this.proponentes()
 
+    
 
     /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
       console.log(this.proponents[0]);
@@ -35,6 +45,8 @@ i:any;
     })
   }
 
-  
+  logout(){
+    this.auth.logout()
+  }
 
 }

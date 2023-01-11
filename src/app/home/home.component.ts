@@ -46,7 +46,13 @@ export class HomeComponent implements OnInit {
 
       } catch (error) {
         this._errorLogin = true;
-        this.errorLogin()
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Usuário não autorizado!',
+        })
+
 
       }
 
@@ -54,13 +60,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  errorLogin() {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Usuário não autorizado!',
-    })
-  }
 
   /* 
   loginParceiro(mail: any) {

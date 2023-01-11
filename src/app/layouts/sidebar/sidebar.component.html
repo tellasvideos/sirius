@@ -1,7 +1,7 @@
 <!-- FIRST SECTION -->
 <div class="container d-flex justify-content-between ">
     <div class="hello-user">
-        <h5 class="font-user word-breack mt-3">Olá, José Sandele</h5>
+        <h5 class="font-user word-breack mt-3">Olá, {{usuario[0].username}} </h5>
     </div>
 
     <div class="card card-size mt-3">
@@ -63,12 +63,15 @@
     </div>
 </div>
 <!-- THIRD SECTION -->
-
+<hr style="color: #F2F2F2;">
 <!-- FOURTH SECTION -->
 <div class="container mb-3">
-    <div class="d-grid gap-2 mx-auto">
-        <button class="btn btn-add-user" type="button" [routerLink]="['/usuario']"
+    <div class="d-grid gap-2 mx-auto mb-3">
+        <button class="btn btn-add-user btn-sm" type="button" [routerLink]="['/usuario']"
             routerLinkActive="router-link-active">Adicionar Usuário</button>
+    </div>
+    <div class="d-grid gap-2 mx-auto">
+        <button class="btn btn-danger btn-exit btn-sm" type="button" (click)="logout()">Terminar sessão</button>
     </div>
 </div>
 <!-- FOURTH SECTION -->

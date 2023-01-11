@@ -95,7 +95,7 @@ export class DataService {
   proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms';
 
   // To get all users
-  API_GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
+  GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
   getAllUsers = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
@@ -156,19 +156,26 @@ export class DataService {
 
   }
 
+  getUser() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.GET_USERS_URL, { headers: headers })
+  }
+
   // get users
   listUsers() {
-    return this.http.get<Users>(this.API_GET_USERS_URL);
+    return this.http.get<Users>(this.GET_USERS_URL);
   }
 
   // delete users by id
   deleteUser(id: any) {
-    return this.http.delete<Users>(this.API_GET_USERS_URL + id + '/');
+    return this.http.delete<Users>(this.GET_USERS_URL + id + '/');
   }
 
   // insert users
   AddUser(data: any) {
-    return this.http.post<Users>(this.API_GET_USERS_URL, data);
+    return this.http.post<Users>(this.GET_USERS_URL, data);
   }
 
   // update users
