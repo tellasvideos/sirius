@@ -21,6 +21,7 @@ i:any;
   constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
+    
     //this.logoOn === this.img.hideImg();
     this.proponentes()
     for ( this.prop = 0; this.prop < this.prop.length; this.prop++) {

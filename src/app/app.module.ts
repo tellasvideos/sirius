@@ -80,6 +80,7 @@ import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common
 import { DataService } from './services/data.service';
 import { MyfilterPipe } from './myfilter.pipe';
 import { SearchPipe } from './search.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -151,7 +152,8 @@ import { SearchPipe } from './search.pipe';
     MatIconModule,
     MatToolbarModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [HeaderComponent, AuthService, DataService, HttpParams],
   bootstrap: [AppComponent]
