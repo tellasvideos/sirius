@@ -12,22 +12,43 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DashboardComponent implements OnInit {
 
-i:any;
+  i: any;
 
   logoOn: any;
+  inqueritos: any;
   prop: any;
+  interestExpress: any;
+  departamento: any;
+  cadeia: any;
   sideBarOpen = true;
 
   constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
-    
-    //this.logoOn === this.img.hideImg();
-    this.proponentes()
-    for ( this.prop = 0; this.prop < this.prop.length; this.prop++) {
+    this.getInquerito();
+    this.getcadeia();
+    this.getManInterest();
+    this.proponentes();
+
+    // loop para contar e atualizar props in real time
+    for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
       this.prop[0] *= 2;
-      if(this.prop[0] == 2)
+      if (this.prop[0] == 2)
         this.prop++;
+    }
+
+    // loop para contar e atualizar interesses in real time
+    for (this.interestExpress = 0; this.interestExpress < this.interestExpress.length; this.interestExpress++) {
+      this.interestExpress[0] *= 2;
+      if (this.interestExpress[0] == 2)
+        this.interestExpress++;
+    }
+
+    // loop para contar e atualizar inqueritos in real time
+    for (this.inqueritos = 0; this.inqueritos < this.inqueritos.length; this.inqueritos++) {
+      this.inqueritos[0] *= 2;
+      if (this.inqueritos[0] == 2)
+        this.inqueritos++;
     }
 
     type EChartsOption = echarts.EChartsOption;
@@ -131,9 +152,9 @@ i:any;
 
     option3 && myChart3.setOption(option3);
 
-   
 
-   
+
+
   }
 
   sideBarToggler() {
@@ -147,8 +168,22 @@ i:any;
     })
   }
 
-  getcadeia(){
-    
+  getcadeia() {
+    this.ds.getValueChains().subscribe(data => {
+      this.cadeia = data;
+    })
+  }
+
+  getManInterest() {
+    this.ds.getInterestExpress().subscribe(data => {
+      this.interestExpress = data;
+    })
+  }
+
+  getInquerito() {
+    this.ds.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+    })
   }
 
 
