@@ -4,6 +4,15 @@
     margin-bottom: 1.5%;
 }
 
+#container {
+    //display: block;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 18%;
+    padding-left: 18%;
+}
+
 .mat-icon {
     vertical-align: center;
 }
@@ -28,159 +37,60 @@ button:hover {
     color: #F2F2F2 !important;
 }
 
-.title-items {
-    margin-left: 22%;
-    font-size: 11px;
-    font-weight: bold;
+.btns{
+    display: flex;
 }
-
-.title-items2 {
-    margin-left: 30%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-user {
-    margin-left: 22%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-ManI {
-    margin-left: 16%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-Dep {
-    margin-left: 12%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-CadV {
-    margin-left: 15%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-item-AndM {
-    margin-left: 13%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-Inst {
-    margin-left: 10%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-Inquir {
-    margin-left: 10%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-items-prop{
-    margin-left: 20%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.title-item-Inq {
-    margin-left: 23%;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-
 
 /* Extra small devices (phones, Galaxy Fold 240px and 450px) */
 @media (min-width: 240px) and (max-width: 450px) {
-    .title-items {
-        display: none;
+
+    .menu-content {
+        display: block;
     }
 
-    .title-items2 {
-        display: none;
+    .btns {
+        display: block;
     }
 
-    .title-items-user {
-        display: none;
-    }
-
-    .title-items-ManI {
-        display: none;
-    }
-
-    .title-items-Dep {
-        display: none;
-    }
-
-    .title-items-CadV {
-        display: none;
-    }
-
-    .title-item-AndM {
-        display: none;
-    }
-
-    .title-items-Inst {
-        display: none;
+    #container {
+        justify-content: center;
+        //flex-direction: row;
+        // flex-wrap: wrap;
+        //padding-right: 18%;
+        // padding-left: 18%;
+        display: block;
 
     }
 
-    .title-items-Inquir {
-        display: none;
+    .menu-items {
+        display: block;
     }
 
-    .title-item-Inq {
-        display: none;
-    }
+
 }
 
 @media (min-width: 451px) and (max-width: 599px) {
 
-    .title-items {
-        display: none;
-    }
-
-    .title-items2 {
-        display: none;
-    }
-
-    .title-items-user {
-        display: none;
-    }
-
-    .title-items-ManI {
-        display: none;
-    }
-
-    .title-items-Dep {
-        display: none;
-    }
-
-    .title-items-CadV {
-        display: none;
-    }
-
-    .title-item-AndM {
-        display: none;
-    }
-
-    .title-items-Inst {
-        display: none;
+    #container {
+        justify-content: center;
+        //flex-direction: row;
+        // flex-wrap: wrap;
+        //padding-right: 18%;
+        // padding-left: 18%;
+        display: block;
 
     }
 
-    .title-items-Inquir {
-        display: none;
+    .btns {
+        display: block;
     }
 
-    .title-item-Inq {
-        display: none;
+    .menu-items {
+        display: block;
+    }
+
+    .menu-content {
+        display: block;
     }
 
 }
@@ -188,46 +98,28 @@ button:hover {
 /* Extra small devices (phones, 600px and 768px) */
 @media (min-width: 600px) and (max-width: 767px) {
 
-    .title-items {
-        display: none;
-    }
-
-    .title-items2 {
-        display: none;
-    }
-
-    .title-items-user {
-        display: none;
-    }
-
-    .title-items-ManI {
-        display: none;
-    }
-
-    .title-items-Dep {
-        display: none;
-    }
-
-    .title-items-CadV {
-        display: none;
-    }
-
-    .title-item-AndM {
-        display: none;
-    }
-
-    .title-items-Inst {
-        display: none;
+    #container {
+        justify-content: center;
+        //flex-direction: row;
+        // flex-wrap: wrap;
+        //padding-right: 18%;
+        // padding-left: 18%;
+        display: block;
 
     }
 
-    .title-items-Inquir {
-        display: none;
+    .btns {
+        display: block;
     }
 
-    .title-item-Inq {
-        display: none;
+    .menu-items {
+        display: block;
     }
+
+    .menu-content {
+        display: block;
+    }
+
 
 }
 
