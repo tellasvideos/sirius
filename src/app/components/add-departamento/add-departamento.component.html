@@ -4,10 +4,15 @@
 </div>
 <div class="modal-body">
     <mdb-form-control>
-        <input mdbInput type="text" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label" for="form1">Departamento</label>
+        <input mdbInput type="text" [(ngModel)]="name" id="form1" class="form-control mb-2" />
+        <label mdbLabel class="form-label text-black" for="form1">Departamento</label>
     </mdb-form-control>
+    <div class="form-floating mb-3 ">
+        <textarea class="form-control" [(ngModel)]="description" placeholder="Comente aqui" name="observation"
+            id="floatingTextarea"></textarea>
+        <label for="floatingTextarea" class="text-black">Descrição</label>
+    </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-success btn-sm">Guardar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="SaveDepartamento()">Guardar</button>
 </div>

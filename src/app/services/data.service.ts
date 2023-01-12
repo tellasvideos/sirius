@@ -69,6 +69,11 @@ export class DataService {
   get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
   save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8022/api/v1'
 
+  // url to get departaments
+  get_departaments_url = 'http://strongboxao.ddns.net:8022/api/v1/departments/';
+  save_departaments_url = 'http://strongboxao.ddns.net:8022/api/v1';
+  delete_departaments_url = 'http://strongboxao.ddns.net:8022/api/v1/departments/';
+
   // url to inquireform
   get_inquireForms_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
   save_inquireForms_url = 'http://strongboxao.ddns.net:8022/api/v1';
@@ -410,5 +415,28 @@ export class DataService {
     return this.http.delete(`${this.delete_inquireForms_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
+  // Method to get Departaments 
+  get_Departaments() {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_departaments_url, { headers: headers })
+  }
+
+  // Method to save departament form
+  salvaDepartaments(departament: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_departaments_url + '/departments/', departament, { headers: headers })
+  }
+
+  // Method to delete Inquire form
+  deleteDepartaments(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_departaments_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
 
 }
