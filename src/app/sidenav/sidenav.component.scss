@@ -9,8 +9,8 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-right: 18%;
-    padding-left: 18%;
+    padding-right: 20%;
+    padding-left: 20%;
 }
 
 .mat-icon {
@@ -37,7 +37,7 @@ button:hover {
     color: #F2F2F2 !important;
 }
 
-.btns{
+.btns {
     display: flex;
 }
 
@@ -54,10 +54,6 @@ button:hover {
 
     #container {
         justify-content: center;
-        //flex-direction: row;
-        // flex-wrap: wrap;
-        //padding-right: 18%;
-        // padding-left: 18%;
         display: block;
 
     }
@@ -65,8 +61,6 @@ button:hover {
     .menu-items {
         display: block;
     }
-
-
 }
 
 @media (min-width: 451px) and (max-width: 599px) {
@@ -100,10 +94,6 @@ button:hover {
 
     #container {
         justify-content: center;
-        //flex-direction: row;
-        // flex-wrap: wrap;
-        //padding-right: 18%;
-        // padding-left: 18%;
         display: block;
 
     }
