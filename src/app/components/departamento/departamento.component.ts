@@ -47,7 +47,7 @@ export class DepartamentoComponent implements OnInit {
       confirmButtonText: 'Sim, eliminar!'
     }).then((apagar) => {
       if (apagar.isConfirmed) {
-        this.ds.deleteValueChain(id).subscribe(
+        this.ds.deleteDepartaments(id).subscribe(
           success => { this.getDepartaments(); },
           error => { this.alert_error(); }
         )
