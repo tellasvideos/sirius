@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
+    this.getDeparet();
     this.getInquerito();
     this.getcadeia();
     this.getManInterest();
@@ -184,6 +185,12 @@ export class DashboardComponent implements OnInit {
   getManInterest() {
     this.ds.getInterestExpress().subscribe(data => {
       this.interestExpress = data;
+    })
+  }
+
+  getDeparet() {
+    this.ds.get_Departaments().subscribe(data => {
+      this.departamento = data;
     })
   }
 
