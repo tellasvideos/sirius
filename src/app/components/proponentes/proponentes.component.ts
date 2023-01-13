@@ -13,13 +13,17 @@ export class ProponentesComponent implements OnInit {
   proponente:any;
   //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
+  propName:any;
+
+
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.dataService.proponentPDAC().subscribe(data =>{
       this.proponente = data;
-      console.log(data)
       this.filterDsc()
+      console.log(data[0]['s2gp/s2g1q1/prop_nome'])
+
     })
    
   }
