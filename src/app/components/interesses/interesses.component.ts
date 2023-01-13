@@ -15,7 +15,7 @@ import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.co
 export class InteressesComponent implements OnInit {
 
   interest?: ManInteress[];
-
+  keyWord: string = '';
   sideBarOpen = true;
 
   apagar = false;
