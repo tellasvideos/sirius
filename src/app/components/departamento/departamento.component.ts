@@ -36,8 +36,8 @@ export class DepartamentoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddDepartamentoComponent)
   }
 
-   // delete uma cadeia de valor
-   deleteDepartamento(id: any) {
+  // delete uma cadeia de valor
+  deleteDepartamento(id: any) {
     Swal.fire({
       title: 'De certeza que quer eliminar?',
       icon: 'warning',
@@ -67,8 +67,8 @@ export class DepartamentoComponent implements OnInit {
     })
   }
 
-  filterDsc(){
-    this.departamento = this.departamento.sort(function(a: any, b: any){
+  filterDsc() {
+    this.departamento = this.departamento.sort(function (a: any, b: any) {
       return b._id - a._id
     })
   }

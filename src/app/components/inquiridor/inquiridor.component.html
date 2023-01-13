@@ -6,33 +6,30 @@
         <app-sidebar></app-sidebar>
     </mat-drawer>
 
-    <!-- Man interesses full content-->
+    <!--  inquiridor full content-->
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-        <!-- Man interesses list-->
-        <div class="row mt-4 container" style="margin-left: 8%; margin-right: -9%;">
-            <div class="col-4 esp1 ">
+        <!--  inquiridor list-->
+        <div class="d-flex mt-4 userlist justify-content-between" style="margin-left: 2%; margin-right: 2%;">
+            <div class=" esp1">
                 <h5 class="list-user-text text-black mb-4">Inquiridor</h5>
             </div>
-            <div class="col-8">
-                <div class="row justify-content-between px-md-1">
-                    <div class="col-2 esp"></div>
-                    <div class="col-10">
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-light text-black"
-                                    style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
-                            </div>
-                            <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
-                                <button type="button" class="btn btn-light text-black"
-                                    style="text-transform: capitalize;">Exportar</button>
-                            </div>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
-                                <button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
-                                        class="fas fa-plus-square text-black"></i> Add Inquiridor</button>
-                            </div>
-                        </div>
+
+            <div class=" justify-content-between px-md-1">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                                class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button type="button" class="btn btn-light text-black"
+                            style="text-transform: capitalize;">Exportar</button>
+                    </div>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                        <button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
+                                class="fas fa-plus-square text-black"></i> Add Inquiridor
+                            </button>
                     </div>
                 </div>
             </div>
