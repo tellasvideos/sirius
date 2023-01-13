@@ -9,7 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ProponentesComponent implements OnInit {
   sideBarOpen = true;
-
+  keyWord: string = '';
   proponente:any;
   //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 

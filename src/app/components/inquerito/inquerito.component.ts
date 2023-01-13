@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class InqueritoComponent implements OnInit {
 
-  keyWord:string = '';
+  keyWord: string = '';
   selecionado: string = '';
 
   opcoes: any = [
@@ -42,8 +42,8 @@ export class InqueritoComponent implements OnInit {
   created_at: any;
   interest_expression: any;
 
-  manifestacao:any;
-  inquiridor:any;
+  manifestacao: any;
+  inquiridor: any;
 
   constructor(
     private modalService: MdbModalService,
@@ -133,8 +133,8 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  get_interest_express(){
-    this.dataService.getInterestExpress().subscribe(data =>{
+  get_interest_express() {
+    this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
       console.log('manifestacao: ', data)
 
@@ -142,8 +142,8 @@ export class InqueritoComponent implements OnInit {
 
   }
 
-  get_inquirier(){
-    this.dataService.get_Inquiriers().subscribe(data =>{
+  get_inquirier() {
+    this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridor = data;
       console.log('inqiridor: ', data)
     })
