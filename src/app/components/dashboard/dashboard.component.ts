@@ -51,6 +51,13 @@ export class DashboardComponent implements OnInit {
         this.inqueritos++;
     }
 
+     // loop para contar e atualizar departamento in real time
+     for (this.departamento = 0; this.departamento < this.departamento.length; this.departamento++) {
+      this.departamento[0] *= 2;
+      if (this.departamento[0] == 2)
+        this.departamento++;
+    }
+
     type EChartsOption = echarts.EChartsOption;
     type EChartsOption2 = echarts.EChartsOption;
     type EChartsOption3 = echarts.EChartsOption;

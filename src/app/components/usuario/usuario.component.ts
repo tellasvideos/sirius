@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class UsuarioComponent implements OnInit {
 
   userOb!: Subscription;
-
+  keyWord: string = '';
   users: any;
 
   usuarios = [
