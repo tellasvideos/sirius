@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class InqueritoComponent implements OnInit {
 
+  keyWord:string = '';
   selecionado: string = '';
 
   opcoes: any = [
