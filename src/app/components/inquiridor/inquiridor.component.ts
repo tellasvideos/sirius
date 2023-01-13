@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class InquiridorComponent implements OnInit {
 
   inquiridores: any;
-
+  keyWord: string = '';
   sideBarOpen = true;
 
   modalRef: MdbModalRef<InquiridorComponent> | null = null;
