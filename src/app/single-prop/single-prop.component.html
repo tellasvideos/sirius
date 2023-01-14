@@ -3,11 +3,11 @@
         <app-sidenav></app-sidenav>
     </mat-drawer>
 
-    <!-- Man interesses full content-->
+    <!-- prop full content-->
     <mat-drawer-content class="container">
         <app-header class="d-none" (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
-        <!-- Man interesses list-->
+        <!-- prop list-->
         <div class="row mt-4">
             <div class="col-4 esp1">
                 <h5 class="list-user-text text-black mb-4 m-4">{{proponente['s2gp/s2g1q1/prop_nome']}}</h5>
@@ -30,10 +30,10 @@
                 </div>
             </div>
         </div>
-        <!-- Man interesses list-->
+        <!-- prop list-->
 
 
-        <!-- List users -->
+        <!-- List proponentes -->
         <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="table-responsive">
                 <table class="table table-sm table-bordered border-success">
@@ -52,23 +52,21 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td> {{proponente.prop_nome}} </td>
-                            <td>{{proponente.prop_empresa}}</td>
-                            <td>{{proponente.prop_nif}}</td>
-                            <td>{{proponente.prop_categ}}</td>
-                            <td>{{proponente.rep_nome}}</td>
-                            <td>{{proponente.prop_telemovel}}</td>
-                            <td>{{proponente.prop_provincia}}</td>
-                            <td>{{proponente.rep_municipio}}</td>
-                            <td> {{proponente.prop_subm | date:"dd/MM/yyyy"}} </td>
+                            <td> {{proponente['prop_nome']}} </td>
+                            <td>{{proponente['prop_empresa']}}</td>
+                            <td>{{proponente['prop_nif']}}</td>
+                            <td>{{proponente['prop_categ']}}</td>
+                            <td>{{proponente['rep_nome']}}</td>
+                            <td>{{proponente['prop_telemovel']}}</td>
+                            <td>{{proponente['prop_provincia']}}</td>
+                            <td>{{proponente['rep_municipio']}}</td>
+                            <td> {{proponente['prop_subm'] | date:"dd/MM/yyyy"}} </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- List users -->
-
-
+        <!-- List proponentes -->
 
     </mat-drawer-content>
 </mat-drawer-container>
