@@ -81,6 +81,7 @@ import { DataService } from './services/data.service';
 import { MyfilterPipe } from './myfilter.pipe';
 import { SearchPipe } from './search.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchByProvincesPipe } from './search-by-provinces.pipe';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MyfilterPipe,
     AcordosComponent,
     ProvinciasComponent,
-    SearchPipe
+    SearchPipe,
+    SearchByProvincesPipe
   ],
   imports: [
     BrowserModule,
