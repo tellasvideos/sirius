@@ -128,6 +128,9 @@ export class DataService {
   // to edit data of interest expression
   edit_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/';
 
+  // InterestExpression by province
+  interestExpressByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/?province=';
+
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
   constructor(
@@ -437,6 +440,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.delete(`${this.delete_departaments_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get interest Expression by province
+  interestExpressionByProvince(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.interestExpressByProv_url}${id}`, { headers: headers }).pipe(take(1));
   }
 
 }

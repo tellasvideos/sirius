@@ -14,6 +14,8 @@ import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.co
 })
 export class InteressesComponent implements OnInit {
 
+  provincia:any;
+
   interest?: ManInteress[];
   keyWord: string = '';
   filterText: string = '';
@@ -32,7 +34,15 @@ export class InteressesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getProvincias()
     this.list_interest()
+  }
+
+  buscar(id:any){
+    this.dataService.interestExpressionByProvince(id).subscribe(data =>{
+      this.provincia = data;
+      console.log('interest por prov: ', data)
+    })
   }
 
   sideBarToggler() {
@@ -79,6 +89,12 @@ export class InteressesComponent implements OnInit {
       }
     })
 
+  }
+
+  getProvincias(){
+    this.dataService.get_Provinces().subscribe(data =>{
+      this.provincia = data;
+    })
   }
 
   alert_error() {
