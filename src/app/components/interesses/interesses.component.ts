@@ -16,6 +16,7 @@ export class InteressesComponent implements OnInit {
 
   interest?: ManInteress[];
   keyWord: string = '';
+  filterText: string = '';
   sideBarOpen = true;
 
   apagar = false;
