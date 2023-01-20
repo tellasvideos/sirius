@@ -14,7 +14,7 @@ import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.co
 })
 export class InteressesComponent implements OnInit {
 
-  provincia:any;
+  provincia: any;
 
   interest?: ManInteress[];
   keyWord: string = '';
@@ -38,10 +38,10 @@ export class InteressesComponent implements OnInit {
     this.list_interest()
   }
 
-  buscar(id:any){
-    this.dataService.interestExpressionByProvince(id).subscribe(data =>{
+  buscar(id: any) {
+    this.dataService.interestExpressionByProvince(id).subscribe(data => {
       this.provincia = data;
-      console.log('interest por prov: ', data)
+      console.log(data)
     })
   }
 
@@ -91,8 +91,8 @@ export class InteressesComponent implements OnInit {
 
   }
 
-  getProvincias(){
-    this.dataService.get_Provinces().subscribe(data =>{
+  getProvincias() {
+    this.dataService.get_Provinces().subscribe(data => {
       this.provincia = data;
     })
   }
@@ -102,6 +102,14 @@ export class InteressesComponent implements OnInit {
       icon: 'error',
       title: 'Oops...',
       text: 'Alguma coisa correu mal, tente mais tarde.',
+    })
+  }
+
+  alert_error2() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Não encontrado',
     })
   }
 }

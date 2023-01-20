@@ -45,18 +45,19 @@
                             class="btn btn-light dropdown-toggle-split" ngbDropdownToggle><i
                                 class="fas fa-map-marker-alt"></i> Província </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
-                            <button ngbDropdownItem *ngFor="let item of provincia" [value]="item.id" (click)="buscar(item.id)" > {{item.name}} </button>
+                            <button ngbDropdownItem *ngFor="let item of provincia" [value]="item.id"
+                                (click)="buscar(item.id)"> {{item.name}} </button>
                         </div>
-                        <button  type="button" class="btn btn-light" style="text-transform: capitalize;">Buscar</button>
+                        <!--button  type="button" class="btn btn-light" style="text-transform: capitalize;">Buscar</button-->
                     </div>
 
-                    <div class="m-1">
+                    <!--div class="m-1">
                         <select class="form-select form-select-sm select-prov" [(ngModel)]="provincia" name="provincia">
                             <option *ngFor="let item of provincia" [value]="item.id" > {{item.name}} </option>
                         </select>
                         <br>
                         <button (click)="buscar(provincia.id)"type="button" class="btn btn-light" style="text-transform: capitalize;" >Buscar</button>
-                    </div>
+                    </div-->
 
                     <!--div-- class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
@@ -72,6 +73,7 @@
                     </!--div-->
                 </div>
             </div>
+            <div> {{provincia[0].farm_name}} </div>
         </div>
 
         <!-- Man-interesse table -->
