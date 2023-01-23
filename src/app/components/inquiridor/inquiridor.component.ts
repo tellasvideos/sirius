@@ -12,10 +12,11 @@ import Swal from 'sweetalert2';
 })
 export class InquiridorComponent implements OnInit {
 
+  inq_por_provincia:any;
   inquiridores: any;
   keyWord: string = '';
   sideBarOpen = true;
-
+  provincias:any;
   modalRef: MdbModalRef<InquiridorComponent> | null = null;
 
   constructor(
@@ -24,6 +25,7 @@ export class InquiridorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getProvincias();
     this.getInquiridores();
   }
 
@@ -38,7 +40,21 @@ export class InquiridorComponent implements OnInit {
   getInquiridores(){
     this.dataService.get_Inquiriers().subscribe(data =>{
       this.inquiridores = data;
-      console.log(data)
+      console.log('inquiridor: ',data)
+    })
+  }
+
+  buscar(id: any) {
+    this.dataService.InquiriersByProvince(id).subscribe(data => {
+      this.inq_por_provincia = data;
+      console.log('inquirier by province', data)
+    })
+  }
+
+  getProvincias() {
+    this.dataService.get_Provinces().subscribe(data => {
+      this.provincias = data;
+      console.log('provincias', data)
     })
   }
 

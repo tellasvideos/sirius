@@ -17,6 +17,8 @@ import { Condicao } from '../models/condicao.model';
 })
 export class DataService {
 
+  loginerror = false;
+
   getCondicao() {
     return [
       new Condicao(1, 'Sim'),
@@ -130,6 +132,10 @@ export class DataService {
 
   // InterestExpression by province
   interestExpressByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/?province=';
+
+  InquiriersByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/?province=';
+
+  proponentsByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/koboformsbyprovince/';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
@@ -449,5 +455,22 @@ export class DataService {
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.interestExpressByProv_url}${id}`, { headers: headers }).pipe(take(1));
   }
+
+  // Method to get inquirier by province
+  InquiriersByProvince(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.InquiriersByProv_url}${id}`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get proponents by province
+  ProponentsByProvince(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.proponentsByProv_url}${id}`, { headers: headers }).pipe(take(1));
+  }
+
 
 }
