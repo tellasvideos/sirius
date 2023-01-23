@@ -14,8 +14,8 @@ import { AddAndManifestComponent } from '../add-and-manifest/add-and-manifest.co
 })
 export class InteressesComponent implements OnInit {
 
-  provincia: any;
-
+  man_Int_por_provincia: any;
+  provincias:any;
   interest?: ManInteress[];
   keyWord: string = '';
   filterText: string = '';
@@ -40,8 +40,8 @@ export class InteressesComponent implements OnInit {
 
   buscar(id: any) {
     this.dataService.interestExpressionByProvince(id).subscribe(data => {
-      this.provincia = data;
-      console.log(data)
+      this.man_Int_por_provincia = data;
+      console.log('man interest by province', data)
     })
   }
 
@@ -61,7 +61,7 @@ export class InteressesComponent implements OnInit {
   list_interest() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.interest = data;
-      console.log(data)
+      console.log('man interest',data)
     })
   }
 
@@ -93,7 +93,8 @@ export class InteressesComponent implements OnInit {
 
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
-      this.provincia = data;
+      this.provincias = data;
+      console.log('provincias', data)
     })
   }
 
