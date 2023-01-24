@@ -135,7 +135,7 @@ export class DataService {
 
   InquiriersByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/?province=';
 
-  proponentsByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/koboformsbyprovince/';
+  proponentsByProv_url = 'http://strongboxao.ddns.net:8022/api/v1'; 
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
@@ -465,11 +465,11 @@ export class DataService {
   }
 
   // Method to get proponents by province
-  ProponentsByProvince(id: any) {
+  ProponentsByProvince(province_id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get(`${this.proponentsByProv_url}${id}`, { headers: headers }).pipe(take(1));
+    return this.http.post(this.proponentsByProv_url + '/koboformsbyprovince/', province_id, { headers: headers });
   }
 
 

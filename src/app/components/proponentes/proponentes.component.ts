@@ -14,27 +14,44 @@ export class ProponentesComponent implements OnInit {
   //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
   provinces: any;
   propName: any;
+  provincias: any;
+  prop_por_provincia: any;
+
+  my_stringify: any;
+  my_stringify2: any;
 
 
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.getProvincias()
+
+
     this.dataService.proponentPDAC().subscribe(data => {
       this.proponente = data;
       this.filterDsc()
 
       console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
 
-      console.log('provincias da biplan: ', this.provinces[14].id)
+      console.log('provincias da biplan: ', this.provincias[0].province_id)
     })
 
-  /*  const array1 = ['a', 'b', 'c'];
-    const array2 = ['d', 'e', 'f'];
-    const array3 = this.proponente.concat(this.provinces);
 
-    console.log(array3);*/
 
+
+    /*  const array1 = ['a', 'b', 'c'];
+      const array2 = ['d', 'e', 'f'];
+      const array3 = this.proponente.concat(this.provinces);
+  
+      console.log(array3);*/
+
+  }
+
+  buscar(id: any) {
+    this.dataService.ProponentsByProvince(id.toString(id)).subscribe(data => {
+      this.prop_por_provincia = data;
+      console.log('prop by province', data)
+    })
   }
 
   sideBarToggler() {
@@ -53,8 +70,13 @@ export class ProponentesComponent implements OnInit {
 
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
-      this.provinces = data;
-      console.log(data)
+      this.provincias = data;
+
+     // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
+      console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
+
+     // this.my_stringify2 = JSON.stringify(data)
+      console.log('stgfy 2 caso:',data.toString())
     })
   }
 
