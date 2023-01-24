@@ -17,7 +17,7 @@ export class AddInquiridorComponent implements OnInit {
   performance_in_village:any;
   performance_in_community:any;
   performance_in_county:any;
-  performance_in_province:any;
+  province:any;
 
   constructor(
     public modalRef: MdbModalRef<AddInquiridorComponent>,
@@ -36,7 +36,7 @@ export class AddInquiridorComponent implements OnInit {
       "performance_in_village": this.performance_in_village,
       "performance_in_community": this.performance_in_community,
       "performance_in_county": this.performance_in_county,
-      "performance_in_province": this.performance_in_province
+      "province": this.province
     }
     this.dataService.salvaInquiriers(Inquirier).subscribe(
       success => {this.alert_success()},
