@@ -82,6 +82,8 @@ import { MyfilterPipe } from './myfilter.pipe';
 import { SearchPipe } from './search.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchByProvincesPipe } from './search-by-provinces.pipe';
+import { NgxPrintModule } from 'ngx-print';
+
 
 
 @NgModule({
@@ -127,6 +129,7 @@ import { SearchByProvincesPipe } from './search-by-provinces.pipe';
     SearchByProvincesPipe
   ],
   imports: [
+    NgxPrintModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
