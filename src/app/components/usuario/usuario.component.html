@@ -19,8 +19,10 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button"  class="btn btn-light text-black" style="text-transform: capitalize;"><i
-                                class="fas fa-print"></i> Imprimir</button>
+                        <button type="button" printSectionId="print-section-list-users" ngxPrint printTitle="Usuários"
+                            class="btn btn-light text-black" styleSheetFile="assets/user-print.scss"
+                            [useExistingCss]="true" style="text-transform: capitalize;"><i class="fas fa-print"></i>
+                            Imprimir</button>
                     </div>
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
@@ -62,7 +64,7 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar usuário..."
                     [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" id="print-section-list-users">
                 <table class="table table-hover table-sm">
                     <thead class="linhas2">
                         <tr>
@@ -71,8 +73,8 @@
                             <th scope="col" class="text-black">Função</th>
                             <th scope="col" class="text-black">IsAdmin</th>
                             <th scope="col" class="text-black">UserName</th>
-                            <th scope="col" class="text-black">Editar</th>
-                            <th scope="col" class="text-black">Apagar</th>
+                            <th scope="col" class="text-black not-it">Editar</th>
+                            <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,10 +85,10 @@
                             <td>{{usuario.department}}</td>
                             <td>{{usuario.is_admin}}</td>
                             <td>{{usuario.username}}</td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
                         </tr>
