@@ -19,8 +19,10 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
-                                class="fas fa-print"></i> Imprimir</button>
+                        <button type="button" printSectionId="print-section-list-interest" ngxPrint
+                            printTitle="Manisfestação de Interesse" class="btn btn-light text-black"
+                            styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
+                            style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
                     </div>
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
@@ -74,6 +76,7 @@
                 </div>
             </div>
 
+            <!-- Resultado  da pesquisa por provincia-->
             <div class="table-responsive" *ngIf="man_Int_por_provincia">
                 <table class="table table-sm table-hover text-center">
                     <tbody>
@@ -90,8 +93,8 @@
                                     <i class="far fa-eye"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" [routerLink]="['/status-pn/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                            <td> <button type="button" [routerLink]="['/status-pn/', item.id]" routerLinkActive="active"
+                                    class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-clock"></i>
                                 </button></td>
 
@@ -100,8 +103,8 @@
                                     <i class="far fa-calendar-check"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" [routerLink]="['/cadeias/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                            <td> <button type="button" [routerLink]="['/cadeias/', item.id]" routerLinkActive="active"
+                                    class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-lemon"></i> </button></td>
 
                             <td>
@@ -127,7 +130,7 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar fazenda..."
                     [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" id="print-section-list-interest">
                 <table class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
@@ -138,13 +141,13 @@
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Aldeia</th>
                             <th scope="col" class="text-black">Data</th>
-                            <th scope="col" class="text-black">Estado</th>
-                            <th scope="col" class="text-black">Ver</th>
-                            <th scope="col" class="text-black">Progresso</th>
-                            <th scope="col" class="text-black">Estatuto</th>
-                            <th scope="col" class="text-black">Cadeias</th>
-                            <th scope="col" class="text-black">Editar</th>
-                            <th scope="col" class="text-black">Apagar</th>
+                            <th scope="col" class="text-black not-it">Estado</th>
+                            <th scope="col" class="text-black not-it">Ver</th>
+                            <th scope="col" class="text-black not-it">Progresso</th>
+                            <th scope="col" class="text-black not-it">Estatuto</th>
+                            <th scope="col" class="text-black not-it">Cadeias</th>
+                            <th scope="col" class="text-black not-it">Editar</th>
+                            <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -157,33 +160,33 @@
                             <td>{{interest.village}}</td>
                             <td>{{interest.created_at | date:"dd/MM/yyyy"}}</td>
                             <td>{{interest.condition}}</td>
-                            <td><button type="button" [routerLink]="['/single-interest/', interest.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"><button type="button" [routerLink]="['/single-interest/', interest.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-eye"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" [routerLink]="['/status-pn/', interest.id]"
+                            <td class="not-it"> <button type="button" [routerLink]="['/status-pn/', interest.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-clock"></i>
                                 </button></td>
 
-                            <td> <button type="button" [routerLink]="['/estatuto-pn/', interest.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" [routerLink]="['/estatuto-pn/', interest.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-calendar-check"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" [routerLink]="['/cadeias/', interest.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" [routerLink]="['/cadeias/', interest.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-lemon"></i> </button></td>
 
-                            <td>
+                            <td class="not-it">
 
                                 <button type="button" [routerLink]="['/edit-interest/', interest.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
                                     (click)="deleteInterest(interest.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
