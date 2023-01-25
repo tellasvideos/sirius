@@ -16,8 +16,9 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
-                                class="fas fa-print"></i> Imprimir</button>
+                        <button type="button" printSectionId="print-section-list-prop" ngxPrint printTitle="Proponentes"
+                            styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
+                            style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
                     </div>
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
@@ -42,18 +43,20 @@
                             class="btn btn-light dropdown-toggle-split" ngbDropdownToggle><i
                                 class="fas fa-map-marker-alt"></i> Província </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
-                            <button ngbDropdownItem *ngFor="let item of provincias" [value]="item.province_id.toString()"
-                                (click)="buscar(item.province_id)"> {{item.name}} </button>
+                            <button ngbDropdownItem *ngFor="let item of provincias"
+                                [value]="item.province_id.toString()" (click)="buscar(item.province_id)"> {{item.name}}
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Resultado da busca por provincia -->
             <div class="table-responsive">
                 <table class="table table-hover table-sm text-center">
                     <tbody>
-                        <tr *ngFor="let item of prop_por_provincia"
-                            routerLink="/single-prop" routerLinkActive="active" [queryParams]="{_id:item._id, 
+                        <tr *ngFor="let item of prop_por_provincia" routerLink="/single-prop" routerLinkActive="active"
+                            [queryParams]="{_id:item._id, 
                                             prop_nome:item['s2gp/s2g1q1/prop_nome'], 
                                             prop_empresa:item['s2gp/s2g1q1/prop_empresa'],
                                             prop_nif:item['s2gp/s2g1q1/prop_nif'],
@@ -93,7 +96,7 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar Proponente..."
                     [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </!--div-->
-            <div class="table-responsive">
+            <div class="table-responsive" id="print-section-list-prop">
                 <table class="table table-hover table-sm text-center">
                     <thead class="linhas2">
                         <tr>
@@ -104,8 +107,8 @@
                             <th scope="col" class="text-black">Telemovel</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black" (click)="filterDsc()">Data</th>
-                            <th scope="col" class="text-black">Ver</th>
-                            <th scope="col" class="text-black">Acordos</th>
+                            <th scope="col" class="text-black not-it">Ver</th>
+                            <th scope="col" class="text-black not-it">Acordos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,10 +134,10 @@
                             <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
                             <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
 
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
-                            <td> <button type="button" [routerLink]="['/acordos/', item._id]"
+                            <td class="not-it"> <button type="button" [routerLink]="['/acordos/', item._id]"
                                     class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-handshake"></i> </button></td>
                         </tr>
@@ -143,6 +146,5 @@
             </div>
         </div>
         <!-- fim List proponents -->
-
     </mat-drawer-content>
 </mat-drawer-container>
