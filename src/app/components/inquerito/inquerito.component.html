@@ -19,7 +19,9 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                        <button type="button" printSectionId="print-section-list-inquerito" ngxPrint
+                            printTitle="Inquérito" styleSheetFile="assets/print.scss" [useExistingCss]="true"
+                            class="btn btn-light text-black" style="text-transform: capitalize;"><i
                                 class="fas fa-print"></i> Imprimir</button>
                     </div>
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
@@ -61,7 +63,7 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar inquérito..."
                     [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" id="print-section-list-inquerito">
                 <table class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
@@ -70,8 +72,8 @@
                             <th scope="col" class="text-black">Data de emissão</th>
                             <th scope="col" class="text-black">Observação</th>
                             <th scope="col" class="text-black">URL</th>
-                            <th scope="col" class="text-black">Editar</th>
-                            <th scope="col" class="text-black">Apagar</th>
+                            <th scope="col" class="text-black not-it">Editar</th>
+                            <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,13 +83,13 @@
                             <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                             <td>{{item.observations}}</td>
                             <td>{{item.document_to_proves_date}}</td>
-                            <td>
+                            <td class="not-it">
                                 <button type="button" [routerLink]="['/edit-inquire/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
                                     (click)="deleteInquire(item.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
