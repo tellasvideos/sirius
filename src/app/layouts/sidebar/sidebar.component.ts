@@ -9,29 +9,35 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() user:any;
-  usuario:any;
-  proponents:any;
-i:any;
-  constructor(private ds: DataService, 
-    private auth: AuthService) { 
-      this.ds.getUser().subscribe(data =>{
-        this.usuario = data;
-        console.log('olá estas logado: ', data[0].username)
-      })
-    }
+  @Input() user: any;
+  usuario: any;
+  proponents: any;
+  i: any;
+  constructor(private ds: DataService,
+    private auth: AuthService) {
+    this.ds.getUser().subscribe(data => {
+      this.usuario = data;
+      console.log('all  users: ', data)
+    })
+  }
 
   ngOnInit(): void {
     this.proponentes()
 
-    
+
+    /*this.ds.userLogin(this.usuario).subscribe(data => {
+      this.user = data;
+      console.log(' user: ', data[0])
+    })*/
 
     /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
       console.log(this.proponents[0]);
     } */
   }
 
-  proponentes(){
+
+
+  proponentes() {
     this.ds.proponentPDAC().subscribe(data => {
       this.proponents = data;
       this.filterDsc()
@@ -39,13 +45,13 @@ i:any;
     })
   }
 
-  filterDsc(){
-    this.proponents = this.proponents.sort(function(a: any, b: any){
+  filterDsc() {
+    this.proponents = this.proponents.sort(function (a: any, b: any) {
       return b._id - a._id
     })
   }
 
-  logout(){
+  logout() {
     this.auth.logout()
   }
 

@@ -16,6 +16,8 @@ export class UsuarioComponent implements OnInit {
   keyWord: string = '';
   users: any;
 
+  usuario: any;
+
   usuarios = [
     {
       "id": 1,
@@ -53,28 +55,17 @@ export class UsuarioComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    // to get all users
-    this.fetchUsers();
-    //console.log(this.usuarios)
-
+    this.getUser();
   }
 
-
-
-  removeUser(id: any) {
-    this.dataService.deleteUser(id).subscribe(() => {
-      this.fetchUsers();
+  getUser() {
+    this.dataService.getUser().subscribe(data => {
+      this.usuario = data;
+      console.log('all  users: ', data)
     })
   }
 
-  fetchUsers() {
-    this.dataService.listUsers().subscribe(data => {
-      this.users = data;
-      console.log('estes são os users: ', this.users)
-    })
-  }
-
+  
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }

@@ -6,7 +6,7 @@
         <app-sidebar></app-sidebar>
     </mat-drawer>
 
-    <!-- Usuario full content-->
+    <!-- item full content-->
     <mat-drawer-content>
         <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
 
@@ -79,12 +79,12 @@
                     </thead>
                     <tbody>
                         <!--*ngFor="let user of users"-->
-                        <tr *ngFor="let usuario of usuarios | search:'name':keyWord">
-                            <td> {{usuario.name}} </td>
-                            <td>{{usuario.work_function}}</td>
-                            <td>{{usuario.department}}</td>
-                            <td>{{usuario.is_admin}}</td>
-                            <td>{{usuario.username}}</td>
+                        <tr *ngFor="let item of usuario | search:'name':keyWord">
+                            <td> {{item.name}} </td>
+                            <td>{{item.department}}</td>
+                            <td>{{item.work_function}}</td>
+                            <td>{{item.is_admin}}</td>
+                            <td>{{item.username}}</td>
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
@@ -100,5 +100,5 @@
 
 
     </mat-drawer-content>
-    <!-- Usuario full content-->
+    <!-- item full content-->
 </mat-drawer-container>

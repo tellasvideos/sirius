@@ -7,51 +7,48 @@
     <form [formGroup]="angForm" (ngSubmit)="postdata(angForm)">
 
         <mdb-form-control>
-            <input mdbInput type="text" formControlName="username" id="form1" class="form-control mb-2" />
+            <input mdbInput type="text" formControlName="name" id="form1" class="form-control mb-2" />
             <label mdbLabel class="form-label" for="form1">Nome</label>
         </mdb-form-control>
 
-        <div class="d-flex mb-2">
-            <mdb-form-control>
-                <input mdbInput type="text" formControlName="department" id="form2" class="form-control" />
-                <label mdbLabel class="form-label" for="form1">Departamento</label>
-            </mdb-form-control>
-            <select class="select"
-                style=" height:36px; width: 30px; border-radius: 8%; background: #DFDFDF; border-color: #DFDFDF;">
-                <option></option>
-                <option>Departamento 1</option>
-                <option>Departamento 2</option>
-                <option>Departamento 3</option>
-            </select>
-        </div>
-
         <mdb-form-control>
-            <input mdbInput type="text" formControlName="work_function" id="form3" class="form-control mb-2" />
-            <label mdbLabel class="form-label" for="form1">Função</label>
+            <input mdbInput type="text" formControlName="username" id="form2" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Nome de utilizador</label>
         </mdb-form-control>
 
         <mdb-form-control>
-            <input mdbInput type="text" formControlName="is_admin" id="form4" class="form-control mb-2" />
-            <label mdbLabel class="form-label" for="form1">IsAdmin</label>
-        </mdb-form-control>
-
-        <mdb-form-control>
-            <input mdbInput type="text" formControlName="username" id="form5" class="form-control mb-2" />
-            <label mdbLabel class="form-label" for="form1">Username</label>
-        </mdb-form-control>
-
-        <mdb-form-control>
-            <input mdbInput type="email" formControlName="email" id="form6" class="form-control mb-2" />
+            <input mdbInput type="email" formControlName="email" id="form3" class="form-control mb-2" />
             <label mdbLabel class="form-label" for="form1">Email</label>
         </mdb-form-control>
 
         <mdb-form-control>
-            <input mdbInput type="password" formControlName="password" id="form7" class="form-control mb-2" />
+            <input mdbInput type="password" formControlName="password" id="form4" class="form-control mb-2" />
             <label mdbLabel class="form-label" for="form1">Password</label>
         </mdb-form-control>
 
+        <div class="mb-3">
+            <label class="mb-2">É administrador?</label>
+            <select class="form-select form-select-sm mb-3" formControlName="is_admin" id="form5"
+                aria-label="Default select example">
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-2">Departamento:</label>
+            <select class="form-select form-select-sm mb-3" formControlName="department" id="form6"
+                aria-label="Default select example">
+                <option *ngFor="let item of departamento" [value]="item.name"> {{item.name}} </option>
+            </select>
+        </div>
+
+        <mdb-form-control>
+            <input mdbInput type="text" formControlName="work_function" id="form7" class="form-control mb-2" />
+            <label mdbLabel class="form-label" for="form1">Função</label>
+        </mdb-form-control>
+
         <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
-       
+
     </form>
 </div>
-

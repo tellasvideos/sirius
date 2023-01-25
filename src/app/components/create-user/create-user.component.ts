@@ -12,6 +12,8 @@ import { DataService } from 'src/app/services/data.service';
 export class CreateUserComponent implements OnInit {
 
   angForm: FormGroup;
+  user:any;
+  departamento:any;
 
   constructor(
     public modalRef: MdbModalRef<CreateUserComponent>, 
@@ -33,15 +35,23 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.angForm.value)
+    console.log(this.angForm.value);
+    this.getDepartaments();
   }
 
-  postdata(data: any){
-    this.dataService.AddUser(this.angForm.value).subscribe(data =>{
-      //console.log(this.angForm.value)
-      this.modalRef.close();
-      this.route.navigate(['usuario']);
+  getDepartaments() {
+    this.dataService.get_Departaments().subscribe(data => {
+      this.departamento = data;
+      console.log(data)
     })
+  }
+
+  postdata(data:any){
+    this.dataService.AddUser(this.angForm.value).subscribe(data =>{
+      this.user = data;
+      console.log('salvo', data)
+    })
+    this.modalRef.close();
   }
 
 }

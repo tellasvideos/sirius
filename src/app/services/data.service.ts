@@ -104,7 +104,8 @@ export class DataService {
   // To get all users
   GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
 
-  getAllUsers = 'http://strongboxao.ddns.net:8022/accounts/users/';
+  // save user url
+  save_user_url = 'http://strongboxao.ddns.net:8022/accounts';
 
   // Auth Token
   getToken_url = 'http://strongboxao.ddns.net:8022/token/';
@@ -135,7 +136,7 @@ export class DataService {
 
   InquiriersByProv_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/?province=';
 
-  proponentsByProv_url = 'http://strongboxao.ddns.net:8022/api/v1'; 
+  proponentsByProv_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
@@ -187,9 +188,13 @@ export class DataService {
     return this.http.delete<Users>(this.GET_USERS_URL + id + '/');
   }
 
-  // insert users
-  AddUser(data: any) {
-    return this.http.post<Users>(this.GET_USERS_URL, data);
+  // insert user
+  AddUser(user: any) {
+    console.log(localStorage.getItem('userToken'), user)
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_user_url + '/users/', user, { headers: headers })
   }
 
   // update users
