@@ -83,6 +83,11 @@ import { SearchPipe } from './search.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchByProvincesPipe } from './search-by-provinces.pipe';
 import { NgxPrintModule } from 'ngx-print';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { EditCadeiaComponent } from './components/edit-cadeia/edit-cadeia.component';
+import { EditInquiridorComponent } from './components/edit-inquiridor/edit-inquiridor.component';
+import { EditInqueritoComponent } from './components/edit-inquerito/edit-inquerito.component';
+import { EditDepartComponent } from './components/edit-depart/edit-depart.component';
 
 
 
@@ -126,7 +131,12 @@ import { NgxPrintModule } from 'ngx-print';
     AcordosComponent,
     ProvinciasComponent,
     SearchPipe,
-    SearchByProvincesPipe
+    SearchByProvincesPipe,
+    EditUserComponent,
+    EditCadeiaComponent,
+    EditInquiridorComponent,
+    EditInqueritoComponent,
+    EditDepartComponent
   ],
   imports: [
     NgxPrintModule,

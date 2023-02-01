@@ -37,6 +37,11 @@ import { AddAndManifestComponent } from './components/add-and-manifest/add-and-m
 import { CadeiasComponent } from './components/cadeias/cadeias.component';
 import { AcordosComponent } from './components/acordos/acordos.component';
 import { ProvinciasComponent } from './provincias/provincias.component';
+import { EditCadeiaComponent } from './components/edit-cadeia/edit-cadeia.component';
+import { EditDepartComponent } from './components/edit-depart/edit-depart.component';
+import { EditInqueritoComponent } from './components/edit-inquerito/edit-inquerito.component';
+import { EditInquiridorComponent } from './components/edit-inquiridor/edit-inquiridor.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -75,9 +80,14 @@ const routes: Routes = [
   { path: 'single-prop', component: SinglePropComponent },
   { path: 'single-interest/:id', component: SingleInterestComponent },
   { path: 'edit-interest/:id', component: EditInterestComponent },
+  { path: 'edit-cadeia/:id', component: EditCadeiaComponent },
+  { path: 'edit-depart/:id', component: EditDepartComponent },
+  { path: 'edit-inquerito/:id', component: EditInqueritoComponent },
+  { path: 'edit-inquiridor/:id', component: EditInquiridorComponent },
+  { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'cadeias/:id', component: CadeiasComponent },
   { path: 'acordos/:id', component: AcordosComponent },
-  { path: 'provincias', component: ProvinciasComponent }
+  //{ path: 'provincias', component: ProvinciasComponent }
 
 ];
 
