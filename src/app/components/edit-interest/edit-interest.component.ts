@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CadeiaVal } from 'src/app/interfaces/cadeiaVal';
 import { ManInteress } from 'src/app/interfaces/manInteress';
 import { DataService } from 'src/app/services/data.service';
@@ -26,7 +26,8 @@ export class EditInterestComponent implements OnInit {
     //public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: Router
   ) {
     //this.atualizardados()
 
@@ -53,12 +54,12 @@ export class EditInterestComponent implements OnInit {
     })
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
   ngOnInit(): void {
-   this.proponestesPDAC(),
+    this.proponestesPDAC(),
       this.getCadeiaDeValor(),
       this.getInterestExpress(),
 
@@ -83,6 +84,7 @@ export class EditInterestComponent implements OnInit {
     )
 
     this.atualizardados()
+    this.route.navigate(['interesses/'])
   }
 
   atualizardados() {

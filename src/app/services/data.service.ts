@@ -108,7 +108,7 @@ export class DataService {
   save_user_url = 'http://strongboxao.ddns.net:8022/accounts';
 
   // delete user url
-  delete_user_url = 'http://strongboxao.ddns.net:8022/accounts/users/';
+  delete_user_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
 
   // Auth Token
   getToken_url = 'http://strongboxao.ddns.net:8022/token/';
@@ -127,6 +127,9 @@ export class DataService {
 
   // to get all interest expression
   get_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+
+  // to get all interest expression
+  edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
   // to delete any interest espression
   delete_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
@@ -238,8 +241,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-
-    return this.http.put(`${this.get_Interest_Exp_url}${interestEx.id}/`, interestEx, { headers: headers }).pipe(take(1));
+    return this.http.put(`${this.edit_Interest_Exp_url}${id}/`, interestEx, { headers: headers }).pipe(take(1));
   }
 
   // Method to Get an interest Expression by id
