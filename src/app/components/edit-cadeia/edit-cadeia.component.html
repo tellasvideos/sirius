@@ -1,1 +1,41 @@
-<p>edit-cadeia works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editCadeia(angForm)">
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form1" formControlName="name"
+                                    class="form-control mb-2" />
+                                <label mdbLabel class="form-label" for="form1">Cadeia de valor</label>
+                            </mdb-form-control>
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form2" formControlName="description" class="form-control mb-2" />
+                                <label mdbLabel class="form-label" for="form2">Descrição</label>
+                            </mdb-form-control>
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

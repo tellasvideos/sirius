@@ -131,8 +131,14 @@ export class DataService {
   // to get user by id
   get_User_by_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
 
+  // to get value chain by id
+  get_Cadeia_by_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/'
+
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+
+  // to update value chain
+  edit__Cadeia_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
 
   // to edit user
   edit_User_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
@@ -253,6 +259,14 @@ export class DataService {
     return this.http.put(`${this.edit_Interest_Exp_url}${id}/`, interestEx, { headers: headers }).pipe(take(1));
   }
 
+  // Method to update value chain
+  EditCadeia(id: number, cadeia: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit__Cadeia_url}${id}/`, cadeia, { headers: headers }).pipe(take(1));
+  }
+
   // Method to Get an interest Expression by id
   getInterestExpressByid(id: any) {
     var headers = new HttpHeaders();
@@ -267,6 +281,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_User_by_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get value chain by id
+  getCadeiaByid(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_Cadeia_by_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to Get all value Chain

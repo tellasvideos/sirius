@@ -87,7 +87,7 @@
                             <td> {{ ' ' }} </td>
                             <td> {{ ' ' }} </td>
                             <td> {{ ' ' }} </td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded ">
+                            <td class="not-it"> <button type="button" [routerLink]="['/edit-cadeia/', item.id]" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
                             <td class="not-it"> <button (click)="deleteCadeia(item.id)" type="button"
