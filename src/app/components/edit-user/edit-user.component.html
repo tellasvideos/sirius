@@ -1,1 +1,76 @@
-<p>edit-user works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Editar
+                        </div>
+                        <div class="card-body">
+
+                            <form [formGroup]="angForm" (ngSubmit)="editUser(angForm)">
+
+                                <mdb-form-control>
+                                    <input mdbInput type="text" formControlName="name" id="form1" class="form-control mb-2" />
+                                    <label mdbLabel class="form-label" for="form1">Nome</label>
+                                </mdb-form-control>
+                        
+                                <mdb-form-control>
+                                    <input mdbInput type="text" formControlName="username" id="form2" class="form-control mb-2" />
+                                    <label mdbLabel class="form-label" for="form1">Nome de utilizador</label>
+                                </mdb-form-control>
+                        
+                                <mdb-form-control>
+                                    <input mdbInput type="email" formControlName="email" id="form3" class="form-control mb-2" />
+                                    <label mdbLabel class="form-label" for="form1">Email</label>
+                                </mdb-form-control>
+                        
+                                <mdb-form-control>
+                                    <input mdbInput type="password" formControlName="password" id="form4" [attr.disabled]="true" class="form-control mb-2" />
+                                    <label mdbLabel class="form-label" for="form1">Password</label>
+                                </mdb-form-control>
+                        
+                                <div class="mb-3">
+                                    <label class="mb-2">É administrador?</label>
+                                    <select class="form-select form-select-sm mb-3" formControlName="is_admin" id="form5"
+                                        aria-label="Default select example">
+                                        <option value="true">Sim</option>
+                                        <option value="false">Não</option>
+                                    </select>
+                                </div>
+                        
+                                <div class="mb-3">
+                                    <label class="mb-2">Departamento:</label>
+                                    <select class="form-select form-select-sm mb-3" formControlName="department" id="form6"
+                                        aria-label="Default select example">
+                                        <option *ngFor="let item of departamento" [value]="item.name"> {{item.name}} </option>
+                                    </select>
+                                </div>
+                        
+                                <mdb-form-control>
+                                    <input mdbInput type="text" formControlName="work_function" id="form7" class="form-control mb-2" />
+                                    <label mdbLabel class="form-label" for="form1">Função</label>
+                                </mdb-form-control>
+                        
+                                <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        
+                            </form>
+                           
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

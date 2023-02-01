@@ -6,7 +6,6 @@ import { ManInteress } from 'src/app/interfaces/manInteress';
 import { DataService } from 'src/app/services/data.service';
 import Swal from "sweetalert2";
 
-
 @Component({
   selector: 'app-edit-interest',
   templateUrl: './edit-interest.component.html',

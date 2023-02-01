@@ -128,8 +128,14 @@ export class DataService {
   // to get all interest expression
   get_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
+  // to get user by id
+  get_User_by_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
+
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+
+  // to edit user
+  edit_User_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
 
   // to delete any interest espression
   delete_Interest_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
@@ -185,8 +191,11 @@ export class DataService {
   }
 
   // Edit users
-  EditeUsers() {
-    return this.http.get<Users>(this.GET_USERS_URL);
+  EditeUsers(id: any, user: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.patch(`${this.edit_User_url}${id}/`, user, { headers: headers }).pipe(take(1));
   }
 
   // delete users by id
@@ -250,6 +259,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_Interest_Exp_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get user by id
+  getUserByid(id: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_User_by_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to Get all value Chain

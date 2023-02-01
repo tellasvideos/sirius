@@ -85,7 +85,7 @@
                             <td>{{item.work_function}}</td>
                             <td>{{item.is_admin}}</td>
                             <td>{{item.username}}</td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" [routerLink]="['/edit-user/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
                             <td class="not-it"> <button type="button" (click)="deleteUser(item.id)" class="btn btn-link btn-sm btn-rounded">
