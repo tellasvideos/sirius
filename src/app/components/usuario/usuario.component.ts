@@ -4,6 +4,8 @@ import { DataService } from 'src/app/services/data.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-usuario',
@@ -65,6 +67,30 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
+   // delete uma dep de valor
+   deleteUser(id: any) {
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.deleteUser(id).subscribe(
+          success => { this.getUser(); },
+          error => { this.alert_error(); }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'Usuário foi eliminado.',
+          'success',
+        )
+      }
+    })
+  }
+
   
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -72,6 +98,14 @@ export class UsuarioComponent implements OnInit {
 
   openModal() {
     this.modalRef = this.modalService.open(CreateUserComponent)
+  }
+
+  alert_error() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Alguma coisa correu mal, tente mais tarde.',
+    })
   }
 }
 

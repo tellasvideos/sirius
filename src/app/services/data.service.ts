@@ -107,6 +107,9 @@ export class DataService {
   // save user url
   save_user_url = 'http://strongboxao.ddns.net:8022/accounts';
 
+  // delete user url
+  delete_user_url = 'http://strongboxao.ddns.net:8022/accounts/users/';
+
   // Auth Token
   getToken_url = 'http://strongboxao.ddns.net:8022/token/';
 
@@ -178,14 +181,17 @@ export class DataService {
     return this.http.get<any[]>(this.GET_USERS_URL, { headers: headers })
   }
 
-  // get users
-  listUsers() {
+  // Edit users
+  EditeUsers() {
     return this.http.get<Users>(this.GET_USERS_URL);
   }
 
   // delete users by id
   deleteUser(id: any) {
-    return this.http.delete<Users>(this.GET_USERS_URL + id + '/');
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.delete(`${this.delete_user_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // insert user

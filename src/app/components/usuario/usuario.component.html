@@ -88,7 +88,7 @@
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" (click)="deleteUser(item.id)" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>
                         </tr>
@@ -97,7 +97,6 @@
             </div>
         </div>
         <!-- List users -->
-
 
     </mat-drawer-content>
     <!-- item full content-->

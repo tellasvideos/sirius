@@ -36,7 +36,7 @@ export class DepartamentoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddDepartamentoComponent)
   }
 
-  // delete uma cadeia de valor
+  // delete uma dep de valor
   deleteDepartamento(id: any) {
     Swal.fire({
       title: 'De certeza que quer eliminar?',
