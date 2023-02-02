@@ -43,6 +43,9 @@ import { EditInqueritoComponent } from './components/edit-inquerito/edit-inqueri
 import { EditInquiridorComponent } from './components/edit-inquiridor/edit-inquiridor.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { EditAcordoComponent } from './components/edit-acordo/edit-acordo.component';
+import { EditCadeiasManInComponent } from './components/edit-cadeias-man-in/edit-cadeias-man-in.component';
+import { EditEstatutoComponent } from './components/edit-estatuto/edit-estatuto.component';
+import { EditStatusComponent } from './components/edit-status/edit-status.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -89,6 +92,9 @@ const routes: Routes = [
   { path: 'cadeias/:id', component: CadeiasComponent },
   { path: 'acordos/:id', component: AcordosComponent },
   { path: 'edit-acordo/:id', component: EditAcordoComponent },
+  { path: 'edit-cadeias-man-in/:id', component: EditCadeiasManInComponent },
+  { path: 'edit-estatuto/:id', component: EditEstatutoComponent },
+  { path: 'edit-status/:id', component: EditStatusComponent },
 
   //{ path: 'provincias', component: ProvinciasComponent }
 

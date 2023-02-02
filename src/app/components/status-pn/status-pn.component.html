@@ -62,7 +62,7 @@
                                     <td>{{item.status}}</td>
                                     <td>{{item.observations}}</td>
                                     <td>{{item.interest_expression}}</td>
-                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button type="button" [routerLink]="['/edit-status/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
                                     <td> <button type="button" (click)="deleteStatus(item.id)"
