@@ -107,7 +107,7 @@ export class AddInteressesComponent implements OnInit {
   atualizardados() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.interest = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -137,14 +137,14 @@ export class AddInteressesComponent implements OnInit {
   getCadeiaDeValor(){
     this.dataService.getValueChains().subscribe(data =>{
       this.cadeiaDeValor = data;
-      console.log('cadeia de valor', data)
+      //console.log('cadeia de valor', data)
     })
   }
 
   get_provinces(){
     this.dataService.get_Provinces().subscribe(data =>{
       this.provinces = data;
-      console.log('prov', data)
+      //console.log('prov', data)
     })
   }
 

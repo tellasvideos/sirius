@@ -20,6 +20,7 @@ export class EditInterestComponent implements OnInit {
   id: any;
   sb: any;
   angForm: FormGroup;
+  provinces:any;
 
   constructor(
     //public modalRef: MdbModalRef<AddInteressesComponent>,
@@ -58,9 +59,10 @@ export class EditInterestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.proponestesPDAC(),
-      this.getCadeiaDeValor(),
-      this.getInterestExpress(),
+    this.proponestesPDAC();
+      this.getCadeiaDeValor();
+      this.getInterestExpress();
+      this.get_provinces();
 
       this.activatedRoute.paramMap.subscribe(paramId => {
         this.id = paramId.get('id'),
@@ -76,7 +78,6 @@ export class EditInterestComponent implements OnInit {
   }
 
   EditInterestExpress() {
-
     this.dataService.editInterestExpression(this.id, this.angForm.value).subscribe(
       success => { this.alert_success() },
       error => { this.alert_error() }
@@ -127,6 +128,13 @@ export class EditInterestComponent implements OnInit {
     this.dataService.getInterestExpress().subscribe(data => {
       this.sb = data,
         console.log('getting int ', data)
+    })
+  }
+
+  get_provinces(){
+    this.dataService.get_Provinces().subscribe(data =>{
+      this.provinces = data;
+      //console.log('prov', data)
     })
   }
 

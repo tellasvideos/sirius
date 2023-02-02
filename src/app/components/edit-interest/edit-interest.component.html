@@ -48,12 +48,9 @@
                                 <div class="mb-3 d-flex justify-content-between">
 
                                     <div class="m-1">
-                                        <select class="form-select form-select-sm select-prov"
-                                            formControlName="province">
-                                            <option value="Luanda">Luanda</option>
-                                            <option value="Namibe">Namibe</option>
-                                            <option value="Malange">Malange</option>
-                                        </select>
+                                            <select class="form-select form-select-sm" style="width: 200px;" formControlName="province" name="provincia">
+                                                <option *ngFor="let item of provinces" [value]="item.id" > {{item.name}} </option>
+                                            </select>
                                     </div>
 
                                     <div class="input-group input-group-sm m-1">
@@ -79,8 +76,8 @@
                                     <label class="mb-2">Avaliação:</label>
                                     <select class="form-select form-select-sm" formControlName="was_evaluated"
                                         aria-label="Default select example">
-                                        <option value="0">Não</option>
-                                        <option value="1">Sim</option>
+                                        <option value="true">Sim</option>
+                                        <option value="false">Não</option>
                                     </select>
                                 </div>
 
