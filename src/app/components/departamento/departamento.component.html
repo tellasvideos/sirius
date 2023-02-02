@@ -86,7 +86,7 @@
                             <td> {{ ' ' }} </td>
                             <td> {{ ' ' }} </td>
                             <td> {{ ' ' }} </td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" [routerLink]="['/edit-depart/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
                             <td class="not-it"> <button (click)="deleteDepartamento(item.id)" type="button"

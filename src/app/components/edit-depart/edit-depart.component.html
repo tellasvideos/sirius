@@ -1,1 +1,45 @@
-<p>edit-depart works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editDepart(angForm)">
+
+                            <mdb-form-control>
+                                <input mdbInput type="text" formControlName="name" id="form1"
+                                    class="form-control mb-2" />
+                                <label mdbLabel class="form-label text-black" for="form1"></label>
+                            </mdb-form-control>
+                            
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" formControlName="description"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea" class="text-black"></label>
+                            </div>
+
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>
