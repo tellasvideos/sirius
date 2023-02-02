@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
 export class CadeiasComponent implements OnInit {
 
   sideBarOpen = false;
-  cadeiaDeValor?: CadeiaVal[];
+  cadeiaDeValor: any;
 
   sb: any;
   id: any;

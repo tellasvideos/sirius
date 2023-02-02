@@ -1,1 +1,45 @@
-<p>edit-cadeias-man-in works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editCadeiaManInt(angForm)">
+                            <input type="text" id="form1" formControlName="value_chain" class="form-control d-none mb-2" />
+                            <input type="text" id="form1" formControlName="interest_expression" class="form-control d-none mb-2" />
+                            <div class="mb-3">
+                                <select class="form-select form-select-sm" formControlName="name_value_chain" name="chains_name">
+                                    <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" formControlName="observations"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea"></label>
+                            </div>
+
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

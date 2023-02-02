@@ -125,6 +125,9 @@ export class DataService {
   // to create interest expression
   interest_Express_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
+  // to get value chain by id
+  get_ValueChainInExpress_By_Id_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
+
   // to get all interest expression
   get_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
@@ -154,6 +157,9 @@ export class DataService {
 
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
+
+  // to update value chain to interest express
+  edit_cadeiaManIn_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechaintointerestexpressions/';
 
   // to update value chain
   edit__Cadeia_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
@@ -295,6 +301,14 @@ export class DataService {
     return this.http.put(`${this.edit_Interest_Exp_url}${id}/`, interestEx, { headers: headers }).pipe(take(1));
   }
 
+  // to update value chain to interest express
+  Edit_CadeiaManIn(id:any, cadeiaManInt:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit_cadeiaManIn_url}${id}/`, cadeiaManInt, { headers: headers }).pipe(take(1));
+  }
+
   // Method to update value chain
   EditCadeia(id: number, cadeia: any) {
     var headers = new HttpHeaders();
@@ -357,6 +371,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_Interest_Exp_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  //Method to get value chain by id
+  getCadeiaManInById(id:number){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_ValueChainInExpress_By_Id_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to get user by id

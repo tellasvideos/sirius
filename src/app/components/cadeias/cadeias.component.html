@@ -22,8 +22,7 @@
 
                             <div class="mb-3">
                                 <select class="form-select form-select-sm" [(ngModel)]="chains_name" name="chains_name">
-                                    <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}}
-                                    </option>
+                                    <option *ngFor="let item of cadeiaDeValor" [value]="item.name"> {{item.name}}</option>
                                 </select>
                             </div>
                             <div class="form-floating mb-3 ">
@@ -63,7 +62,7 @@
                                     <td>{{item.name_value_chain}}</td>
                                     <td>{{item.observations}}</td>
                                     <td>{{item.interest_expression}}</td>
-                                    <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <td> <button type="button" [routerLink]="['/edit-cadeias-man-int/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                             <i class="fas fa-pen"></i>
                                         </button></td>
                                     <td> <button (click)="delete_ValueChainsIExpress(item.id)" type="button"
