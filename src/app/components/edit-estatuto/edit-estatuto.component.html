@@ -1,1 +1,46 @@
-<p>edit-estatuto works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editEstatuto(angForm)">
+                            <input type="text" id="form1" formControlName="interest_expression" class="form-control mb-2 d-none" />
+                            <div class="mb-3">
+                                <select class="form-select form-select-sm" formControlName="status" name="status">
+                                    <option value="Entregue">Entregue</option>
+                                    <option value="Andamento">Andamento</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control" formControlName="observations"
+                                    name="observation" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea"></label>
+                            </div>
+
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

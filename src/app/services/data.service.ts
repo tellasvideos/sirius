@@ -146,6 +146,9 @@ export class DataService {
   // to get business plan status by id
   get_Status_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
 
+  // to get business plan estatute
+  get_Estatute_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
+
   // to get inquire by id
   get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
 
@@ -166,6 +169,9 @@ export class DataService {
 
   // to update business plan status
   edit_status_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatus/';
+
+  // to update business plan statutes
+  edit_statutes_url = 'http://strongboxao.ddns.net:8022/api/v1/businessplanstatutes/';
 
   // to update data to inquire
   edit_inquerito_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
@@ -329,6 +335,14 @@ export class DataService {
     return this.http.put(`${this.edit_status_url}${id}/`, status, { headers: headers }).pipe(take(1));
   }
 
+  // Method update BP statutes
+  Edit_BP_Statutes(id:number, statutes:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit_statutes_url}${id}/`, statutes, { headers: headers }).pipe(take(1));
+  }
+
   // Method to updade inquerito
   EditInquerito(id: number, inquerito:any){
     var headers = new HttpHeaders();
@@ -391,6 +405,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_Status_byId_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  //Method to get business plan estatute
+  getEstatuteById(id:number){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_Estatute_byId_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   //Method to get inquerito by id
