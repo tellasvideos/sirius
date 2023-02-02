@@ -21,22 +21,22 @@
 
                                 <mdb-form-control>
                                     <input mdbInput type="text" formControlName="name" id="form1" class="form-control mb-2" />
-                                    <label mdbLabel class="form-label" for="form1">Nome</label>
+                                    <label mdbLabel class="form-label" for="form1"></label>
                                 </mdb-form-control>
                         
                                 <mdb-form-control>
                                     <input mdbInput type="text" formControlName="username" id="form2" class="form-control mb-2" />
-                                    <label mdbLabel class="form-label" for="form1">Nome de utilizador</label>
+                                    <label mdbLabel class="form-label" for="form1"></label>
                                 </mdb-form-control>
                         
                                 <mdb-form-control>
                                     <input mdbInput type="email" formControlName="email" id="form3" class="form-control mb-2" />
-                                    <label mdbLabel class="form-label" for="form1">Email</label>
+                                    <label mdbLabel class="form-label" for="form1"></label>
                                 </mdb-form-control>
                         
-                                <mdb-form-control>
-                                    <input mdbInput type="password" formControlName="password" id="form4" [attr.disabled]="true" class="form-control mb-2" />
-                                    <label mdbLabel class="form-label" for="form1">Password</label>
+                                <mdb-form-control class="d-none">
+                                    <input mdbInput type="password" formControlName="password" id="form4" [attr.disabled]="true" class="form-control mb-2 d-none" />
+                                    <label mdbLabel class="form-label d-none" for="form1"></label>
                                 </mdb-form-control>
                         
                                 <div class="mb-3">
@@ -58,7 +58,7 @@
                         
                                 <mdb-form-control>
                                     <input mdbInput type="text" formControlName="work_function" id="form7" class="form-control mb-2" />
-                                    <label mdbLabel class="form-label" for="form1">Função</label>
+                                    <label mdbLabel class="form-label" for="form1"></label>
                                 </mdb-form-control>
                         
                                 <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
