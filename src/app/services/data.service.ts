@@ -140,6 +140,9 @@ export class DataService {
   // to get departament by id
   get_Depart_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/departments/';
 
+  // to get agreement proposer by id
+  get_agreement_proposer_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
+
   // to get inquire by id
   get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
 
@@ -154,6 +157,9 @@ export class DataService {
 
   // to update departaments
   edit_depart_url = 'http://strongboxao.ddns.net:8022/api/v1/departments/';
+
+  // to update proposer agreement
+  edit_acordo_url = 'http://strongboxao.ddns.net:8022/api/v1/proposeragreements/';
 
   // to update data to inquire
   edit_inquerito_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
@@ -301,6 +307,14 @@ export class DataService {
     return this.http.put(`${this.edit_depart_url}${id}/`, depart, { headers: headers }).pipe(take(1));
   }
 
+  // Method to update proposer agreement
+  EditAcordo(id: number, acordo:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit_acordo_url}${id}/`, acordo, { headers: headers }).pipe(take(1));
+  }
+
   // Method to updade inquerito
   EditInquerito(id: number, inquerito:any){
     var headers = new HttpHeaders();
@@ -347,6 +361,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_Depart_byId_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get agreement_proposer by id
+  getAcordoById(id:number){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_agreement_proposer_byId_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   //Method to get inquerito by id

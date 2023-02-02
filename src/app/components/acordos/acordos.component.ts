@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./acordos.component.scss']
 })
 export class AcordosComponent implements OnInit {
-  
+
   sideBarOpen = false;
 
   sb: any;
@@ -19,8 +19,7 @@ export class AcordosComponent implements OnInit {
 
   agreement_name: any;
   observations: any;
-  proposer_id: any;	
-
+  proposer_id: any;
 
   constructor(
     private dataService: DataService,
@@ -32,13 +31,13 @@ export class AcordosComponent implements OnInit {
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.proposer_id = paramId.get('id'),
-        console.log('id clicado', this.proposer_id)
+      this.proposer_id = paramId.get('id')
+      //  console.log('id clicado', this.proposer_id)
 
     });
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
@@ -46,7 +45,7 @@ export class AcordosComponent implements OnInit {
 
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.proposer_id = paramId.get('id')
-      console.log('id proponente', this.proposer_id)
+      //  console.log('id proponente', this.proposer_id)
 
       //this.passarId()
 
@@ -96,15 +95,15 @@ export class AcordosComponent implements OnInit {
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+      //  console.log('getting int ', data)
     })
   }
 
   getAcordos() {
     this.dataService.get_Proposal_Agreement().subscribe(data => {
       this.acordos = data;
-      console.log('get acordos', data)
+      //console.log('get acordos', data)
     })
   }
 

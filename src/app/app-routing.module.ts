@@ -42,6 +42,7 @@ import { EditDepartComponent } from './components/edit-depart/edit-depart.compon
 import { EditInqueritoComponent } from './components/edit-inquerito/edit-inquerito.component';
 import { EditInquiridorComponent } from './components/edit-inquiridor/edit-inquiridor.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { EditAcordoComponent } from './components/edit-acordo/edit-acordo.component';
 
 // configuração de rotas
 const routes: Routes = [
@@ -87,6 +88,8 @@ const routes: Routes = [
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'cadeias/:id', component: CadeiasComponent },
   { path: 'acordos/:id', component: AcordosComponent },
+  { path: 'edit-acordo/:id', component: EditAcordoComponent },
+
   //{ path: 'provincias', component: ProvinciasComponent }
 
 ];

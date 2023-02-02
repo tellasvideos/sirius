@@ -88,6 +88,7 @@ import { EditCadeiaComponent } from './components/edit-cadeia/edit-cadeia.compon
 import { EditInquiridorComponent } from './components/edit-inquiridor/edit-inquiridor.component';
 import { EditInqueritoComponent } from './components/edit-inquerito/edit-inquerito.component';
 import { EditDepartComponent } from './components/edit-depart/edit-depart.component';
+import { EditAcordoComponent } from './components/edit-acordo/edit-acordo.component';
 
 
 
@@ -136,7 +137,8 @@ import { EditDepartComponent } from './components/edit-depart/edit-depart.compon
     EditCadeiaComponent,
     EditInquiridorComponent,
     EditInqueritoComponent,
-    EditDepartComponent
+    EditDepartComponent,
+    EditAcordoComponent
   ],
   imports: [
     NgxPrintModule,
