@@ -1,1 +1,59 @@
-<p>edit-inquerito works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editInquerito(angForm)">
+                            <div class="mb-3">
+                                <label class="mb-2">Inquiridor:</label>
+                                <select class="form-select form-select-sm mb-3" formControlName="responsible" name="responsible"
+                                    aria-label="Default select example">
+                                    <option *ngFor="let item of inquiridor" [value]="item.responsible"> {{item.responsible}}
+                                    </option>
+                                </select>
+                            </div>
+            
+                            <div class="mb-3">
+                                <label class="mb-2">Manifestação de Interesse:</label>
+                                <select class="form-select form-select-sm mb-3" formControlName="interest_expression"
+                                    name="interest_expression" aria-label="Default select example">
+                                    <option *ngFor="let item of manifestacao" [value]="item.id"> {{item.farm_name}} </option>
+                                </select>
+                            </div>
+            
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="form-control form-control-sm" formControlName="document_to_proves_date" type="text"
+                                    name="document_to_proves_date" aria-label=".form-control-sm example">
+                            </div>
+            
+                            <div class="form-floating mb-3 ">
+                                <textarea class="form-control"  formControlName="observations"
+                                    name="observations" id="floatingTextarea"></textarea>
+                            </div>
+            
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

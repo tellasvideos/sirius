@@ -53,9 +53,9 @@ export class InqueritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.get_inquireForms();
     this.get_interest_express();
     this.get_inquirier();
+    this.get_inquireForms();
   }
 
   sideBarToggler() {
@@ -113,7 +113,7 @@ export class InqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      console.log(data);
+      console.log('inquérito', data)
     })
   }
 

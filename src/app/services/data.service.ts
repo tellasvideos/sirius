@@ -129,13 +129,16 @@ export class DataService {
   get_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
   // to get user by id
-  get_User_by_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
+  get_User_byId_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
 
   // to get value chain by id
-  get_Cadeia_by_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/'
+  get_Cadeia_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/'
 
   // to get inquirier by id
-  get_Iquiridor_by_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
+  get_Iquiridor_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
+
+  // to get inquire by id
+  get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
 
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
@@ -145,6 +148,9 @@ export class DataService {
 
   // to update data of the inquirier
   edit_inquiridor_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
+
+  // to update data to inquire
+  edit_inquerito_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirerforms/';
 
   // to edit user
   edit_User_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
@@ -281,6 +287,14 @@ export class DataService {
     return this.http.put(`${this.edit_inquiridor_url}${id}/`, inquiridor, { headers: headers }).pipe(take(1));
   }
 
+  // Method to updade inquerito
+  EditInquerito(id: number, inquerito:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit_inquerito_url}${id}/`, inquerito, { headers: headers }).pipe(take(1));
+  }
+
   // Method to Get an interest Expression by id
   getInterestExpressByid(id: any) {
     var headers = new HttpHeaders();
@@ -294,7 +308,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get(`${this.get_User_by_url}${id}/`, { headers: headers }).pipe(take(1));
+    return this.http.get(`${this.get_User_byId_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to get value chain by id
@@ -302,7 +316,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get(`${this.get_Cadeia_by_url}${id}/`, { headers: headers }).pipe(take(1));
+    return this.http.get(`${this.get_Cadeia_byId_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to get inqurier by id
@@ -310,7 +324,15 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get(`${this.get_Iquiridor_by_url}${id}/`, { headers: headers }).pipe(take(1));
+    return this.http.get(`${this.get_Iquiridor_byId_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  //Method to get inquerito by id
+  getInqueritoByid(id:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_Iquerito_byId_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to Get all value Chain
