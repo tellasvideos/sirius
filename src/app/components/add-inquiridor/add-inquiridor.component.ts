@@ -56,7 +56,6 @@ export class AddInquiridorComponent implements OnInit {
   get_provincias(){
     this.dataService.get_Provinces().subscribe(data =>{
       this.provincias = data;
-      console.log(data)
     })
   }
 

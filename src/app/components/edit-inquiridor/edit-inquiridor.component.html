@@ -1,1 +1,58 @@
-<p>edit-inquiridor works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <div class="row m-2">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="angForm" (ngSubmit)="editInquiridor(angForm)">
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form1" formControlName="responsible" class="form-control mb-3" />
+                                <label mdbLabel class="form-label" for="form1"></label>
+                            </mdb-form-control>
+                        
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form1" formControlName="performance_in_village" class="form-control mb-3" />
+                                <label mdbLabel class="form-label" for="form1"></label>
+                            </mdb-form-control>
+                        
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form1" formControlName="performance_in_community" class="form-control mb-3" />
+                                <label mdbLabel class="form-label" for="form1"></label>
+                            </mdb-form-control>
+                        
+                            <mdb-form-control>
+                                <input mdbInput type="text" id="form1" formControlName="performance_in_county" class="form-control mb-3" />
+                                <label mdbLabel class="form-label" for="form1"></label>
+                            </mdb-form-control>
+                        
+                            <div class="mb-3">
+                                <label class="mb-2">Provincia:</label>
+                                <select class="form-select form-select-sm mb-3" formControlName="province" name="provincia" aria-label="Default select example">
+                                    <option *ngFor="let item of provincias" [value]="item.id">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        </form>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>

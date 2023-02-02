@@ -111,7 +111,7 @@
                             <td> {{item.performance_in_community}} </td>
                             <td>{{item.performance_in_county}}</td>
                             <td>{{item.province_name}}</td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <td class="not-it"> <button type="button" [routerLink]="['/edit-inquiridor/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
                             <td class="not-it"> <button (click)="deleteInquirier(item.id)" type="button"

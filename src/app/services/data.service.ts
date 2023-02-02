@@ -134,11 +134,17 @@ export class DataService {
   // to get value chain by id
   get_Cadeia_by_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/'
 
+  // to get inquirier by id
+  get_Iquiridor_by_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
+
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8022/api/v1/interestexpressions/';
 
   // to update value chain
   edit__Cadeia_url = 'http://strongboxao.ddns.net:8022/api/v1/valuechains/';
+
+  // to update data of the inquirier
+  edit_inquiridor_url = 'http://strongboxao.ddns.net:8022/api/v1/inquirers/';
 
   // to edit user
   edit_User_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
@@ -267,6 +273,14 @@ export class DataService {
     return this.http.put(`${this.edit__Cadeia_url}${id}/`, cadeia, { headers: headers }).pipe(take(1));
   }
 
+  //Method to edit inquiriers
+  EditInquiridor(id:number, inquiridor:any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.put(`${this.edit_inquiridor_url}${id}/`, inquiridor, { headers: headers }).pipe(take(1));
+  }
+
   // Method to Get an interest Expression by id
   getInterestExpressByid(id: any) {
     var headers = new HttpHeaders();
@@ -289,6 +303,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.get(`${this.get_Cadeia_by_url}${id}/`, { headers: headers }).pipe(take(1));
+  }
+
+  // Method to get inqurier by id
+  getInquiridorByid(id: any){
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get(`${this.get_Iquiridor_by_url}${id}/`, { headers: headers }).pipe(take(1));
   }
 
   // Method to Get all value Chain
