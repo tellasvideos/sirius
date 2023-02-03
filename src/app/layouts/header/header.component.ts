@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
+import { DashboardComponent } from 'src/app/components/list/dashboard/dashboard.component';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -11,9 +11,9 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter()
   //logoOn = '../../../assets/logo.jpg';
 
-  @Input() keyWord:any;
+  @Input() keyWord: any;
 
- // keyWord: string = '';
+  // keyWord: string = '';
 
   cadeia: any;
 

@@ -25,10 +25,10 @@ export class SidebarComponent implements OnInit {
     this.proponentes()
 
 
-    /*this.ds.userLogin(this.usuario).subscribe(data => {
+    this.ds.userLogin(this.usuario).subscribe(data => {
       this.user = data;
       console.log(' user: ', data[0])
-    })*/
+    })
 
     /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
       console.log(this.proponents[0]);
