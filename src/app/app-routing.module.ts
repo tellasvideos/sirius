@@ -26,7 +26,6 @@ import { AddInquiridorComponent } from './components/add-inquiridor/add-inquirid
 import { AddDepartamentoComponent } from './components/add-departamento/add-departamento.component';
 import { AddCadeiaValorComponent } from './components/add-cadeia-valor/add-cadeia-valor.component';
 import { AddInstituicaoComponent } from './components/add-instituicao/add-instituicao.component';
-import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.service';
 import { StatusPnComponent } from './components/status-pn/status-pn.component';
 import { EstatutoPnComponent } from './components/estatuto-pn/estatuto-pn.component';
 import { ProponentesComponent } from './components/proponentes/proponentes.component';
@@ -46,13 +45,14 @@ import { EditAcordoComponent } from './components/edit-acordo/edit-acordo.compon
 import { EditCadeiasManInComponent } from './components/edit-cadeias-man-in/edit-cadeias-man-in.component';
 import { EditEstatutoComponent } from './components/edit-estatuto/edit-estatuto.component';
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
+import { AuthGuard } from './services/auth.guard';
 
 // configuração de rotas
 const routes: Routes = [
   // { path: '', redirectTo:'dashboard', pathMatch:'full' },
   {
-    path: 'dashboard', component: DashboardComponent
-    //canActivate: [AuthGuard]
+    path: 'dashboard', component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   { path: '', component: HomeComponent },
   { path: 'andamentomanifes', component: AndamentomanifesComponent },

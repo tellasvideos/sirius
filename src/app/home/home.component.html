@@ -50,43 +50,39 @@
       <div class="col-md-4">
 
         <div class="card text-white bg-card mb-1 w-60">
-          <div class="card-header border-0" style="text-transform:uppercase; font-weight:bold;">
+          <div class="card-header border-0 mt-2" style="text-transform:uppercase; font-weight:bold;">
             <!--i class="fas fa-user-circle fa-8x avatar"></i-->Login
           </div>
           <div class="card-body p-4">
-            <form>
+
+            <form [formGroup]="angForm" (ngSubmit)="LOGIN_(angForm)">
+
               <div class="input-group input-group-lg mb-3">
                 <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
                   <i class="far fa-envelope"></i>
                 </a>
-                <input type="email" class="form-control" placeholder="" [(ngModel)]="user[0].username" name="email"
+                <input type="email" class="form-control" placeholder="" formControlName="username" name="email"
                   aria-label="Example text with button addon" aria-describedby="button-addon1" />
               </div>
+
               <div class="input-group input-group-lg mb-3">
                 <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
                   <i class="fas fa-lock"></i>
                 </a>
-                <input type="password" class="form-control" placeholder="" [(ngModel)]="user[0].password" name="pass"
+                <input type="password" class="form-control" placeholder="" formControlName="password" name="password"
                   aria-label="Example text with button addon" aria-describedby="button-addon2" />
               </div>
+
+              <input type="submit" name="submit" value="Entrar" class="btn btn-success btn-sm mt-2"
+                style="width: 200px;">
             </form>
-            <div class="row" style="margin-top: 8%;">
-              <div class="col-md-6"></div>
-              <div class="col-md-6 forgot-pass" style="font-size: 12px; color: #F2F2F2;"> <a [routerLink]="['/recpass']"
-                  routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a>
-              </div>
+
+            <div class="forgot-pass mt-3" style="font-size: 11px; color: #F2F2F2;"> <a [routerLink]="['/recpass']"
+                routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a>
             </div>
 
           </div>
-
         </div>
-        <div><button type="button" class="btn btn-color btn-lg"
-            (click)="LOGIN_(user[0].email, user[0].pass)">Entrar</button></div>
 
       </div>
-
-    </div>
-
-
-  </div>
-  <!-- Background image -->
+      <!-- Background image -->

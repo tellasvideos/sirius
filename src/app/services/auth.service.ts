@@ -12,6 +12,9 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) { }
 
 
+  IsloggedIn(){
+    return !!localStorage.getItem('userToken');
+  }
 
   public setSession(authResult: any): void {
     // Set the time that the Access Token will expire at
