@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  LOGIN_(data:any) {
-  
+  LOGIN_(data: any) {
+
     console.log(this.angForm.value)
 
     localStorage.removeItem('user');
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 
       success => {
         this.user = success
-        console.log('Depois do login', success);
+       // console.log('Depois do login', success);
 
         if (this.user.token) {
           this._errorLogin = false;
@@ -69,16 +69,13 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  login(data:any) {
 
+  login(data: any) {
     console.log(this.angForm.value)
-
     localStorage.removeItem('user');
-
     this.auth.userLogin(this.angForm.value).subscribe(data => {
       this.user = data
-      console.log('Depois do login', data);
-
+      //console.log('Depois do login', data);
       if (this.user.token) {
         this._errorLogin = false;
         localStorage.setItem("userToken", this.user.token);

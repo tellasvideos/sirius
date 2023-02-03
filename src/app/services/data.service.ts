@@ -226,7 +226,7 @@ export class DataService {
   userLogin(user: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    console.log(user)
+    //console.log(user)
     return this.http.post<any>(this.getToken_url, user, { headers: headers });
 
   }
