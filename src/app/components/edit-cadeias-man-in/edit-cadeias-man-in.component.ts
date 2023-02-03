@@ -62,7 +62,7 @@ export class EditCadeiasManInComponent implements OnInit {
   }
 
   getCadeiasManIn() {
-    this.dataService.get_BusinessPlan_statutos().subscribe(data => {
+    this.dataService.get_ValueChainsIE().subscribe(data => {
       this.cadeiaManIn = data;
     })
   }
