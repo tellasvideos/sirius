@@ -47,22 +47,14 @@ import { EditEstatutoComponent } from './components/edit-estatuto/edit-estatuto.
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
 import { AuthGuard } from './services/auth.guard';
 
+
 // configuração de rotas
 const routes: Routes = [
-  // { path: '', redirectTo:'dashboard', pathMatch:'full' },
-  {
-    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
-  },
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: '', component: HomeComponent },
-  {
-    path: 'andamentomanifes', component: AndamentomanifesComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'cadeiadevalor', component: CadeiadevalorComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'cvintesses', component: CvintessesComponent, canActivate: [AuthGuard]
-  },
+  {path: 'andamentomanifes', component: AndamentomanifesComponent, canActivate: [AuthGuard]},
+  {path: 'cadeiadevalor', component: CadeiadevalorComponent, canActivate: [AuthGuard]},
+  {path: 'cvintesses', component: CvintessesComponent, canActivate: [AuthGuard]},
   { path: 'departamento', component: DepartamentoComponent, canActivate: [AuthGuard] },
   { path: 'gestaoambiental', component: GestaoambientalComponent, canActivate: [AuthGuard] },
   { path: 'inquerito', component: InqueritoComponent, canActivate: [AuthGuard] },
@@ -100,9 +92,6 @@ const routes: Routes = [
   { path: 'edit-cadeias-man-in/:id', component: EditCadeiasManInComponent, canActivate: [AuthGuard] },
   { path: 'edit-estatuto/:id', component: EditEstatutoComponent, canActivate: [AuthGuard] },
   { path: 'edit-status/:id', component: EditStatusComponent, canActivate: [AuthGuard] },
-
-  //{ path: 'provincias', component: ProvinciasComponent }
-
 ];
 
 
