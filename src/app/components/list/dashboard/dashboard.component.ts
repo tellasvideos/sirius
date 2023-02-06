@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
-    this.isAdmin()
+    //this.isAdmin()
     this.getDeparet();
     this.getInquerito();
     this.getcadeia();

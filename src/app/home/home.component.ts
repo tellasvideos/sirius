@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
     console.log(this.angForm.value)
     localStorage.removeItem('user');
     this.auth.userLogin(this.angForm.value).subscribe(data => {
-      this.user = data
+      this.user = data;
       //console.log('Depois do login', data);
       if (this.user.token) {
         this._errorLogin = false;

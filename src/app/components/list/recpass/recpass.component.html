@@ -1,8 +1,8 @@
 <div style="background-image: url('../../assets/fundorecpass.jpg');
 height: 100vh;
 background-repeat: no-repeat;
-background-size: cover;">
-    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88);">
+background-size: cover;  ">
+    <div class="mask cover" style="background-color: rgba(10, 45, 10, 0.88); overflow-y:auto;">
         <div class="row p-5 ">
 
             <div class="col-12">
@@ -15,11 +15,24 @@ background-size: cover;">
                             <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
                                 <i class="far fa-envelope"></i>
                             </a>
-                            <input type="email" class="form-control" placeholder=""
+                            <input type="email" class="form-control" placeholder="" [(ngModel)]="username"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1" />
                         </div>
-                        <div class="btn-position">
-                            <button type="button" class="btn btn-color btn-lg">Enviar código para o meu email</button>
+                        <div class="btn-position mb-4">
+                            <button type="button" (click)="forgtPass(username.valeu, url)"
+                                class="btn btn-color btn-lg">Enviar código para o meu email</button>
+                        </div>
+
+                        <div class="input-group input-group-lg mb-4">
+                            <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
+                                <i class="fas fa-lock"></i>
+                            </a>
+                            <input type="password" class="form-control" placeholder="Insira nova Palavra passe"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                        </div>
+
+                        <div class="btn-position mb-4">
+                            <button type="button" class="btn btn-color btn-lg">Guardar</button>
                         </div>
 
                         <div class="row" style="margin-top: 8%;">

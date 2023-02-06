@@ -107,6 +107,9 @@ export class DataService {
   // save user url
   save_user_url = 'http://strongboxao.ddns.net:8022/accounts';
 
+  // forgot password
+  forgot_pass_url = 'http://strongboxao.ddns.net:8022/accounts';
+
   // delete user url
   delete_user_url = 'http://strongboxao.ddns.net:8022/accounts/user/';
 
@@ -222,11 +225,21 @@ export class DataService {
     return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers }).pipe(take(1))
   }
 
+  // Method to recover password
+  forgtPass(email: any, url: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
+    console.log('path', url);
+    console.log('email', email);
+    return this.http.post(this.forgot_pass_url + '/forgotpassword/', email & url, { headers: headers })
+  }
+
   // login user and generete token
   userLogin(user: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    //console.log(user)
+    console.log(user)
     return this.http.post<any>(this.getToken_url, user, { headers: headers });
 
   }
@@ -302,7 +315,7 @@ export class DataService {
   }
 
   // to update value chain to interest express
-  Edit_CadeiaManIn(id:any, cadeiaManInt:any){
+  Edit_CadeiaManIn(id: any, cadeiaManInt: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -318,7 +331,7 @@ export class DataService {
   }
 
   //Method to edit inquiriers
-  EditInquiridor(id:number, inquiridor:any){
+  EditInquiridor(id: number, inquiridor: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -326,7 +339,7 @@ export class DataService {
   }
 
   // Method to edit departament
-  EditDepartamento(id: number, depart:any){
+  EditDepartamento(id: number, depart: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -334,7 +347,7 @@ export class DataService {
   }
 
   // Method to update proposer agreement
-  EditAcordo(id: number, acordo:any){
+  EditAcordo(id: number, acordo: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -342,7 +355,7 @@ export class DataService {
   }
 
   // Method to update Business Plan status
-  Edit_BP_Status(id: number, status:any){
+  Edit_BP_Status(id: number, status: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -350,7 +363,7 @@ export class DataService {
   }
 
   // Method update BP statutes
-  Edit_BP_Statutes(id:number, statutes:any){
+  Edit_BP_Statutes(id: number, statutes: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -358,7 +371,7 @@ export class DataService {
   }
 
   // Method to updade inquerito
-  EditInquerito(id: number, inquerito:any){
+  EditInquerito(id: number, inquerito: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -374,7 +387,7 @@ export class DataService {
   }
 
   //Method to get value chain by id
-  getCadeiaManInById(id:number){
+  getCadeiaManInById(id: number) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -398,7 +411,7 @@ export class DataService {
   }
 
   // Method to get inqurier by id
-  getInquiridorByid(id: any){
+  getInquiridorByid(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -406,7 +419,7 @@ export class DataService {
   }
 
   //Method to get departament by id
-  getDepartById(id:any){
+  getDepartById(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -414,7 +427,7 @@ export class DataService {
   }
 
   // Method to get agreement_proposer by id
-  getAcordoById(id:number){
+  getAcordoById(id: number) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -422,7 +435,7 @@ export class DataService {
   }
 
   // Method to get business plan status
-  getStatusById(id:number){
+  getStatusById(id: number) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -430,7 +443,7 @@ export class DataService {
   }
 
   //Method to get business plan estatute
-  getEstatuteById(id:number){
+  getEstatuteById(id: number) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -438,7 +451,7 @@ export class DataService {
   }
 
   //Method to get inquerito by id
-  getInqueritoByid(id:any){
+  getInqueritoByid(id: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
