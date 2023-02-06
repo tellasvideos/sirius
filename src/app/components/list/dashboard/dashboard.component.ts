@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
 
 import * as echarts from 'echarts';
@@ -22,9 +22,15 @@ export class DashboardComponent implements OnInit {
   cadeia: any;
   sideBarOpen = true;
 
+  //isAdmin = true;
+
+  @Input()
+  usuario: any;
+
   constructor(public img: HeaderComponent, private ds: DataService) { }
 
   ngOnInit(): void {
+    this.isAdmin()
     this.getDeparet();
     this.getInquerito();
     this.getcadeia();
@@ -52,8 +58,8 @@ export class DashboardComponent implements OnInit {
         this.inqueritos++;
     }
 
-     // loop para contar e atualizar departamento in real time
-     for (this.departamento = 0; this.departamento < this.departamento.length; this.departamento++) {
+    // loop para contar e atualizar departamento in real time
+    for (this.departamento = 0; this.departamento < this.departamento.length; this.departamento++) {
       this.departamento[0] *= 2;
       if (this.departamento[0] == 2)
         this.departamento++;
@@ -198,6 +204,16 @@ export class DashboardComponent implements OnInit {
     this.ds.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
     })
+  }
+
+  isAdmin() {
+    // verifica se user é admin ou não
+    if (this.usuario[0].is_admin == false) {
+      console.log(this.usuario[0])
+      console.log('contacte o admin')
+    } else {
+    }
+
   }
 
 
