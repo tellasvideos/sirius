@@ -231,7 +231,16 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
     console.log('email a recuperar pass', email);
-    return this.http.post(this.forgot_pass_url + '/forgotpassword/', email, {headers: headers} )
+    return this.http.post(this.forgot_pass_url + '/forgotpassword/', email, { headers: headers })
+  }
+
+  // Method to set new password
+  setPass(newpass: any) {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
+    console.log('pass redifinida', newpass);
+    return this.http.post(this.forgot_pass_url + '/setnewpassword/', newpass, { headers: headers })
   }
 
   // login user and generete token

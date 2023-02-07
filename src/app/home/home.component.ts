@@ -42,14 +42,15 @@ export class HomeComponent implements OnInit {
 
   forgtPass() {
     let User = { "email": this.username}
-    console.log('vindo do input', User)
+    //console.log('vindo do input', User)
     this.auth.forgtPass(User).subscribe(data => {
       this.retorno = data;
-      console.log('foi enviada uma mensagem ao seu email, para recuperar sua palavra passe.', User)
+      //console.log('foi enviada uma mensagem ao seu email, para recuperar sua palavra passe.', User)
     });
+    this.username = '';
     Swal.fire({
       icon: 'info',
-      text: 'Foi enviada uma mensagem ao seu email, por favor acesse para recuperar sua palavra passe.',
+      text: 'Foi enviada uma mensagem ao seu email por favor, acesse para definir sua nova palavra passe.',
     })
     
   }

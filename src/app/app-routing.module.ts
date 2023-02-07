@@ -60,7 +60,7 @@ const routes: Routes = [
   { path: 'inquiridor', component: InquiridorComponent, canActivate: [AuthGuard] },
   { path: 'instituicoes', component: InstituicoesComponent, canActivate: [AuthGuard] },
   { path: 'interesses', component: InteressesComponent, canActivate: [AuthGuard] },
-  { path: 'recpass', component: RecpassComponent },
+  { path: 'recpass', component: RecpassComponent, /*canActivate: [AuthGuard]*/},
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuard] },
   { path: 'footer', component: FooterComponent, canActivate: [AuthGuard] },
