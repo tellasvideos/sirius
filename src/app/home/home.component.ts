@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   LOGIN_(data: any) {
 
-    console.log(this.angForm.value)
+    console.log('input user', this.angForm.value)
 
     localStorage.removeItem('user');
 
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
 
       success => {
         this.user = success
-       // console.log('Depois do login', success);
+       console.log('Depois do login', success);
 
         if (this.user.token) {
           this._errorLogin = false;

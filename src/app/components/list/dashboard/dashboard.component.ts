@@ -61,10 +61,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
+
+    /*this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
       this._initBasicAreaEcharts(data);
-    })
+    })*/
 
     //this.isAdmin()
     this.getDeparet();
