@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }]
 
   username: any;
-  retorno:any;
+  retorno: any;
 
   _errorLogin = false;
   pass_: any;
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   forgtPass() {
-    let User = { "email": this.username}
+    let User = { "email": this.username }
     //console.log('vindo do input', User)
     this.auth.forgtPass(User).subscribe(data => {
       this.retorno = data;
@@ -52,21 +52,18 @@ export class HomeComponent implements OnInit {
       icon: 'info',
       text: 'Foi enviada uma mensagem ao seu email por favor, acesse para definir sua nova palavra passe.',
     })
-    
-  }
 
+  }
 
   LOGIN_(data: any) {
 
     console.log('input user', this.angForm.value)
-
     localStorage.removeItem('user');
-
     this.auth.userLogin(this.angForm.value).subscribe(
 
       success => {
         this.user = success
-       console.log('Depois do login', success);
+        // console.log('Depois do login', success);
 
         if (this.user.token) {
           this._errorLogin = false;
