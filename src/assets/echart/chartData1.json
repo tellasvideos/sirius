@@ -1,0 +1,30 @@
+[
+    {
+        "name": "segunda",
+        "value": "100"
+    },
+    {
+        "name": "Terça",
+        "value": "200"
+    },
+    {
+        "name": "Quarta",
+        "value": "50"
+    },
+    {
+        "name": "Quinta",
+        "value": "200"
+    },
+    {
+        "name": "Sexta",
+        "value": "300"
+    },
+    {
+        "name": "Sábado",
+        "value": "100"
+    },
+    {
+        "name": "Domingo",
+        "value": "50"
+    }
+]

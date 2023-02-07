@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
 
+
 import * as echarts from 'echarts';
 import { DataService } from 'src/app/services/data.service';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  subscripition?: Subscription;
 
   i: any;
 
@@ -27,7 +30,7 @@ export class DashboardComponent implements OnInit {
   @Input()
   usuario: any;
 
-  constructor(public img: HeaderComponent, private ds: DataService) { }
+  constructor(public img: HeaderComponent, private ds: DataService ) { }
 
   ngOnInit(): void {
     //this.isAdmin()
