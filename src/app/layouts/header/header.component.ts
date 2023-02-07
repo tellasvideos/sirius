@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   getCadeia_de_valor() {
     this.ds.getValueChains().subscribe(data => {
       this.cadeia = data;
-      console.log(data);
+     // console.log(data);
     })
   }
 

@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     private auth: AuthService) {
     this.ds.getUser().subscribe(data => {
       this.usuario = data;
-      console.log('all  users: ', data)
+    //  console.log('all  users: ', data)
     })
   }
 
@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
 
     this.ds.userLogin(this.usuario).subscribe(data => {
       this.user = data;
-      console.log(' user: ', data[0])
+     // console.log(' user: ', data[0])
     })
 
     /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit {
     this.ds.proponentPDAC().subscribe(data => {
       this.proponents = data;
       this.filterDsc()
-      console.log(data[0], data[1], data[2], data[3])
+      //console.log(data[0], data[1], data[2], data[3])
     })
   }
 

@@ -214,7 +214,7 @@ export class DashboardComponent implements OnInit {
   proponentes() {
     this.ds.proponentPDAC().subscribe(data => {
       this.prop = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -245,7 +245,7 @@ export class DashboardComponent implements OnInit {
   isAdmin() {
     // verifica se user é admin ou não
     if (this.usuario[0].is_admin == false) {
-      console.log(this.usuario[0])
+      // console.log(this.usuario[0])
       console.log('contacte o admin')
     } else {
     }

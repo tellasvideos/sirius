@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   LOGIN_(data: any) {
 
-    console.log('input user', this.angForm.value)
+    //console.log('input user', this.angForm.value)
     localStorage.removeItem('user');
     this.auth.userLogin(this.angForm.value).subscribe(
 
@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
         if (this.user.token) {
           this._errorLogin = false;
           localStorage.setItem("userToken", this.user.token);
+          localStorage.setItem('user', JSON.stringify(this.user));
           this.route.navigate(['/dashboard'])
         }
       },
