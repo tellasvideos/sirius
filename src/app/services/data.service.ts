@@ -226,13 +226,12 @@ export class DataService {
   }
 
   // Method to recover password
-  forgtPass(email: any, url: any) {
+  forgtPass(user: any) {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
-    console.log('path', url);
-    console.log('email', email);
-    return this.http.post(this.forgot_pass_url + '/forgotpassword/', email & url, { headers: headers })
+    console.log('dados', user);
+    return this.http.post(this.forgot_pass_url + '/forgotpassword/', user, {headers: headers} )
   }
 
   // login user and generete token

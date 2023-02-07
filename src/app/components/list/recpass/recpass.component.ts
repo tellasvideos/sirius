@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
@@ -12,28 +13,28 @@ export class RecpassComponent implements OnInit {
   constructor(private ds: DataService, public route: Router) { }
 
   //token = '1c644080bc6af5e8990a30c964157719cbb6576c';
-  url ='http://localhost:4200/recpass';
+  url = 'http://localhost:4200/recpass';
 
-  user: any =[{
+  user: any = [{
     username: '',
-    password: ''
-  }] 
+    password: '',
+    url: 'http://localhost:4200/recpass'
+  }]
 
-  username:any;
-
-  retorno:any;
+  username: any;
+  retorno: any;
 
   ngOnInit(): void {
-   
+
   }
 
-  forgtPass(email: any, route_url: any) {
+  forgtPass(user: any) {
 
-    console.log(this.username)
+    console.log(this.user[0])
 
-    this.ds.forgtPass(this.username, this.url).subscribe(data => {
+    this.ds.forgtPass(this.user).subscribe(data => {
       this.retorno = data;
-      console.log('salvo', this.username, this.url)
+      console.log('salvo', this.user[0])
     });
 
   }
