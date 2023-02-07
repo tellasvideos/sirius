@@ -68,8 +68,38 @@
             </form>
 
             <div class="forgot-pass mt-4 text-center" style="font-size: 11px; color: #F2F2F2;"> <a
-                [routerLink]="['/recpass']" routerLinkActive="router-link-active">Esqueceu-se da palavra passe?</a>
+                data-bs-toggle="modal" href="#exampleModalToggle">Esqueceu-se da palavra passe?</a>
             </div>
+
+            <!--  modal -->
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+              tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5 d-none" id="exampleModalToggleLabel" style="color:black;">Recuperar Password
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="input-group input-group-lg mb-2">
+                      <a class="btn text-white" style="background-color: #005E00;" href="#!" role="button">
+                        <i class="far fa-envelope"></i>
+                      </a>
+                      <input type="email" class="form-control" placeholder="Digite o seu Email" [(ngModel)]="username"
+                        aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button (click)="forgtPass()" class="btn btn-sm btn-success" [disabled]="!username"
+                      data-bs-dismiss="modal">Recuperar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
           </div>
         </div>

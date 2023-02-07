@@ -5,6 +5,9 @@ import { HeaderComponent } from 'src/app/layouts/header/header.component';
 import * as echarts from 'echarts';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
+import { EchartService } from 'src/app/services/echart.service';
+import { BasicEchartLineModel } from 'src/app/models/echart.models';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +17,7 @@ import { Subscription } from 'rxjs';
 export class DashboardComponent implements OnInit {
 
   subscripition?: Subscription;
+  _chartOption?: EChartsOption;
 
   i: any;
 
@@ -30,9 +34,38 @@ export class DashboardComponent implements OnInit {
   @Input()
   usuario: any;
 
-  constructor(public img: HeaderComponent, private ds: DataService ) { }
+  constructor(public img: HeaderComponent, private ds: DataService, private echartService: EchartService) {
+
+  }
+
+  private _initBasicAreaEcharts(chartData: BasicEchartLineModel[]) {
+    this._chartOption = {
+      tooltip: {
+        show: true
+      },
+      xAxis: {
+        type: 'category',
+        data: chartData.map(m => ({
+          value: m.name
+        }))
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: chartData.map(m => ({
+          value: m.value
+        }))
+      }]
+    }
+  }
 
   ngOnInit(): void {
+    
+    this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
+      this._initBasicAreaEcharts(data);
+    })
+
     //this.isAdmin()
     this.getDeparet();
     this.getInquerito();

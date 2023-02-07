@@ -15,7 +15,7 @@ export class EchartService {
   }
 
   getBasicAreaEchartData(): Observable<BasicEchartLineModel[]> {
-    return this.httpClient.get<BasicEchartLineModel[]>('assets/echart/chartData2.json');
+    return this.httpClient.get<BasicEchartLineModel[]>('assets/echart/chartData1.json');
   }
 
 }

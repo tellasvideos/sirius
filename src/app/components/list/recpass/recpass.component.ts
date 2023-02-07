@@ -28,15 +28,17 @@ export class RecpassComponent implements OnInit {
 
   }
 
-  forgtPass(user: any) {
-
-    console.log(this.user[0])
-
-    this.ds.forgtPass(this.user).subscribe(data => {
+  forgtPass() {
+    let User = { "email": this.username}
+    console.log('vindo do input', User)
+    this.ds.forgtPass(User).subscribe(data => {
       this.retorno = data;
-      console.log('salvo', this.user[0])
+      console.log('foi enviado um link ao seu email', User)
     });
+  }
 
+  setnewPassword(){
+    
   }
 
 }
