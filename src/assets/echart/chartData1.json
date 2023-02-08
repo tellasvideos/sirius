@@ -1,30 +1,50 @@
 [
     {
-        "name": "segunda",
-        "value": "100"
-    },
-    {
-        "name": "Terça",
-        "value": "200"
-    },
-    {
-        "name": "Quarta",
+        "name": "Janeiro",
         "value": "50"
     },
     {
-        "name": "Quinta",
+        "name": "Fevereiro",
         "value": "200"
     },
     {
-        "name": "Sexta",
+        "name": "Março",
         "value": "300"
     },
     {
-        "name": "Sábado",
+        "name": "Abril",
         "value": "100"
     },
     {
-        "name": "Domingo",
+        "name": "Maio",
+        "value": "50"
+    },
+    {
+        "name": "Junho",
+        "value": "100"
+    },
+    {
+        "name": "Julho",
+        "value": "200"
+    },
+    {
+        "name": "Agosto",
+        "value": "50"
+    },
+    {
+        "name": "Setembro",
+        "value": "200"
+    },
+    {
+        "name": "Outubro",
+        "value": "300"
+    },
+    {
+        "name": "Novembro",
+        "value": "100"
+    },
+    {
+        "name": "Dezembro",
         "value": "50"
     }
 ]

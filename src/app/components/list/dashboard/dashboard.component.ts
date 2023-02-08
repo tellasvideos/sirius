@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
         data: chartData.map(m => ({
           value: m.value
         })),
-        type:'line'
+        type: 'line'
       }]
     }
     _chartOption && testChart.setOption(_chartOption);
@@ -117,19 +117,19 @@ export class DashboardComponent implements OnInit {
 
     var chartDom = document.getElementById('main')!;
     var myChart = echarts.init(chartDom);
-    var option: EChartsOption;
+    var option1: EChartsOption;
 
-    option = {
+    option1 = {
       tooltip: {
         trigger: 'item'
       },
-      legend: {
+      /*legend: {
         bottom: '-2%',
         left: 'center'
-      },
+      },*/
       series: [
         {
-          name: 'Dados',
+          name: 'Produção',
           type: 'pie',
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
@@ -152,12 +152,20 @@ export class DashboardComponent implements OnInit {
             { value: 735, name: 'Milho' },
             { value: 580, name: 'Feijão' },
             { value: 484, name: 'Ovos' },
+            { value: 884, name: 'gimguba' },
+            { value: 184, name: 'ervilha' },
+            { value: 1084, name: 'cebola' },
+            { value: 184, name: 'tomate' },
+            { value: 424, name: 'couves' },
+            { value: 494, name: 'laranja' },
+            { value: 684, name: 'limao' },
+            { value: 784, name: 'Café' },
           ]
         }
       ]
     };
 
-    option && myChart.setOption(option);
+    option1 && myChart.setOption(option1);
 
 
     // segundo Gráfico
