@@ -31,9 +31,8 @@ export class ProponentesComponent implements OnInit {
       this.proponente = data;
       this.filterDsc()
 
-      console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
-
-      console.log('provincias da biplan: ', this.provincias[0].province_id)
+     // console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
+      //console.log('provincias da biplan: ', this.provincias[0].province_id)
     })
 
 
@@ -48,7 +47,7 @@ export class ProponentesComponent implements OnInit {
   }
 
   buscar(id: any) {
-    this.dataService.ProponentsByProvince(id).subscribe(data => {
+    this.dataService.ProponentsByProvince(id.toString()).subscribe(data => {
       this.prop_por_provincia = data;
       console.log('prop by province', data)
     })
@@ -73,10 +72,10 @@ export class ProponentesComponent implements OnInit {
       this.provincias = data;
 
      // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
-      console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
+     // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
 
      // this.my_stringify2 = JSON.stringify(data)
-      console.log('stgfy 2 caso:',data)
+   //  console.log('stgfy 2 caso:',data)
     })
   }
 

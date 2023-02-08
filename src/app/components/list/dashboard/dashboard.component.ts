@@ -17,7 +17,7 @@ import { EChartsOption } from 'echarts';
 export class DashboardComponent implements OnInit {
 
   subscripition?: Subscription;
-  _chartOption?: EChartsOption;
+  _chartOption!: EChartsOption;
 
   i: any;
 
@@ -39,7 +39,12 @@ export class DashboardComponent implements OnInit {
   }
 
   private _initBasicAreaEcharts(chartData: BasicEchartLineModel[]) {
-    this._chartOption = {
+
+    var chartDom = document.getElementById('yee')!;
+    var testChart = echarts.init(chartDom);
+    var _chartOption: EChartsOption;
+
+    _chartOption = {
       tooltip: {
         show: true
       },
@@ -55,16 +60,21 @@ export class DashboardComponent implements OnInit {
       series: [{
         data: chartData.map(m => ({
           value: m.value
-        }))
+        })),
+        type:'line'
       }]
     }
+    _chartOption && testChart.setOption(_chartOption);
+
   }
+
+
 
   ngOnInit(): void {
 
-    /*this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
+    this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
       this._initBasicAreaEcharts(data);
-    })*/
+    });
 
     //this.isAdmin()
     this.getDeparet();
