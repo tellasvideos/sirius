@@ -73,11 +73,13 @@ export class HomeComponent implements OnInit {
 
       success => {
         this.user = success
-        // console.log('Depois do login', success);
+      //  console.log('Depois do login', success);
 
         if (this.user.token) {
           this._errorLogin = false;
           localStorage.setItem("userToken", this.user.token);
+          localStorage.setItem("user", this.angForm.value['username'] );
+         // console.log(this.user)
           // localStorage.setItem('user', JSON.stringify(this.user));
           this.route.navigate(['/dashboard'])
         }

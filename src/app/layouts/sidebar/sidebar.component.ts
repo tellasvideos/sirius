@@ -14,13 +14,24 @@ export class SidebarComponent implements OnInit {
   proponents?: any;
   i: any;
 
+  logged:any;
+
   constructor(private ds: DataService,
     private auth: AuthService) {
 
   }
 
   ngOnInit(): void {
-    this.proponentes()
+    
+   const userData = String(localStorage.getItem('user'));
+
+   if (userData) {
+    const user = String(userData);
+    this.logged = user;
+    console.log( 'passado', this.logged)
+  }
+
+  this.proponentes()
 
   }
 
@@ -37,6 +48,8 @@ export class SidebarComponent implements OnInit {
       return b._id - a._id
     })
   }
+
+  
 
   logout() {
     this.auth.logout()

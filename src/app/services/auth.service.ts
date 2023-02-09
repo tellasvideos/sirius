@@ -13,7 +13,7 @@ export class AuthService {
 
 
   IsloggedIn(){
-    return !!localStorage.getItem('userToken');
+    return !!localStorage.getItem('user');
   }
 
   public setSession(authResult: any): void {
@@ -24,6 +24,7 @@ export class AuthService {
     localStorage.setItem('expires_at', expiresAt);
     //  console.log(expiresAt);
   }
+  
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
