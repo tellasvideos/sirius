@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private auth: DataService,
+    private authService: AuthService,
     private route: Router,
     private fb: FormBuilder
   ) {
@@ -74,6 +76,7 @@ export class HomeComponent implements OnInit {
 
         if (this.user.token) {
           this._errorLogin = false;
+          this.authService.setSession(this.user.token);
           localStorage.setItem("userToken", this.user.token);
           localStorage.setItem("user", this.angForm.value['username']);
           // console.log(this.user)
