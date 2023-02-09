@@ -11,37 +11,24 @@ export class SidebarComponent implements OnInit {
 
   @Input() user: any;
   usuario: any;
-  proponents: any;
+  proponents?: any;
   i: any;
+
   constructor(private ds: DataService,
     private auth: AuthService) {
-    this.ds.getUser().subscribe(data => {
-      this.usuario = data;
-    //  console.log('all  users: ', data)
-    })
+
   }
 
   ngOnInit(): void {
     this.proponentes()
 
-
-    this.ds.userLogin(this.usuario).subscribe(data => {
-      this.user = data;
-     // console.log(' user: ', data[0])
-    })
-
-    /*for (this.i = 0; this.i <= 4 && this.filterDsc(); this.i++) {
-      console.log(this.proponents[0]);
-    } */
   }
-
-
 
   proponentes() {
     this.ds.proponentPDAC().subscribe(data => {
       this.proponents = data;
       this.filterDsc()
-      //console.log(data[0], data[1], data[2], data[3])
+    //  console.log(this.proponents[0]['s2gp/s2g1q1/prop_nome'])
     })
   }
 

@@ -100,7 +100,7 @@ export class DataService {
   // to save any business plan status
   Save_BusPlanStatus_url = 'http://strongboxao.ddns.net:8022/api/v1';
 
-  proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms';
+  proponent_PDAC_url = 'http://strongboxao.ddns.net:8022/api/v1/getkoboforms/';
 
   // To get all users
   GET_USERS_URL = 'http://strongboxao.ddns.net:8022/accounts/users/';
