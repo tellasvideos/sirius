@@ -10,14 +10,14 @@ import Swal from "sweetalert2"
 })
 export class AddInquiridorComponent implements OnInit {
 
-  inquiridores:any;
-  provincias:any;
+  inquiridores: any;
+  provincias: any;
 
-  responsible:any;
-  performance_in_village:any;
-  performance_in_community:any;
-  performance_in_county:any;
-  province:any;
+  responsible: any;
+  performance_in_village: any;
+  performance_in_community: any;
+  performance_in_county: any;
+  province: any;
 
   constructor(
     public modalRef: MdbModalRef<AddInquiridorComponent>,
@@ -30,7 +30,7 @@ export class AddInquiridorComponent implements OnInit {
     this.get_provincias();
   }
 
-  save_iquirier(){
+  save_iquirier() {
     let Inquirier = {
       "responsible": this.responsible,
       "performance_in_village": this.performance_in_village,
@@ -39,22 +39,22 @@ export class AddInquiridorComponent implements OnInit {
       "province": this.province
     }
     this.dataService.salvaInquiriers(Inquirier).subscribe(
-      success => {this.alert_success()},
-      error => {this.alert_error()}
+      success => { this.alert_success() },
+      error => { this.alert_error() }
     )
     this.get_inquiridor()
     this.modalRef.close();
   }
 
   get_inquiridor() {
-    this.dataService.get_Inquiriers().subscribe(data =>{
+    this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridores = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
-  get_provincias(){
-    this.dataService.get_Provinces().subscribe(data =>{
+  get_provincias() {
+    this.dataService.get_Provinces().subscribe(data => {
       this.provincias = data;
     })
   }

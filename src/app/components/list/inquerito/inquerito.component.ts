@@ -49,8 +49,7 @@ export class InqueritoComponent implements OnInit {
     private modalService: MdbModalService,
     private dataService: DataService,
     private route: Router
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.get_interest_express();
@@ -67,7 +66,6 @@ export class InqueritoComponent implements OnInit {
   }
 
   save_inquireForm() {
-
     let InquireForm = {
       "observations": this.observations,
       "responsible": this.responsible,
@@ -113,7 +111,7 @@ export class InqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      console.log('inquérito', data)
+      //console.log('inquérito', data)
     })
   }
 
@@ -136,7 +134,7 @@ export class InqueritoComponent implements OnInit {
   get_interest_express() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
-      console.log('manifestacao: ', data)
+      //console.log('manifestacao: ', data)
 
     })
 
@@ -145,7 +143,7 @@ export class InqueritoComponent implements OnInit {
   get_inquirier() {
     this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridor = data;
-      console.log('inqiridor: ', data)
+      //console.log('inqiridor: ', data)
     })
   }
 

@@ -27,15 +27,12 @@ export class SingleInterestComponent implements OnInit {
   angForm: FormGroup;
 
   constructor(
-    //public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
-    //this.atualizardados()
-
     this.angForm = this.fb.group({
-      farm_name: ['',  Validators.required],
+      farm_name: ['', Validators.required],
       proponent_name: ['', Validators.required],
       province: ['', Validators.required],
       county: ['', Validators.required],
@@ -57,42 +54,39 @@ export class SingleInterestComponent implements OnInit {
     })
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
   ngOnInit(): void {
-   this.proponestesPDAC(),
+    this.proponestesPDAC(),
       this.getCadeiaDeValor(),
       this.getInterestExpress(),
 
       this.activatedRoute.paramMap.subscribe(paramId => {
-        this.id = paramId.get('id'),
-          console.log('id clicado', this.id)
+        this.id = paramId.get('id');
+        //console.log('id clicado', this.id)
 
         this.dataService.getInterestExpressByid(this.id).subscribe(data => {
-          this.angForm.patchValue(data)
-          console.log('dados do id clicado', data)
-          console.log(this.angForm.value)
+          this.angForm.patchValue(data);
+          //console.log('dados do id clicado', data)
+          //console.log(this.angForm.value)
         });
-
       });
   }
 
   EditInterestExpress() {
-
     this.dataService.editInterestExpression(this.id, this.angForm.value).subscribe(
       success => { this.alert_success() },
       error => { this.alert_error() }
     )
-
     this.atualizardados()
   }
 
   atualizardados() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.interest = data,
-        console.log(data)
+      this.interest = data;
+      //console.log(data)
     })
   }
 
@@ -103,6 +97,7 @@ export class SingleInterestComponent implements OnInit {
       text: "Alguma coisa correu mal, tente mais tarde.",
     })
   }
+
   alert_success() {
     Swal.fire({
       icon: "success",
@@ -121,15 +116,15 @@ export class SingleInterestComponent implements OnInit {
 
   getCadeiaDeValor() {
     this.dataService.getValueChains().subscribe(data => {
-      this.cadeiaDeValor = data,
-        console.log('cadeia de valor', data)
+      this.cadeiaDeValor = data;
+      //console.log('cadeia de valor', data)
     })
   }
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+      //console.log('getting int ', data)
     })
   }
 

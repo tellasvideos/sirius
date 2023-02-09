@@ -17,7 +17,7 @@ import Swal from "sweetalert2"
 })
 export class AddInteressesComponent implements OnInit {
 
-  provinces:any;
+  provinces: any;
 
   cadeiaDeValor?: CadeiaVal[];
   interest?: ManInteress[];
@@ -60,12 +60,8 @@ export class AddInteressesComponent implements OnInit {
     public modalRef: MdbModalRef<AddInteressesComponent>,
     private dataService: DataService,
   ) {
-    //console.log(this.condicao)
-    //this.paises = this.dataService.getPaises();
-    //this.condicao = this.dataService.getCondicao();
-    this.atualizardados()
 
-
+    this.atualizardados();
   }
 
   ngOnInit(): void {
@@ -134,22 +130,22 @@ export class AddInteressesComponent implements OnInit {
     })
   }
 
-  getCadeiaDeValor(){
-    this.dataService.getValueChains().subscribe(data =>{
+  getCadeiaDeValor() {
+    this.dataService.getValueChains().subscribe(data => {
       this.cadeiaDeValor = data;
       //console.log('cadeia de valor', data)
     })
   }
 
-  get_provinces(){
-    this.dataService.get_Provinces().subscribe(data =>{
+  get_provinces() {
+    this.dataService.get_Provinces().subscribe(data => {
       this.provinces = data;
       //console.log('prov', data)
     })
   }
 
-  filterDsc(){
-    this.PDAC = this.PDAC.sort(function(a: any, b: any){
+  filterDsc() {
+    this.PDAC = this.PDAC.sort(function (a: any, b: any) {
       return b._id - a._id
     })
   }

@@ -39,20 +39,15 @@ export class CadeiasComponent implements OnInit {
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id'),
-        console.log('id clicado', this.id)
-
+      this.id = paramId.get('id');
+       // console.log('id clicado', this.id)
     });
   }
 
   salvarCadeia() {
-
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id')
-      console.log('id man int', this.id)
-
-      //this.passarId()
-
+    //  console.log('id man int', this.id)
       let Cadeias = {
         "name_value_chain": this.chains_name,
         "observations": this.observations,
@@ -72,9 +67,7 @@ export class CadeiasComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
-
     })
-
   }
 
   // delete uma cadeia
@@ -100,27 +93,26 @@ export class CadeiasComponent implements OnInit {
         )
       }
     })
-
   }
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+        //console.log('getting int ', data)
     })
   }
 
   getCadeiaInterest() {
     this.dataService.get_ValueChainsIE().subscribe(data => {
       this._chains = data;
-      console.log('get cadeias ManInterest', data)
+      //console.log('get cadeias ManInterest', data)
     })
   }
 
   getCadeia() {
     this.dataService.getValueChains().subscribe(data => {
       this.cadeiaDeValor = data;
-      console.log('get cadeias', data)
+     // console.log('get cadeias', data)
     })
   }
 

@@ -5,7 +5,6 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { AddCadeiaValorComponent } from '../../inserts/add-cadeia-valor/add-cadeia-valor.component';
 
-
 @Component({
   selector: 'app-cadeiadevalor',
   templateUrl: './cadeiadevalor.component.html',
@@ -13,19 +12,15 @@ import { AddCadeiaValorComponent } from '../../inserts/add-cadeia-valor/add-cade
 })
 export class CadeiadevalorComponent implements OnInit {
 
-  // @ViewChild('add-cadeia-valor' AddCadeiaValorComponent);
   keyWord: string = '';
-
   cadeiaDeValor?: CadeiaVal[];
-
   sideBarOpen = true;
-
   modalRef: MdbModalRef<AddCadeiaValorComponent> | null = null;
 
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService
-  ) { 
+  ) {
     this.atualizarlista()
   }
 
@@ -37,7 +32,7 @@ export class CadeiadevalorComponent implements OnInit {
   atualizarlista() {
     this.dataService.getValueChains().subscribe(dados => {
       this.cadeiaDeValor = dados;
-      console.log('array list de todas as cadeias:', dados)
+      // console.log('array list de todas as cadeias:', dados)
     })
   }
 

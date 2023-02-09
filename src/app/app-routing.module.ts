@@ -2,16 +2,12 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // components
-import { AndamentomanifesComponent } from './components/list/andamentomanifes/andamentomanifes.component';
 import { CadeiadevalorComponent } from './components/list/cadeiadevalor/cadeiadevalor.component';
-import { CvintessesComponent } from './components/list/cvintesses/cvintesses.component';
 import { DashboardComponent } from './components/list/dashboard/dashboard.component';
 import { DepartamentoComponent } from './components/list/departamento/departamento.component';
-import { GestaoambientalComponent } from './components/list/gestaoambiental/gestaoambiental.component';
 import { HomeComponent } from './home/home.component';
 import { InqueritoComponent } from './components/list/inquerito/inquerito.component';
 import { InquiridorComponent } from './components/list/inquiridor/inquiridor.component';
-import { InstituicoesComponent } from './components/list/instituicoes/instituicoes.component';
 import { InteressesComponent } from './components/list/interesses/interesses.component';
 import { RecpassComponent } from './components/list/recpass/recpass.component';
 import { UsuarioComponent } from './components/list/usuario/usuario.component';
@@ -34,7 +30,6 @@ import { EditInterestComponent } from './components/edit/edit-interest/edit-inte
 import { AddAndManifestComponent } from './components/inserts/add-and-manifest/add-and-manifest.component';
 import { CadeiasComponent } from './components/list/cadeias/cadeias.component';
 import { AcordosComponent } from './components/list/acordos/acordos.component';
-import { ProvinciasComponent } from './components/list/provincias/provincias.component';
 import { EditCadeiaComponent } from './components/edit/edit-cadeia/edit-cadeia.component';
 import { EditDepartComponent } from './components/edit/edit-depart/edit-depart.component';
 import { EditInqueritoComponent } from './components/edit/edit-inquerito/edit-inquerito.component';
@@ -51,14 +46,10 @@ import { AuthGuard } from './services/auth.guard';
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: '', component: HomeComponent },
-  {path: 'andamentomanifes', component: AndamentomanifesComponent, canActivate: [AuthGuard]},
   {path: 'cadeiadevalor', component: CadeiadevalorComponent, canActivate: [AuthGuard]},
-  {path: 'cvintesses', component: CvintessesComponent, canActivate: [AuthGuard]},
   { path: 'departamento', component: DepartamentoComponent, canActivate: [AuthGuard] },
-  { path: 'gestaoambiental', component: GestaoambientalComponent, canActivate: [AuthGuard] },
   { path: 'inquerito', component: InqueritoComponent, canActivate: [AuthGuard] },
   { path: 'inquiridor', component: InquiridorComponent, canActivate: [AuthGuard] },
-  { path: 'instituicoes', component: InstituicoesComponent, canActivate: [AuthGuard] },
   { path: 'interesses', component: InteressesComponent, canActivate: [AuthGuard] },
   { path: 'recpass', component: RecpassComponent, /*canActivate: [AuthGuard]*/},
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },

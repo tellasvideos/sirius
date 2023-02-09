@@ -34,20 +34,16 @@ export class StatusPnComponent implements OnInit {
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id'),
-        console.log('id clicado', this.id)
+      this.id = paramId.get('id');
+      //console.log('id clicado', this.id)
 
     });
   }
 
   salvarStatus() {
-
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id')
-      console.log('id man int', this.id)
-
-      //this.passarId()
-
+      this.id = paramId.get('id');
+      //console.log('id man int', this.id)
       let status_pn = { "status": this.status, "observations": this.observations, "interest_expression": this.id }
       this.dataService.salvaBusinessPlanStatus(status_pn).subscribe(
         success => { this.getStatus() },
@@ -94,23 +90,23 @@ export class StatusPnComponent implements OnInit {
 
   passarId() {
     this.dataService.getInterestExpressByid(this.id).subscribe(data => {
-      this.id.patchValue(data)
-      console.log('dados do id clicado', data)
-      console.log(this.id.value)
+      this.id.patchValue(data);
+      //console.log('dados do id clicado', data)
+      //console.log(this.id.value)
     });
   }
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+      //console.log('getting int ', data)
     })
   }
 
   getStatus() {
     this.dataService.get_BusinessPlan_status().subscribe(data => {
       this._status = data;
-      console.log('get status', data)
+      //console.log('get status', data)
     })
   }
 

@@ -66,12 +66,12 @@ export class EditInterestComponent implements OnInit {
 
       this.activatedRoute.paramMap.subscribe(paramId => {
         this.id = paramId.get('id'),
-          console.log('id clicado', this.id)
+          //console.log('id clicado', this.id)
 
         this.dataService.getInterestExpressByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
-          console.log('dados do id clicado', data)
-          console.log(this.angForm.value)
+          //console.log('dados do id clicado', data)
+          //console.log(this.angForm.value)
         });
 
       });
@@ -89,8 +89,8 @@ export class EditInterestComponent implements OnInit {
 
   atualizardados() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.interest = data,
-        console.log(data)
+      this.interest = data;
+        //console.log(data)
     })
   }
 
@@ -112,22 +112,22 @@ export class EditInterestComponent implements OnInit {
 
   proponestesPDAC() {
     this.dataService.proponentPDAC().subscribe(data => {
-      this.PDAC = data,
+      this.PDAC = data;
         this.filterDsc()
     })
   }
 
   getCadeiaDeValor() {
     this.dataService.getValueChains().subscribe(data => {
-      this.cadeiaDeValor = data,
-        console.log('cadeia de valor', data)
+      this.cadeiaDeValor = data;
+        //console.log('cadeia de valor', data)
     })
   }
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+        //console.log('getting int ', data)
     })
   }
 

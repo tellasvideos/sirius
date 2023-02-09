@@ -23,12 +23,7 @@ export class AddCadeiaValorComponent implements OnInit {
     public modalRef: MdbModalRef<AddCadeiaValorComponent>,
     private ds: DataService,
     private formBuilder: FormBuilder
-  ) { 
-
-   /* this.meuFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', [Validators.required]],
-    });*/
+  ) {
   }
 
   ngOnInit(): void {
@@ -38,8 +33,8 @@ export class AddCadeiaValorComponent implements OnInit {
   salvarCadeiaValor() {
     let cadeia = { "name": this.cadeiaVal, "description": this.desc }
     this.ds.salvaCadeiaDeValor(cadeia).subscribe(
-      success => {this.atualizardados()},
-      error => {this.alert_error()}
+      success => { this.atualizardados() },
+      error => { this.alert_error() }
     )
     this.atualizardados();
     Swal.fire({

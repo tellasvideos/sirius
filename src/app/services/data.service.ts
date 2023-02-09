@@ -3,12 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Users } from '../interfaces/users';
 import { map, catchError, take } from 'rxjs/operators';
-//import 'rxjs/add/observable/throw';
 import { throwError } from 'rxjs';
 import { CadeiaVal } from '../interfaces/cadeiaVal';
-
 import { Pais } from '../models/pais'
-
 import { Cidade } from '../models/cidade'
 import { Condicao } from '../models/condicao.model';
 import { BasicEchartLineModel } from '../models/echart.models';
@@ -222,7 +219,6 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
-
     return this.http.get<any[]>(this.proponent_PDAC_url, { headers: headers }).pipe(take(1))
   }
 
@@ -231,7 +227,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
-    console.log('email a recuperar pass', email);
+    //console.log('email a recuperar pass', email);
     return this.http.post(this.forgot_pass_url + '/forgotpassword/', email, { headers: headers })
   }
 
@@ -240,7 +236,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token 1c644080bc6af5e8990a30c964157719cbb6576c');
-    console.log('pass redifinida', newpass);
+    //console.log('pass redifinida', newpass);
     return this.http.post(this.forgot_pass_url + '/setnewpassword/', newpass, { headers: headers })
   }
 
@@ -248,7 +244,7 @@ export class DataService {
   userLogin(user: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    //console.log('a logar', user)
+    ////console.log('a logar', user)
     return this.http.post<any>(this.getToken_url, user, { headers: headers }).pipe(take(1));
   }
 
@@ -277,21 +273,16 @@ export class DataService {
 
   // insert user
   AddUser(user: any) {
-    console.log(localStorage.getItem('userToken'), user)
+    //console.log(localStorage.getItem('userToken'), user)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.post(this.save_user_url + '/users/', user, { headers: headers })
   }
 
-  // update users
-  updateUser() {
-
-  }
-
   // Method to save an interest Expression
   salvaInterestExpress(interestEx: any) {
-    console.log(localStorage.getItem('userToken'), interestEx)
+    //console.log(localStorage.getItem('userToken'), interestEx)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -484,7 +475,7 @@ export class DataService {
 
   // Method to Post a Value Chain
   salvaCadeiaDeValor(cadeiaVal: any) {
-    console.log(localStorage.getItem('userToken'), cadeiaVal)
+    //console.log(localStorage.getItem('userToken'), cadeiaVal)
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
@@ -704,7 +695,7 @@ export class DataService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    console.log(province_id)
+    //console.log(province_id)
     return this.http.post(this.proponentsByProv_url + '/koboformsbyprovince/', province_id.toString(), { headers: headers });
   }
 

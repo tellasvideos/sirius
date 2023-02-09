@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: chartData.map(m => ({
-          value: m.name.substring(0,3)
+          value: m.name.substring(0, 3)
         }))
       },
       yAxis: {
@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: chartData.map(m => ({
-          value: m.name.substring(0,3)
+          value: m.name.substring(0, 3)
         }))
       },
       yAxis: {
@@ -158,7 +158,6 @@ export class DashboardComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
 
     this._cadeiaValorChart();
@@ -166,13 +165,13 @@ export class DashboardComponent implements OnInit {
     // Subscribe chart for inqueritos
     this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
       this._inqueritosChart(data);
-      console.log('inqueritos chart por mes:', data)
+      //console.log('inqueritos chart por mes:', data)
     });
 
     // subscribe Chart for interesses
     this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
       this._interessesChart(data);
-      console.log('interesses chart por mes:', data)
+      //console.log('interesses chart por mes:', data)
     });
 
     //this.isAdmin()
@@ -219,7 +218,7 @@ export class DashboardComponent implements OnInit {
   proponentes() {
     this.ds.proponentPDAC().subscribe(data => {
       this.prop = data;
-      //console.log(data)
+      ////console.log(data)
     })
   }
 
@@ -245,16 +244,6 @@ export class DashboardComponent implements OnInit {
     this.ds.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
     })
-  }
-
-  isAdmin() {
-    // verifica se user é admin ou não
-    if (this.usuario[0].is_admin == false) {
-      // console.log(this.usuario[0])
-      console.log('contacte o admin')
-    } else {
-    }
-
   }
 
 

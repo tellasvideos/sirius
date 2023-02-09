@@ -42,12 +42,8 @@ import { UsuarioComponent } from './components/list/usuario/usuario.component';
 import { DepartamentoComponent } from './components/list/departamento/departamento.component';
 import { InteressesComponent } from './components/list/interesses/interesses.component';
 import { CadeiadevalorComponent } from './components/list/cadeiadevalor/cadeiadevalor.component';
-import { CvintessesComponent } from './components/list/cvintesses/cvintesses.component';
-import { InstituicoesComponent } from './components/list/instituicoes/instituicoes.component';
-import { AndamentomanifesComponent } from './components/list/andamentomanifes/andamentomanifes.component';
 import { InquiridorComponent } from './components/list/inquiridor/inquiridor.component';
 import { InqueritoComponent } from './components/list/inquerito/inquerito.component';
-import { GestaoambientalComponent } from './components/list/gestaoambiental/gestaoambiental.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { SidenavComponent } from './layouts/sidenav/sidenav.component';
@@ -68,7 +64,6 @@ import { SingleInterestComponent } from './components/single-view/single-interes
 import { EditInterestComponent } from './components/edit/edit-interest/edit-interest.component';
 import { CadeiasComponent } from './components/list/cadeias/cadeias.component';
 import { AcordosComponent } from './components/list/acordos/acordos.component';
-import { ProvinciasComponent } from './components/list/provincias/provincias.component';
 import { EditUserComponent } from './components/edit/edit-user/edit-user.component';
 import { EditCadeiaComponent } from './components/edit/edit-cadeia/edit-cadeia.component';
 import { EditInquiridorComponent } from './components/edit/edit-inquiridor/edit-inquiridor.component';
@@ -104,12 +99,8 @@ import { NgxPrintModule } from 'ngx-print';
     DepartamentoComponent,
     InteressesComponent,
     CadeiadevalorComponent,
-    CvintessesComponent,
-    InstituicoesComponent,
-    AndamentomanifesComponent,
     InquiridorComponent,
     InqueritoComponent,
-    GestaoambientalComponent,
     HeaderComponent,
     FooterComponent,
     SidenavComponent,
@@ -131,7 +122,6 @@ import { NgxPrintModule } from 'ngx-print';
     CadeiasComponent,
     MyfilterPipe,
     AcordosComponent,
-    ProvinciasComponent,
     SearchPipe,
     SearchByProvincesPipe,
     EditUserComponent,

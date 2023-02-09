@@ -19,30 +19,6 @@ export class UsuarioComponent implements OnInit {
   users: any;
 
   usuario: any;
-
-  usuarios = [
-    {
-      "id": 1,
-      "email": "andre@andre.com",
-      "name": "andre",
-      "username": "andreusername",
-      "department": "git",
-      "work_function": "dev",
-      "is_admin": true,
-      "created_at": "2022-11-08T20:46:22.311618Z"
-    },
-    {
-      "id": 2,
-      "email": "user@example.com",
-      "name": "kadeu",
-      "username": "kadeu123",
-      "department": "bash",
-      "work_function": "devweb",
-      "is_admin": true,
-      "created_at": "2022-12-05T09:45:56.823633Z"
-    }
-  ]
-
   token: any;
 
   sideBarOpen = true;
@@ -54,8 +30,6 @@ export class UsuarioComponent implements OnInit {
     private http: HttpClient
   ) { }
 
-
-
   ngOnInit(): void {
     this.getUser();
   }
@@ -63,12 +37,12 @@ export class UsuarioComponent implements OnInit {
   getUser() {
     this.dataService.getUser().subscribe(data => {
       this.usuario = data;
-      console.log('all  users: ', data)
+      //console.log('all  users: ', data)
     })
   }
 
-   // delete uma dep de valor
-   deleteUser(id: any) {
+  // delete uma dep de valor
+  deleteUser(id: any) {
     Swal.fire({
       title: 'De certeza que quer eliminar?',
       icon: 'warning',
@@ -91,7 +65,6 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
@@ -107,5 +80,6 @@ export class UsuarioComponent implements OnInit {
       text: 'Alguma coisa correu mal, tente mais tarde.',
     })
   }
+
 }
 

@@ -8,10 +8,10 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./proponentes.component.scss']
 })
 export class ProponentesComponent implements OnInit {
+
   sideBarOpen = true;
   keyWord: string = '';
   proponente: any;
-  //modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
   provinces: any;
   propName: any;
   provincias: any;
@@ -25,18 +25,12 @@ export class ProponentesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProvincias()
-
-
     this.dataService.proponentPDAC().subscribe(data => {
       this.proponente = data;
       this.filterDsc()
-
-     // console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
+      // console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
       //console.log('provincias da biplan: ', this.provincias[0].province_id)
     })
-
-
-
 
     /*  const array1 = ['a', 'b', 'c'];
       const array2 = ['d', 'e', 'f'];
@@ -71,11 +65,11 @@ export class ProponentesComponent implements OnInit {
     this.dataService.get_Provinces().subscribe(data => {
       this.provincias = data;
 
-     // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
-     // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
+      // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
+      // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
 
-     // this.my_stringify2 = JSON.stringify(data)
-   //  console.log('stgfy 2 caso:',data)
+      // this.my_stringify2 = JSON.stringify(data)
+      //  console.log('stgfy 2 caso:',data)
     })
   }
 

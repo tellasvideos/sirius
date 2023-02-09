@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2'
 
-
 @Component({
   selector: 'app-acordos',
   templateUrl: './acordos.component.html',

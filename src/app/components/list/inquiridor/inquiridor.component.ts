@@ -40,21 +40,21 @@ export class InquiridorComponent implements OnInit {
   getInquiridores() {
     this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridores = data;
-      console.log('inquiridor: ', data)
+      //console.log('inquiridor: ', data)
     })
   }
 
   buscar(id: any) {
     this.dataService.InquiriersByProvince(id).subscribe(data => {
       this.inq_por_provincia = data;
-      console.log('inquirier by province', data)
+      //console.log('inquirier by province', data)
     })
   }
 
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
       this.provincias = data;
-      console.log('provincias', data)
+      //console.log('provincias', data)
     })
   }
 
@@ -80,7 +80,6 @@ export class InquiridorComponent implements OnInit {
         )
       }
     })
-
   }
 
   alert_error() {
@@ -90,4 +89,5 @@ export class InquiridorComponent implements OnInit {
       text: 'Alguma coisa correu mal, tente mais tarde.',
     })
   }
+
 }

@@ -41,13 +41,13 @@ export class EditUserComponent implements OnInit {
     this.getUser();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id'),
-        console.log('id clicado', this.id)
+      this.id = paramId.get('id');
+        //console.log('id clicado', this.id)
 
       this.dataService.getUserByid(this.id).subscribe(data => {
-        this.angForm.patchValue(data)
-        console.log('dados do id clicado', data)
-        console.log(this.angForm.value)
+        this.angForm.patchValue(data);
+        //console.log('dados do id clicado', data)
+        //console.log(this.angForm.value)
       });
 
     });
@@ -86,14 +86,14 @@ export class EditUserComponent implements OnInit {
   getUser() {
     this.dataService.getUser().subscribe(data => {
       this.usuario = data;
-      console.log('all  users: ', data)
+      //console.log('all  users: ', data)
     })
   }
 
   getDepartaments() {
     this.dataService.get_Departaments().subscribe(data => {
       this.departamento = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 

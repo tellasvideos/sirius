@@ -30,24 +30,20 @@ export class EstatutoPnComponent implements OnInit {
     this.getInterestExpress();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id'),
-        console.log('id clicado', this.id)
-
+      this.id = paramId.get('id');
+      //console.log('id clicado', this.id)
     });
   }
 
-  sideBarToggler(){
+  sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
-  
+
   salvarStatutes() {
-
     this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id')
-      console.log('id man int', this.id)
-
+      this.id = paramId.get('id');
+      //console.log('id man int', this.id)
       //this.passarId()
-
       let statutes_pn = { "status": this.statutes, "observations": this.observations, "interest_expression": this.id }
       this.dataService.salvaBusinessPlanStatutos(statutes_pn).subscribe(
         success => { this.getStatutes() },
@@ -61,9 +57,8 @@ export class EstatutoPnComponent implements OnInit {
         title: 'Salvo',
         showConfirmButton: false,
         timer: 1500
-      })
-
-    })
+      });
+    });
 
   }
 
@@ -94,15 +89,15 @@ export class EstatutoPnComponent implements OnInit {
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
-      this.sb = data,
-        console.log('getting int ', data)
+      this.sb = data;
+      //console.log('getting int ', data)
     })
   }
 
   getStatutes() {
     this.dataService.get_BusinessPlan_statutos().subscribe(data => {
       this._statutes = data;
-      console.log('get status', data)
+      //console.log('get status', data)
     })
   }
 
