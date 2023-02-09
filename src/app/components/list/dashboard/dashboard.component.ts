@@ -37,124 +37,15 @@ export class DashboardComponent implements OnInit {
   usuario: any;
 
   constructor(public img: HeaderComponent, private ds: DataService, private echartService: EchartService) {
-
   }
 
-  _inqueritosChart(chartData: BasicEchartLineModel[]) {
+  _cadeiaValorChart() {
 
-    var chartDom = document.getElementById('inqueritosChart')!;
-    var testChart = echarts.init(chartDom);
-    var _chartOption_Inqueritos_por_mes: EChartsOption;
-
-    _chartOption_Inqueritos_por_mes = {
-      tooltip: {
-        show: true
-      },
-      xAxis: {
-        type: 'category',
-        data: chartData.map(m => ({
-          value: m.name
-        }))
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: chartData.map(m => ({
-          value: m.value
-        })),
-        type: 'line'
-      }]
-    }
-    _chartOption_Inqueritos_por_mes && testChart.setOption(_chartOption_Inqueritos_por_mes);
-
-  }
-
-  _interessesChart(chartData: BasicEchartLineModel[]) {
-
-    var chartDom = document.getElementById('interessesChart')!;
+    var chartDom = document.getElementById('cadeiaValorChart')!;
     var Chart = echarts.init(chartDom);
-    var _chartOption_Interesses_por_mes: EChartsOption;
+    var _chartOption_CadeiaValor_por_mes: EChartsOption;
 
-    _chartOption_Interesses_por_mes = {
-      tooltip: {
-        show: true
-      },
-      xAxis: {
-        type: 'category',
-        data: chartData.map(m => ({
-          value: m.name
-        }))
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: chartData.map(m => ({
-          value: m.value
-        })),
-        type: 'line'
-      }]
-    }
-    _chartOption_Interesses_por_mes && Chart.setOption(_chartOption_Interesses_por_mes);
-
-  }
-
-
-
-  ngOnInit(): void {
-
-    // Subscribe chart for inqueritos
-    this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
-      this._inqueritosChart(data);
-    });
-
-    // subscribe Chart for interesses
-    this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
-      this._interessesChart(data);
-    });
-
-    //this.isAdmin()
-    this.getDeparet();
-    this.getInquerito();
-    this.getcadeia();
-    this.getManInterest();
-    this.proponentes();
-
-    // loop para contar e atualizar props in real time
-    for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
-      this.prop[0] *= 2;
-      if (this.prop[0] == 2)
-        this.prop++;
-    }
-
-    // loop para contar e atualizar interesses in real time
-    for (this.interestExpress = 0; this.interestExpress < this.interestExpress.length; this.interestExpress++) {
-      this.interestExpress[0] *= 2;
-      if (this.interestExpress[0] == 2)
-        this.interestExpress++;
-    }
-
-    // loop para contar e atualizar inqueritos in real time
-    for (this.inqueritos = 0; this.inqueritos < this.inqueritos.length; this.inqueritos++) {
-      this.inqueritos[0] *= 2;
-      if (this.inqueritos[0] == 2)
-        this.inqueritos++;
-    }
-
-    // loop para contar e atualizar departamento in real time
-    for (this.departamento = 0; this.departamento < this.departamento.length; this.departamento++) {
-      this.departamento[0] *= 2;
-      if (this.departamento[0] == 2)
-        this.departamento++;
-    }
-
-    type EChartsOption = echarts.EChartsOption;
-    var chartDom = document.getElementById('main')!;
-    var myChart = echarts.init(chartDom);
-    var option1: EChartsOption;
-
-    option1 = {
+    _chartOption_CadeiaValor_por_mes = {
       tooltip: {
         trigger: 'item'
       },
@@ -200,7 +91,125 @@ export class DashboardComponent implements OnInit {
       ]
     };
 
-    option1 && myChart.setOption(option1);
+    _chartOption_CadeiaValor_por_mes && Chart.setOption(_chartOption_CadeiaValor_por_mes);
+
+  }
+
+  _inqueritosChart(chartData: BasicEchartLineModel[]) {
+
+    var chartDom = document.getElementById('inqueritosChart')!;
+    var testChart = echarts.init(chartDom);
+    var _chartOption_Inqueritos_por_mes: EChartsOption;
+
+    _chartOption_Inqueritos_por_mes = {
+      tooltip: {
+        show: true
+      },
+      xAxis: {
+        type: 'category',
+        data: chartData.map(m => ({
+          value: m.name.substring(0,3)
+        }))
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        name: 'Número de Inquéritos',
+        data: chartData.map(m => ({
+          value: m.value
+        })),
+        type: 'line'
+      }]
+    }
+    _chartOption_Inqueritos_por_mes && testChart.setOption(_chartOption_Inqueritos_por_mes);
+
+  }
+
+  _interessesChart(chartData: BasicEchartLineModel[]) {
+
+    var chartDom = document.getElementById('interessesChart')!;
+    var Chart = echarts.init(chartDom);
+    var _chartOption_Interesses_por_mes: EChartsOption;
+
+    _chartOption_Interesses_por_mes = {
+      tooltip: {
+        show: true
+      },
+      xAxis: {
+        type: 'category',
+        data: chartData.map(m => ({
+          value: m.name.substring(0,3)
+        }))
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        name: 'Número de Interesses',
+        data: chartData.map(m => ({
+          value: m.value
+        })),
+        type: 'line'
+      }]
+    }
+    _chartOption_Interesses_por_mes && Chart.setOption(_chartOption_Interesses_por_mes);
+
+  }
+
+
+
+  ngOnInit(): void {
+
+    this._cadeiaValorChart();
+
+    // Subscribe chart for inqueritos
+    this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
+      this._inqueritosChart(data);
+      console.log('inqueritos chart por mes:', data)
+    });
+
+    // subscribe Chart for interesses
+    this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
+      this._interessesChart(data);
+      console.log('interesses chart por mes:', data)
+    });
+
+    //this.isAdmin()
+    this.getDeparet();
+    this.getInquerito();
+    this.getcadeia();
+    this.getManInterest();
+    this.proponentes();
+
+    // loop para contar e atualizar props in real time
+    for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
+      this.prop[0] *= 2;
+      if (this.prop[0] == 2)
+        this.prop++;
+    }
+
+    // loop para contar e atualizar interesses in real time
+    for (this.interestExpress = 0; this.interestExpress < this.interestExpress.length; this.interestExpress++) {
+      this.interestExpress[0] *= 2;
+      if (this.interestExpress[0] == 2)
+        this.interestExpress++;
+    }
+
+    // loop para contar e atualizar inqueritos in real time
+    for (this.inqueritos = 0; this.inqueritos < this.inqueritos.length; this.inqueritos++) {
+      this.inqueritos[0] *= 2;
+      if (this.inqueritos[0] == 2)
+        this.inqueritos++;
+    }
+
+    // loop para contar e atualizar departamento in real time
+    for (this.departamento = 0; this.departamento < this.departamento.length; this.departamento++) {
+      this.departamento[0] *= 2;
+      if (this.departamento[0] == 2)
+        this.departamento++;
+    }
+
   }
 
   sideBarToggler() {
