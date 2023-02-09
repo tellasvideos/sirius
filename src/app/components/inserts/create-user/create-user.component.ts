@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { DataService } from 'src/app/services/data.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-user',
@@ -12,15 +13,15 @@ import { DataService } from 'src/app/services/data.service';
 export class CreateUserComponent implements OnInit {
 
   angForm: FormGroup;
-  user:any;
-  departamento:any;
+  user: any;
+  departamento: any;
 
   constructor(
-    public modalRef: MdbModalRef<CreateUserComponent>, 
+    public modalRef: MdbModalRef<CreateUserComponent>,
     private fb: FormBuilder,
     private dataService: DataService,
     private route: Router
-    ) {
+  ) {
 
     this.angForm = this.fb.group({
       name: ['', Validators.required],
@@ -35,23 +36,49 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.angForm.value);
+    //  console.log(this.angForm.value);
     this.getDepartaments();
   }
 
   getDepartaments() {
     this.dataService.get_Departaments().subscribe(data => {
       this.departamento = data;
-      console.log(data)
+      // console.log(data)
     })
   }
 
-  postdata(data:any){
-    this.dataService.AddUser(this.angForm.value).subscribe(data =>{
-      this.user = data;
-      console.log('salvo', data)
-    })
+  postdata(data: any) {
+    this.dataService.AddUser(this.angForm.value).subscribe(
+
+      success => {
+        this.user = success;
+        this.alert_success();
+        // console.log('salvo', data)
+      },
+
+      error => {
+        this.alert_error();
+      }
+      
+    );
     this.modalRef.close();
+  }
+
+  alert_error() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Alguma coisa correu mal, tente mais tarde.",
+    })
+  }
+
+  alert_success() {
+    Swal.fire({
+      icon: "success",
+      title: "Salvo",
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

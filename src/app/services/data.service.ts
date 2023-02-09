@@ -11,6 +11,7 @@ import { Pais } from '../models/pais'
 
 import { Cidade } from '../models/cidade'
 import { Condicao } from '../models/condicao.model';
+import { BasicEchartLineModel } from '../models/echart.models';
 
 @Injectable({
   providedIn: 'root'
@@ -383,6 +384,14 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     return this.http.put(`${this.edit_inquerito_url}${id}/`, inquerito, { headers: headers }).pipe(take(1));
+  }
+
+  // get chartData 
+  getBasicAreaEchartData(): Observable<BasicEchartLineModel[]> {
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8022/api/v1/getinterestexpressionsnumberpermonth/', { headers: headers });
   }
 
   // Method to Get an interest Expression by id

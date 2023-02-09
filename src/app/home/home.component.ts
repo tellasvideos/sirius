@@ -43,16 +43,26 @@ export class HomeComponent implements OnInit {
   forgtPass() {
     let User = { "email": this.username }
     //console.log('vindo do input', User)
-    this.auth.forgtPass(User).subscribe(data => {
-      this.retorno = data;
-      //console.log('foi enviada uma mensagem ao seu email, para recuperar sua palavra passe.', User)
-    });
-    this.username = '';
-    Swal.fire({
-      icon: 'info',
-      text: 'Foi enviada uma mensagem ao seu email por favor, acesse para definir sua nova palavra passe.',
-    })
+    this.auth.forgtPass(User).subscribe(
 
+      success => {
+        this.retorno = success;
+        Swal.fire({
+          icon: 'info',
+          text: 'Foi enviada uma mensagem ao seu email por favor, acesse para definir sua nova palavra passe.',
+        })
+        //console.log('foi enviada uma mensagem ao seu email, para recuperar sua palavra passe.', User)
+      },
+
+      error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Alguma coisa ocorreu mal, tente mais tarde!',
+        });
+      }
+    );
+    this.username = '';
   }
 
   LOGIN_(data: any) {
@@ -68,14 +78,14 @@ export class HomeComponent implements OnInit {
         if (this.user.token) {
           this._errorLogin = false;
           localStorage.setItem("userToken", this.user.token);
-         // localStorage.setItem('user', JSON.stringify(this.user));
+          // localStorage.setItem('user', JSON.stringify(this.user));
           this.route.navigate(['/dashboard'])
         }
       },
 
       error => {
         this._errorLogin = true;
-        console.log('error')
+        // console.log('error')
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -99,7 +109,7 @@ export class HomeComponent implements OnInit {
         this.route.navigate(['/dashboard'])
       } else {
         this._errorLogin = true;
-        console.log('error')
+        //console.log('error')
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

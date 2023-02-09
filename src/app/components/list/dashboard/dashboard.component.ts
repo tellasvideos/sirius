@@ -17,7 +17,9 @@ import { EChartsOption } from 'echarts';
 export class DashboardComponent implements OnInit {
 
   subscripition?: Subscription;
-  _chartOption!: EChartsOption;
+  _chartOption_Inqueritos_por_mes?: EChartsOption;
+  _chartOption_Interesses_por_mes?: EChartsOption;
+  _chartOption_CadeiaValor_por_mes?: EChartsOption;
 
   i: any;
 
@@ -38,13 +40,13 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  private _initBasicAreaEcharts(chartData: BasicEchartLineModel[]) {
+  _inqueritosChart(chartData: BasicEchartLineModel[]) {
 
-    var chartDom = document.getElementById('yee')!;
+    var chartDom = document.getElementById('inqueritosChart')!;
     var testChart = echarts.init(chartDom);
-    var _chartOption: EChartsOption;
+    var _chartOption_Inqueritos_por_mes: EChartsOption;
 
-    _chartOption = {
+    _chartOption_Inqueritos_por_mes = {
       tooltip: {
         show: true
       },
@@ -64,7 +66,37 @@ export class DashboardComponent implements OnInit {
         type: 'line'
       }]
     }
-    _chartOption && testChart.setOption(_chartOption);
+    _chartOption_Inqueritos_por_mes && testChart.setOption(_chartOption_Inqueritos_por_mes);
+
+  }
+
+  _interessesChart(chartData: BasicEchartLineModel[]) {
+
+    var chartDom = document.getElementById('interessesChart')!;
+    var Chart = echarts.init(chartDom);
+    var _chartOption_Interesses_por_mes: EChartsOption;
+
+    _chartOption_Interesses_por_mes = {
+      tooltip: {
+        show: true
+      },
+      xAxis: {
+        type: 'category',
+        data: chartData.map(m => ({
+          value: m.name
+        }))
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: chartData.map(m => ({
+          value: m.value
+        })),
+        type: 'line'
+      }]
+    }
+    _chartOption_Interesses_por_mes && Chart.setOption(_chartOption_Interesses_por_mes);
 
   }
 
@@ -72,8 +104,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subscripition = this.echartService.getBasicAreaEchartData().subscribe(data => {
-      this._initBasicAreaEcharts(data);
+    // Subscribe chart for inqueritos
+    this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
+      this._inqueritosChart(data);
+    });
+
+    // subscribe Chart for interesses
+    this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
+      this._interessesChart(data);
     });
 
     //this.isAdmin()
@@ -112,9 +150,6 @@ export class DashboardComponent implements OnInit {
     }
 
     type EChartsOption = echarts.EChartsOption;
-    type EChartsOption2 = echarts.EChartsOption;
-    type EChartsOption3 = echarts.EChartsOption;
-
     var chartDom = document.getElementById('main')!;
     var myChart = echarts.init(chartDom);
     var option1: EChartsOption;
@@ -166,63 +201,6 @@ export class DashboardComponent implements OnInit {
     };
 
     option1 && myChart.setOption(option1);
-
-
-    // segundo Gráfico
-    var chartDom2 = document.getElementById('main2')!;
-    var myChart2 = echarts.init(chartDom2);
-    var option2: EChartsOption2;
-
-    option2 = {
-      xAxis: {
-        type: 'category',
-        data: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: [1, 2, 1, 4, 4, 5, 3, 4],
-          type: 'line'
-        }
-      ]
-    };
-
-    option2 && myChart2.setOption(option2);
-
-
-    // Terceiro gráico
-    var chartDom3 = document.getElementById('main3')!;
-    var myChart3 = echarts.init(chartDom3);
-    var option3: EChartsOption3;
-
-    option3 = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: [120, 200, 150, 80, 70, 110, 130],
-          type: 'bar',
-          showBackground: true,
-          backgroundStyle: {
-            color: 'rgba(180, 180, 180, 0.2)'
-          }
-        }
-      ]
-    };
-
-
-    option3 && myChart3.setOption(option3);
-
-
-
-
   }
 
   sideBarToggler() {
