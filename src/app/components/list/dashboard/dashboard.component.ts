@@ -97,6 +97,12 @@ export class DashboardComponent implements OnInit {
 
   _inqueritosChart(chartData: BasicEchartLineModel[]) {
 
+    /*let numberString = '10,000';
+
+let numberArray = numberString.split(',');
+
+let result = numberArray.join(''); */
+
     var chartDom = document.getElementById('inqueritosChart')!;
     var testChart = echarts.init(chartDom);
     var _chartOption_Inqueritos_por_mes: EChartsOption;
@@ -108,19 +114,21 @@ export class DashboardComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: chartData.map(m => ({
-          value: m.name.substring(0, 3)
+          value: m.name
         }))
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
       },
-      series: [{
-        name: 'Número de Inquéritos',
-        data: chartData.map(m => ({
-          value: m.value
-        })),
-        type: 'line'
-      }]
+      series: [
+        {
+          name: 'Inqueritos',
+          data: chartData.map(m => ({
+            value: m.value
+          })),
+          type: 'line'
+        }
+      ]
     }
     _chartOption_Inqueritos_por_mes && testChart.setOption(_chartOption_Inqueritos_por_mes);
 
@@ -137,20 +145,21 @@ export class DashboardComponent implements OnInit {
         show: true
       },
       xAxis: {
+       // name: 'Mês/ano',
         type: 'category',
         data: chartData.map(m => ({
-          value: m.name.substring(0, 3)
+          value: m.name
         }))
       },
       yAxis: {
         type: 'value'
       },
       series: [{
-        name: 'Número de Interesses',
+        name: 'Interesses',
         data: chartData.map(m => ({
           value: m.value
         })),
-        type: 'line'
+        type: 'bar'
       }]
     }
     _chartOption_Interesses_por_mes && Chart.setOption(_chartOption_Interesses_por_mes);
@@ -165,13 +174,17 @@ export class DashboardComponent implements OnInit {
     // Subscribe chart for inqueritos
     this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
       this._inqueritosChart(data);
-      //console.log('inqueritos chart por mes:', data)
+
+     /* let numberArray = data[0].year.split(',');
+      let result = numberArray.join('');
+      console.log('virgula eliminada: ', result);*/
+      console.log('inqueritos chart por mes:', data)
     });
 
     // subscribe Chart for interesses
     this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
       this._interessesChart(data);
-      //console.log('interesses chart por mes:', data)
+      console.log('interesses chart por mes:', data)
     });
 
     //this.isAdmin()

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito.component';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-inquerito',
@@ -48,7 +49,8 @@ export class InqueritoComponent implements OnInit {
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService,
-    private route: Router
+    private route: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -82,6 +84,11 @@ export class InqueritoComponent implements OnInit {
     this.responsible = '';
     this.document_to_proves_date = '';
     this.interest_expression = '';
+    this.goBack()
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   deleteInquire(id: any) {

@@ -20,7 +20,7 @@ export class EchartService {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8022/api/v1/getinquirersnumberpermonth/', { headers: headers });
+    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8022/api/v1/getinquirerformsnumberpermonth/', { headers: headers });
   }
 
   // to get chart data to Interst expression

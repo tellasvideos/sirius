@@ -37,6 +37,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var data = [
+      "1,234",
+      "5,678",
+      "9,012"
+    ];
+
+    console.log(data);
+    let numberArray = data[0].split(',');
+    let result = numberArray.join('');
+    console.log('virgula eliminada: ', result); // Output: 10000
+
   }
 
   forgtPass() {
@@ -73,7 +84,6 @@ export class HomeComponent implements OnInit {
       success => {
         this.user = success
         //  console.log('Depois do login', success);
-
         if (this.user.token) {
           this._errorLogin = false;
           this.authService.setSession(this.user.token);
