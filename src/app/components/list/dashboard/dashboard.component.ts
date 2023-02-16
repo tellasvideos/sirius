@@ -36,10 +36,13 @@ export class DashboardComponent implements OnInit {
   @Input()
   usuario: any;
 
-  constructor(public img: HeaderComponent, private ds: DataService, private echartService: EchartService) {
+  constructor(
+    public img: HeaderComponent,
+    private ds: DataService,
+    private echartService: EchartService) {
   }
 
-  _cadeiaValorChart() {
+  _cadeiaValorChart(chartData: any[]) {
 
     var chartDom = document.getElementById('cadeiaValorChart')!;
     var Chart = echarts.init(chartDom);
@@ -73,20 +76,9 @@ export class DashboardComponent implements OnInit {
           labelLine: {
             show: false
           },
-          data: [
-            { value: 1048, name: 'Arroz' },
-            { value: 735, name: 'Milho' },
-            { value: 580, name: 'Feijão' },
-            { value: 484, name: 'Ovos' },
-            { value: 884, name: 'gimguba' },
-            { value: 184, name: 'ervilha' },
-            { value: 1084, name: 'cebola' },
-            { value: 184, name: 'tomate' },
-            { value: 424, name: 'couves' },
-            { value: 494, name: 'laranja' },
-            { value: 684, name: 'limao' },
-            { value: 784, name: 'Café' },
-          ]
+          data: chartData.map(m => ({
+            value: m.value
+          })),
         }
       ]
     };
@@ -96,12 +88,6 @@ export class DashboardComponent implements OnInit {
   }
 
   _inqueritosChart(chartData: BasicEchartLineModel[]) {
-
-    /*let numberString = '10,000';
-
-let numberArray = numberString.split(',');
-
-let result = numberArray.join(''); */
 
     var chartDom = document.getElementById('inqueritosChart')!;
     var testChart = echarts.init(chartDom);
@@ -145,7 +131,7 @@ let result = numberArray.join(''); */
         show: true
       },
       xAxis: {
-       // name: 'Mês/ano',
+        // name: 'Mês/ano',
         type: 'category',
         data: chartData.map(m => ({
           value: m.name
@@ -169,22 +155,27 @@ let result = numberArray.join(''); */
 
   ngOnInit(): void {
 
-    this._cadeiaValorChart();
+    // this._cadeiaValorChart();
+
+    // Subscribe chart for VAlue chain from interestExpression
+    this.subscripition = this.echartService.get_CadeiaValor_EchartData().subscribe(data => {
+      this._cadeiaValorChart(data);
+    });
 
     // Subscribe chart for inqueritos
     this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
       this._inqueritosChart(data);
 
-     /* let numberArray = data[0].year.split(',');
-      let result = numberArray.join('');
-      console.log('virgula eliminada: ', result);*/
-      console.log('inqueritos chart por mes:', data)
+      /* let numberArray = data[0].year.split(',');
+       let result = numberArray.join('');
+       console.log('virgula eliminada: ', result);*/
+      //console.log('inqueritos chart por mes:', data)
     });
 
     // subscribe Chart for interesses
     this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
       this._interessesChart(data);
-      console.log('interesses chart por mes:', data)
+      //console.log('interesses chart por mes:', data)
     });
 
     //this.isAdmin()
