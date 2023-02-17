@@ -43,8 +43,8 @@
                             class="btn btn-light dropdown-toggle-split" ngbDropdownToggle><i
                                 class="fas fa-map-marker-alt"></i> Província </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
-                            <button ngbDropdownItem *ngFor="let item of provincias"
-                                [value]="item.province_id" (click)="buscar(item.province_id)"> {{item.name}}
+                            <button ngbDropdownItem *ngFor="let item of provincias" [value]="item.province_id"
+                                (click)="buscar(item.province_id)"> {{item.name}}
                             </button>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                             <td>{{item['s2gp/s2g1q1/prop_nif']}}</td>
                             <td>{{item['s2gp/s2g2/rep_nome']}}</td>
                             <td>{{item['s2gp/s2g2/rep_telemovel']}}</td>
-                            <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
+                            <td>{{devolve_nome_provincia(item['s2gp/s2g3/rep_provincia'])}}</td>
                             <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
 
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">

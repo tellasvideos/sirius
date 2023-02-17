@@ -20,7 +20,7 @@ export class ProponentesComponent implements OnInit {
   my_stringify: any;
   my_stringify2: any;
 
-
+  prov: any;
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -38,6 +38,12 @@ export class ProponentesComponent implements OnInit {
   
       console.log(array3);*/
 
+  }
+
+  devolve_nome_provincia(id: any) {
+    this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].name
+    // console.log(this.prov)
+    return this.prov
   }
 
   buscar(id: any) {
