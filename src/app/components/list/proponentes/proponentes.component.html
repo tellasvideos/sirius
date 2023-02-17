@@ -44,7 +44,7 @@
                                 class="fas fa-map-marker-alt"></i> Província </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
                             <button ngbDropdownItem *ngFor="let item of provincias"
-                                [value]="item.province_id.toString()" (click)="buscar(item.province_id)"> {{item.name}}
+                                [value]="item.province_id" (click)="buscar(item.province_id)"> {{item.name}}
                             </button>
                         </div>
                     </div>

@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
       },*/
       series: [
         {
-          name: 'Produção',
+          name: 'Interesse na produção',
           type: 'pie',
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
@@ -77,7 +77,8 @@ export class DashboardComponent implements OnInit {
             show: false
           },
           data: chartData.map(m => ({
-            value: m.value
+            value: m.value,
+            name: m.name
           })),
         }
       ]
@@ -113,7 +114,7 @@ export class DashboardComponent implements OnInit {
             value: m.value
           })),
           type: 'line'
-        }
+        },
       ]
     }
     _chartOption_Inqueritos_por_mes && testChart.setOption(_chartOption_Inqueritos_por_mes);
@@ -160,6 +161,8 @@ export class DashboardComponent implements OnInit {
     // Subscribe chart for VAlue chain from interestExpression
     this.subscripition = this.echartService.get_CadeiaValor_EchartData().subscribe(data => {
       this._cadeiaValorChart(data);
+      //console.log('value chain from interest', data)
+
     });
 
     // Subscribe chart for inqueritos

@@ -10,7 +10,7 @@ export class EchartService {
 
   constructor(private httpClient: HttpClient) { }
 
-  
+
   getBasicLineEchartData(): Observable<BasicEchartLineModel[]> {
     return this.httpClient.get<BasicEchartLineModel[]>('assets/echart/chartData1.json');
   }
@@ -31,12 +31,12 @@ export class EchartService {
     return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8022/api/v1/getinterestexpressionsnumberpermonth/', { headers: headers });
   }
 
-   // to get Chart data to Value chain
-   get_CadeiaValor_EchartData(): Observable<BasicEchartLineModel[]> {
+  // to get Chart data to Value chain
+  get_CadeiaValor_EchartData(): Observable<BasicEchartLineModel[]> {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.httpClient.get<BasicEchartLineModel[]>('', { headers: headers });
+    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8022/api/v1/getvaluechainfrominterestexpressions/', { headers: headers });
   }
 
 

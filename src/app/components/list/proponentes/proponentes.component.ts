@@ -41,7 +41,7 @@ export class ProponentesComponent implements OnInit {
   }
 
   buscar(id: any) {
-    this.dataService.ProponentsByProvince(id.toString()).subscribe(data => {
+    this.dataService.ProponentsByProvince(id).subscribe(data => {
       this.prop_por_provincia = data;
       console.log('prop by province', data)
     })
