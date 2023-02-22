@@ -696,7 +696,7 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
     //console.log(province_id)
-    return this.http.post(this.proponentsByProv_url + '/koboformsbyprovince/', province_id.toString(), { headers: headers });
+    return this.http.post(this.proponentsByProv_url + '/koboformsbyprovince/', province_id, { headers: headers });
   }
 
 

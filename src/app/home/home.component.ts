@@ -37,16 +37,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var data = [
-      "1,234",
-      "5,678",
-      "9,012"
-    ];
+    /* var data = [
+       "1,234",
+       "5,678",
+       "9,012"
+     ];*/
 
-    console.log(data);
-    let numberArray = data[0].split(',');
-    let result = numberArray.join('');
-    console.log('virgula eliminada: ', result); // Output: 10000
+    //console.log(data);
+    // let numberArray = data[0].split(',');
+    // let result = numberArray.join('');
+    //console.log('virgula eliminada: ', result); // Output: 10000
 
   }
 

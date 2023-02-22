@@ -42,13 +42,20 @@ export class ProponentesComponent implements OnInit {
 
   devolve_nome_provincia(id: any) {
     this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].name
+    //    console.log(this.prov)
+    return this.prov
+  }
+
+  devolve_nome_provincia2(id: any) {
+    this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].province_id
     // console.log(this.prov)
     return this.prov
   }
 
-  buscar(id: any) {
+  buscarPorProvincia(id: any) {
     this.dataService.ProponentsByProvince(id).subscribe(data => {
-      this.prop_por_provincia = data;
+      this.prov = data;
+      this.devolve_nome_provincia2(id)
       console.log('prop by province', data)
     })
   }
@@ -75,7 +82,7 @@ export class ProponentesComponent implements OnInit {
       // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
 
       // this.my_stringify2 = JSON.stringify(data)
-      //  console.log('stgfy 2 caso:',data)
+      console.log('provincias:', data)
     })
   }
 

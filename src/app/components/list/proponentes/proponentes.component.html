@@ -44,7 +44,7 @@
                                 class="fas fa-map-marker-alt"></i> Província </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
                             <button ngbDropdownItem *ngFor="let item of provincias" [value]="item.province_id"
-                                (click)="buscar(item.province_id)"> {{item.name}}
+                                (click)="buscarPorProvincia(item.province_id)"> {{item.name}}
                             </button>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
             <div class="table-responsive">
                 <table class="table table-hover table-sm text-center">
                     <tbody>
-                        <tr *ngFor="let item of prop_por_provincia" routerLink="/single-prop" routerLinkActive="active"
+                        <tr *ngFor="let item of prov" routerLink="/single-prop" routerLinkActive="active"
                             [queryParams]="{_id:item._id, 
                                             prop_nome:item['s2gp/s2g1q1/prop_nome'], 
                                             prop_empresa:item['s2gp/s2g1q1/prop_empresa'],
@@ -74,7 +74,7 @@
                             <td>{{item['s2gp/s2g1q1/prop_nif']}}</td>
                             <td>{{item['s2gp/s2g2/rep_nome']}}</td>
                             <td>{{item['s2gp/s2g2/rep_telemovel']}}</td>
-                            <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
+                            <td>{{devolve_nome_provincia(item['s2gp/s2g3/rep_provincia'])}}</td>
                             <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
 
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded">
