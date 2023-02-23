@@ -16,7 +16,7 @@ import { BasicEchartLineModel } from '../models/echart.models';
 export class DataService {
 
   loginerror = false;
-
+  
   getCondicao() {
     return [
       new Condicao(1, 'Sim'),
