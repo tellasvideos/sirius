@@ -44,14 +44,14 @@ import { AuthGuard } from './services/auth.guard';
 
 // configuração de rotas
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
-  {path: 'cadeiadevalor', component: CadeiadevalorComponent, canActivate: [AuthGuard]},
+  { path: 'cadeiadevalor', component: CadeiadevalorComponent, canActivate: [AuthGuard] },
   { path: 'departamento', component: DepartamentoComponent, canActivate: [AuthGuard] },
   { path: 'inquerito', component: InqueritoComponent, canActivate: [AuthGuard] },
   { path: 'inquiridor', component: InquiridorComponent, canActivate: [AuthGuard] },
   { path: 'interesses', component: InteressesComponent, canActivate: [AuthGuard] },
-  { path: 'recpass', component: RecpassComponent, /*canActivate: [AuthGuard]*/},
+  { path: 'recpass', component: RecpassComponent, /*canActivate: [AuthGuard]*/ },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuard] },
   { path: 'footer', component: FooterComponent, canActivate: [AuthGuard] },
@@ -84,7 +84,7 @@ const routes: Routes = [
 ];
 
 
-export const routing: ModuleWithProviders<any> = RouterModule.forRoot(routes);
+export const routing: ModuleWithProviders<any> = RouterModule.forRoot(routes, { useHash: true });
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
