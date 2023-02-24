@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./edit-interest.component.scss']
 })
 export class EditInterestComponent implements OnInit {
-  cadeiaDeValor?: CadeiaVal[];
+  cadeiaDeValor: any;
   interest?: ManInteress[];
   sideBarOpen = true;
   PDAC: any;
@@ -20,7 +20,7 @@ export class EditInterestComponent implements OnInit {
   id: any;
   sb: any;
   angForm: FormGroup;
-  provinces:any;
+  provinces: any;
 
   constructor(
     //public modalRef: MdbModalRef<AddInteressesComponent>,
@@ -60,13 +60,13 @@ export class EditInterestComponent implements OnInit {
 
   ngOnInit(): void {
     this.proponestesPDAC();
-      this.getCadeiaDeValor();
-      this.getInterestExpress();
-      this.get_provinces();
+    this.getCadeiaDeValor();
+    this.getInterestExpress();
+    this.get_provinces();
 
-      this.activatedRoute.paramMap.subscribe(paramId => {
-        this.id = paramId.get('id'),
-          //console.log('id clicado', this.id)
+    this.activatedRoute.paramMap.subscribe(paramId => {
+      this.id = paramId.get('id'),
+        //console.log('id clicado', this.id)
 
         this.dataService.getInterestExpressByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
@@ -74,7 +74,7 @@ export class EditInterestComponent implements OnInit {
           //console.log(this.angForm.value)
         });
 
-      });
+    });
   }
 
   EditInterestExpress() {
@@ -90,7 +90,7 @@ export class EditInterestComponent implements OnInit {
   atualizardados() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.interest = data;
-        //console.log(data)
+      //console.log(data)
     })
   }
 
@@ -113,26 +113,26 @@ export class EditInterestComponent implements OnInit {
   proponestesPDAC() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.PDAC = data;
-        this.filterDsc()
+      this.filterDsc()
     })
   }
 
   getCadeiaDeValor() {
     this.dataService.getValueChains().subscribe(data => {
       this.cadeiaDeValor = data;
-        //console.log('cadeia de valor', data)
+      //console.log('cadeia de valor', data)
     })
   }
 
   getInterestExpress() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.sb = data;
-        //console.log('getting int ', data)
+      //console.log('getting int ', data)
     })
   }
 
-  get_provinces(){
-    this.dataService.get_Provinces().subscribe(data =>{
+  get_provinces() {
+    this.dataService.get_Provinces().subscribe(data => {
       this.provinces = data;
       //console.log('prov', data)
     })
