@@ -82,7 +82,7 @@ export class ProponentesComponent implements OnInit {
       // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
 
       // this.my_stringify2 = JSON.stringify(data)
-      console.log('provincias:', data)
+      //console.log('provincias:', data)
     })
   }
 

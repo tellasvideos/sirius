@@ -14,6 +14,8 @@ export class SinglePropComponent implements OnInit {
 
   id: any;
   prop_nome: any;
+  prov:any;
+  provincias:any;
 
   constructor(
     private router: Router,
@@ -30,7 +32,26 @@ export class SinglePropComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
+  devolve_nome_provincia(id: any) {
+    this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].name
+    //    console.log(this.prov)
+    return this.prov
+  }
+
+  getProvincias() {
+    this.dataService.get_Provinces().subscribe(data => {
+      this.provincias = data;
+
+      // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
+      // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
+
+      // this.my_stringify2 = JSON.stringify(data)
+      //console.log('provincias:', data)
+    })
+  }
+
   ngOnInit(): void {
+    this.getProvincias()
     this.route.queryParams.subscribe(data => {
       this.proponente = data;
       this.id = data['id'];
