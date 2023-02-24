@@ -26,6 +26,7 @@ export class SinglePropComponent implements OnInit {
       this.proponente = data;
       //console.log(data)
     })
+    this.getProvincias()
   }
 
   sideBarToggler() {
@@ -41,17 +42,10 @@ export class SinglePropComponent implements OnInit {
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
       this.provincias = data;
-
-      // this.my_stringify = JSON.stringify(this.provincias[0].province_id)
-      // console.log('stringify provincias_id:', this.provincias[0].province_id.toString())
-
-      // this.my_stringify2 = JSON.stringify(data)
-      //console.log('provincias:', data)
     })
   }
 
   ngOnInit(): void {
-    this.getProvincias()
     this.route.queryParams.subscribe(data => {
       this.proponente = data;
       this.id = data['id'];
