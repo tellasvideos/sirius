@@ -46,7 +46,7 @@ export class EditUserComponent implements OnInit {
 
       this.dataService.getUserByid(this.id).subscribe(data => {
         this.angForm.patchValue(data);
-        console.log('dados do iduser clicado', data)
+        //console.log('dados do iduser clicado', data)
         //console.log(this.angForm.value)
       });
 
@@ -86,7 +86,7 @@ export class EditUserComponent implements OnInit {
   getUser() {
     this.dataService.getUser().subscribe(data => {
       this.usuario = data;
-      console.log('all data users: ', data)
+      //console.log('all data users: ', data)
     })
   }
 
