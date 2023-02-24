@@ -34,7 +34,7 @@ export class SinglePropComponent implements OnInit {
     this.route.queryParams.subscribe(data => {
       this.proponente = data;
       this.id = data['id'];
-      this.prop_nome == data['prop_nome'];
+      this.prop_nome === data['prop_nome'];
       // console.log('queryparams', data['prop_nome'])
       /* this.dataService.proponentPDAC().subscribe(data => {
          this.proponente = data;
