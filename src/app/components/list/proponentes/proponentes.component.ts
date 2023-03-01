@@ -58,19 +58,19 @@ export class ProponentesComponent implements OnInit {
 
   devolver_nome_empresa(id:any){
     this.empre = this.empresa.filter((emp: any) => emp.id === id)[0].name
-    console.log(this.empre)
+  //  console.log(this.empre)
     return this.empre
   }
 
   devolver_nome_municipio(id:any){
     this.mun = this.municipio.filter((emp: any) => emp.id === id)[0].name
-    console.log(this.mun)
+  //  console.log(this.mun)
     return this.mun
   }
 
   devolver_nome_categoria(id:any){
     this.cat = this.categoria.filter((emp: any) => emp.id === id)[0].name
-    console.log(this.cat)
+   // console.log(this.cat)
     return this.cat
   }
 
@@ -106,21 +106,21 @@ export class ProponentesComponent implements OnInit {
   getEmpresas(){
     this.dataService.getCompanyName().subscribe(data =>{
       this.empresa = data;
-      console.log(data)
+     // console.log(data)
     })
   }
 
   getCategorias(){
     this.dataService.getCategory().subscribe(data =>{
       this.categoria = data;
-      console.log(data)
+     // console.log(data)
     })
   }
 
   getMunicipio(){
     this.dataService.getMunicipio().subscribe(data =>{
       this.municipio = data;
-      console.log(data)
+     // console.log(data)
     })
   }
 

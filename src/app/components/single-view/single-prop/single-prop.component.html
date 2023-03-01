@@ -57,20 +57,22 @@
             </div>
             <br>
             <div>
-                <div class="input-group input-group-sm mb-3">
+                <!--div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Alvará comercial</span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
                         [(ngModel)]="proponente['alvara']" aria-describedby="inputGroup-sizing-sm">
-                </div>
+                </!--div-->
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Coordenadas</span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        [(ngModel)]="proponente['coordenadas']" aria-describedby="inputGroup-sizing-sm">
+                        [(ngModel)]="proponente['coordenadas']" aria-describedby="inputGroup-sizing-sm" readonly
+                        [attr.disabled]="true">
                 </div>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Objectivo</span>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        [(ngModel)]="proponente['objectivos']" aria-describedby="inputGroup-sizing-sm">
+                        [(ngModel)]="proponente['objectivos']" aria-describedby="inputGroup-sizing-sm" readonly
+                        [attr.disabled]="true">
                 </div>
             </div>
 
