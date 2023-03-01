@@ -57,19 +57,19 @@ export class ProponentesComponent implements OnInit {
   }
 
   devolver_nome_empresa(id:any){
-    this.empre = this.empresa.filter((emp: any) => emp.name === id)[0].name
+    this.empre = this.empresa.filter((emp: any) => emp.id === id)[0].name
     console.log(this.empre)
     return this.empre
   }
 
   devolver_nome_municipio(id:any){
-    this.mun = this.municipio.filter((emp: any) => emp.name === id)[0].name
+    this.mun = this.municipio.filter((emp: any) => emp.id === id)[0].name
     console.log(this.mun)
     return this.mun
   }
 
   devolver_nome_categoria(id:any){
-    this.cat = this.categoria.filter((emp: any) => emp.name === id)[0].name
+    this.cat = this.categoria.filter((emp: any) => emp.id === id)[0].name
     console.log(this.cat)
     return this.cat
   }

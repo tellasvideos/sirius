@@ -64,19 +64,19 @@ export class SinglePropComponent implements OnInit {
   }
 
   devolver_nome_empresa(id: any) {
-    this.retorno = this.empresa.filter((emp: any) => emp.name === id)[0].name
+    this.retorno = this.empresa.filter((emp: any) => emp.id === id)[0].name
     console.log(this.retorno)
     return this.retorno
   }
 
   devolver_nome_municipio(id: any) {
-    this.retorno = this.municipio.filter((emp: any) => emp.name === id)[0].name
+    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
     console.log(this.retorno)
     return this.retorno
   }
 
   devolver_nome_categoria(id: any) {
-    this.retorno = this.categoria.filter((emp: any) => emp.name === id)[0].name
+    this.retorno = this.categoria.filter((emp: any) => emp.id === id)[0].name
     console.log(this.retorno)
     return this.retorno
   }
