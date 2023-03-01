@@ -14,8 +14,14 @@ export class SinglePropComponent implements OnInit {
 
   id: any;
   prop_nome: any;
-  prov:any;
-  provincias:any;
+  prov: any;
+  provincias: any;
+
+  empresa: any;
+  categoria: any;
+  municipio: any;
+
+  retorno: any;
 
   constructor(
     private router: Router,
@@ -29,22 +35,6 @@ export class SinglePropComponent implements OnInit {
     this.getProvincias()
   }
 
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
-  }
-
-  devolve_nome_provincia(id: any) {
-    this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].name
-    //    console.log(this.prov)
-    return this.prov
-  }
-
-  getProvincias() {
-    this.dataService.get_Provinces().subscribe(data => {
-      this.provincias = data;
-    })
-  }
-
   ngOnInit(): void {
     this.route.queryParams.subscribe(data => {
       this.proponente = data;
@@ -55,6 +45,69 @@ export class SinglePropComponent implements OnInit {
          this.proponente = data;
        })*/
     })
+
+    this.getCategorias()
+    this.getEmpresas()
+    this.getMunicipio()
+
   }
+
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  devolve_nome_provincia(id: any) {
+    this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].name
+    //    console.log(this.prov)
+    return this.prov
+  }
+
+  devolver_nome_empresa(id: any) {
+    this.retorno = this.empresa.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.retorno)
+    return this.retorno
+  }
+
+  devolver_nome_municipio(id: any) {
+    this.retorno = this.municipio.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.retorno)
+    return this.retorno
+  }
+
+  devolver_nome_categoria(id: any) {
+    this.retorno = this.categoria.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.retorno)
+    return this.retorno
+  }
+
+
+  getProvincias() {
+    this.dataService.get_Provinces().subscribe(data => {
+      this.provincias = data;
+    })
+  }
+
+  getEmpresas() {
+    this.dataService.getCompanyName().subscribe(data => {
+      this.empresa = data;
+      // console.log(data)
+    })
+  }
+
+  getCategorias() {
+    this.dataService.getCategory().subscribe(data => {
+      this.categoria = data;
+      //console.log(data)
+    })
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
+    })
+  }
+
 
 }

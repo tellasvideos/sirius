@@ -214,6 +214,21 @@ export class DataService {
     return this.http.get('http://192.168.3.13:8001/accounts/users/', { headers: headers, params: params })
   }
 
+  // Method to get company name
+  getCompanyName(){
+    return this.http.get('http://192.168.3.13:8001/api/v1/empresas/');
+  }
+
+  // Method to get Category
+  getCategory(){
+    return this.http.get('http://192.168.3.13:8001/api/v1/categorias/');
+  }
+
+  // Method to get village
+  getMunicipio(){
+    return this.http.get('http://192.168.3.13:8001/api/v1/municipios/');
+  }
+
   // Method to Get all proponents from PDAC Data-Base
   proponentPDAC() {
     var headers = new HttpHeaders();

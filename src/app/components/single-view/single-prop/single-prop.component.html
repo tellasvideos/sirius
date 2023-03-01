@@ -43,13 +43,13 @@
                     <tbody>
                         <tr>
                             <td> {{proponente['prop_nome']}} </td>
-                            <td>{{proponente['prop_empresa']}}</td>
+                            <td>{{devolver_nome_empresa(proponente['prop_empresa'])}}</td>
                             <td>{{proponente['prop_nif']}}</td>
-                            <td>{{proponente['prop_categ']}}</td>
+                            <td>{{devolver_nome_categoria(proponente['prop_categ'])}}</td>
                             <td>{{proponente['rep_nome']}}</td>
                             <td>{{proponente['prop_telemovel']}}</td>
                             <td>{{devolve_nome_provincia(proponente['prop_provincia'])}}</td>
-                            <td>{{proponente['rep_municipio']}}</td>
+                            <td>{{devolver_nome_municipio(proponente['rep_municipio'])}}</td>
                             <td> {{proponente['prop_subm'] | date:"dd/MM/yyyy"}} </td>
                         </tr>
                     </tbody>

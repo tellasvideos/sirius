@@ -21,9 +21,17 @@ export class ProponentesComponent implements OnInit {
   my_stringify2: any;
 
   prov: any;
+  empresa:any;
+  categoria:any;
+  municipio:any;
+  empre:any;
+
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getMunicipio()
+    this.getEmpresas()
+    this.getCategorias()
     this.getProvincias()
     this.dataService.proponentPDAC().subscribe(data => {
       this.proponente = data;
@@ -45,6 +53,25 @@ export class ProponentesComponent implements OnInit {
     //    console.log(this.prov)
     return this.prov
   }
+
+  devolver_nome_empresa(id:any){
+    this.empre = this.empresa.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.empre)
+    return this.empre
+  }
+
+  devolver_nome_municipio(id:any){
+    this.empre = this.municipio.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.empre)
+    return this.empre
+  }
+
+  devolver_nome_categoria(id:any){
+    this.empre = this.categoria.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.empre)
+    return this.empre
+  }
+
 
   devolve_nome_provincia2(id: any) {
     this.prov = this.provincias.filter((p: any) => p.province_id === id)[0].province_id
@@ -73,6 +100,28 @@ export class ProponentesComponent implements OnInit {
       return b._id - a._id
     })
   }
+
+  getEmpresas(){
+    this.dataService.getCompanyName().subscribe(data =>{
+      this.empresa = data;
+      console.log(data)
+    })
+  }
+
+  getCategorias(){
+    this.dataService.getCategory().subscribe(data =>{
+      this.categoria = data;
+      console.log(data)
+    })
+  }
+
+  getMunicipio(){
+    this.dataService.getMunicipio().subscribe(data =>{
+      this.municipio = data;
+      console.log(data)
+    })
+  }
+
 
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
