@@ -25,6 +25,8 @@ export class ProponentesComponent implements OnInit {
   categoria:any;
   municipio:any;
   empre:any;
+  cat:any;
+  mun:any;
 
   constructor(private modalService: MdbModalService, private dataService: DataService) { }
 
@@ -61,15 +63,15 @@ export class ProponentesComponent implements OnInit {
   }
 
   devolver_nome_municipio(id:any){
-    this.empre = this.municipio.filter((emp: any) => emp.name === id)[0].name
-    console.log(this.empre)
-    return this.empre
+    this.mun = this.municipio.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.mun)
+    return this.mun
   }
 
   devolver_nome_categoria(id:any){
-    this.empre = this.categoria.filter((emp: any) => emp.name === id)[0].name
-    console.log(this.empre)
-    return this.empre
+    this.cat = this.categoria.filter((emp: any) => emp.name === id)[0].name
+    console.log(this.cat)
+    return this.cat
   }
 
 
