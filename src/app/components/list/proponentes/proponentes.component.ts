@@ -37,6 +37,7 @@ export class ProponentesComponent implements OnInit {
     this.getProvincias()
     this.dataService.proponentPDAC().subscribe(data => {
       this.proponente = data;
+      console.log(data)
       this.filterDsc()
       // console.log('provincias do pdac: ', data[0]['s2gp/s2g3/rep_provincia'])
       //console.log('provincias da biplan: ', this.provincias[0].province_id)
