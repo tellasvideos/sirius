@@ -66,7 +66,7 @@ export class InteressesComponent implements OnInit {
   deleteInterest(id: any) {
     Swal.fire({
       title: 'De certeza que quer eliminar?',
-      text: "Você está prestes a eliminar a sua Manifestação de Interesse!",
+      text: "Você está prestes a eliminar este Back Off!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#2CBF04',

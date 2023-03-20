@@ -10,7 +10,7 @@
         <!-- proponente list-->
         <div class="d-flex mt-4 userlist justify-content-between" style="margin-left: 2%; margin-right: 2%;">
             <div class=" esp1">
-                <h5 class="list-user-text text-black mb-4">Proponente</h5>
+                <h5 class="list-user-text text-black mb-4">M. Interesse</h5>
             </div>
 
             <div class=" justify-content-between px-md-1">
@@ -107,6 +107,7 @@
                             <th scope="col" class="text-black">Telemovel</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black" (click)="filterDsc()">Data</th>
+                            <th scope="col" class="text-black not-it">Status</th>
                             <th scope="col" class="text-black not-it">Ver</th>
                             <th scope="col" class="text-black not-it">Acordos</th>
                         </tr>
@@ -137,6 +138,9 @@
                             <td>{{devolve_nome_provincia(item['s2gp/s2g3/rep_provincia'])}}</td>
                             <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
 
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="far fa-clock"></i>
+                                </button></td>
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
