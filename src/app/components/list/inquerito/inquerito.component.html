@@ -154,7 +154,7 @@
                 </div>
 
                 <div>
-                    <label for="municipio">município:</label>
+                    <label for="municipio">Município:</label>
                     <select class="form-select form-select-sm mb-3" id="municipio" name="municipio"
                         [(ngModel)]="municipio">
                         <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
@@ -169,7 +169,7 @@
                 </!--div-->
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                     data-bs-target="#exampleModalToggle2">Próximo</button>
             </div>
         </div>
@@ -182,406 +182,396 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
                 <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nome da
-                            empresa/fazenda/cooperativa:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <label for="exampleFormControlInput1" class="form-label">Aldeia</label>
+                        <input type="text" [(ngModel)]="aldeia" class="form-control form-control-sm"
+                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label">NlF da
-                            empresa/fazenda/cooperativa:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput2" placeholder="">
+                        <label for="exampleFormControlInput2" class="form-label">Data do primeiro contacto:</label>
+                        <input type="date" [(ngModel)]="data_1_contacto" min="{{minDate | date:'yyyy-MM-dd'}}"
+                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                            style="width: 340px;" class="form-control form-control-sm">
                     </div>
                 </div>
+
+                <div>
+                    <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
+                    <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
+                        name="resultado_1_contacto" [(ngModel)]="resultado_1_contacto" (change)="carregardocs2()">
+                        <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="documento_em_falta">Documento em Falta:</label>
+                    <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="documento_em_falta"
+                        [(ngModel)]="documento_em_falta">
+                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                    </select>
+                </div>
+
 
                 <div class="justify-content-between d-flex">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput3" class="form-label">Nome do candidato/representante
-                            (Proponente) legal:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput3" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput4" class="form-label">Função do candidato na Fazenda:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput4" placeholder="">
-                    </div>
-                </div>
 
-                <div class="justify-content-between d-flex">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Formação académica do
-                            proponente:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput5" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label"> Principal actividade profissional do
-                            proponente:
-                        </label>
-                        <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput5" placeholder="">
-                    </div>
-                </div>
-
-                <div class="">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Presença continua na fazenda:</label>
-                        <div class="m-2" *ngFor="let item of opcoes">
-                            <input type="radio" name="opcoes" [value]="item.name" (change)="ChangeHandler($event)"
-                                #continuous_presence_on_farm>
-                            <i> {{item.name}} </i>
+                    <div class="justify-content-between d-flex">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Formação académica do
+                                proponente:</label>
+                            <input type="text" class="form-control form-control-sm" style="width: 340px;"
+                                id="exampleFormControlInput5" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label"> Principal actividade profissional
+                                do
+                                proponente:
+                            </label>
+                            <input type="text" class="form-control form-control-sm" style="width: 340px;"
+                                id="exampleFormControlInput5" placeholder="">
                         </div>
                     </div>
-                    <div class="form-floating" *ngIf="selecionado == 'Não' ">
-                        <textarea class="form-control" placeholder="Comente aqui" name="observation"
-                            id="floatingTextarea"></textarea>
-                        <label for="exampleFormControlInput5" class="form-label">Estimativa da
-                            presença:</label>
-                    </div>
-                </div>
 
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
-                    data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
-                    data-bs-toggle="modal">Próximo</button>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
+                        data-bs-toggle="modal">Próximo</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Terceiro modal -->
-<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <div class=" justify-content-between d-flex ">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Idade do candidato/representante
-                            legal:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 80px;"
-                            id="exampleFormControlInput1" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Bilhete de identidade Nº:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput1" placeholder="">
-                    </div>
+    <!-- Terceiro modal -->
+    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição do Proponente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
 
-                <div class="">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Idade do proponente maior de 60 anos e
-                            tem filhos para assumir?</label>
-                        <div class="m-2" *ngFor="let item of opcoes">
-                            <input type="radio" name="opcoes" [value]="item.name" (change)="ChangeHandler($event)"
-                                #candidate_age_if_over_sixty_has_childen>
-                            <i> {{item.name}} </i>
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Idade do candidato/representante
+                                legal:</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 80px;"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Bilhete de identidade Nº:</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput1" placeholder="">
                         </div>
                     </div>
-                    <div class="form-floating mb-3" *ngIf="selecionado == 'Sim' ">
-                        <textarea class="form-control" placeholder="Comente aqui" id="floatingTextarea"></textarea>
-                        <label for="exampleFormControlInput5" class="form-label">Nome, Idade, Telefone e Formação
-                            académica do filho</label>
-                    </div>
-                </div>
 
-                <div class=" justify-content-between d-flex ">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Número de telefone:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput1" placeholder="">
-                    </div>
                     <div class="">
-                        <label for="exampleFormControlInput1" class="form-label">Endereço permanente:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 340px;"
-                            id="exampleFormControlInput1" placeholder="">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Idade do proponente maior de 60
+                                anos e
+                                tem filhos para assumir?</label>
+                            <div class="m-2" *ngFor="let item of opcoes">
+                                <input type="radio" name="opcoes" [value]="item.name" (change)="ChangeHandler($event)"
+                                    #candidate_age_if_over_sixty_has_childen>
+                                <i> {{item.name}} </i>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3" *ngIf="selecionado == 'Sim' ">
+                            <textarea class="form-control" placeholder="Comente aqui" id="floatingTextarea"></textarea>
+                            <label for="exampleFormControlInput5" class="form-label">Nome, Idade, Telefone e Formação
+                                académica do filho</label>
+                        </div>
                     </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Número de telefone:</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 340px;"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="">
+                            <label for="exampleFormControlInput1" class="form-label">Endereço permanente:</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 340px;"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+                    </div>
+
+
                 </div>
-
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
-                    data-bs-toggle="modal">Próximo</button>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
+                        data-bs-toggle="modal">Próximo</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Quarto modal -->
-<div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <div class=" justify-content-between d-flex ">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Quando é que a fazenda teve o seu
-                            inicio oficial?</label>
-                        <input type="date" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput1" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Qual documento que prova essa
-                            (data?)</label>
-                        <input type="file" [(ngModel)]="document_to_proves_date" style="width: 350px;"
-                            class="form-control form-control-sm" id="inputGroupFile02">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Que tipo de Empresa:</label>
-                    <select class="form-select form-select-sm mb-3" aria-label="Default select example">
-                        <option value="fazenda">Fazenda</option>
-                        <option value="empresa">Empresa</option>
-                        <option value="cooperativa">Cooperativa</option>
-                        <option value="agricola">Agrícola</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
-
-                <div class="justify-content-between d-flex">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Superfície total da Fazenda:</label>
-                        <input type="number" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5" placeholder="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Superfície pronta para Agricultura:
-                        </label>
-                        <input type="number" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5" placeholder="">
-                    </div>
-                </div>
-                <div class="justify-content-center text-center text-black m-3">
-                    <h4>Avaliação das potencialidades da fazenda:</h4>
-                </div>
-                <div class="justify-content-between d-flex">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Clima:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5" placeholder="Precipitação anual e distribuição">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Solo:
-                        </label>
-                        <input type="text" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5"
-                            placeholder="Prof, textura, coloração, drenagem, salinidade econfiguração de relevo, cobertura vegetal">
-                    </div>
-                </div>
-
-                <div class="justify-content-between d-flex">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Disponibilidade
-                            de água:</label>
-                        <input type="text" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5"
-                            placeholder="Fonte de água permanente, nascentes, nacas, regadios…">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput5" class="form-label">Existência de culturas perenes
-                            econdições:
-                        </label>
-                        <input type="text" class="form-control form-control-sm" style="width: 350px;"
-                            id="exampleFormControlInput5" placeholder="Café, outras plantas, idade, condições etc.">
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Acesso a Fazenda:</label>
-                    <select class="form-select form-select-sm mb-3" style="width: 350px;"
-                        aria-label="Default select example">
-                        <option value="facil">Fácil</option>
-                        <option value="dificil">Difícil</option>
-                        <option value="muito_dificil">Muito difícil</option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
-                    data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
-                    data-bs-toggle="modal">Próximo</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Quinto modal -->
-<div class="modal fade" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
-                    data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle6"
-                    data-bs-toggle="modal">Próximo</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sexto modal -->
-<div class="modal fade" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 6</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Hide this modal and show the first with the button below.
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
-                    data-bs-toggle="modal">Voltar</button>
-                <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle7"
-                    data-bs-toggle="modal">Próximo</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-< Sétimo modal ->
-    <div class="modal fade" id="exampleModalToggle7" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    <!-- Quarto modal -->
+    <div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 7</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Hide this modal and show the first with the button below.
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Quando é que a fazenda teve o seu
+                                inicio oficial?</label>
+                            <input type="date" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Qual documento que prova essa
+                                (data?)</label>
+                            <input type="file" [(ngModel)]="document_to_proves_date" style="width: 350px;"
+                                class="form-control form-control-sm" id="inputGroupFile02">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo de Empresa:</label>
+                        <select class="form-select form-select-sm mb-3" aria-label="Default select example">
+                            <option value="fazenda">Fazenda</option>
+                            <option value="empresa">Empresa</option>
+                            <option value="cooperativa">Cooperativa</option>
+                            <option value="agricola">Agrícola</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="justify-content-between d-flex">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Superfície total da
+                                Fazenda:</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Superfície pronta para Agricultura:
+                            </label>
+                            <input type="number" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5" placeholder="">
+                        </div>
+                    </div>
+                    <div class="justify-content-center text-center text-black m-3">
+                        <h4>Avaliação das potencialidades da fazenda:</h4>
+                    </div>
+                    <div class="justify-content-between d-flex">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Clima:</label>
+                            <input type="text" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5" placeholder="Precipitação anual e distribuição">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Solo:
+                            </label>
+                            <input type="text" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5"
+                                placeholder="Prof, textura, coloração, drenagem, salinidade econfiguração de relevo, cobertura vegetal">
+                        </div>
+                    </div>
+
+                    <div class="justify-content-between d-flex">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Disponibilidade
+                                de água:</label>
+                            <input type="text" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5"
+                                placeholder="Fonte de água permanente, nascentes, nacas, regadios…">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput5" class="form-label">Existência de culturas perenes
+                                econdições:
+                            </label>
+                            <input type="text" class="form-control form-control-sm" style="width: 350px;"
+                                id="exampleFormControlInput5" placeholder="Café, outras plantas, idade, condições etc.">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Acesso a Fazenda:</label>
+                        <select class="form-select form-select-sm mb-3" style="width: 350px;"
+                            aria-label="Default select example">
+                            <option value="facil">Fácil</option>
+                            <option value="dificil">Difícil</option>
+                            <option value="muito_dificil">Muito difícil</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle3"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
+                        data-bs-toggle="modal">Próximo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Quinto modal -->
+    <div class="modal fade" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Descrição da Fazenda</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle4"
+                        data-bs-toggle="modal">Voltar</button>
                     <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle6"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
                         data-bs-toggle="modal">Próximo</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Oitavo modal -->
-    <div class="modal fade" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    <!-- Sexto modal -->
+    <div class="modal fade" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 8</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 6</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Hide this modal and show the first with the button below.
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle5"
+                        data-bs-toggle="modal">Voltar</button>
                     <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle7"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
                         data-bs-toggle="modal">Próximo</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Nonu modal -->
-    <div class="modal fade" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 9</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Hide this modal and show the first with the button below.
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
-                        data-bs-toggle="modal">Próximo</button>
+    < Sétimo modal ->
+        <div class="modal fade" id="exampleModalToggle7" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 7</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle6"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
+                            data-bs-toggle="modal">Próximo</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Décimo modal -->
-    <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 10</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Hide this modal and show the first with the button below.
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle11"
-                        data-bs-toggle="modal">Próximo</button>
+        <!-- Oitavo modal -->
+        <div class="modal fade" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 8</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle7"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
+                            data-bs-toggle="modal">Próximo</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- last modal -->
-    <div class="modal fade" id="exampleModalToggle11" aria-hidden="true" aria-labelledby="10" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel10">Modal 11</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Hide this modal and show the first with the button below.
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-success">Guardar</button>
+        <!-- Nonu modal -->
+        <div class="modal fade" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 9</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle8"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
+                            data-bs-toggle="modal">Próximo</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Décimo modal -->
+        <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 10</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle9"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle11"
+                            data-bs-toggle="modal">Próximo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- last modal -->
+        <div class="modal fade" id="exampleModalToggle11" aria-hidden="true" aria-labelledby="10" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel10">Modal 11</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle10"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-success">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>

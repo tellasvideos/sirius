@@ -13,13 +13,44 @@ import { Location } from "@angular/common";
 })
 export class InqueritoComponent implements OnInit {
 
+  today: Date = new Date();
+  minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+  maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
+
   keyWord: string = '';
   selecionado: string = '';
 
+  resultados_De_Contacto = ['A ser visitada', 'Incomunicavel: Não atende',
+    'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento',
+    'Recusada: actividade inelegivel', 'Recusada: MI duplicada',
+    'Recusada: proponente desistiu', 'Recusada por falta dos 10%',
+    'Recusada por divida', 'Recusada: Zona ilegivel',
+    'Recusada por falta de documentação legal', 'Didas teste'
+  ];
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié']; // substitua com as suas províncias
   municipios: any; // esta lista será atualizada quando o usuário selecionar uma província
- // provinciaSelecionada: any;
   municipio: any;
+  docs: any;
+
+  carregardocs2() {
+    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
+    // aqui está um exemplo com algumas cidades fixas para cada província:
+    switch (this.resultado_1_contacto) {
+      case 'Recusada por falta de documentação legal':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      default:
+        this.docs = [];
+    }
+  }
 
   carregarMunicipios() {
     // substitua esta função com a sua lógica para carregar os municípios da província selecionada
@@ -34,7 +65,7 @@ export class InqueritoComponent implements OnInit {
       case 'Huambo':
         this.municipios = ['Bailundo', 'Caála', 'Ecunha', 'Huambo', 'Mungo'];
         break;
-        case 'Bié':
+      case 'Bié':
         this.municipios = ['Camacupa', 'Catabola', 'Chinguar'];
         break;
       default:
@@ -71,28 +102,28 @@ export class InqueritoComponent implements OnInit {
   interest_expression: any;
   manifestacao: any;
   inquiridor: any;
-// novos dados de inqueritos
-  nome_simplificado:any;
-  provincia:any;
- // municipio:any;
-  aldeia:any;
-  data_1_contacto:any;
-  resultado_1_contacto:any;
-  documento_em_falta:any;
-  documento_em_falta_2:any;
-  duplicada_da:any;
-  data_1_visita:any;
-  resultado_da_visita:any;
-  documento_em_falta_3:any;
-  duplicada_da_2:any;
-  data_validacao_inquerito:any;
-  que_tipo_de_negocio_esta:any;
-  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:any;
-  que_tipo:any;
-  que_tipo_2:any;
-  status:any;
-  manifestacao_de_interesse:any;
-  inqueridor:any;
+  // novos dados de inqueritos
+  nome_simplificado: any;
+  provincia: any;
+  // municipio:any;
+  aldeia: any;
+  data_1_contacto: any;
+  resultado_1_contacto: any;
+  documento_em_falta: any;
+  documento_em_falta_2: any;
+  duplicada_da: any;
+  data_1_visita: any;
+  resultado_da_visita: any;
+  documento_em_falta_3: any;
+  duplicada_da_2: any;
+  data_validacao_inquerito: any;
+  que_tipo_de_negocio_esta: any;
+  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
+  que_tipo: any;
+  que_tipo_2: any;
+  status: any;
+  manifestacao_de_interesse: any;
+  inqueridor: any;
 
   constructor(
     private modalService: MdbModalService,
@@ -107,16 +138,19 @@ export class InqueritoComponent implements OnInit {
     this.get_inquireForms();
     this.getProvincia();
     this.getPdac();
+
+    // this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
+
   }
 
-  getProvincia(){
-    this.dataService.get_Provinces().subscribe(data =>{
+  getProvincia() {
+    this.dataService.get_Provinces().subscribe(data => {
       this.provincia = data;
     })
   }
 
-  getPdac(){
-    this.dataService.proponentPDAC().subscribe(data =>{
+  getPdac() {
+    this.dataService.proponentPDAC().subscribe(data => {
       this.manifestacao_de_interesse = data;
     })
   }
