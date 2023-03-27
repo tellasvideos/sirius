@@ -42,9 +42,30 @@ export class InqueritoComponent implements OnInit {
   document_to_proves_date: any;
   created_at: any;
   interest_expression: any;
-
   manifestacao: any;
   inquiridor: any;
+// novos dados de inqueritos
+  nome_simplificado:any;
+  provincia:any;
+  municipio:any;
+  aldeia:any;
+  data_1_contacto:any;
+  resultado_1_contacto:any;
+  documento_em_falta:any;
+  documento_em_falta_2:any;
+  duplicada_da:any;
+  data_1_visita:any;
+  resultado_da_visita:any;
+  documento_em_falta_3:any;
+  duplicada_da_2:any;
+  data_validacao_inquerito:any;
+  que_tipo_de_negocio_esta:any;
+  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:any;
+  que_tipo:any;
+  que_tipo_2:any;
+  status:any;
+  manifestacao_de_interesse:any;
+  inqueridor:any;
 
   constructor(
     private modalService: MdbModalService,
@@ -57,6 +78,20 @@ export class InqueritoComponent implements OnInit {
     this.get_interest_express();
     this.get_inquirier();
     this.get_inquireForms();
+    this.getProvincia();
+    this.getPdac();
+  }
+
+  getProvincia(){
+    this.dataService.get_Provinces().subscribe(data =>{
+      this.provincia = data;
+    })
+  }
+
+  getPdac(){
+    this.dataService.proponentPDAC().subscribe(data =>{
+      this.manifestacao_de_interesse = data;
+    })
   }
 
   sideBarToggler() {
