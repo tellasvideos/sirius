@@ -217,27 +217,32 @@
                     </select>
                 </div>
 
-
-                <div class="justify-content-between d-flex">
-
-                    <div class="justify-content-between d-flex">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput5" class="form-label">Formação académica do
-                                proponente:</label>
-                            <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                                id="exampleFormControlInput5" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput5" class="form-label"> Principal actividade profissional
-                                do
-                                proponente:
-                            </label>
-                            <input type="text" class="form-control form-control-sm" style="width: 340px;"
-                                id="exampleFormControlInput5" placeholder="">
-                        </div>
+                <div class=" justify-content-between d-block ">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Resultado da Visita</label>
+                        <select class="form-select form-select-sm mb-3"  (change)="carregardocs3()" 
+                            style="width: 340px;" id="documento_em_falta"
+                            name="documento_em_falta" [(ngModel)]="resultado_da_visita">
+                            <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="documento_em_falta">Documento em Falta 2:</label>
+                        <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="documento_em_falta"
+                            [(ngModel)]="documento_em_falta_2">
+                            <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                        </select>
                     </div>
 
+                    <div>
+                        <label for="documento_em_falta">Documento em Falta 3:</label>
+                        <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="documento_em_falta"
+                            [(ngModel)]="documento_em_falta_3">
+                            <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="modal-footer justify-content-between">
                     <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
                         data-bs-toggle="modal">Voltar</button>

@@ -20,6 +20,20 @@ export class InqueritoComponent implements OnInit {
   keyWord: string = '';
   selecionado: string = '';
 
+  resultados_da_visita = ['Em análise',
+    'Incomunicavel: não atende',
+    'Incontactável : N° tel errado',
+    'Pendente por falta de documento',
+    'Recusada: actividade inelegível',
+    'Recusada : MI duplicada',
+    'Recusada : proponente desistiu',
+    'Recusada por falta dos 10%',
+    'Recusado por dívida',
+    'Recusada : zona inelegível',
+    'Recusada por falta de documentação legal',
+    'Didas teste'
+  ]
+
   resultados_De_Contacto = ['A ser visitada', 'Incomunicavel: Não atende',
     'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento',
     'Recusada: actividade inelegivel', 'Recusada: MI duplicada',
@@ -31,6 +45,72 @@ export class InqueritoComponent implements OnInit {
   municipios: any; // esta lista será atualizada quando o usuário selecionar uma província
   municipio: any;
   docs: any;
+
+  carregardocs3() {
+    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
+    // aqui está um exemplo com algumas cidades fixas para cada província:
+
+    switch (this.resultado_da_visita) {
+      case 'A ser visitada':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      case 'Recusada por falta de documentação legal':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      case 'Pendente por falta de documento':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      case 'Recusada: MI duplicada':
+        this.docs = ['Pendestes da M. Interesse'];
+        break;
+      case 'A ser visitada':
+        this.docs === this.data_1_contacto;
+        break;
+      default:
+        this.docs = [];
+    }
+
+    switch (this.documento_em_falta_3) {
+      case 'Recusada por falta de documentação legal':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      default:
+        this.docs = [];
+    }
+  }
+
 
   carregardocs2() {
     // substitua esta função com a sua lógica para carregar os municípios da província selecionada
@@ -46,6 +126,23 @@ export class InqueritoComponent implements OnInit {
           'BI',
           'NIF',
           'Otro'];
+        break;
+      case 'Pendente por falta de documento':
+        this.docs = ['Título de terra',
+          'croquis de localização',
+          'alvará comercial',
+          'certidão comercia',
+          'certidão de Não devedor da AGT',
+          'INSS',
+          'BI',
+          'NIF',
+          'Otro'];
+        break;
+      case 'Recusada: MI duplicada':
+        this.docs = ['Pendestes da M. Interesse'];
+        break;
+      case 'A ser visitada':
+        this.docs === this.data_1_contacto;
         break;
       default:
         this.docs = [];
