@@ -16,6 +16,33 @@ export class InqueritoComponent implements OnInit {
   keyWord: string = '';
   selecionado: string = '';
 
+  provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié']; // substitua com as suas províncias
+  municipios: any; // esta lista será atualizada quando o usuário selecionar uma província
+ // provinciaSelecionada: any;
+  municipio: any;
+
+  carregarMunicipios() {
+    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
+    // aqui está um exemplo com algumas cidades fixas para cada província:
+    switch (this.provincia) {
+      case 'Huila':
+        this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
+        break;
+      case 'Cuanza Sul':
+        this.municipios = ['Amboim', 'Cassongue', 'Cela', 'Ebo', 'Libolo', 'Mussende', 'Quibala', 'Quilenda', 'Seles', 'Sumbe'];
+        break;
+      case 'Huambo':
+        this.municipios = ['Bailundo', 'Caála', 'Ecunha', 'Huambo', 'Mungo'];
+        break;
+        case 'Bié':
+        this.municipios = ['Camacupa', 'Catabola', 'Chinguar'];
+        break;
+      default:
+        this.municipios = [];
+    }
+  }
+
+
   opcoes: any = [
     { "name": 'Sim' },
     { "name": 'Não' }
@@ -47,7 +74,7 @@ export class InqueritoComponent implements OnInit {
 // novos dados de inqueritos
   nome_simplificado:any;
   provincia:any;
-  municipio:any;
+ // municipio:any;
   aldeia:any;
   data_1_contacto:any;
   resultado_1_contacto:any;
