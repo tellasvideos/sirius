@@ -102,8 +102,9 @@
                         <tr>
                             <th scope="col" class="text-black">Nome</th>
                             <th scope="col" class="text-black">Empresa</th>
-                            <th scope="col" class="text-black">Nif</th>
+                            <!--th scope="col" class="text-black">Nif</!--th-->
                             <th scope="col" class="text-black">Representante</th>
+                            <!--th scope="col" class="text-black">Email</!--th-->
                             <th scope="col" class="text-black">Telemovel</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black" (click)="filterDsc()">Data</th>
@@ -127,20 +128,23 @@
                                             rep_municipio:item['s2gp/s2g3/rep_municipio'],
                                             alvara:item['s1g1/doc_alvara'],
                                             coordenadas:item['s2gp/s2g3/rep_cordenadas'],
-                                            objectivos:item['s2gp/objetivo1/objetivo2']
+                                            objectivos:item['s2gp/objetivo1/objetivo2'],
+                                            prop_email:item['s2gp/s2g2/rep_email']
                                            }">
 
                             <td> {{item['s2gp/s2g1q1/prop_nome']}} </td>
                             <td>{{devolver_nome_empresa(item['s2gp/s2g1q1/prop_empresa'])}}</td>
-                            <td>{{item['s2gp/s2g1q1/prop_nif']}}</td>
+                            <!--td>{{item['s2gp/s2g1q1/prop_nif']}}</!---->
                             <td>{{item['s2gp/s2g2/rep_nome']}}</td>
+                            <!--td>{{item['s2gp/s2g2/rep_email']}}</!--td-->
                             <td>{{item['s2gp/s2g2/rep_telemovel']}}</td>
-                            <td>{{devolve_nome_provincia(item['s2gp/s2g3/rep_provincia'])}}</td>
+                            <td>{{item['s2gp/s2g3/rep_provincia']}}</td>
                             <td> {{item._submission_time | date:"dd/MM/yyyy"}} </td>
+                            <td>{{item['_status']}}</td>
 
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <!--td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-clock"></i>
-                                </button></td>
+                                </button></!td-->
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-eye"></i>
                                 </button></td>
