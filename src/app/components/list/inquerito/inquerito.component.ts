@@ -34,15 +34,21 @@ export class InqueritoComponent implements OnInit {
     'Didas teste'
   ]
 
-  resultados_De_Contacto = ['A ser visitada', 'Incomunicavel: Não atende',
-    'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento',
-    'Recusada: actividade inelegivel', 'Recusada: MI duplicada',
-    'Recusada: proponente desistiu', 'Recusada por falta dos 10%',
-    'Recusada por divida', 'Recusada: Zona ilegivel',
-    'Recusada por falta de documentação legal', 'Didas teste'
+  resultados_De_Contacto = ['A ser visitada',
+    'Incomunicavel: Não atende',
+    'Incomunicavel: Nº Tel errado',
+    'Pendente por falta de documento',
+    'Recusada: actividade inelegivel',
+    'Recusada: MI duplicada',
+    'Recusada: proponente desistiu',
+    'Recusada por falta dos 10%',
+    'Recusada por divida',
+    'Recusada: Zona ilegivel',
+    'Recusada por falta de documentação legal',
+    'Didas teste'
   ];
-  provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié']; 
-  municipios: any; 
+  provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
+  municipios: any;
   municipio: any;
   docs: any;
 
@@ -84,9 +90,9 @@ export class InqueritoComponent implements OnInit {
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
         break;
-      case 'A ser visitada':
-        this.docs = ['Data atual'];
-        break;
+        case 'Em análise':
+          this.docs = ['data'];
+          break;
       default:
         this.docs = [];
     }
