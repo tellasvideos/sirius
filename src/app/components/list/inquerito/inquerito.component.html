@@ -296,31 +296,55 @@
 
                 <div class=" justify-content-between d-flex ">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Aldeia</label>
-                        <input type="text" [(ngModel)]="aldeia" class="form-control form-control-sm"
-                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
+                        <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
+                            style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="que_tipo_de_negocio_esta">
+                            <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
+                        </select>
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Aldeia</label>
-                        <input type="text" [(ngModel)]="aldeia" class="form-control form-control-sm"
-                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Carregar Inquérito: (.docx
+                                .pdf)</label>
+                            <input type="file" style="width: 350px;" class="form-control form-control-sm"
+                                id="inputGroupFile02">
+                        </div>
                     </div>
+                </div>
 
-                    <div class="modal-footer justify-content-between">
-                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
-                            data-bs-toggle="modal">Voltar</button>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalToggle4">Próximo</button>
-                    </div>
+                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
+                    <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se implementar
+                        o projecto?</label>
+                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                        [(ngModel)]="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
+                        <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Agregador' ">
+                    <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
+                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                        [(ngModel)]="que_tipo">
+                        <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalToggle4">Próximo</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 
-    <!-- Terceiro modal ->
+<!-- Terceiro modal ->
         <-- Quarto modal ->
         <div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
             tabindex="-1">

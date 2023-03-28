@@ -20,6 +20,29 @@ export class InqueritoComponent implements OnInit {
   keyWord: string = '';
   selecionado: string = '';
 
+  tipos_de_negococio = [
+    'Productor',
+    'Agregador',
+    'Transformador',
+    'Distribuidor',
+    'Prestador de servicios',
+    'Serviços mecânicos',
+    'Negócio insumos'
+  ]
+
+  tipos_de_agregador = [
+    'Descasque',
+    'Seleção',
+    'embalagem'
+  ]
+
+  tipos_de_cadeia_de_valor = [
+    'Tuberculos',
+    'Café',
+    'Grãos',
+    'Avicultura'
+  ]
+
   resultados_da_visita = ['Em análise',
     'Incomunicavel: não atende',
     'Incontactável: N° tel errado',
@@ -51,6 +74,28 @@ export class InqueritoComponent implements OnInit {
   municipios: any;
   municipio: any;
   docs: any;
+
+  loadTipoNegocio() {
+    switch (this.que_tipo_de_negocio_esta) {
+      case 'Productor':
+        this.docs = [
+          'Tuberculos',
+          'Café',
+          'Grãos',
+          'Avicultura'
+        ]
+        break;
+      case 'Agregador':
+        this.docs = [
+          'Descasque',
+          'Seleção',
+          'embalagem'
+        ]
+        break;
+      default:
+        this.docs = [];
+    }
+  }
 
   carregardocs3() {
     switch (this.resultado_da_visita) {
@@ -90,9 +135,9 @@ export class InqueritoComponent implements OnInit {
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
         break;
-        case 'Em análise':
-          this.docs = ['data'];
-          break;
+      case 'Em análise':
+        this.docs = ['data'];
+        break;
       default:
         this.docs = [];
     }
