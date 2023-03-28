@@ -41,15 +41,12 @@ export class InqueritoComponent implements OnInit {
     'Recusada por divida', 'Recusada: Zona ilegivel',
     'Recusada por falta de documentação legal', 'Didas teste'
   ];
-  provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié']; // substitua com as suas províncias
-  municipios: any; // esta lista será atualizada quando o usuário selecionar uma província
+  provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié']; 
+  municipios: any; 
   municipio: any;
   docs: any;
 
   carregardocs3() {
-    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
-    // aqui está um exemplo com algumas cidades fixas para cada província:
-
     switch (this.resultado_da_visita) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
@@ -88,7 +85,7 @@ export class InqueritoComponent implements OnInit {
         this.docs = ['Pendestes da M. Interesse'];
         break;
       case 'A ser visitada':
-        this.docs === this.data_1_contacto;
+        this.docs = ['Data atual'];
         break;
       default:
         this.docs = [];
@@ -109,12 +106,25 @@ export class InqueritoComponent implements OnInit {
       default:
         this.docs = [];
     }
+
+    switch (this.duplicada_da) {
+      case 'Recusada : MI duplicada':
+        this.docs = ['Lista Pendente das M. Interesse'];
+        break;
+      default:
+        this.docs = [];
+    }
+
+    switch (this.data_validacao_inquerito) {
+      case 'Em análise':
+        this.docs = ['Data atual'];
+        break;
+      default:
+        this.docs = [];
+    }
   }
 
-
   carregardocs2() {
-    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
-    // aqui está um exemplo com algumas cidades fixas para cada província:
     switch (this.resultado_1_contacto) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
@@ -142,7 +152,7 @@ export class InqueritoComponent implements OnInit {
         this.docs = ['Pendestes da M. Interesse'];
         break;
       case 'A ser visitada':
-        this.docs === this.data_1_contacto;
+        this.docs = ['Data atual'];
         break;
       default:
         this.docs = [];
@@ -150,8 +160,6 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregarMunicipios() {
-    // substitua esta função com a sua lógica para carregar os municípios da província selecionada
-    // aqui está um exemplo com algumas cidades fixas para cada província:
     switch (this.provincia) {
       case 'Huila':
         this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
