@@ -99,14 +99,15 @@
 
                 <div class="mb-3">
                     <label class="mb-2">Nome simplificado:</label>
-                    <input class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text"
-                        style="width: 340px;" name="nome_simplificado" aria-label=".form-control-sm example">
+                    <input class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
+                        (input)="checkFormValidity()" style="width: 340px;" name="nome_simplificado"
+                        aria-label=".form-control-sm example">
                 </div>
 
                 <div class="mb-3">
                     <label class="mb-2">M. Interesse:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="manifestacao_de_interesse"
-                        name="responsible" aria-label="Default select example">
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="manifestacao_de_interesse" required
+                        (select)="checkFormValidity()" name="responsible" aria-label="Default select example">
                         <option *ngFor="let item of manifestacao_de_interesse" [value]="item['s2gp/s2g1q1/_id']">
                             {{item['s2gp/s2g1q1/prop_nome']}}
                         </option>
@@ -115,8 +116,8 @@
 
                 <div class="mb-3">
                     <label class="mb-2">Inquiridor:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="responsible"
-                        aria-label="Default select example">
+                    <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="responsible" required
+                        (select)="checkFormValidity()" aria-label="Default select example">
                         <option *ngFor="let item of inquiridor" [value]="item.id"> {{item.responsible}}
                         </option>
                     </select>
@@ -125,16 +126,17 @@
                 <div class="justify-content-between d-flex">
                     <div>
                         <label for="provincia">Província:</label>
-                        <select class="form-select form-select-sm mb-3" id="provincia" name="provincia"
-                            style="width: 350px;" [(ngModel)]="provincia" (change)="carregarMunicipios()">
+                        <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
+                            (select)="checkFormValidity()" style="width: 350px;" [(ngModel)]="provincia"
+                            (change)="carregarMunicipios()">
                             <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                         </select>
                     </div>
 
                     <div>
                         <label for="municipio">Município:</label>
-                        <select class="form-select form-select-sm mb-3" id="municipio" name="municipio"
-                            style="width: 350px;" [(ngModel)]="municipio">
+                        <select class="form-select form-select-sm mb-3" id="municipio" name="municipio" required
+                            (select)="checkFormValidity()" style="width: 350px;" [(ngModel)]="municipio">
                             <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
@@ -142,7 +144,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" [disabled]="!isFormValid"
                     data-bs-target="#exampleModalToggle2">Próximo</button>
             </div>
         </div>

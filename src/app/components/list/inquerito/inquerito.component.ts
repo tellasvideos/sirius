@@ -13,6 +13,8 @@ import { Location } from "@angular/common";
 })
 export class InqueritoComponent implements OnInit {
 
+  isFormValid = false; // variável para armazenar o estado de validação do formulário
+
   today: Date = new Date();
   minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
   maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
@@ -113,7 +115,7 @@ export class InqueritoComponent implements OnInit {
           'Processamento e negócio grãos'
         ]
         break;
-        case 'Prestador de serviços':
+      case 'Prestador de serviços':
         this.docs = [
           'mecanizacao',
           'comercializacao',
@@ -292,9 +294,30 @@ export class InqueritoComponent implements OnInit {
     this.getProvincia();
     this.getPdac();
 
-    // this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
+    //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
+
+
+
 
   }
+
+  // função para verificar o estado de validação do formulário
+  checkFormValidity(): void {
+    const formControl = document.querySelector('input') as HTMLInputElement;
+    const value = formControl.value;
+
+    const formControls = document.querySelectorAll('input, select, textarea');
+    let isFormValid = true;
+
+    formControls.forEach(control => {
+      if (control.hasAttribute('required') && !control) {
+        isFormValid = false;
+      }
+    });
+
+    this.isFormValid = isFormValid;
+  }
+
 
   getProvincia() {
     this.dataService.get_Provinces().subscribe(data => {
