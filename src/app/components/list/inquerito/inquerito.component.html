@@ -331,6 +331,14 @@
                     </select>
                 </div>
 
+                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Transformador' ">
+                    <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
+                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                        [(ngModel)]="que_tipo">
+                        <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+
                 <div class="modal-footer justify-content-between">
                     <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                         data-bs-toggle="modal">Voltar</button>

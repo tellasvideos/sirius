@@ -43,6 +43,11 @@ export class InqueritoComponent implements OnInit {
     'Avicultura'
   ]
 
+  tipos_de_transformador = [
+    'Processamento e negócio Café',
+    'Processamento e negócio grãos'
+  ]
+
   resultados_da_visita = ['Em análise',
     'Incomunicavel: não atende',
     'Incontactável: N° tel errado',
@@ -90,6 +95,12 @@ export class InqueritoComponent implements OnInit {
           'Descasque',
           'Seleção',
           'embalagem'
+        ]
+        break;
+      case 'Transformador':
+        this.docs = [
+          'Processamento e negócio Café',
+          'Processamento e negócio grãos'
         ]
         break;
       default:
