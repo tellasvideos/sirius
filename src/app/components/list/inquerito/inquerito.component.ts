@@ -22,14 +22,14 @@ export class InqueritoComponent implements OnInit {
 
   resultados_da_visita = ['Em análise',
     'Incomunicavel: não atende',
-    'Incontactável : N° tel errado',
+    'Incontactável: N° tel errado',
     'Pendente por falta de documento',
     'Recusada: actividade inelegível',
-    'Recusada : MI duplicada',
-    'Recusada : proponente desistiu',
+    'Recusada: MI duplicada',
+    'Recusada: proponente desistiu',
     'Recusada por falta dos 10%',
     'Recusado por dívida',
-    'Recusada : zona inelegível',
+    'Recusada: zona inelegível',
     'Recusada por falta de documentação legal',
     'Didas teste'
   ]
@@ -91,37 +91,6 @@ export class InqueritoComponent implements OnInit {
         this.docs = [];
     }
 
-    switch (this.documento_em_falta_3) {
-      case 'Recusada por falta de documentação legal':
-        this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
-          'INSS',
-          'BI',
-          'NIF',
-          'Otro'];
-        break;
-      default:
-        this.docs = [];
-    }
-
-    switch (this.duplicada_da) {
-      case 'Recusada : MI duplicada':
-        this.docs = ['Lista Pendente das M. Interesse'];
-        break;
-      default:
-        this.docs = [];
-    }
-
-    switch (this.data_validacao_inquerito) {
-      case 'Em análise':
-        this.docs = ['Data atual'];
-        break;
-      default:
-        this.docs = [];
-    }
   }
 
   carregardocs2() {
@@ -150,9 +119,6 @@ export class InqueritoComponent implements OnInit {
         break;
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
-        break;
-      case 'A ser visitada':
-        this.docs = ['Data atual'];
         break;
       default:
         this.docs = [];
