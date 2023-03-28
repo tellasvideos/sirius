@@ -20,12 +20,22 @@ export class InqueritoComponent implements OnInit {
   keyWord: string = '';
   selecionado: string = '';
 
+  estado = ['Aprovado']
+
+  tipos_de_prestadores = [
+    'mecanizacao',
+    'comercializacao',
+    'insumos/sementes',
+    'transporte',
+    'Construçao'
+  ]
+
   tipos_de_negococio = [
     'Productor',
     'Agregador',
     'Transformador',
     'Distribuidor',
-    'Prestador de servicios',
+    'Prestador de serviços',
     'Serviços mecânicos',
     'Negócio insumos'
   ]
@@ -101,6 +111,15 @@ export class InqueritoComponent implements OnInit {
         this.docs = [
           'Processamento e negócio Café',
           'Processamento e negócio grãos'
+        ]
+        break;
+        case 'Prestador de serviços':
+        this.docs = [
+          'mecanizacao',
+          'comercializacao',
+          'insumos/sementes',
+          'transporte',
+          'Construçao'
         ]
         break;
       default:
@@ -254,6 +273,7 @@ export class InqueritoComponent implements OnInit {
   em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
   que_tipo: any;
   que_tipo_2: any;
+  que_tipo_3: any;
   status: any;
   manifestacao_de_interesse: any;
   inqueridor: any;
