@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 // Angular Materials
@@ -165,6 +166,7 @@ import { NgxPrintModule } from 'ngx-print';
     MatGridListModule,
     HttpClientModule,
     NgbModule
+    
   ],
   providers: [HeaderComponent, AuthService, DataService, HttpParams],
   bootstrap: [AppComponent]

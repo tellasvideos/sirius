@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito.component';
+//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from "@angular/common";
 
 @Component({
@@ -14,6 +15,7 @@ import { Location } from "@angular/common";
 export class InqueritoComponent implements OnInit {
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
+  pdac:any;
 
   today: Date = new Date();
   minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
@@ -228,23 +230,6 @@ export class InqueritoComponent implements OnInit {
   }
 
 
-  opcoes: any = [
-    { "name": 'Sim' },
-    { "name": 'Não' }
-  ]
-
-  tipo_Empresa: any = [
-    { "name": 'Fazenda' },
-    { "name": 'Cooperativa' },
-    { "name": 'Empresa' },
-    { "name": 'Agrícola' },
-    { "name": 'Outro' }
-  ]
-
-  ChangeHandler(event: any) {
-    this.selecionado = event.target.value;
-  }
-
   inqueritos: any;
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
@@ -259,16 +244,16 @@ export class InqueritoComponent implements OnInit {
   // novos dados de inqueritos
   nome_simplificado: any;
   provincia: any;
-  // municipio:any;
+  inquerito_preenchido?: string;
   aldeia: any;
-  data_1_contacto: any;
+  data_1_contacto?: string;
   resultado_1_contacto: any;
-  documento_em_falta: any;
-  documento_em_falta_2: any;
+  documento_em_falta?: any[];
+  documento_em_falta_2?: any[];
   duplicada_da: any;
-  data_1_visita: any;
+  data_1_visita?: string;
   resultado_da_visita: any;
-  documento_em_falta_3: any;
+  documento_em_falta_3?: any[];
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
@@ -277,7 +262,7 @@ export class InqueritoComponent implements OnInit {
   que_tipo_2: any;
   que_tipo_3: any;
   status: any;
-  manifestacao_de_interesse: any;
+  manifestacao_de_interesse?: any;
   inqueridor: any;
 
   constructor(
@@ -285,7 +270,12 @@ export class InqueritoComponent implements OnInit {
     private dataService: DataService,
     private route: Router,
     private location: Location,
+   // public activeModal: NgbActiveModal
   ) { }
+
+ /* fecharModal() {
+    this.activeModal.close();
+  }*/
 
   ngOnInit(): void {
     this.get_interest_express();
@@ -296,13 +286,10 @@ export class InqueritoComponent implements OnInit {
 
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
 
-
-
-
   }
 
   // função para verificar o estado de validação do formulário
-  checkFormValidity(): void {
+  /*checkFormValidity(): void {
     const formControl = document.querySelector('input') as HTMLInputElement;
     const value = formControl.value;
 
@@ -316,7 +303,7 @@ export class InqueritoComponent implements OnInit {
     });
 
     this.isFormValid = isFormValid;
-  }
+  }*/
 
 
   getProvincia() {
@@ -327,7 +314,8 @@ export class InqueritoComponent implements OnInit {
 
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
-      this.manifestacao_de_interesse = data;
+      this.pdac = data;
+      console.log(data)
     })
   }
 
@@ -337,6 +325,43 @@ export class InqueritoComponent implements OnInit {
 
   openModal() {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
+  }
+
+  save_inquerito() {
+    let InquireForm = {
+      "nome_simplificado": this.nome_simplificado,
+      "provincia": this.provincia,
+      "municipio": this.municipio,
+      "aldeia": this.aldeia,
+      "data_1_contacto": this.data_1_contacto,
+      "resultado_1_contacto": this.resultado_1_contacto,
+      "documento_em_falta": this.documento_em_falta,
+      "documento_em_falta_2": this.documento_em_falta_2,
+      "duplicada_da": this.duplicada_da,
+      "data_1_visita": this.data_1_visita,
+      "resultado_da_visita": this.resultado_da_visita,
+      "documento_em_falta_3": this.documento_em_falta_3,
+      "duplicada_da_2": this.duplicada_da_2,
+      "data_validacao_inquerito": this.data_validacao_inquerito,
+      "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
+      "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
+      "que_tipo": this.que_tipo,
+      "que_tipo_2": this.que_tipo_2,
+      "que_tipo_3": this.que_tipo_3,
+      "status": this.status,
+      "created_at": this.created_at,
+      "manifestacao_de_interesse": this.manifestacao_de_interesse,
+      "inqueridor": this.inqueridor,
+      "inquerito_preenchido": this.inquerito_preenchido
+    }
+    this.dataService.salvaInquireForm(InquireForm).subscribe(
+      success => { this.alert_success },
+      error => { this.alert_error }
+      
+    )
+    this.get_inquireForms();
+    this.goBack()
+   // this.route.navigate(['interesses']);
   }
 
   save_inquireForm() {
@@ -356,7 +381,8 @@ export class InqueritoComponent implements OnInit {
     this.responsible = '';
     this.document_to_proves_date = '';
     this.interest_expression = '';
-    this.goBack()
+   // this.fecharModal()
+   // this.goBack()
   }
 
   goBack(): void {
@@ -390,7 +416,7 @@ export class InqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      //console.log('inquérito', data)
+      console.log('inquérito', data)
     })
   }
 
@@ -398,7 +424,7 @@ export class InqueritoComponent implements OnInit {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Alguma coisa correu mal, tente mais tarde.",
+      text: "Alguma coisa correu mal, verifique se preencheu os campos correctamente.",
     })
   }
   alert_success() {

@@ -77,9 +77,9 @@ export class DataService {
   delete_departaments_url = 'http://strongboxao.ddns.net:8001/api/v1/departments/';
 
   // url to inquireform
-  get_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
+  get_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
   save_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1';
-  delete_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
+  delete_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
 
   // url to delete BP status
   delete_Status_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatus/';
@@ -645,18 +645,18 @@ export class DataService {
 
   // Method to get inquire form
   get_InquireForm() {
-    var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get<any[]>(this.get_inquireForms_url, { headers: headers })
+    //var headers = new HttpHeaders();
+   // headers = headers.append('Content-Type', 'application/json');
+   // headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.get<any[]>(this.get_inquireForms_url)
   }
 
   // Method to save inquire form
   salvaInquireForm(inquireForm: any) {
-    var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.post(this.save_inquireForms_url + '/inqueritos/', inquireForm, { headers: headers })
+   // var headers = new HttpHeaders();
+   // headers = headers.append('Content-Type', 'application/json');
+   // headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
+    return this.http.post(this.save_inquireForms_url + '/inqueritos/', inquireForm)
   }
 
   // Method to delete Inquire form
