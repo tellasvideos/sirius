@@ -199,7 +199,7 @@
 
                 <div *ngIf="this.resultado_1_contacto === 'Pendente por falta de documento' ">
                     <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                    <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                    <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
                         name="documento_em_falta" [(ngModel)]="documento_em_falta">
                         <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                     </select>
@@ -223,7 +223,7 @@
                     </div>
                     <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
                         <label for="documento_em_falta">Documento em Falta 2:</label>
-                        <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                        <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" [(ngModel)]="documento_em_falta_2">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
@@ -246,7 +246,7 @@
 
                     <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
                         <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                        <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                        <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" [(ngModel)]="documento_em_falta_3">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>

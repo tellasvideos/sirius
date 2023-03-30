@@ -15,7 +15,7 @@ import { Location } from "@angular/common";
 export class InqueritoComponent implements OnInit {
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
-  pdac:any;
+  pdac: any;
 
   today: Date = new Date();
   minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
@@ -229,6 +229,7 @@ export class InqueritoComponent implements OnInit {
     }
   }
 
+  reloadOnce: any;
 
   inqueritos: any;
   sideBarOpen = true;
@@ -270,12 +271,12 @@ export class InqueritoComponent implements OnInit {
     private dataService: DataService,
     private route: Router,
     private location: Location,
-   // public activeModal: NgbActiveModal
+    // public activeModal: NgbActiveModal
   ) { }
 
- /* fecharModal() {
-    this.activeModal.close();
-  }*/
+  /* fecharModal() {
+     this.activeModal.close();
+   }*/
 
   ngOnInit(): void {
     this.get_interest_express();
@@ -285,6 +286,9 @@ export class InqueritoComponent implements OnInit {
     this.getPdac();
 
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
+
+    
+    
 
   }
 
@@ -357,12 +361,21 @@ export class InqueritoComponent implements OnInit {
     this.dataService.salvaInquireForm(InquireForm).subscribe(
       success => { this.alert_success },
       error => { this.alert_error }
-      
+
     )
     this.get_inquireForms();
-    this.goBack()
-   // this.route.navigate(['interesses']);
+    //this.location.reload();
+    //this.goBack()
+    //window.location.reload();
+   // window.removeEventListener('load', this.reloadOnce);
+    //window.addEventListener('load', this.reloadOnce);
+
+   /* this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.route.navigate([this.route.url]);
+    });*/
   }
+
+  
 
   save_inquireForm() {
     let InquireForm = {
@@ -381,8 +394,8 @@ export class InqueritoComponent implements OnInit {
     this.responsible = '';
     this.document_to_proves_date = '';
     this.interest_expression = '';
-   // this.fecharModal()
-   // this.goBack()
+    // this.fecharModal()
+    // this.goBack()
   }
 
   goBack(): void {
