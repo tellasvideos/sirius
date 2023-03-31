@@ -53,10 +53,10 @@
                         <tr>
                             <!--th scope="col" class="text-black">Inquiridor</!--th-->
                             <th scope="col" class="text-black">Back Off</th>
-                            <th scope="col" class="text-black">Data de emissão</th>
+                            <th scope="col" class="text-black">Data do 1º Contacto</th>
                             <th scope="col" class="text-black">Provincia</th>
                             <th scope="col" class="text-black">Status</th>
-                            <th scope="col" class="text-black not-it">Editar</th>
+                            <!--th scope="col" class="text-black not-it">Editar</!--th-->
                             <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
@@ -67,12 +67,12 @@
                             <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                             <td>{{item.provincia}}</td>
                             <td>{{item.status}}</td>
-                            <td class="not-it">
+                            <!--td class="not-it">
                                 <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button>
-                            </td>
+                            </!--td-->
                             <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
                                     (click)="deleteInquire(item.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
@@ -86,262 +86,274 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<!-- Primeiro modal -->
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inquérito</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+<form enctype="multipart/form-data">
 
-                <div class="mb-3">
-                    <label class="mb-2">Nome simplificado:</label>
-                    <input class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
-                        style="width: 340px;" name="nome_simplificado" aria-label=".form-control-sm example">
+
+    <!-- Primeiro modal -->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inquérito</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
 
-                <div class="mb-3">
-                    <label class="mb-2">M. Interesse:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="manifestacao_de_interesse" required
-                        name="responsible" aria-label="Default select example">
-                        <option *ngFor="let item of pdac" [value]="item._id">
-                            {{item['s2gp/s2g1q1/prop_nome']}}
-                        </option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label class="mb-2">Nome simplificado:</label>
+                        <input class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
+                            style="width: 340px;" name="nome_simplificado" aria-label=".form-control-sm example">
+                    </div>
 
-                <div class="mb-3">
-                    <label class="mb-2">Inquiridor:</label>
-                    <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="responsible" required
-                        aria-label="Default select example">
-                        <option *ngFor="let item of inquiridor" [value]="item.id"> {{item.responsible}}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="justify-content-between d-flex">
-                    <div>
-                        <label for="provincia">Província:</label>
-                        <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
-                            style="width: 350px;" [(ngModel)]="provincia" (change)="carregarMunicipios()">
-                            <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
+                    <div class="mb-3">
+                        <label class="mb-2">M. Interesse:</label>
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="manifestacao_de_interesse" required
+                            name="responsible" aria-label="Default select example">
+                            <option *ngFor="let item of pdac" [value]="item['s2gp/s2g1q1/prop_nome']">
+                                {{item['s2gp/s2g1q1/prop_nome']}}
+                            </option>
                         </select>
                     </div>
 
-                    <div>
-                        <label for="municipio">Município:</label>
-                        <select class="form-select form-select-sm mb-3" id="municipio" name="municipio" required
-                            style="width: 350px;" [(ngModel)]="municipio">
-                            <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
+                    <div class="mb-3">
+                        <label class="mb-2">Inquiridor:</label>
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="responsible"
+                            required aria-label="Default select example">
+                            <option *ngFor="let item of inquiridor" [value]="item.id"> {{item.responsible}}
+                            </option>
                         </select>
                     </div>
-                </div>
-            </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalToggle2">Próximo</button>
+                    <div class="justify-content-between d-flex">
+                        <div>
+                            <label for="provincia">Província:</label>
+                            <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
+                                style="width: 350px;" [(ngModel)]="provincia" (change)="carregarMunicipios()">
+                                <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="municipio">Município:</label>
+                            <select class="form-select form-select-sm mb-3" id="municipio" name="municipio" required
+                                style="width: 350px;" [(ngModel)]="municipio">
+                                <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalToggle2">Próximo</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Segundo modal -->
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito:</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+    <!-- Segundo modal -->
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito:</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-                <div class=" justify-content-between d-flex ">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Aldeia:</label>
-                        <input type="text" [(ngModel)]="aldeia" class="form-control form-control-sm"
-                            style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Aldeia:</label>
+                            <input type="text" [(ngModel)]="aldeia" class="form-control form-control-sm"
+                                style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label">Data do primeiro contacto:</label>
+                            <input type="date" [(ngModel)]="data_1_contacto" min="{{minDate | date:'yyyy-MM-dd'}}"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px;" class="form-control form-control-sm">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label">Data do primeiro contacto:</label>
-                        <input type="date" [(ngModel)]="data_1_contacto" min="{{minDate | date:'yyyy-MM-dd'}}"
-                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                            style="width: 340px;" class="form-control form-control-sm">
-                    </div>
-                </div>
 
-                <div>
-                    <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
-                    <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
-                        name="resultado_1_contacto" [(ngModel)]="resultado_1_contacto" (change)="carregardocs2()">
-                        <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="exampleFormControlInput2" class="form-label">Data da primeira visita:</label>
-                    <input type="date" [(ngModel)]="data_1_visita" min="{{minDate | date:'yyyy-MM-dd'}}"
-                        max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'" style="width: 340px;"
-                        class="form-control form-control-sm">
-                </div>
-
-                <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
-                    <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                    <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                        name="documento_em_falta" [(ngModel)]="documento_em_falta">
-                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                    </select>
-                </div>
-
-                <div *ngIf="this.resultado_1_contacto === 'Pendente por falta de documento' ">
-                    <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                    <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
-                        name="documento_em_falta" [(ngModel)]="documento_em_falta">
-                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                    </select>
-                </div>
-
-                <div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
-                    <label for="documento_em_falta">Duplicada:</label>
-                    <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="documento_em_falta"
-                        [(ngModel)]="duplicada_da">
-                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                    </select>
-                </div>
-
-                <div class=" justify-content-between d-block ">
-                    <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
-                        <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
-                        <select class="form-select form-select-sm mb-3" (change)="carregardocs3()" style="width: 340px;"
-                            id="documento_em_falta" name="documento_em_falta" [(ngModel)]="resultado_da_visita">
-                            <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
+                    <div>
+                        <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
+                        <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
+                            name="resultado_1_contacto" [(ngModel)]="resultado_1_contacto" (change)="carregardocs2()">
+                            <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
                         </select>
                     </div>
-                    <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
-                        <label for="documento_em_falta">Documento em Falta 2:</label>
-                        <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput2" class="form-label">Data da primeira visita:</label>
+                        <input type="date" [(ngModel)]="data_1_visita" min="{{minDate | date:'yyyy-MM-dd'}}"
+                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                            style="width: 150px;" class="form-control form-control-sm">
+                    </div>
+
+                    <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
+                        <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                        <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                            name="documento_em_falta" [(ngModel)]="documento_em_falta">
+                            <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                        </select>
+                    </div>
+
+                    <div *ngIf="this.resultado_1_contacto === 'Pendente por falta de documento' ">
+                        <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                        <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" [(ngModel)]="documento_em_falta_2">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label">Data de validação:</label>
-                        <input type="date" [(ngModel)]="data_validacao_inquerito" min="{{minDate | date:'yyyy-MM-dd'}}"
-                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                            style="width: 340px;" class="form-control form-control-sm">
-                    </div>
-
-                    <div class="mb-3" *ngIf="this.data_validacao_inquerito">
-                        <label for="exampleFormControlInput2" class="form-label">Status:</label>
-                        <select class="form-select form-select-sm mb-3" id="documento_em_falta" style="width: 100px;"
-                            name="documento_em_falta" [(ngModel)]="status">
-                            <option *ngFor="let item of estado" [value]="item" selected>{{item}}</option>
-                        </select>
-                    </div>
-
-                    <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
-                        <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                        <select  class="form-select form-select-sm mb-3" id="documento_em_falta"
-                            name="documento_em_falta" [(ngModel)]="documento_em_falta_3">
-                            <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                        </select>
-                    </div>
-
-                    <div *ngIf="this.resultado_da_visita === 'Recusada: MI duplicada'">
+                    <div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
                         <label for="documento_em_falta">Duplicada:</label>
                         <select class="form-select form-select-sm mb-3" id="documento_em_falta"
-                            name="documento_em_falta" [(ngModel)]="duplicada_da_2">
+                            name="documento_em_falta" [(ngModel)]="duplicada_da">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModalToggle3">Próximo</button>
+                    <div class=" justify-content-between d-block ">
+                        <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
+                            <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
+                            <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
+                                style="width: 340px;" id="documento_em_falta" name="documento_em_falta"
+                                [(ngModel)]="resultado_da_visita">
+                                <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
+                            <label for="documento_em_falta">Documento em Falta:</label>
+                            <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                name="documento_em_falta" [(ngModel)]="documento_em_falta_3">
+                                <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                            </select>
+                        </div>
+
+                        <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
+                            <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                            <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                name="documento_em_falta" [(ngModel)]="documento_em_falta_4">
+                                <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                            </select>
+                        </div>
+
+                        <div *ngIf="this.resultado_da_visita === 'Recusada: MI duplicada'">
+                            <label for="documento_em_falta">Duplicada:</label>
+                            <select class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                name="documento_em_falta" [(ngModel)]="duplicada_da_2">
+                                <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label">Data de validação:</label>
+                            <input type="date" [(ngModel)]="data_validacao_inquerito"
+                                min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
+                                class="form-control form-control-sm">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput2" class="form-label">Status:</label>
+                            <select class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                style="width: 100px;" name="documento_em_falta" [(ngModel)]="status">
+                                <option *ngFor="let item of estado" [value]="item" selected>{{item}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalToggle3">Próximo</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Terceiro modal -->
-<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+    <!-- Terceiro modal -->
+    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-                <div class=" justify-content-between d-flex ">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
-                        <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
-                            style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
-                            [(ngModel)]="que_tipo_de_negocio_esta">
-                            <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
+                            <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
+                                style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
+                                [(ngModel)]="que_tipo_de_negocio_esta">
+                                <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <!--label for="exampleFormControlInput1" class="form-label">Carregar Inquérito: (.docx
+                                .pdf)</!--label-->
+                                <!--input type="file" name="file" style="width: 350px;" [(ngModel)]="inquerito_preenchido"
+                                class="form-control form-control-sm" id="inputGroupFile02"-->
+                                <label class="form-label" for="customFile">Carregar Inquérito: (.docx
+                                    .pdf)</label>
+                                <input type="file" [(ngModel)]="inquerito_preenchido" class="form-control"
+                                    id="customFile" style="width: 350px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
+                        <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
+                            implementar
+                            o projecto?</label>
+                        <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
+                            <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Carregar Inquérito: (.docx
-                                .pdf)</label>
-                            <input type="file" style="width: 350px;" [(ngModel)]="inquerito_preenchido"
-                                class="form-control form-control-sm" id="inputGroupFile02">
-                        </div>
+                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Agregador' ">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
+                        <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="que_tipo">
+                            <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
+                        </select>
                     </div>
-                </div>
 
-                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
-                    <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se implementar
-                        o projecto?</label>
-                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
-                        [(ngModel)]="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
-                        <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
-                    </select>
-                </div>
+                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Transformador' ">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
+                        <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="que_tipo_2">
+                            <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
 
-                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Agregador' ">
-                    <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
-                        [(ngModel)]="que_tipo">
-                        <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
-                    </select>
-                </div>
+                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Prestador de serviços' ">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
+                        <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="que_tipo_3">
+                            <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
+                        </select>
+                    </div>
 
-                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Transformador' ">
-                    <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
-                        [(ngModel)]="que_tipo_2">
-                        <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
-                    </select>
-                </div>
-
-                <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Prestador de serviços' ">
-                    <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                    <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="tipodenegocio"
-                        [(ngModel)]="que_tipo_3">
-                        <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
-                    </select>
-                </div>
-
-                <div class="modal-footer justify-content-between">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal">Voltar</button>
-                    <button class="btn btn-sm btn-success" type="submit"  (click)="save_inquerito()" >Guardar</button>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
+                            data-bs-toggle="modal">Voltar</button>
+                        <button class="btn btn-sm btn-success" type="submit" (click)="save_inquerito()">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>

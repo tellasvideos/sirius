@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito.component';
 //import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from "@angular/common";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-inquerito',
@@ -13,6 +14,8 @@ import { Location } from "@angular/common";
   styleUrls: ['./inquerito.component.scss']
 })
 export class InqueritoComponent implements OnInit {
+
+  formAprovado = false;
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
   pdac: any;
@@ -24,7 +27,7 @@ export class InqueritoComponent implements OnInit {
   keyWord: string = '';
   selecionado: string = '';
 
-  estado = ['Aprovado']
+  estado = ['Aprovado', 'Pendente']
 
   tipos_de_prestadores = [
     'mecanizacao',
@@ -242,19 +245,21 @@ export class InqueritoComponent implements OnInit {
   interest_expression: any;
   manifestacao: any;
   inquiridor: any;
+
   // novos dados de inqueritos
   nome_simplificado: any;
   provincia: any;
-  inquerito_preenchido?: string;
+  inquerito_preenchido!: File;
   aldeia: any;
   data_1_contacto?: string;
   resultado_1_contacto: any;
-  documento_em_falta?: any[];
-  documento_em_falta_2?: any[];
+  documento_em_falta?: any;
+  documento_em_falta_2?: any;
   duplicada_da: any;
   data_1_visita?: string;
   resultado_da_visita: any;
-  documento_em_falta_3?: any[];
+  documento_em_falta_3?: any;
+  documento_em_falta_4?: any;
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
@@ -271,6 +276,7 @@ export class InqueritoComponent implements OnInit {
     private dataService: DataService,
     private route: Router,
     private location: Location,
+    private http: HttpClient
     // public activeModal: NgbActiveModal
   ) { }
 
@@ -287,8 +293,8 @@ export class InqueritoComponent implements OnInit {
 
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
 
-    
-    
+
+
 
   }
 
@@ -319,8 +325,13 @@ export class InqueritoComponent implements OnInit {
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
-      console.log(data)
+      this.pdac = this.pdac.sort(function (a: any, b: any) {
+        return b._id - a._id
+      })
+      //console.log(data)
+
     })
+
   }
 
   sideBarToggler() {
@@ -332,6 +343,12 @@ export class InqueritoComponent implements OnInit {
   }
 
   save_inquerito() {
+
+    if (this.inquerito_preenchido) {
+      const formData = new FormData();
+      formData.append('inqerito_preenchido', this.inquerito_preenchido, this.inquerito_preenchido.name);
+    }
+
     let InquireForm = {
       "nome_simplificado": this.nome_simplificado,
       "provincia": this.provincia,
@@ -341,10 +358,11 @@ export class InqueritoComponent implements OnInit {
       "resultado_1_contacto": this.resultado_1_contacto,
       "documento_em_falta": this.documento_em_falta,
       "documento_em_falta_2": this.documento_em_falta_2,
+      "documento_em_falta_3": this.documento_em_falta_3,
+      "documento_em_falta_4": this.documento_em_falta_4,
       "duplicada_da": this.duplicada_da,
       "data_1_visita": this.data_1_visita,
       "resultado_da_visita": this.resultado_da_visita,
-      "documento_em_falta_3": this.documento_em_falta_3,
       "duplicada_da_2": this.duplicada_da_2,
       "data_validacao_inquerito": this.data_validacao_inquerito,
       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
@@ -358,24 +376,27 @@ export class InqueritoComponent implements OnInit {
       "inqueridor": this.inqueridor,
       "inquerito_preenchido": this.inquerito_preenchido
     }
+
     this.dataService.salvaInquireForm(InquireForm).subscribe(
-      success => { this.alert_success },
-      error => { this.alert_error }
+      success => { this.alert_success(); },
+      error => { this.alert_error(); }
 
     )
+
     this.get_inquireForms();
     //this.location.reload();
     //this.goBack()
-    //window.location.reload();
-   // window.removeEventListener('load', this.reloadOnce);
-    //window.addEventListener('load', this.reloadOnce);
-
-   /* this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    const modal = document.getElementById('exampleModalToggle3');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
       this.route.navigate([this.route.url]);
-    });*/
+    });
+
   }
 
-  
+
 
   save_inquireForm() {
     let InquireForm = {
