@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InqueritoComponent implements OnInit {
 
+  userFrontOff:any;
   formAprovado = false;
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
@@ -290,6 +291,7 @@ export class InqueritoComponent implements OnInit {
     this.get_inquireForms();
     this.getProvincia();
     this.getPdac();
+    this.getUserFrontOFF();
 
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
 
@@ -483,6 +485,13 @@ export class InqueritoComponent implements OnInit {
     this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridor = data;
       //console.log('inqiridor: ', data)
+    })
+  }
+
+  getUserFrontOFF(){
+    this.dataService.getUser().subscribe(data =>{
+      this.userFrontOff = data;
+      console.log('users', data)
     })
   }
 

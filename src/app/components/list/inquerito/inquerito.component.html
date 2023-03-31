@@ -52,7 +52,7 @@
                     <thead class="linhas2">
                         <tr>
                             <!--th scope="col" class="text-black">Inquiridor</!--th-->
-                            <th scope="col" class="text-black">Back Off</th>
+                            <th scope="col" class="text-black">M. Interesse</th>
                             <th scope="col" class="text-black">Data do 1º Contacto</th>
                             <th scope="col" class="text-black">Provincia</th>
                             <th scope="col" class="text-black">Status</th>
@@ -120,7 +120,7 @@
                         <label class="mb-2">Inquiridor:</label>
                         <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="responsible"
                             required aria-label="Default select example">
-                            <option *ngFor="let item of inquiridor" [value]="item.id"> {{item.responsible}}
+                            <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                             </option>
                         </select>
                     </div>
