@@ -23,7 +23,7 @@ export class EchartService {
     return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8001/api/v1/getinquirerformsnumberpermonth/', { headers: headers });
   }
 
-  // to get chart data to Interst expression
+  // to get chart data to Interst expressionn
   get_Interesses_EchartData(): Observable<BasicEchartLineModel[]> {
     var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
