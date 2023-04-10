@@ -362,7 +362,7 @@ export class InqueritoComponent implements OnInit {
 
     if (this.inquerito_preenchido) {
       const formData = new FormData();
-      const file = new Blob([this.data], { type: 'application/octet-stream' });
+      const file = new Blob([this.inquerito_preenchido], { type: 'application/octet-stream' });
       formData.append('inqerito_preenchido', file);
       formData.append('inqerito_preenchido', this.inquerito_preenchido, this.inquerito_preenchido.name);
     }
