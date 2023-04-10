@@ -247,6 +247,7 @@ export class InqueritoComponent implements OnInit {
   manifestacao: any;
   inquiridor: any;
 
+  uploadFile:any;
   // novos dados de inqueritos
   nome_simplificado: any;
   provincia: any;
@@ -271,6 +272,8 @@ export class InqueritoComponent implements OnInit {
   status: any;
   manifestacao_de_interesse?: any;
   inqueridor: any;
+
+  data:any;
 
   constructor(
     private modalService: MdbModalService,
@@ -344,10 +347,23 @@ export class InqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
+ /* onFileSelected(event: { target: { inquerito_preenchido: any[]; }; }) {
+    const file = event.target.inquerito_preenchido[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fileData = new Blob([reader.result], { type: file.type });
+      this.uploadFile(fileData);
+    };
+    reader.readAsArrayBuffer(file);
+  }*/
+  
+
   save_inquerito() {
 
     if (this.inquerito_preenchido) {
       const formData = new FormData();
+      const file = new Blob([this.data], { type: 'application/octet-stream' });
+      formData.append('inqerito_preenchido', file);
       formData.append('inqerito_preenchido', this.inquerito_preenchido, this.inquerito_preenchido.name);
     }
 
