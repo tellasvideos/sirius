@@ -7,6 +7,7 @@ import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito
 //import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-inquerito',
@@ -15,7 +16,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InqueritoComponent implements OnInit {
 
-  userFrontOff:any;
+  angForm!: FormGroup;
+
+  userFrontOff: any;
   formAprovado = false;
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
@@ -247,7 +250,7 @@ export class InqueritoComponent implements OnInit {
   manifestacao: any;
   inquiridor: any;
 
-  uploadFile:any;
+  uploadFile: any;
   // novos dados de inqueritos
   nome_simplificado: any;
   provincia: any;
@@ -273,16 +276,45 @@ export class InqueritoComponent implements OnInit {
   manifestacao_de_interesse?: any;
   inqueridor: any;
 
-  data:any;
+  data: any;
 
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService,
     private route: Router,
     private location: Location,
-    private http: HttpClient
+    private http: HttpClient,
+    private fb: FormBuilder
     // public activeModal: NgbActiveModal
-  ) { }
+  ) {
+    this.angForm = this.fb.group({
+      nome_simplificado: ['', Validators.required],
+      provincia: ['', Validators.required],
+      municipio: ['', Validators.required],
+      aldeia: ['', Validators.required],
+      data_1_contacto: ['', Validators.required],
+      resultado_1_contacto: ['', Validators.required],
+      documento_em_falta: ['', Validators.required],
+      documento_em_falta_2: ['', Validators.required],
+      documento_em_falta_3: ['', Validators.required],
+      documento_em_falta_4: ['', Validators.required],
+      duplicada_da: ['', Validators.required],
+      data_1_visita: ['', Validators.required],
+      resultado_da_visita: ['', Validators.required],
+      duplicada_da_2: ['', Validators.required],
+      data_validacao_inquerito: ['', Validators.required],
+      que_tipo_de_negocio_esta: ['', Validators.required],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
+      que_tipo: ['', Validators.required],
+      que_tipo_2: ['', Validators.required],
+      que_tipo_3: ['', Validators.required],
+      status: ['', Validators.required],
+      created_at: ['', Validators.required],
+      manifestacao_de_interesse: ['', Validators.required],
+      inqueridor: ['', Validators.required],
+      inquerito_preenchido: ['', Validators.required]
+    });
+  }
 
   /* fecharModal() {
      this.activeModal.close();
@@ -347,25 +379,21 @@ export class InqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
- /* onFileSelected(event: { target: { inquerito_preenchido: any[]; }; }) {
-    const file = event.target.inquerito_preenchido[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      const fileData = new Blob([reader.result], { type: file.type });
-      this.uploadFile(fileData);
-    };
-    reader.readAsArrayBuffer(file);
-  }*/
-  
+  /* onFileSelected(event: { target: { inquerito_preenchido: any[]; }; }) {
+     const file = event.target.inquerito_preenchido[0];
+     const reader = new FileReader();
+     reader.onload = () => {
+       const fileData = new Blob([reader.result], { type: file.type });
+       this.uploadFile(fileData);
+     };
+     reader.readAsArrayBuffer(file);
+   }*/
 
-  save_inquerito() {
 
-    if (this.inquerito_preenchido) {
-      const formData = new FormData();
-      const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
-      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
-    }
-    let InquireForm = {
+  save_inquerito(data: any) {
+
+
+    /*let InquireForm = {
       "nome_simplificado": this.nome_simplificado,
       "provincia": this.provincia,
       "municipio": this.municipio,
@@ -391,9 +419,15 @@ export class InqueritoComponent implements OnInit {
       "manifestacao_de_interesse": this.manifestacao_de_interesse,
       "inqueridor": this.inqueridor,
       "inquerito_preenchido": this.inquerito_preenchido
+    }*/
+
+    if (this.inquerito_preenchido) {
+      const formData = new FormData();
+      const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
+      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
     }
 
-    this.dataService.salvaInquireForm(InquireForm).subscribe(
+    this.dataService.salvaInquireForm(this.angForm.value).subscribe(
       success => { this.alert_success(); },
       error => { this.alert_error(); }
 
@@ -502,8 +536,8 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  getUserFrontOFF(){
-    this.dataService.getUser().subscribe(data =>{
+  getUserFrontOFF() {
+    this.dataService.getUser().subscribe(data => {
       this.userFrontOff = data;
       console.log('users', data)
     })
