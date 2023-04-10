@@ -86,7 +86,7 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<form enctype="multipart/form-data" [formGroup]="angForm" >
+<form [formGroup]="angForm" (ngSubmit)="save_inquerito(angForm)" enctype="multipart/form-data" >
 
     <!-- Primeiro modal -->
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
@@ -350,7 +350,7 @@
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                             data-bs-toggle="modal">Voltar</button>
-                        <button  name="submit"  (click)="save_inquerito(angForm)" class="btn btn-success btn-sm mt-4">Guardar</button>
+                        <button  type="submit"   class="btn btn-success btn-sm mt-4">Guardar</button>
                     </div>
                 </div>
             </div>
