@@ -421,15 +421,15 @@ export class InqueritoComponent implements OnInit {
       "inquerito_preenchido": this.inquerito_preenchido
     }*/
 
-    if (this.angForm.get('inquerito_preenchido')?.value) {
+    if (this.inquerito_preenchido) {
       const formData = new FormData();
       const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
-      formData.append('inqerito_preenchido', blob, this.angForm.get('inquerito_preenchido')?.value);
+      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
     }
 
     this.dataService.salvaInquireForm(this.angForm.value).subscribe(
       success => { this.alert_success(); },
-    //  error => { this.alert_error(); }
+      //  error => { this.alert_error(); }
 
     )
 
