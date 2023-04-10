@@ -86,7 +86,7 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="save_inquerito(angForm)">
+<form enctype="multipart/form-data" [formGroup]="angForm" >
 
     <!-- Primeiro modal -->
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
@@ -196,7 +196,7 @@
                             class="form-control form-control-sm">
                     </div>
 
-                    <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
+                    <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
                         <label for="documento_em_falta">Selecione os documentos em falta:</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" formControlName="documento_em_falta">
@@ -212,7 +212,7 @@
                         </select>
                     </div>
 
-                    <div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
+                    <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada: MI duplicada'">
                         <label for="documento_em_falta">Duplicada:</label>
                         <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="duplicada_da"
                             formControlName="duplicada_da">
@@ -221,7 +221,7 @@
                     </div>
 
                     <div class=" justify-content-between d-block ">
-                        <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
+                        <div class="mb-3" *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' ">
                             <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
                             <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
                                 style="width: 340px;" id="documento_em_falta" name="resultado_da_visita"
@@ -229,7 +229,7 @@
                                 <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
-                        <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
+                        <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
                             <label for="documento_em_falta">Documento em Falta:</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_3" formControlName="documento_em_falta_3">
@@ -237,7 +237,7 @@
                             </select>
                         </div>
 
-                        <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
+                        <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
                             <label for="documento_em_falta">Selecione os documentos em falta:</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_4" formControlName="documento_em_falta_4">
@@ -245,7 +245,7 @@
                             </select>
                         </div>
 
-                        <div *ngIf="this.resultado_da_visita === 'Recusada: MI duplicada'">
+                        <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
                             <label for="documento_em_falta">Duplicada:</label>
                             <select class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="duplicada_da_2" formControlName="duplicada_da_2">
@@ -312,7 +312,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor' ">
                         <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                             implementar
                             o projecto?</label>
@@ -323,7 +323,7 @@
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Agregador' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo"
                             formControlName="que_tipo">
@@ -331,7 +331,7 @@
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Transformador' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_2"
                             formControlName="que_tipo_2">
@@ -339,7 +339,7 @@
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Prestador de serviços' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
                             formControlName="que_tipo_3">
@@ -350,7 +350,7 @@
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                             data-bs-toggle="modal">Voltar</button>
-                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
+                        <button  name="submit"  (click)="save_inquerito(angForm)" class="btn btn-success btn-sm mt-4">Guardar</button>
                     </div>
                 </div>
             </div>

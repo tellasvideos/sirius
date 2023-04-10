@@ -7,7 +7,7 @@ import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito
 //import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-inquerito',
@@ -102,7 +102,7 @@ export class InqueritoComponent implements OnInit {
   docs: any;
 
   loadTipoNegocio() {
-    switch (this.que_tipo_de_negocio_esta) {
+    switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       case 'Productor':
         this.docs = [
           'Tuberculos',
@@ -139,7 +139,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs3() {
-    switch (this.resultado_da_visita) {
+    switch (this.angForm.get('resultado_da_visita')?.value) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -186,7 +186,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs2() {
-    switch (this.resultado_1_contacto) {
+    switch (this.angForm.get('resultado_1_contacto')?.value) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -218,7 +218,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregarMunicipios() {
-    switch (this.provincia) {
+    switch (this.angForm.get('provincia')?.value) {
       case 'Huila':
         this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
         break;
@@ -288,31 +288,31 @@ export class InqueritoComponent implements OnInit {
     // public activeModal: NgbActiveModal
   ) {
     this.angForm = this.fb.group({
-      nome_simplificado: ['', Validators.required],
-      provincia: ['', Validators.required],
-      municipio: ['', Validators.required],
-      aldeia: ['', Validators.required],
-      data_1_contacto: ['', Validators.required],
-      resultado_1_contacto: ['', Validators.required],
-      documento_em_falta: ['', Validators.required],
-      documento_em_falta_2: ['', Validators.required],
-      documento_em_falta_3: ['', Validators.required],
-      documento_em_falta_4: ['', Validators.required],
-      duplicada_da: ['', Validators.required],
-      data_1_visita: ['', Validators.required],
-      resultado_da_visita: ['', Validators.required],
-      duplicada_da_2: ['', Validators.required],
-      data_validacao_inquerito: ['', Validators.required],
-      que_tipo_de_negocio_esta: ['', Validators.required],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
-      que_tipo: ['', Validators.required],
-      que_tipo_2: ['', Validators.required],
-      que_tipo_3: ['', Validators.required],
-      status: ['', Validators.required],
-      created_at: ['', Validators.required],
-      manifestacao_de_interesse: ['', Validators.required],
-      inqueridor: ['', Validators.required],
-      inquerito_preenchido: ['', Validators.required]
+      nome_simplificado: [''],
+      provincia: [''],
+      municipio: [''],
+      aldeia: [''],
+      data_1_contacto: [''],
+      resultado_1_contacto: [''],
+      documento_em_falta: [''],
+      documento_em_falta_2: [''],
+      documento_em_falta_3: [''],
+      documento_em_falta_4: [''],
+      duplicada_da: [''],
+      data_1_visita: [''],
+      resultado_da_visita: [''],
+      duplicada_da_2: [''],
+      data_validacao_inquerito: [''],
+      que_tipo_de_negocio_esta: [''],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
+      que_tipo: [''],
+      que_tipo_2: [''],
+      que_tipo_3: [''],
+      status: [''],
+      //created_at: [''],
+      manifestacao_de_interesse: [''],
+      inqueridor: [''],
+      inquerito_preenchido: ['']
     });
   }
 
