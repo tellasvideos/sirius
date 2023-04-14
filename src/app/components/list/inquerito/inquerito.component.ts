@@ -102,7 +102,7 @@ export class InqueritoComponent implements OnInit {
   docs: any;
 
   loadTipoNegocio() {
-    switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+    switch (this.que_tipo_de_negocio_esta) {
       case 'Productor':
         this.docs = [
           'Tuberculos',
@@ -139,7 +139,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs3() {
-    switch (this.angForm.get('resultado_da_visita')?.value) {
+    switch (this.resultado_da_visita) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -186,7 +186,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs2() {
-    switch (this.angForm.get('resultado_1_contacto')?.value) {
+    switch (this.resultado_1_contacto) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -218,7 +218,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregarMunicipios() {
-    switch (this.angForm.get('provincia')?.value) {
+    switch (this.provincia) {
       case 'Huila':
         this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
         break;
