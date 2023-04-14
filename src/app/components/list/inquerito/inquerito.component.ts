@@ -312,7 +312,7 @@ export class InqueritoComponent implements OnInit {
       //created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-      inquerito_preenchido: this.inquerito_preenchido
+      inquerito_preenchido: [this.inquerito_preenchido]
     });
   }
 
