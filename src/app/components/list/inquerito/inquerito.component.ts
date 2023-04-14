@@ -252,29 +252,29 @@ export class InqueritoComponent implements OnInit {
 
   uploadFile: any;
   // novos dados de inqueritos
-  //nome_simplificado: any;
+  nome_simplificado: any;
   provincia: any;
   inquerito_preenchido!: File;
-  //aldeia: any;
-  //data_1_contacto?: string;
-  //resultado_1_contacto: any;
-  //documento_em_falta?: any;
-  //documento_em_falta_2?: any;
-  //duplicada_da: any;
-  //data_1_visita?: string;
-  //resultado_da_visita: any;
-  //documento_em_falta_3?: any;
-  //documento_em_falta_4?: any;
-  //duplicada_da_2: any;
-  //data_validacao_inquerito: any;
-  //que_tipo_de_negocio_esta: any;
-  //em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
-  //que_tipo: any;
-  //que_tipo_2: any;
-  //que_tipo_3: any;
-  //status: any;
-  //manifestacao_de_interesse?: any;
-  //inqueridor: any;
+  aldeia: any;
+  data_1_contacto?: string;
+  resultado_1_contacto: any;
+  documento_em_falta?: ["none","none","none","none","none","none"];
+  documento_em_falta_2?: ["none","none","none","none","none","none"];
+  duplicada_da: any;
+  data_1_visita?: string;
+  resultado_da_visita: any;
+  documento_em_falta_3?: ["none","none","none","none","none","none"];
+  documento_em_falta_4?: ["none","none","none","none","none","none"];
+  duplicada_da_2: any;
+  data_validacao_inquerito: any;
+  que_tipo_de_negocio_esta: any;
+  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
+  que_tipo: any;
+  que_tipo_2: any;
+  que_tipo_3: any;
+  status: any;
+  manifestacao_de_interesse?: any;
+  inqueridor: any;
 
   data: any;
 
@@ -287,17 +287,17 @@ export class InqueritoComponent implements OnInit {
     private fb: FormBuilder
     // public activeModal: NgbActiveModal
   ) {
-    this.angForm = this.fb.group({
+   /* this.angForm = this.fb.group({
       nome_simplificado: [''],
       provincia: [''],
       municipio: [''],
       aldeia: [''],
       data_1_contacto: [''],
       resultado_1_contacto: [''],
-      documento_em_falta: ['item1', 'item2', 'item3'],
-      documento_em_falta_2: ['item1', 'item2', 'item3'],
-      documento_em_falta_3: ['item1', 'item2', 'item3'],
-      documento_em_falta_4: ['item1', 'item2', 'item3'],
+      documento_em_falta: ['none', 'item2', 'item3'],
+      documento_em_falta_2: ['none', 'item2', 'item3'],
+      documento_em_falta_3: ['none', 'item2', 'item3'],
+      documento_em_falta_4: ['none', 'item2', 'item3'],
       duplicada_da: [''],
       data_1_visita: [''],
       resultado_da_visita: [''],
@@ -312,8 +312,8 @@ export class InqueritoComponent implements OnInit {
       //created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-      inquerito_preenchido: [this.inquerito_preenchido]
-    });
+      inquerito_preenchido: ['']
+    });*/
   }
 
   /* fecharModal() {
@@ -329,9 +329,6 @@ export class InqueritoComponent implements OnInit {
     this.getUserFrontOFF();
 
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
-
-
-
 
   }
 
@@ -390,10 +387,9 @@ export class InqueritoComponent implements OnInit {
    }*/
 
 
-  save_inquerito(data: any) {
+  save_inquerito() {
 
-
-    /*let InquireForm = {
+    let InquireForm = {
       "nome_simplificado": this.nome_simplificado,
       "provincia": this.provincia,
       "municipio": this.municipio,
@@ -419,7 +415,7 @@ export class InqueritoComponent implements OnInit {
       "manifestacao_de_interesse": this.manifestacao_de_interesse,
       "inqueridor": this.inqueridor,
       "inquerito_preenchido": this.inquerito_preenchido
-    }*/
+    }
 
     if (this.inquerito_preenchido) {
       const formData = new FormData();
@@ -427,9 +423,9 @@ export class InqueritoComponent implements OnInit {
       formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
     }
 
-    this.dataService.salvaInquireForm(this.angForm.value).subscribe(
+    this.dataService.salvaInquireForm(InquireForm).subscribe(
       success => { this.alert_success(); },
-      //  error => { this.alert_error(); }
+      error => { this.alert_error(); }
 
     )
 
