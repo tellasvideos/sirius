@@ -222,7 +222,7 @@
                     </div>
 
                     <div class=" justify-content-between d-block ">
-                        <div class="mb-3" *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' ">
+                        <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
                             <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
                             <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
                                 style="width: 340px;" id="documento_em_falta" name="resultado_da_visita"
@@ -343,7 +343,7 @@
                     </div>
 
                     <div class="mb-3"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
+                        *ngIf="this.que_tipo_de_negocio_esta === 'Prestador de serviços' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
                             [(ngModel)]="que_tipo_3">
