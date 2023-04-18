@@ -40,6 +40,9 @@ import { EditCadeiasManInComponent } from './components/edit/edit-cadeias-man-in
 import { EditEstatutoComponent } from './components/edit/edit-estatuto/edit-estatuto.component';
 import { EditStatusComponent } from './components/edit/edit-status/edit-status.component';
 import { AuthGuard } from './services/auth.guard';
+import { PgasComponent } from './components/list/pgas/pgas.component';
+import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elaborados.component';
+import { VisitasComponent } from './components/list/visitas/visitas.component';
 
 
 // configuração de rotas
@@ -68,6 +71,9 @@ const routes: Routes = [
   { path: 'estatuto-pn/:id', component: EstatutoPnComponent, canActivate: [AuthGuard] },
   { path: 'proponentes', component: ProponentesComponent, canActivate: [AuthGuard] },
   { path: 'single-prop', component: SinglePropComponent, canActivate: [AuthGuard] },
+  { path: 'pgas', component: PgasComponent, canActivate: [AuthGuard] },
+  { path: 'pn-elaborados', component: PnElaboradosComponent, canActivate: [AuthGuard] },
+  { path: 'visitas', component: VisitasComponent, canActivate: [AuthGuard] },
   { path: 'single-interest/:id', component: SingleInterestComponent, canActivate: [AuthGuard] },
   { path: 'edit-interest/:id', component: EditInterestComponent, canActivate: [AuthGuard] },
   { path: 'edit-cadeia/:id', component: EditCadeiaComponent, canActivate: [AuthGuard] },

@@ -87,6 +87,9 @@ import { SearchPipe } from './search.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchByProvincesPipe } from './search-by-provinces.pipe';
 import { NgxPrintModule } from 'ngx-print';
+import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elaborados.component';
+import { PgasComponent } from './components/list/pgas/pgas.component';
+import { VisitasComponent } from './components/list/visitas/visitas.component';
 
 
 
@@ -133,7 +136,10 @@ import { NgxPrintModule } from 'ngx-print';
     EditAcordoComponent,
     EditStatusComponent,
     EditEstatutoComponent,
-    EditCadeiasManInComponent
+    EditCadeiasManInComponent,
+    PnElaboradosComponent,
+    PgasComponent,
+    VisitasComponent,
   ],
   imports: [
     NgxPrintModule,
