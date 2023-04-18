@@ -442,8 +442,6 @@ export class InqueritoComponent implements OnInit {
 
   }
 
-
-
   save_inquireForm() {
     let InquireForm = {
       "observations": this.observations,

@@ -51,155 +51,155 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
   
-  // development  http://192.168.3.13:8001/
+  // development  http://strongboxao.ddns.net:8001/
 
   // url to get provinces and add an man. interest
-  get_Provinces_url = 'http://192.168.3.13:8001/api/v1/provinces/';
+  get_Provinces_url = 'http://strongboxao.ddns.net:8001/api/v1/provinces/';
 
   //url to proposal agreeement
-  get_Proposal_Agreement_url = 'http://192.168.3.13:8001/api/v1/proposeragreements/';
-  delete_Proposal_Agreement_url = 'http://192.168.3.13:8001/api/v1/proposeragreements/';
-  save_Proposal_Agreement_url = 'http://192.168.3.13:8001/api/v1';
+  get_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8001/api/v1/proposeragreements/';
+  delete_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8001/api/v1/proposeragreements/';
+  save_Proposal_Agreement_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
   // url to get inquiriers
-  get_inquiriers_url = 'http://192.168.3.13:8001/api/v1/inquirers/';
-  save_inquiriers_url = 'http://192.168.3.13:8001/api/v1';
-  delete_inquiriers_url = 'http://192.168.3.13:8001/api/v1/inquirers/';
+  get_inquiriers_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirers/';
+  save_inquiriers_url = 'http://strongboxao.ddns.net:8001/api/v1';
+  delete_inquiriers_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirers/';
 
   // Value chain to interest expression
-  delete_ValueChainsToInterestExpress_url = 'http://192.168.3.13:8001/api/v1/valuechaintointerestexpressions/';
-  get_ValueChainsToInterestExpress_url = 'http://192.168.3.13:8001/api/v1/valuechaintointerestexpressions/';
-  save_ValueChainsToInterestExpress_url = 'http://192.168.3.13:8001/api/v1'
+  delete_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechaintointerestexpressions/';
+  get_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechaintointerestexpressions/';
+  save_ValueChainsToInterestExpress_url = 'http://strongboxao.ddns.net:8001/api/v1'
 
   // url to get departaments
-  get_departaments_url = 'http://192.168.3.13:8001/api/v1/departments/';
-  save_departaments_url = 'http://192.168.3.13:8001/api/v1';
-  delete_departaments_url = 'http://192.168.3.13:8001/api/v1/departments/';
+  get_departaments_url = 'http://strongboxao.ddns.net:8001/api/v1/departments/';
+  save_departaments_url = 'http://strongboxao.ddns.net:8001/api/v1';
+  delete_departaments_url = 'http://strongboxao.ddns.net:8001/api/v1/departments/';
 
   // url to inquireform
-  get_inquireForms_url = 'http://192.168.3.13:8001/api/v1/inqueritos/';
-  save_inquireForms_url = 'http://192.168.3.13:8001/api/v1';
-  delete_inquireForms_url = 'http://192.168.3.13:8001/api/v1/inqueritos/';
+  get_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
+  save_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1';
+  delete_inquireForms_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
 
   // url to delete BP status
-  delete_Status_url = 'http://192.168.3.13:8001/api/v1/businessplanstatus/';
+  delete_Status_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatus/';
 
   // url to delete business plan statute
-  delete_Statutes_url = 'http://192.168.3.13:8001/api/v1/businessplanstatutes/';
+  delete_Statutes_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to get all business plan statutos
-  get_BusPlanStatutos_url = 'http://192.168.3.13:8001/api/v1/businessplanstatutes/';
+  get_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to save any business plan statutos
-  Save_BusPlanStatutos_url = 'http://192.168.3.13:8001/api/v1';
+  Save_BusPlanStatutos_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
   // to get all business plan status
-  get_BusPlanStatus_url = 'http://192.168.3.13:8001/api/v1/businessplanstatus/';
+  get_BusPlanStatus_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatus/';
 
   // to save any business plan status
-  Save_BusPlanStatus_url = 'http://192.168.3.13:8001/api/v1';
+  Save_BusPlanStatus_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
-  proponent_PDAC_url = 'http://192.168.3.13:8001/api/v1/getkoboforms/';
+  proponent_PDAC_url = 'http://strongboxao.ddns.net:8001/api/v1/getkoboforms/';
 
   // To get all users
-  GET_USERS_URL = 'http://192.168.3.13:8001/accounts/users/';
+  GET_USERS_URL = 'http://strongboxao.ddns.net:8001/accounts/users/';
 
   // save user url
-  save_user_url = 'http://192.168.3.13:8001/accounts';
+  save_user_url = 'http://strongboxao.ddns.net:8001/accounts';
 
   // forgot password
-  forgot_pass_url = 'http://192.168.3.13:8001/accounts';
+  forgot_pass_url = 'http://strongboxao.ddns.net:8001/accounts';
 
   // delete user url
-  delete_user_url = 'http://192.168.3.13:8001/accounts/user/';
+  delete_user_url = 'http://strongboxao.ddns.net:8001/accounts/user/';
 
   // Auth Token
-  getToken_url = 'http://192.168.3.13:8001/token/';
+  getToken_url = 'http://strongboxao.ddns.net:8001/token/';
 
   // add valuechains
-  base = 'http://192.168.3.13:8001/api/v1';
+  base = 'http://strongboxao.ddns.net:8001/api/v1';
 
   // to get all value chain
-  get_ValueChain_url = 'http://192.168.3.13:8001/api/v1/valuechains/'
+  get_ValueChain_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechains/'
 
   // to delete any valueChain
-  delete_ValueChain_url = 'http://192.168.3.13:8001/api/v1/valuechains/';
+  delete_ValueChain_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechains/';
 
   // to create interest expression
-  interest_Express_url = 'http://192.168.3.13:8001/api/v1';
+  interest_Express_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
   // to get value chain by id
-  get_ValueChainInExpress_By_Id_url = 'http://192.168.3.13:8001/api/v1/valuechaintointerestexpressions/';
+  get_ValueChainInExpress_By_Id_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechaintointerestexpressions/';
 
   // to get all interest expression
-  get_Interest_Exp_url = 'http://192.168.3.13:8001/api/v1/interestexpressions/';
+  get_Interest_Exp_url = 'http://strongboxao.ddns.net:8001/api/v1/interestexpressions/';
 
   // to get user by id
-  get_User_byId_url = 'http://192.168.3.13:8001/accounts/user/';
+  get_User_byId_url = 'http://strongboxao.ddns.net:8001/accounts/user/';
 
   // to get value chain by id
-  get_Cadeia_byId_url = 'http://192.168.3.13:8001/api/v1/valuechains/'
+  get_Cadeia_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechains/'
 
   // to get inquirier by id
-  get_Iquiridor_byId_url = 'http://192.168.3.13:8001/api/v1/inquirers/';
+  get_Iquiridor_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirers/';
 
   // to get departament by id
-  get_Depart_byId_url = 'http://192.168.3.13:8001/api/v1/departments/';
+  get_Depart_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/departments/';
 
   // to get agreement proposer by id
-  get_agreement_proposer_byId_url = 'http://192.168.3.13:8001/api/v1/proposeragreements/';
+  get_agreement_proposer_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/proposeragreements/';
 
   // to get business plan status by id
-  get_Status_byId_url = 'http://192.168.3.13:8001/api/v1/businessplanstatus/';
+  get_Status_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatus/';
 
   // to get business plan estatute
-  get_Estatute_byId_url = 'http://192.168.3.13:8001/api/v1/businessplanstatutes/';
+  get_Estatute_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to get inquire by id
-  get_Iquerito_byId_url = 'http://192.168.3.13:8001/api/v1/inquirerforms/';
+  get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
 
   // to get all interest expression
-  edit_Interest_Exp_url = 'http://192.168.3.13:8001/api/v1/interestexpressions/';
+  edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8001/api/v1/interestexpressions/';
 
   // to update value chain to interest express
-  edit_cadeiaManIn_url = 'http://192.168.3.13:8001/api/v1/valuechaintointerestexpressions/';
+  edit_cadeiaManIn_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechaintointerestexpressions/';
 
   // to update value chain
-  edit__Cadeia_url = 'http://192.168.3.13:8001/api/v1/valuechains/';
+  edit__Cadeia_url = 'http://strongboxao.ddns.net:8001/api/v1/valuechains/';
 
   // to update data of the inquirier
-  edit_inquiridor_url = 'http://192.168.3.13:8001/api/v1/inquirers/';
+  edit_inquiridor_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirers/';
 
   // to update departaments
-  edit_depart_url = 'http://192.168.3.13:8001/api/v1/departments/';
+  edit_depart_url = 'http://strongboxao.ddns.net:8001/api/v1/departments/';
 
   // to update proposer agreement
-  edit_acordo_url = 'http://192.168.3.13:8001/api/v1/proposeragreements/';
+  edit_acordo_url = 'http://strongboxao.ddns.net:8001/api/v1/proposeragreements/';
 
   // to update business plan status
-  edit_status_url = 'http://192.168.3.13:8001/api/v1/businessplanstatus/';
+  edit_status_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatus/';
 
   // to update business plan statutes
-  edit_statutes_url = 'http://192.168.3.13:8001/api/v1/businessplanstatutes/';
+  edit_statutes_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to update data to inquire
-  edit_inquerito_url = 'http://192.168.3.13:8001/api/v1/inquirerforms/';
+  edit_inquerito_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
 
   // to edit user
-  edit_User_url = 'http://192.168.3.13:8001/accounts/user/';
+  edit_User_url = 'http://strongboxao.ddns.net:8001/accounts/user/';
 
   // to delete any interest espression
-  delete_Interest_url = 'http://192.168.3.13:8001/api/v1/interestexpressions/';
+  delete_Interest_url = 'http://strongboxao.ddns.net:8001/api/v1/interestexpressions/';
 
   // to edit data of interest expression
-  edit_Interest_url = 'http://192.168.3.13:8001/api/v1/';
+  edit_Interest_url = 'http://strongboxao.ddns.net:8001/api/v1/';
 
   // InterestExpression by province
-  interestExpressByProv_url = 'http://192.168.3.13:8001/api/v1/interestexpressions/?province=';
+  interestExpressByProv_url = 'http://strongboxao.ddns.net:8001/api/v1/interestexpressions/?province=';
 
-  InquiriersByProv_url = 'http://192.168.3.13:8001/api/v1/inquirers/?province=';
+  InquiriersByProv_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirers/?province=';
 
-  proponentsByProv_url = 'http://192.168.3.13:8001/api/v1';
+  proponentsByProv_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
@@ -213,22 +213,22 @@ export class DataService {
     var params = new HttpParams().set('user_id', 1);
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Bearer 1c644080bc6af5e8990a30c964157719cbb6576c');
-    return this.http.get('http://192.168.3.13:8001/accounts/users/', { headers: headers, params: params })
+    return this.http.get('http://strongboxao.ddns.net:8001/accounts/users/', { headers: headers, params: params })
   }
 
   // Method to get company name
   getCompanyName(){
-    return this.http.get('http://192.168.3.13:8001/api/v1/empresas/');
+    return this.http.get('http://strongboxao.ddns.net:8001/api/v1/empresas/');
   }
 
   // Method to get Category
   getCategory(){
-    return this.http.get('http://192.168.3.13:8001/api/v1/categorias/');
+    return this.http.get('http://strongboxao.ddns.net:8001/api/v1/categorias/');
   }
 
   // Method to get village
   getMunicipio(){
-    return this.http.get('http://192.168.3.13:8001/api/v1/municipios/');
+    return this.http.get('http://strongboxao.ddns.net:8001/api/v1/municipios/');
   }
 
   // Method to Get all proponents from PDAC Data-Base
@@ -399,7 +399,7 @@ export class DataService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.http.get<BasicEchartLineModel[]>('http://192.168.3.13:8001/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
+    return this.http.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8001/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
   }
 
   // Method to Get an interest Expression by id
