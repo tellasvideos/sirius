@@ -3,11 +3,12 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
 </div>
 <div class="modal-body">
-    <mdb-form-control>
-        <input mdbInput type="text" [(ngModel)]="name" id="form1" class="form-control mb-2" />
-        <label mdbLabel class="form-label text-black" for="form1">Departamento</label>
-    </mdb-form-control>
-    <div class="form-floating mb-3 ">
+    <div class="mb-3">
+        <label class="mb-2">Departamento:</label>
+        <select class="form-select form-select-sm mb-3" [(ngModel)]="name" name="departamento" aria-label="Default select example">
+            <option *ngFor="let item of departamento" [value]="item">{{item}}</option>
+        </select>
+    </div>    <div class="form-floating mb-3 ">
         <textarea class="form-control" [(ngModel)]="description" placeholder="Comente aqui" name="observation"
             id="floatingTextarea"></textarea>
         <label for="floatingTextarea" class="text-black">Descrição</label>

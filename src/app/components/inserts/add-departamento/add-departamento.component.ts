@@ -12,7 +12,16 @@ import Swal from "sweetalert2"
 export class AddDepartamentoComponent implements OnInit {
 
   array_depart: any;
-
+  departamento = [
+    'Direcção',
+    'M&A',
+    'Back Off',
+    'Front Off',
+    'Salvaguarde',
+    'Apoio Técnico',
+    'Contabilidade',
+    'CV & Mercado'
+  ]
   name: any;
   description: any;
 
