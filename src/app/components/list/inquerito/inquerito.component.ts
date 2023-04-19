@@ -537,8 +537,8 @@ export class InqueritoComponent implements OnInit {
 
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
-      this.userFrontOff = data;
-      console.log('users', data)
+      this.userFrontOff = data.filter(user => user.department === 'Front Off'); // filtrar usuarios do departamento front off
+      console.log('users do front off: ', data)
     })
   }
 
