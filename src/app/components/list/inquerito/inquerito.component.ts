@@ -17,7 +17,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 export class InqueritoComponent implements OnInit {
 
   angForm!: FormGroup;
-
+  user_logged:any;
   userFrontOff: any;
   formAprovado = false;
 
@@ -258,13 +258,13 @@ export class InqueritoComponent implements OnInit {
   aldeia: any;
   data_1_contacto?: string;
   resultado_1_contacto: any;
-  documento_em_falta?: ["none","none","none","none","none","none"];
-  documento_em_falta_2?: ["none","none","none","none","none","none"];
+  documento_em_falta?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none"];
   duplicada_da: any;
   data_1_visita?: string;
   resultado_da_visita: any;
-  documento_em_falta_3?: ["none","none","none","none","none","none"];
-  documento_em_falta_4?: ["none","none","none","none","none","none"];
+  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none"];
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
@@ -287,33 +287,33 @@ export class InqueritoComponent implements OnInit {
     private fb: FormBuilder
     // public activeModal: NgbActiveModal
   ) {
-   /* this.angForm = this.fb.group({
-      nome_simplificado: [''],
-      provincia: [''],
-      municipio: [''],
-      aldeia: [''],
-      data_1_contacto: [''],
-      resultado_1_contacto: [''],
-      documento_em_falta: ['none', 'item2', 'item3'],
-      documento_em_falta_2: ['none', 'item2', 'item3'],
-      documento_em_falta_3: ['none', 'item2', 'item3'],
-      documento_em_falta_4: ['none', 'item2', 'item3'],
-      duplicada_da: [''],
-      data_1_visita: [''],
-      resultado_da_visita: [''],
-      duplicada_da_2: [''],
-      data_validacao_inquerito: [''],
-      que_tipo_de_negocio_esta: [''],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
-      que_tipo: [''],
-      que_tipo_2: [''],
-      que_tipo_3: [''],
-      status: [''],
-      //created_at: [''],
-      manifestacao_de_interesse: [''],
-      inqueridor: [''],
-      inquerito_preenchido: ['']
-    });*/
+    /* this.angForm = this.fb.group({
+       nome_simplificado: [''],
+       provincia: [''],
+       municipio: [''],
+       aldeia: [''],
+       data_1_contacto: [''],
+       resultado_1_contacto: [''],
+       documento_em_falta: ['none', 'item2', 'item3'],
+       documento_em_falta_2: ['none', 'item2', 'item3'],
+       documento_em_falta_3: ['none', 'item2', 'item3'],
+       documento_em_falta_4: ['none', 'item2', 'item3'],
+       duplicada_da: [''],
+       data_1_visita: [''],
+       resultado_da_visita: [''],
+       duplicada_da_2: [''],
+       data_validacao_inquerito: [''],
+       que_tipo_de_negocio_esta: [''],
+       em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
+       que_tipo: [''],
+       que_tipo_2: [''],
+       que_tipo_3: [''],
+       status: [''],
+       //created_at: [''],
+       manifestacao_de_interesse: [''],
+       inqueridor: [''],
+       inquerito_preenchido: ['']
+     });*/
   }
 
   /* fecharModal() {
@@ -328,6 +328,11 @@ export class InqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
 
+    // Pegar dados do user logado
+    this.dataService.getUserData().subscribe((data: any) => {
+      this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
+      console.log('User logado', this.user_logged)
+    });
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
 
   }

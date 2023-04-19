@@ -218,6 +218,7 @@ export class DataService {
     return this.http.get('http://strongboxao.ddns.net:8001/accounts/users/', { headers: headers, params: params })
   }
 
+  // To get user login data
   getUserData() {
     const token = localStorage.getItem('userToken');
     const headers = new HttpHeaders({

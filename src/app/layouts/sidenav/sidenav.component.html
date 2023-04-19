@@ -16,22 +16,22 @@
                 <div><span style="font-size:xx-small; color: black;">Dashboard</span></div>
             </div>
             <div class="d-block text-center">
-                <button routerLink="/usuario" routerLinkActive="active" type="button" class="btn"><i
-                        class="fas fa-user-alt fa-2x"></i></button>
-                <div><span style="font-size:xx-small; color: black;">Usuário</span></div>
+                <button routerLink="/interesses" routerLinkActive="active" type="button" class="btn"><i
+                        class="fas fa-map-signs fa-2x"></i> </button>
+                <div><span style="font-size:xx-small; color: black;">Back Office</span></div>
             </div>
         </div>
 
-        <div class=" justify-content-between btns ">
+        <div class=" justify-content-between btns">
             <div class="d-block text-center">
                 <button routerLink="/inquerito" routerLinkActive="active" type="button" class="btn "><i
                         class="fas fa-laptop fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">Front Office</span></div>
             </div>
             <div class="d-block text-center">
-                <button routerLink="/interesses" routerLinkActive="active" type="button" class="btn"><i
-                        class="fas fa-map-signs fa-2x"></i> </button>
-                <div><span style="font-size:xx-small; color: black;">Back Office</span></div>
+                <button routerLink="/cadeiadevalor" routerLinkActive="active" type="button" class="btn "><i
+                        class="fas fa-seedling fa-2x"></i></button>
+                <div><span style="font-size:xx-small; color: black;">Cadeia de valor</span></div>
             </div>
         </div>
 
@@ -42,9 +42,9 @@
                 <div><span style="font-size:xx-small; color: black;">M. interesse</span></div>
             </div>
             <div class="d-block text-center">
-                <button routerLink="/cadeiadevalor" routerLinkActive="active" type="button" class="btn "><i
-                        class="fas fa-seedling fa-2x"></i></button>
-                <div><span style="font-size:xx-small; color: black;">Cadeia de valor</span></div>
+                <button routerLink="/pn-elaborados" routerLinkActive="active" type="button" class="btn"><i
+                        class="fas fa-check fa-2x"></i></button>
+                <div><span style="font-size:xx-small; color: black;">PN Elaborados</span></div>
             </div>
         </div>
 
@@ -55,19 +55,22 @@
                 <div><span style="font-size:xx-small; color: black;">Departamento</span></div>
             </div>
             <div class="d-block text-center">
-                <button routerLink="/pn-elaborados" routerLinkActive="active" type="button" class="btn"><i class="fas fa-check fa-2x"></i></button>
-                <div><span style="font-size:xx-small; color: black;">PN Elaborados</span></div>
+                <button routerLink="/visitas" routerLinkActive="active" type="button" class="btn "><i
+                        class="fas fa-arrow-right-arrow-left fa-2x"></i></button>
+                <div><span style="font-size:xx-small; color: black;">Visitas</span></div>
             </div>
         </div>
 
         <div class=" justify-content-between btns">
-            <div class="d-block text-center">
-                <button routerLink="/pgas" routerLinkActive="active" type="button" class="btn"><i class="fas fa-chart-pie fa-2x"></i></button>
+            <div class="d-block text-center" >
+                <button routerLink="/pgas" routerLinkActive="active" type="button" class="btn"><i
+                        class="fas fa-chart-pie fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">PGAS</span></div>
             </div>
-            <div class="d-block text-center">
-                <button routerLink="/visitas" routerLinkActive="active" type="button" class="btn "><i class="fas fa-arrow-right-arrow-left fa-2x"></i></button>
-                <div><span style="font-size:xx-small; color: black;">Visitas</span></div>
+            <div class="d-block text-center" *ngIf="user.is_admin === true">
+                <button routerLink="/usuario" routerLinkActive="active" type="button" class="btn"><i
+                        class="fas fa-user-alt fa-2x"></i></button>
+                <div><span style="font-size:xx-small; color: black;">Usuário</span></div>
             </div>
         </div>
     </div>

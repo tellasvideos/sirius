@@ -4,6 +4,12 @@
     margin-bottom: 1.5%;
 }
 
+.adjust {
+    width: calc(100% - 10px); /* ajuste a largura da div de conteúdo */
+    margin-left: 10px; /* adicione margem à esquerda para compensar a largura do botão oculto */
+  }
+  
+
 #container {
     //display: block;
     justify-content: center;

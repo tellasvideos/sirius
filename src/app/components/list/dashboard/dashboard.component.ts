@@ -180,7 +180,7 @@ export class DashboardComponent implements OnInit {
     // Pegar dados do user logado
     this.userService.getUserData().subscribe((data: any) => {
       this.user = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log(this.user)
+      console.log( 'User logado', this.user)
     });
 
 
