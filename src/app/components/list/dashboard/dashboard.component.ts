@@ -1,13 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
-
-
+import { LocalStorageService } from 'angular-web-storage';
 import * as echarts from 'echarts';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
 import { EchartService } from 'src/app/services/echart.service';
 import { BasicEchartLineModel } from 'src/app/models/echart.models';
 import { EChartsOption } from 'echarts';
+import jwt_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+
+
+interface User {
+  name: string;
+  email: string;
+  username: string;
+  department: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -21,8 +30,9 @@ export class DashboardComponent implements OnInit {
   _chartOption_Interesses_por_mes?: EChartsOption;
   _chartOption_CadeiaValor_por_mes?: EChartsOption;
 
+  user: any;
   i: any;
-
+  token: any;
   logoOn: any;
   inqueritos: any;
   prop: any;
@@ -31,6 +41,7 @@ export class DashboardComponent implements OnInit {
   cadeia: any;
   sideBarOpen = true;
 
+  filteredUsers: any;
   //isAdmin = true;
 
   @Input()
@@ -39,7 +50,17 @@ export class DashboardComponent implements OnInit {
   constructor(
     public img: HeaderComponent,
     private ds: DataService,
-    private echartService: EchartService) {
+    private echartService: EchartService,
+    private localStorage: LocalStorageService,
+    private http: HttpClient,
+    private userService: DataService
+  ) {
+
+    // exibe todas as informações do usuário contidas no token
+    //const user = this.localStorage.get('user')
+    //  console.log('nome do usuario', user); // exibe o nome do usuário
+    //  console.log('email do user', user.email); // exibe o email do usuário
+    //  console.log('departamento do user', user.department); // exibe o departamento do usuário
   }
 
   _cadeiaValorChart(chartData: any[]) {
@@ -156,7 +177,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this._cadeiaValorChart();
+    // Pegar dados do user logado
+    this.userService.getUserData().subscribe((data: any) => {
+      this.user = data.find((user: any) => user.email === localStorage.getItem('user'));
+      console.log(this.user)
+    });
+
 
     // Subscribe chart for VAlue chain from interestExpression
     this.subscripition = this.echartService.get_CadeiaValor_EchartData().subscribe(data => {

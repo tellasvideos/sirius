@@ -201,6 +201,8 @@ export class DataService {
 
   proponentsByProv_url = 'http://strongboxao.ddns.net:8001/api/v1';
 
+  apiUrl = 'http://strongboxao.ddns.net:8001/accounts/users';
+
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
   constructor(
@@ -214,6 +216,15 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Bearer 1c644080bc6af5e8990a30c964157719cbb6576c');
     return this.http.get('http://strongboxao.ddns.net:8001/accounts/users/', { headers: headers, params: params })
+  }
+
+  getUserData() {
+    const token = localStorage.getItem('userToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(this.apiUrl, { headers });
   }
 
   // Method to get company name

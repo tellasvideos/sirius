@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   angForm: FormGroup;
   user: any = [{
-
+    id:'',
     username: '',
     password: ''
 
@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
           this._errorLogin = false;
           this.authService.setSession(this.user.token);
           localStorage.setItem("userToken", this.user.token);
+          localStorage.setItem("userId", this.user);
           localStorage.setItem("user", this.angForm.value['username']);
           // console.log(this.user)
           // localStorage.setItem('user', JSON.stringify(this.user));
