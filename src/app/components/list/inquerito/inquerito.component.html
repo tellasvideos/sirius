@@ -117,13 +117,12 @@
                         <label class="mb-2">M. Interesse Duplicada:</label>
                         <br>
                         <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
-                            <input name="opcoes" type="radio" (change)="onChangeyes($event)"
-                                value="{{n}}">
+                            <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
                             <label class="form-check-label text-black p-2">{{n}}</label>
                         </div>
                     </div>
 
-                    <div class="mb-3" *ngIf="duplicada_da && this.opcoes[0]">
+                    <!--div class="mb-3" >
                         <label class="mb-2">Duplicada Com:</label>
                         <select class="form-select form-select-sm mb-3" [(ngModel)]="duplicada_da" name="opcoes"
                             required aria-label="Default select example">
@@ -131,14 +130,20 @@
                                 {{item.nome_simplificado}}
                             </option>
                         </select>
+                    </div-->
+
+                    <div class="justify-content-between d-flex mb-3" *ngIf="duplicada_da == this.opcoes[0]">
+                        <div>Lista pendente dos nomes simplificados:</div>
+                        <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
+                            bindValue="nome_simplificado" [(ngModel)]="duplicada_da" [searchable]="true"
+                            placeholder="Pesquise aqui"></ng-select>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-2">Didas Teste</label>
                         <br>
                         <div *ngFor="let n of opcoesDidasTeste" class="form-check form-check-inline p-3">
-                            <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)"
-                                value="{{n}}">
+                            <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)" value="{{n}}">
                             <label class="form-check-label text-black p-2">{{n}}</label>
                         </div>
                     </div>

@@ -16,6 +16,12 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 })
 export class InqueritoComponent implements OnInit {
 
+  items = [
+    'Valor 1',
+    'Valor 2',
+    'Valor 3'
+  ];
+
   angForm!: FormGroup;
   user_logged: any;
   userFrontOff: any;

@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 // Angular Materials
@@ -80,7 +79,7 @@ import { EditCadeiasManInComponent } from './components/edit/edit-cadeias-man-in
 
 // Providers
 import { AuthService } from './services/auth.service';
-import { HttpClientModule, HttpParams, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpParams } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { MyfilterPipe } from './myfilter.pipe';
 import { SearchPipe } from './search.pipe';
@@ -90,8 +89,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elaborados.component';
 import { PgasComponent } from './components/list/pgas/pgas.component';
 import { VisitasComponent } from './components/list/visitas/visitas.component';
-
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -171,7 +169,9 @@ import { VisitasComponent } from './components/list/visitas/visitas.component';
     MatToolbarModule,
     MatGridListModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgSelectModule  
+    //NgSelectModule
     
   ],
   providers: [HeaderComponent, AuthService, DataService, HttpParams],
