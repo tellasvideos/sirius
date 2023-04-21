@@ -57,8 +57,8 @@ export class InqueritoComponent implements OnInit {
     'Transformador',
     'Distribuidor',
     'Prestador de serviços',
-    'Serviços mecânicos',
-    'Negócio insumos'
+    //'Serviços mecânicos',
+    // 'Negócio insumos'
   ]
 
   tipos_de_agregador = [
@@ -79,12 +79,12 @@ export class InqueritoComponent implements OnInit {
     'Processamento e negócio grãos'
   ]
 
-  resultados_da_visita = ['Em análise',
-    'Incomunicavel: não atende',
+  resultados_da_visita = ['Inquérito em Elaboração',
+    //'Incomunicavel: não atende',
     'Incontactável: N° tel errado',
-    'Pendente por falta de documento',
+    //'Pendente por falta de documento',
     'Recusada: actividade inelegível',
-    'Recusada: MI duplicada',
+    //'Recusada: MI duplicada',
     'Recusada: proponente desistiu',
     'Recusada por falta dos 10%',
     'Recusado por dívida',
@@ -98,13 +98,13 @@ export class InqueritoComponent implements OnInit {
     'Incomunicavel: Nº Tel errado',
     'Pendente por falta de documento',
     'Recusada: actividade inelegivel',
-    'Recusada: MI duplicada',
+    // 'Recusada: MI duplicada',
     'Recusada: proponente desistiu',
     'Recusada por falta dos 10%',
     'Recusada por divida',
     'Recusada: Zona ilegivel',
     'Recusada por falta de documentação legal',
-    'Didas teste'
+    //  'Didas teste'
   ];
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
   municipios: any;
@@ -192,7 +192,7 @@ export class InqueritoComponent implements OnInit {
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
         break;
-      case 'Em análise':
+      case 'Inquérito em Elaboração':
         this.docs = ['data'];
         break;
       default:
@@ -563,7 +563,7 @@ export class InqueritoComponent implements OnInit {
   // filtrar usuarios do departamento front off
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
-      this.userFrontOff = data.filter(user => user.department === 'Front Off'); 
+      this.userFrontOff = data.filter(user => user.department === 'Front Off');
       console.log('users do front off: ', data)
     })
   }
@@ -581,7 +581,7 @@ export class InqueritoComponent implements OnInit {
     } else {
       this.duplicada_da = false
     }
-    
+
   }
 
   onChangeDidasTeste(event: any) {
@@ -589,8 +589,8 @@ export class InqueritoComponent implements OnInit {
     if (this.nome_simplificado === this.opcoesDidasTeste) {
       this.nome_simplificado = ''
     } else {
-     this.nome_simplificado = false
-     this.nome_simplificado = ''
+      this.nome_simplificado = false
+      this.nome_simplificado = ''
     }
   }
 

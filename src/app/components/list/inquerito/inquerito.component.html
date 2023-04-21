@@ -288,7 +288,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput2" class="form-label">Data de validação:</label>
+                            <label for="exampleFormControlInput2" class="form-label">Data de entrega do Inquérito ao Back Office:
+                                <p class="text-black">Com todos os Documentos </label>
                             <input type="date" [(ngModel)]="data_validacao_inquerito" name="data_validacao_inquerito"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px;" class="form-control form-control-sm">
@@ -327,15 +328,14 @@
                 <div class="modal-body">
 
                     <div class=" justify-content-between d-flex ">
+                       
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
-                            <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
-                                style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
-                                [(ngModel)]="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
-                                <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
-                            </select>
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente: (.docx .pdf)</label>
+                                <input type="file" name="inquerito_preenchido"
+                                    class="form-control" id="customFile" style="width: 350px;" />
+                            </div>
                         </div>
-
                         <div class="mb-3">
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
@@ -343,6 +343,15 @@
                                     class="form-control" id="customFile" style="width: 350px;" />
                             </div>
                         </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
+                        <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
+                            style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
+                            [(ngModel)]="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
+                            <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
+                        </select>
                     </div>
 
                     <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
