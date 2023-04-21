@@ -17,9 +17,10 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 export class InqueritoComponent implements OnInit {
 
   angForm!: FormGroup;
-  user_logged:any;
+  user_logged: any;
   userFrontOff: any;
   formAprovado = false;
+  Inquerito_pendente: any;
 
   isFormValid = false; // variável para armazenar o estado de validação do formulário
   pdac: any;
@@ -32,6 +33,8 @@ export class InqueritoComponent implements OnInit {
   selecionado: string = '';
 
   estado = ['Aprovado', 'Pendente']
+
+  opcoes = ['Sim', 'Nao']
 
   tipos_de_prestadores = [
     'mecanizacao',
@@ -100,6 +103,12 @@ export class InqueritoComponent implements OnInit {
   municipios: any;
   municipio: any;
   docs: any;
+  selectedParc: any;
+  parceiros: any;
+
+  MI_duplida() {
+
+  }
 
   loadTipoNegocio() {
     switch (this.que_tipo_de_negocio_esta) {
@@ -327,6 +336,7 @@ export class InqueritoComponent implements OnInit {
     this.getProvincia();
     this.getPdac();
     this.getUserFrontOFF();
+    this.get_inquireFormsByPendentes()
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -503,6 +513,14 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  // filtrar inqueritos pendentes
+  get_inquireFormsByPendentes() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente');
+      console.log('inquéritos pendentes', this.Inquerito_pendente)
+    })
+  }
+
   alert_error() {
     Swal.fire({
       icon: "error",
@@ -535,9 +553,10 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  // filtrar usuarios do departamento front off
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
-      this.userFrontOff = data.filter(user => user.department === 'Front Off'); // filtrar usuarios do departamento front off
+      this.userFrontOff = data.filter(user => user.department === 'Front Off'); 
       console.log('users do front off: ', data)
     })
   }
@@ -545,6 +564,16 @@ export class InqueritoComponent implements OnInit {
   goToInquiridor() {
     this.modalRef?.close();
     this.route.navigate(['inquiridor'])
+  }
+
+  // muda o comportamento da checkbox sim ou não
+  onChangeyes(event: any) {
+    this.duplicada_da = event.target.value;
+    if (this.duplicada_da === this.opcoes[0]) {
+
+    } else {
+      this.duplicada_da = false
+    }
   }
 
 }
