@@ -32,7 +32,7 @@ export class InqueritoComponent implements OnInit {
   pdac: any;
 
   today: Date = new Date();
-  minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+  //minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() -31);
   maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
 
   keyWord: string = '';

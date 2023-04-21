@@ -136,7 +136,7 @@
                         <div>Lista pendente dos nomes simplificados:</div>
                         <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
                             bindValue="nome_simplificado" [(ngModel)]="duplicada_da" [searchable]="true"
-                            placeholder="Pesquise aqui"></ng-select>
+                            placeholder=""></ng-select>
                     </div>
 
                     <div class="mb-3">
@@ -210,9 +210,8 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label">Data do primeiro contacto:</label>
                             <input type="date" [(ngModel)]="data_1_contacto" name="data_1_contacto"
-                                min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
-                                class="form-control form-control-sm">
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -227,9 +226,8 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">Data da primeira visita:</label>
                         <input type="date" [(ngModel)]="data_1_visita" name="data_1_visita"
-                            min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
-                            class="form-control form-control-sm">
+                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                            style="width: 150px;" class="form-control form-control-sm">
                     </div>
 
                     <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
@@ -292,9 +290,8 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label">Data de validação:</label>
                             <input type="date" [(ngModel)]="data_validacao_inquerito" name="data_validacao_inquerito"
-                                min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
-                                class="form-control form-control-sm">
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px;" class="form-control form-control-sm">
                         </div>
 
                         <div class="mb-3">
