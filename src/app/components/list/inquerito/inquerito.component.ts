@@ -35,6 +35,7 @@ export class InqueritoComponent implements OnInit {
   estado = ['Aprovado', 'Pendente']
 
   opcoes = ['Sim', 'Nao']
+  opcoesDidasTeste = ['Nao']
 
   tipos_de_prestadores = [
     'mecanizacao',
@@ -573,6 +574,17 @@ export class InqueritoComponent implements OnInit {
 
     } else {
       this.duplicada_da = false
+    }
+    
+  }
+
+  onChangeDidasTeste(event: any) {
+    this.nome_simplificado = event.target.value;
+    if (this.nome_simplificado === this.opcoesDidasTeste) {
+      this.nome_simplificado = ''
+    } else {
+     this.nome_simplificado = false
+     this.nome_simplificado = ''
     }
   }
 
