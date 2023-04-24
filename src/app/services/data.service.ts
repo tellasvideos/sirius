@@ -156,7 +156,7 @@ export class DataService {
   get_Estatute_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to get inquire by id
-  get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
+  get_Iquerito_byId_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
 
   // to get all interest expression
   edit_Interest_Exp_url = 'http://strongboxao.ddns.net:8001/api/v1/interestexpressions/';
@@ -183,7 +183,7 @@ export class DataService {
   edit_statutes_url = 'http://strongboxao.ddns.net:8001/api/v1/businessplanstatutes/';
 
   // to update data to inquire
-  edit_inquerito_url = 'http://strongboxao.ddns.net:8001/api/v1/inquirerforms/';
+  edit_inquerito_url = 'http://strongboxao.ddns.net:8001/api/v1/inqueritos/';
 
   // to edit user
   edit_User_url = 'http://strongboxao.ddns.net:8001/accounts/user/';

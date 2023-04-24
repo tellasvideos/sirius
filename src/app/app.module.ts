@@ -90,6 +90,7 @@ import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elabor
 import { PgasComponent } from './components/list/pgas/pgas.component';
 import { VisitasComponent } from './components/list/visitas/visitas.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +139,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PnElaboradosComponent,
     PgasComponent,
     VisitasComponent,
+    VerInqueritoComponent,
   ],
   imports: [
     NgxPrintModule,
