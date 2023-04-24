@@ -64,7 +64,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of inqueritos | search:'responsible':keyWord">
+                        <tr *ngFor="let item of inqueritos | search:'manifestacao_de_interesse':keyWord">
                             <!--td>{{item.responsible}} </!--td-->
                             <td>{{item.manifestacao_de_interesse}}</td>
                             <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
@@ -134,8 +134,8 @@
 
                     <div class="justify-content-between d-flex mb-3" *ngIf="duplicada_da == this.opcoes[0]">
                         <div>Lista pendente dos nomes simplificados:</div>
-                        <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
-                            bindValue="nome_simplificado" [(ngModel)]="duplicada_da" [searchable]="true"
+                        <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado" 
+                             [(ngModel)]="duplicada_da" [searchable]="true"
                             placeholder=""></ng-select>
                     </div>
 
@@ -246,13 +246,13 @@
                         </select>
                     </div>
 
-                    <div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
+                    <!--div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
                         <label for="documento_em_falta">Duplicada:</label>
                         <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="duplicada_da"
                             [(ngModel)]="duplicada_da">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
-                    </div>
+                    </!--div-->
 
                     <div class=" justify-content-between d-block ">
                         <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">

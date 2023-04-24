@@ -9,6 +9,9 @@ import { Location } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
+import { timer } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
 @Component({
   selector: 'app-inquerito',
   templateUrl: './inquerito.component.html',
@@ -458,9 +461,15 @@ export class InqueritoComponent implements OnInit {
     if (modal) {
       modal.style.display = 'none';
     }
-    this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
-      this.route.navigate([this.route.url]);
+
+    // Espera 8 segundos antes de recarregar a página
+    timer(3000).pipe(delay(3000)).subscribe(() => {
+      location.reload();
     });
+   // location.reload();
+    // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
+    //   this.route.navigate([this.route.url]);
+    //  });
 
   }
 
@@ -523,7 +532,8 @@ export class InqueritoComponent implements OnInit {
   // filtrar inqueritos pendentes
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente');
+      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
+      //.map(inqueritos => inqueritos.nome_simplificado);;
       console.log('inquéritos pendentes', this.Inquerito_pendente)
     })
   }
@@ -579,7 +589,7 @@ export class InqueritoComponent implements OnInit {
     if (this.duplicada_da === this.opcoes[0]) {
 
     } else {
-      this.duplicada_da = false
+      // this.duplicada_da == false
     }
 
   }
