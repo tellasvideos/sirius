@@ -20,7 +20,7 @@
                         <form enctype="multipart/form-data" [formGroup]="angForm">
                             <div class="mb-3">
                                 <label class="mb-2">M. Interesse:</label>
-                                <select class="form-select form-select-sm mb-3"
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
                                     formControlName="manifestacao_de_interesse" name="manifestacao_de_interesse"
                                     aria-label="Default select example">
                                     <option *ngFor="let item of pdac" [value]="item['s2gp/s2g1q1/prop_nome']">
@@ -34,7 +34,8 @@
                                     <label class="mb-2">M. Interesse Duplicada:</label>
                                     <br>
                                     <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
-                                        <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
+                                        <input readonly [attr.disabled]="true" name="opcoes" type="radio"
+                                            (change)="onChangeyes($event)" value="{{n}}">
                                         <label class="form-check-label text-black p-2">{{n}}</label>
                                     </div>
                                 </div>
@@ -43,31 +44,31 @@
                                     <label class="mb-2">Didas Teste</label>
                                     <br>
                                     <div *ngFor="let n of opcoesDidasTeste" class="form-check form-check-inline p-3">
-                                        <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)"
-                                            value="{{n}}">
+                                        <input name="opcoes" readonly [attr.disabled]="true" type="checkbox"
+                                            (change)="onChangeDidasTeste($event)" value="{{n}}">
                                         <label class="form-check-label text-black p-2">{{n}}</label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="justify-content-between d-flex mb-3"
-                                *ngIf="this.duplicada_da == this.opcoes[0]">
+                            <div class="justify-content-between d-flex mb-3">
                                 <div>Lista pendente dos nomes simplificados:</div>
-                                <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
-                                    formControlName="nome_simplificado" [searchable]="true" placeholder=""></ng-select>
+                                <ng-select [attr.disabled]="true" style="width:60%;" [items]="Inquerito_pendente"
+                                    bindLabel="nome_simplificado" formControlName="nome_simplificado"
+                                    [searchable]="true" placeholder=""></ng-select>
                             </div>
 
                             <div class="mb-3" *ngIf="this.duplicada_da != this.opcoes[0]">
                                 <label class="mb-2">Nome simplificado:</label>
-                                <input class="form-control form-control-sm" formControlName="nome_simplificado"
-                                    type="text" style="width: 340px;" name="nome_simplificado"
-                                    aria-label=".form-control-sm example">
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    formControlName="nome_simplificado" type="text" style="width: 340px;"
+                                    name="nome_simplificado" aria-label=".form-control-sm example">
                             </div>
 
                             <div class="mb-3">
                                 <label class="mb-2">Inquiridor:</label>
-                                <select class="form-select form-select-sm mb-3" formControlName="inqueridor"
-                                    name="inqueridor" aria-label="Default select example">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    formControlName="inqueridor" name="inqueridor" aria-label="Default select example">
                                     <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                                     </option>
                                 </select>
@@ -76,17 +77,18 @@
                             <div class="justify-content-between d-flex">
                                 <div>
                                     <label for="provincia">Província:</label>
-                                    <select class="form-select form-select-sm mb-3" id="provincia" name="provincia"
-                                        style="width: 350px;" formControlName="provincia"
-                                        (change)="carregarMunicipios()">
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                        id="provincia" name="provincia" style="width: 350px;"
+                                        formControlName="provincia" (change)="carregarMunicipios()">
                                         <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                                     </select>
                                 </div>
 
                                 <div>
                                     <label for="municipio">Município:</label>
-                                    <select class="form-select form-select-sm mb-3" id="municipio" name="municipio"
-                                        style="width: 350px;" formControlName="municipio">
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                        id="municipio" name="municipio" style="width: 350px;"
+                                        formControlName="municipio">
                                         <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
@@ -95,24 +97,25 @@
                             <div class=" justify-content-between d-flex ">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Aldeia:</label>
-                                    <input type="text" formControlName="aldeia" name="aldeia"
-                                        class="form-control form-control-sm" style="width: 340px;"
+                                    <input readonly [attr.disabled]="true" type="text" formControlName="aldeia"
+                                        name="aldeia" class="form-control form-control-sm" style="width: 340px;"
                                         id="exampleFormControlInput1" placeholder="">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Data do primeiro
                                         contacto:</label>
-                                    <input type="date" formControlName="data_1_contacto" name="data_1_contacto"
-                                        max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                        style="width: 150px;" class="form-control form-control-sm">
+                                    <input type="date" readonly [attr.disabled]="true" formControlName="data_1_contacto"
+                                        name="data_1_contacto" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                        [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
+                                        class="form-control form-control-sm">
                                 </div>
                             </div>
 
                             <div>
                                 <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
-                                <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
-                                    name="resultado_1_contacto" formControlName="resultado_1_contacto"
-                                    (change)="carregardocs2()">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="resultado_1_contacto" name="resultado_1_contacto"
+                                    formControlName="resultado_1_contacto" (change)="carregardocs2()">
                                     <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
                                 </select>
                             </div>
@@ -121,9 +124,10 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Data da primeira
                                         visita:</label>
-                                    <input type="date" formControlName="data_1_visita" name="data_1_visita"
-                                        max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                        style="width: 150px;" class="form-control form-control-sm">
+                                    <input type="date" readonly [attr.disabled]="true" formControlName="data_1_visita"
+                                        name="data_1_visita" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                        [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
+                                        class="form-control form-control-sm">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Data de entrega do
@@ -131,73 +135,72 @@
                                         Back Office:
                                         <p class="text-black">Com todos os Documentos
                                     </label>
-                                    <input type="date" formControlName="data_validacao_inquerito"
-                                        name="data_validacao_inquerito" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                        [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
-                                        class="form-control form-control-sm">
+                                    <input readonly [attr.disabled]="true" type="date"
+                                        formControlName="data_validacao_inquerito" name="data_validacao_inquerito"
+                                        max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                        style="width: 150px;" class="form-control form-control-sm">
                                 </div>
                             </div>
 
-                            <div
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
+                            <div>
                                 <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                    name="documento_em_falta" formControlName="documento_em_falta">
+                                <select readonly [attr.disabled]="true" multiple class="form-select form-select-sm mb-3"
+                                    id="documento_em_falta" name="documento_em_falta"
+                                    formControlName="documento_em_falta">
                                     <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                 </select>
                             </div>
 
-                            <div
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
+                            <div>
                                 <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                    name="documento_em_falta_2" formControlName="documento_em_falta_2">
+                                <select multiple readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="documento_em_falta" name="documento_em_falta_2"
+                                    formControlName="documento_em_falta_2">
                                     <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                 </select>
                             </div>
 
                             <div class=" justify-content-between d-block ">
-                                <div class="mb-3"
-                                    *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' ">
+                                <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Resultado da
                                         Visita:</label>
-                                    <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
-                                        style="width: 340px;" id="documento_em_falta" name="resultado_da_visita"
-                                        formControlName="resultado_da_visita">
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                        (change)="carregardocs3()" style="width: 340px;" id="documento_em_falta"
+                                        name="resultado_da_visita" formControlName="resultado_da_visita">
                                         <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
-                                <div
-                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                                <div>
                                     <label for="documento_em_falta">Documento em Falta:</label>
-                                    <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                    <select multiple readonly [attr.disabled]="true"
+                                        class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="documento_em_falta_3" formControlName="documento_em_falta_3">
                                         <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
 
-                                <div
-                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                                <div>
                                     <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                    <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                    <select multiple readonly [attr.disabled]="true"
+                                        class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="documento_em_falta_4" formControlName="documento_em_falta_4">
                                         <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
 
-                                <div
-                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
+                                <div>
                                     <label for="documento_em_falta">Duplicada:</label>
-                                    <select class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                        name="duplicada_da_2" formControlName="duplicada_da_2">
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                        id="documento_em_falta" name="duplicada_da_2" formControlName="duplicada_da_2">
                                         <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Status:</label>
-                                    <select class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                        style="width: 100px;" name="status" formControlName="status">
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                        id="documento_em_falta" style="width: 100px;" name="status"
+                                        formControlName="status">
                                         <option *ngFor="let item of estado" [value]="item" selected>{{item}}</option>
                                     </select>
                                 </div>
@@ -210,17 +213,17 @@
                                     <div class="mb-3" enctype="multipart/form-data">
                                         <label class="form-label" for="customFile">Documentos do Proponente: (.docx
                                             .pdf)</label>
-                                        <input type="file" name="inquerito_preenchido" class="form-control"
-                                            id="customFile" style="width: 350px;" />
+                                        <input type="file" readonly [attr.disabled]="true" name="inquerito_preenchido"
+                                            class="form-control" id="customFile" style="width: 350px;" />
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="mb-3" enctype="multipart/form-data">
                                         <label class="form-label" for="customFile">Carregar Inquérito: (.docx
                                             .pdf)</label>
-                                        <input type="file" formControlName="inquerito_preenchido"
-                                            name="inquerito_preenchido" class="form-control" id="customFile"
-                                            style="width: 350px;" />
+                                        <input type="file" readonly [attr.disabled]="true"
+                                            formControlName="inquerito_preenchido" name="inquerito_preenchido"
+                                            class="form-control" id="customFile" style="width: 350px;" />
                                     </div>
                                 </div>
                             </div>
@@ -228,49 +231,46 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está?
                                 </label>
-                                <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
-                                    style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
-                                    formControlName="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    (change)="loadTipoNegocio()" style="width: 340px;" id="tipodenegocio"
+                                    name="tipodenegocio" formControlName="que_tipo_de_negocio_esta"
+                                    name="que_tipo_de_negocio_esta">
                                     <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
                                 </select>
                             </div>
 
-                            <div class="mb-3"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor' ">
+                            <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                                     implementar
                                     o projecto?</label>
-                                <select class="form-select form-select-sm mb-3" id="tipodenegocio"
-                                    name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="tipodenegocio" name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                     formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
                                     <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}
                                     </option>
                                 </select>
                             </div>
 
-                            <div class="mb-3"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' ">
+                            <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                                <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo"
-                                    formControlName="que_tipo">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="tipodenegocio" name="que_tipo" formControlName="que_tipo">
                                     <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
                                 </select>
                             </div>
 
-                            <div class="mb-3"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' ">
+                            <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                                <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_2"
-                                    formControlName="que_tipo_2">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="tipodenegocio" name="que_tipo_2" formControlName="que_tipo_2">
                                     <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
                                 </select>
                             </div>
 
-                            <div class="mb-3"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
+                            <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
-                                <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
-                                    formControlName="que_tipo_3">
+                                <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
+                                    id="tipodenegocio" name="que_tipo_3" formControlName="que_tipo_3">
                                     <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                                 </select>
                             </div>
