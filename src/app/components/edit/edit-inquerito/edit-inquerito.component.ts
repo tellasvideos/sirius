@@ -42,12 +42,12 @@ export class EditInqueritoComponent implements OnInit {
   aldeia: any;
   data_1_contacto?: string;
   resultado_1_contacto: any;
-  documento_em_falta?: ["none", "none", "none", "none", "none", "none"];
-  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta?: ["Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs"];
+  documento_em_falta_2?: ["Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs"];
   data_1_visita?: string;
   resultado_da_visita: any;
-  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none"];
-  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_3?: ["Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs"];
+  documento_em_falta_4?: ["Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs", "Sem Docs"];
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
@@ -73,10 +73,10 @@ export class EditInqueritoComponent implements OnInit {
       aldeia: [''],
       data_1_contacto: [''],
       resultado_1_contacto: [''],
-      documento_em_falta: ["nehum"],
-      documento_em_falta_2: ["nehum"],
-      documento_em_falta_3: ["nehum"],
-      documento_em_falta_4: ["nehum"],
+      documento_em_falta: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
+      documento_em_falta_2: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
+      documento_em_falta_3: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
+      documento_em_falta_4: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
       duplicada_da: [''],
       data_1_visita: [''],
       resultado_da_visita: [''],
@@ -156,6 +156,8 @@ export class EditInqueritoComponent implements OnInit {
 
     )
     this.get_inquireForms();
+    this.route.navigate(['inquerito/']);
+
   }
 
 
