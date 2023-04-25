@@ -65,6 +65,8 @@ export class EditInqueritoComponent implements OnInit {
     private route: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private location: Location
+
   ) {
     this.angForm = this.fb.group({
       nome_simplificado: [''],
@@ -156,10 +158,12 @@ export class EditInqueritoComponent implements OnInit {
 
     )
     this.get_inquireForms();
-    this.route.navigate(['inquerito/']);
-
+    this.goBack()
   }
 
+  goBack(): void {
+    (this.location as any).back();
+  }
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
