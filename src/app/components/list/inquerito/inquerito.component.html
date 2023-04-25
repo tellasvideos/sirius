@@ -58,7 +58,8 @@
                             <th scope="col" class="text-black">Provincia</th>
                             <th scope="col" class="text-black">Status</th>
                             <th scope="col" class="text-black not-it">Ver</th>
-                            <th scope="col" class="text-black not-it" *ngIf="this.user_logged.department === 'Front Off'">Editar</th>
+                            <th scope="col" class="text-black not-it"
+                                *ngIf="this.user_logged.department === 'Front Off'">Editar</th>
                             <th *ngIf=" this.user_logged.department === 'Front Off'" scope="col"
                                 class="text-black not-it">Apagar
                             </th>
@@ -120,12 +121,23 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="mb-2">M. Interesse Duplicada:</label>
-                        <br>
-                        <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
-                            <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
-                            <label class="form-check-label text-black p-2">{{n}}</label>
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <label class="mb-2">M. Interesse Duplicada:</label>
+                            <br>
+                            <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
+                                <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
+                                <label class="form-check-label text-black p-2">{{n}}</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="mb-2">Didas Teste</label>
+                            <br>
+                            <div *ngFor="let n of opcoesDidasTeste" class="form-check form-check-inline p-3">
+                                <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)"
+                                    value="{{n}}">
+                                <label class="form-check-label text-black p-2">{{n}}</label>
+                            </div>
                         </div>
                     </div>
 
@@ -145,14 +157,6 @@
                             [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="mb-2">Didas Teste</label>
-                        <br>
-                        <div *ngFor="let n of opcoesDidasTeste" class="form-check form-check-inline p-3">
-                            <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)" value="{{n}}">
-                            <label class="form-check-label text-black p-2">{{n}}</label>
-                        </div>
-                    </div>
 
                     <div class="mb-3" *ngIf="duplicada_da != this.opcoes[0]">
                         <label class="mb-2">Nome simplificado:</label>

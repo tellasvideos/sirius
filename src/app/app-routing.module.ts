@@ -43,6 +43,7 @@ import { AuthGuard } from './services/auth.guard';
 import { PgasComponent } from './components/list/pgas/pgas.component';
 import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elaborados.component';
 import { VisitasComponent } from './components/list/visitas/visitas.component';
+import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 
 
 // configuração de rotas
@@ -87,6 +88,8 @@ const routes: Routes = [
   { path: 'edit-cadeias-man-in/:id', component: EditCadeiasManInComponent, canActivate: [AuthGuard] },
   { path: 'edit-estatuto/:id', component: EditEstatutoComponent, canActivate: [AuthGuard] },
   { path: 'edit-status/:id', component: EditStatusComponent, canActivate: [AuthGuard] },
+  { path: 'ver-inquerito/:id', component: VerInqueritoComponent, canActivate: [AuthGuard] },
+
 ];
 
 
