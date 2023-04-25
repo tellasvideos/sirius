@@ -19,12 +19,11 @@ export class EditInqueritoComponent implements OnInit {
   opcoes = ['Sim', 'Nao']
   opcoesDidasTeste = ['Nao']
 
-
-  
+  angForm: FormGroup;
   sideBarOpen = true;
   id: any;
+
   inquiridor: any;
-  angForm: FormGroup;
   manifestacao: any;
   inquerito: any;
   inqueritos:any;
@@ -72,6 +71,7 @@ export class EditInqueritoComponent implements OnInit {
       interest_expression: ['', Validators.required],
       document_to_proves_date: ['', Validators.required],
       observations: ['', Validators.required],
+      
       nome_simplificado: ['', Validators.required] ,
       provincia: ['', Validators.required],
       municipio:['', Validators.required] ,
