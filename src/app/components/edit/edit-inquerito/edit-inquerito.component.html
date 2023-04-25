@@ -17,11 +17,13 @@
                     </div>
                     <div class="card-body">
 
-                        <form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="update_inquerito(angForm)">
+                        <form enctype="multipart/form-data" [formGroup]="angForm"
+                            (ngSubmit)="update_inquerito(angForm)">
                             <div class="mb-3">
                                 <label class="mb-2">M. Interesse:</label>
-                                <select class="form-select form-select-sm mb-3" formControlName="manifestacao_de_interesse"
-                                    required name="manifestacao_de_interesse" aria-label="Default select example">
+                                <select class="form-select form-select-sm mb-3"
+                                    formControlName="manifestacao_de_interesse" name="manifestacao_de_interesse"
+                                    aria-label="Default select example">
                                     <option *ngFor="let item of pdac" [value]="item['s2gp/s2g1q1/prop_nome']">
                                         {{item['s2gp/s2g1q1/prop_nome']}}
                                     </option>
@@ -49,7 +51,8 @@
                                 </div>
                             </div>
 
-                            <div class="justify-content-between d-flex mb-3" *ngIf="this.duplicada_da == this.opcoes[0]">
+                            <div class="justify-content-between d-flex mb-3"
+                                *ngIf="this.duplicada_da == this.opcoes[0]">
                                 <div>Lista pendente dos nomes simplificados:</div>
                                 <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
                                     formControlName="nome_simplificado" [searchable]="true" placeholder=""></ng-select>
@@ -57,15 +60,15 @@
 
                             <div class="mb-3" *ngIf="this.duplicada_da != this.opcoes[0]">
                                 <label class="mb-2">Nome simplificado:</label>
-                                <input class="form-control form-control-sm" formControlName="nome_simplificado" type="text"
-                                    required style="width: 340px;" name="nome_simplificado"
+                                <input class="form-control form-control-sm" formControlName="nome_simplificado"
+                                    type="text" style="width: 340px;" name="nome_simplificado"
                                     aria-label=".form-control-sm example">
                             </div>
 
                             <div class="mb-3">
                                 <label class="mb-2">Inquiridor:</label>
                                 <select class="form-select form-select-sm mb-3" formControlName="inqueridor"
-                                    name="inqueridor" required aria-label="Default select example">
+                                    name="inqueridor" aria-label="Default select example">
                                     <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                                     </option>
                                 </select>
@@ -75,7 +78,7 @@
                                 <div>
                                     <label for="provincia">Província:</label>
                                     <select class="form-select form-select-sm mb-3" id="provincia" name="provincia"
-                                        required style="width: 350px;" formControlName="provincia"
+                                        style="width: 350px;" formControlName="provincia"
                                         (change)="carregarMunicipios()">
                                         <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                                     </select>
@@ -84,7 +87,7 @@
                                 <div>
                                     <label for="municipio">Município:</label>
                                     <select class="form-select form-select-sm mb-3" id="municipio" name="municipio"
-                                        required style="width: 350px;" formControlName="municipio">
+                                        style="width: 350px;" formControlName="municipio">
                                         <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
@@ -136,7 +139,8 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
+                            <div
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
                                 <label for="documento_em_falta">Selecione os documentos em falta:</label>
                                 <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                     name="documento_em_falta" formControlName="documento_em_falta">
@@ -144,7 +148,8 @@
                                 </select>
                             </div>
 
-                            <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
+                            <div
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
                                 <label for="documento_em_falta">Selecione os documentos em falta:</label>
                                 <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                     name="documento_em_falta_2" formControlName="documento_em_falta_2">
@@ -153,7 +158,8 @@
                             </div>
 
                             <div class=" justify-content-between d-block ">
-                                <div class="mb-3" *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' ">
+                                <div class="mb-3"
+                                    *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' ">
                                     <label for="exampleFormControlInput1" class="form-label">Resultado da
                                         Visita:</label>
                                     <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
@@ -162,7 +168,8 @@
                                         <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
-                                <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                                <div
+                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
                                     <label for="documento_em_falta">Documento em Falta:</label>
                                     <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="documento_em_falta_3" formControlName="documento_em_falta_3">
@@ -170,7 +177,8 @@
                                     </select>
                                 </div>
 
-                                <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                                <div
+                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
                                     <label for="documento_em_falta">Selecione os documentos em falta:</label>
                                     <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="documento_em_falta_4" formControlName="documento_em_falta_4">
@@ -178,7 +186,8 @@
                                     </select>
                                 </div>
 
-                                <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
+                                <div
+                                    *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
                                     <label for="documento_em_falta">Duplicada:</label>
                                     <select class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="duplicada_da_2" formControlName="duplicada_da_2">
@@ -227,7 +236,8 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor' ">
+                            <div class="mb-3"
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor' ">
                                 <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                                     implementar
                                     o projecto?</label>
@@ -239,7 +249,8 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' ">
+                            <div class="mb-3"
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' ">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                                 <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo"
                                     formControlName="que_tipo">
@@ -247,7 +258,8 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' ">
+                            <div class="mb-3"
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' ">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                                 <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_2"
                                     formControlName="que_tipo_2">
@@ -255,7 +267,8 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
+                            <div class="mb-3"
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                                 <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
                                     formControlName="que_tipo_3">

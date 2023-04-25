@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import Swal from "sweetalert2";
@@ -19,7 +19,7 @@ export class EditInqueritoComponent implements OnInit {
   opcoes = ['Sim', 'Nao']
   opcoesDidasTeste = ['Nao']
 
-  angForm: FormGroup;
+  angForm!: FormGroup;
   sideBarOpen = true;
   id: any;
 
@@ -61,41 +61,36 @@ export class EditInqueritoComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
     private dataService: DataService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
   ) {
-    this.angForm = this.fb.group({
-      responsible: ['', Validators.required],
-      interest_expression: ['', Validators.required],
-      document_to_proves_date: ['', Validators.required],
-      observations: ['', Validators.required],
-      
-      nome_simplificado: ['', Validators.required] ,
-      provincia: ['', Validators.required],
-      municipio:['', Validators.required] ,
-      aldeia:['', Validators.required] ,
-      data_1_contacto: ['', Validators.required],
-      resultado_1_contacto: ['', Validators.required],
+    this.angForm = this.fb.group({ 
+      nome_simplificado: [''] ,
+      provincia: [''],
+      municipio:[''] ,
+      aldeia:[''] ,
+      data_1_contacto: [''],
+      resultado_1_contacto: [''],
       documento_em_falta: ["none", "none", "none", "none", "none", "none"],
       documento_em_falta_2: ["none", "none", "none", "none", "none", "none"],
       documento_em_falta_3: ["none", "none", "none", "none", "none", "none"],
       documento_em_falta_4: ["none", "none", "none", "none", "none", "none"],
-      duplicada_da:['', Validators.required] ,
-      data_1_visita: ['', Validators.required],
-      resultado_da_visita:['', Validators.required] ,
-      duplicada_da_2:['', Validators.required] ,
-      data_validacao_inquerito:['', Validators.required] ,
-      que_tipo_de_negocio_esta: ['', Validators.required],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:['', Validators.required] ,
-      que_tipo: ['', Validators.required],
-      que_tipo_2: ['', Validators.required],
-      que_tipo_3: ['', Validators.required],
-      status: ['', Validators.required],
-      created_at: ['', Validators.required],
-      manifestacao_de_interesse:['', Validators.required] ,
-      inqueridor: ['', Validators.required],
+      duplicada_da:[''] ,
+      data_1_visita: [''],
+      resultado_da_visita:[''] ,
+      duplicada_da_2:[''] ,
+      data_validacao_inquerito:[''] ,
+      que_tipo_de_negocio_esta: [''],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:[''] ,
+      que_tipo: [''],
+      que_tipo_2: [''],
+      que_tipo_3: [''],
+      status: [''],
+      created_at: [''],
+      manifestacao_de_interesse:[''] ,
+      inqueridor: [''],
       inquerito_preenchido: this.inquerito_preenchido
     })
   }
@@ -109,6 +104,7 @@ export class EditInqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
 
+   
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
