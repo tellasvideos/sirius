@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import Swal from "sweetalert2";
+
 @Component({
   selector: 'app-ver-inquerito',
   templateUrl: './ver-inquerito.component.html',
@@ -10,35 +11,52 @@ import Swal from "sweetalert2";
 })
 export class VerInqueritoComponent implements OnInit {
 
- 
-  sideBarOpen = true;
-  id: any;
-  inquiridor: any;
-  angForm: FormGroup;
-  inqueritosData:any;
-  pdac:any;
-  userFrontOff:any;
-  inquerito:any;
-  inqueritos:any;
-  Inquerito_pendente:any;
-  duplicada_da:any;
-  que_tipo_de_negocio_esta:any;
-  manifestacao:any;
-  nome_simplificado:any;
-  resultado_1_contacto:any;
-  resultado_da_visita:any;
+  today: Date = new Date();
+  maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
 
+  pdac: any;
   opcoes = ['Sim', 'Nao']
   opcoesDidasTeste = ['Nao']
+
+  angForm: FormGroup;
+  sideBarOpen = true;
+  id: any;
+
+  inquiridor: any;
+  manifestacao: any;
+  inquerito: any;
+  inqueritos: any;
+  provincia: any;
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
-  provincia:any;
   municipios: any;
   municipio: any;
   docs: any;
-  inquerito_preenchido!: File;
 
-  today: Date = new Date();
-  maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
+  Inquerito_pendente: any;
+  manifestacao_de_interesse: any;
+  duplicada_da: any;
+  nome_simplificado: any;
+  userFrontOff: any;
+  inquerito_preenchido!: File;
+  aldeia: any;
+  data_1_contacto?: string;
+  resultado_1_contacto: any;
+  documento_em_falta?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none"];
+  data_1_visita?: string;
+  resultado_da_visita: any;
+  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none"];
+  duplicada_da_2: any;
+  data_validacao_inquerito: any;
+  que_tipo_de_negocio_esta: any;
+  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
+  que_tipo: any;
+  que_tipo_2: any;
+  que_tipo_3: any;
+  status: any;
+  inqueridor: any;
+  created_at: any;
 
 
   constructor(
@@ -48,36 +66,37 @@ export class VerInqueritoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) {
     this.angForm = this.fb.group({
-      nome_simplificado: ['', Validators.required] ,
+      responsible: ['', Validators.required],
+      interest_expression: ['', Validators.required],
+      document_to_proves_date: ['', Validators.required],
+      observations: ['', Validators.required],
+
+      nome_simplificado: ['', Validators.required],
       provincia: ['', Validators.required],
-      municipio:['', Validators.required] ,
-      aldeia:['', Validators.required] ,
+      municipio: ['', Validators.required],
+      aldeia: ['', Validators.required],
       data_1_contacto: ['', Validators.required],
       resultado_1_contacto: ['', Validators.required],
-      documento_em_falta: ["none", "none", "none", "none", "none", "none", Validators.required],
-      documento_em_falta_2: ["none", "none", "none", "none", "none", "none", Validators.required],
-      documento_em_falta_3: ["none", "none", "none", "none", "none", "none", Validators.required],
-      documento_em_falta_4: ["none", "none", "none", "none", "none", "none", Validators.required],
-      duplicada_da:['', Validators.required] ,
+      documento_em_falta: ["none", "none", "none", "none", "none", "none"],
+      documento_em_falta_2: ["none", "none", "none", "none", "none", "none"],
+      documento_em_falta_3: ["none", "none", "none", "none", "none", "none"],
+      documento_em_falta_4: ["none", "none", "none", "none", "none", "none"],
+      duplicada_da: ['', Validators.required],
       data_1_visita: ['', Validators.required],
-      resultado_da_visita:['', Validators.required] ,
-      duplicada_da_2:['', Validators.required] ,
-      data_validacao_inquerito:['', Validators.required] ,
+      resultado_da_visita: ['', Validators.required],
+      duplicada_da_2: ['', Validators.required],
+      data_validacao_inquerito: ['', Validators.required],
       que_tipo_de_negocio_esta: ['', Validators.required],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:['', Validators.required] ,
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
       que_tipo: ['', Validators.required],
       que_tipo_2: ['', Validators.required],
       que_tipo_3: ['', Validators.required],
       status: ['', Validators.required],
       created_at: ['', Validators.required],
-      manifestacao_de_interesse:['', Validators.required] ,
+      manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
       inquerito_preenchido: this.inquerito_preenchido
     })
-  }
-
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
   }
 
   ngOnInit(): void {
@@ -88,7 +107,6 @@ export class VerInqueritoComponent implements OnInit {
     this.get_inquireForms();
     this.getPdac();
     this.getUserFrontOFF();
-    //this.getInqueritosData();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
@@ -96,52 +114,56 @@ export class VerInqueritoComponent implements OnInit {
           this.angForm.patchValue(data)
         });
     });
+
   }
 
-  
-  get_interest_express() {
-    this.dataService.getInterestExpress().subscribe(data => {
-      this.manifestacao = data
-    })
-  }
+  update_inquerito(data: any) {
 
-  // muda o comportamento da checkbox sim ou não
-  onChangeyes(event: any) {
-    this.duplicada_da = event.target.value;
-    if (this.duplicada_da === this.opcoes[0]) {
+    /* let InquireForm = {
+       "nome_simplificado": this.nome_simplificado,
+       "provincia": this.provincia,
+       "municipio": this.municipio,
+       "aldeia": this.aldeia,
+       "data_1_contacto": this.data_1_contacto,
+       "resultado_1_contacto": this.resultado_1_contacto,
+       "documento_em_falta": this.documento_em_falta,
+       "documento_em_falta_2": this.documento_em_falta_2,
+       "documento_em_falta_3": this.documento_em_falta_3,
+       "documento_em_falta_4": this.documento_em_falta_4,
+       "duplicada_da": this.duplicada_da,
+       "data_1_visita": this.data_1_visita,
+       "resultado_da_visita": this.resultado_da_visita,
+       "duplicada_da_2": this.duplicada_da_2,
+       "data_validacao_inquerito": this.data_validacao_inquerito,
+       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
+       "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
+       "que_tipo": this.que_tipo,
+       "que_tipo_2": this.que_tipo_2,
+       "que_tipo_3": this.que_tipo_3,
+       "status": this.status,
+       "created_at": this.created_at,
+       "manifestacao_de_interesse": this.manifestacao_de_interesse,
+       "inqueridor": this.inqueridor,
+       "inquerito_preenchido": this.inquerito_preenchido
+     }*/
 
-    } else {
-      // this.duplicada_da == false
+    if (this.inquerito_preenchido) {
+      const formData = new FormData();
+      const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
+      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
     }
 
+    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+      success => { this.alert_success(); },
+      error => { this.alert_error(); }
+
+    )
+    this.get_inquireForms();
   }
 
-  get_inquiridor() {
-    this.dataService.get_Inquiriers().subscribe(data => {
-      this.inquiridor = data;
-    })
-  }
 
-  get_inquireForms() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
-      console.log('inquérito', data)
-    })
-  }
-
-  get_inquerito() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inquerito = data;
-    })
-  }
-
-  // filtrar inqueritos pendentes
-  get_inquireFormsByPendentes() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
-      //.map(inqueritos => inqueritos.nome_simplificado);;
-      console.log('inquéritos pendentes', this.Inquerito_pendente)
-    })
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
   }
 
   getPdac() {
@@ -156,6 +178,16 @@ export class VerInqueritoComponent implements OnInit {
 
   }
 
+
+  editInquerito(data: any) {
+    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+      success => { this.alert_success() },
+      error => { this.alert_error() }
+    )
+    this.get_inquerito();
+    this.route.navigate(['inquerito/']);
+  }
+
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
       this.userFrontOff = data.filter(user => user.department === 'Front Off');
@@ -163,24 +195,80 @@ export class VerInqueritoComponent implements OnInit {
     })
   }
 
-  getInqueritosData(){
-    this.dataService.get_InquireForm().subscribe(data =>{
-      this.inqueritosData = data;
+  get_interest_express() {
+    this.dataService.getInterestExpress().subscribe(data => {
+      this.manifestacao = data
     })
   }
 
+  get_inquiridor() {
+    this.dataService.get_Inquiriers().subscribe(data => {
+      this.inquiridor = data;
+    })
+  }
+
+  get_inquerito() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inquerito = data;
+    })
+  }
+
+  get_inquireForms() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      console.log('inquérito', data)
+    })
+  }
+
+
+  alert_error() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Alguma coisa correu mal, tente mais tarde.",
+    })
+  }
+  alert_success() {
+    Swal.fire({
+      icon: "success",
+      title: "Salvo",
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  // filtrar inqueritos pendentes
+  get_inquireFormsByPendentes() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
+      //.map(inqueritos => inqueritos.nome_simplificado);;
+      console.log('inquéritos pendentes', this.Inquerito_pendente)
+    })
+  }
+
+
+  // muda o comportamento da checkbox sim ou não
+  onChangeyes(event: any) {
+    this.duplicada_da = event.target.value;
+    if (this.duplicada_da === this.opcoes[0]) {
+
+    } else {
+      // this.duplicada_da == false
+    }
+
+  }
 
   onChangeDidasTeste(event: any) {
     this.nome_simplificado = event.target.value;
     if (this.nome_simplificado === this.opcoesDidasTeste) {
       this.nome_simplificado = ''
     } else {
-    //  this.nome_simplificado = false
+      //  this.nome_simplificado = false
       this.nome_simplificado = ''
     }
   }
 
-  
+
   tipos_de_prestadores = [
     'mecanizacao',
     'comercializacao',
@@ -384,6 +472,4 @@ export class VerInqueritoComponent implements OnInit {
   }
 
 
-
- 
 }
