@@ -15,7 +15,7 @@ export class EditInqueritoComponent implements OnInit {
   today: Date = new Date();
   maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
 
-  pdac:any;
+  pdac: any;
   opcoes = ['Sim', 'Nao']
   opcoesDidasTeste = ['Nao']
 
@@ -26,18 +26,18 @@ export class EditInqueritoComponent implements OnInit {
   inquiridor: any;
   manifestacao: any;
   inquerito: any;
-  inqueritos:any;
-  provincia:any;
+  inqueritos: any;
+  provincia: any;
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
   municipios: any;
   municipio: any;
   docs: any;
 
-  Inquerito_pendente:any;
-  manifestacao_de_interesse:any;
-  duplicada_da:any;
-  nome_simplificado:any;
-  userFrontOff:any;
+  Inquerito_pendente: any;
+  manifestacao_de_interesse: any;
+  duplicada_da: any;
+  nome_simplificado: any;
+  userFrontOff: any;
   inquerito_preenchido!: File;
   aldeia: any;
   data_1_contacto?: string;
@@ -66,30 +66,30 @@ export class EditInqueritoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
   ) {
-    this.angForm = this.fb.group({ 
-      nome_simplificado: [''] ,
+    this.angForm = this.fb.group({
+      nome_simplificado: [''],
       provincia: [''],
-      municipio:[''] ,
-      aldeia:[''] ,
+      municipio: [''],
+      aldeia: [''],
       data_1_contacto: [''],
       resultado_1_contacto: [''],
-      documento_em_falta: ["none", "none", "none", "none", "none", "none"],
-      documento_em_falta_2: ["none", "none", "none", "none", "none", "none"],
-      documento_em_falta_3: ["none", "none", "none", "none", "none", "none"],
-      documento_em_falta_4: ["none", "none", "none", "none", "none", "none"],
-      duplicada_da:[''] ,
+      documento_em_falta: ['', '', '', ''],
+      documento_em_falta_2: ['', '', '', ''],
+      documento_em_falta_3: ['', '', '', ''],
+      documento_em_falta_4: ['', '', '', ''],
+      duplicada_da: [''],
       data_1_visita: [''],
-      resultado_da_visita:[''] ,
-      duplicada_da_2:[''] ,
-      data_validacao_inquerito:[''] ,
+      resultado_da_visita: [''],
+      duplicada_da_2: [''],
+      data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: [''],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto:[''] ,
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
       que_tipo: [''],
       que_tipo_2: [''],
       que_tipo_3: [''],
       status: [''],
       created_at: [''],
-      manifestacao_de_interesse:[''] ,
+      manifestacao_de_interesse: [''],
       inqueridor: [''],
       inquerito_preenchido: this.inquerito_preenchido
     })
@@ -104,7 +104,7 @@ export class EditInqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
 
-   
+
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
@@ -114,35 +114,35 @@ export class EditInqueritoComponent implements OnInit {
 
   }
 
-  update_inquerito(data:any) {
+  update_inquerito(data: any) {
 
-   /* let InquireForm = {
-      "nome_simplificado": this.nome_simplificado,
-      "provincia": this.provincia,
-      "municipio": this.municipio,
-      "aldeia": this.aldeia,
-      "data_1_contacto": this.data_1_contacto,
-      "resultado_1_contacto": this.resultado_1_contacto,
-      "documento_em_falta": this.documento_em_falta,
-      "documento_em_falta_2": this.documento_em_falta_2,
-      "documento_em_falta_3": this.documento_em_falta_3,
-      "documento_em_falta_4": this.documento_em_falta_4,
-      "duplicada_da": this.duplicada_da,
-      "data_1_visita": this.data_1_visita,
-      "resultado_da_visita": this.resultado_da_visita,
-      "duplicada_da_2": this.duplicada_da_2,
-      "data_validacao_inquerito": this.data_validacao_inquerito,
-      "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
-      "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
-      "que_tipo": this.que_tipo,
-      "que_tipo_2": this.que_tipo_2,
-      "que_tipo_3": this.que_tipo_3,
-      "status": this.status,
-      "created_at": this.created_at,
-      "manifestacao_de_interesse": this.manifestacao_de_interesse,
-      "inqueridor": this.inqueridor,
-      "inquerito_preenchido": this.inquerito_preenchido
-    }*/
+    /* let InquireForm = {
+       "nome_simplificado": this.nome_simplificado,
+       "provincia": this.provincia,
+       "municipio": this.municipio,
+       "aldeia": this.aldeia,
+       "data_1_contacto": this.data_1_contacto,
+       "resultado_1_contacto": this.resultado_1_contacto,
+       "documento_em_falta": this.documento_em_falta,
+       "documento_em_falta_2": this.documento_em_falta_2,
+       "documento_em_falta_3": this.documento_em_falta_3,
+       "documento_em_falta_4": this.documento_em_falta_4,
+       "duplicada_da": this.duplicada_da,
+       "data_1_visita": this.data_1_visita,
+       "resultado_da_visita": this.resultado_da_visita,
+       "duplicada_da_2": this.duplicada_da_2,
+       "data_validacao_inquerito": this.data_validacao_inquerito,
+       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
+       "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
+       "que_tipo": this.que_tipo,
+       "que_tipo_2": this.que_tipo_2,
+       "que_tipo_3": this.que_tipo_3,
+       "status": this.status,
+       "created_at": this.created_at,
+       "manifestacao_de_interesse": this.manifestacao_de_interesse,
+       "inqueridor": this.inqueridor,
+       "inquerito_preenchido": this.inquerito_preenchido
+     }*/
 
     if (this.inquerito_preenchido) {
       const formData = new FormData();
@@ -234,8 +234,8 @@ export class EditInqueritoComponent implements OnInit {
     })
   }
 
-   // filtrar inqueritos pendentes
-   get_inquireFormsByPendentes() {
+  // filtrar inqueritos pendentes
+  get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
       //.map(inqueritos => inqueritos.nome_simplificado);;
@@ -260,12 +260,12 @@ export class EditInqueritoComponent implements OnInit {
     if (this.nome_simplificado === this.opcoesDidasTeste) {
       this.nome_simplificado = ''
     } else {
-    //  this.nome_simplificado = false
+      //  this.nome_simplificado = false
       this.nome_simplificado = ''
     }
   }
 
-  
+
   tipos_de_prestadores = [
     'mecanizacao',
     'comercializacao',
