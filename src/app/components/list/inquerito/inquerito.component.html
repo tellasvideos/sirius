@@ -95,6 +95,28 @@
             </div>
         </div>
 
+        <!--form #fileUploadForm enctype="multipart/form-data" (submit)="submitFiles()">
+            <div>
+              <label for="documento_18">Documento 18:</label>
+              <input type="file" name="documento_18" id="documento_18" [(ngModel)]="documento_18" (change)="onFileSelected($event, 'documento_18')" accept=".pdf,.doc,.docx">
+            </div>
+            <div>
+              <label for="documento_19">Documento 19:</label>
+              <input type="file" name="documento_19" id="documento_19" [(ngModel)]="documento_19" (change)="onFileSelected($event, 'documento_19')" accept=".pdf,.doc,.docx">
+            </div>
+            <div>
+              <label for="documento_17">Documento 17:</label>
+              <input type="file" name="documento_17" id="documento_17" [(ngModel)]="documento_17" (change)="onFileSelected($event, 'documento_17')" accept=".pdf,.doc,.docx">
+            </div>
+            <div>
+              <label for="documento_16">Documento 16:</label>
+              <input type="file" name="documento_16" id="documento_16" [(ngModel)]="documento_16" (change)="onFileSelected($event, 'documento_16')" accept=".pdf,.doc,.docx">
+            </div>
+          
+            <button type="submit">Enviar</button>
+          </form-->
+              
+
     </mat-drawer-content>
 </mat-drawer-container>
 
@@ -405,7 +427,7 @@
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                             data-bs-toggle="modal">Voltar</button>
-                        <button type="submit" (click)="save_inquerito()"
+                        <button type="submit" (click)="save_inquerito2()"
                             class="btn btn-success btn-sm mt-4">Guardar</button>
                     </div>
                 </div>

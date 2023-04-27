@@ -5,12 +5,14 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito.component';
 //import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Location } from "@angular/common";
+import { Location, } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-inquerito',
@@ -24,6 +26,8 @@ export class InqueritoComponent implements OnInit {
     'Valor 2',
     'Valor 3'
   ];
+
+
 
   angForm!: FormGroup;
   user_logged: any;
@@ -115,6 +119,8 @@ export class InqueritoComponent implements OnInit {
   docs: any;
   selectedParc: any;
   parceiros: any;
+
+
 
   MI_duplida() {
 
@@ -261,29 +267,48 @@ export class InqueritoComponent implements OnInit {
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
-  observations: any;
-  responsible: any;
   document_to_proves_date: any;
-  created_at: any;
+  created_at!: string;
   interest_expression: any;
   manifestacao: any;
   inquiridor: any;
 
-  uploadFile: any;
   // novos dados de inqueritos
+
   nome_simplificado: any;
   provincia: any;
   inquerito_preenchido!: File;
+  documento_do_proponente!: File;
+  documento_1!: File;
+  documento_2!: File;
+  documento_3!: File;
+  documento_4!: File;
+  documento_5!: File;
+  documento_6!: File;
+  documento_7!: File;
+  documento_8!: File;
+  documento_9!: File;
+  documento_10!: File;
+  documento_11!: File;
+  documento_12!: File;
+  documento_13!: File;
+  documento_14!: File;
+  documento_15!: File;
+  documento_16!: File;
+  documento_17!: File;
+  documento_18!: File;
+  documento_19!: File;
+  documento_20!: File;
   aldeia: any;
-  data_1_contacto?: string;
+  data_1_contacto!: string;
   resultado_1_contacto: any;
-  documento_em_falta?: ["none", "none", "none", "none", "none", "none"];
-  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta?: ["none", "none", "none", "none"];
+  documento_em_falta_2?: ["none", "none", "none", "none"];
   duplicada_da: any;
-  data_1_visita?: string;
+  data_1_visita!: string;
   resultado_da_visita: any;
-  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none"];
-  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none"];
+  documento_em_falta_3?: ["none", "none", "none", "none"];
+  documento_em_falta_4?: ["none", "none", "none", "none"];
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
@@ -303,7 +328,7 @@ export class InqueritoComponent implements OnInit {
     private route: Router,
     private location: Location,
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
     // public activeModal: NgbActiveModal
   ) {
     /* this.angForm = this.fb.group({
@@ -354,25 +379,7 @@ export class InqueritoComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
-
   }
-
-  // função para verificar o estado de validação do formulário
-  /*checkFormValidity(): void {
-    const formControl = document.querySelector('input') as HTMLInputElement;
-    const value = formControl.value;
-
-    const formControls = document.querySelectorAll('input, select, textarea');
-    let isFormValid = true;
-
-    formControls.forEach(control => {
-      if (control.hasAttribute('required') && !control) {
-        isFormValid = false;
-      }
-    });
-
-    this.isFormValid = isFormValid;
-  }*/
 
 
   getProvincia() {
@@ -463,35 +470,115 @@ export class InqueritoComponent implements OnInit {
     }
 
     // Espera 8 segundos antes de recarregar a página
-    timer(3000).pipe(delay(3000)).subscribe(() => {
-      location.reload();
-    });
-   // location.reload();
+    //timer(3000).pipe(delay(3000)).subscribe(() => {
+    //location.reload();
+    //});
+    // location.reload();
     // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
     //   this.route.navigate([this.route.url]);
     //  });
 
   }
 
-  save_inquireForm() {
-    let InquireForm = {
-      "observations": this.observations,
-      "responsible": this.responsible,
-      "document_to_proves_date": this.document_to_proves_date,
-      "created_at": this.created_at,
-      "interest_expression": this.interest_expression
+  
+  onFileSelected(event: Event, propertyName: any) {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
+    if (file) {
+      propertyName = file;
     }
-    this.dataService.salvaInquireForm(InquireForm).subscribe(
-      success => { this.alert_success },
-      error => { this.alert_error }
+  }
+  
+
+  submitFiles() {
+    const formData = new FormData();
+    formData.append('documento_18', this.documento_18);
+    formData.append('documento_19', this.documento_19);
+    formData.append('documento_17', this.documento_17);
+    formData.append('documento_16', this.documento_16);
+
+    // chamar a função de envio da API REST aqui
+    this.dataService.salvaInquireForm(formData).subscribe(
+      success => { this.alert_success(); },
+      error => { this.alert_error(); }
     )
+
+  }
+
+  save_inquerito2() {
+    
+
+    let formData = new FormData();
+
+    formData.append("nome_simplificado", this.nome_simplificado);
+    formData.append("provincia", this.provincia);
+    formData.append("municipio", this.municipio);
+    formData.append("aldeia", this.aldeia);
+    formData.append("data_1_contacto", this.data_1_contacto);
+    formData.append("resultado_1_contacto", this.resultado_1_contacto);
+    formData.append("documento_em_falta", this.documento_em_falta as any);
+    formData.append("documento_em_falta_2", this.documento_em_falta_2 as any);
+    formData.append("documento_em_falta_3", this.documento_em_falta_3 as any);
+    formData.append("documento_em_falta_4", this.documento_em_falta_4 as any);
+    formData.append("duplicada_da", this.duplicada_da);
+    formData.append("data_1_visita", this.data_1_visita);
+    formData.append("resultado_da_visita", this.resultado_da_visita);
+    formData.append("duplicada_da_2", this.duplicada_da_2);
+    formData.append("data_validacao_inquerito", this.data_validacao_inquerito);
+    formData.append("que_tipo_de_negocio_esta", this.que_tipo_de_negocio_esta);
+    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto);
+    formData.append("que_tipo", this.que_tipo);
+    formData.append("que_tipo_2", this.que_tipo_2);
+    formData.append("que_tipo_3", this.que_tipo_3);
+    formData.append("status", this.status);
+    formData.append("created_at", this.created_at);
+    formData.append("manifestacao_de_interesse", this.manifestacao_de_interesse);
+    formData.append("inqueridor", this.inqueridor);
+    formData.append("documento_do_proponente", this.documento_do_proponente);
+    formData.append("documento_1", this.documento_1);
+    formData.append("documento_2", this.documento_2);
+    formData.append("documento_3", this.documento_3);
+    formData.append("documento_4", this.documento_4);
+    formData.append("documento_5", this.documento_5);
+    formData.append("documento_6", this.documento_6);
+    formData.append("documento_7", this.documento_7);
+    formData.append("documento_8", this.documento_8);
+    formData.append("documento_9", this.documento_9);
+    formData.append("documento_10", this.documento_10);
+    formData.append("documento_11", this.documento_11);
+    formData.append("documento_12", this.documento_12);
+    formData.append("documento_13", this.documento_13);
+    formData.append("documento_14", this.documento_14);
+    formData.append("documento_15", this.documento_15);
+    formData.append("documento_16", this.documento_16);
+    formData.append("documento_17", this.documento_17);
+    formData.append("documento_18", this.documento_18);
+    formData.append("documento_19", this.documento_19);
+    formData.append("documento_20", this.documento_20);
+
+
+    this.dataService.salvaInquireForm(formData).subscribe(
+      success => { this.alert_success(); },
+      error => { this.alert_error(); }
+
+    )
+
     this.get_inquireForms();
-    this.observations = '';
-    this.responsible = '';
-    this.document_to_proves_date = '';
-    this.interest_expression = '';
-    // this.fecharModal()
-    // this.goBack()
+    //this.location.reload();
+    //this.goBack()
+    const modal = document.getElementById('exampleModalToggle3');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 8 segundos antes de recarregar a página
+    //timer(3000).pipe(delay(3000)).subscribe(() => {
+    //location.reload();
+    //});
+    // location.reload();
+    // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
+    //   this.route.navigate([this.route.url]);
+    //  });
+
   }
 
   goBack(): void {
