@@ -355,12 +355,12 @@
     <div class="modal fade" id="exampleModalToggle3" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-black">
 
                     <div class=" justify-content-between d-flex ">
 
@@ -368,7 +368,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 1: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_do_proponente" class="form-control" id="customFile"
+                                <input type="file" name="documento_do_proponente" [(ngModel)]="documento_do_proponente" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -376,7 +376,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 2: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_1" class="form-control" id="customFile"
+                                <input type="file" name="documento_1" [(ngModel)]="documento_1" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -387,7 +387,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 3: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_2" class="form-control" id="customFile"
+                                <input type="file" name="documento_2" [(ngModel)]="documento_2" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -395,7 +395,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 4: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_3" class="form-control" id="customFile"
+                                <input type="file" name="documento_3" [(ngModel)]="documento_3" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -406,7 +406,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 5: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_4" class="form-control" id="customFile"
+                                <input type="file" name="documento_4" [(ngModel)]="documento_4" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -414,7 +414,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 6: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_5" class="form-control" id="customFile"
+                                <input type="file" name="documento_5" [(ngModel)]="documento_5" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -425,7 +425,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 7: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_6" class="form-control" id="customFile"
+                                <input type="file" name="documento_6" [(ngModel)]="documento_6" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -433,7 +433,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 8: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_7" class="form-control" id="customFile"
+                                <input type="file" name="documento_7" [(ngModel)]="documento_7" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -444,7 +444,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 9: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_8" class="form-control" id="customFile"
+                                <input type="file" name="documento_8" [(ngModel)]="documento_8" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -452,7 +452,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 10: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_9" class="form-control" id="customFile"
+                                <input type="file" name="documento_9" [(ngModel)]="documento_9" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -463,7 +463,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 11: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_10" class="form-control" id="customFile"
+                                <input type="file" name="documento_10" [(ngModel)]="documento_10" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -471,7 +471,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 12: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_11" class="form-control" id="customFile"
+                                <input type="file" name="documento_11" [(ngModel)]="documento_11" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -482,7 +482,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 13: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_12" class="form-control" id="customFile"
+                                <input type="file" name="documento_12" [(ngModel)]="documento_12" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -490,7 +490,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 14: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_13" class="form-control" id="customFile"
+                                <input type="file" name="documento_13" [(ngModel)]="documento_13" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -501,7 +501,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 15: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_14" class="form-control" id="customFile"
+                                <input type="file" name="documento_14" [(ngModel)]="documento_14" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -509,7 +509,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 16: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_15" class="form-control" id="customFile"
+                                <input type="file" name="documento_15" [(ngModel)]="documento_15" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -520,7 +520,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 17: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_16" class="form-control" id="customFile"
+                                <input type="file" name="documento_16" [(ngModel)]="documento_16" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -528,7 +528,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 18: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_17" class="form-control" id="customFile"
+                                <input type="file" name="documento_17" [(ngModel)]="documento_17" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -539,7 +539,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 19: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_18" class="form-control" id="customFile"
+                                <input type="file" name="documento_18" [(ngModel)]="documento_18" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -547,7 +547,7 @@
                             <div class="mb-3" enctype="multipart/form-data">
                                 <label class="form-label" for="customFile">Documentos do Proponente 20: (.docx
                                     .pdf)</label>
-                                <input type="file" name="documento_19" class="form-control" id="customFile"
+                                <input type="file" name="documento_19" [(ngModel)]="documento_19" class="form-control" id="customFile"
                                     style="width: 500px;" />
                             </div>
                         </div>
@@ -563,7 +563,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
