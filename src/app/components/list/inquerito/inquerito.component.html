@@ -27,7 +27,8 @@
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group"
                         *ngIf=" this.user_logged.department === 'Front Off'">
                         <button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
-                            class="btn btn-success btn-top"><i class="fas fa-plus-square text-black"></i> Add
+                            data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
+                                class="fas fa-plus-square text-black"></i> Add
                             Inquérito</button>
                     </div>
                 </div>
@@ -115,7 +116,7 @@
           
             <button type="submit">Enviar</button>
           </form-->
-              
+
 
     </mat-drawer-content>
 </mat-drawer-container>
@@ -123,8 +124,8 @@
 <form enctype="multipart/form-data">
 
     <!-- Primeiro modal -->
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1">
+    <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -223,7 +224,7 @@
     </div>
 
     <!-- Segundo modal -->
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -351,9 +352,9 @@
     </div>
 
     <!-- Terceiro modal -->
-    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    <div class="modal fade" id="exampleModalToggle3" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Inquérito</h1>
@@ -365,20 +366,204 @@
 
                         <div class="mb-3">
                             <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente: (.docx
+                                <label class="form-label" for="customFile">Documentos do Proponente 1: (.docx
                                     .pdf)</label>
-                                <input type="file" name="inquerito_preenchido" class="form-control" id="customFile"
-                                    style="width: 350px;" />
+                                <input type="file" name="documento_do_proponente" class="form-control" id="customFile"
+                                    style="width: 500px;" />
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
-                                <input type="file" [(ngModel)]="inquerito_preenchido" name="inquerito_preenchido"
-                                    class="form-control" id="customFile" style="width: 350px;" />
+                                <label class="form-label" for="customFile">Documentos do Proponente 2: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_1" class="form-control" id="customFile"
+                                    style="width: 500px;" />
                             </div>
                         </div>
                     </div>
+
+                    <div class=" justify-content-between d-flex">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 3: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_2" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 4: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_3" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 5: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_4" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 6: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_5" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 7: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_6" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 8: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_7" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 9: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_8" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 10: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_9" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 11: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_10" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 12: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_11" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 13: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_12" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 14: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_13" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 15: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_14" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 16: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_15" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 17: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_16" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 18: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_17" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" justify-content-between d-flex">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 19: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_18" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Documentos do Proponente 20: (.docx
+                                    .pdf)</label>
+                                <input type="file" name="documento_19" class="form-control" id="customFile"
+                                    style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class=" justify-content-between d-flex ">
+                        <div class="mb-3">
+                            <div class="mb-3" enctype="multipart/form-data">
+                                <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
+                                <input type="file" [(ngModel)]="inquerito_preenchido" name="inquerito_preenchido"
+                                    class="form-control" id="customFile" style="width: 500px;" />
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>

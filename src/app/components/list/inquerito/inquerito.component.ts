@@ -11,6 +11,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import * as bootstrap from 'bootstrap';
 
 
 
@@ -379,6 +380,7 @@ export class InqueritoComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
+
   }
 
 
@@ -480,14 +482,14 @@ export class InqueritoComponent implements OnInit {
 
   }
 
-  
+
   onFileSelected(event: Event, propertyName: any) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
     if (file) {
       propertyName = file;
     }
   }
-  
+
 
   submitFiles() {
     const formData = new FormData();
@@ -505,7 +507,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   save_inquerito2() {
-    
+
 
     let formData = new FormData();
 
