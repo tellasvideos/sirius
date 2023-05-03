@@ -84,13 +84,11 @@
                                     </select>
                                 </div>
 
-                                <div>
-                                    <label for="municipio">Município:</label>
-                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
-                                        id="municipio" name="municipio" style="width: 350px;"
-                                        formControlName="municipio">
-                                        <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <label class="mb-2">Município:</label>
+                                    <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                        formControlName="municipio" type="text" style="width: 340px;" name="municipio"
+                                        aria-label=".form-control-sm example">
                                 </div>
                             </div>
 
