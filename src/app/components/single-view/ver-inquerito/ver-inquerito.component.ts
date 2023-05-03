@@ -58,6 +58,7 @@ export class VerInqueritoComponent implements OnInit {
   inqueridor: any;
   created_at: any;
 
+  listaDocsEmFalta:any;
 
   constructor(
     private fb: FormBuilder,
@@ -77,10 +78,10 @@ export class VerInqueritoComponent implements OnInit {
       aldeia: ['', Validators.required],
       data_1_contacto: ['', Validators.required],
       resultado_1_contacto: ['', Validators.required],
-      documento_em_falta: ['', '', '', ''],
-      documento_em_falta_2: ['', '', '', ''],
-      documento_em_falta_3: ['', '', '', ''],
-      documento_em_falta_4: ['', '', '', ''],
+      documento_em_falta: this.fb.array(Array(9).fill('')),
+      documento_em_falta_2: this.fb.array(Array(9).fill('')),
+      documento_em_falta_3: this.fb.array(Array(9).fill('')),
+      documento_em_falta_4: this.fb.array(Array(9).fill('')),
       duplicada_da: ['', Validators.required],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
@@ -107,6 +108,7 @@ export class VerInqueritoComponent implements OnInit {
     this.get_inquireForms();
     this.getPdac();
     this.getUserFrontOFF();
+    this.getInqueritoByIdDocs();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
@@ -115,6 +117,13 @@ export class VerInqueritoComponent implements OnInit {
         });
     });
 
+  }
+
+  getInqueritoByIdDocs(){
+    this.dataService.get_InquireForm().subscribe(data =>{
+      this.listaDocsEmFalta = data;
+      console.log( 'o que qero ver: ', data)
+    })
   }
 
   update_inquerito(data: any) {

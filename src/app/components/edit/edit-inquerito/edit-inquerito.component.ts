@@ -75,10 +75,10 @@ export class EditInqueritoComponent implements OnInit {
       aldeia: [''],
       data_1_contacto: [''],
       resultado_1_contacto: [''],
-      documento_em_falta: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
-      documento_em_falta_2: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
-      documento_em_falta_3: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
-      documento_em_falta_4: this.fb.array(['Sem Docs', 'Sem Docs', 'Sem Docs', 'Sem Docs']),
+      documento_em_falta: this.fb.array(Array(9).fill('sem documentos')),
+      documento_em_falta_2: this.fb.array(Array(9).fill('sem documentos')),
+      documento_em_falta_3: this.fb.array(Array(9).fill('sem documentos')),
+      documento_em_falta_4: this.fb.array(Array(9).fill('sem documentos')),
       duplicada_da: [''],
       data_1_visita: [''],
       resultado_da_visita: [''],
@@ -93,7 +93,7 @@ export class EditInqueritoComponent implements OnInit {
       created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-      inquerito_preenchido: this.inquerito_preenchido
+      inquerito_preenchido: [false]
     })
   }
 
@@ -105,6 +105,7 @@ export class EditInqueritoComponent implements OnInit {
     this.get_inquireForms();
     this.getPdac();
     this.getUserFrontOFF();
+
 
 
     this.activatedRoute.paramMap.subscribe(paramId => {
@@ -158,12 +159,14 @@ export class EditInqueritoComponent implements OnInit {
 
     )
     this.get_inquireForms();
+    console.log(this.docs)
     this.route.navigate(['inquerito/']);
-  //  this.goBack()
+    //  this.goBack()
+
   }
 
   goBack(): void {
-  //  (this.location as any).back();
+    //  (this.location as any).back();
   }
 
   sideBarToggler() {
@@ -189,6 +192,7 @@ export class EditInqueritoComponent implements OnInit {
       error => { this.alert_error() }
     )
     this.get_inquerito();
+    console.log('documentos selecionados', this.angForm.get('documento_em_falta_2')?.value)
     this.route.navigate(['inquerito/']);
   }
 
@@ -360,7 +364,7 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   carregardocs2() {
-    switch (this.resultado_1_contacto) {
+    switch (this.angForm.get('resultado_1_contacto')?.value) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -392,7 +396,7 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   carregardocs3() {
-    switch (this.resultado_da_visita) {
+    switch (this.angForm.get('resultado_da_visita')?.value) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -439,7 +443,7 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   loadTipoNegocio() {
-    switch (this.que_tipo_de_negocio_esta) {
+    switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       case 'Productor':
         this.docs = [
           'Tuberculos',

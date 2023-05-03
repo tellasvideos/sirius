@@ -142,22 +142,22 @@
                                 </div>
                             </div>
 
-                            <div>
-                                <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                <select readonly [attr.disabled]="true" multiple class="form-select form-select-sm mb-3"
-                                    id="documento_em_falta" name="documento_em_falta"
-                                    formControlName="documento_em_falta">
-                                    <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                                </select>
+                            <div class="mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta 1:</h4>
+                                        {{ this.angForm.get('documento_em_falta')?.value }}
+                                    </div>
+                                </div>
                             </div>
 
-                            <div>
-                                <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                <select multiple readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
-                                    id="documento_em_falta" name="documento_em_falta_2"
-                                    formControlName="documento_em_falta_2">
-                                    <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                                </select>
+                            <div class="mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta 2:</h4>
+                                        {{ this.angForm.get('documento_em_falta_2')?.value }}
+                                    </div>
+                                </div>
                             </div>
 
                             <div class=" justify-content-between d-block ">
@@ -170,30 +170,22 @@
                                         <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label for="documento_em_falta">Documento em Falta:</label>
-                                    <select multiple readonly [attr.disabled]="true"
-                                        class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                        name="documento_em_falta_3" formControlName="documento_em_falta_3">
-                                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="text-black">Documentos em falta 3:</h4>
+                                            {{ this.angForm.get('documento_em_falta_3')?.value }}
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                    <select multiple readonly [attr.disabled]="true"
-                                        class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                        name="documento_em_falta_4" formControlName="documento_em_falta_4">
-                                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="documento_em_falta">Duplicada:</label>
-                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
-                                        id="documento_em_falta" name="duplicada_da_2" formControlName="duplicada_da_2">
-                                        <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="text-black">Documentos em falta 4:</h4>
+                                            {{ this.angForm.get('documento_em_falta_4')?.value }}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">

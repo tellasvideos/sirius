@@ -303,13 +303,13 @@ export class InqueritoComponent implements OnInit {
   aldeia: any;
   data_1_contacto!: string;
   resultado_1_contacto: any;
-  documento_em_falta?: ["none", "none", "none", "none"];
-  documento_em_falta_2?: ["none", "none", "none", "none"];
+  documento_em_falta?: ["none", "none", "none", "none","none", "none", "none", "none"];
+  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none", "none", "none"];
   duplicada_da: any;
   data_1_visita!: string;
   resultado_da_visita: any;
-  documento_em_falta_3?: ["none", "none", "none", "none"];
-  documento_em_falta_4?: ["none", "none", "none", "none"];
+  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none", "none", "none"];
+  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none", "none", "none"];
   duplicada_da_2: any;
   data_validacao_inquerito: any;
   que_tipo_de_negocio_esta: any;
