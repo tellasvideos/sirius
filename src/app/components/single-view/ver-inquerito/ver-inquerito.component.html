@@ -78,15 +78,15 @@
                                 <div>
                                     <label for="provincia">Província:</label>
                                     <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
-                                        id="provincia" name="provincia" style="width: 350px;"
+                                        id="provincia" name="provincia" style="width: 340px;"
                                         formControlName="provincia" (change)="carregarMunicipios()">
                                         <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                                     </select>
                                 </div>
 
                                 <div>
-                                    <label class="mb-2">Município:</label>
-                                    <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    <label>Município:</label>
+                                    <input readonly [attr.disabled]="true" class="form-control form-control-sm mb-3"
                                         formControlName="municipio" type="text" style="width: 340px;" name="municipio"
                                         aria-label=".form-control-sm example">
                                 </div>
