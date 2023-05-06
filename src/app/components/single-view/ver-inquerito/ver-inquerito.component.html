@@ -195,27 +195,6 @@
 
                             </div>
 
-                            <div class=" justify-content-between d-flex ">
-
-                                <div class="mb-3">
-                                    <div class="mb-3" enctype="multipart/form-data">
-                                        <label class="form-label" for="customFile">Documentos do Proponente: (.docx
-                                            .pdf)</label>
-                                        <input type="file" readonly [attr.disabled]="true" name="inquerito_preenchido"
-                                            class="form-control" id="customFile" style="width: 350px;" />
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="mb-3" enctype="multipart/form-data">
-                                        <label class="form-label" for="customFile">Carregar Inquérito: (.docx
-                                            .pdf)</label>
-                                        <input type="file" readonly [attr.disabled]="true"
-                                            formControlName="inquerito_preenchido" name="inquerito_preenchido"
-                                            class="form-control" id="customFile" style="width: 350px;" />
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está?
                                 </label>
@@ -262,9 +241,6 @@
                                     <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                                 </select>
                             </div>
-
-                            <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm mt-4">
-
                         </form>
 
                     </div>

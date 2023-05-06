@@ -13,6 +13,11 @@ body {
     /* Hide scrollbars */
 }
 
+label{
+    color: black;
+    font-weight: bold;
+}
+
 mat-drawer {
     overflow: hidden;
     width: 270px;

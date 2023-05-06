@@ -149,9 +149,9 @@
                             </div>
 
                             <div
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
-                                <label for="documento_em_falta">Selecione os documentos em falta:</label>
-                                <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento'">
+                                <label for="documento_em_falta_2">Selecione os documentos em falta:</label>
+                                <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta_2"
                                     name="documento_em_falta_2" formControlName="documento_em_falta_2">
                                     <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                 </select>
@@ -186,14 +186,14 @@
                                     </select>
                                 </div>
 
-                                <div
+                                <!--div
                                     *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
                                     <label for="documento_em_falta">Duplicada:</label>
                                     <select class="form-select form-select-sm mb-3" id="documento_em_falta"
                                         name="duplicada_da_2" formControlName="duplicada_da_2">
                                         <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                                     </select>
-                                </div>
+                                </div-->
 
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Status:</label>
@@ -203,27 +203,6 @@
                                     </select>
                                 </div>
 
-                            </div>
-
-                            <div class=" justify-content-between d-flex ">
-
-                                <div class="mb-3">
-                                    <div class="mb-3" enctype="multipart/form-data">
-                                        <label class="form-label" for="customFile">Documentos do Proponente: (.docx
-                                            .pdf)</label>
-                                        <input type="file" name="inquerito_preenchido" class="form-control"
-                                            id="customFile" style="width: 350px;" />
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="mb-3" enctype="multipart/form-data">
-                                        <label class="form-label" for="customFile">Carregar Inquérito: (.docx
-                                            .pdf)</label>
-                                        <input type="file" formControlName="inquerito_preenchido"
-                                            name="inquerito_preenchido" class="form-control" id="customFile"
-                                            style="width: 350px;" />
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="mb-3">

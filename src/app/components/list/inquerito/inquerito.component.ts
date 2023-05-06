@@ -396,10 +396,7 @@ export class InqueritoComponent implements OnInit {
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
-      //console.log(data)
-
     })
-
   }
 
   sideBarToggler() {
@@ -492,10 +489,10 @@ export class InqueritoComponent implements OnInit {
       modal.style.display = 'none';
     }
 
-    // Espera 8 segundos antes de recarregar a página
-    //timer(3000).pipe(delay(3000)).subscribe(() => {
-    //location.reload();
-    //});
+    // Espera 3 segundos antes de recarregar a página
+    timer(3000).pipe(delay(3000)).subscribe(() => {
+    location.reload();
+    });
     // location.reload();
     // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
     //   this.route.navigate([this.route.url]);
