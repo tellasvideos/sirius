@@ -44,6 +44,7 @@ import { PgasComponent } from './components/list/pgas/pgas.component';
 import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elaborados.component';
 import { VisitasComponent } from './components/list/visitas/visitas.component';
 import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
+import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
 
 
 // configuração de rotas
@@ -89,6 +90,7 @@ const routes: Routes = [
   { path: 'edit-estatuto/:id', component: EditEstatutoComponent, canActivate: [AuthGuard] },
   { path: 'edit-status/:id', component: EditStatusComponent, canActivate: [AuthGuard] },
   { path: 'ver-inquerito/:id', component: VerInqueritoComponent, canActivate: [AuthGuard] },
+  { path: 'documentos-inquerito/:id', component: DocumentosInqueritoComponent, canActivate: [AuthGuard] },
 
 ];
 

@@ -303,7 +303,7 @@ export class InqueritoComponent implements OnInit {
   aldeia: any;
   data_1_contacto!: string;
   resultado_1_contacto: any;
-  documento_em_falta?: ["none", "none", "none", "none","none", "none", "none", "none"];
+  documento_em_falta?: ["none", "none", "none", "none", "none", "none", "none", "none"];
   documento_em_falta_2?: ["none", "none", "none", "none", "none", "none", "none", "none"];
   duplicada_da: any;
   data_1_visita!: string;
@@ -448,7 +448,28 @@ export class InqueritoComponent implements OnInit {
       "created_at": this.created_at,
       "manifestacao_de_interesse": this.manifestacao_de_interesse,
       "inqueridor": this.inqueridor,
-      "inquerito_preenchido": this.inquerito_preenchido
+      "inquerito_preenchido": this.inquerito_preenchido,
+      "documento_do_proponente": this.documento_do_proponente,
+      "documento_1": this.documento_1,
+      "documento_2": this.documento_2,
+      "documento_3": this.documento_3,
+      "documento_4": this.documento_4,
+      "documento_5": this.documento_5,
+      "documento_6": this.documento_6,
+      "documento_7": this.documento_7,
+      "documento_8": this.documento_8,
+      "documento_9": this.documento_9,
+      "documento_10": this.documento_10,
+      "documento_11": this.documento_11,
+      "documento_12": this.documento_12,
+      "documento_13": this.documento_13,
+      "documento_14": this.documento_14,
+      "documento_15": this.documento_15,
+      "documento_16": this.documento_16,
+      "documento_17": this.documento_17,
+      "documento_18": this.documento_18,
+      "documento_19": this.documento_19,
+      "documento_20": this.documento_20,
     }
 
     if (this.inquerito_preenchido) {
@@ -483,30 +504,7 @@ export class InqueritoComponent implements OnInit {
   }
 
 
-  onFileSelected(event: Event, propertyName: any) {
-    const file = (event.target as HTMLInputElement)?.files?.[0];
-    if (file) {
-      propertyName = file;
-    }
-  }
-
-
-  submitFiles() {
-    const formData = new FormData();
-    formData.append('documento_18', this.documento_18);
-    formData.append('documento_19', this.documento_19);
-    formData.append('documento_17', this.documento_17);
-    formData.append('documento_16', this.documento_16);
-
-    // chamar a função de envio da API REST aqui
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
-    )
-
-  }
-
-  save_inquerito2() {
+  /*save_inquerito2() {
 
 
     let formData = new FormData();
@@ -581,7 +579,7 @@ export class InqueritoComponent implements OnInit {
     //   this.route.navigate([this.route.url]);
     //  });
 
-  }
+  }*/
 
   goBack(): void {
     this.location.back();

@@ -118,26 +118,24 @@
                                 </select>
                             </div>
 
-                            <div class=" justify-content-between d-flex mb-3">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput2" class="form-label">Data da primeira
-                                        visita:</label>
-                                    <input type="date" readonly [attr.disabled]="true" formControlName="data_1_visita"
-                                        name="data_1_visita" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                        [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
-                                        class="form-control form-control-sm">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput2" class="form-label">Data de entrega do
-                                        Inquérito ao
-                                        Back Office:
-                                        <p class="text-black">Com todos os Documentos
-                                    </label>
-                                    <input readonly [attr.disabled]="true" type="date"
-                                        formControlName="data_validacao_inquerito" name="data_validacao_inquerito"
-                                        max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                        style="width: 150px;" class="form-control form-control-sm">
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput2" class="form-label">Data da primeira
+                                    visita:</label>
+                                <input type="date" readonly [attr.disabled]="true" formControlName="data_1_visita"
+                                    name="data_1_visita" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                    [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
+                                    class="form-control form-control-sm">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput2" class="form-label">Data de entrega do
+                                    Inquérito ao
+                                    Back Office:
+                                    <p class="text-black">Com todos os Documentos
+                                </label>
+                                <input readonly [attr.disabled]="true" type="date"
+                                    formControlName="data_validacao_inquerito" name="data_validacao_inquerito"
+                                    max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                    style="width: 150px;" class="form-control form-control-sm">
                             </div>
 
                             <div class="mb-3">
