@@ -81,12 +81,12 @@
                                 </button>
                             </td>
 
-                            <td class="not-it">
+                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
                                 <button type="button" [routerLink]="['/documentos-inquerito/', item.id]" routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-file-lines"></i>
                                 </button>
                             </td>
-                            <td class="not-it">
+                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
                                 <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
