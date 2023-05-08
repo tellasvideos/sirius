@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
 
   logged: any;
 
+  user_logged:any;
+
   constructor(private ds: DataService,
     private auth: AuthService) {
 
@@ -30,6 +32,12 @@ export class SidebarComponent implements OnInit {
       // console.log( 'passado', this.logged)
     }
     this.proponentes()
+
+    // Pegar dados do user logado
+    this.ds.getUserData().subscribe((data: any) => {
+      this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
+      console.log('User logadooooo', this.user_logged.department)
+    });
   }
 
   proponentes() {

@@ -81,6 +81,8 @@ export class DocumentosInqueritoComponent implements OnInit {
      
     }
 
+    this.alert_success()
+
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
       success => { this.alert_success(); },
      // error => { this.alert_error(); }
