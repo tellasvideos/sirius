@@ -59,7 +59,8 @@
                             <th scope="col" class="text-black">Provincia</th>
                             <th scope="col" class="text-black">Status</th>
                             <th scope="col" class="text-black not-it">Ver</th>
-                            <th scope="col" class="text-black not-it">Documentos</th>
+                            <th scope="col" class="text-black not-it"
+                                *ngIf="this.user_logged.department === 'Front Off'">Documentos</th>
                             <th scope="col" class="text-black not-it"
                                 *ngIf="this.user_logged.department === 'Front Off'">Editar</th>
                             <th *ngIf=" this.user_logged.department === 'Front Off'" scope="col"
@@ -82,7 +83,8 @@
                             </td>
 
                             <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
-                                <button type="button" [routerLink]="['/documentos-inquerito/', item.id]" routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                <button type="button" [routerLink]="['/documentos-inquerito/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-file-lines"></i>
                                 </button>
                             </td>
@@ -369,7 +371,7 @@
                 </div>
                 <div class="modal-body ">
 
-                    
+
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
                         <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
