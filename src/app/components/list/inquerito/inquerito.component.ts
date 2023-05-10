@@ -366,13 +366,16 @@ export class InqueritoComponent implements OnInit {
    }*/
 
   ngOnInit(): void {
+    this.get_farm_names();
+    this.getDuplicateInqueridores();
+    this.getDuplicateValues();
     this.get_interest_express();
     this.get_inquirier();
     this.get_inquireForms();
     this.getProvincia();
     this.getPdac();
     this.getUserFrontOFF();
-    this.get_inquireFormsByPendentes()
+    this.get_inquireFormsByPendentes();
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -393,6 +396,7 @@ export class InqueritoComponent implements OnInit {
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
+      console.log('array pdac', this.pdac)
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
@@ -613,6 +617,50 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  // inqueritos duplicados
+  getDuplicateValues() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+  
+      // Transforma o objeto em um array de valores
+      const values = Object.values(this.inqueritos);
+  
+      // Encontra os valores duplicados
+      const duplicates = values.filter((value, index, self) => {
+        return self.indexOf(value) !== index;
+      });
+  
+      console.log('Valores duplicados: ', duplicates);
+    });
+  }
+
+  getDuplicateInqueridores() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+  
+      const duplicates = [];
+      const uniqueInqueridores = [];
+  
+      // Verifica cada objeto no array
+      for (let i = 0; i < this.inqueritos.length; i++) {
+        const inqueridor = this.inqueritos[i].inqueridor;
+  
+        // Verifica se o valor do inqueridor já foi encontrado anteriormente
+        if (uniqueInqueridores.indexOf(inqueridor) !== -1) {
+          // Se o valor já foi encontrado, adiciona o objeto ao array de duplicados
+          duplicates.push(this.inqueritos[i]);
+        } else {
+          // Se o valor não foi encontrado, adiciona o valor ao array de inqueridores únicos
+          uniqueInqueridores.push(inqueridor);
+        }
+      }
+  
+      console.log('Objetos duplicados com base no valor do inqueridor: ', duplicates);
+    });
+  }
+  
+  
+
   // filtrar inqueritos pendentes
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
@@ -646,6 +694,16 @@ export class InqueritoComponent implements OnInit {
     })
 
   }
+
+  // obter o nome da fazenda (nome_simplificado) da janela back off
+  get_farm_names() {
+    this.dataService.getInterestExpress().subscribe(data => {
+      this.manifestacao = data;
+      const farmNames = data.map(item => item.farm_name);
+      console.log('farm_names ou nomes simplificados: ', farmNames);
+    });
+  }
+  
 
   get_inquirier() {
     this.dataService.get_Inquiriers().subscribe(data => {

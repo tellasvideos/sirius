@@ -143,35 +143,24 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="mb-3">
-                        <label class="mb-2">M. Interesse:</label>
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="manifestacao_de_interesse" required
-                            name="manifestacao_de_interesse" aria-label="Default select example">
-                            <option *ngFor="let item of pdac" [value]="item['s2gp/s2g1q1/prop_nome']">
-                                {{item['s2gp/s2g1q1/prop_nome']}}
-                            </option>
-                        </select>
-                    </div>
+                    <div class="mb-3 justify-content-between d-flex">
 
-                    <div class=" justify-content-between d-flex ">
                         <div class="mb-3">
-                            <label class="mb-2">M. Interesse Duplicada:</label>
-                            <br>
+                            <label class="mb-3">M. Interesse Duplicada?:</label>
                             <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
                                 <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
                                 <label class="form-check-label text-black p-2">{{n}}</label>
                             </div>
                         </div>
-                        <!--div class="mb-3">
-                            <label class="mb-2">Didas Teste</label>
-                            <br>
-                            <div *ngFor="let n of opcoesDidasTeste" class="form-check form-check-inline p-3">
-                                <input name="opcoes" type="checkbox" (change)="onChangeDidasTeste($event)"
-                                    value="{{n}}">
-                                <label class="form-check-label text-black p-2">{{n}}</label>
-                            </div>
-                        </!--div-->
+
+                        <div class="my-element">
+                            <label class="mb-3">Pesquisar M. Interesse:</label>
+                            <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" style="width: 350px;"
+                                [(ngModel)]="manifestacao_de_interesse" [searchable]="true" placeholder=""></ng-select>
+                        </div>
+
                     </div>
+
 
                     <!--div class="mb-3" >
                         <label class="mb-2">Duplicada Com:</label>
@@ -184,28 +173,28 @@
                     </div-->
 
                     <div class="justify-content-between d-flex mb-3" *ngIf="duplicada_da == this.opcoes[0]">
-                        <div>Lista pendente dos nomes simplificados:</div>
-                        <ng-select style="width:60%;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
+                        <div>Duplicada Com:</div>
+                        <ng-select style="width:350px;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
                             [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
                     </div>
 
 
                     <div class="mb-3" *ngIf="duplicada_da != this.opcoes[0]">
                         <label class="mb-2">Nome simplificado:</label>
-                        <input class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
+                        <input style="width:355px;" class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
                             style="width: 340px;" name="nome_simplificado" aria-label=".form-control-sm example">
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-2">Inquiridor:</label>
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="inqueridor"
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="inqueridor" style="width:350px;"
                             required aria-label="Default select example">
                             <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="justify-content-between d-flex">
+                    <div class="d-block">
                         <div>
                             <label for="provincia">Província:</label>
                             <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required

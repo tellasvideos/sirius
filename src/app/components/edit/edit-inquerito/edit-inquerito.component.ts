@@ -176,10 +176,10 @@ export class EditInqueritoComponent implements OnInit {
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
+      console.log('pedac array', data)
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
-      //console.log(data)
 
     })
 
