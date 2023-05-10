@@ -28,6 +28,8 @@ export class InqueritoComponent implements OnInit {
     'Valor 3'
   ];
 
+  duplicateNames:any;
+
 
 
   angForm!: FormGroup;
@@ -323,6 +325,8 @@ export class InqueritoComponent implements OnInit {
 
   data: any;
 
+  prop_name:any;
+
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService,
@@ -367,8 +371,6 @@ export class InqueritoComponent implements OnInit {
 
   ngOnInit(): void {
     this.get_farm_names();
-    this.getDuplicateInqueridores();
-    this.getDuplicateValues();
     this.get_interest_express();
     this.get_inquirier();
     this.get_inquireForms();
@@ -396,7 +398,8 @@ export class InqueritoComponent implements OnInit {
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
-      console.log('array pdac', this.pdac)
+      this.prop_name = data.map(pdac => pdac['s2gp/s2g1q1/prop_nome'])
+      console.log('array pdac apenas nomes', this.prop_name)
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
@@ -494,9 +497,9 @@ export class InqueritoComponent implements OnInit {
     }
 
     // Espera 3 segundos antes de recarregar a página
-    timer(3000).pipe(delay(3000)).subscribe(() => {
-    location.reload();
-    });
+   // timer(3000).pipe(delay(3000)).subscribe(() => {
+    //location.reload();
+   // });
     // location.reload();
     // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
     //   this.route.navigate([this.route.url]);
@@ -616,58 +619,14 @@ export class InqueritoComponent implements OnInit {
       console.log('inquérito', data)
     })
   }
-
-  // inqueritos duplicados
-  getDuplicateValues() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
   
-      // Transforma o objeto em um array de valores
-      const values = Object.values(this.inqueritos);
-  
-      // Encontra os valores duplicados
-      const duplicates = values.filter((value, index, self) => {
-        return self.indexOf(value) !== index;
-      });
-  
-      console.log('Valores duplicados: ', duplicates);
-    });
-  }
-
-  getDuplicateInqueridores() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
-  
-      const duplicates = [];
-      const uniqueInqueridores = [];
-  
-      // Verifica cada objeto no array
-      for (let i = 0; i < this.inqueritos.length; i++) {
-        const inqueridor = this.inqueritos[i].inqueridor;
-  
-        // Verifica se o valor do inqueridor já foi encontrado anteriormente
-        if (uniqueInqueridores.indexOf(inqueridor) !== -1) {
-          // Se o valor já foi encontrado, adiciona o objeto ao array de duplicados
-          duplicates.push(this.inqueritos[i]);
-        } else {
-          // Se o valor não foi encontrado, adiciona o valor ao array de inqueridores únicos
-          uniqueInqueridores.push(inqueridor);
-        }
-      }
-  
-      console.log('Objetos duplicados com base no valor do inqueridor: ', duplicates);
-    });
-  }
-  
-  
-
-  // filtrar inqueritos pendentes
+  // nome_simplificado duplicados
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
-      //.map(inqueritos => inqueritos.nome_simplificado);;
-      console.log('inquéritos pendentes', this.Inquerito_pendente)
-    })
+      const simplifiedNames = data.map(inqueritos => inqueritos.nome_simplificado);
+      this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
+      console.log('nome_simplificado duplicados', this.duplicateNames);
+    });
   }
 
   alert_error() {

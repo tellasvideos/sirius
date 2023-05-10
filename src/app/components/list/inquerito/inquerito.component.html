@@ -156,7 +156,7 @@
 
                         <div class="my-element mb-3">
                             <label class="mb-3">Pesquisar M. Interesse:</label>
-                            <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" style="width: 350px;"
+                            <ng-select [items]="pdac"bindLabel="s2gp/s2g1q1/prop_nome"  style="width: 350px;"
                                 [(ngModel)]="manifestacao_de_interesse" [searchable]="true" placeholder=""></ng-select>
                         </div>
 
@@ -164,7 +164,7 @@
 
                     <div class="my-element mb-3" *ngIf="duplicada_da == this.opcoes[0]">
                         <label class="mb-3">Duplicada Com:</label>
-                        <ng-select style="width:350px;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
+                        <ng-select style="width:350px;" [items]="duplicateNames" bindLabel="nome_simplificado"
                             [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
                     </div>
 
