@@ -146,14 +146,15 @@
                     <div class="mb-3 justify-content-between d-flex">
 
                         <div class="mb-3">
-                            <label class="mb-3">M. Interesse Duplicada?:</label>
+                            <label>M. Interesse Duplicada?</label>
+                            <br>
                             <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
                                 <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
                                 <label class="form-check-label text-black p-2">{{n}}</label>
                             </div>
                         </div>
 
-                        <div class="my-element">
+                        <div class="my-element mb-3">
                             <label class="mb-3">Pesquisar M. Interesse:</label>
                             <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                 [(ngModel)]="manifestacao_de_interesse" [searchable]="true" placeholder=""></ng-select>
@@ -161,6 +162,11 @@
 
                     </div>
 
+                    <div class="my-element mb-3" *ngIf="duplicada_da == this.opcoes[0]">
+                        <label class="mb-3">Duplicada Com:</label>
+                        <ng-select style="width:350px;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
+                            [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
+                    </div>
 
                     <!--div class="mb-3" >
                         <label class="mb-2">Duplicada Com:</label>
@@ -172,29 +178,24 @@
                         </select>
                     </div-->
 
-                    <div class="justify-content-between d-flex mb-3" *ngIf="duplicada_da == this.opcoes[0]">
-                        <div>Duplicada Com:</div>
-                        <ng-select style="width:350px;" [items]="Inquerito_pendente" bindLabel="nome_simplificado"
-                            [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
-                    </div>
 
 
                     <div class="mb-3" *ngIf="duplicada_da != this.opcoes[0]">
                         <label class="mb-2">Nome simplificado:</label>
-                        <input style="width:355px;" class="form-control form-control-sm" [(ngModel)]="nome_simplificado" type="text" required
-                            style="width: 340px;" name="nome_simplificado" aria-label=".form-control-sm example">
+                        <input style="width:250px;" class="form-control form-control-sm" [(ngModel)]="nome_simplificado"
+                            type="text" required name="nome_simplificado" aria-label=".form-control-sm example">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="duplicada_da !== this.opcoes[0]">
                         <label class="mb-2">Inquiridor:</label>
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="inqueridor" style="width:350px;"
-                            required aria-label="Default select example">
+                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="inqueridor"
+                            style="width:350px;" required aria-label="Default select example">
                             <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="d-block">
+                    <div class="d-block" *ngIf="duplicada_da !== this.opcoes[0]">
                         <div>
                             <label for="provincia">Província:</label>
                             <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
@@ -215,7 +216,9 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModalToggle2">Próximo</button>
+                        *ngIf="duplicada_da !== this.opcoes[0]" data-bs-target="#exampleModalToggle2">Próximo</button>
+                    <button *ngIf="duplicada_da == this.opcoes[0]" type="submit" (click)="save_inquerito()"
+                        class="btn btn-success btn-sm mt-4">Guardar</button>
                 </div>
             </div>
         </div>
