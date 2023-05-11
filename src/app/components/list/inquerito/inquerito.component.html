@@ -156,7 +156,7 @@
 
                         <div class="my-element mb-3">
                             <label class="mb-3">Pesquisar M. Interesse:</label>
-                            <ng-select [items]="pdac"bindLabel="s2gp/s2g1q1/prop_nome"  style="width: 350px;"
+                            <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                 [(ngModel)]="manifestacao_de_interesse" [searchable]="true" placeholder=""></ng-select>
                         </div>
 
@@ -249,7 +249,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div *ngIf="this.data_1_contacto">
                         <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                         <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
                             name="resultado_1_contacto" [(ngModel)]="resultado_1_contacto" (change)="carregardocs2()">
@@ -257,15 +257,24 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada'">
                         <label for="exampleFormControlInput2" class="form-label">Data da primeira visita:</label>
                         <input type="date" [(ngModel)]="data_1_visita" name="data_1_visita"
                             max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                             style="width: 150px;" class="form-control form-control-sm">
                     </div>
 
+                    <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
+                        <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
+                        <select class="form-select form-select-sm mb-3" (change)="carregardocs3()" style="width: 340px;"
+                            id="documento_em_falta" name="resultado_da_visita" [(ngModel)]="resultado_da_visita">
+                            <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
+                        </select>
+                    </div>
+
                     <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
-                        <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                        <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                            documentos, mantenha premido a tecla CTRL no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" [(ngModel)]="documento_em_falta">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -273,7 +282,8 @@
                     </div>
 
                     <div *ngIf="this.resultado_1_contacto === 'Pendente por falta de documento' ">
-                        <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                        <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                            documentos, mantenha premido a tecla CTRL no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta_2" [(ngModel)]="documento_em_falta_2">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -289,16 +299,10 @@
                     </!--div-->
 
                     <div class=" justify-content-between d-block ">
-                        <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
-                            <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
-                            <select class="form-select form-select-sm mb-3" (change)="carregardocs3()"
-                                style="width: 340px;" id="documento_em_falta" name="resultado_da_visita"
-                                [(ngModel)]="resultado_da_visita">
-                                <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
-                            </select>
-                        </div>
+
                         <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
-                            <label for="documento_em_falta">Documento em Falta:</label>
+                            <label for="documento_em_falta">Documento em Falta: (Para selecionar múltiplos
+                                documentos, mantenha premido a tecla CTRL no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_3" [(ngModel)]="documento_em_falta_3">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -306,7 +310,8 @@
                         </div>
 
                         <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
-                            <label for="documento_em_falta">Selecione os documentos em falta:</label>
+                            <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                                documentos, mantenha premido a tecla CTRL no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_4" [(ngModel)]="documento_em_falta_4">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -321,17 +326,16 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3" *ngIf="this.resultado_da_visita == 'Inquérito em Elaboração'">
                             <label for="exampleFormControlInput2" class="form-label">Data de entrega do Inquérito ao
-                                Back Office:
-                                <p class="text-black">Com todos os Documentos
+                                Back Office: (Com todos os Documentos)
                             </label>
                             <input type="date" [(ngModel)]="data_validacao_inquerito" name="data_validacao_inquerito"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px;" class="form-control form-control-sm">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3 d-none">
                             <label for="exampleFormControlInput2" class="form-label">Status:</label>
                             <select class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 style="width: 100px;" name="status" [(ngModel)]="status">

@@ -92,7 +92,7 @@ export class InqueritoComponent implements OnInit {
   resultados_da_visita = ['Inquérito em Elaboração',
     //'Incomunicavel: não atende',
     'Incontactável: N° tel errado',
-    //'Pendente por falta de documento',
+    'Pendente por falta de documento',
     'Recusada: actividade inelegível',
     //'Recusada: MI duplicada',
     'Recusada: proponente desistiu',
