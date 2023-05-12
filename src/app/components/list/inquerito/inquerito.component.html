@@ -47,7 +47,7 @@
         <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="bm-3">
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar inquérito..."
-                    [(ngModel)]="keyWord" type="text" style="width: 300px;">
+                    formControlName="keyWord" type="text" style="width: 300px;">
             </div>
             <div class="table-responsive" id="print-section-list-inquerito">
                 <table class="table table-sm table-hover text-center">
@@ -105,32 +105,10 @@
             </div>
         </div>
 
-        <!--form #fileUploadForm enctype="multipart/form-data" (submit)="submitFiles()">
-            <div>
-              <label for="documento_18">Documento 18:</label>
-              <input type="file" name="documento_18" id="documento_18" [(ngModel)]="documento_18" (change)="onFileSelected($event, 'documento_18')" accept=".pdf,.doc,.docx">
-            </div>
-            <div>
-              <label for="documento_19">Documento 19:</label>
-              <input type="file" name="documento_19" id="documento_19" [(ngModel)]="documento_19" (change)="onFileSelected($event, 'documento_19')" accept=".pdf,.doc,.docx">
-            </div>
-            <div>
-              <label for="documento_17">Documento 17:</label>
-              <input type="file" name="documento_17" id="documento_17" [(ngModel)]="documento_17" (change)="onFileSelected($event, 'documento_17')" accept=".pdf,.doc,.docx">
-            </div>
-            <div>
-              <label for="documento_16">Documento 16:</label>
-              <input type="file" name="documento_16" id="documento_16" [(ngModel)]="documento_16" (change)="onFileSelected($event, 'documento_16')" accept=".pdf,.doc,.docx">
-            </div>
-          
-            <button type="submit">Enviar</button>
-          </form-->
-
-
     </mat-drawer-content>
 </mat-drawer-container>
 
-<form enctype="multipart/form-data">
+<form enctype="multipart/form-data" [formGroup]="angForm">
 
     <!-- Primeiro modal -->
     <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -157,20 +135,21 @@
                         <div class="my-element mb-3">
                             <label class="mb-3">Pesquisar M. Interesse:</label>
                             <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" style="width: 350px;"
-                                [(ngModel)]="manifestacao_de_interesse" [searchable]="true" placeholder=""></ng-select>
+                                formControlName="manifestacao_de_interesse" [searchable]="true"
+                                placeholder=""></ng-select>
                         </div>
 
                     </div>
 
-                    <div class="my-element mb-3" *ngIf="duplicada_da == this.opcoes[0]">
+                    <div class="my-element mb-3" *ngIf="this.angForm.get('duplicada_da')?.value == this.opcoes[0]">
                         <label class="mb-3">Duplicada Com:</label>
                         <ng-select style="width:350px;" [items]="duplicateNames" bindLabel="nome_simplificado"
-                            [(ngModel)]="duplicada_da" [searchable]="true" placeholder=""></ng-select>
+                            formControlName="duplicada_da" [searchable]="true" placeholder=""></ng-select>
                     </div>
 
                     <!--div class="mb-3" >
                         <label class="mb-2">Duplicada Com:</label>
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="duplicada_da" name="opcoes"
+                        <select class="form-select form-select-sm mb-3" formControlName="duplicada_da" name="opcoes"
                             required aria-label="Default select example">
                             <option *ngFor="let item of Inquerito_pendente" [value]="item.nome_simplificado">
                                 {{item.nome_simplificado}}
@@ -178,28 +157,27 @@
                         </select>
                     </div-->
 
-
-
-                    <div class="mb-3" *ngIf="duplicada_da != this.opcoes[0]">
+                    <div class="mb-3" *ngIf="this.angForm.get('duplicada_da')?.value != this.opcoes[0]">
                         <label class="mb-2">Nome simplificado:</label>
-                        <input style="width:250px;" class="form-control form-control-sm" [(ngModel)]="nome_simplificado"
-                            type="text" required name="nome_simplificado" aria-label=".form-control-sm example">
+                        <input style="width:250px;" class="form-control form-control-sm"
+                            formControlName="nome_simplificado" type="text" required name="nome_simplificado"
+                            aria-label=".form-control-sm example">
                     </div>
 
-                    <div class="mb-3" *ngIf="duplicada_da !== this.opcoes[0]">
+                    <div class="mb-3" *ngIf="this.angForm.get('duplicada_da')?.value !== this.opcoes[0]">
                         <label class="mb-2">Inquiridor:</label>
-                        <select class="form-select form-select-sm mb-3" [(ngModel)]="inqueridor" name="inqueridor"
+                        <select class="form-select form-select-sm mb-3" formControlName="inqueridor" name="inqueridor"
                             style="width:350px;" required aria-label="Default select example">
                             <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="d-block" *ngIf="duplicada_da !== this.opcoes[0]">
+                    <div class="d-block" *ngIf="this.angForm.get('duplicada_da')?.value !== this.opcoes[0]">
                         <div>
                             <label for="provincia">Província:</label>
                             <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
-                                style="width: 350px;" [(ngModel)]="provincia" (change)="carregarMunicipios()">
+                                style="width: 350px;" formControlName="provincia" (change)="carregarMunicipios()">
                                 <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                             </select>
                         </div>
@@ -207,7 +185,7 @@
                         <div>
                             <label for="municipio">Município:</label>
                             <select class="form-select form-select-sm mb-3" id="municipio" name="municipio" required
-                                style="width: 350px;" [(ngModel)]="municipio">
+                                style="width: 350px;" formControlName="municipio">
                                 <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
@@ -216,9 +194,10 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        *ngIf="duplicada_da !== this.opcoes[0]" data-bs-target="#exampleModalToggle2">Próximo</button>
-                    <button *ngIf="duplicada_da == this.opcoes[0]" type="submit" (click)="save_inquerito()"
-                        class="btn btn-success btn-sm mt-4">Guardar</button>
+                        *ngIf="this.angForm.get('duplicada_da')?.value !== this.opcoes[0]"
+                        data-bs-target="#exampleModalToggle2">Próximo</button>
+                    <button *ngIf="this.angForm.get('duplicada_da')?.value == this.opcoes[0]" type="submit"
+                        (click)="save_inquerito2()" class="btn btn-success btn-sm mt-4">Guardar</button>
                 </div>
             </div>
         </div>
@@ -238,54 +217,61 @@
                     <div class=" justify-content-between d-flex ">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Aldeia:</label>
-                            <input type="text" [(ngModel)]="aldeia" name="aldeia" class="form-control form-control-sm"
-                                style="width: 340px;" id="exampleFormControlInput1" placeholder="">
+                            <input type="text" formControlName="aldeia" name="aldeia"
+                                class="form-control form-control-sm" style="width: 340px;" id="exampleFormControlInput1"
+                                placeholder="">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label">Data do primeiro contacto:</label>
-                            <input type="date" [(ngModel)]="data_1_contacto" name="data_1_contacto"
+                            <input type="date" formControlName="data_1_contacto" name="data_1_contacto"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
-                    <div *ngIf="this.data_1_contacto">
+                    <div *ngIf="this.angForm.get('data_1_contacto')?.value">
                         <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                         <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
-                            name="resultado_1_contacto" [(ngModel)]="resultado_1_contacto" (change)="carregardocs2()">
+                            name="resultado_1_contacto" formControlName="resultado_1_contacto"
+                            (change)="carregardocs2()">
+                            <option></option>
                             <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada'">
+                    <div class="mb-3" *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
                         <label for="exampleFormControlInput2" class="form-label">Data da primeira visita:</label>
-                        <input type="date" [(ngModel)]="data_1_visita" name="data_1_visita"
+                        <input type="date" formControlName="data_1_visita" name="data_1_visita"
                             max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                             style="width: 150px;" class="form-control form-control-sm">
                     </div>
 
-                    <div class="mb-3" *ngIf="this.resultado_1_contacto === 'A ser visitada' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
                         <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
                         <select class="form-select form-select-sm mb-3" (change)="carregardocs3()" style="width: 340px;"
-                            id="documento_em_falta" name="resultado_da_visita" [(ngModel)]="resultado_da_visita">
+                            id="documento_em_falta" name="resultado_da_visita" formControlName="resultado_da_visita">
+                            <option></option>
                             <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
 
-                    <div *ngIf="this.resultado_1_contacto === 'Recusada por falta de documentação legal' ">
-                        <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                    <div
+                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
+                        <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para selecionar
+                            múltiplos
                             documentos, mantenha premido a tecla CTRL no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                            name="documento_em_falta" [(ngModel)]="documento_em_falta">
+                            name="documento_em_falta" formControlName="documento_em_falta">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
 
-                    <div *ngIf="this.resultado_1_contacto === 'Pendente por falta de documento' ">
-                        <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                    <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
+                        <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para selecionar
+                            múltiplos
                             documentos, mantenha premido a tecla CTRL no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                            name="documento_em_falta_2" [(ngModel)]="documento_em_falta_2">
+                            name="documento_em_falta_2" formControlName="documento_em_falta_2">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
@@ -293,52 +279,57 @@
                     <!--div *ngIf="this.resultado_1_contacto === 'Recusada: MI duplicada'">
                         <label for="documento_em_falta">Duplicada:</label>
                         <select class="form-select form-select-sm mb-3" id="documento_em_falta" name="duplicada_da"
-                            [(ngModel)]="duplicada_da">
+                            formControlName="duplicada_da">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                         </select>
                     </!--div-->
 
                     <div class=" justify-content-between d-block ">
 
-                        <div *ngIf="this.resultado_da_visita === 'Recusada por falta de documentação legal'">
-                            <label for="documento_em_falta">Documento em Falta: (Para selecionar múltiplos
+                        <div
+                            *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                            <label for="documento_em_falta" class="mb-2">Documento em Falta: (Para selecionar múltiplos
                                 documentos, mantenha premido a tecla CTRL no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                name="documento_em_falta_3" [(ngModel)]="documento_em_falta_3">
+                                name="documento_em_falta_3" formControlName="documento_em_falta_3">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
 
-                        <div *ngIf="this.resultado_da_visita === 'Pendente por falta de documento'">
-                            <label for="documento_em_falta">Selecione os documentos em falta: (Para selecionar múltiplos
+                        <div
+                            *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                            <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para
+                                selecionar múltiplos
                                 documentos, mantenha premido a tecla CTRL no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                name="documento_em_falta_4" [(ngModel)]="documento_em_falta_4">
+                                name="documento_em_falta_4" formControlName="documento_em_falta_4">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
 
-                        <div *ngIf="this.resultado_da_visita === 'Recusada: MI duplicada'">
+                        <div *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada: MI duplicada'">
                             <label for="documento_em_falta">Duplicada:</label>
                             <select class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                name="duplicada_da_2" [(ngModel)]="duplicada_da_2">
+                                name="duplicada_da_2" formControlName="duplicada_da_2">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
 
-                        <div class="mb-3" *ngIf="this.resultado_da_visita == 'Inquérito em Elaboração'">
+                        <div class="mb-3"
+                            *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração'">
                             <label for="exampleFormControlInput2" class="form-label">Data de entrega do Inquérito ao
                                 Back Office: (Com todos os Documentos)
                             </label>
-                            <input type="date" [(ngModel)]="data_validacao_inquerito" name="data_validacao_inquerito"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px;" class="form-control form-control-sm">
+                            <input type="date" formControlName="data_validacao_inquerito"
+                                name="data_validacao_inquerito" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px;"
+                                class="form-control form-control-sm">
                         </div>
 
                         <div class="mb-3 d-none">
                             <label for="exampleFormControlInput2" class="form-label">Status:</label>
                             <select class="form-select form-select-sm mb-3" id="documento_em_falta"
-                                style="width: 100px;" name="status" [(ngModel)]="status">
+                                style="width: 100px;" name="status" formControlName="status">
                                 <option *ngFor="let item of estado" [value]="item" selected>{{item}}</option>
                             </select>
                         </div>
@@ -372,253 +363,69 @@
                         <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio Está? </label>
                         <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
                             style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
-                            [(ngModel)]="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
+                            formControlName="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
                             <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Productor' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor' ">
                         <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                             implementar
                             o projecto?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio"
                             name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
-                            [(ngModel)]="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
+                            formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
                             <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Agregador' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo"
-                            [(ngModel)]="que_tipo">
+                            formControlName="que_tipo">
                             <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Transformador' ">
+                    <div class="mb-3" *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_2"
-                            [(ngModel)]="que_tipo_2">
+                            formControlName="que_tipo_2">
                             <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <div class="mb-3" *ngIf="this.que_tipo_de_negocio_esta === 'Prestador de serviços' ">
+                    <div class="mb-3"
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' ">
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
-                            [(ngModel)]="que_tipo_3">
+                            formControlName="que_tipo_3">
                             <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
-                    <!--div class=" justify-content-between d-flex text-black">
-
+                    <div class="mb-3">
                         <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 1: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_do_proponente" [(ngModel)]="documento_do_proponente"
-                                    class="form-control" id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 2: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_1" [(ngModel)]="documento_1" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
+                            <label class="form-label" for="customFile">Documentos do Proponente: (.docx
+                                .pdf)</label>
+                            <input type="file" (change)="onSelectedFile($event)" name="documento_do_proponente"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="documento_do_proponente"
+                                class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>
-
-                    <div class=" justify-content-between d-flex text-black">
+                    <div class="mb-3">
                         <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 3: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_2" [(ngModel)]="documento_2" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 4: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_3" [(ngModel)]="documento_3" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
+                            <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
+                            <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="inquerito_preenchido"
+                                class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 5: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_4" [(ngModel)]="documento_4" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 6: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_5" [(ngModel)]="documento_5" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black ">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 7: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_6" [(ngModel)]="documento_6" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 8: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_7" [(ngModel)]="documento_7" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 9: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_8" [(ngModel)]="documento_8" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 10: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_9" [(ngModel)]="documento_9" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 11: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_10" [(ngModel)]="documento_10" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 12: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_11" [(ngModel)]="documento_11" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 13: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_12" [(ngModel)]="documento_12" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 14: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_13" [(ngModel)]="documento_13" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 15: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_14" [(ngModel)]="documento_14" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 16: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_15" [(ngModel)]="documento_15" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 17: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_16" [(ngModel)]="documento_16" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 18: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_17" [(ngModel)]="documento_17" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 19: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_18" [(ngModel)]="documento_18" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Documentos do Proponente 20: (.docx
-                                    .pdf)</label>
-                                <input type="file" name="documento_19" [(ngModel)]="documento_19" class="form-control"
-                                    id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div-- class=" justify-content-between d-flex text-black">
-                        <div class="mb-3">
-                            <div class="mb-3" enctype="multipart/form-data">
-                                <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
-                                <input type="file" [(ngModel)]="inquerito_preenchido" name="inquerito_preenchido"
-                                    class="form-control" id="customFile" style="width: 500px;" />
-                            </div>
-                        </div>
-                    </div-->
-
 
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                             data-bs-toggle="modal">Voltar</button>
-                        <button type="submit" (click)="save_inquerito()"
+                        <button type="submit" (click)="save_inquerito2()"
                             class="btn btn-success btn-sm mt-4">Guardar</button>
                     </div>
                 </div>

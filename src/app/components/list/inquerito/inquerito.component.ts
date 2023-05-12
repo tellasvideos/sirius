@@ -22,13 +22,16 @@ import * as bootstrap from 'bootstrap';
 })
 export class InqueritoComponent implements OnInit {
 
+  selectedFile: any;
+  selectedFile2: any;
+
   items = [
     'Valor 1',
     'Valor 2',
     'Valor 3'
   ];
 
-  duplicateNames:any;
+  duplicateNames: any;
 
 
 
@@ -130,7 +133,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   loadTipoNegocio() {
-    switch (this.que_tipo_de_negocio_esta) {
+    switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       case 'Productor':
         this.docs = [
           'Tuberculos',
@@ -167,7 +170,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs3() {
-    switch (this.resultado_da_visita) {
+    switch (this.angForm.get('resultado_da_visita')?.value) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -214,7 +217,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregardocs2() {
-    switch (this.resultado_1_contacto) {
+    switch (this.angForm.get('resultado_1_contacto')?.value) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -270,38 +273,39 @@ export class InqueritoComponent implements OnInit {
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
-  document_to_proves_date: any;
-  created_at!: string;
+  provincia: any;
   interest_expression: any;
   manifestacao: any;
   inquiridor: any;
 
   // novos dados de inqueritos
 
-  nome_simplificado: any;
+
+  /* documento_1!: File;
+   documento_2!: File;
+   documento_3!: File;
+   documento_4!: File;
+   documento_5!: File;
+   documento_6!: File;
+   documento_7!: File;
+   documento_8!: File;
+   documento_9!: File;
+   documento_10!: File;
+   documento_11!: File;
+   documento_12!: File;
+   documento_13!: File;
+   documento_14!: File;
+   documento_15!: File;
+   documento_16!: File;
+   documento_17!: File;
+   documento_18!: File;
+   documento_19!: File;
+   documento_20!: File;*/
+
+  /*nome_simplificado: any;
   provincia: any;
   inquerito_preenchido!: File;
   documento_do_proponente!: File;
-  documento_1!: File;
-  documento_2!: File;
-  documento_3!: File;
-  documento_4!: File;
-  documento_5!: File;
-  documento_6!: File;
-  documento_7!: File;
-  documento_8!: File;
-  documento_9!: File;
-  documento_10!: File;
-  documento_11!: File;
-  documento_12!: File;
-  documento_13!: File;
-  documento_14!: File;
-  documento_15!: File;
-  documento_16!: File;
-  documento_17!: File;
-  documento_18!: File;
-  documento_19!: File;
-  documento_20!: File;
   aldeia: any;
   data_1_contacto!: string;
   resultado_1_contacto: any;
@@ -321,11 +325,9 @@ export class InqueritoComponent implements OnInit {
   que_tipo_3: any;
   status: any;
   manifestacao_de_interesse?: any;
-  inqueridor: any;
-
+  inqueridor: any;*/
   data: any;
-
-  prop_name:any;
+  prop_name: any;
 
   constructor(
     private modalService: MdbModalService,
@@ -336,33 +338,35 @@ export class InqueritoComponent implements OnInit {
     private fb: FormBuilder,
     // public activeModal: NgbActiveModal
   ) {
-    /* this.angForm = this.fb.group({
-       nome_simplificado: [''],
-       provincia: [''],
-       municipio: [''],
-       aldeia: [''],
-       data_1_contacto: [''],
-       resultado_1_contacto: [''],
-       documento_em_falta: ['none', 'item2', 'item3'],
-       documento_em_falta_2: ['none', 'item2', 'item3'],
-       documento_em_falta_3: ['none', 'item2', 'item3'],
-       documento_em_falta_4: ['none', 'item2', 'item3'],
-       duplicada_da: [''],
-       data_1_visita: [''],
-       resultado_da_visita: [''],
-       duplicada_da_2: [''],
-       data_validacao_inquerito: [''],
-       que_tipo_de_negocio_esta: [''],
-       em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
-       que_tipo: [''],
-       que_tipo_2: [''],
-       que_tipo_3: [''],
-       status: [''],
-       //created_at: [''],
-       manifestacao_de_interesse: [''],
-       inqueridor: [''],
-       inquerito_preenchido: ['']
-     });*/
+    this.angForm = this.fb.group({
+      nome_simplificado: [''],
+      provincia: [''],
+      municipio: [''],
+      aldeia: [''],
+      data_1_contacto: [''],
+      resultado_1_contacto: [''],
+      documento_em_falta: this.fb.array(Array(9).fill('sem falta')),
+      documento_em_falta_2: this.fb.array(Array(9).fill('sem falta')),
+      documento_em_falta_3: this.fb.array(Array(9).fill('sem falta')),
+      documento_em_falta_4: this.fb.array(Array(9).fill('sem falta')),
+      duplicada_da: [''],
+      data_1_visita: [''],
+      resultado_da_visita: [''],
+      duplicada_da_2: [''],
+      data_validacao_inquerito: [''],
+      que_tipo_de_negocio_esta: [''],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
+      que_tipo: [''],
+      que_tipo_2: [''],
+      que_tipo_3: [''],
+      status: [''],
+      created_at: [''],
+      manifestacao_de_interesse: [''],
+      inqueridor: [''],
+
+      inquerito_preenchido: [''],
+      documento_do_proponente: ['']
+    });
   }
 
   /* fecharModal() {
@@ -425,140 +429,107 @@ export class InqueritoComponent implements OnInit {
    }*/
 
 
-  save_inquerito() {
-
-    let InquireForm = {
-      "nome_simplificado": this.nome_simplificado,
-      "provincia": this.provincia,
-      "municipio": this.municipio,
-      "aldeia": this.aldeia,
-      "data_1_contacto": this.data_1_contacto,
-      "resultado_1_contacto": this.resultado_1_contacto,
-      "documento_em_falta": this.documento_em_falta,
-      "documento_em_falta_2": this.documento_em_falta_2,
-      "documento_em_falta_3": this.documento_em_falta_3,
-      "documento_em_falta_4": this.documento_em_falta_4,
-      "duplicada_da": this.duplicada_da,
-      "data_1_visita": this.data_1_visita,
-      "resultado_da_visita": this.resultado_da_visita,
-      "duplicada_da_2": this.duplicada_da_2,
-      "data_validacao_inquerito": this.data_validacao_inquerito,
-      "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
-      "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
-      "que_tipo": this.que_tipo,
-      "que_tipo_2": this.que_tipo_2,
-      "que_tipo_3": this.que_tipo_3,
-      "status": this.status,
-      "created_at": this.created_at,
-      "manifestacao_de_interesse": this.manifestacao_de_interesse,
-      "inqueridor": this.inqueridor,
-      "inquerito_preenchido": this.inquerito_preenchido,
-      "documento_do_proponente": this.documento_do_proponente,
-      "documento_1": this.documento_1,
-      "documento_2": this.documento_2,
-      "documento_3": this.documento_3,
-      "documento_4": this.documento_4,
-      "documento_5": this.documento_5,
-      "documento_6": this.documento_6,
-      "documento_7": this.documento_7,
-      "documento_8": this.documento_8,
-      "documento_9": this.documento_9,
-      "documento_10": this.documento_10,
-      "documento_11": this.documento_11,
-      "documento_12": this.documento_12,
-      "documento_13": this.documento_13,
-      "documento_14": this.documento_14,
-      "documento_15": this.documento_15,
-      "documento_16": this.documento_16,
-      "documento_17": this.documento_17,
-      "documento_18": this.documento_18,
-      "documento_19": this.documento_19,
-      "documento_20": this.documento_20,
-    }
-
-    if (this.inquerito_preenchido) {
-      const formData = new FormData();
-      const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
-      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
-    }
-
-    this.dataService.salvaInquireForm(InquireForm).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
-
-    )
-
-    this.get_inquireForms();
-    //this.location.reload();
-    //this.goBack()
-    const modal = document.getElementById('exampleModalToggle3');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 3 segundos antes de recarregar a página
-   // timer(3000).pipe(delay(3000)).subscribe(() => {
-    //location.reload();
-   // });
-    // location.reload();
-    // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
-    //   this.route.navigate([this.route.url]);
-    //  });
-
-  }
+  /* save_inquerito() {
+ 
+     let InquireForm = {
+       "nome_simplificado": this.nome_simplificado,
+       "provincia": this.provincia,
+       "municipio": this.municipio,
+       "aldeia": this.aldeia,
+       "data_1_contacto": this.data_1_contacto,
+       "resultado_1_contacto": this.resultado_1_contacto,
+       "documento_em_falta": this.documento_em_falta,
+       "documento_em_falta_2": this.documento_em_falta_2,
+       "documento_em_falta_3": this.documento_em_falta_3,
+       "documento_em_falta_4": this.documento_em_falta_4,
+       "duplicada_da": this.duplicada_da,
+       "data_1_visita": this.data_1_visita,
+       "resultado_da_visita": this.resultado_da_visita,
+       "duplicada_da_2": this.duplicada_da_2,
+       "data_validacao_inquerito": this.data_validacao_inquerito,
+       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
+       "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
+       "que_tipo": this.que_tipo,
+       "que_tipo_2": this.que_tipo_2,
+       "que_tipo_3": this.que_tipo_3,
+       "status": this.status,
+       "created_at": this.created_at,
+       "manifestacao_de_interesse": this.manifestacao_de_interesse,
+       "inqueridor": this.inqueridor,
+       "inquerito_preenchido": this.inquerito_preenchido,
+       "documento_do_proponente": this.documento_do_proponente,
+     }
+     
+ 
+     if (this.inquerito_preenchido) {
+       const formData = new FormData();
+       const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
+       formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
+     }
+ 
+     this.dataService.salvaInquireForm(InquireForm).subscribe(
+       success => { this.alert_success(); },
+       error => { this.alert_error(); }
+ 
+     )
+ 
+     this.get_inquireForms();
+     //this.location.reload();
+     //this.goBack()
+     const modal = document.getElementById('exampleModalToggle3');
+     if (modal) {
+       modal.style.display = 'none';
+     }
+ 
+     // Espera 3 segundos antes de recarregar a página
+    // timer(3000).pipe(delay(3000)).subscribe(() => {
+     //location.reload();
+    // });
+     // location.reload();
+     // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
+     //   this.route.navigate([this.route.url]);
+     //  });
+ 
+   }*/
 
 
-  /*save_inquerito2() {
+  save_inquerito2() {
 
+    let fileList: FileList = this.selectedFile;
+    let fileList2: FileList = this.selectedFile2;
 
+    let documento_do_proponente: File = fileList[0];
+    let inquerito_preenchido: File = fileList2[0];
+    
     let formData = new FormData();
 
-    formData.append("nome_simplificado", this.nome_simplificado);
-    formData.append("provincia", this.provincia);
-    formData.append("municipio", this.municipio);
-    formData.append("aldeia", this.aldeia);
-    formData.append("data_1_contacto", this.data_1_contacto);
-    formData.append("resultado_1_contacto", this.resultado_1_contacto);
-    formData.append("documento_em_falta", this.documento_em_falta as any);
-    formData.append("documento_em_falta_2", this.documento_em_falta_2 as any);
-    formData.append("documento_em_falta_3", this.documento_em_falta_3 as any);
-    formData.append("documento_em_falta_4", this.documento_em_falta_4 as any);
-    formData.append("duplicada_da", this.duplicada_da);
-    formData.append("data_1_visita", this.data_1_visita);
-    formData.append("resultado_da_visita", this.resultado_da_visita);
-    formData.append("duplicada_da_2", this.duplicada_da_2);
-    formData.append("data_validacao_inquerito", this.data_validacao_inquerito);
-    formData.append("que_tipo_de_negocio_esta", this.que_tipo_de_negocio_esta);
-    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto);
-    formData.append("que_tipo", this.que_tipo);
-    formData.append("que_tipo_2", this.que_tipo_2);
-    formData.append("que_tipo_3", this.que_tipo_3);
-    formData.append("status", this.status);
-    formData.append("created_at", this.created_at);
-    formData.append("manifestacao_de_interesse", this.manifestacao_de_interesse);
-    formData.append("inqueridor", this.inqueridor);
-    formData.append("documento_do_proponente", this.documento_do_proponente);
-    formData.append("documento_1", this.documento_1);
-    formData.append("documento_2", this.documento_2);
-    formData.append("documento_3", this.documento_3);
-    formData.append("documento_4", this.documento_4);
-    formData.append("documento_5", this.documento_5);
-    formData.append("documento_6", this.documento_6);
-    formData.append("documento_7", this.documento_7);
-    formData.append("documento_8", this.documento_8);
-    formData.append("documento_9", this.documento_9);
-    formData.append("documento_10", this.documento_10);
-    formData.append("documento_11", this.documento_11);
-    formData.append("documento_12", this.documento_12);
-    formData.append("documento_13", this.documento_13);
-    formData.append("documento_14", this.documento_14);
-    formData.append("documento_15", this.documento_15);
-    formData.append("documento_16", this.documento_16);
-    formData.append("documento_17", this.documento_17);
-    formData.append("documento_18", this.documento_18);
-    formData.append("documento_19", this.documento_19);
-    formData.append("documento_20", this.documento_20);
+    formData.append("documento_do_proponente", documento_do_proponente, documento_do_proponente.name);
+    formData.append("inquerito_preenchido", inquerito_preenchido, inquerito_preenchido.name);
 
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
+    formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
+    formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
+    formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
+    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
+    formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
+    formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
+    formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
+    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("created_at", this.angForm.get('created_at')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
 
     this.dataService.salvaInquireForm(formData).subscribe(
       success => { this.alert_success(); },
@@ -567,23 +538,12 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    //this.location.reload();
-    //this.goBack()
+
     const modal = document.getElementById('exampleModalToggle3');
     if (modal) {
       modal.style.display = 'none';
     }
-
-    // Espera 8 segundos antes de recarregar a página
-    //timer(3000).pipe(delay(3000)).subscribe(() => {
-    //location.reload();
-    //});
-    // location.reload();
-    // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
-    //   this.route.navigate([this.route.url]);
-    //  });
-
-  }*/
+  }
 
   goBack(): void {
     this.location.back();
@@ -619,7 +579,7 @@ export class InqueritoComponent implements OnInit {
       console.log('inquérito', data)
     })
   }
-  
+
   // nome_simplificado duplicados
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
@@ -662,7 +622,7 @@ export class InqueritoComponent implements OnInit {
       console.log('farm_names ou nomes simplificados: ', farmNames);
     });
   }
-  
+
 
   get_inquirier() {
     this.dataService.get_Inquiriers().subscribe(data => {
@@ -686,23 +646,35 @@ export class InqueritoComponent implements OnInit {
 
   // muda o comportamento da checkbox sim ou não
   onChangeyes(event: any) {
-    this.duplicada_da = event.target.value;
-    if (this.duplicada_da === this.opcoes[0]) {
-
+    this.angForm.patchValue({
+      duplicada_da: event.target.value
+    });
+    if (this.angForm.get('duplicada_da')!.value === this.opcoes[0]) {
+      // this.opcoes[0] = ''
     } else {
       // this.duplicada_da == false
     }
 
   }
 
-  onChangeDidasTeste(event: any) {
-    this.nome_simplificado = event.target.value;
-    if (this.nome_simplificado === this.opcoesDidasTeste) {
-      this.nome_simplificado = ''
+  /*onChangeDidasTeste(event: any) {
+    this.angForm.get('nome_simplificado')?.value = event.target.value;
+    if (this.angForm.get('nome_simplificado')?.value === this.opcoesDidasTeste) {
+      this.angForm.get('nome_simplificado')?.value = ''
     } else {
-      this.nome_simplificado = false
-      this.nome_simplificado = ''
+      this.angForm.get('nome_simplificado')?.value = false
+      this.angForm.get('nome_simplificado')?.value = ''
     }
+  }*/
+
+  onSelectedFile(e: any) {
+    this.selectedFile = e.target.files;
+    console.log('doc selected',this.selectedFile)
+  }
+
+  onSelectedFile2(e: any) {
+    this.selectedFile2 = e.target.files;
+    console.log('doc selected 2',this.selectedFile2)
   }
 
 }
