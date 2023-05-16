@@ -345,10 +345,10 @@ export class InqueritoComponent implements OnInit {
       aldeia: [''],
       data_1_contacto: [''],
       resultado_1_contacto: [''],
-      documento_em_falta: this.fb.array(Array(9).fill('sem falta')),
-      documento_em_falta_2: this.fb.array(Array(9).fill('sem falta')),
-      documento_em_falta_3: this.fb.array(Array(9).fill('sem falta')),
-      documento_em_falta_4: this.fb.array(Array(9).fill('sem falta')),
+      documento_em_falta: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta')),
       duplicada_da: [''],
       data_1_visita: [''],
       resultado_da_visita: [''],
@@ -408,6 +408,12 @@ export class InqueritoComponent implements OnInit {
         return b._id - a._id
       })
     })
+  }
+
+  onChangeValorSelecionado(event: any) {
+    this.prop_name = event;
+    console.log(this.prop_name['s2gp/s2g1q1/prop_nome'])
+    //this.prop_name); // Chamada da sua função com o valor selecionado
   }
 
   sideBarToggler() {
