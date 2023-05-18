@@ -409,8 +409,8 @@
                         <div class="mb-3">
                             <label class="form-label" for="customFile">Documentos do Proponente: (.docx
                                 .pdf)</label>
-                            <input type="file" (change)="onSelectedFile($event)" name="documento_do_proponente"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="documento_do_proponente"
+                            <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="documents"
                                 class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>

@@ -184,14 +184,14 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
+                                <!--div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Status:</label>
                                     <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
                                         id="documento_em_falta" style="width: 100px;" name="status"
                                         formControlName="status">
                                         <option *ngFor="let item of estado" [value]="item" selected>{{item}}</option>
                                     </select>
-                                </div>
+                                </!--div-->
 
                             </div>
 
@@ -241,6 +241,25 @@
                                     <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                                 </select>
                             </div>
+
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="customFile">Documentos do Proponente:
+                                    </label>
+                                    <input type="text" name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
+                                        formControlName="documents" class="form-control" id="customFile"
+                                        style="width: 500px;" />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="customFile"> Inquérito: </label>
+                                    <input type="text" name="inquerito_preenchido" accept=".pdf,.doc,.docx,.jpeg,.jpg"
+                                        formControlName="inquerito_preenchido" class="form-control" id="customFile"
+                                        style="width: 500px;" />
+                                </div>
+                            </div>
+
                         </form>
 
                     </div>

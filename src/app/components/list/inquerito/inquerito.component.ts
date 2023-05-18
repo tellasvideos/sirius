@@ -249,7 +249,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   carregarMunicipios() {
-    switch (this.provincia) {
+    switch (this.angForm.get('provincia')?.value) {
       case 'Huila':
         this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
         break;
@@ -365,7 +365,7 @@ export class InqueritoComponent implements OnInit {
       inqueridor: [''],
 
       inquerito_preenchido: [''],
-      documento_do_proponente: ['']
+      documents: ['']
     });
   }
 
@@ -504,12 +504,32 @@ export class InqueritoComponent implements OnInit {
     let fileList: FileList = this.selectedFile;
     let fileList2: FileList = this.selectedFile2;
 
-    let documento_do_proponente: File = fileList[0];
+    let documents: File = fileList[0];
     let inquerito_preenchido: File = fileList2[0];
-    
+
     let formData = new FormData();
 
-    formData.append("documento_do_proponente", documento_do_proponente, documento_do_proponente.name);
+    /*if (this.selectedFile && this.selectedFile.length > 0) {
+      for (let i = 0; i < this.selectedFile.length; i++) {
+        formData.append('documents', this.selectedFile[i], this.selectedFile[i].name);
+      }
+    }*/
+
+
+     //Adicionar documentos
+    //for (let i = 0; i < fileList.length; i++) {
+    formData.append('documents', fileList[0], fileList[0].name);
+    //}
+
+    //Converter os arquivos em uma lista separada por vírgulas
+    // let documentsList: string = Array.from(fileList)
+    // .map(file => file.name)
+    //.join(',');
+
+    //formData.append('documents', documentsList);
+
+    // formData.append("documents", documents, documents.name);
+
     formData.append("inquerito_preenchido", inquerito_preenchido, inquerito_preenchido.name);
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
@@ -675,12 +695,12 @@ export class InqueritoComponent implements OnInit {
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
-    console.log('doc selected',this.selectedFile)
+    console.log('doc selected', this.selectedFile)
   }
 
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
-    console.log('doc selected 2',this.selectedFile2)
+    console.log('doc selected 2', this.selectedFile2)
   }
 
 }

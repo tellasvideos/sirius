@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 })
 export class VerInqueritoComponent implements OnInit {
 
+
+  InqueritoPreenchido:any;
+
   today: Date = new Date();
   maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
 
@@ -109,6 +112,7 @@ export class VerInqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
     this.getInqueritoByIdDocs();
+    this.get_inquireFormsInqueritoPreenchido();
 
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
@@ -225,10 +229,18 @@ export class VerInqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      console.log('inquérito', data)
+      console.log('inquérito', this.inqueritos['inquerito_preenchido'])
     })
   }
 
+  // mapear o link do Inquerito preenchido
+  get_inquireFormsInqueritoPreenchido() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      this.InqueritoPreenchido = data.map(item => item.inquerito_preenchido)
+      console.log('link inquérito preenchido', this.InqueritoPreenchido)
+    })
+  }
 
   alert_error() {
     Swal.fire({
