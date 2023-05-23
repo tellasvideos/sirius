@@ -241,24 +241,27 @@
                                     <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                                 </select>
                             </div>
-
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="customFile">Documentos do Proponente:
-                                    </label>
-                                    <input type="text" name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
-                                        formControlName="documents" class="form-control" id="customFile"
-                                        style="width: 500px;" />
-                                </div>
-                            </div>
                             <hr>
                             <div class="mb-3">
                                 <div class="mb-3">
-                                    <label class="form-label" for="customFile"> Inquérito: (Clique no link abaixo para vizualizar o ficheiro) </label>
+                                    <label class="form-label" for="customFile">Documentos do Proponente: (Clique no link
+                                        abaixo para vizualizar o ficheiro)
+                                    </label>
+                                    <a [href]="this.angForm.get('documents')?.value" target="_blank">
+                                        <input type="text" name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
+                                            formControlName="documents" style="cursor: pointer;" class="form-control"
+                                            id="customFile" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="customFile"> Inquérito: (Clique no link abaixo para
+                                        vizualizar o ficheiro) </label>
                                     <a [href]="this.angForm.get('inquerito_preenchido')?.value" target="_blank">
                                         <input type="text" name="inquerito_preenchido"
                                             accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="inquerito_preenchido"
-                                           style="cursor: pointer;" class="form-control" id="customFile" />
+                                            style="cursor: pointer;" class="form-control" id="customFile" />
                                     </a>
                                 </div>
                             </div>
