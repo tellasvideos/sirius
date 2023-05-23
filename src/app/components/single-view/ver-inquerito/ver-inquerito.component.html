@@ -251,13 +251,14 @@
                                         style="width: 500px;" />
                                 </div>
                             </div>
+                            <hr>
                             <div class="mb-3">
                                 <div class="mb-3">
-                                    <label class="form-label" for="customFile"> Inquérito: (Clique no link para vizualizar o ficheiro) </label>
-                                    <a [href]="this.angForm.get('inquerito_preenchido')?.value">
+                                    <label class="form-label" for="customFile"> Inquérito: (Clique no link abaixo para vizualizar o ficheiro) </label>
+                                    <a [href]="this.angForm.get('inquerito_preenchido')?.value" target="_blank">
                                         <input type="text" name="inquerito_preenchido"
                                             accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="inquerito_preenchido"
-                                            class="form-control" id="customFile" />
+                                           style="cursor: pointer;" class="form-control" id="customFile" />
                                     </a>
                                 </div>
                             </div>
