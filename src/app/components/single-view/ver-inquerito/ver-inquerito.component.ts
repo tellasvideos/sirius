@@ -99,7 +99,8 @@ export class VerInqueritoComponent implements OnInit {
       created_at: ['', Validators.required],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
-      inquerito_preenchido: this.inquerito_preenchido
+      inquerito_preenchido: [''],
+      documents: ['']
     })
   }
 

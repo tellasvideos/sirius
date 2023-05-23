@@ -248,7 +248,7 @@
                                         abaixo para vizualizar o ficheiro)
                                     </label>
                                     <a [href]="this.angForm.get('documents')?.value" target="_blank">
-                                        <input type="text" name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
+                                        <input type="text" readonly name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
                                             formControlName="documents" style="cursor: pointer;" class="form-control"
                                             id="customFile" />
                                     </a>
@@ -259,7 +259,7 @@
                                     <label class="form-label" for="customFile"> Inquérito: (Clique no link abaixo para
                                         vizualizar o ficheiro) </label>
                                     <a [href]="this.angForm.get('inquerito_preenchido')?.value" target="_blank">
-                                        <input type="text" name="inquerito_preenchido"
+                                        <input type="text" readonly name="inquerito_preenchido"
                                             accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="inquerito_preenchido"
                                             style="cursor: pointer;" class="form-control" id="customFile" />
                                     </a>
