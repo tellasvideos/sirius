@@ -366,7 +366,7 @@ export class InqueritoComponent implements OnInit {
 
       inquerito_preenchido: [''],
       documents: ['']
-     // documents: this.fb.array(Array(5).fill('sem falta'))
+      // documents: this.fb.array(Array(5).fill('sem falta'))
     });
   }
 
@@ -531,18 +531,17 @@ export class InqueritoComponent implements OnInit {
 
     let fileList: FileList = this.selectedFile;
     let fileList2: FileList = this.selectedFile2;
-  
+
     let documents: FileList = fileList;
     let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-  
+
     let formData = new FormData();
-  
+
     for (let i = 0; i < documents.length; i++) {
       formData.append("documents", documents[i], documents[i].name);
     }
-  
-    formData.append("inquerito_preenchido", inquerito_preenchido as Blob, inquerito_preenchido?.name);
 
+    formData.append("inquerito_preenchido", inquerito_preenchido as Blob, inquerito_preenchido?.name);
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
