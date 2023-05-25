@@ -366,6 +366,7 @@ export class InqueritoComponent implements OnInit {
 
       inquerito_preenchido: [''],
       documents: ['']
+     // documents: this.fb.array(Array(5).fill('sem falta'))
     });
   }
 
@@ -498,39 +499,50 @@ export class InqueritoComponent implements OnInit {
  
    }*/
 
+  save_inquerito3() {
+    const formData = new FormData();
+    formData.append('documents', this.selectedFile[0], this.selectedFile[0].name);
+    formData.append('inquerito_preenchido', this.selectedFile2[0], this.selectedFile2[0].name);
+
+    const formValues = this.angForm.value;
+    Object.keys(formValues).forEach(key => {
+      formData.append(key, formValues[key]);
+    });
+
+    this.dataService.salvaInquireForm(formData).subscribe(
+      () => {
+        this.alert_success();
+        this.get_inquireForms();
+      },
+      () => {
+        this.alert_error();
+      }
+    );
+
+    const modal = document.getElementById('exampleModalToggle3');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+
 
   save_inquerito2() {
 
     let fileList: FileList = this.selectedFile;
     let fileList2: FileList = this.selectedFile2;
-
-    let documents: File = fileList[0];
-    let inquerito_preenchido: File = fileList2[0];
-
+  
+    let documents: FileList = fileList;
+    let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+  
     let formData = new FormData();
+  
+    for (let i = 0; i < documents.length; i++) {
+      formData.append("documents", documents[i], documents[i].name);
+    }
+  
+    formData.append("inquerito_preenchido", inquerito_preenchido as Blob, inquerito_preenchido?.name);
 
-    /*if (this.selectedFile && this.selectedFile.length > 0) {
-      for (let i = 0; i < this.selectedFile.length; i++) {
-        formData.append('documents', this.selectedFile[i], this.selectedFile[i].name);
-      }
-    }*/
-
-
-     //Adicionar documentos
-    //for (let i = 0; i < fileList.length; i++) {
-    formData.append('documents', fileList[0], fileList[0].name);
-    //}
-
-    //Converter os arquivos em uma lista separada por vírgulas
-    // let documentsList: string = Array.from(fileList)
-    // .map(file => file.name)
-    //.join(',');
-
-    //formData.append('documents', documentsList);
-
-    // formData.append("documents", documents, documents.name);
-
-    formData.append("inquerito_preenchido", inquerito_preenchido, inquerito_preenchido.name);
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
