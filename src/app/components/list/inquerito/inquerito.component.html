@@ -45,10 +45,20 @@
         </div>
 
         <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
-            <div class="bm-3">
-                <input class="form-control form-control-sm mb-2" placeholder="Pesquisar M. Interesse..."
-                    [(ngModel)]="keyWord" type="text" style="width: 300px;">
+            <div class="d-flex justify-content-between">
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar M. Interesse..."
+                        [(ngModel)]="keyWord" type="text" style="width: 300px;">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select form-select-sm" id="duplicateNames" name="duplicateNames"
+                        style="width: 200px;">
+                        <option value="" disabled selected hidden>Lista de MI Duplicada</option>
+                        <option disabled *ngFor="let prov of duplicateNames" [value]="prov">{{prov}}</option>
+                    </select>
+                </div>
             </div>
+
             <div class="table-responsive" id="print-section-list-inquerito">
                 <table class="table table-sm table-hover text-center">
                     <thead class="linhas2">
@@ -174,16 +184,18 @@
                         <label class="mb-2">Inquiridor:</label>
                         <select class="form-select form-select-sm mb-3" formControlName="inqueridor" name="inqueridor"
                             style="width:350px;" required aria-label="Default select example">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
                             </option>
                         </select>
                     </div>
 
-                    <div class="d-block" *ngIf="!showDuplicatedInput">
+                    <div class="d-block mb-3" *ngIf="!showDuplicatedInput">
                         <div>
                             <label for="provincia">Província:</label>
                             <select class="form-select form-select-sm mb-3" id="provincia" name="provincia" required
                                 style="width: 350px;" formControlName="provincia" (change)="carregarMunicipios()">
+                                <option value="" disabled selected hidden></option>
                                 <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                             </select>
                         </div>
@@ -192,11 +204,18 @@
                             <label for="municipio">Município:</label>
                             <select class="form-select form-select-sm mb-3" id="municipio" name="municipio" required
                                 style="width: 350px;" formControlName="municipio">
+                                <option value="" disabled selected hidden></option>
                                 <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                             </select>
                         </div>
                     </div>
+
+                    <div class="mb-3" *ngIf="!showDuplicatedInput">
+                        <button (click)="clearInput()" class="btn btn-light btn-sm">Limpar Campos</button>
+                    </div>
                 </div>
+
+
 
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal" *ngIf="!showDuplicatedInput"
@@ -239,7 +258,7 @@
                         <select class="form-select form-select-sm mb-3" id="resultado_1_contacto"
                             name="resultado_1_contacto" formControlName="resultado_1_contacto"
                             (change)="carregardocs2()">
-                            <option></option>
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}</option>
                         </select>
                     </div>
@@ -255,7 +274,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
                         <select class="form-select form-select-sm mb-3" (change)="carregardocs3()" style="width: 340px;"
                             id="documento_em_falta" name="resultado_da_visita" formControlName="resultado_da_visita">
-                            <option></option>
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let mun of resultados_da_visita" [value]="mun">{{mun}}</option>
                         </select>
                     </div>
@@ -341,12 +360,16 @@
 
                     </div>
 
-                    <div class="modal-footer justify-content-between">
-                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
-                            data-bs-toggle="modal">Voltar</button>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalToggle3">Próximo</button>
+                    <div class="mb-3">
+                        <button (click)="clearInput()" class="btn btn-light btn-sm">Limpar Campos</button>
                     </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalToggle3">Próximo</button>
                 </div>
             </div>
         </div>
@@ -369,6 +392,7 @@
                         <select class="form-select form-select-sm mb-3" (change)="loadTipoNegocio()"
                             style="width: 340px;" id="tipodenegocio" name="tipodenegocio"
                             formControlName="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of tipos_de_negococio" [value]="item">{{item}}</option>
                         </select>
                     </div>
@@ -380,6 +404,7 @@
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio"
                             name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                             formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
                         </select>
                     </div>
@@ -388,6 +413,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo"
                             formControlName="que_tipo">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
                         </select>
                     </div>
@@ -396,6 +422,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_2"
                             formControlName="que_tipo_2">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
                         </select>
                     </div>
@@ -405,14 +432,15 @@
                         <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         <select class="form-select form-select-sm mb-3" id="tipodenegocio" name="que_tipo_3"
                             formControlName="que_tipo_3">
+                            <option value="" disabled selected hidden></option>
                             <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <div class="mb-3">
-                            <label class="form-label" for="customFile">Documentos do Proponente: (.docx
-                                .pdf)</label>
+                            <label class="form-label" for="customFile">Carregar Documentos do Proponente: (.docx
+                                .pdf .doc .jpeg .jpg)</label>
                             <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
                                 accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"
                                 class="form-control" id="customFile" style="width: 500px;" />
@@ -421,19 +449,24 @@
 
                     <div class="mb-3">
                         <div class="mb-3">
-                            <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
+                            <label class="form-label" for="customFile">Carregar Inquérito: (.docx
+                                .pdf .doc .jpeg .jpg)</label>
                             <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
                                 accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="inquerito_preenchido"
                                 class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>
 
-                    <div class="modal-footer justify-content-between">
-                        <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
-                            data-bs-toggle="modal">Voltar</button>
-                        <button type="submit" [disabled]="!isFileFieldsFilled" (click)="save_inquerito2()"
-                            class="btn btn-success btn-sm mt-4">Guardar</button>
+                    <div class="mb-3">
+                        <button (click)="clearInput()" class="btn btn-light btn-sm">Limpar Campos</button>
                     </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal">Voltar</button>
+                    <button type="submit" [disabled]="!isFileFieldsFilled" (click)="save_inquerito2()"
+                        class="btn btn-success btn-sm mt-4">Guardar</button>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito
 //import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Location, } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl, FormArray } from '@angular/forms';
 
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -439,80 +439,7 @@ export class InqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
-  /* onFileSelected(event: { target: { inquerito_preenchido: any[]; }; }) {
-     const file = event.target.inquerito_preenchido[0];
-     const reader = new FileReader();
-     reader.onload = () => {
-       const fileData = new Blob([reader.result], { type: file.type });
-       this.uploadFile(fileData);
-     };
-     reader.readAsArrayBuffer(file);
-   }*/
-
-
-  /* save_inquerito() {
  
-     let InquireForm = {
-       "nome_simplificado": this.nome_simplificado,
-       "provincia": this.provincia,
-       "municipio": this.municipio,
-       "aldeia": this.aldeia,
-       "data_1_contacto": this.data_1_contacto,
-       "resultado_1_contacto": this.resultado_1_contacto,
-       "documento_em_falta": this.documento_em_falta,
-       "documento_em_falta_2": this.documento_em_falta_2,
-       "documento_em_falta_3": this.documento_em_falta_3,
-       "documento_em_falta_4": this.documento_em_falta_4,
-       "duplicada_da": this.duplicada_da,
-       "data_1_visita": this.data_1_visita,
-       "resultado_da_visita": this.resultado_da_visita,
-       "duplicada_da_2": this.duplicada_da_2,
-       "data_validacao_inquerito": this.data_validacao_inquerito,
-       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
-       "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
-       "que_tipo": this.que_tipo,
-       "que_tipo_2": this.que_tipo_2,
-       "que_tipo_3": this.que_tipo_3,
-       "status": this.status,
-       "created_at": this.created_at,
-       "manifestacao_de_interesse": this.manifestacao_de_interesse,
-       "inqueridor": this.inqueridor,
-       "inquerito_preenchido": this.inquerito_preenchido,
-       "documento_do_proponente": this.documento_do_proponente,
-     }
-     
- 
-     if (this.inquerito_preenchido) {
-       const formData = new FormData();
-       const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
-       formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
-     }
- 
-     this.dataService.salvaInquireForm(InquireForm).subscribe(
-       success => { this.alert_success(); },
-       error => { this.alert_error(); }
- 
-     )
- 
-     this.get_inquireForms();
-     //this.location.reload();
-     //this.goBack()
-     const modal = document.getElementById('exampleModalToggle3');
-     if (modal) {
-       modal.style.display = 'none';
-     }
- 
-     // Espera 3 segundos antes de recarregar a página
-    // timer(3000).pipe(delay(3000)).subscribe(() => {
-     //location.reload();
-    // });
-     // location.reload();
-     // this.route.navigateByUrl('/inquerito', { skipLocationChange: true }).then(() => {
-     //   this.route.navigate([this.route.url]);
-     //  });
- 
-   }*/
-
   save_inquerito2() {
 
     let fileList: FileList = this.selectedFile;
@@ -570,51 +497,23 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    
-    this.angForm = this.fb.group({
-      nome_simplificado: [''],
-      provincia: [''],
-      municipio: [''],
-      aldeia: [''],
-      data_1_contacto: [''],
-      resultado_1_contacto: [''],
-      documento_em_falta: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta')),
-      duplicada_da: [''],
-      data_1_visita: [''],
-      resultado_da_visita: [''],
-      duplicada_da_2: [''],
-      data_validacao_inquerito: [''],
-      que_tipo_de_negocio_esta: [''],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
-      que_tipo: [''],
-      que_tipo_2: [''],
-      que_tipo_3: [''],
-      status: [''],
-      created_at: [''],
-      manifestacao_de_interesse: [''],
-      inqueridor: [''],
-
-      inquerito_preenchido: [''],
-      documents: ['']
-      // documents: this.fb.array(Array(5).fill('sem falta'))
-    });
-  
-
-   // const modal = document.getElementById('exampleModalToggle3');
-    //if (modal) {
-     // modal.style.display = 'none';
-   // }
-
-    // Espera 3 segundos antes de recarregar a página
-    //timer(3000).pipe(delay(3000)).subscribe(() => {
-    //  location.reload();
-   // });
+    this.clearInput();
   }
 
+  // Limpa todos os campos do formulario incluindo o formArray
+  clearInput() {
+    Object.keys(this.angForm.controls).forEach(key => {
+      const control = this.angForm.get(key);
   
+      if (control instanceof FormArray) {
+        while (control.length !== 0) {
+          control.removeAt(0);
+        }
+      } else {
+        control?.setValue('');
+      }
+    });
+  }
 
   goBack(): void {
     this.location.back();
