@@ -524,12 +524,12 @@ export class InqueritoComponent implements OnInit {
 
     let formData = new FormData();
 
-    for (let i = 0; i < documents.length; i++) {
+    for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
     }
 
     // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2.length > 0) {
+    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
       const inqueritoPreenchido = this.selectedFile2[0];
 
       // Verificar se o arquivo não está vazio
