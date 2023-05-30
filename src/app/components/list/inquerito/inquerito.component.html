@@ -46,8 +46,8 @@
 
         <div class="row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="bm-3">
-                <input class="form-control form-control-sm mb-2" placeholder="Pesquisar inquérito..."
-                    formControlName="keyWord" type="text" style="width: 300px;">
+                <input class="form-control form-control-sm mb-2" placeholder="Pesquisar M. Interesse..."
+                [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </div>
             <div class="table-responsive" id="print-section-list-inquerito">
                 <table class="table table-sm table-hover text-center">
@@ -55,9 +55,9 @@
                         <tr>
                             <!--th scope="col" class="text-black">Inquiridor</!--th-->
                             <th scope="col" class="text-black">M. Interesse</th>
+                            <th scope="col" class="text-black">Nome Simplificado</th>
                             <th scope="col" class="text-black">Data do 1º Contacto</th>
                             <th scope="col" class="text-black">Provincia</th>
-                            <th scope="col" class="text-black">Status</th>
                             <th scope="col" class="text-black not-it">Ver</th>
                             <!--th scope="col" class="text-black not-it"
                                 *ngIf="this.user_logged.department === 'Front Off'">Documentos</!--th-->
@@ -72,9 +72,9 @@
                         <tr *ngFor="let item of inqueritos | search:'manifestacao_de_interesse':keyWord">
                             <!--td>{{item.responsible}} </!--td-->
                             <td>{{item.manifestacao_de_interesse}}</td>
-                            <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
+                            <td>{{item.nome_simplificado}}</td>
                             <td>{{item.provincia}}</td>
-                            <td>{{item.status}}</td>
+                            <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
                             <td class="not-it">
                                 <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
@@ -108,7 +108,7 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<form enctype="multipart/form-data" [formGroup]="angForm">
+<form enctype="multipart/form-data" [formGroup]="angForm" (change)="checkFileFields()">
 
     <!-- Primeiro modal -->
     <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -124,13 +124,18 @@
                     <div class="mb-3 justify-content-between d-flex">
 
                         <div class="mb-3">
-                            <label>M. Interesse Duplicada?</label>
+                            <label class="mb-3">M. Interesse Duplicada?</label>
                             <br>
-                            <div *ngFor="let n of opcoes" class="form-check form-check-inline p-3">
-                                <input name="opcoes" type="radio" (change)="onChangeyes($event)" value="{{n}}">
-                                <label class="form-check-label text-black p-2">{{n}}</label>
+                            <div class="d-flex justify-content-between">
+                                <label>
+                                    <input type="radio" name="radioOption" (click)="showInput(true)"> Sim
+                                </label>
+                                <label>
+                                    <input type="radio" name="radioOption" (click)="showInput(false)"> Não
+                                </label>
                             </div>
                         </div>
+
 
                         <div class="my-element mb-3">
                             <label class="mb-3">Pesquisar M. Interesse:</label>
@@ -142,7 +147,7 @@
 
                     </div>
 
-                    <div class="my-element mb-3" *ngIf="this.angForm.get('duplicada_da')?.value == this.opcoes[0]">
+                    <div class="my-element mb-3" *ngIf="showDuplicatedInput">
                         <label class="mb-3">Duplicada Com:</label>
                         <ng-select style="width:350px;" [items]="duplicateNames" bindLabel="nome_simplificado"
                             formControlName="duplicada_da" [searchable]="true" placeholder=""></ng-select>
@@ -260,7 +265,7 @@
                         *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' ">
                         <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para selecionar
                             múltiplos
-                            documentos, mantenha premido a tecla CTRL no teclado)</label>
+                            documentos, mantenha premido a tecla Shift no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta" formControlName="documento_em_falta">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -270,7 +275,7 @@
                     <div *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
                         <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para selecionar
                             múltiplos
-                            documentos, mantenha premido a tecla CTRL no teclado)</label>
+                            documentos, mantenha premido a tecla Shift no teclado)</label>
                         <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                             name="documento_em_falta_2" formControlName="documento_em_falta_2">
                             <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -290,7 +295,7 @@
                         <div
                             *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
                             <label for="documento_em_falta" class="mb-2">Documento em Falta: (Para selecionar múltiplos
-                                documentos, mantenha premido a tecla CTRL no teclado)</label>
+                                documentos, mantenha premido a tecla Shift no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_3" formControlName="documento_em_falta_3">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -301,7 +306,7 @@
                             *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
                             <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para
                                 selecionar múltiplos
-                                documentos, mantenha premido a tecla CTRL no teclado)</label>
+                                documentos, mantenha premido a tecla Shift no teclado)</label>
                             <select multiple class="form-select form-select-sm mb-3" id="documento_em_falta"
                                 name="documento_em_falta_4" formControlName="documento_em_falta_4">
                                 <option *ngFor="let mun of docs" [value]="mun">{{mun}}</option>
@@ -410,7 +415,7 @@
                             <label class="form-label" for="customFile">Documentos do Proponente: (.docx
                                 .pdf)</label>
                             <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="documents"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"
                                 class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>
@@ -419,7 +424,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="customFile">Carregar Inquérito: (.docx .pdf)</label>
                             <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg" formControlName="inquerito_preenchido"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="inquerito_preenchido"
                                 class="form-control" id="customFile" style="width: 500px;" />
                         </div>
                     </div>
@@ -427,7 +432,7 @@
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-sm btn-primary" data-bs-target="#exampleModalToggle2"
                             data-bs-toggle="modal">Voltar</button>
-                        <button type="submit" (click)="save_inquerito2()"
+                        <button type="submit" [disabled]="!isFileFieldsFilled" (click)="save_inquerito2()"
                             class="btn btn-success btn-sm mt-4">Guardar</button>
                     </div>
                 </div>

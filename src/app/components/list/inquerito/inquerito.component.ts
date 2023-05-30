@@ -25,6 +25,8 @@ export class InqueritoComponent implements OnInit {
   selectedFile: any;
   selectedFile2: any;
 
+  isFileFieldsFilled: boolean = false;
+
   items = [
     'Valor 1',
     'Valor 2',
@@ -367,7 +369,19 @@ export class InqueritoComponent implements OnInit {
       inquerito_preenchido: [''],
       documents: ['']
       // documents: this.fb.array(Array(5).fill('sem falta'))
+
+      
     });
+  }
+
+  // campos obrigatorios
+  checkFileFields() {
+    const fileFields = this.angForm.get('documents');
+    const fileFields2 = this.angForm.get('inquerito_preenchido');
+    const fileFields3 = this.angForm.get('manifestacao_de_interesse');
+    this.isFileFieldsFilled = fileFields?.touched && fileFields?.value && fileFields?.value.length > 0;
+    this.isFileFieldsFilled = fileFields2?.touched && fileFields2?.value && fileFields2?.value.length > 0;
+    this.isFileFieldsFilled = fileFields3?.touched && fileFields3?.value && fileFields3?.value.length > 0;
   }
 
   /* fecharModal() {
@@ -499,46 +513,14 @@ export class InqueritoComponent implements OnInit {
  
    }*/
 
-  save_inquerito3() {
-    const formData = new FormData();
-    formData.append('documents', this.selectedFile[0], this.selectedFile[0].name);
-    formData.append('inquerito_preenchido', this.selectedFile2[0], this.selectedFile2[0].name);
-
-    const formValues = this.angForm.value;
-    Object.keys(formValues).forEach(key => {
-      formData.append(key, formValues[key]);
-    });
-
-    this.dataService.salvaInquireForm(formData).subscribe(
-      () => {
-        this.alert_success();
-        this.get_inquireForms();
-      },
-      () => {
-        this.alert_error();
-      }
-    );
-
-    const modal = document.getElementById('exampleModalToggle3');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 3 segundos antes de recarregar a página
-    timer(3000).pipe(delay(3000)).subscribe(() => {
-      location.reload();
-    });
-  }
-
-
-
   save_inquerito2() {
 
     let fileList: FileList = this.selectedFile;
-    let fileList2: FileList = this.selectedFile2;
-
     let documents: FileList = fileList;
-    let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+
+    let fileList2: FileList = this.selectedFile2;
+    let inquerito_preenchido: FileList = fileList2;
+    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
     let formData = new FormData();
 
@@ -546,7 +528,15 @@ export class InqueritoComponent implements OnInit {
       formData.append("files", documents[i], documents[i].name);
     }
 
-    formData.append("inquerito_preenchido", inquerito_preenchido as Blob, inquerito_preenchido?.name);
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile2 && this.selectedFile2.length > 0) {
+      const inqueritoPreenchido = this.selectedFile2[0];
+
+      // Verificar se o arquivo não está vazio
+      if (inqueritoPreenchido.size > 0) {
+        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
+      }
+    }
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
@@ -580,12 +570,51 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
+    
+    this.angForm = this.fb.group({
+      nome_simplificado: [''],
+      provincia: [''],
+      municipio: [''],
+      aldeia: [''],
+      data_1_contacto: [''],
+      resultado_1_contacto: [''],
+      documento_em_falta: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta')),
+      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta')),
+      duplicada_da: [''],
+      data_1_visita: [''],
+      resultado_da_visita: [''],
+      duplicada_da_2: [''],
+      data_validacao_inquerito: [''],
+      que_tipo_de_negocio_esta: [''],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
+      que_tipo: [''],
+      que_tipo_2: [''],
+      que_tipo_3: [''],
+      status: [''],
+      created_at: [''],
+      manifestacao_de_interesse: [''],
+      inqueridor: [''],
 
-    const modal = document.getElementById('exampleModalToggle3');
-    if (modal) {
-      modal.style.display = 'none';
-    }
+      inquerito_preenchido: [''],
+      documents: ['']
+      // documents: this.fb.array(Array(5).fill('sem falta'))
+    });
+  
+
+   // const modal = document.getElementById('exampleModalToggle3');
+    //if (modal) {
+     // modal.style.display = 'none';
+   // }
+
+    // Espera 3 segundos antes de recarregar a página
+    //timer(3000).pipe(delay(3000)).subscribe(() => {
+    //  location.reload();
+   // });
   }
+
+  
 
   goBack(): void {
     this.location.back();
@@ -687,9 +716,9 @@ export class InqueritoComponent implements OnInit {
   }
 
   // muda o comportamento da checkbox sim ou não
-  onChangeyes(event: any) {
+  onChangeyes_(event: any) {
     this.angForm.patchValue({
-      duplicada_da: event.target.value
+      duplicada_da: event.target.value === this.opcoes[0]
     });
     if (this.angForm.get('duplicada_da')!.value === this.opcoes[0]) {
       // this.opcoes[0] = ''
@@ -697,6 +726,24 @@ export class InqueritoComponent implements OnInit {
       // this.duplicada_da == false
     }
 
+  }
+
+  onChangeyes(event: any) {
+    const selectedOption = event.target.value;
+    this.angForm.patchValue({
+      duplicada_da: selectedOption === 'Sim' ? null : ''
+    });
+  }
+
+  showDuplicatedInput: boolean = false;
+  duplicatedName: string = '';
+
+  showInput(show: boolean) {
+    this.showDuplicatedInput = show;
+    this.angForm.get('duplicada_da');
+    if (!show) {
+      this.duplicatedName = ''; // Limpa o valor do input quando for ocultado
+    }
   }
 
   /*onChangeDidasTeste(event: any) {
