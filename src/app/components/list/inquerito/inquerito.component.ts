@@ -523,6 +523,11 @@ export class InqueritoComponent implements OnInit {
     if (modal) {
       modal.style.display = 'none';
     }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(3000).pipe(delay(3000)).subscribe(() => {
+      location.reload();
+    });
   }
 
 
@@ -550,9 +555,9 @@ export class InqueritoComponent implements OnInit {
     formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
     formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
     formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_2')?.value);
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_3')?.value);
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
     formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
