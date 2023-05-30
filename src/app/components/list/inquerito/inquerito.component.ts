@@ -503,6 +503,12 @@ export class InqueritoComponent implements OnInit {
   // Limpa todos os campos do formulario incluindo o formArray
   clearInput() {
     Object.keys(this.angForm.controls).forEach(key => {
+      this.angForm.get(key)?.setValue('');
+    });
+  }
+
+  clearInput2() {
+    Object.keys(this.angForm.controls).forEach(key => {
       const control = this.angForm.get(key);
   
       if (control instanceof FormArray) {
