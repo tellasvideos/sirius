@@ -92,6 +92,7 @@ import { VisitasComponent } from './components/list/visitas/visitas.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { DocumentosInqueritoComponent } from './components/list/documentos-inque
     VisitasComponent,
     VerInqueritoComponent,
     DocumentosInqueritoComponent,
+    LoadingComponent,
   ],
   imports: [
     NgxPrintModule,
