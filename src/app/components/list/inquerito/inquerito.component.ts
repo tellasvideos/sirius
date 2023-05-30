@@ -538,7 +538,7 @@ export class InqueritoComponent implements OnInit {
     let formData = new FormData();
 
     for (let i = 0; i < documents.length; i++) {
-      formData.append("documents", documents[i], documents[i].name);
+      formData.append("files", documents[i], documents[i].name);
     }
 
     formData.append("inquerito_preenchido", inquerito_preenchido as Blob, inquerito_preenchido?.name);

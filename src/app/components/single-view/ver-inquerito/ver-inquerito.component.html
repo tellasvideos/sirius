@@ -247,13 +247,19 @@
                                     <label class="form-label" for="customFile">Documentos do Proponente: (Clique no link
                                         abaixo para vizualizar o ficheiro)
                                     </label>
-                                    <a [href]="this.angForm.get('documents')?.value" target="_blank">
+                                    <!--a [href]="this.angForm.get('documents')?.value" target="_blank">
                                         <input type="text" readonly name="documents" accept=".pdf,.doc,.docx,.jpeg,.jpg"
                                             formControlName="documents" style="cursor: pointer;" class="form-control"
                                             id="customFile" />
-                                    </a>
+                                    </a-->
+                                    <ul>
+                                        <li *ngFor="let document of angForm.get('documents')?.value">
+                                            <a [href]="document" target="_blank">{{ document }}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+
                             <div class="mb-3">
                                 <div class="mb-3">
                                     <label class="form-label" for="customFile"> Inquérito: (Clique no link abaixo para
