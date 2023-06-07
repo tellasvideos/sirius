@@ -18,12 +18,17 @@
                     <div class="card-body">
 
                         <form enctype="multipart/form-data" [formGroup]="angForm">
-                            <div class="mb-3">
-                                <label class="mb-2">Didas Teste</label>
-                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
-                                    formControlName="didasTeste" type="text" style="width: 50px;"
-                                    name="didasTeste" aria-label=".form-control-sm example">
+
+                            <div class="justify-content-between d-flex mb-3">
+                                <div>.</div>
+                                <div>
+                                    <label>Didas Teste:</label>
+                                    <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                        formControlName="didasTeste" type="text" style="width: 50px;" name="didasTeste"
+                                        aria-label=".form-control-sm example">
+                                </div>
                             </div>
+
                             <div class="mb-3">
                                 <label class="mb-2">M. Interesse:</label>
                                 <select readonly [attr.disabled]="true" class="form-select form-select-sm mb-3"
