@@ -181,16 +181,16 @@
                     <!-- Pergunta 3 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                         <div>
-                            <label>Didas Teste</label>
+                            <label>Didas Teste ?</label>
                         </div>
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="radio" name="radioOption" (click)="showInput(true)"> Sim
+                                <input type="radio" name="radioOption" [value]="true" formControlName="didasTeste"> Sim
                             </div>
 
                             <div>
-                                <input type="radio" name="radioOption" (click)="showInput(false)"> Não
+                                <input type="radio" name="radioOption" [value]="false" formControlName="didasTeste"> Não
                             </div>
                         </div>
                     </div>
