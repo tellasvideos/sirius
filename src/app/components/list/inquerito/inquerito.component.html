@@ -64,10 +64,11 @@
                     <thead class="linhas2">
                         <tr>
                             <!--th scope="col" class="text-black">Inquiridor</!--th-->
-                            <th scope="col" class="text-black">M. Interesse</th>
                             <th scope="col" class="text-black">Nome Simplificado</th>
-                            <th scope="col" class="text-black">Data do 1º Contacto</th>
-                            <th scope="col" class="text-black">Provincia</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Município</th>
+                            <th scope="col" class="text-black">Inquiridor</th>
+                            <th scope="col" class="text-black">Estado MI</th>
                             <th scope="col" class="text-black not-it">Ver</th>
                             <!--th scope="col" class="text-black not-it"
                                 *ngIf="this.user_logged.department === 'Front Off'">Documentos</!--th-->
@@ -79,12 +80,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of inqueritos | search:'manifestacao_de_interesse':keyWord">
+                        <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
                             <!--td>{{item.responsible}} </!--td-->
-                            <td>{{item.manifestacao_de_interesse}}</td>
                             <td>{{item.nome_simplificado}}</td>
                             <td>{{item.provincia}}</td>
-                            <td>{{item.created_at | date:"dd/MM/yyyy"}}</td>
+                            <td>{{item.municipio}}</td>
+                            <td>{{item.inqueridor}}</td>
+                            <td>{{item.status}}</td>
+                            <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
                             <td class="not-it">
                                 <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
@@ -185,7 +188,7 @@
                         <select class="form-select form-select-sm mb-3" formControlName="inqueridor" name="inqueridor"
                             style="width:350px;" required aria-label="Default select example">
                             <option value="" disabled selected hidden></option>
-                            <option *ngFor="let item of userFrontOff" [value]="item.id"> {{item.name}}
+                            <option *ngFor="let item of userFrontOff" [value]="item.name"> {{item.name}}
                             </option>
                         </select>
                     </div>
