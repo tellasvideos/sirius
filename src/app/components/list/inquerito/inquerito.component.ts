@@ -370,7 +370,7 @@ export class InqueritoComponent implements OnInit {
       documents: ['']
       // documents: this.fb.array(Array(5).fill('sem falta'))
 
-      
+
     });
   }
 
@@ -439,7 +439,7 @@ export class InqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
- 
+
   save_inquerito2() {
 
     let fileList: FileList = this.selectedFile;
@@ -498,7 +498,9 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.clearInput();
+    // this.clearInput();
+    this.route.navigate(['inquerito/']);
+
   }
 
   // Limpa todos os campos do formulario incluindo o formArray
@@ -511,7 +513,7 @@ export class InqueritoComponent implements OnInit {
   clearInput2() {
     Object.keys(this.angForm.controls).forEach(key => {
       const control = this.angForm.get(key);
-  
+
       if (control instanceof FormArray) {
         while (control.length !== 0) {
           control.removeAt(0);
