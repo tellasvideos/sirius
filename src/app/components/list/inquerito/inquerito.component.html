@@ -121,7 +121,7 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<form enctype="multipart/form-data" [formGroup]="angForm" (change)="checkFileFields()">
+<form enctype="multipart/form-data" [formGroup]="angForm">
 
     <!-- modal -->
     <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -186,11 +186,11 @@
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="radio" name="radioOption" [value]="true" formControlName="didasTeste"> Sim
+                                <input type="radio" name="radioOption1" [value]="true" formControlName="didasTeste"> Sim
                             </div>
 
                             <div>
-                                <input type="radio" name="radioOption" [value]="false" formControlName="didasTeste"> Não
+                                <input type="radio" name="radioOption1" [value]="false" formControlName="didasTeste"> Não
                             </div>
                         </div>
                     </div>
@@ -541,7 +541,7 @@
                         <button (click)="clearInput()" class="btn btn-light btn-sm">Limpar Campos</button>
                     </div>
                     <div>
-                        <button type="submit" [disabled]="!isFileFieldsFilled" (click)="save_inquerito2()"
+                        <button type="submit" (click)="save_inquerito2()"
                             class="btn btn-success btn-sm">Guardar</button>
                     </div>
                 </div>

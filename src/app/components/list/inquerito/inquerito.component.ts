@@ -365,7 +365,7 @@ export class InqueritoComponent implements OnInit {
       created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-
+      didasTeste: [''],
       inquerito_preenchido: [''],
       documents: ['']
       // documents: this.fb.array(Array(5).fill('sem falta'))
@@ -489,6 +489,7 @@ export class InqueritoComponent implements OnInit {
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
     this.dataService.salvaInquireForm(formData).subscribe(
       success => { this.alert_success(); },
