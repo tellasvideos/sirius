@@ -93,7 +93,7 @@ export class EditInqueritoComponent implements OnInit {
       created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-      inquerito_preenchido: [false]
+      // inquerito_preenchido: [false]
     })
   }
 
@@ -106,8 +106,6 @@ export class EditInqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
 
-
-
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
@@ -119,39 +117,6 @@ export class EditInqueritoComponent implements OnInit {
 
   update_inquerito(data: any) {
 
-    /* let InquireForm = {
-       "nome_simplificado": this.nome_simplificado,
-       "provincia": this.provincia,
-       "municipio": this.municipio,
-       "aldeia": this.aldeia,
-       "data_1_contacto": this.data_1_contacto,
-       "resultado_1_contacto": this.resultado_1_contacto,
-       "documento_em_falta": this.documento_em_falta,
-       "documento_em_falta_2": this.documento_em_falta_2,
-       "documento_em_falta_3": this.documento_em_falta_3,
-       "documento_em_falta_4": this.documento_em_falta_4,
-       "duplicada_da": this.duplicada_da,
-       "data_1_visita": this.data_1_visita,
-       "resultado_da_visita": this.resultado_da_visita,
-       "duplicada_da_2": this.duplicada_da_2,
-       "data_validacao_inquerito": this.data_validacao_inquerito,
-       "que_tipo_de_negocio_esta": this.que_tipo_de_negocio_esta,
-       "em_qual_cadeia_de_valor_vai_se_implementar_o_projecto": this.em_qual_cadeia_de_valor_vai_se_implementar_o_projecto,
-       "que_tipo": this.que_tipo,
-       "que_tipo_2": this.que_tipo_2,
-       "que_tipo_3": this.que_tipo_3,
-       "status": this.status,
-       "created_at": this.created_at,
-       "manifestacao_de_interesse": this.manifestacao_de_interesse,
-       "inqueridor": this.inqueridor,
-       "inquerito_preenchido": this.inquerito_preenchido
-     }*/
-
-    if (this.inquerito_preenchido) {
-      const formData = new FormData();
-      const blob = new Blob([this.inquerito_preenchido], { type: this.inquerito_preenchido.type });
-      formData.append('inqerito_preenchido', blob, this.inquerito_preenchido.name);
-    }
 
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
       success => { this.alert_success(); },
@@ -345,7 +310,7 @@ export class EditInqueritoComponent implements OnInit {
 
 
   carregarMunicipios() {
-    switch (this.provincia) {
+    switch (this.angForm.get('provincia')?.value) {
       case 'Huila':
         this.municipios = ['Caconda', 'Caluquembe', 'Chicomba'];
         break;
