@@ -571,7 +571,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" style="width: 350px;" id="tipodenegocio"
+                            <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo"
                                 name="que_tipo" formControlName="que_tipo"
                                 [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo')?.touched }">
                                 <option value="" disabled selected hidden></option>
@@ -591,7 +591,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" style="width: 350px;" id="tipodenegocio"
+                            <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_2"
                                 name="que_tipo_2" formControlName="que_tipo_2"
                                 [ngClass]="{ 'is-invalid': angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2')?.touched }">
                                 <option value="" disabled selected hidden></option>
@@ -611,7 +611,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" style="width: 350px;" id="tipodenegocio"
+                            <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_3"
                                 name="que_tipo_3" formControlName="que_tipo_3"
                                 [ngClass]="{ 'is-invalid': angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3')?.touched }">
                                 <option value="" disabled selected hidden></option>
@@ -630,11 +630,44 @@
                     <div>
                         <button (click)="resetForm()" class="btn btn-light btn-sm">Limpar Campos</button>
                     </div>
-                    <div>
+                    <div *ngIf="showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito2()"
                             class="btn btn-success btn-sm">Guardar</button>
                     </div>
+                    <div
+                        *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
+                        <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar
+                            2</button>
+                    </div>
+
+                    <div *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
+                        <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
+                            3</button>
+                    </div>
+
+                    <div *ngIf="angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
+                        <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
+                            4</button>
+                    </div>
+
+                    <div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Transformador' && !showDuplicatedInput">
+                        <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar
+                            5</button>
+                    </div>
+
+                    <div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
+                        <button type="submit" (click)="save_inquerito_6_parte()" class="btn btn-success btn-sm">Guardar
+                            6</button>
+                    </div>
+
+                    <!--div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Productor' && !showDuplicatedInput">
+                        <button type="submit" (click)="save_inquerito_8_parte()" class="btn btn-success btn-sm">Guardar
+                            7</button>
+                    </!--div-->
+
                 </div>
+
+
             </div>
         </div>
     </div>
