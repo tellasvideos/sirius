@@ -303,15 +303,15 @@ export class InqueritoComponent implements OnInit {
       documento_em_falta_3: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_4: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       duplicada_da: [''],
-      data_1_visita: [''],
-      resultado_da_visita: [''],
+      data_1_visita: ['', Validators.required],
+      resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
-      data_validacao_inquerito: [''],
-      que_tipo_de_negocio_esta: [''],
+      data_validacao_inquerito: ['', Validators.required],
+      que_tipo_de_negocio_esta: ['', Validators.required],
       em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
-      que_tipo: [''],
-      que_tipo_2: [''],
-      que_tipo_3: [''],
+      que_tipo: ['', Validators.required],
+      que_tipo_2: ['', Validators.required],
+      que_tipo_3: ['', Validators.required],
       status: [''],
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
@@ -464,6 +464,20 @@ export class InqueritoComponent implements OnInit {
       this.angForm.get(key)?.setValue('');
     });
   }
+
+  resetForm() {
+    const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at'];
+  
+    Object.keys(this.angForm.controls).forEach((controlName) => {
+      if (!excludedFields.includes(controlName)) {
+        this.angForm.get(controlName)?.reset();
+      }
+    });
+  
+    this.angForm.markAsUntouched();
+    this.angForm.markAsPristine();
+  }
+    
 
   clearInput2() {
     Object.keys(this.angForm.controls).forEach(key => {
