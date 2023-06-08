@@ -640,37 +640,27 @@
                             2</button>
                     </div>
 
-                    <div *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
+                    <div
+                        *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
                             3</button>
                     </div>
 
-                    <div *ngIf="angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
+                    <div
+                        *ngIf="angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
                             4</button>
                     </div>
 
-                    <div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Transformador' && !showDuplicatedInput">
+                    <div
+                        *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Transformador' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar
                             5</button>
                     </div>
 
-                    <div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
-                        <button type="submit" (click)="save_inquerito_6_parte()" class="btn btn-success btn-sm">Guardar
-                            6</button>
-                    </div>
-
-                    <!--div *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Productor' && !showDuplicatedInput">
-                        <button type="submit" (click)="save_inquerito_8_parte()" class="btn btn-success btn-sm">Guardar
-                            7</button>
-                    </!--div-->
-
                 </div>
-
-
             </div>
         </div>
-    </div>
 
 </form>
 
