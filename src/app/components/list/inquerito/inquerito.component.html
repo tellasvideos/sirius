@@ -142,8 +142,13 @@
                         <div class="my-element" style="margin-left: 10%;">
                             <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome"
                                 bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
-                                formControlName="manifestacao_de_interesse" [searchable]="true"
-                                placeholder=""></ng-select>
+                                formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
+                                [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
+                            </ng-select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched">
+                                * Campo obrigatório.
+                            </div>
                         </div>
                     </div>
 
@@ -186,13 +191,8 @@
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="checkbox" name="didasTeste1"  [value]="true" formControlName="didasTeste">
+                                <input type="checkbox" name="didasTeste1" [value]="true" formControlName="didasTeste">
                             </div>
-
-                            <!--div>
-                                <input type="radio" name="radioOption1" [value]="false" formControlName="didasTeste">
-                                Não
-                            </!--div-->
                         </div>
                     </div>
 
@@ -213,21 +213,23 @@
                     <!-- Pergunta 5 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
                         *ngIf="!showDuplicatedInput">
-
                         <div>
                             <label>Inquiridor:</label>
                         </div>
-
                         <div>
                             <select class="form-select form-select-sm" formControlName="inqueridor" name="inqueridor"
-                                style="width:350px;" required aria-label="Default select example">
+                                style="width:350px;" required aria-label="Default select example"
+                                [ngClass]="{ 'is-invalid': angForm.get('inqueridor')?.invalid && angForm.get('inqueridor')?.touched }">
                                 <option value="" disabled selected hidden></option>
-                                <option *ngFor="let item of userFrontOff" [value]="item.name"> {{item.name}}
-                                </option>
+                                <option *ngFor="let item of userFrontOff" [value]="item.name">{{item.name}}</option>
                             </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('inqueridor')?.invalid && angForm.get('inqueridor')?.touched">
+                                * Campo obrigatório.
+                            </div>
                         </div>
-
                     </div>
+
 
                     <!-- Pergunta 6 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
@@ -235,15 +237,18 @@
                         <div>
                             <label>Província:</label>
                         </div>
-
                         <div>
                             <select class="form-select form-select-sm" id="provincia" name="provincia" required
-                                style="width: 350px;" formControlName="provincia" (change)="carregarMunicipios()">
+                                style="width: 350px;" formControlName="provincia" (change)="carregarMunicipios()"
+                                [ngClass]="{ 'is-invalid': angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
                             </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched">
+                                * Campo obrigatório.
+                            </div>
                         </div>
-
                     </div>
 
                     <!-- Pergunta 7 -->
@@ -255,10 +260,15 @@
                         </div>
                         <div>
                             <select class="form-select form-select-sm" id="municipio" name="municipio" required
-                                style="width: 350px;" formControlName="municipio">
+                                style="width: 350px;" formControlName="municipio"
+                                [ngClass]="{ 'is-invalid': angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
                             </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched">
+                                * Campo obrigatório.
+                            </div>
                         </div>
 
                     </div>
@@ -272,7 +282,12 @@
                         <div>
                             <input type="text" formControlName="aldeia" name="aldeia"
                                 class="form-control form-control-sm" style="width: 350px;" id="exampleFormControlInput1"
-                                placeholder="">
+                                placeholder=""
+                                [ngClass]="{ 'is-invalid': angForm.get('aldeia')?.invalid && angForm.get('aldeia')?.touched }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('aldeia')?.invalid && angForm.get('aldeia')?.touched">
+                                * Campo obrigatório.
+                            </div>
                         </div>
                     </div>
 

@@ -280,54 +280,6 @@ export class InqueritoComponent implements OnInit {
   manifestacao: any;
   inquiridor: any;
 
-  // novos dados de inqueritos
-
-
-  /* documento_1!: File;
-   documento_2!: File;
-   documento_3!: File;
-   documento_4!: File;
-   documento_5!: File;
-   documento_6!: File;
-   documento_7!: File;
-   documento_8!: File;
-   documento_9!: File;
-   documento_10!: File;
-   documento_11!: File;
-   documento_12!: File;
-   documento_13!: File;
-   documento_14!: File;
-   documento_15!: File;
-   documento_16!: File;
-   documento_17!: File;
-   documento_18!: File;
-   documento_19!: File;
-   documento_20!: File;*/
-
-  /*nome_simplificado: any;
-  provincia: any;
-  inquerito_preenchido!: File;
-  documento_do_proponente!: File;
-  aldeia: any;
-  data_1_contacto!: string;
-  resultado_1_contacto: any;
-  documento_em_falta?: ["none", "none", "none", "none", "none", "none", "none", "none"];
-  documento_em_falta_2?: ["none", "none", "none", "none", "none", "none", "none", "none"];
-  duplicada_da: any;
-  data_1_visita!: string;
-  resultado_da_visita: any;
-  documento_em_falta_3?: ["none", "none", "none", "none", "none", "none", "none", "none"];
-  documento_em_falta_4?: ["none", "none", "none", "none", "none", "none", "none", "none"];
-  duplicada_da_2: any;
-  data_validacao_inquerito: any;
-  que_tipo_de_negocio_esta: any;
-  em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: any;
-  que_tipo: any;
-  que_tipo_2: any;
-  que_tipo_3: any;
-  status: any;
-  manifestacao_de_interesse?: any;
-  inqueridor: any;*/
   data: any;
   prop_name: any;
 
@@ -338,39 +290,35 @@ export class InqueritoComponent implements OnInit {
     private location: Location,
     private http: HttpClient,
     private fb: FormBuilder,
-    // public activeModal: NgbActiveModal
   ) {
     this.angForm = this.fb.group({
       nome_simplificado: [''],
-      provincia: [''],
-      municipio: [''],
-      aldeia: [''],
+      provincia: ['', Validators.required],
+      municipio: ['', Validators.required],
+      aldeia: ['', Validators.required],
       data_1_contacto: [''],
-      resultado_1_contacto: [''],
-      documento_em_falta: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta')),
-      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta')),
+      resultado_1_contacto: ['', Validators.required],
+      documento_em_falta: this.fb.array(Array(5).fill('sem falta'), Validators.required),
+      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta'), Validators.required),
+      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta'), Validators.required),
+      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       duplicada_da: [''],
       data_1_visita: [''],
       resultado_da_visita: [''],
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: [''],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [''],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
       que_tipo: [''],
       que_tipo_2: [''],
       que_tipo_3: [''],
       status: [''],
       created_at: [''],
-      manifestacao_de_interesse: [''],
-      inqueridor: [''],
+      manifestacao_de_interesse: ['', Validators.required],
+      inqueridor: ['', Validators.required],
       didasTeste: [false],
-      inquerito_preenchido: [''],
-      documents: ['']
-      // documents: this.fb.array(Array(5).fill('sem falta'))
-
-
+      inquerito_preenchido: ['', Validators.required],
+      documents: ['', Validators.required]
     });
   }
 
@@ -441,6 +389,13 @@ export class InqueritoComponent implements OnInit {
 
 
   save_inquerito2() {
+
+    if (!this.angForm.get('manifestacao_de_interesse')?.value) {
+      if (!this.angForm.get('manifestacao_de_interesse')?.value) {
+        this.alert_error_MI();
+      }
+      return;
+    }
 
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
@@ -584,6 +539,14 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  alert_error_MI() {
+    Swal.fire({
+      icon: "error",
+      //title: "Oops...",
+      text: "Por favor, preencha os campos obrigatórios",
+    })
+  }
+
   get_interest_express() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
@@ -653,16 +616,6 @@ export class InqueritoComponent implements OnInit {
       this.duplicatedName = ''; // Limpa o valor do input quando for ocultado
     }
   }
-
-  /*onChangeDidasTeste(event: any) {
-    this.angForm.get('nome_simplificado')?.value = event.target.value;
-    if (this.angForm.get('nome_simplificado')?.value === this.opcoesDidasTeste) {
-      this.angForm.get('nome_simplificado')?.value = ''
-    } else {
-      this.angForm.get('nome_simplificado')?.value = false
-      this.angForm.get('nome_simplificado')?.value = ''
-    }
-  }*/
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
