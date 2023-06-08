@@ -295,14 +295,21 @@
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                         *ngIf="!showDuplicatedInput">
                         <div>
-                            <label for="data_1_contacto">Data do primeiro contacto:</label>
+                            <label for="data_1_contacto">Data do primeiro contato:</label>
                         </div>
                         <div>
                             <input type="date" formControlName="data_1_contacto" name="data_1_contacto"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px;" class="form-control form-control-sm">
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('data_1_contacto')?.invalid && angForm.get('data_1_contacto')?.touched }">
+                            <div class="invalid-feedback" style="width: 350px;"
+                                *ngIf="angForm.get('data_1_contacto')?.invalid && angForm.get('data_1_contacto')?.touched">
+                                * Campo obrigatório. Pois, e a data não pode ser posterior à data de hoje (não é
+                                possível antecipar)
+                            </div>
                         </div>
                     </div>
+
 
                     <!-- Pergunta 9.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"

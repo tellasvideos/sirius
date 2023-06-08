@@ -296,7 +296,7 @@ export class InqueritoComponent implements OnInit {
       provincia: ['', Validators.required],
       municipio: ['', Validators.required],
       aldeia: ['', Validators.required],
-      data_1_contacto: [''],
+      data_1_contacto: ['', Validators.required],
       resultado_1_contacto: ['', Validators.required],
       documento_em_falta: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_2: this.fb.array(Array(5).fill('sem falta'), Validators.required),
