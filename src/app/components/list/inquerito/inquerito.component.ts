@@ -365,7 +365,7 @@ export class InqueritoComponent implements OnInit {
       created_at: [''],
       manifestacao_de_interesse: [''],
       inqueridor: [''],
-      didasTeste: [''],
+      didasTeste: [false],
       inquerito_preenchido: [''],
       documents: ['']
       // documents: this.fb.array(Array(5).fill('sem falta'))

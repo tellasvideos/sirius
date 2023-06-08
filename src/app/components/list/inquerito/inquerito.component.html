@@ -155,11 +155,11 @@
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="radio" name="radioOption" (click)="showInput(true)"> Sim
+                                <input type="radio" name="radioOption1" (click)="showInput(true)"> Sim
                             </div>
 
                             <div>
-                                <input type="radio" name="radioOption" (click)="showInput(false)"> Não
+                                <input type="radio" name="radioOption2" (click)="showInput(false)"> Não
                             </div>
                         </div>
 
@@ -186,13 +186,13 @@
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="radio" name="radioOption1" [value]="true" formControlName="didasTeste"> Sim
+                                <input type="checkbox" name="didasTeste1"  [value]="true" formControlName="didasTeste">
                             </div>
 
-                            <div>
+                            <!--div>
                                 <input type="radio" name="radioOption1" [value]="false" formControlName="didasTeste">
                                 Não
-                            </div>
+                            </!--div-->
                         </div>
                     </div>
 
