@@ -302,7 +302,7 @@ export class InqueritoComponent implements OnInit {
       documento_em_falta_2: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_3: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_4: this.fb.array(Array(5).fill('sem falta'), Validators.required),
-      duplicada_da: [''],
+      duplicada_da: [false],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
@@ -1042,7 +1042,7 @@ export class InqueritoComponent implements OnInit {
   
   // Limpa todos os campos do formulario incluindo o formArray
   resetForm() {
-    const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at'];
+    const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at', 'didasTeste', 'duplicada_da'];
   
     Object.keys(this.angForm.controls).forEach((controlName) => {
       if (!excludedFields.includes(controlName)) {

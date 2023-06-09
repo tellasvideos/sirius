@@ -160,13 +160,13 @@
 
                         <div class="d-flex justify-content-between mx-auto" style="width: 18%;">
                             <div>
-                                <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
+                                <input type="checkbox" name="checkboxOption"  formControlName="duplicada_da"
                                     (click)="showInput(true)" [checked]="showDuplicatedInput"> Sim
                             </div>
 
                             <div>
                                 <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
-                                    (click)="showInput(false)" [checked]="!showDuplicatedInput"> Não
+                                    (click)="showInput(false)"  [checked]="!showDuplicatedInput"> Não
                             </div>
                         </div>
 
@@ -191,11 +191,9 @@
                             <label>Didas Teste ?</label>
                         </div>
 
-                        <div class="d-flex justify-content-between mx-auto">
-                            <div style="width: 20%;">
-                                <!--input type="checkbox" name="didasTeste1" [value]="true" formControlName="didasTeste"
-                                    (click)="showInput(true)"-->
-                                <input type="checkbox" name="checkboxOption" formControlName="didasTeste"
+                        <div class="d-flex justify-content-between">
+                            <div style="margin-right: 200px;">
+                                <input type="checkbox" name="checkboxOption" [value]="true" formControlName="didasTeste"
                                     (click)="showInput(true)" [checked]="showDuplicatedInput">
                             </div>
                         </div>
