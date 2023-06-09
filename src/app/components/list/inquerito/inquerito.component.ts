@@ -59,11 +59,11 @@ export class InqueritoComponent implements OnInit {
   opcoesDidasTeste = ['Nao']
 
   tipos_de_prestadores = [
-    'mecanizacao',
-    'comercializacao',
-    'insumos/sementes',
-    'transporte',
-    'Construçao'
+    'Mecanizacão',
+    'comercializacão',
+    'Insumos/sementes',
+    'Transporte',
+    'Construção'
   ]
 
   tipos_de_negococio = [
@@ -79,7 +79,7 @@ export class InqueritoComponent implements OnInit {
   tipos_de_agregador = [
     'Descasque',
     'Seleção',
-    'embalagem'
+    'Embalagem'
   ]
 
   tipos_de_cadeia_de_valor = [
@@ -96,7 +96,7 @@ export class InqueritoComponent implements OnInit {
 
   resultados_da_visita = ['Inquérito em Elaboração',
     //'Incomunicavel: não atende',
-    'Incontactável: N° tel errado',
+    //'Incontactável: N° tel errado',
     'Pendente por falta de documento',
     'Recusada: actividade inelegível',
     //'Recusada: MI duplicada',
@@ -105,7 +105,7 @@ export class InqueritoComponent implements OnInit {
     'Recusado por dívida',
     'Recusada: zona inelegível',
     'Recusada por falta de documentação legal',
-    'Didas teste'
+    //'Didas teste'
   ]
 
   resultados_De_Contacto = ['A ser visitada',
@@ -269,8 +269,13 @@ export class InqueritoComponent implements OnInit {
     }
   }
 
-  reloadOnce: any;
 
+
+
+
+
+
+  reloadOnce: any;
   inqueritos: any;
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
@@ -302,7 +307,7 @@ export class InqueritoComponent implements OnInit {
       documento_em_falta_2: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_3: this.fb.array(Array(5).fill('sem falta'), Validators.required),
       documento_em_falta_4: this.fb.array(Array(5).fill('sem falta'), Validators.required),
-      duplicada_da: [false],
+      duplicada_da: [''],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
@@ -321,6 +326,15 @@ export class InqueritoComponent implements OnInit {
       documents: ['', Validators.required]
     });
   }
+
+
+
+
+
+
+
+
+
 
   ngOnInit(): void {
     this.get_farm_names();
@@ -379,6 +393,11 @@ export class InqueritoComponent implements OnInit {
   openModal() {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
+
+
+
+
+
 
 
   // Guarda dados do form caso a MI for duplicada
@@ -441,7 +460,16 @@ export class InqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
+
+        if (dataValidacaoInquerito) {
+          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+
+        }
+
+        this.alert_success();
+      },
       error => { this.alert_error(); }
 
     )
@@ -462,6 +490,13 @@ export class InqueritoComponent implements OnInit {
     });
 
   }
+
+
+
+
+
+
+
 
 
   // Guarda até a opção resultado da visita no campo resultado do primeiro contacto
@@ -565,10 +600,18 @@ export class InqueritoComponent implements OnInit {
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
 
+    this.dataService.salvaInquireForm(formData).subscribe(
+      success => {
+        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
+
+        if (dataValidacaoInquerito) {
+          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+
+        }
+        this.alert_success();
+      },
+      error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
@@ -586,6 +629,11 @@ export class InqueritoComponent implements OnInit {
       location.reload();
     });
   }
+
+
+
+
+
 
   // Guarda até o campo resultado da visita
   save_inquerito_3_parte() {
@@ -703,10 +751,18 @@ export class InqueritoComponent implements OnInit {
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
 
+    this.dataService.salvaInquireForm(formData).subscribe(
+      success => {
+        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
+
+        if (dataValidacaoInquerito) {
+          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+
+        }
+        this.alert_success();
+      },
+      error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
@@ -724,6 +780,12 @@ export class InqueritoComponent implements OnInit {
       location.reload();
     });
   }
+
+
+
+
+
+
 
   // Guarda apartir do campo resultado da visita na opção Inquérito elaborado
   save_inquerito_4_parte() {
@@ -820,12 +882,12 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+    /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
       if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
         this.alert_error_Em_qual_cadeia();
       }
       return;
-    }
+    }*/
 
 
     let fileList: FileList = this.selectedFile;
@@ -877,18 +939,28 @@ export class InqueritoComponent implements OnInit {
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
+
+
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        
+        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
+
+        if (dataValidacaoInquerito) {
+          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+        }
+        this.alert_success();
+      },
       error => { this.alert_error(); }
 
     )
 
     this.get_inquireForms();
-    this.resetForm();
+    //this.resetForm();
     //this.closeModal('exampleModalToggle');
 
     // close modal
-    const modal = document.getElementById('exampleModalToggle');
+    /*const modal = document.getElementById('exampleModalToggle');
     if (modal) {
       modal.style.display = 'none';
     }
@@ -896,8 +968,14 @@ export class InqueritoComponent implements OnInit {
     // Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });
+    });*/
   }
+
+
+
+
+
+
 
   // Guarda até produtor
   save_inquerito_5_parte() {
@@ -980,33 +1058,33 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-        this.alert_error_Em_qual_cadeia();
-      }
-      return;
-    }
+    /* if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+       if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+         this.alert_error_Em_qual_cadeia();
+       }
+       return;
+     }*/
 
-    if (!this.angForm.get('que_tipo')?.value) {
-      if (!this.angForm.get('que_tipo')?.value) {
-        this.alert_error_produtor();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo_2')?.value) {
-      if (!this.angForm.get('que_tipo_2')?.value) {
-        this.alert_error_Agregador();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo_3')?.value) {
-      if (!this.angForm.get('que_tipo_3')?.value) {
-        this.alert_error_Transform();
-      }
-      return;
-    }
+    /* if (!this.angForm.get('que_tipo')?.value) {
+       if (!this.angForm.get('que_tipo')?.value) {
+         this.alert_error_produtor();
+       }
+       return;
+     }
+ 
+     if (!this.angForm.get('que_tipo_2')?.value) {
+       if (!this.angForm.get('que_tipo_2')?.value) {
+         this.alert_error_Agregador();
+       }
+       return;
+     }
+ 
+     if (!this.angForm.get('que_tipo_3')?.value) {
+       if (!this.angForm.get('que_tipo_3')?.value) {
+         this.alert_error_Transform();
+       }
+       return;
+     }*/
 
     if (!this.angForm.get('inquerito_preenchido')?.value) {
       if (!this.angForm.get('inquerito_preenchido')?.value) {
@@ -1072,10 +1150,18 @@ export class InqueritoComponent implements OnInit {
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
+    const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
 
+    if (dataValidacaoInquerito) {
+      this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+
+    }
+
+    this.dataService.salvaInquireForm(formData).subscribe(
+      success => {
+        this.alert_success();
+      },
+      error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
@@ -1095,7 +1181,14 @@ export class InqueritoComponent implements OnInit {
   }
 
 
-  // Limpa todos os campos do formulario incluindo o formArray
+
+
+
+
+
+
+
+  // Limpa todos os campos do formulario 
   resetForm() {
     const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at', 'didasTeste', 'duplicada_da'];
 
@@ -1158,15 +1251,25 @@ export class InqueritoComponent implements OnInit {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Alguma coisa correu mal, verifique se preencheu os campos correctamente.",
+      text: "Alguma coisa correu mal, verifique a sua conexão de internet. Se persistir entre em contacto com a equipa de suporte",
     })
   }
+
   alert_success() {
     Swal.fire({
       icon: "success",
       title: "Salvo",
       showConfirmButton: false,
       timer: 1500
+    })
+  }
+
+  alert_success_MI_Aproved() {
+    Swal.fire({
+      icon: "success",
+      title: "Manifestação de Interesse Aprovada",
+      showConfirmButton: false,
+      timer: 2000
     })
   }
 
@@ -1383,7 +1486,7 @@ export class InqueritoComponent implements OnInit {
       this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
-    this.resetForm()
+    // this.resetForm()
   }
 
   onSelectedFile(e: any) {

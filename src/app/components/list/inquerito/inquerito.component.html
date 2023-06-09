@@ -208,8 +208,13 @@
 
                         <div>
                             <input style="width:350px;" class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }"
                                 formControlName="nome_simplificado" type="text" required name="nome_simplificado"
                                 aria-label=".form-control-sm example">
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched">
+                            * Campo obrigatório.
                         </div>
                     </div>
 
@@ -556,12 +561,12 @@
                             <select style="width: 350px;" class="form-select form-select-sm" id="tipodenegocio"
                                 name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                 formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
-                                [ngClass]="{ 'is-invalid': angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto') }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}</option>
                             </select>
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.touched">
+                                *ngIf="angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')">
                                 * Campo obrigatório.
                             </div>
                         </div>
@@ -576,12 +581,12 @@
                         <div>
                             <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo"
                                 name="que_tipo" formControlName="que_tipo"
-                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo') }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of tipos_de_agregador" [value]="item">{{item}}</option>
                             </select>
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('que_tipo')?.invalid && angForm.get('que_tipo')?.touched">
+                                *ngIf="angForm.get('que_tipo')?.invalid && angForm.get('que_tipo')">
                                 * Campo obrigatório.
                             </div>
                         </div>
@@ -596,12 +601,12 @@
                         <div>
                             <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_2"
                                 name="que_tipo_2" formControlName="que_tipo_2"
-                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2') }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}</option>
                             </select>
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2')?.touched">
+                                *ngIf="angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2')">
                                 * Campo obrigatório.
                             </div>
                         </div>
@@ -616,17 +621,19 @@
                         <div>
                             <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_3"
                                 name="que_tipo_3" formControlName="que_tipo_3"
-                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3') }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}</option>
                             </select>
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3')?.touched">
+                                *ngIf="angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3')">
                                 * Campo obrigatório.
                             </div>
                         </div>
                     </div>
-
+                    <div class="d-none">
+                        <input type="text" formControlName="status">
+                    </div>
                 </div>
 
                 <div class="modal-footer justify-content-between">
@@ -640,25 +647,25 @@
                     <div
                         *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
                         <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar
-                            2</button>
+                        </button>
                     </div>
 
                     <div
                         *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
-                            3</button>
+                        </button>
                     </div>
 
                     <div
                         *ngIf="angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
-                            4</button>
+                        </button>
                     </div>
 
                     <div
                         *ngIf="angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Transformador' && !showDuplicatedInput">
                         <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar
-                            5</button>
+                        </button>
                     </div>
 
                 </div>
