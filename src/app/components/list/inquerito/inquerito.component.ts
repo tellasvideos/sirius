@@ -341,6 +341,13 @@ export class InqueritoComponent implements OnInit {
 
   }
 
+  closeModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      const modalInstance = new bootstrap.Modal(modal);
+      modalInstance.hide();
+    }
+  }
 
   getProvincia() {
     this.dataService.get_Provinces().subscribe(data => {
@@ -383,13 +390,6 @@ export class InqueritoComponent implements OnInit {
       }
       return;
     }
-
-   /* if (!this.angForm.get('provincia')?.value) {
-      if (!this.angForm.get('provincia')?.value) {
-        this.alert_error_MI();
-      }
-      return;
-    }*/
 
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
@@ -447,10 +447,11 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
+    this.resetForm();  
+    this.closeModal('exampleModalToggle');
+    
   }
+
 
   // Guarda até a opção resultado da visita no campo resultado do primeiro contacto
   save_inquerito_2_parte() {
@@ -560,9 +561,8 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
+    this.resetForm();      
+    this.closeModal('exampleModalToggle');
   }
 
   // Guarda até o campo resultado da visita
@@ -688,9 +688,8 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
+    this.resetForm();      
+    this.closeModal('exampleModalToggle');
   }
 
   // Guarda apartir do campo resultado da visita na opção Inquérito elaborado
@@ -855,9 +854,8 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
+    this.resetForm();      
+    this.closeModal('exampleModalToggle');
   }
 
   // Guarda até produtor
@@ -1040,525 +1038,11 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
-  }
-
-  // Guarda até agregador
-  save_inquerito_6_parte() {
-
-    if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-      if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-        this.alert_error_MI();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('inqueridor')?.value) {
-      if (!this.angForm.get('inqueridor')?.value) {
-        this.alert_error_Inqueridor();
-      }
-      return;
-    }
-
-   if (!this.angForm.get('provincia')?.value) {
-      if (!this.angForm.get('provincia')?.value) {
-        this.alert_error_Prov();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('municipio')?.value) {
-      if (!this.angForm.get('municipio')?.value) {
-        this.alert_error_Mun();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('aldeia')?.value) {
-      if (!this.angForm.get('aldeia')?.value) {
-        this.alert_error_Ald();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('data_1_contacto')?.value) {
-      if (!this.angForm.get('data_1_contacto')?.value) {
-        this.alert_error_Dat_1_con();
-      }
-      return;
-    }
-
-    
-    if (!this.angForm.get('resultado_1_contacto')?.value) {
-      if (!this.angForm.get('resultado_1_contacto')?.value) {
-        this.alert_error_Result_1_con();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      if (!this.angForm.get('data_validacao_inquerito')?.value) {
-        this.alert_error_Dat_val_inq();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-        this.alert_error_Que_tipo_negocio();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-        this.alert_error_Em_qual_cadeia();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo')?.value) {
-      if (!this.angForm.get('que_tipo')?.value) {
-        this.alert_error_Agregador();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }
-
-
-    let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
-
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-    let formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }
-
-    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
-    formData.append("provincia", this.angForm.get('provincia')?.value);
-    formData.append("municipio", this.angForm.get('municipio')?.value);
-    formData.append("aldeia", this.angForm.get('aldeia')?.value);
-    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
-    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
-    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
-    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
-    formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
-    formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
-    formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
-    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
-    formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
-    formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
-    formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
-    formData.append("created_at", this.angForm.get('created_at')?.value);
-    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
-    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
-
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
-
-    )
-
-    this.get_inquireForms();
-    // this.clearInput();
-    this.route.navigate(['inquerito/']);
-
-  }
-
- // Guarda até transformador
- save_inquerito_7_parte() {
-
-  if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-    if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-      this.alert_error_MI();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('inqueridor')?.value) {
-    if (!this.angForm.get('inqueridor')?.value) {
-      this.alert_error_Inqueridor();
-    }
-    return;
-  }
-
- if (!this.angForm.get('provincia')?.value) {
-    if (!this.angForm.get('provincia')?.value) {
-      this.alert_error_Prov();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('municipio')?.value) {
-    if (!this.angForm.get('municipio')?.value) {
-      this.alert_error_Mun();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('aldeia')?.value) {
-    if (!this.angForm.get('aldeia')?.value) {
-      this.alert_error_Ald();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_1_contacto')?.value) {
-    if (!this.angForm.get('data_1_contacto')?.value) {
-      this.alert_error_Dat_1_con();
-    }
-    return;
+    this.resetForm(); 
+    this.closeModal('exampleModalToggle');     
   }
 
   
-  if (!this.angForm.get('resultado_1_contacto')?.value) {
-    if (!this.angForm.get('resultado_1_contacto')?.value) {
-      this.alert_error_Result_1_con();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_1_visita')?.value) {
-    if (!this.angForm.get('data_1_visita')?.value) {
-      this.alert_error_Dat_1_vis();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('resultado_da_visita')?.value) {
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      this.alert_error_Result();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_validacao_inquerito')?.value) {
-    if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      this.alert_error_Dat_val_inq();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      this.alert_error_Que_tipo_negocio();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-    if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      this.alert_error_Em_qual_cadeia();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('que_tipo_2')?.value) {
-    if (!this.angForm.get('que_tipo_2')?.value) {
-      this.alert_error_Transform();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('inquerito_preenchido')?.value) {
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
-      this.alert_error_Inq_pre();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('documents')?.value) {
-    if (!this.angForm.get('documents')?.value) {
-      this.alert_error_Docs();
-    }
-    return;
-  }
-
-
-  let fileList: FileList = this.selectedFile;
-  let documents: FileList = fileList;
-
-  let fileList2: FileList = this.selectedFile2;
-  let inquerito_preenchido: FileList = fileList2;
-  // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-  let formData = new FormData();
-
-  for (let i = 0; i < documents?.length; i++) {
-    formData.append("files", documents[i], documents[i].name);
-  }
-
-  // Verificar se há um arquivo selecionado
-  if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-    const inqueritoPreenchido = this.selectedFile2[0];
-
-    // Verificar se o arquivo não está vazio
-    if (inqueritoPreenchido.size > 0) {
-      formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-    }
-  }
-
-  formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
-  formData.append("provincia", this.angForm.get('provincia')?.value);
-  formData.append("municipio", this.angForm.get('municipio')?.value);
-  formData.append("aldeia", this.angForm.get('aldeia')?.value);
-  formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
-  formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
-  formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-  formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-  formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-  formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
-  formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-  formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
-  formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
-  formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
-  formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
-  formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
-  formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
-  formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
-  formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
-  formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-  formData.append("status", this.angForm.get('status')?.value);
-  formData.append("created_at", this.angForm.get('created_at')?.value);
-  formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-  formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
-  formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
-
-  this.dataService.salvaInquireForm(formData).subscribe(
-    success => { this.alert_success(); },
-    error => { this.alert_error(); }
-
-  )
-
-  this.get_inquireForms();
-  // this.clearInput();
-  this.route.navigate(['inquerito/']);
-
-}
-
-// Guarda até prestador de servicos
-save_inquerito_8_parte() {
-
-  if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-    if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-      this.alert_error_MI();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('inqueridor')?.value) {
-    if (!this.angForm.get('inqueridor')?.value) {
-      this.alert_error_Inqueridor();
-    }
-    return;
-  }
-
- if (!this.angForm.get('provincia')?.value) {
-    if (!this.angForm.get('provincia')?.value) {
-      this.alert_error_Prov();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('municipio')?.value) {
-    if (!this.angForm.get('municipio')?.value) {
-      this.alert_error_Mun();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('aldeia')?.value) {
-    if (!this.angForm.get('aldeia')?.value) {
-      this.alert_error_Ald();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_1_contacto')?.value) {
-    if (!this.angForm.get('data_1_contacto')?.value) {
-      this.alert_error_Dat_1_con();
-    }
-    return;
-  }
-
-  
-  if (!this.angForm.get('resultado_1_contacto')?.value) {
-    if (!this.angForm.get('resultado_1_contacto')?.value) {
-      this.alert_error_Result_1_con();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_1_visita')?.value) {
-    if (!this.angForm.get('data_1_visita')?.value) {
-      this.alert_error_Dat_1_vis();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('resultado_da_visita')?.value) {
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      this.alert_error_Result();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('data_validacao_inquerito')?.value) {
-    if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      this.alert_error_Dat_val_inq();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      this.alert_error_Que_tipo_negocio();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-    if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      this.alert_error_Em_qual_cadeia();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('que_tipo_3')?.value) {
-    if (!this.angForm.get('que_tipo_3')?.value) {
-      this.alert_error_Prestador();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('inquerito_preenchido')?.value) {
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
-      this.alert_error_Inq_pre();
-    }
-    return;
-  }
-
-  if (!this.angForm.get('documents')?.value) {
-    if (!this.angForm.get('documents')?.value) {
-      this.alert_error_Docs();
-    }
-    return;
-  }
-
-
-  let fileList: FileList = this.selectedFile;
-  let documents: FileList = fileList;
-
-  let fileList2: FileList = this.selectedFile2;
-  let inquerito_preenchido: FileList = fileList2;
-  // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-  let formData = new FormData();
-
-  for (let i = 0; i < documents?.length; i++) {
-    formData.append("files", documents[i], documents[i].name);
-  }
-
-  // Verificar se há um arquivo selecionado
-  if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-    const inqueritoPreenchido = this.selectedFile2[0];
-
-    // Verificar se o arquivo não está vazio
-    if (inqueritoPreenchido.size > 0) {
-      formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-    }
-  }
-
-  formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
-  formData.append("provincia", this.angForm.get('provincia')?.value);
-  formData.append("municipio", this.angForm.get('municipio')?.value);
-  formData.append("aldeia", this.angForm.get('aldeia')?.value);
-  formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
-  formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
-  formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-  formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-  formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-  formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
-  formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-  formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
-  formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
-  formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
-  formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
-  formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
-  formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
-  formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
-  formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
-  formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-  formData.append("status", this.angForm.get('status')?.value);
-  formData.append("created_at", this.angForm.get('created_at')?.value);
-  formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-  formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
-  formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
-
-  this.dataService.salvaInquireForm(formData).subscribe(
-    success => { this.alert_success(); },
-    error => { this.alert_error(); }
-
-  )
-
-  this.get_inquireForms();
-  // this.clearInput();
-  this.route.navigate(['inquerito/']);
-
-}
-
-
   // Limpa todos os campos do formulario incluindo o formArray
   resetForm() {
     const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at'];
@@ -1617,6 +1101,7 @@ save_inquerito_8_parte() {
     });
   }
 
+  // Alert services
   alert_error() {
     Swal.fire({
       icon: "error",
@@ -1717,7 +1202,7 @@ save_inquerito_8_parte() {
     Swal.fire({
       icon: "error",
       //title: "Oops...",
-      text: "Por favor, preencha o campo Em qual cadeia de valor vai se implementar o projeto",
+      text: "Por favor, preencha o campo em falta",
     })
   }
 
