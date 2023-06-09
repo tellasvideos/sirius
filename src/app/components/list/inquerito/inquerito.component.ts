@@ -447,9 +447,20 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm();  
-    this.closeModal('exampleModalToggle');
-    
+    this.resetForm();
+    // this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
+
   }
 
 
@@ -470,7 +481,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-   if (!this.angForm.get('provincia')?.value) {
+    if (!this.angForm.get('provincia')?.value) {
       if (!this.angForm.get('provincia')?.value) {
         this.alert_error_Prov();
       }
@@ -561,8 +572,19 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm();      
-    this.closeModal('exampleModalToggle');
+    this.resetForm();
+    // this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
   }
 
   // Guarda até o campo resultado da visita
@@ -582,7 +604,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-   if (!this.angForm.get('provincia')?.value) {
+    if (!this.angForm.get('provincia')?.value) {
       if (!this.angForm.get('provincia')?.value) {
         this.alert_error_Prov();
       }
@@ -610,7 +632,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    
+
     if (!this.angForm.get('resultado_1_contacto')?.value) {
       if (!this.angForm.get('resultado_1_contacto')?.value) {
         this.alert_error_Result_1_con();
@@ -688,8 +710,19 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm();      
-    this.closeModal('exampleModalToggle');
+    this.resetForm();
+    //this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
   }
 
   // Guarda apartir do campo resultado da visita na opção Inquérito elaborado
@@ -709,7 +742,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-   if (!this.angForm.get('provincia')?.value) {
+    if (!this.angForm.get('provincia')?.value) {
       if (!this.angForm.get('provincia')?.value) {
         this.alert_error_Prov();
       }
@@ -737,7 +770,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    
+
     if (!this.angForm.get('resultado_1_contacto')?.value) {
       if (!this.angForm.get('resultado_1_contacto')?.value) {
         this.alert_error_Result_1_con();
@@ -794,7 +827,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    
+
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
@@ -851,8 +884,19 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm();      
-    this.closeModal('exampleModalToggle');
+    this.resetForm();
+    //this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
   }
 
   // Guarda até produtor
@@ -872,7 +916,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-   if (!this.angForm.get('provincia')?.value) {
+    if (!this.angForm.get('provincia')?.value) {
       if (!this.angForm.get('provincia')?.value) {
         this.alert_error_Prov();
       }
@@ -900,7 +944,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    
+
     if (!this.angForm.get('resultado_1_contacto')?.value) {
       if (!this.angForm.get('resultado_1_contacto')?.value) {
         this.alert_error_Result_1_con();
@@ -1035,21 +1079,32 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm(); 
-    this.closeModal('exampleModalToggle');     
+    this.resetForm();
+    //this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
   }
 
-  
+
   // Limpa todos os campos do formulario incluindo o formArray
   resetForm() {
     const excludedFields = ['data_1_contacto', 'data_1_visita', 'data_validacao_inquerito', 'created_at', 'didasTeste', 'duplicada_da'];
-  
+
     Object.keys(this.angForm.controls).forEach((controlName) => {
       if (!excludedFields.includes(controlName)) {
         this.angForm.get(controlName)?.reset();
       }
     });
-  
+
     this.angForm.markAsUntouched();
     this.angForm.markAsPristine();
   }
