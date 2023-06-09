@@ -478,16 +478,18 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     // this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
+   // close modal
+   const modal = document.getElementById('exampleModalToggle');
+   if (modal) {
+     const bootstrapModal = new bootstrap.Modal(modal);
+     bootstrapModal.hide();
+     document.body.classList.remove('modal-open');
+   }
 
-    // Espera 3 segundos antes de recarregar a página
+    /*/ Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });
+    });*/
 
   }
 
@@ -618,16 +620,18 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     // this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
+   // close modal
+   const modal = document.getElementById('exampleModalToggle');
+   if (modal) {
+     const bootstrapModal = new bootstrap.Modal(modal);
+     bootstrapModal.hide();
+     document.body.classList.remove('modal-open');
+   }
 
-    // Espera 3 segundos antes de recarregar a página
+    /*/ Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });
+    });*/
   }
 
 
@@ -769,16 +773,18 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
+   // close modal
+   const modal = document.getElementById('exampleModalToggle');
+   if (modal) {
+     const bootstrapModal = new bootstrap.Modal(modal);
+     bootstrapModal.hide();
+     document.body.classList.remove('modal-open');
+   }
 
-    // Espera 3 segundos antes de recarregar a página
+    /*/ Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });
+    });*/
   }
 
 
@@ -950,7 +956,7 @@ export class InqueritoComponent implements OnInit {
           // Define o valor do campo "status" como "Aprovado"
           this.angForm.patchValue({ status: 'Aprovado' });
           // Redirecionar para a rota backoffice
-          this.route.navigate(['/interesses']);
+          // this.route.navigate(['/interesses']);
         }
 
         this.alert_success();
@@ -965,13 +971,16 @@ export class InqueritoComponent implements OnInit {
     // close modal
     const modal = document.getElementById('exampleModalToggle');
     if (modal) {
-      modal.style.display = 'none';
+      const bootstrapModal = new bootstrap.Modal(modal);
+      bootstrapModal.hide();
+      document.body.classList.remove('modal-open');
     }
 
+
     // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
+    //timer(4000).pipe(delay(4000)).subscribe(() => {
+    //location.reload();
+    //});
   }
 
 
@@ -1174,13 +1183,15 @@ export class InqueritoComponent implements OnInit {
     // close modal
     const modal = document.getElementById('exampleModalToggle');
     if (modal) {
-      modal.style.display = 'none';
+      const bootstrapModal = new bootstrap.Modal(modal);
+      bootstrapModal.hide();
+      document.body.classList.remove('modal-open');
     }
 
-    // Espera 3 segundos antes de recarregar a página
+    /*// Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });
+    });*/
   }
 
 
