@@ -795,9 +795,6 @@ export class InqueritoComponent implements OnInit {
     }
 
     
-    
-
-
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
@@ -1321,15 +1318,17 @@ export class InqueritoComponent implements OnInit {
     });
   }
 
+  // Manipulador de checkboxs
   showDuplicatedInput: boolean = false;
   duplicatedName: string = '';
 
   showInput(show: boolean) {
     this.showDuplicatedInput = show;
-    this.angForm.get('duplicada_da');
     if (!show) {
-      this.duplicatedName = ''; // Limpa o valor do input quando for ocultado
+      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
+      this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
+    this.resetForm()
   }
 
   onSelectedFile(e: any) {
