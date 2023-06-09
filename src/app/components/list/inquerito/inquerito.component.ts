@@ -943,24 +943,27 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.salvaInquireForm(formData).subscribe(
       success => {
-        
+
         const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
 
         if (dataValidacaoInquerito) {
-          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
+          // Define o valor do campo "status" como "Aprovado"
+          this.angForm.patchValue({ status: 'Aprovado' });
+          // Redirecionar para a rota backoffice
+          this.route.navigate(['/interesses']);
         }
+
         this.alert_success();
       },
       error => { this.alert_error(); }
-
     )
 
     this.get_inquireForms();
-    //this.resetForm();
+    this.resetForm();
     //this.closeModal('exampleModalToggle');
 
     // close modal
-    /*const modal = document.getElementById('exampleModalToggle');
+    const modal = document.getElementById('exampleModalToggle');
     if (modal) {
       modal.style.display = 'none';
     }
@@ -968,7 +971,7 @@ export class InqueritoComponent implements OnInit {
     // Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });*/
+    });
   }
 
 
