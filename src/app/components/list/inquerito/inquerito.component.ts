@@ -1175,7 +1175,7 @@ export class InqueritoComponent implements OnInit {
        modal.style.display = 'none';
      }
 
-    // Espera 2 segundos antes de recarregar a página
+    // Espera 2 segundos antes de recarregar aa página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
     });
