@@ -481,15 +481,13 @@ export class InqueritoComponent implements OnInit {
    // close modal
    const modal = document.getElementById('exampleModalToggle');
    if (modal) {
-     const bootstrapModal = new bootstrap.Modal(modal);
-     bootstrapModal.hide();
-     document.body.classList.remove('modal-open');
+     modal.style.display = 'none';
    }
 
-    /*/ Espera 3 segundos antes de recarregar a página
+    // Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });*/
+    });
 
   }
 
@@ -622,16 +620,14 @@ export class InqueritoComponent implements OnInit {
 
    // close modal
    const modal = document.getElementById('exampleModalToggle');
-   if (modal) {
-     const bootstrapModal = new bootstrap.Modal(modal);
-     bootstrapModal.hide();
-     document.body.classList.remove('modal-open');
-   }
+     if (modal) {
+       modal.style.display = 'none';
+     }
 
-    /*/ Espera 3 segundos antes de recarregar a página
+    // Espera 2 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });*/
+    });
   }
 
 
@@ -775,16 +771,13 @@ export class InqueritoComponent implements OnInit {
 
    // close modal
    const modal = document.getElementById('exampleModalToggle');
-   if (modal) {
-     const bootstrapModal = new bootstrap.Modal(modal);
-     bootstrapModal.hide();
-     document.body.classList.remove('modal-open');
-   }
-
-    /*/ Espera 3 segundos antes de recarregar a página
+     if (modal) {
+       modal.style.display = 'none';
+     }
+    // Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });*/
+    });
   }
 
 
@@ -968,19 +961,15 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-    // close modal
     const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      const bootstrapModal = new bootstrap.Modal(modal);
-      bootstrapModal.hide();
-      document.body.classList.remove('modal-open');
-    }
-
+     if (modal) {
+       modal.style.display = 'none';
+     }
 
     // Espera 3 segundos antes de recarregar a página
-    //timer(4000).pipe(delay(4000)).subscribe(() => {
-    //location.reload();
-    //});
+    timer(3000).pipe(delay(3000)).subscribe(() => {
+    location.reload();
+    });
   }
 
 
@@ -1182,16 +1171,14 @@ export class InqueritoComponent implements OnInit {
 
     // close modal
     const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      const bootstrapModal = new bootstrap.Modal(modal);
-      bootstrapModal.hide();
-      document.body.classList.remove('modal-open');
-    }
+     if (modal) {
+       modal.style.display = 'none';
+     }
 
-    /*// Espera 3 segundos antes de recarregar a página
+    // Espera 2 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
-    });*/
+    });
   }
 
 
