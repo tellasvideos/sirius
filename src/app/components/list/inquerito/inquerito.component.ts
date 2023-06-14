@@ -317,7 +317,7 @@ export class InqueritoComponent implements OnInit {
       que_tipo: ['', Validators.required],
       que_tipo_2: ['', Validators.required],
       que_tipo_3: ['', Validators.required],
-      status: [''],
+      status: ['Duplicada'],
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
@@ -453,41 +453,38 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("status", this.angForm.get('status')?.value || '');
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
+    const miDuplicada = this.angForm.get('duplicada_da')?.value;
+
+    if (miDuplicada) {
+      this.angForm.patchValue({ status: 'Duplicada' });
+    }
+
+
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
-
-        if (dataValidacaoInquerito) {
-          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
-
-        }
-
-        this.alert_success();
-      },
+      success => { this.alert_success(); },
       error => { this.alert_error(); }
-
     )
 
     this.get_inquireForms();
     this.resetForm();
     // this.closeModal('exampleModalToggle');
 
-   // close modal
-   const modal = document.getElementById('exampleModalToggle');
-   if (modal) {
-     modal.style.display = 'none';
-   }
-
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
+    /*/ close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+ 
+     // Espera 3 segundos antes de recarregar a página
+     timer(2000).pipe(delay(2000)).subscribe(() => {
+       location.reload();
+     });*/
 
   }
 
@@ -618,11 +615,11 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     // this.closeModal('exampleModalToggle');
 
-   // close modal
-   const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
 
     // Espera 2 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
@@ -769,11 +766,11 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-   // close modal
-   const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
     // Espera 3 segundos antes de recarregar a página
     timer(2000).pipe(delay(2000)).subscribe(() => {
       location.reload();
@@ -962,13 +959,13 @@ export class InqueritoComponent implements OnInit {
     //this.closeModal('exampleModalToggle');
 
     const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
+    if (modal) {
+      modal.style.display = 'none';
+    }
 
     // Espera 3 segundos antes de recarregar a página
     timer(3000).pipe(delay(3000)).subscribe(() => {
-    location.reload();
+      location.reload();
     });
   }
 
@@ -1171,9 +1168,9 @@ export class InqueritoComponent implements OnInit {
 
     // close modal
     const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
+    if (modal) {
+      modal.style.display = 'none';
+    }
 
     // Espera 2 segundos antes de recarregar aa página
     timer(2000).pipe(delay(2000)).subscribe(() => {
