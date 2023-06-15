@@ -1524,6 +1524,17 @@ export class InqueritoComponent implements OnInit {
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
     // this.resetForm()
+    this.angForm.get('duplicada_da')?.reset();
+  }
+
+  showInputDidas(show: boolean) {
+    this.showDuplicatedInput = show;
+    if (!show) {
+     this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
+      this.duplicatedName = ''; // Limpa o valor do campo duplicado
+    }
+    // this.resetForm()
+    this.angForm.get('didasTeste')?.reset();
   }
 
   onSelectedFile(e: any) {
