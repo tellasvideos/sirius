@@ -13,6 +13,8 @@ import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
 
+import { ViewChild } from '@angular/core';
+
 
 
 @Component({
@@ -21,6 +23,9 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./inquerito.component.scss']
 })
 export class InqueritoComponent implements OnInit {
+
+  @ViewChild('exampleModalToggle')
+  modal: any;
 
   selectedFile: any;
   selectedFile2: any;
@@ -134,8 +139,16 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  MI_duplida() {
-
+  fecharModal() {
+    if (this.modal) {
+      this.modal.nativeElement.classList.remove('show');
+      this.modal.nativeElement.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      const modalBackdrop = document.querySelector('.modal-backdrop');
+      if (modalBackdrop) {
+        modalBackdrop.parentNode?.removeChild(modalBackdrop);
+      }
+    }
   }
 
   loadTipoNegocio() {
@@ -483,7 +496,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  // Guarda dados do form caso a MI for duplicada
+  // Guarda dados do form caso a MI for duplicada (Botao 1)
   save_inquerito2() {
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
       if (!this.angForm.get('manifestacao_de_interesse')?.value) {
@@ -545,6 +558,7 @@ export class InqueritoComponent implements OnInit {
 
     this.get_inquireForms();
     this.resetForm();
+    // this.fecharModal();
     // this.closeModal('exampleModalToggle');
 
     // close modal
@@ -570,7 +584,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  // Guarda até a opção resultado da visita no campo resultado do primeiro contacto
+  // Guarda até a opção resultado da visita no campo resultado do primeiro contacto (Botao 2)
   save_inquerito_2_parte() {
 
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
@@ -698,7 +712,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  // Guarda até o campo resultado da visita
+  // Guarda até o campo resultado da visita (Botao 3)
   save_inquerito_3_parte() {
 
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
@@ -841,7 +855,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  // Guarda apartir do campo resultado da visita na opção Inquérito elaborado
+  // Guarda apartir do campo resultado da visita na opção Inquérito elaborado (Botao 4)
   save_inquerito_4_parte() {
 
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
@@ -908,7 +922,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_validacao_inquerito')?.value) {
+    /*if (!this.angForm.get('data_validacao_inquerito')?.value) {
       if (!this.angForm.get('data_validacao_inquerito')?.value) {
         this.alert_error_Dat_val_inq();
       }
@@ -934,7 +948,7 @@ export class InqueritoComponent implements OnInit {
         this.alert_error_Que_tipo_negocio();
       }
       return;
-    }
+    }*/
 
     /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
       if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
@@ -1021,7 +1035,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-  // Guarda até produtor
+  // Guarda todos os campos do formulário (botao 5)
   save_inquerito_5_parte() {
 
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
@@ -1102,14 +1116,14 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    /* if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+     /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
        if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
          this.alert_error_Em_qual_cadeia();
        }
        return;
-     }*/
+     }
 
-    /* if (!this.angForm.get('que_tipo')?.value) {
+     if (!this.angForm.get('que_tipo')?.value) {
        if (!this.angForm.get('que_tipo')?.value) {
          this.alert_error_produtor();
        }
@@ -1531,7 +1545,7 @@ export class InqueritoComponent implements OnInit {
   showInputDidas(show: boolean) {
     this.showDuplicatedInput_1 = show;
     if (!show) {
-     this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
+      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
     // this.resetForm()
@@ -1547,5 +1561,18 @@ export class InqueritoComponent implements OnInit {
     this.selectedFile2 = e.target.files;
     console.log('doc selected 2', this.selectedFile2)
   }
+
+
+  isGuardar5Visible(): boolean {
+    const dataValidacao = this.angForm.get('data_validacao_inquerito')?.value;
+
+    return !!dataValidacao;
+  }
+
+  showGuardar4(): boolean {
+    return !this.isGuardar5Visible();
+  }
+  
+
 
 }
