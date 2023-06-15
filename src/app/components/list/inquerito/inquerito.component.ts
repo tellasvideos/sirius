@@ -8,6 +8,7 @@ import { AddInqueritoComponent } from '../../inserts/add-inquerito/add-inquerito
 import { Location, } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -140,16 +141,21 @@ export class InqueritoComponent implements OnInit {
 
 
   fecharModal() {
-    if (this.modal) {
-      this.modal.nativeElement.classList.remove('show');
-      this.modal.nativeElement.style.display = 'none';
+    const modal = document.getElementById('exampleModalToggle');
+    const backdrop = document.getElementsByClassName('modal-backdrop')[0];
+  
+    if (modal && backdrop) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+      backdrop.parentNode?.removeChild(backdrop);
+  
+      // Remover a classe 'modal-open' do elemento 'body'
       document.body.classList.remove('modal-open');
-      const modalBackdrop = document.querySelector('.modal-backdrop');
-      if (modalBackdrop) {
-        modalBackdrop.parentNode?.removeChild(modalBackdrop);
-      }
     }
   }
+  
+  
+  
 
   loadTipoNegocio() {
     switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -312,6 +318,7 @@ export class InqueritoComponent implements OnInit {
     private location: Location,
     private http: HttpClient,
     private fb: FormBuilder,
+    private modalService_: NgbModal
   ) {
     this.angForm = this.fb.group({
       nome_simplificado: [''],
@@ -379,6 +386,11 @@ export class InqueritoComponent implements OnInit {
       modalInstance.hide();
     }
   }
+
+  fecharModal_() {
+    this.modalService_.dismissAll();
+  }
+  
 
   getProvincia() {
     this.dataService.get_Provinces().subscribe(data => {
@@ -558,7 +570,8 @@ export class InqueritoComponent implements OnInit {
 
     this.get_inquireForms();
     this.resetForm();
-    // this.fecharModal();
+    //this.fecharModal_();
+    //this.fecharModal();
     // this.closeModal('exampleModalToggle');
 
     // close modal
