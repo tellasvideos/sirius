@@ -106,7 +106,7 @@ export class InqueritoComponent implements OnInit {
     'Recusada: zona inelegível',
     'Recusada por falta de área',
     'Recusada por falta de documentação legal',
-    'Recusada: CV inelegivel'
+    'Recusada: CV inelegível'
     //'Didas teste'
   ]
 
@@ -114,15 +114,15 @@ export class InqueritoComponent implements OnInit {
     'Incomunicavel: Não atende',
     'Incomunicavel: Nº Tel errado',
     'Pendente por falta de documento',
-    'Recusada: actividade inelegivel',
+    'Recusada: actividade inelegível',
     // 'Recusada: MI duplicada',
     'Recusada: proponente desistiu',
     'Recusada por falta dos 10%',
-    'Recusada por divida',
+    'Recusada por dívida',
     'Recusada: zona inelegível',
     'Recusada por falta de documentação legal',
     'Recusada por falta de área',
-    'Recusada: CV inelegivel'
+    'Recusada: CV inelegível'
     //  'Didas teste'
   ];
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
@@ -409,19 +409,19 @@ export class InqueritoComponent implements OnInit {
     const resultadoDaVisita_7 = this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento';
     const resultadoDaVisita_8 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal';
     const resultadoDaVisita_9 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de área';
-    const resultadoDaVisita_10 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: CV inelegivel';
+    const resultadoDaVisita_10 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: CV inelegível';
 
     const resultado_Do_1_contacto = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Não atende';
     const resultado_Do_1_contacto_2 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Nº Tel errado';
     const resultado_Do_1_contacto_3 = this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento';
     const resultado_Do_1_contacto_4 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal';
     const resultado_Do_1_contacto_5 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta dos 10%';
-    const resultado_Do_1_contacto_6 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por divida';
+    const resultado_Do_1_contacto_6 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por dívida';
     const resultado_Do_1_contacto_7 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: actividade inelegível';
     const resultado_Do_1_contacto_8 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: proponente desistiu';
-    const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: Zona ilegivel';
+    const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: zona inelegível';
     const resultado_Do_1_contacto_10 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de área';
-    const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegivel';
+    const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegível';
 
     const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
     const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
