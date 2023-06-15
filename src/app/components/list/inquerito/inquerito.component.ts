@@ -119,6 +119,8 @@ export class InqueritoComponent implements OnInit {
     'Recusada por divida',
     'Recusada: Zona ilegivel',
     'Recusada por falta de documentação legal',
+    'Recusada por falta de área',
+    'Recusada : CV inelegivel'
     //  'Didas teste'
   ];
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
@@ -317,7 +319,7 @@ export class InqueritoComponent implements OnInit {
       que_tipo: ['', Validators.required],
       que_tipo_2: ['', Validators.required],
       que_tipo_3: ['', Validators.required],
-      status: ['Duplicada'],
+      status: [''],
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
@@ -394,15 +396,40 @@ export class InqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
+  // Estados manifestações de interesse “Estado MI” atribui automaticamente
+  public getStatus(): string {
+    const resultadoDaVisita = this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração';
+    const resultadoDaVisita_2 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Não atende';
+    const resultadoDaVisita_3 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Nº Tel errado';
+    const resultadoDaVisita_4 = this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento';
+    const resultadoDaVisita_5 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal';
+    const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
+    const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
 
-
+    if (duplicadaDaValue) {
+      return 'MI Duplicada';
+    } else if (dataValidacaoInqueritoValue) {
+      return 'Aprovado';
+    } else if (resultadoDaVisita) {
+      return 'Em Análise'
+    } else if (resultadoDaVisita_2) {
+      return 'Incomunicavel: Não atende'
+    } else if (resultadoDaVisita_3) {
+      return 'Incomunicavel: Nº Tel errado'
+    } else if (resultadoDaVisita_4) {
+      return 'Pendente por falta de documento'
+    } else if (resultadoDaVisita_5) {
+      return 'Pendente por falta de documento'
+    } {
+      return '';
+    }
+  }
 
 
 
 
   // Guarda dados do form caso a MI for duplicada
   save_inquerito2() {
-
     if (!this.angForm.get('manifestacao_de_interesse')?.value) {
       if (!this.angForm.get('manifestacao_de_interesse')?.value) {
         this.alert_error_MI();
@@ -410,24 +437,21 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
+    const fileList: FileList = this.selectedFile;
+    const documents: FileList = fileList;
 
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+    const fileList2: FileList = this.selectedFile2;
+    const inquerito_preenchido: FileList = fileList2;
 
-    let formData = new FormData();
+    const formData = new FormData();
 
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
     }
 
-    // Verificar se há um arquivo selecionado
     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
       const inqueritoPreenchido = this.selectedFile2[0];
 
-      // Verificar se o arquivo não está vazio
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
@@ -453,40 +477,34 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value || '');
+    formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    const miDuplicada = this.angForm.get('duplicada_da')?.value;
-
-    if (miDuplicada) {
-      this.angForm.patchValue({ status: 'Duplicada' });
-    }
-
-
     this.dataService.salvaInquireForm(formData).subscribe(
       success => { this.alert_success(); },
       error => { this.alert_error(); }
-    )
-
-    this.get_inquireForms();
-    this.resetForm();
-    // this.closeModal('exampleModalToggle');
-
-    /*/ close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
- 
-     // Espera 3 segundos antes de recarregar a página
-     timer(2000).pipe(delay(2000)).subscribe(() => {
-       location.reload();
-     });*/
-
+    );
   }
+
+
+
+  /* this.get_inquireForms();
+   this.resetForm();
+   // this.closeModal('exampleModalToggle');
+
+   // close modal
+   const modal = document.getElementById('exampleModalToggle');
+   if (modal) {
+     modal.style.display = 'none';
+   }
+ 
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });*/
 
 
 
@@ -591,7 +609,7 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
@@ -599,15 +617,7 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
-
-        if (dataValidacaoInquerito) {
-          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
-
-        }
-        this.alert_success();
-      },
+      success => { this.alert_success(); },
       error => { this.alert_error(); }
     )
 
@@ -742,7 +752,7 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
@@ -750,15 +760,7 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
-
-        if (dataValidacaoInquerito) {
-          this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
-
-        }
-        this.alert_success();
-      },
+      success => { this.alert_success(); },
       error => { this.alert_error(); }
     )
 
@@ -929,7 +931,7 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
@@ -938,19 +940,7 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-
-        const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
-
-        if (dataValidacaoInquerito) {
-          // Define o valor do campo "status" como "Aprovado"
-          this.angForm.patchValue({ status: 'Aprovado' });
-          // Redirecionar para a rota backoffice
-          // this.route.navigate(['/interesses']);
-        }
-
-        this.alert_success();
-      },
+      success => { this.alert_success(); },
       error => { this.alert_error(); }
     )
 
@@ -1142,18 +1132,11 @@ export class InqueritoComponent implements OnInit {
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
-    formData.append("status", this.angForm.get('status')?.value);
+    formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
-
-    const dataValidacaoInquerito = this.angForm.get('data_validacao_inquerito')?.value;
-
-    if (dataValidacaoInquerito) {
-      this.angForm.patchValue({ status: 'Aprovado' }); // Define o valor do campo "status" como "Aprovado"
-
-    }
 
     this.dataService.salvaInquireForm(formData).subscribe(
       success => {
