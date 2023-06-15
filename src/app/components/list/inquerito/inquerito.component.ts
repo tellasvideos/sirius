@@ -1515,6 +1515,7 @@ export class InqueritoComponent implements OnInit {
 
   // Manipulador de checkboxs
   showDuplicatedInput: boolean = false;
+  showDuplicatedInput_1: boolean = true;
   duplicatedName: string = '';
 
   showInput(show: boolean) {
@@ -1528,13 +1529,13 @@ export class InqueritoComponent implements OnInit {
   }
 
   showInputDidas(show: boolean) {
-    this.showDuplicatedInput = show;
+    this.showDuplicatedInput_1 = show;
     if (!show) {
      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
     // this.resetForm()
-    this.angForm.get('didasTeste')?.reset();
+    //this.angForm.get('didasTeste')?.reset();
   }
 
   onSelectedFile(e: any) {
