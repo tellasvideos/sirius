@@ -104,7 +104,9 @@ export class InqueritoComponent implements OnInit {
     'Recusada por falta dos 10%',
     'Recusado por dívida',
     'Recusada: zona inelegível',
+    'Recusada por falta de área',
     'Recusada por falta de documentação legal',
+    'Recusada: CV inelegivel'
     //'Didas teste'
   ]
 
@@ -117,10 +119,10 @@ export class InqueritoComponent implements OnInit {
     'Recusada: proponente desistiu',
     'Recusada por falta dos 10%',
     'Recusada por divida',
-    'Recusada: Zona ilegivel',
+    'Recusada: zona inelegível',
     'Recusada por falta de documentação legal',
     'Recusada por falta de área',
-    'Recusada : CV inelegivel'
+    'Recusada: CV inelegivel'
     //  'Didas teste'
   ];
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
@@ -399,12 +401,31 @@ export class InqueritoComponent implements OnInit {
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
   public getStatus(): string {
     const resultadoDaVisita = this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração';
-    const resultadoDaVisita_2 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Não atende';
-    const resultadoDaVisita_3 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Nº Tel errado';
-    const resultadoDaVisita_4 = this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento';
-    const resultadoDaVisita_5 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal';
+    const resultadoDaVisita_2 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta dos 10%';
+    const resultadoDaVisita_3 = this.angForm.get('resultado_da_visita')?.value === 'Recusado por dívida';
+    const resultadoDaVisita_4 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: actividade inelegível';
+    const resultadoDaVisita_5 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: proponente desistiu';
+    const resultadoDaVisita_6 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: zona inelegível';
+    const resultadoDaVisita_7 = this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento';
+    const resultadoDaVisita_8 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal';
+    const resultadoDaVisita_9 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de área';
+    const resultadoDaVisita_10 = this.angForm.get('resultado_da_visita')?.value === 'Recusada: CV inelegivel';
+
+    const resultado_Do_1_contacto = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Não atende';
+    const resultado_Do_1_contacto_2 = this.angForm.get('resultado_1_contacto')?.value === 'Incomunicavel: Nº Tel errado';
+    const resultado_Do_1_contacto_3 = this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento';
+    const resultado_Do_1_contacto_4 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal';
+    const resultado_Do_1_contacto_5 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta dos 10%';
+    const resultado_Do_1_contacto_6 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por divida';
+    const resultado_Do_1_contacto_7 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: actividade inelegível';
+    const resultado_Do_1_contacto_8 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: proponente desistiu';
+    const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: Zona ilegivel';
+    const resultado_Do_1_contacto_10 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de área';
+    const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegivel';
+
     const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
     const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
+    const didasTeste = this.angForm.get('didasTeste')?.value === true;
 
     if (duplicadaDaValue) {
       return 'MI Duplicada';
@@ -412,15 +433,49 @@ export class InqueritoComponent implements OnInit {
       return 'Aprovado';
     } else if (resultadoDaVisita) {
       return 'Em Análise'
-    } else if (resultadoDaVisita_2) {
+    } else if (resultado_Do_1_contacto) {
       return 'Incomunicavel: Não atende'
-    } else if (resultadoDaVisita_3) {
+    } else if (resultado_Do_1_contacto_2) {
       return 'Incomunicavel: Nº Tel errado'
+    } else if (resultado_Do_1_contacto_3) {
+      return 'Pendente por falta de documento'
+    } else if (resultadoDaVisita_7) {
+      return 'Pendente por falta de documento'
+    } else if (resultado_Do_1_contacto_4) {
+      return 'Recusada por falta de documentação legal'
+    } else if (resultadoDaVisita_8) {
+      return 'Recusada por falta de documentação legal'
+    } else if (resultadoDaVisita_2) {
+      return 'Recusada por falta dos 10%'
+    } else if (resultado_Do_1_contacto_5) {
+      return 'Recusada por falta dos 10%'
+    } else if (resultado_Do_1_contacto_6) {
+      return 'Recusada por dívida'
+    } else if (resultadoDaVisita_3) {
+      return 'Recusada por dívida'
     } else if (resultadoDaVisita_4) {
-      return 'Pendente por falta de documento'
+      return 'Recusada: Actividade inelegível'
+    } else if (resultado_Do_1_contacto_7) {
+      return 'Recusada: Actividade inelegível'
+    } else if (resultado_Do_1_contacto_8) {
+      return 'Recusada: proponente desistiu'
     } else if (resultadoDaVisita_5) {
-      return 'Pendente por falta de documento'
-    } {
+      return 'Recusada: proponente desistiu'
+    } else if (didasTeste) {
+      return 'Candidatura Inválida'
+    } else if (resultado_Do_1_contacto_9) {
+      return 'Recusada: zona inelegível'
+    } else if (resultadoDaVisita_6) {
+      return 'Recusada: zona inelegível'
+    } else if (resultadoDaVisita_9) {
+      return 'Recusada por falta de área'
+    } else if (resultado_Do_1_contacto_10) {
+      return 'Recusada por falta de área'
+    } else if (resultadoDaVisita_10) {
+      return 'Recusada CV'
+    } else if (resultado_Do_1_contacto_11) {
+      return 'Recusada CV'
+    } else {
       return '';
     }
   }
@@ -487,24 +542,25 @@ export class InqueritoComponent implements OnInit {
       success => { this.alert_success(); },
       error => { this.alert_error(); }
     );
+
+    this.get_inquireForms();
+    this.resetForm();
+    // this.closeModal('exampleModalToggle');
+
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+
+    // Espera 3 segundos antes de recarregar a página
+    timer(2000).pipe(delay(2000)).subscribe(() => {
+      location.reload();
+    });
   }
 
 
 
-  /* this.get_inquireForms();
-   this.resetForm();
-   // this.closeModal('exampleModalToggle');
-
-   // close modal
-   const modal = document.getElementById('exampleModalToggle');
-   if (modal) {
-     modal.style.display = 'none';
-   }
- 
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });*/
 
 
 
