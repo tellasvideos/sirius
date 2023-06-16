@@ -388,11 +388,11 @@ export class EditInqueritoComponent implements OnInit {
         });
     });
 
-    // recebe o status do inquerito ou estado da MI por id
+    /*/ recebe o status do inquerito ou estado da MI por id
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id');
       this.getStatusById(this.id);
-    });
+    });*/
   }
 
 
@@ -440,7 +440,7 @@ export class EditInqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
-  estados: string[] = [];
+  /*estados: string[] = [];
   estadoSelecionado?: string;
 
   gerarListaEstados(): void {
@@ -482,7 +482,7 @@ export class EditInqueritoComponent implements OnInit {
   onEstadoSelecionado(): void {
     // Implemente a lógica para tratar o estado selecionado pelo usuário
     console.log('Estado selecionado:', this.estadoSelecionado);
-  }
+  }*/
 
 
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
