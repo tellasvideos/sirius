@@ -1,3 +1,43 @@
+::ng-deep.ng-select-container {
+    border-bottom: 1px solid #0F57CD !important;
+    border: 1px solid #ccc;
+    //  border-radius: 4px;
+    background-color: #f6f4f4;
+}
+
+::ng-deep.ng-option-highlighted {
+    background-color: #ccc;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ng-dropdown-panel {
+    background-color: #474242;
+    /* Defina a cor cinza desejada */
+}
+
+
+.is-invalid.ng-select-container {
+    border-color: red !important;
+}
+
+.is-invalid.form-select {
+    border-color: red !important;
+}
+
+.is-invalid.form-control {
+    border-color: red;
+}
+
+.my-element {
+    float: right;
+    //margin-right: 100px;
+}
+
 .bg-card {
     background-color: #262626;
     align-items: center;
