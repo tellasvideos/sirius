@@ -1175,6 +1175,11 @@ export class EditInqueritoComponent implements OnInit {
 
     formData.append("status", this.getStatus());
     formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
+    formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
+    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
+    formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
+    formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
+    formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
 
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
