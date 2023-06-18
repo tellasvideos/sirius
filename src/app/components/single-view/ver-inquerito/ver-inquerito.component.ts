@@ -125,6 +125,42 @@ export class VerInqueritoComponent implements OnInit {
 
   }
 
+  showInputDidas(show: boolean) {
+    this.showDuplicatedInput_1 = show;
+    if (!show) {
+      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
+      this.duplicatedName = ''; // Limpa o valor do campo duplicado
+    }
+    // this.resetForm()
+    //this.angForm.get('didasTeste')?.reset();
+  }
+
+  duplicateNames:any;
+
+  // nome_simplificado duplicados
+  get_inquireFormsByPendentes() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      const simplifiedNames = data.map(inqueritos => inqueritos.nome_simplificado);
+      this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
+      console.log('nome_simplificado duplicados', this.duplicateNames);
+    });
+  }
+
+  // Manipulador de checkboxs
+  showDuplicatedInput: boolean = false;
+  showDuplicatedInput_1: boolean = true;
+  duplicatedName: string = '';
+
+  showInput(show: boolean) {
+    this.showDuplicatedInput = show;
+    if (!show) {
+      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
+      this.duplicatedName = ''; // Limpa o valor do campo duplicado
+    }
+    // this.resetForm()
+    this.angForm.get('duplicada_da')?.reset();
+  }
+
   getInqueritoByIdDocs() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.listaDocsEmFalta = data;
@@ -216,14 +252,14 @@ export class VerInqueritoComponent implements OnInit {
     })
   }
 
-  // filtrar inqueritos pendentes
+  /*/ filtrar inqueritos pendentes
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
       //.map(inqueritos => inqueritos.nome_simplificado);;
       console.log('inquéritos pendentes', this.Inquerito_pendente)
     })
-  }
+  }*/
 
 
   // muda o comportamento da checkbox sim ou não
