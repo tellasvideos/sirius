@@ -401,6 +401,13 @@
                                     <label class="form-label" for="customFile">Inquérito Preenchido: (
                                         .pdf ou .docx )</label>
                                 </div>
+                                <ul>
+                                    <li>
+                                        <a [href]="this.angForm.get('inquerito_preenchido')?.value" target="_blank">{{
+                                            this.angForm.get('inquerito_preenchido')?.value
+                                            }}</a>
+                                    </li>
+                                </ul>
                                 <div>
                                     <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="inquerito_preenchido"
@@ -421,6 +428,11 @@
                                         ( .pdf ou .docx
                                         )</label>
                                 </div>
+                                <ul>
+                                    <li *ngFor="let document of angForm.get('documents')?.value">
+                                        <a [href]="document" target="_blank">{{ document }}</a>
+                                    </li>
+                                </ul>
                                 <div>
                                     <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"
@@ -561,7 +573,7 @@
                                     </select>
                                 </div>
                             </!--div-->
-                            
+
                             <!--form enctype="multipart/form-data" [formGroup]="angForm"
                             (ngSubmit)="update_inquerito(angForm)">
                             <div class="mb-3">
@@ -789,33 +801,34 @@
 
                             <div *ngIf="showDuplicatedInput">
                                 <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
+                                    1
                                 </button>
                             </div>
 
                             <div
                                 *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
                                 <button type="submit" (click)="save_inquerito_2_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 2
                                 </button>
                             </div>
 
                             <div
                                 *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
                                 <button type="submit" (click)="save_inquerito_3_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 3
                                 </button>
                             </div>
 
                             <div
                                 *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
                                 <button type="submit" (click)="save_inquerito_4_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 4
                                 </button>
                             </div>
 
                             <div *ngIf="isGuardar5Visible()">
                                 <button type="submit" (click)="save_inquerito_5_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 5
                                 </button>
                             </div>
 

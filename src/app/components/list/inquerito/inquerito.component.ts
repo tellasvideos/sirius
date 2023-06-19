@@ -143,19 +143,19 @@ export class InqueritoComponent implements OnInit {
   fecharModal() {
     const modal = document.getElementById('exampleModalToggle');
     const backdrop = document.getElementsByClassName('modal-backdrop')[0];
-  
+
     if (modal && backdrop) {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
       backdrop.parentNode?.removeChild(backdrop);
-  
+
       // Remover a classe 'modal-open' do elemento 'body'
       document.body.classList.remove('modal-open');
     }
   }
-  
-  
-  
+
+
+
 
   loadTipoNegocio() {
     switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -325,17 +325,19 @@ export class InqueritoComponent implements OnInit {
       provincia: ['', Validators.required],
       municipio: ['', Validators.required],
       aldeia: ['', Validators.required],
-      data_1_contacto: ['', Validators.required],
+      data_1_contacto: [null],
       resultado_1_contacto: ['', Validators.required],
-      documento_em_falta: this.fb.array(Array(5).fill('sem falta'), Validators.required),
-      documento_em_falta_2: this.fb.array(Array(5).fill('sem falta'), Validators.required),
-      documento_em_falta_3: this.fb.array(Array(5).fill('sem falta'), Validators.required),
-      documento_em_falta_4: this.fb.array(Array(5).fill('sem falta'), Validators.required),
+
+      documento_em_falta: [null], 
+      documento_em_falta_2: [null],
+      documento_em_falta_3: [null], 
+      documento_em_falta_4: [null], 
+
       duplicada_da: [''],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
-      data_validacao_inquerito: ['', Validators.required],
+      data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: ['', Validators.required],
       em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
       que_tipo: ['', Validators.required],
@@ -346,8 +348,8 @@ export class InqueritoComponent implements OnInit {
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
       didasTeste: [false],
-      inquerito_preenchido: ['', Validators.required],
-      documents: ['', Validators.required]
+      inquerito_preenchido: [''],
+      documents: ['']
     });
   }
 
@@ -356,7 +358,13 @@ export class InqueritoComponent implements OnInit {
 
 
 
-
+  buildDocumentosEmFaltaArray(numElements: number): FormArray {
+    const array = this.fb.array([]);
+    for (let i = 0; i < numElements; i++) {
+      array.push(this.fb.control('', Validators.required));
+    }
+    return array;
+  }
 
 
 
@@ -390,7 +398,7 @@ export class InqueritoComponent implements OnInit {
   fecharModal_() {
     this.modalService_.dismissAll();
   }
-  
+
 
   getProvincia() {
     this.dataService.get_Provinces().subscribe(data => {
@@ -678,10 +686,12 @@ export class InqueritoComponent implements OnInit {
     formData.append("aldeia", this.angForm.get('aldeia')?.value);
     formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
     formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+
     formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
     formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
     formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
     formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
     formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
@@ -699,25 +709,28 @@ export class InqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
+
+
+
     this.dataService.salvaInquireForm(formData).subscribe(
       success => { this.alert_success(); },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
-    this.resetForm();
-    // this.closeModal('exampleModalToggle');
-
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 2 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
+    /* this.resetForm();
+     // this.closeModal('exampleModalToggle');
+ 
+     // close modal
+     const modal = document.getElementById('exampleModalToggle');
+     if (modal) {
+       modal.style.display = 'none';
+     }
+ 
+     // Espera 2 segundos antes de recarregar a página
+     timer(2000).pipe(delay(2000)).subscribe(() => {
+       location.reload();
+     });*/
   }
 
 
@@ -1129,33 +1142,33 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-     /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-       if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-         this.alert_error_Em_qual_cadeia();
-       }
-       return;
-     }
+    /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
+        this.alert_error_Em_qual_cadeia();
+      }
+      return;
+    }
 
-     if (!this.angForm.get('que_tipo')?.value) {
-       if (!this.angForm.get('que_tipo')?.value) {
-         this.alert_error_produtor();
-       }
-       return;
-     }
+    if (!this.angForm.get('que_tipo')?.value) {
+      if (!this.angForm.get('que_tipo')?.value) {
+        this.alert_error_produtor();
+      }
+      return;
+    }
  
-     if (!this.angForm.get('que_tipo_2')?.value) {
-       if (!this.angForm.get('que_tipo_2')?.value) {
-         this.alert_error_Agregador();
-       }
-       return;
-     }
+    if (!this.angForm.get('que_tipo_2')?.value) {
+      if (!this.angForm.get('que_tipo_2')?.value) {
+        this.alert_error_Agregador();
+      }
+      return;
+    }
  
-     if (!this.angForm.get('que_tipo_3')?.value) {
-       if (!this.angForm.get('que_tipo_3')?.value) {
-         this.alert_error_Transform();
-       }
-       return;
-     }*/
+    if (!this.angForm.get('que_tipo_3')?.value) {
+      if (!this.angForm.get('que_tipo_3')?.value) {
+        this.alert_error_Transform();
+      }
+      return;
+    }*/
 
     if (!this.angForm.get('inquerito_preenchido')?.value) {
       if (!this.angForm.get('inquerito_preenchido')?.value) {
@@ -1315,7 +1328,7 @@ export class InqueritoComponent implements OnInit {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Alguma coisa correu mal, verifique a sua conexão de internet. Se persistir entre em contacto com a equipa de suporte",
+      text: "Alguma coisa correu mal, tente novamente.",
     })
   }
 
@@ -1585,7 +1598,7 @@ export class InqueritoComponent implements OnInit {
   showGuardar4(): boolean {
     return !this.isGuardar5Visible();
   }
-  
+
 
 
 }

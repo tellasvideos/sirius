@@ -639,35 +639,35 @@
                 </div>
 
                 <div class="modal-footer justify-content-between">
-                    <div>
+                    <!--div>
                         <button (click)="resetForm()" class="btn btn-light btn-sm">Limpar Campos</button>
-                    </div>
+                    </!--div-->
 
                     <div *ngIf="showDuplicatedInput">
-                        <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar 1
                         </button>
                     </div>
 
                     <div
                         *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
-                        <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar 2
                         </button>
                     </div>
 
                     <div
                         *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
-                        <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar 3
                         </button>
                     </div>
 
                     <div
                         *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
-                        <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar 4
                         </button>
                     </div>
 
                     <div *ngIf="isGuardar5Visible()">
-                        <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar 5
                         </button>
                     </div>
 

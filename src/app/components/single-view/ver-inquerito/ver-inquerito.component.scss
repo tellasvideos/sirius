@@ -1,3 +1,13 @@
+::ng-deep.ng-select-container {
+    border-bottom: 1px solid #0F57CD !important;
+    border: 1px solid #ccc;
+    //  border-radius: 4px;
+    background-color: #f6f4f4;
+}
+
+::ng-deep.ng-option-highlighted {
+    background-color: #ccc;
+}
 .bg-card {
     background-color: #262626;
     align-items: center;
