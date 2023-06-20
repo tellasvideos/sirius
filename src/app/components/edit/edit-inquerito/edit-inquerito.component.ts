@@ -602,27 +602,28 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
+    formData.append("status", this.getStatus());
+
+
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
-    );
+    )
 
     this.get_inquireForms();
     this.resetForm();
-    //this.fecharModal_();
-    //this.fecharModal();
-    // this.closeModal('exampleModalToggle');
-
-    /*/ close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });*/
+    this.route.navigate(['inquerito']);
   }
 
 
@@ -711,30 +712,27 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("status", this.getStatus());
 
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
     this.resetForm();
-    // this.closeModal('exampleModalToggle');
-
-    /*/ close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 2 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });*/
+    this.route.navigate(['inquerito']);
   }
 
 
@@ -832,25 +830,27 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
+    formData.append("status", this.getStatus());
 
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
     this.resetForm();
-    //this.closeModal('exampleModalToggle');
-
-    /*/ close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });*/
+    this.route.navigate(['inquerito']);
   }
 
 
@@ -985,36 +985,41 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
+    formData.append("status", this.getStatus());
+
+
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
     this.resetForm();
+    this.route.navigate(['inquerito']);
     //this.closeModal('exampleModalToggle');
-
-    /*const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 3 segundos antes de recarregar a página
-    timer(3000).pipe(delay(3000)).subscribe(() => {
-      location.reload();
-    });*/
   }
 
 
 
 
-  save_inquerito_5_parte_() {
+  /*save_inquerito_5_parte_() {
     /* if (this.angForm.invalid) {
        this.alert_error();
        return;
      }*/
 
-    const formData = new FormData();
+   /* const formData = new FormData();
 
     const documents: FileList = this.selectedFile;
     if (documents) {
@@ -1045,7 +1050,7 @@ export class EditInqueritoComponent implements OnInit {
         this.alert_error();
       }
     );
-  }
+  }*/
 
 
 
@@ -1116,12 +1121,12 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-   /* if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      if (!this.angForm.get('data_validacao_inquerito')?.value) {
-        this.alert_error_Dat_val_inq();
-      }
-      return;
-    }*/
+    /* if (!this.angForm.get('data_validacao_inquerito')?.value) {
+       if (!this.angForm.get('data_validacao_inquerito')?.value) {
+         this.alert_error_Dat_val_inq();
+       }
+       return;
+     }*/
 
     if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -1130,19 +1135,19 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-   /* if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }*/
+    /* if (!this.angForm.get('inquerito_preenchido')?.value) {
+       if (!this.angForm.get('inquerito_preenchido')?.value) {
+         this.alert_error_Inq_pre();
+       }
+       return;
+     }
+ 
+     if (!this.angForm.get('documents')?.value) {
+       if (!this.angForm.get('documents')?.value) {
+         this.alert_error_Docs();
+       }
+       return;
+     }*/
 
 
     let fileList: FileList = this.selectedFile;
@@ -1150,7 +1155,6 @@ export class EditInqueritoComponent implements OnInit {
 
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
     let formData = new FormData();
 
@@ -1168,19 +1172,6 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
-    // Obter os valores atuais dos campos documento_em_falta
-    const documentoEmFalta = this.angForm.get('documento_em_falta')?.value;
-    const documentoEmFalta2 = this.angForm.get('documento_em_falta_2')?.value;
-    const documentoEmFalta3 = this.angForm.get('documento_em_falta_3')?.value;
-    const documentoEmFalta4 = this.angForm.get('documento_em_falta_4')?.value;
-
-    // Remover os campos antes de enviar para a API
-    const formValue = { ...this.angForm.value };
-    delete formValue.documento_em_falta;
-    delete formValue.documento_em_falta_2;
-    delete formValue.documento_em_falta_3;
-    delete formValue.documento_em_falta_4;
-
     formData.append("status", this.getStatus());
     formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
     formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
@@ -1193,24 +1184,25 @@ export class EditInqueritoComponent implements OnInit {
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
+        // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        /*/ Espera 2 segundos antes de recarregar aa página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });*/
       },
       error => { this.alert_error(); }
+
     )
 
     this.get_inquireForms();
     // this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-    /*/ close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 2 segundos antes de recarregar aa página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });*/
   }
 
 
@@ -1284,7 +1276,7 @@ export class EditInqueritoComponent implements OnInit {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Alguma coisa correu mal, verifique a sua conexão de internet. Se persistir entre em contacto com a equipa de suporte",
+      text: "Alguma coisa correu mal, tente novamente.",
     })
   }
 
@@ -1555,6 +1547,26 @@ export class EditInqueritoComponent implements OnInit {
     return !this.isGuardar5Visible();
   }
 
+
+  onFilesSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      const files: FileList = inputElement.files;
+      const selectedFiles: File[] = [];
+      for (let i = 0; i < files.length; i++) {
+        selectedFiles.push(files[i]);
+      }
+      this.angForm.get('documents')?.setValue(selectedFiles);
+    }
+  }
+
+
+  onFileSelected2(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.angForm.get('inquerito_preenchido')?.setValue(inputElement.files[0]);
+    }
+  }
 
 
 

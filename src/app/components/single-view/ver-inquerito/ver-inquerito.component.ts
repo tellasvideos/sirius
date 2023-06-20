@@ -116,12 +116,18 @@ export class VerInqueritoComponent implements OnInit {
     this.getInqueritoByIdDocs();
     this.get_inquireFormsInqueritoPreenchido();
 
-    this.activatedRoute.paramMap.subscribe(paramId => {
+   this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
         });
     });
+
+    this.carregardocs2();
+
+   /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
+      this.carregardocs2();
+    });*/
 
   }
 

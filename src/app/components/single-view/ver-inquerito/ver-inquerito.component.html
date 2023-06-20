@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="my-element" style="margin-left: 10%;">
-                                <ng-select style="width:350px;" [items]="duplicateNames"  [readonly]="true"
+                                <ng-select style="width:350px;" [items]="duplicateNames" [readonly]="true"
                                     bindLabel="nome_simplificado" formControlName="duplicada_da" [searchable]="true"
                                     placeholder=""></ng-select>
                             </div>
@@ -140,14 +140,9 @@
 
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                     id="municipio" name="municipio" required style="width: 350px;"
                                     formControlName="municipio">
-                                    <!--option value="" disabled selected hidden></!--option-->
-                                    <option *ngFor="let municipio of municipios" [value]="municipio">{{municipio}}
-                                    </option>
-                                </select>
-
                             </div>
 
                         </div>
@@ -200,9 +195,30 @@
                             </div>
                         </div>
 
+                        <div class="mx-auto d-flex mb-1" style="width: 85%;">
+                            <div class="mb-3 p-3" style="margin-left: auto;"
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal'">
+                                <div class="card" style="width: 350px;">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta:</h4>
+                                        {{ this.angForm.get('documento_em_falta')?.value }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 p-3" style="margin-left: auto;"
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento'">
+                                <div class="card" style="width: 350px;">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta:</h4>
+                                        {{ this.angForm.get('documento_em_falta_2')?.value }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Pergunta 9.1.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal'">
                             <div>
                                 <label for="documento_em_falta" class="mb-2">Selecione os documentos
@@ -218,10 +234,11 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </!div-->
+
 
                         <!-- Pergunta 9.1.2 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento'">
                             <div>
                                 <label for="documento_em_falta" class="mb-2">Documento em falta:
@@ -238,7 +255,7 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </!div-->
 
                         <!-- Pergunta 10 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
@@ -258,7 +275,7 @@
                         </div>
 
                         <!-- Pergunta 10.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <div class="justify-content-between mx-auto d-flex mb-1" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Resultado
@@ -276,17 +293,39 @@
                                 </select>
 
                             </div>
+
+                        </div>
+
+                        <div class="mx-auto d-flex mb-1" style="width: 85%;">
+                            <div class="mb-3 p-3" style="margin-left: auto;"
+                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                                <div class="card" style="width: 350px;">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta:</h4>
+                                        {{ this.angForm.get('documento_em_falta_3')?.value }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 p-3" style="margin-left: auto;"
+                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                                <div class="card" style="width: 350px;">
+                                    <div class="card-body">
+                                        <h4 class="text-black">Documentos em falta:</h4>
+                                        {{ this.angForm.get('documento_em_falta_4')?.value }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
+
                         <!-- Pergunta 10.1.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
                             <div>
-                                <label for="documento_em_falta_3" class="mb-2">Documento em Falta:
-                                    (Para selecionar
-                                    múltiplos
-                                    documentos, mantenha premido a tecla CTRL no teclado)</label>
+                                <label for="documento_em_falta_3" class="mb-2">Documento em Falta yes:
+                                    </label>
                             </div>
 
                             <div>
@@ -298,10 +337,10 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 10.1.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
                             <div>
                                 <label for="documento_em_falta" class="mb-2">Documento em falta:
@@ -318,7 +357,7 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 11 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
@@ -340,35 +379,44 @@
                         </div>
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                             <div>
-                                <label class="form-label" for="customFile">Inquérito Preenchido: </label>
+                                <label class="form-label" for="customFile">Inquérito Preenchido:</label>
                             </div>
-                            <div>
-                                <ul>
-                                    <li>
-                                        <a [href]="this.angForm.get('inquerito_preenchido')?.value"
-                                            target="_blank">{{ this.angForm.get('inquerito_preenchido')?.value
-                                            }}</a>
-                                    </li>
-                                </ul>
+
+                            <div class="d-block">
+                                <div style="width: 350px;">
+                                    <ul>
+                                        <li>
+                                            <a [href]="this.angForm.get('inquerito_preenchido')?.value"
+                                                target="_blank">{{
+                                                this.angForm.get('inquerito_preenchido')?.value
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
                             </div>
                         </div>
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                             <div>
                                 <label class="form-label" for="customFile">Documentos do Proponente:
-                                   </label>
+                                </label>
                             </div>
-                            <div>
-                                <ul>
-                                    <li *ngFor="let document of angForm.get('documents')?.value">
-                                        <a [href]="document" target="_blank">{{ document }}</a>
-                                    </li>
-                                </ul>
+
+                            <div class="d-block">
+                                <div style="width: 350px;">
+                                    <ul>
+                                        <li *ngFor="let document of angForm.get('documents')?.value">
+                                            <a [href]="document" target="_blank">{{ document }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
                             </div>
                         </div>
 

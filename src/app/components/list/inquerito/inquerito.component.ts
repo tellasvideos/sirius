@@ -328,10 +328,10 @@ export class InqueritoComponent implements OnInit {
       data_1_contacto: [null],
       resultado_1_contacto: ['', Validators.required],
 
-      documento_em_falta: [null], 
+      documento_em_falta: [null],
       documento_em_falta_2: [null],
-      documento_em_falta_3: [null], 
-      documento_em_falta_4: [null], 
+      documento_em_falta_3: [null],
+      documento_em_falta_4: [null],
 
       duplicada_da: [''],
       data_1_visita: ['', Validators.required],
@@ -545,53 +545,55 @@ export class InqueritoComponent implements OnInit {
       }
     }
 
-    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
-    formData.append("provincia", this.angForm.get('provincia')?.value);
-    formData.append("municipio", this.angForm.get('municipio')?.value);
-    formData.append("aldeia", this.angForm.get('aldeia')?.value);
-    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
-    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
-    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+    //formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    // formData.append("provincia", this.angForm.get('provincia')?.value);
+    // formData.append("municipio", this.angForm.get('municipio')?.value);
+    // formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    // formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    //formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    //formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    //formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    //formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    //formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
-    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
+    //formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    //formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
-    formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
-    formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
-    formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
-    formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
-    formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
-    formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
+    //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
+    //formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
+    //formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
+    //formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
+    //formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
+    //formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
     formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    //formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success(); // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     );
 
     this.get_inquireForms();
-    this.resetForm();
+    //this.resetForm();
     //this.fecharModal_();
     //this.fecharModal();
     // this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
 
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
   }
 
 
@@ -713,24 +715,26 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 2 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
-    /* this.resetForm();
-     // this.closeModal('exampleModalToggle');
- 
-     // close modal
-     const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
- 
-     // Espera 2 segundos antes de recarregar a página
-     timer(2000).pipe(delay(2000)).subscribe(() => {
-       location.reload();
-     });*/
+    //this.resetForm();
+    // this.closeModal('exampleModalToggle');
+
   }
 
 
@@ -856,7 +860,18 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success();
+        // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
       error => { this.alert_error(); }
     )
 
@@ -864,15 +879,7 @@ export class InqueritoComponent implements OnInit {
     this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-    // Espera 3 segundos antes de recarregar a página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
+
   }
 
 
@@ -1036,23 +1043,26 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.salvaInquireForm(formData).subscribe(
-      success => { this.alert_success(); },
+      success => {
+        this.alert_success(); const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+
+        // Espera 3 segundos antes de recarregar a página
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+      },
+
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
-    this.resetForm();
+    // this.resetForm();
     //this.closeModal('exampleModalToggle');
 
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
 
-    // Espera 3 segundos antes de recarregar a página
-    timer(3000).pipe(delay(3000)).subscribe(() => {
-      location.reload();
-    });
   }
 
 
@@ -1237,24 +1247,23 @@ export class InqueritoComponent implements OnInit {
     this.dataService.salvaInquireForm(formData).subscribe(
       success => {
         this.alert_success();
+        // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        // Executar o timer somente após a resposta da API ser recebida
+        timer(2000).pipe(delay(2000)).subscribe(() => {
+          location.reload();
+        });
+
       },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
     this.resetForm();
-    //this.closeModal('exampleModalToggle');
 
-    // close modal
-    const modal = document.getElementById('exampleModalToggle');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-
-    // Espera 2 segundos antes de recarregar aa página
-    timer(2000).pipe(delay(2000)).subscribe(() => {
-      location.reload();
-    });
   }
 
 

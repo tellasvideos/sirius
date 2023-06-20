@@ -161,13 +161,9 @@
 
                                 </div>
                                 <div>
-                                    <select class="form-select form-select-sm" id="municipio" name="municipio" required
-                                        style="width: 350px;" formControlName="municipio"
+                                    <input class="form-select form-select-sm" id="municipio" name="municipio" required
+                                        style="width: 350px; background-color: white;" formControlName="municipio"
                                         [ngClass]="{ 'is-invalid': angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched }">
-                                        <!--option value="" disabled selected hidden></!--option-->
-                                        <option *ngFor="let municipio of municipios" [value]="municipio">{{municipio}}
-                                        </option>
-                                    </select>
                                     <div class="invalid-feedback"
                                         *ngIf="angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched">
                                         * Campo obrigatório.
@@ -394,21 +390,34 @@
                                 </div>
                             </div>
 
+                            <!-- Exemplo para o campo "documents" -->
+                            <!--input type="file" formControlName="documents" (change)="onFilesSelected($event)"
+                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value"-->
+                            <!-- Exemplo para o campo "inquerito_preenchido" -->
+                            <!--input type="file" formControlName="inquerito_preenchido" (change)="onFileSelected2($event)"
+                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value"-->
+
+
                             <!-- Pergunta 11.1 -->
-                            <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                            <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                                 *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                                 <div>
                                     <label class="form-label" for="customFile">Inquérito Preenchido: (
                                         .pdf ou .docx )</label>
                                 </div>
-                                <ul>
-                                    <li>
-                                        <a [href]="this.angForm.get('inquerito_preenchido')?.value" target="_blank">{{
-                                            this.angForm.get('inquerito_preenchido')?.value
-                                            }}</a>
-                                    </li>
-                                </ul>
-                                <div>
+
+                                <div class="d-block">
+                                    <div style="width: 350px;">
+                                        <ul>
+                                            <li>
+                                                <a [href]="this.angForm.get('inquerito_preenchido')?.value"
+                                                    target="_blank">{{
+                                                    this.angForm.get('inquerito_preenchido')?.value
+                                                    }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <br>
                                     <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="inquerito_preenchido"
                                         class="form-control" id="customFile" style="width: 350px;"
@@ -421,19 +430,23 @@
                             </div>
 
                             <!-- Pergunta 11.1 -->
-                            <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                            <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                                 *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                                 <div>
                                     <label class="form-label" for="customFile">Documentos do Proponente:
                                         ( .pdf ou .docx
                                         )</label>
                                 </div>
-                                <ul>
-                                    <li *ngFor="let document of angForm.get('documents')?.value">
-                                        <a [href]="document" target="_blank">{{ document }}</a>
-                                    </li>
-                                </ul>
-                                <div>
+
+                                <div class="d-block">
+                                    <div style="width: 350px;">
+                                        <ul>
+                                            <li *ngFor="let document of angForm.get('documents')?.value">
+                                                <a [href]="document" target="_blank">{{ document }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <br>
                                     <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"
                                         class="form-control" id="customFile" style="width: 350px;"
@@ -558,6 +571,9 @@
                                 </div>
 
                             </div>
+
+
+
                             <!--input type="text" formControlName="status"-->
 
                             <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
