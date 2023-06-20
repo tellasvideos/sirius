@@ -403,7 +403,7 @@ export class DataService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.http.put(`${this.edit_inquerito_url}${id}/`, inquerito, /*{ headers: headers }*/).pipe(take(1));
+    return this.http.patch(`${this.edit_inquerito_url}${id}/`, inquerito, /*{ headers: headers }*/).pipe(take(1));
   }
 
   // get chartData 

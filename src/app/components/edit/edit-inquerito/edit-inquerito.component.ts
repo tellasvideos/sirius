@@ -961,15 +961,16 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }*/
 
+    let formData = new FormData();
 
-    let fileList: FileList = this.selectedFile;
+    /*let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
-    let formData = new FormData();
+    
 
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
@@ -983,7 +984,7 @@ export class EditInqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
 
     formData.append("status", this.getStatus());
 
@@ -1190,10 +1191,10 @@ export class EditInqueritoComponent implements OnInit {
           modal.style.display = 'none';
         }
 
-        /*/ Espera 2 segundos antes de recarregar aa página
+        // Espera 2 segundos antes de recarregar aa página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
-        });*/
+        });
       },
       error => { this.alert_error(); }
 

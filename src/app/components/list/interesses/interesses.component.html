@@ -29,9 +29,11 @@
                             style="text-transform: capitalize;">Exportar</button>
                     </!--div-->
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
-                        <button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
+                        <!--button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
                                 class="fas fa-plus-square text-black"></i> Add Back Off
-                        </button>
+                        </!--button--> <button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
+                            data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
+                                class="fas fa-plus-square text-black"></i> Add Back Office</button>
                     </div>
                 </div>
             </div>
@@ -135,61 +137,81 @@
                     <thead class="linhas2">
                         <tr>
                             <th scope="col" class="text-black">Id</th>
-                            <th scope="col" class="text-black">Nome/Fazenda</th>
-                            <th scope="col" class="text-black">M. Interesse</th>
+                            <th scope="col" class="text-black">Nome Simplificado</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
-                            <th scope="col" class="text-black">Aldeia</th>
-                            <th scope="col" class="text-black">Data</th>
-                            <th scope="col" class="text-black">Estado</th>
+                            <th scope="col" class="text-black">Tipo de Negócio</th>
+                            <th scope="col" class="text-black">Estado PN</th>
+                            <th scope="col" class="text-black">Inquérito preenchido</th>
+                            <th scope="col" class="text-black">Documentos</th>
                             <th scope="col" class="text-black not-it">Ver</th>
-                            <th scope="col" class="text-black not-it">Progresso</th>
-                            <th scope="col" class="text-black not-it">Estatuto</th>
-                            <th scope="col" class="text-black not-it">Cadeias</th>
-                            <th scope="col" class="text-black not-it">Editar</th>
+                            <!--th scope="col" class="text-black not-it">Progresso</!--th-->
+                            <!--th scope="col" class="text-black not-it">Estatuto</!--th-->
+                            <!--th scope="col" class="text-black not-it">Cadeias</!--th-->
+                            <th scope="col" class="text-black not-it">Colar info</th>
                             <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let interest of interest | search:'farm_name':keyWord">
-                            <td>{{interest.id}} </td>
-                            <td>{{interest.farm_name}} </td>
-                            <td>{{interest.proponent_name}}</td>
-                            <td>{{interest.province_name}}</td>
-                            <td>{{interest.county}}</td>
-                            <td>{{interest.village}}</td>
-                            <td>{{interest.created_at | date:"dd/MM/yyyy"}}</td>
-                            <td>{{interest.condition}}</td>
-                            <td class="not-it"><button type="button" [routerLink]="['/single-interest/', interest.id]"
+                        <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
+                            <td>{{item.id}} </td>
+                            <td>{{item.nome_simplificado}} </td>
+                            <td>{{item.provincia}}</td>
+                            <td>{{item.municipio}}</td>
+                            <td>{{item.que_tipo_de_negocio_esta}}</td>
+                            <!--td>{{item.inquerito_preenchido | slice:0:15}}</td>
+                            <td>{{item.documents}}</td-->
+                            <td>{{item.status}}</td>
+
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                        <a href="javascript:void(0);" (click)="downloadFile(item.inquerito_preenchido)"
+                                            style="text-align: left;">{{ item.inquerito_preenchido | slice:0:15 }}</a>
+                                    </li>
+                                </ul>
+                            </td>
+
+                            <td>
+                                <ul style="list-style-type: none;">
+                                    <li *ngFor="let doc of item.documents">
+                                        <a href="javascript:void(0);" (click)="downloadFile(doc)"
+                                            style="text-align: left;">{{ doc | slice:0:15 }}</a>
+                                    </li>
+                                </ul>
+                            </td>
+
+                            <!--td class="not-it"> <button type="button" 
+                                routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                <i class="fas fa-file-lines"></i>
+                            </button></!--td-->
+                            <td class="not-it"><button type="button" [routerLink]="['/ver-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-eye"></i>
                                 </button>
                             </td>
-                            <td class="not-it"> <button type="button" [routerLink]="['/status-pn/', interest.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="far fa-clock"></i>
-                                </button></td>
 
-                            <td class="not-it"> <button type="button" [routerLink]="['/estatuto-pn/', interest.id]"
+
+                            <!--td class="not-it"> <button type="button" [routerLink]="['/estatuto-pn/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-calendar-check"></i>
                                 </button>
-                            </td>
-                            <td class="not-it"> <button type="button" [routerLink]="['/cadeias/', interest.id]"
+                            </!td>
+                            <td-- class="not-it"> <button type="button" [routerLink]="['/cadeias/', interest.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
-                                    <i class="far fa-lemon"></i> </button></td>
+                                    <i class="far fa-lemon"></i> </button></td-->
 
                             <td class="not-it">
 
-                                <button type="button" [routerLink]="['/edit-interest/', interest.id]"
+                                <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                    (click)="deleteInterest(interest.id)">
+                            <!--td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="deleteInquire(item.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
+                                </button></td-->
                         </tr>
                     </tbody>
                 </table>
@@ -199,3 +221,268 @@
     </mat-drawer-content>
     <!-- Man interesses full content -->
 </mat-drawer-container>
+
+
+<form enctype="multipart/form-data" [formGroup]="angForm">
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário Backoffice</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Pergunta 12 -->
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Consultor PN:</label>
+                        </div>
+                        <div>
+                            <select class="form-select form-select-sm" formControlName="consultor_pn_name"
+                                name="consultor_pn_name" style="width:350px;" required
+                                aria-label="Default select example"
+                                [ngClass]="{ 'is-invalid': angForm.get('consultor_pn_name')?.invalid && angForm.get('consultor_pn_name')?.touched }">
+                                <option value="" disabled selected hidden></option>
+                                <option>user backoffice 1</option>
+                                <option>user backoffice 2</option>
+                            </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('consultor_pn_name')?.invalid && angForm.get('consultor_pn_name')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 13 -->
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="inicio_elaboracao_pn" style="width: 240px;">Data inicio elaboração do
+                                PN:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="inicio_elaboracao_pn" name="inicio_elaboracao_pn"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched }">
+                            <div class="invalid-feedback" style="width: 350px;"
+                                *ngIf="angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched">
+                                * Campo obrigatório. Pois, e a data não pode ser posterior à data de hoje (não é
+                                possível antecipar)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 14 -->
+                    <div *ngIf="angForm.get('inicio_elaboracao_pn')?.value"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="fim_elaboracao_pn" style="width: 240px;">Data fim elaboração PN (inicio de
+                                verificação):</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="fim_elaboracao_pn" name="fim_elaboracao_pn"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15 -->
+                    <div *ngIf="angForm.get('fim_elaboracao_pn')?.value"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="fim_verificacao" style="width: 240px;">Data fim de verificação:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="fim_verificacao" name="fim_verificacao"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.1 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Área total da fazenda (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_total_fazenda"
+                                name="area_total_fazenda" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.2 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Área de cultivo pelo PN (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_cultivo_pn"
+                                name="area_cultivo_pn" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.3 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Recursos proprios (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="recursos_proprios"
+                                name="recursos_proprios" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.4 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Financiamento PDAC (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="financiamento"
+                                name="financiamento" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched }"
+                                type="number" pattern="[0-9]*">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.5 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Financiamento bancário (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="financiamento_bancario"
+                                name="financiamento_bancario" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched }"
+                                type="number" pattern="[0-9]*">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.6 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Histórico de produção: que culturas foram produzidas no
+                                ano agrícola de há dois anos?</label>
+                        </div>
+                        <div>
+
+                            <select class="form-select form-select-sm" formControlName="historico_producao_2_anos"
+                                name="historico_producao_2_anos" style="width:350px;" required
+                                aria-label="Default select example"
+                                [ngClass]="{ 'is-invalid': angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched }">
+                                <option value="" disabled selected hidden></option>
+                                <option>Café</option>
+                                <option>Milho</option>
+                                <option>Feijão</option>
+                                <option>Soja</option>
+                                <option>Batata Rena</option>
+                                <option>Batata Doce</option>
+                            </select>
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.7 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Área de [cultura] cultivda há dois anos (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_cultura_2_anos"
+                                name="area_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 15.8 -->
+                    <div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Produção de [cultura] obtida há dois anos (ton):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="producao_cultura_2_anos"
+                                name="producao_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="modal-footer justify-content-between">
+
+                    <div>
+                        <button type="submit" class="btn btn-success btn-sm">Guardar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
