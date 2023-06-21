@@ -159,7 +159,7 @@
                             <!--th scope="col" class="text-black not-it">Cadeias</!--th-->
                             <th scope="col" class="text-black not-it" *ngIf="
                             this.user_logged.department === 'Back Off'">Colar info</th>
-                            <th scope="col" class="text-black not-it">Add Back Office</th>
+                            <!--th scope="col" class="text-black not-it">Add Back Office</!--th-->
                         </tr>
                     </thead>
                     <tbody>
@@ -211,17 +211,18 @@
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-lemon"></i> </button></td-->
 
-                            <td class="not-it" *ngIf="
+                            <!--td class="not-it" *ngIf="
                             this.user_logged.department === 'Back Off'">
 
                                 <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button>
-                            </td>
-                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                    (click)="selecionarInquerito(item)" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalToggle">
+                            </|td-->
+                            <td *ngIf="
+                            this.user_logged.department === 'Back Off'" class="not-it"> <button type="button"
+                                    class="btn btn-link btn-sm btn-rounded" (click)="selecionarInquerito(item)"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>
                                 </button></td>
                         </tr>
@@ -359,9 +360,10 @@
                                 verificação):</label>
                         </div>
                         <div>
-                            <input type="date" formControlName="fim_elaboracao_pn" name="fim_elaboracao_pn"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            <input type="date" formControlName="fim_elaboracao_pn" (change)="checkDates_1()"
+                                name="fim_elaboracao_pn" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -373,8 +375,9 @@
                         </div>
                         <div>
                             <input type="date" formControlName="fim_verificacao" name="fim_verificacao"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                (change)="checkDates_2()" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -478,7 +481,7 @@
                     </div>
 
                     <!-- Pergunta 15.6 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
+                    <div *ngIf="angForm.get('fim_verificacao')?.value && inqueritoSelecionado?.que_tipo_de_negocio_esta === 'Productor'"
                         class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                         <div>
                             <label>Histórico de produção: que culturas foram produzidas no
@@ -541,7 +544,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Estudo de viabilidade: ( .pdf ou .docx
                                 )</label>
@@ -560,7 +563,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Termo de compromisso assinado: ( .pdf ou .docx
                                 )</label>
@@ -579,7 +582,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Projeto RIV completo: ( .pdf ou .docx
                                 )</label>
@@ -598,7 +601,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">FTAS: ( .pdf ou .docx
                                 )</label>
@@ -616,7 +619,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Lista de trabalhadores (nome/idade/sexo): ( .pdf
                                 ou .docx
@@ -636,7 +639,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Documentos administrativos: ( .pdf ou .docx
                                 )</label>
@@ -655,7 +658,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
                                 )</label>
@@ -668,7 +671,7 @@
 
                     <!-- Pergunta 15.8.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value">
+                        *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Outros documentos (fichas técnicas, facturas): (
                                 .docx, .jpeg ou .pdf

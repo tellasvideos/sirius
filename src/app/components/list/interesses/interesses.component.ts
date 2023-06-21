@@ -205,11 +205,65 @@ export class InteressesComponent implements OnInit {
     const today = new Date();
 
     if (pnEntregueDate > today) {
-      alert('A "Data PN entregue ao PDAC" não pode ser posterior à data de hoje.');
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data PN entregue ao PDAC" não pode ser posterior à data de hoje.',
+      })
     }
 
     if (pnEntregueDate < fimVerificacaoDate) {
-      alert('A "Data PN entregue ao PDAC" não pode ser anterior à "Data fim verificacção PN".');
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data PN entregue ao PDAC" não pode ser anterior à "Data fim verificacção PN".',
+      })
+    }
+  }
+  
+  checkDates_1() {
+    const pnEntregueDate = this.angForm.get('inicio_elaboracao_pn')?.value;
+    const fimVerificacaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
+    const today = new Date();
+
+    if (pnEntregueDate > today) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data inicio elaboração" não pode ser posterior à data de hoje.',
+      })
+    }
+
+    if (pnEntregueDate > fimVerificacaoDate) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data fim elaboracao PN" não pode ser anterior à "Data inicio elaboração PN".',
+      })
+    }
+  }
+
+  checkDates_2() {
+    const fimVerificacaoDate = this.angForm.get('fim_verificacao')?.value;
+    const fimElaboracaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
+    const today = new Date();
+
+    if (fimElaboracaoDate > today) {
+
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data Fim de elaboração PN" não pode ser posterior à data de hoje.',
+      })
+
+    }
+
+    if (fimElaboracaoDate > fimVerificacaoDate) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data fim verificação" não pode ser anterior à "Data fim elaboração PN".',
+      })
     }
   }
 
@@ -218,7 +272,7 @@ export class InteressesComponent implements OnInit {
     this.angForm.get('proponente_desistiu')?.setValue(proponenteDesistiu);
 
     if (proponenteDesistiu) {
-      alert('O proponente desistiu!');
+      //alert('O proponente desistiu!');
     }
   }
 

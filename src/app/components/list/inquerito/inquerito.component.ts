@@ -1252,6 +1252,7 @@ export class InqueritoComponent implements OnInit {
         if (modal) {
           modal.style.display = 'none';
         }
+        this.route.navigate(['interesses'])
         // Executar o timer somente após a resposta da API ser recebida
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
@@ -1262,7 +1263,8 @@ export class InqueritoComponent implements OnInit {
     )
 
     this.get_inquireForms();
-    this.resetForm();
+    //this.resetForm();
+    
 
   }
 
