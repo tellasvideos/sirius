@@ -32,9 +32,17 @@
                     this.user_logged.department === 'Back Off' || this.user_logged.is_admin === true">
                         <!--button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
                                 class="fas fa-plus-square text-black"></i> Add Back Off
-                        </!--button--> <button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
+                        </!--button--> <!--button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
                             data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
-                                class="fas fa-plus-square text-black"></i> Add Back Office</button>
+                                class="fas fa-plus-square text-black"></i> Add Back Office</button-->
+
+                        <!-- Botão para abrir o modal -->
+                        <!--button data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#exampleModalToggle' + inqueritoSelecionadoId" type="button"
+                            class="btn btn-success btn-top">
+                            <i class="fas fa-plus-square text-black"></i> Add
+                        </!--button-->
+
                     </div>
                 </div>
             </div>
@@ -151,7 +159,7 @@
                             <!--th scope="col" class="text-black not-it">Cadeias</!--th-->
                             <th scope="col" class="text-black not-it" *ngIf="
                             this.user_logged.department === 'Back Off'">Colar info</th>
-                            <!--th scope="col" class="text-black not-it">Apagar</th-->
+                            <th scope="col" class="text-black not-it">Add Back Office</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -211,19 +219,77 @@
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
-                            <!--td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                    (click)="deleteInquire(item.id)">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td-->
+                            <td class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="selecionarInquerito(item)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalToggle">
+                                    <i class="fas fa-file-lines"></i>
+                                </button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
+
     </mat-drawer-content>
     <!-- Man interesses full content -->
 </mat-drawer-container>
+
+<!-- Modal -->
+<!--div *ngIf="inqueritoSelecionado" [id]="'exampleModalToggle' + inqueritoSelecionado.id" class="modal" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ inqueritoSelecionado.nome_simplificado }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                <p>Nome simplificado: {{ inqueritoSelecionado.nome_simplificado }}</p>
+                <p>Status: {{ inqueritoSelecionado.status }}</p>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+               
+            </div>
+        </div>
+    </div>
+</!--div-->
+
+<!-- Lista de inquéritos -->
+<!--table>
+    <tbody>
+        <tr *ngFor="let item of inqueritos">
+            <td>{{item.id}}</td>
+            <td>{{item.nome_simplificado}}</td>
+            <td>{{item.status}}</td>
+            <td>
+                <button type="button" class="btn btn-link">
+                    Abrir Modal
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</!--table-->
+
+<!-- Modal -->
+<!--div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalToggleLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Detalhes do Inquérito</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+        </div>
+    </div>
+</!div-->
+
 
 
 <form enctype="multipart/form-data" [formGroup]="angForm">
@@ -239,6 +305,14 @@
                 </div>
                 <div class="modal-body">
 
+                    <!--div>
+                        <p>ID: {{ inqueritoSelecionado?.id }}</p>
+                    <p>Nome Simplificado: {{ inqueritoSelecionado?.nome_simplificado }}</p>
+                    <p>Status: {{ inqueritoSelecionado?.status }}</p>
+                    <p>tipo negocio: {{inqueritoSelecionado?.que_tipo_de_negocio_esta}} </p>
+                    <p>{{inqueritoSelecionado | json }}</p>
+                    </!div-->
+
                     <!-- Pergunta 12 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                         <div>
@@ -246,8 +320,7 @@
                         </div>
                         <div>
                             <select class="form-select form-select-sm" formControlName="consultor_pn"
-                                name="consultor_pn" style="width:350px;" required
-                                aria-label="Default select example"
+                                name="consultor_pn" style="width:350px;" required aria-label="Default select example"
                                 [ngClass]="{ 'is-invalid': angForm.get('consultor_pn')?.invalid && angForm.get('consultor_pn')?.touched }">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of userbackOff" [value]="item.name">{{item.name}}</option>
@@ -418,7 +491,7 @@
                                 aria-label="Default select example"
                                 [ngClass]="{ 'is-invalid': angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched }">
                                 <option value="" disabled selected hidden></option>
-                                <option *ngFor="let prod of historico_de_producao_" [value]="prod" >{{prod}}</option>
+                                <option *ngFor="let prod of historico_de_producao_" [value]="prod">{{prod}}</option>
                             </select>
 
                             <div class="invalid-feedback"

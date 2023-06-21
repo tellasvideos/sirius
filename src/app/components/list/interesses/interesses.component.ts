@@ -8,6 +8,7 @@ import { AddInteressesComponent } from '../../inserts/add-interesses/add-interes
 import { AddAndManifestComponent } from '../../inserts/add-and-manifest/add-and-manifest.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-interesses',
@@ -46,7 +47,9 @@ export class InteressesComponent implements OnInit {
     private modalService: MdbModalService,
     private dataService: DataService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     this.angForm = this.fb.group({
@@ -102,6 +105,34 @@ export class InteressesComponent implements OnInit {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
       console.log('User logado', this.user_logged)
     });
+
+    this.route.queryParams.subscribe(params => {
+      this.inqueritoSelecionado = params;
+    });
+  }
+
+  inqueritoSelecionado: any | null = null;
+  /*// levar dados do inquerito selecionado para o formulario backoffice
+  //inqueritos: any[] = [];
+  inqueritoSelecionadoId: number | null = null;
+  inqueritoSelecionado: any | null = null; // Declare a variável inqueritoSelecionado
+
+  selecionarInquerito(id: number) {
+    this.inqueritoSelecionadoId = id;
+
+    this.dataService.getInqueritoDetalhes(id).subscribe(
+      (inquerito) => {
+        this.inqueritoSelecionado = inquerito;
+        console.log( this.inqueritoSelecionadoId)
+      },
+      (error) => {
+        console.error('Erro ao obter detalhes do inquérito:', error);
+      }
+    );
+  }*/
+
+  selecionarInquerito(item: any) {
+    this.inqueritoSelecionado = item;
   }
 
   enviarFormulario() {
@@ -109,7 +140,7 @@ export class InteressesComponent implements OnInit {
       const formData = new FormData();
 
       formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
-      formData.append('inicio_elaboracao_pn',(this.angForm.get('inicio_elaboracao_pn')?.value));
+      formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
       formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
       formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
       formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
