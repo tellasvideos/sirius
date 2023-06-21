@@ -688,10 +688,10 @@
                     <div *ngIf="angForm.get('fim_verificacao')?.value"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
                         <div>
-                            <label for="inicio_elaboracao_pn">Data PN entregue ao PDAC:</label>
+                            <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
                         </div>
                         <div>
-                            <input type="date" formControlName="inicio_elaboracao_pn" name="inicio_elaboracao_pn"
+                            <input type="date" formControlName="data_pn_entregue_ao_pdac" name="data_pn_entregue_ao_pdac"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
                                 (change)="checkDates()">

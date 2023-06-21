@@ -212,7 +212,7 @@ export class InteressesComponent implements OnInit {
       })
     }
 
-    if (pnEntregueDate > fimVerificacaoDate) {
+    if (pnEntregueDate < fimVerificacaoDate) {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
