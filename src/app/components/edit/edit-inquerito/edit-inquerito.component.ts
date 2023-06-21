@@ -391,11 +391,6 @@ export class EditInqueritoComponent implements OnInit {
         });
     });
 
-    /*/ recebe o status do inquerito ou estado da MI por id
-    this.activatedRoute.paramMap.subscribe(paramId => {
-      this.id = paramId.get('id');
-      this.getStatusById(this.id);
-    });*/
   }
 
 
@@ -443,50 +438,7 @@ export class EditInqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
-  /*estados: string[] = [];
-  estadoSelecionado?: string;
-
-  gerarListaEstados(): void {
-    const estadoSelecionado = this.getStatus();
-    this.estados = [];
-
-    const todosOsEstados = [
-      'Aprovado',
-      'Em Análise',
-      'Por contactar',
-      'MI Duplicada',
-      'Incomunicavel: Não atende',
-      'Incomunicavel: Nº Tel errado',
-      'Pendente por falta de documento',
-      'Recusada por falta de documentação legal',
-      'Recusada por falta dos 10%',
-      'Recusada por dívida',
-      'Recusada: Actividade inelegível',
-      'Recusada: proponente desistiu',
-      'Recusada: zona inelegível',
-      'Recusada por falta de área',
-      'Recusada CV'
-    ];
-
-    this.estados.push(estadoSelecionado); // Adicionar o estado selecionado como o primeiro item
-
-    this.estados = this.estados.concat(todosOsEstados.filter(estado => estado !== estadoSelecionado));
-    // this.estados.push(''); // Adicionar uma opção vazia
-  }
-
-
-  getStatusById(id: string): void {
-    this.dataService.getInqueritoByid(id).subscribe(data => {
-      this.angForm.patchValue(data);
-      this.gerarListaEstados();
-    });
-  }
-
-  onEstadoSelecionado(): void {
-    // Implemente a lógica para tratar o estado selecionado pelo usuário
-    console.log('Estado selecionado:', this.estadoSelecionado);
-  }*/
-
+  
 
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
   public getStatus(): string {
@@ -807,32 +759,26 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
-
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
     let formData = new FormData();
 
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }
-
     formData.append("status", this.getStatus());
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -843,14 +789,15 @@ export class EditInqueritoComponent implements OnInit {
         // Espera 3 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
+          this.location.back();
         });
       },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
-    this.resetForm();
-    this.route.navigate(['inquerito']);
+   // this.resetForm();
+   // this.route.navigate(['inquerito']);
   }
 
 
@@ -926,70 +873,28 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    /*if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      if (!this.angForm.get('data_validacao_inquerito')?.value) {
-        this.alert_error_Dat_val_inq();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-        this.alert_error_Que_tipo_negocio();
-      }
-      return;
-    }*/
-
-    /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-        this.alert_error_Em_qual_cadeia();
-      }
-      return;
-    }*/
-
+   
     let formData = new FormData();
 
-    /*let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
-
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-    
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }*/
-
     formData.append("status", this.getStatus());
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
 
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -997,62 +902,22 @@ export class EditInqueritoComponent implements OnInit {
           modal.style.display = 'none';
         }
 
-        // Espera 3 segundos antes de recarregar a página
+        // Espera 2 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
-          // this.location.back();
+          this.location.back();
         });
       },
       error => { this.alert_error(); }
     )
 
     this.get_inquireForms();
-    this.resetForm();
-    this.route.navigate(['inquerito']);
+   // this.resetForm();
+    //this.route.navigate(['inquerito']);
     //this.closeModal('exampleModalToggle');
   }
 
 
-
-
-  /*save_inquerito_5_parte_() {
-    /* if (this.angForm.invalid) {
-       this.alert_error();
-       return;
-     }*/
-
-  /* const formData = new FormData();
-
-   const documents: FileList = this.selectedFile;
-   if (documents) {
-     for (let i = 0; i < documents.length; i++) {
-       formData.append('files', documents[i], documents[i].name);
-     }
-   }
-
-   const inqueritoPreenchido: FileList = this.selectedFile2;
-   if (inqueritoPreenchido && inqueritoPreenchido.length > 0 && inqueritoPreenchido[0].size > 0) {
-     formData.append('inquerito_preenchido', inqueritoPreenchido[0], inqueritoPreenchido[0].name);
-   }
-
-   formData.append("status", this.getStatus());
-
-   const formValue = this.angForm.value;
-   Object.keys(formValue).forEach(key => {
-     formData.append(key, formValue[key]);
-   });
-
-   this.dataService.EditInquerito(this.id, formData).subscribe(
-     success => {
-       this.alert_success();
-       this.get_inquireForms();
-       this.resetForm();
-     },
-     error => {
-       this.alert_error();
-     }
-   );
- }*/
 
 
 
@@ -1122,13 +987,6 @@ export class EditInqueritoComponent implements OnInit {
       }
       return;
     }
-
-    /* if (!this.angForm.get('data_validacao_inquerito')?.value) {
-       if (!this.angForm.get('data_validacao_inquerito')?.value) {
-         this.alert_error_Dat_val_inq();
-       }
-       return;
-     }*/
 
     if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -1204,7 +1062,7 @@ export class EditInqueritoComponent implements OnInit {
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
-        /*/ close modal
+        // close modal
         const modal = document.getElementById('exampleModalToggle');
         if (modal) {
           modal.style.display = 'none';
@@ -1214,23 +1072,15 @@ export class EditInqueritoComponent implements OnInit {
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
           this.location.back();
-        });*/
+        });
       },
       error => { this.alert_error(); }
 
     )
 
     this.get_inquireForms();
-    // this.resetForm();
-    //this.closeModal('exampleModalToggle');
 
   }
-
-
-
-
-
-
 
 
 
