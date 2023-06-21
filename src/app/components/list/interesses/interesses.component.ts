@@ -200,8 +200,8 @@ export class InteressesComponent implements OnInit {
   }
 
   checkDates() {
-    const pnEntregueDate = this.angForm.get('inicio_elaboracao_pn')?.value;
-    const fimVerificacaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
+    const pnEntregueDate = this.angForm.get('data_pn_entregue_ao_pdac')?.value;
+    const fimVerificacaoDate = this.angForm.get('fim_verificacao')?.value;
     const today = new Date();
 
     if (pnEntregueDate > today) {
@@ -212,7 +212,7 @@ export class InteressesComponent implements OnInit {
       })
     }
 
-    if (pnEntregueDate < fimVerificacaoDate) {
+    if (pnEntregueDate > fimVerificacaoDate) {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
@@ -220,7 +220,7 @@ export class InteressesComponent implements OnInit {
       })
     }
   }
-  
+
   checkDates_1() {
     const pnEntregueDate = this.angForm.get('inicio_elaboracao_pn')?.value;
     const fimVerificacaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
