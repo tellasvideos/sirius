@@ -135,54 +135,56 @@ export class InteressesComponent implements OnInit {
     this.inqueritoSelecionado = item;
   }
 
-  enviarFormulario() {
-    if (this.angForm.valid) {
-      const formData = new FormData();
+  enviarFormulario(data_: any) {
+    console.log('start...')
+    const formData = new FormData();
 
-      formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
-      formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
-      formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
-      formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
-      formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
-      formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
-      formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
-      formData.append('financiamento', this.angForm.get('financiamento')?.value);
-      formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
-      formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
-      formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
-      formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
-      formData.append('estudo_de_viabilidade', this.angForm.get('estudo_de_viabilidade')?.value);
-      formData.append('termo_compromisso_assinado', this.angForm.get('termo_compromisso_assinado')?.value);
-      formData.append('projeto_riv_completo', this.angForm.get('projeto_riv_completo')?.value);
-      formData.append('ftas', this.angForm.get('ftas')?.value);
-      formData.append('lista_de_trabalhadores', this.angForm.get('lista_de_trabalhadores')?.value);
-      formData.append('documentos_administrativos', this.angForm.get('documentos_administrativos')?.value);
-      formData.append('ficheiro_riv', this.angForm.get('ficheiro_riv')?.value);
+    formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
+    formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
+    formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
+    formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
+    formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
+    formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
+    formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
+    formData.append('financiamento', this.angForm.get('financiamento')?.value);
+    formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
+    formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
+    formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
+    formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
 
-      // Tratar o campo 'outros_documentos' para lidar com múltiplos arquivos
-      const outrosDocumentosFiles = this.angForm.get('outros_documentos')?.value;
-      for (let i = 0; i < outrosDocumentosFiles.length; i++) {
-        formData.append('outros_documentos[]', outrosDocumentosFiles[i]);
-      }
+    formData.append('estudo_de_viabilidade', this.angForm.get('estudo_de_viabilidade')?.value);
+    formData.append('termo_compromisso_assinado', this.angForm.get('termo_compromisso_assinado')?.value);
+    formData.append('projeto_riv_completo', this.angForm.get('projeto_riv_completo')?.value);
+    formData.append('ftas', this.angForm.get('ftas')?.value);
+    formData.append('lista_de_trabalhadores', this.angForm.get('lista_de_trabalhadores')?.value);
+    formData.append('documentos_administrativos', this.angForm.get('documentos_administrativos')?.value);
+    formData.append('ficheiro_riv', this.angForm.get('ficheiro_riv')?.value);
 
-      formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
-      formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
-      formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
-      formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
-      formData.append('created_at', this.angForm.get('created_at')?.value);
-
-      this.http.post('http://strongboxao.ddns.net:8001/api/v1/formulariosbackoffice/', formData)
-        .subscribe(
-          (response) => {
-            console.log('Formulário enviado com sucesso!', response);
-            // Implemente o código para lidar com a resposta da API aqui
-          },
-          (error) => {
-            console.error('Erro ao enviar o formulário:', error);
-            // Implemente o código para lidar com o erro aqui
-          }
-        );
+    // Tratar o campo 'outros_documentos' para lidar com múltiplos arquivos
+    const outrosDocumentosFiles = this.angForm.get('outros_documentos')?.value;
+    for (let i = 0; i < outrosDocumentosFiles?.length; i++) {
+      formData.append('outros_documentos[]', outrosDocumentosFiles[i]);
     }
+
+    formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
+    formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
+    formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
+    formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
+    formData.append('created_at', this.angForm.get('created_at')?.value);
+
+    this.http.post('http://strongboxao.ddns.net:8001/api/v1/formulariosbackoffice/', formData)
+      .subscribe(
+        (response) => {
+          console.log('Formulário enviado com sucesso!', response);
+          // Implemente o código para lidar com a resposta da API aqui
+        },
+        (error) => {
+          console.error('Erro ao enviar o formulário:', error);
+          // Implemente o código para lidar com o erro aqui
+        }
+      );
+
+
   }
 
   /*private formatDate(date: string): string {
@@ -425,6 +427,63 @@ export class InteressesComponent implements OnInit {
       title: 'Oops...',
       text: 'Não encontrado',
     })
+  }
+
+  // change de files 1
+  selectedFile1:any;
+  onSelectedFile1(e: any) {
+    this.selectedFile1 = e.target.files;
+    console.log('Doc estudo de viabilidade', this.selectedFile1)
+  }
+
+  // change de files 2
+  selectedFile2:any;
+  onSelectedFile2(e: any) {
+    this.selectedFile2 = e.target.files;
+    console.log('Doc termo de compromisso', this.selectedFile2)
+  }
+
+  // change de files 3
+  selectedFile3:any;
+  onSelectedFile3(e: any) {
+    this.selectedFile3 = e.target.files;
+    console.log('Doc projecto riv', this.selectedFile3)
+  }
+
+  // change de files 4
+  selectedFile4:any;
+  onSelectedFile4(e: any) {
+    this.selectedFile4 = e.target.files;
+    console.log('Doc ftas', this.selectedFile4)
+
+  }
+  
+  // change de files 5
+  selectedFile5:any;
+  onSelectedFile5(e: any) {
+    this.selectedFile5 = e.target.files;
+    console.log('Doc lista de trabalhadores', this.selectedFile5)
+  }
+  
+  // change de files 6
+  selectedFile6:any;
+  onSelectedFile6(e: any) {
+    this.selectedFile6 = e.target.files;
+    console.log('Doc docs admins', this.selectedFile6)
+  }
+  
+  // change de files 7
+  selectedFile7:any;
+  onSelectedFile7(e: any) {
+    this.selectedFile7 = e.target.files;
+    console.log('Doc riv file', this.selectedFile7)
+  }
+  
+  // change de files 8
+  selectedFile8:any;
+  onSelectedFile8(e: any) {
+    this.selectedFile8 = e.target.files;
+    console.log('Doc outros docs', this.selectedFile8)
   }
 
 }

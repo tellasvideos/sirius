@@ -439,13 +439,13 @@
                                 </div>
 
                                 <div class="d-block">
-                                    <div style="width: 350px;">
+                                    <!--div style="width: 350px;">
                                         <ul>
                                             <li *ngFor="let document of angForm.get('documents')?.value">
                                                 <a [href]="document" target="_blank">{{ document }}</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </!--div-->
                                     <br>
                                     <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"

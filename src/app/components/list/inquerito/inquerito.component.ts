@@ -1594,6 +1594,7 @@ export class InqueritoComponent implements OnInit {
     console.log('doc selected', this.selectedFile)
   }
 
+  
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
     console.log('doc selected 2', this.selectedFile2)

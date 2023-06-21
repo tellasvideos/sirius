@@ -1000,6 +1000,7 @@ export class EditInqueritoComponent implements OnInit {
         // Espera 3 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
+          // this.location.back();
         });
       },
       error => { this.alert_error(); }
@@ -1020,38 +1021,38 @@ export class EditInqueritoComponent implements OnInit {
        return;
      }*/
 
-   /* const formData = new FormData();
+  /* const formData = new FormData();
 
-    const documents: FileList = this.selectedFile;
-    if (documents) {
-      for (let i = 0; i < documents.length; i++) {
-        formData.append('files', documents[i], documents[i].name);
-      }
-    }
+   const documents: FileList = this.selectedFile;
+   if (documents) {
+     for (let i = 0; i < documents.length; i++) {
+       formData.append('files', documents[i], documents[i].name);
+     }
+   }
 
-    const inqueritoPreenchido: FileList = this.selectedFile2;
-    if (inqueritoPreenchido && inqueritoPreenchido.length > 0 && inqueritoPreenchido[0].size > 0) {
-      formData.append('inquerito_preenchido', inqueritoPreenchido[0], inqueritoPreenchido[0].name);
-    }
+   const inqueritoPreenchido: FileList = this.selectedFile2;
+   if (inqueritoPreenchido && inqueritoPreenchido.length > 0 && inqueritoPreenchido[0].size > 0) {
+     formData.append('inquerito_preenchido', inqueritoPreenchido[0], inqueritoPreenchido[0].name);
+   }
 
-    formData.append("status", this.getStatus());
+   formData.append("status", this.getStatus());
 
-    const formValue = this.angForm.value;
-    Object.keys(formValue).forEach(key => {
-      formData.append(key, formValue[key]);
-    });
+   const formValue = this.angForm.value;
+   Object.keys(formValue).forEach(key => {
+     formData.append(key, formValue[key]);
+   });
 
-    this.dataService.EditInquerito(this.id, formData).subscribe(
-      success => {
-        this.alert_success();
-        this.get_inquireForms();
-        this.resetForm();
-      },
-      error => {
-        this.alert_error();
-      }
-    );
-  }*/
+   this.dataService.EditInquerito(this.id, formData).subscribe(
+     success => {
+       this.alert_success();
+       this.get_inquireForms();
+       this.resetForm();
+     },
+     error => {
+       this.alert_error();
+     }
+   );
+ }*/
 
 
 
@@ -1152,15 +1153,15 @@ export class EditInqueritoComponent implements OnInit {
 
 
     let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
+    //let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
 
     let formData = new FormData();
 
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
+    for (let i = 0; i < fileList?.length; i++) {
+      formData.append("files", fileList[i], fileList[i].name);
     }
 
     // Verificar se há um arquivo selecionado
@@ -1173,19 +1174,37 @@ export class EditInqueritoComponent implements OnInit {
       }
     }
 
-    formData.append("status", this.getStatus());
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
+    formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
     formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
     formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
     formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
     formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
     formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
     formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
+    formData.append("status", this.getStatus());
+    formData.append("created_at", this.angForm.get('created_at')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
-        // close modal
+        /*/ close modal
         const modal = document.getElementById('exampleModalToggle');
         if (modal) {
           modal.style.display = 'none';
@@ -1194,7 +1213,8 @@ export class EditInqueritoComponent implements OnInit {
         // Espera 2 segundos antes de recarregar aa página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
-        });
+          this.location.back();
+        });*/
       },
       error => { this.alert_error(); }
 
@@ -1529,12 +1549,12 @@ export class EditInqueritoComponent implements OnInit {
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
-    console.log('doc selected', this.selectedFile)
+    console.log('multiple docs selected', this.selectedFile)
   }
 
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
-    console.log('doc selected 2', this.selectedFile2)
+    console.log('inquerito selected ', this.selectedFile2)
   }
 
 
@@ -1569,6 +1589,12 @@ export class EditInqueritoComponent implements OnInit {
     }
   }
 
+
+  arquivosSelecionados: File[] = [];
+
+  selecionarArquivos(event: any) {
+    this.arquivosSelecionados = Array.from(event.target.files);
+  }
 
 
 }
