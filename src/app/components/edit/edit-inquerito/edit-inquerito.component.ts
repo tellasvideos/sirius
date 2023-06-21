@@ -1067,11 +1067,11 @@ export class EditInqueritoComponent implements OnInit {
         if (modal) {
           modal.style.display = 'none';
         }
-
+        this.route.navigate(['interesses'])
         // Espera 2 segundos antes de recarregar aa página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
-          this.location.back();
+          //this.location.back();
         });
       },
       error => { this.alert_error(); }
