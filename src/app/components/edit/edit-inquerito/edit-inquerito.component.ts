@@ -995,7 +995,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    /* if (!this.angForm.get('inquerito_preenchido')?.value) {
+     if (!this.angForm.get('inquerito_preenchido')?.value) {
        if (!this.angForm.get('inquerito_preenchido')?.value) {
          this.alert_error_Inq_pre();
        }
@@ -1007,7 +1007,7 @@ export class EditInqueritoComponent implements OnInit {
          this.alert_error_Docs();
        }
        return;
-     }*/
+     }
 
 
     let fileList: FileList = this.selectedFile;
@@ -1380,7 +1380,7 @@ export class EditInqueritoComponent implements OnInit {
   showInput(show: boolean) {
     this.showDuplicatedInput = show;
     if (!show) {
-      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
+      this.angForm.get('duplicada_da')?.setValue(null); // Desmarca a opção "Sim"
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
     // this.resetForm()
@@ -1390,7 +1390,7 @@ export class EditInqueritoComponent implements OnInit {
   showInputDidas(show: boolean) {
     this.showDuplicatedInput_1 = show;
     if (!show) {
-      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
+      this.angForm.get('didasTeste')?.setValue(null); // Desmarca a opção "Sim"
       this.duplicatedName = ''; // Limpa o valor do campo duplicado
     }
     // this.resetForm()

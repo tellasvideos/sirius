@@ -550,7 +550,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="estudo_de_viabilidade" (change)="onSelectedFile2($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
+                        <input type="file" name="estudo_de_viabilidade" (change)="onSelectedFile1($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
                             formControlName="estudo_de_viabilidade" class="form-control" id="customFile"
                             style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('estudo_de_viabilidade')?.invalid && (angForm.get('estudo_de_viabilidade')?.touched) }">
@@ -569,7 +569,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="termo_compromisso_assinado" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
+                        <input type="file" name="termo_compromisso_assinado" (change)="onSelectedFile2($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
                             formControlName="termo_compromisso_assinado" class="form-control" id="customFile"
                             style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('termo_compromisso_assinado')?.invalid && (angForm.get('termo_compromisso_assinado')?.touched) }">
@@ -588,7 +588,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="projeto_riv_completo" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
+                        <input type="file" name="projeto_riv_completo" (change)="onSelectedFile3($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
                             formControlName="projeto_riv_completo" class="form-control" id="customFile"
                             style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('projeto_riv_completo')?.invalid && (angForm.get('projeto_riv_completo')?.touched) }">
@@ -607,7 +607,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="ftas" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="ftas"
+                        <input type="file" name="ftas" (change)="onSelectedFile4($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="ftas"
                             class="form-control" id="customFile" style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('ftas')?.invalid && (angForm.get('ftas')?.touched) }">
                         <div class="invalid-feedback"
@@ -626,7 +626,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="lista_de_trabalhadores" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
+                        <input type="file" name="lista_de_trabalhadores" (change)="onSelectedFile5($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
                             formControlName="lista_de_trabalhadores" class="form-control" id="customFile"
                             style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('lista_de_trabalhadores')?.invalid && (angForm.get('ftas')?.touched) }">
@@ -645,7 +645,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="documentos_administrativos" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
+                        <input type="file" name="documentos_administrativos" (change)="onSelectedFile6($event)" accept=".pdf,.doc,.docx,.jpeg,.jpg .txt"
                             formControlName="documentos_administrativos" class="form-control" id="customFile"
                             style="width: 350px;"
                             [ngClass]="{ 'is-invalid': angForm.get('documentos_administrativos')?.invalid && (angForm.get('documentos_administrativos')?.touched) }">
@@ -664,7 +664,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" name="ficheiro_riv" accept=".riv" formControlName="ficheiro_riv"
+                        <input type="file" name="ficheiro_riv" (change)="onSelectedFile7($event)" accept=".riv" formControlName="ficheiro_riv"
                             class="form-control" id="customFile" style="width: 350px;">
                     </div>
                 </div>
@@ -678,7 +678,7 @@
                             )</label>
                     </div>
                     <div>
-                        <input type="file" multiple name="outros_documentos" accept=".docx, .jpeg ou .pd"
+                        <input type="file" multiple name="outros_documentos"(change)="onSelectedFile8($event)" accept=".docx, .jpeg, .pdf"
                             formControlName="outros_documentos" class="form-control" id="customFile"
                             style="width: 350px;">
                     </div>
@@ -739,7 +739,7 @@
 
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm d-none">
+                    <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                     <!--div>
                             <button type="submit"  class="btn btn-success btn-sm">Guardar
                             </button>

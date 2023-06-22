@@ -152,19 +152,112 @@ export class InteressesComponent implements OnInit {
     formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
     formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
 
-    formData.append('estudo_de_viabilidade', this.angForm.get('estudo_de_viabilidade')?.value);
-    formData.append('termo_compromisso_assinado', this.angForm.get('termo_compromisso_assinado')?.value);
-    formData.append('projeto_riv_completo', this.angForm.get('projeto_riv_completo')?.value);
-    formData.append('ftas', this.angForm.get('ftas')?.value);
-    formData.append('lista_de_trabalhadores', this.angForm.get('lista_de_trabalhadores')?.value);
-    formData.append('documentos_administrativos', this.angForm.get('documentos_administrativos')?.value);
-    formData.append('ficheiro_riv', this.angForm.get('ficheiro_riv')?.value);
+    // Tratamento para upload de um arquivo (estudo de viabilidade)
+    let fileList1: FileList = this.selectedFile1;
+    let estudo_de_viabilidade: FileList = fileList1;
 
-    // Tratar o campo 'outros_documentos' para lidar com múltiplos arquivos
-    const outrosDocumentosFiles = this.angForm.get('outros_documentos')?.value;
-    for (let i = 0; i < outrosDocumentosFiles?.length; i++) {
-      formData.append('outros_documentos[]', outrosDocumentosFiles[i]);
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile1 && this.selectedFile1?.length > 0) {
+      const Estudo_de_viabilidade = this.selectedFile1[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Estudo_de_viabilidade.size > 0) {
+        formData.append("estudo_de_viabilidade", Estudo_de_viabilidade, Estudo_de_viabilidade.name);
+      }
     }
+
+    // Tratamento para upload de um arquivo (Termo de compromisso) 
+    let fileList2: FileList = this.selectedFile2;
+    let termo_compromisso_assinado: FileList = fileList2;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+      const Termo_compromisso_assinado = this.selectedFile2[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Termo_compromisso_assinado.size > 0) {
+        formData.append('termo_compromisso_assinado', Termo_compromisso_assinado, Termo_compromisso_assinado.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (projeto_riv_completo) 
+    let fileList3: FileList = this.selectedFile3;
+    let projeto_riv_completo: FileList = fileList3;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile3 && this.selectedFile3?.length > 0) {
+      const Projeto_riv_completo = this.selectedFile3[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Projeto_riv_completo.size > 0) {
+        formData.append('projeto_riv_completo', Projeto_riv_completo, Projeto_riv_completo.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (Ftas) 
+    let fileList4: FileList = this.selectedFile4;
+    let ftas: FileList = fileList4;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile4 && this.selectedFile4?.length > 0) {
+      const Ftas = this.selectedFile4[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Ftas.size > 0) {
+        formData.append('ftas', Ftas, Ftas.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (lista_de_trabalhadores) 
+    let fileList5: FileList = this.selectedFile5;
+    let lista_de_trabalhadores: FileList = fileList5;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile5 && this.selectedFile5?.length > 0) {
+      const Lista_de_trabalhadores = this.selectedFile5[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Lista_de_trabalhadores.size > 0) {
+        formData.append('lista_de_trabalhadores', Lista_de_trabalhadores, Lista_de_trabalhadores.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (documentos_administrativos) 
+    let fileList6: FileList = this.selectedFile6;
+    let documentos_administrativos: FileList = fileList6;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile6 && this.selectedFile6?.length > 0) {
+      const Documentos_administrativos = this.selectedFile6[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Documentos_administrativos.size > 0) {
+        formData.append('documentos_administrativos', Documentos_administrativos, Documentos_administrativos.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (ficheiro_riv) 
+    let fileList7: FileList = this.selectedFile7;
+    let ficheiro_riv: FileList = fileList7;
+
+    // Verificar se há um arquivo selecionado
+    if (this.selectedFile7 && this.selectedFile7?.length > 0) {
+      const Ficheiro_riv = this.selectedFile7[0];
+
+      // Verificar se o arquivo não está vazio
+      if (Ficheiro_riv.size > 0) {
+        formData.append('ficheiro_riv', Ficheiro_riv, Ficheiro_riv.name);
+      }
+    }
+
+    // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
+    let fileList8: FileList = this.selectedFile8;
+
+    for (let i = 0; i < fileList8?.length; i++) {
+      formData.append("outros_documentos", fileList8[i], fileList8[i].name);
+    }
+
+
 
     formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
@@ -172,7 +265,9 @@ export class InteressesComponent implements OnInit {
     formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
     formData.append('created_at', this.angForm.get('created_at')?.value);
 
-    this.http.post('http://strongboxao.ddns.net:8001/api/v1/formulariosbackoffice/', formData)
+    formData.append('inquerito', this.inqueritoSelecionado?.id);
+
+    this.dataService.Send_Backoffice_form(formData)
       .subscribe(
         (response) => {
           console.log('Formulário enviado com sucesso!', response);
@@ -430,57 +525,57 @@ export class InteressesComponent implements OnInit {
   }
 
   // change de files 1
-  selectedFile1:any;
+  selectedFile1: any;
   onSelectedFile1(e: any) {
     this.selectedFile1 = e.target.files;
     console.log('Doc estudo de viabilidade', this.selectedFile1)
   }
 
   // change de files 2
-  selectedFile2:any;
+  selectedFile2: any;
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
     console.log('Doc termo de compromisso', this.selectedFile2)
   }
 
   // change de files 3
-  selectedFile3:any;
+  selectedFile3: any;
   onSelectedFile3(e: any) {
     this.selectedFile3 = e.target.files;
     console.log('Doc projecto riv', this.selectedFile3)
   }
 
   // change de files 4
-  selectedFile4:any;
+  selectedFile4: any;
   onSelectedFile4(e: any) {
     this.selectedFile4 = e.target.files;
     console.log('Doc ftas', this.selectedFile4)
 
   }
-  
+
   // change de files 5
-  selectedFile5:any;
+  selectedFile5: any;
   onSelectedFile5(e: any) {
     this.selectedFile5 = e.target.files;
     console.log('Doc lista de trabalhadores', this.selectedFile5)
   }
-  
+
   // change de files 6
-  selectedFile6:any;
+  selectedFile6: any;
   onSelectedFile6(e: any) {
     this.selectedFile6 = e.target.files;
     console.log('Doc docs admins', this.selectedFile6)
   }
-  
+
   // change de files 7
-  selectedFile7:any;
+  selectedFile7: any;
   onSelectedFile7(e: any) {
     this.selectedFile7 = e.target.files;
     console.log('Doc riv file', this.selectedFile7)
   }
-  
+
   // change de files 8
-  selectedFile8:any;
+  selectedFile8: any;
   onSelectedFile8(e: any) {
     this.selectedFile8 = e.target.files;
     console.log('Doc outros docs', this.selectedFile8)
