@@ -742,5 +742,15 @@ export class DataService {
     return this.http.post(this.formBackoffice_url + '/formulariosbackoffice/', form_data)
   }
 
+  // A function to get all backoffice data and inquires data
+  get_backoffice_Url = 'http://strongboxao.ddns.net:8001/api/v1/formulariosbackoffice/';
+  Get_Backoffice_Form() {
+    return this.http.get<any[]>(this.get_backoffice_Url);
+  }
 
+  // Pegar dados do formulario Backoffice junto ao id do inquerito selecionado
+  dados_agrupados_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/?inquerito=';
+  Get_Backoffice_data_and_Inquerito_by_id(id: any) {
+    return this.http.get(`${this.dados_agrupados_url}${id}`, /*{ headers: headers }*/).pipe(take(1));
+  }
 }

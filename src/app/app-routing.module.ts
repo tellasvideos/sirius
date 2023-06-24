@@ -45,6 +45,7 @@ import { PnElaboradosComponent } from './components/list/pn-elaborados/pn-elabor
 import { VisitasComponent } from './components/list/visitas/visitas.component';
 import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
+import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
 
 
 // configuração de rotas
@@ -90,6 +91,7 @@ const routes: Routes = [
   { path: 'edit-estatuto/:id', component: EditEstatutoComponent, canActivate: [AuthGuard] },
   { path: 'edit-status/:id', component: EditStatusComponent, canActivate: [AuthGuard] },
   { path: 'ver-inquerito/:id', component: VerInqueritoComponent, canActivate: [AuthGuard] },
+  { path: 'ver-inquerito-from-backoffice/:id', component: VerInqueritoFromBackofficeComponent, canActivate: [AuthGuard] },
   { path: 'documentos-inquerito/:id', component: DocumentosInqueritoComponent, canActivate: [AuthGuard] },
 
 ];

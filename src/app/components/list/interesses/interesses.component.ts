@@ -76,20 +76,12 @@ export class InteressesComponent implements OnInit {
       ficheiro_riv: new FormControl(null),
       outros_documentos: new FormControl(null),
 
-      /*estudo_de_viabilidade: ['', Validators.required],
-      termo_compromisso_assinado: ['', Validators.required],
-      projeto_riv_completo: ['', Validators.required],
-      ftas: ['', Validators.required],
-      lista_de_trabalhadores: ['', Validators.required],
-      documentos_administrativos: ['', Validators.required],
-      ficheiro_riv: [''],
-      outros_documentos: [''],*/
+     
       data_pn_entregue_ao_pdac: [''],
       pn_pendente: [false],
       justificacao_pn_pendente: ['', Validators.required],
       proponente_desistiu: [false],
       created_at: [''],
-      //consultor_pn: ['']
     })
   }
 
@@ -99,6 +91,7 @@ export class InteressesComponent implements OnInit {
     this.getInqueritos()
     this.checkDates()
     this.getUserBackOFF()
+    this.get_form_backoffice()
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -106,34 +99,82 @@ export class InteressesComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
 
+    // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
     });
+
+    /*/ leva os dados do backoffice para o inquerito selecionado
+    this.route.queryParams.subscribe(params => {
+      this.backofficeFormSelecionado = params;
+
+      this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.inqueritoSelecionado?.id).subscribe(data => {
+        this.alldata = data;
+        console.log(data)
+      })
+    });*/
+
+
   }
 
-  inqueritoSelecionado: any | null = null;
-  /*// levar dados do inquerito selecionado para o formulario backoffice
-  //inqueritos: any[] = [];
-  inqueritoSelecionadoId: number | null = null;
-  inqueritoSelecionado: any | null = null; // Declare a variável inqueritoSelecionado
+  // to get all data from form backoffice
+  formBackoffice: any;
+  get_form_backoffice() {
+    this.dataService.Get_Backoffice_Form().subscribe(data => {
+      this.formBackoffice = data;
+      console.log(this.formBackoffice)
+    })
+  }
 
-  selecionarInquerito(id: number) {
-    this.inqueritoSelecionadoId = id;
-
-    this.dataService.getInqueritoDetalhes(id).subscribe(
-      (inquerito) => {
-        this.inqueritoSelecionado = inquerito;
-        console.log( this.inqueritoSelecionadoId)
-      },
-      (error) => {
-        console.error('Erro ao obter detalhes do inquérito:', error);
-      }
-    );
+  /*/ obter dados das duas tabelas juntos Inquerito e Backoffice por id
+  alldata: any;
+  get_data_from_inquerito_e_BackOffice(id_inquerito: any) {
+    this.dataService.Get_Backoffice_data_and_Inquerito_by_id(id_inquerito).subscribe(data => {
+      this.alldata = data;
+      console.log('data: ', data)
+    })
   }*/
 
+  // Estados PN (Part. 1)
+  getStatus_pn() {
+
+    const Estado_MI = this.inqueritoSelecionado?.status === 'Aprovado' && this.angForm.get('inicio_elaboracao_pn')?.value === '';
+    const Data_inicio_elaboração_PN = this.angForm.get('inicio_elaboracao_pn')?.value && this.angForm.get('fim_elaboracao_pn')?.value === '';
+    const Data_fim_elaboração_PN = this.angForm.get('fim_elaboracao_pn')?.value && this.angForm.get('fim_verificacao')?.value === '';
+    const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
+    const O_proponente_desistiu = this.angForm.get('proponente_desistiu')?.value === true;
+    const O_PN_esta_pendente = this.angForm.get('pn_pendente')?.value === true;
+    const Data_PN_entregue_ao_PDAC = this.angForm.get('data_pn_entregue_ao_pdac')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
+
+    if (Estado_MI) {
+      return 'Inquérito em stock';
+    } else if (Data_inicio_elaboração_PN) {
+      return 'PN em elaborção';
+    } else if (Data_fim_elaboração_PN) {
+      return 'PN em verificação'
+    } else if (Data_fim_verificacao) {
+      return 'PN finalizado'
+    } else if (O_proponente_desistiu) {
+      return 'Desistência do proponente'
+    } else if (O_PN_esta_pendente) {
+      return 'PN pendente no BO'
+    } else if (Data_PN_entregue_ao_PDAC) {
+      return 'PN em analise UIP PDAC'
+    } {
+      return ''
+    }
+  }
+
+  // levar dados do inquerito selecionado para o formulario backoffice
+  inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
   }
+
+  // ver backoffice form deste inquérito
+  ver_Backoffice_form_inquerito(itemId: number) {
+  }
+  
 
   enviarFormulario(data_: any) {
     console.log('start...')
@@ -252,18 +293,18 @@ export class InteressesComponent implements OnInit {
 
     // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
     let fileList8: FileList = this.selectedFile8;
+    let documents: FileList = fileList8;
 
-    for (let i = 0; i < fileList8?.length; i++) {
-      formData.append("outros_documentos", fileList8[i], fileList8[i].name);
+    for (let i = 0; i < documents?.length; i++) {
+      formData.append("files", documents[i], documents[i].name);
     }
-
-
 
     formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
     formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
     formData.append('created_at', this.angForm.get('created_at')?.value);
+    formData.append('status_pn', this.getStatus_pn());
 
     formData.append('inquerito', this.inqueritoSelecionado?.id);
 
@@ -272,6 +313,7 @@ export class InteressesComponent implements OnInit {
         (response) => {
           console.log('Formulário enviado com sucesso!', response);
           // Implemente o código para lidar com a resposta da API aqui
+          this.alert_success();
         },
         (error) => {
           console.error('Erro ao enviar o formulário:', error);
@@ -282,10 +324,15 @@ export class InteressesComponent implements OnInit {
 
   }
 
-  /*private formatDate(date: string): string {
-    const dateObj = new Date(date);
-    return dateObj.toISOString();
-  }*/
+  alert_success() {
+    Swal.fire({
+      icon: "success",
+      title: "Salvo",
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
 
   userbackOff: any;
   // filtrar usuarios do departamento back off

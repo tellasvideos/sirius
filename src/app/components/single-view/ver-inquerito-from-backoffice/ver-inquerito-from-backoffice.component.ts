@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-ver-inquerito',
-  templateUrl: './ver-inquerito.component.html',
-  styleUrls: ['./ver-inquerito.component.scss']
+  selector: 'app-ver-inquerito-from-backoffice',
+  templateUrl: './ver-inquerito-from-backoffice.component.html',
+  styleUrls: ['./ver-inquerito-from-backoffice.component.scss']
 })
-export class VerInqueritoComponent implements OnInit {
-
+export class VerInqueritoFromBackofficeComponent implements OnInit {
 
   InqueritoPreenchido: any;
 
@@ -22,10 +21,9 @@ export class VerInqueritoComponent implements OnInit {
   opcoesDidasTeste = ['Nao']
 
   angForm: FormGroup;
+
   sideBarOpen = true;
   id: any;
-
-  id_bo:any;
 
   inquiridor: any;
   manifestacao: any;
@@ -104,8 +102,51 @@ export class VerInqueritoComponent implements OnInit {
       didasTeste: [''],
       inquerito_preenchido: [''],
       documents: ['']
+
+
+
     })
+
+    /*/ dados do backoffice pertencentes a esse inquerito
+    this.angForm2 = this.fb.group({
+
+      consultor_pn: ['', Validators.required],
+      inicio_elaboracao_pn: ['', Validators.required],
+      fim_elaboracao_pn: [''],
+      fim_verificacao: [''],
+      area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      area_cultivo_pn: ['', Validators.required],
+      recursos_proprios: ['', Validators.required],
+      financiamento: ['', Validators.required],
+      financiamento_bancario: ['', Validators.required],
+      historico_producao_2_anos: ['', Validators.required],
+      area_cultura_2_anos: ['', Validators.required],
+      producao_cultura_2_anos: ['', Validators.required],
+
+      estudo_de_viabilidade: new FormControl(null),
+      termo_compromisso_assinado: new FormControl(null),
+      projeto_riv_completo: new FormControl(null),
+      ftas: new FormControl(null),
+      lista_de_trabalhadores: new FormControl(null),
+      documentos_administrativos: new FormControl(null),
+      ficheiro_riv: new FormControl(null),
+      outros_documentos: new FormControl(null),
+
+     
+      data_pn_entregue_ao_pdac: [''],
+      pn_pendente: [false],
+      justificacao_pn_pendente: ['', Validators.required],
+      proponente_desistiu: [false],
+      created_at: [''],
+    })
+
+    this.combinedForm = this.fb.group({
+      form1: this.angForm,
+      form2: this.angForm2,
+    });*/
+
   }
+
 
   ngOnInit(): void {
     this.get_inquireFormsByPendentes();
@@ -118,7 +159,7 @@ export class VerInqueritoComponent implements OnInit {
     this.getInqueritoByIdDocs();
     this.get_inquireFormsInqueritoPreenchido();
 
-   this.activatedRoute.paramMap.subscribe(paramId => {
+    this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
@@ -127,17 +168,29 @@ export class VerInqueritoComponent implements OnInit {
 
     this.carregardocs2();
 
-    this.activatedRoute.params.subscribe(params => {
-      const itemId = params['id'];
-      // Use o ID do item para buscar os detalhes do item ou realizar qualquer ação necessária
-      console.log('ID do item:', itemId);
+    /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
+       this.carregardocs2();
+     });*/
+
+
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      this.id = paramMap.get('id');
+      this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.id).subscribe(data => {
+        // Converta data para um array se ainda não for
+        const dataArray = Array.isArray(data) ? data : [data];
+        this.backoffice_data = dataArray.reverse();
+        console.log('aquiiiiiiii', this.backoffice_data[0]?.consultor_pn);
+      });
     });
 
-   /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
-      this.carregardocs2();
-    });*/
+
 
   }
+
+  backoffice_data: any;
+
+
+  alldata: any;
 
   showInputDidas(show: boolean) {
     this.showDuplicatedInput_1 = show;
@@ -149,7 +202,7 @@ export class VerInqueritoComponent implements OnInit {
     //this.angForm.get('didasTeste')?.reset();
   }
 
-  duplicateNames:any;
+  duplicateNames: any;
 
   // nome_simplificado duplicados
   get_inquireFormsByPendentes() {
@@ -497,6 +550,25 @@ export class VerInqueritoComponent implements OnInit {
         break;
       default:
         this.docs = [];
+    }
+  }
+
+  toggleProponenteDesistiu() {
+    const proponenteDesistiu = this.backoffice_data[0]?.proponente_desistiu;
+    this.backoffice_data[0]?.proponente_desistiu.setValue(proponenteDesistiu);
+
+    if (proponenteDesistiu) {
+      //alert('O proponente desistiu!');
+    }
+  }
+
+
+  toggleJustificacaoPnPendente() {
+    const pnPendente = this.backoffice_data[0]?.pn_pendente;
+    if (pnPendente) {
+      this.backoffice_data[0]?.justificacao_pn_pendente?.enable();
+    } else {
+      this.backoffice_data[0]?.justificacao_pn_pendente?.disable();
     }
   }
 

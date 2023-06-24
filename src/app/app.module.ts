@@ -93,6 +93,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
 import { LoadingComponent } from './loading/loading.component';
+import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +145,7 @@ import { LoadingComponent } from './loading/loading.component';
     VerInqueritoComponent,
     DocumentosInqueritoComponent,
     LoadingComponent,
+    VerInqueritoFromBackofficeComponent,
   ],
   imports: [
     NgxPrintModule,
