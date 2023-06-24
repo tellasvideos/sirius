@@ -195,7 +195,8 @@
                                 routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                 <i class="fas fa-file-lines"></i>
                             </button></!--td-->
-                            <td class="not-it"><button type="button" (click)="selecionarInquerito(item)" [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
+                            <td class="not-it"><button type="button" (click)="selecionarInquerito(item)"
+                                    [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-eye"></i>
                                 </button>
@@ -294,7 +295,7 @@
 
 
 <!-- modal -->
-<div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
     aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -304,6 +305,9 @@
             </div>
 
             <div class="modal-body">
+                <!--div *ngIf="isLoading" class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </!--div-->
                 <form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="enviarFormulario(angForm)">
 
                     <!--div>
@@ -741,7 +745,7 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="modal-footer justify-content-between">
                         <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                         <div>

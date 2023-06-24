@@ -49,7 +49,7 @@ export class PnElaboradosComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log(this.inqueritos);
+      console.log('inqueritos', this.inqueritos);
       this.inqueritos.sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);

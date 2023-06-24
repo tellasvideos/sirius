@@ -179,7 +179,7 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
         // Converta data para um array se ainda não for
         const dataArray = Array.isArray(data) ? data : [data];
         this.backoffice_data = dataArray.reverse();
-        console.log('aquiiiiiiii', this.backoffice_data[0]?.consultor_pn);
+        console.log('aquiiiiiiii', this.backoffice_data[0]);
       });
     });
 

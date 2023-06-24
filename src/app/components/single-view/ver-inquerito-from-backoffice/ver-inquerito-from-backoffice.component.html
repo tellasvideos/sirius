@@ -17,8 +17,6 @@
                     </div>
                     <form enctype="multipart/form-data" [formGroup]="angForm">
 
-
-
                         <!-- Pergunta 1 -->
                         <div class="mb-3 mt-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;">
                             <div>
@@ -37,21 +35,11 @@
                             <div>
                                 <label>M.I Duplicada?</label>
                             </div>
-
-                            <div class="d-flex justify-content-between" style="width: 18%; margin-right: 191px;">
-                                <div>
-                                    <input type="checkbox" name="checkboxOption" readonly [attr.disabled]="true"
-                                        formControlName="duplicada_da" (click)="showInput(true)"
-                                        [checked]="showDuplicatedInput"> Sim
-                                </div>
-
-                                <div>
-                                    <input type="checkbox" name="checkboxOption" (click)="showInput(false)" readonly
-                                        [attr.disabled]="true" [checked]="!showDuplicatedInput">
-                                    Não
-                                </div>
+                            <div>
+                                <input type="text" readonly [attr.disabled]="true"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                    value="{{inqueritos['duplicada_da'] ? 'Sim' : 'Não'}}">
                             </div>
-
                         </div>
 
                         <!-- Pergunta 2.1 -->
@@ -75,10 +63,10 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <div style="margin-right: 303px;">
-                                    <input type="checkbox" readonly [attr.disabled]="true" name="checkboxOption"
-                                        [value]="true" formControlName="didasTeste" (click)="showInputDidas(true)"
-                                        [checked]="showDuplicatedInput_1">
+                                <div>
+                                    <input type="text" readonly [attr.disabled]="true"
+                                        style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                        value="{{inqueritos['didasTeste'] ? 'Sim' : 'Não'}}">
                                 </div>
                             </div>
                         </div>
@@ -237,7 +225,7 @@
                         </div>
 
                         <!-- Pergunta 10.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-1" style="width: 80%;"
+                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                             *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Resultado
@@ -467,9 +455,10 @@
                                     PN:</label>
                             </div>
                             <div>
-                                <input type="text" readonly [attr.disabled]="true"
-                                    value="{{ backoffice_data[0]?.inicio_elaboracao_pn }}" name="inicio_elaboracao_pn"
-                                    style="width:350px;" class="form-control form-control-sm">
+                                <input type="date" readonly [attr.disabled]="true"
+                                    value="{{ backoffice_data[0]?.inicio_elaboracao_pn | date:'yyyy-MM-dd' }}"
+                                    name="inicio_elaboracao_pn" style="width:350px;"
+                                    class="form-control form-control-sm">
                             </div>
                         </div>
 
@@ -483,9 +472,9 @@
                             </div>
                             <div>
                                 <input type="date" readonly [attr.disabled]="true"
-                                    value="{{ backoffice_data[0]?.fim_elaboracao_pn }}" name="fim_elaboracao_pn"
-                                    max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                    value="{{ backoffice_data[0]?.fim_elaboracao_pn | date:'yyyy-MM-dd' }}"
+                                    name="fim_elaboracao_pn" style="width: 150px; margin-right: 200px;"
+                                    class="form-control form-control-sm">
                             </div>
                         </div>
 
@@ -497,8 +486,8 @@
                             </div>
                             <div>
                                 <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
-                                    name="fim_verificacao" value="{{ backoffice_data[0]?.fim_verificacao }}"
-                                    max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                    name="fim_verificacao"
+                                    value="{{ backoffice_data[0]?.fim_verificacao | date:'yyyy-MM-dd' }}"
                                     style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                             </div>
                         </div>
@@ -511,7 +500,7 @@
                             </div>
                             <div>
                                 <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.area_total_fazenda }}" name="area_total_fazenda"
+                                    value="{{ backoffice_data[0]?.area_total_fazenda}}" name="area_total_fazenda"
                                     style="width: 150px; margin-right: 200px;" required type="number" readonly
                                     [attr.disabled]="true">
                             </div>
@@ -526,7 +515,7 @@
                             <div>
 
                                 <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.area_cultivo_pn }}" name="area_cultivo_pn"
+                                    value="{{ backoffice_data[0]?.area_cultivo_pn}}" name="area_cultivo_pn"
                                     style="width: 150px; margin-right: 200px;" required type="number" readonly
                                     [attr.disabled]="true">
                             </div>
@@ -770,9 +759,9 @@
                                 <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
                             </div>
                             <div>
-                                <input type="date" value="{{backoffice_data[0]?.data_pn_entregue_ao_pdac}}" readonly
-                                    [attr.disabled]="true" name="data_pn_entregue_ao_pdac"
-                                    max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                <input type="date"
+                                    value="{{backoffice_data[0]?.data_pn_entregue_ao_pdac | date:'yyyy-MM-dd'}}"
+                                    readonly [attr.disabled]="true" name="data_pn_entregue_ao_pdac"
                                     style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                             </div>
                         </div>
@@ -784,11 +773,10 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <div style="margin-right: 310px;">
-                                    <input type="checkbox" name="checkboxOption" readonly [attr.disabled]="true"
-                                        [checked]="backoffice_data[0]?.pn_pendente"
-                                        value="{{backoffice_data[0]?.pn_pendente}}"
-                                        (change)="toggleJustificacaoPnPendente()">
+                                <div>
+                                    <input type="text" name="checkboxOption" readonly [attr.disabled]="true"
+                                        style="width: 350px;" class="form-control form-control-sm"
+                                        value="{{backoffice_data[0]?.pn_pendente ? 'Sim' : 'Não'}}">
                                 </div>
                             </div>
                         </div>
@@ -813,29 +801,29 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <div style="margin-right: 310px;">
-                                    <input type="checkbox" name="checkboxOption" readonly [attr.disabled]="true"
-                                        value="{{backoffice_data[0]?.proponente_desistiu}}"
-                                        (change)="toggleProponenteDesistiu()">
+                                <div>
+                                    <input type="text" name="checkboxOption" readonly [attr.disabled]="true"
+                                        style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                        value="{{backoffice_data[0]?.proponente_desistiu ? 'Sim' : 'Não'}}">
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                        <!--div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                             <div>
                                 <label>Status PN:</label>
                             </div>
 
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <input type="text" class="form-control form-control-sm" readonly [attr.disabled]="true"
-                                        value="{{backoffice_data[0]?.status_pn}}" style="width: 350px;"
-                                       >
+                                    <input type="text" class="form-control form-control-sm" readonly
+                                        [attr.disabled]="true" value="{{backoffice_data[0]?.status_pn}}"
+                                        style="width: 150px; margin-right: 200px;">
                                 </div>
                             </div>
 
-                        </div>
+                        </!--div-->
 
                     </form>
 

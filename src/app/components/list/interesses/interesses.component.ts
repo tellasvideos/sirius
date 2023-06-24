@@ -9,6 +9,9 @@ import { AddAndManifestComponent } from '../../inserts/add-and-manifest/add-and-
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { timer } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-interesses',
@@ -49,7 +52,8 @@ export class InteressesComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {
 
     this.angForm = this.fb.group({
@@ -76,7 +80,7 @@ export class InteressesComponent implements OnInit {
       ficheiro_riv: new FormControl(null),
       outros_documentos: new FormControl(null),
 
-     
+
       data_pn_entregue_ao_pdac: [''],
       pn_pendente: [false],
       justificacao_pn_pendente: ['', Validators.required],
@@ -174,10 +178,9 @@ export class InteressesComponent implements OnInit {
   // ver backoffice form deste inquérito
   ver_Backoffice_form_inquerito(itemId: number) {
   }
-  
+
 
   enviarFormulario(data_: any) {
-    console.log('start...')
     const formData = new FormData();
 
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
@@ -308,20 +311,76 @@ export class InteressesComponent implements OnInit {
 
     formData.append('inquerito', this.inqueritoSelecionado?.id);
 
-    this.dataService.Send_Backoffice_form(formData)
-      .subscribe(
-        (response) => {
-          console.log('Formulário enviado com sucesso!', response);
-          // Implemente o código para lidar com a resposta da API aqui
-          this.alert_success();
-        },
-        (error) => {
-          console.error('Erro ao enviar o formulário:', error);
-          // Implemente o código para lidar com o erro aqui
-        }
-      );
+    const statusPN = this.getStatus_pn();
 
+    // Success callback
+    const successCallback = (response: any) => {
+      console.log('Formulário enviado com sucesso!', response);
+      // Implemente o código para lidar com a resposta da API aqui
+      this.alert_success();
+      // close modal
+      const modal = document.getElementById('exampleModalToggle');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+      // Executar o timer somente após a resposta da API ser recebida
+      timer(2000).pipe(delay(2000)).subscribe(() => {
+        location.reload();
+      });
 
+     // this.hideLoading();
+    };
+
+    // Success calback 2
+    const successCallback2 = (response: any) => {
+      console.log('Formulário enviado com sucesso e plano de negocio finalizado!', response);
+      // Implemente o código para lidar com a resposta da API aqui
+      Swal.fire({
+        icon: "success",
+        title: "PN Elaborado",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      // close modal
+      const modal = document.getElementById('exampleModalToggle');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+      // Executar o timer somente após a resposta da API ser recebida
+      timer(2000).pipe(delay(2000)).subscribe(() => {
+        location.reload();
+      });
+     // this.hideLoading();
+    };
+
+    // Error callback
+    const errorCallback = (error: any) => {
+      console.error('Erro ao enviar o formulário:', error);
+      // Implemente o código para lidar com o erro aqui
+      //this.hideLoading();
+    };
+
+    // condição que define o status_pn
+    if (statusPN === 'PN finalizado') {
+      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
+      this.router.navigate(['pn-elaborados']);
+    } else {
+      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
+    }
+
+  }
+
+  isLoading: boolean = false;
+  showLoading() {
+    // Exibir o indicador de loading
+    // Por exemplo, definir uma variável de controle no componente para mostrar/ocultar o indicador
+    this.isLoading = true;
+  }
+
+  hideLoading() {
+    // Ocultar o indicador de loading
+    // Por exemplo, alterar o valor da variável de controle no componente
+    this.isLoading = false;
   }
 
   alert_success() {
