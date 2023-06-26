@@ -39,19 +39,19 @@ export class PnElaboradosComponent implements OnInit {
     this.mostrarSegundoCampo = this.recusado_pelo_cti;
   }
 
-  onPendenteNoBanco(){
+  onPendenteNoBanco() {
     this.mostrarSegundoCampo = this.pn_pendente_no_banco;
   }
 
   // DAdos do Formulario
   data_analise_cti: any;
-  recusado_pelo_cti?:boolean;
-  justificacao_recusado_pelo_cti:any;
-  data_aprovacao_financiamento_mg:any;
-  data_aprovacao_financiamento_banco:any;
-  pn_pendente_no_banco?:boolean;
-  justificacao_pn_pendente_no_banco:any;
-  data_primeiro_pedido_reembolso:any;
+  recusado_pelo_cti: boolean = false;
+  justificacao_recusado_pelo_cti: any;
+  data_aprovacao_financiamento_mg: any;
+  data_aprovacao_financiamento_banco: any;
+  pn_pendente_no_banco?: boolean;
+  justificacao_pn_pendente_no_banco: any;
+  data_primeiro_pedido_reembolso: any;
 
   constructor(
     private modalService: MdbModalService,
@@ -84,7 +84,7 @@ export class PnElaboradosComponent implements OnInit {
 
     // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
-      this.backoffice_form_data_Selecionado = params;
+      this.mappedFormBackoffice = params;
     });
 
     this.getInqueritos();
@@ -104,12 +104,17 @@ export class PnElaboradosComponent implements OnInit {
     this.get_form_backoffice____();
   }
 
-  backoffice_form_data_Selecionado: any | null = null;
-  Financiamento_bancario_data(item: any) {
-    this.get_form_backoffice____() === item;
-    // console.log(item)
-    // this.backoffice_form_data_Selecionado = item;
+  selectedFinanciamentoBancario: any;
+
+  mostrarFinanciamento(inqueritoId: any) {
+    this.selectedFinanciamentoBancario = this.getFormBackofficeData(inqueritoId);
+    if (this.selectedFinanciamentoBancario) {
+      console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
+      // Aqui você pode fazer qualquer manipulação necessária para exibir o campo financiamento_bancario
+    }
   }
+
+
 
   // Função de validação personalizada para justificacao_recusado_pelo_cti
   justificacaoRecusadoPeloCtiValidator(control: AbstractControl) {
@@ -196,7 +201,8 @@ export class PnElaboradosComponent implements OnInit {
         return {
           status_pn: item.status_pn,
           data_pn_entregue_ao_pdac: item.data_pn_entregue_ao_pdac,
-          financiamento_bancario: item.financiamento_bancario
+          financiamento_bancario: item.financiamento_bancario,
+          inquerito: item.inquerito
         };
       });
 
