@@ -68,26 +68,32 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <td>{{item.id}} </td>
-                            <td>{{item.nome_simplificado}} </td>
-                            <td>{{item.provincia}}</td>
-                            <td>{{item.municipio}}</td>
-                            <td>{{ getFormBackofficeData(item.id)?.status_pn }}</td>
-                            <td>{{ getFormBackofficeData(item.id)?.data_pn_entregue_ao_pdac }}</td>
-
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{item.id}} </td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">
+                                {{item.nome_simplificado}} </td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{item.provincia}}
+                            </td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{item.municipio}}
+                            </td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{
+                                getFormBackofficeData(item.id)?.data_pn_entregue_ao_pdac | date: 'yyyy-MM-dd' }}</td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{
+                                getFormBackofficeData(item.id)?.status_pn}}</td>
                             <td class="not-it"><button type="button" routerLinkActive="active"
+                                    *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'"
                                     [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
                                     class="btn btn-link btn-sm btn-rounded ">
                                     <i class="far fa-eye"></i>
                                 </button>
                             </td>
 
-                            <td *ngIf="
-                            this.user_logged.department === 'Back Off' || this.user_logged.department === 'M&A'"
-                                class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'" class="not-it">
+                                <button type="button" class="btn btn-link btn-sm btn-rounded" *ngIf="
+                                this.user_logged.department === 'Back Off' || this.user_logged.department === 'M&A'"
                                     data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>
-                                </button></td>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -109,7 +115,129 @@
             </div>
 
             <div class="modal-body">
+
+                <!--input type="checkbox" [(ngModel)]="primeiraSelecao" (change)="onPrimeiraSelecaoChange()">
+                <input type="text" [(ngModel)]="segundaTexto" *ngIf="mostrarSegundoCampo"-->
+
+                <!-- Pergunta 19 -->
+                <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div>
+                        <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
+                    </div>
+                    <div>
+                        <input type="date" [(ngModel)]="data_analise_cti" name="data_analise_cti"
+                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                            style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                    </div>
+                </div>
+
+                <!-- Pergunta 20 -->
+                <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                    <div>
+                        <label>Recusado pelo CTI</label>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div style="margin-right: 310px;">
+                            <input type="checkbox" name="recusado_pelo_cti" [checked]="this.recusado_pelo_cti"
+                                [(ngModel)]="recusado_pelo_cti" (change)="onPrimeiraSelecaoChange()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 20.1 -->
+                <div class="mb-3 d-flex justify-content-between mx-auto" *ngIf="this.recusado_pelo_cti"
+                    style="width: 80%;">
+                    <div>
+                        <label for="justificacao_recusado_pelo_cti">Justificação:</label>
+                    </div>
+                    <div>
+                        <textarea [(ngModel)]="justificacao_recusado_pelo_cti" name="justificacao_recusado_pelo_cti"
+                            style="width: 350px;" class="form-control form-control-sm"></textarea>
+                    </div>
+                </div>
+
+                <!-- Pergunta 21 -->
+                <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div>
+                        <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
+                    </div>
+                    <div>
+                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_mg"
+                            name="data_aprovacao_financiamento_mg" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+
+                <!-- Pergunta 22 -->
+                <div *ngIf="data_aprovacao_financiamento_mg && this.mappedFormBackoffice[0]?.financiamento_bancario > 0"
+                    class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div>
+                        <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
+                    </div>
+                    <div>
+                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_banco"
+                            name="data_aprovacao_financiamento_banco" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+
+                <!-- Pergunta 23 -->
+                <div *ngIf="data_aprovacao_financiamento_mg && data_aprovacao_financiamento_banco === '' "
+                    class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                    <div>
+                        <label>Pendente no Banco?</label>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div style="margin-right: 310px;">
+                            <input type="checkbox" name="pn_pendente_no_banco" [checked]="this.pn_pendente_no_banco"
+                                [(ngModel)]="pn_pendente_no_banco" (change)="onPendenteNoBanco()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 24 -->
+                <div class="mb-3 d-flex justify-content-between mx-auto" *ngIf="this.pn_pendente_no_banco"
+                    style="width: 80%;">
+                    <div>
+                        <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
+                    </div>
+                    <div>
+                        <textarea [(ngModel)]="justificacao_pn_pendente_no_banco"
+                            name="justificacao_pn_pendente_no_banco" style="width: 350px;"
+                            class="form-control form-control-sm"></textarea>
+                    </div>
+                </div>
+
+                <!-- Pergunta 22 -->
+                <div *ngIf="data_aprovacao_financiamento_banco" class="justify-content-between mx-auto d-flex mb-3"
+                    style="width: 80%;">
+                    <div>
+                        <label for="data_primeiro_pedido_reembolso">Data 1° pedido de desembolso
+                        </label>
+                    </div>
+                    <div>
+                        <input type="date" [(ngModel)]="data_primeiro_pedido_reembolso"
+                            name="data_primeiro_pedido_reembolso" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+                <div>
+                    <!--button 
+                        (click)="get_data_from_inquerito_e_BackOffice(inqueritoSelecionado?.id)"
+                        class="btn btn-success btn-sm">teste
+                    </!--button-->
+                    <label>OBS: Formulário em desenvolvimento...
+                    </label>
+                </div>
             </div>
         </div>
     </div>
-</div>
