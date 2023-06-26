@@ -103,8 +103,6 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
       inquerito_preenchido: [''],
       documents: ['']
 
-
-
     })
 
     /*/ dados do backoffice pertencentes a esse inquerito
@@ -251,7 +249,6 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
     })
 
   }
-
 
   editInquerito(data: any) {
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
