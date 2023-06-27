@@ -48,7 +48,7 @@
         <div class=" row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="bm-3">
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar por nome simplificado..."
-                    [(ngModel)]="keyWord" type="text" style="width: 300px;">
+                    formControlName="keyWord" type="text" style="width: 300px;">
             </div>
             <div class="table-responsive" id="print-section-list-interest">
                 <table class="table table-sm table-hover text-center">
@@ -89,7 +89,7 @@
 
                             <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'" class="not-it">
                                 <button (click)="mostrarFinanciamento(item.id)" type="button"
-                                    class="btn btn-link btn-sm btn-rounded" *ngIf="
+                                    (click)="selecionarInquerito(item)" class="btn btn-link btn-sm btn-rounded" *ngIf="
                                 this.user_logged.department === 'Back Off' || this.user_logged.department === 'M&A'"
                                     data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>
@@ -114,141 +114,135 @@
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário PN elaborados</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="enviarFormulario()">
 
-            <div class="modal-body">
+                <div class="modal-body">
 
-                <!--input type="checkbox" [(ngModel)]="primeiraSelecao" (change)="onPrimeiraSelecaoChange()">
-                <input type="text" [(ngModel)]="segundaTexto" *ngIf="mostrarSegundoCampo"-->
-                <!-- {{selectedFinanciamentoBancario?.data_pn_entregue_ao_pdac}}-->
-                <!-- Pergunta 19 -->
-                <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
-                    <div>
-                        <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
-                    </div>
-                    <div>
-                        <input type="date" [(ngModel)]="data_analise_cti" name="data_analise_cti"
-                            max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                            style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
-                    </div>
-                </div>
-
-                <!-- Pergunta 20 -->
-                <div *ngIf="data_analise_cti" class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
-                    <div>
-                        <label>Recusado pelo CTI</label>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                        <div style="margin-right: 310px;">
-                            <input type="checkbox" name="recusado_pelo_cti" [checked]="this.recusado_pelo_cti"
-                                [(ngModel)]="recusado_pelo_cti" (change)="onPrimeiraSelecaoChange()">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_analise_cti" name="data_analise_cti"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
-                </div>
 
-                <!-- Pergunta 20.1 -->
-                <div class="mb-3 d-flex justify-content-between mx-auto" *ngIf="this.recusado_pelo_cti === true"
-                    style="width: 80%;">
-                    <div>
-                        <label for="justificacao_recusado_pelo_cti">Justificação:</label>
-                    </div>
-                    <div>
-                        <textarea [(ngModel)]="justificacao_recusado_pelo_cti" name="justificacao_recusado_pelo_cti"
-                            [ngClass]="{ 'is-invalid': !justificacao_recusado_pelo_cti && _touched }" required
-                            (blur)="_touched = true" style="width: 350px;"
-                            class="form-control form-control-sm"></textarea>
-                    </div>
-                </div>
+                    <!-- Pergunta 20 -->
+                    <div *ngIf="angForm.get('data_analise_cti')?.value"
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                        <div>
+                            <label>Recusado pelo CTI</label>
+                        </div>
 
-                <!-- Pergunta 21 -->
-                <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                    *ngIf="!recusado_pelo_cti || false">
-                    <div>
-                        <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
+                        <div class="d-flex justify-content-between">
+                            <div style="margin-right: 310px;">
+                                <input type="checkbox" name="recusado_pelo_cti"
+                                    [checked]="this.angForm.get('recusado_pelo_cti')?.value"
+                                    formControlName="recusado_pelo_cti" (change)="onPrimeiraSelecaoChange()">
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_mg" (change)="checkDates2()"
-                            name="data_aprovacao_financiamento_mg" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
-                            class="form-control form-control-sm">
-                    </div>
-                </div>
 
-                <!--div>
+                    <!-- Pergunta 20.1 -->
+                    <div class="mb-3 d-flex justify-content-between mx-auto"
+                        *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 80%;">
+                        <div>
+                            <label for="justificacao_recusado_pelo_cti">Justificação:</label>
+                        </div>
+                        <div>
+                            <textarea formControlName="justificacao_recusado_pelo_cti"
+                                name="justificacao_recusado_pelo_cti"
+                                [ngClass]="{ 'is-invalid': !angForm.get('justificacao_recusado_pelo_cti')?.value && _touched }"
+                                required (blur)="_touched = true" style="width: 350px;"
+                                class="form-control form-control-sm"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 21 -->
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="!angForm.get('recusado_pelo_cti')?.value || false">
+                        <div>
+                            <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_aprovacao_financiamento_mg"
+                                (change)="checkDates2()" name="data_aprovacao_financiamento_mg"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <!--div>
                     <p>Valor do financiamento bancário selecionado: {{ selectedFinanciamentoBancario?.financiamento_bancario 
                         }}</p>
                 </!--div-->
 
-                <!-- Pergunta 22 -->
-                <div *ngIf="data_aprovacao_financiamento_mg && selectedFinanciamentoBancario?.financiamento_bancario > 0"
-                    class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
-                    <div>
-                        <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
-                    </div>
-                    <div>
-                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_banco" (change)="checkDates()"
-                            name="data_aprovacao_financiamento_banco" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
-                            class="form-control form-control-sm">
-                    </div>
-                </div>
-
-                <!-- Pergunta 23 -->
-                <div *ngIf="data_aprovacao_financiamento_mg && !data_aprovacao_financiamento_banco"
-                    class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
-                    <div>
-                        <label>Pendente no Banco?</label>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                        <div style="margin-right: 310px;">
-                            <input type="checkbox" name="pn_pendente_no_banco" [checked]="this.pn_pendente_no_banco"
-                                [(ngModel)]="pn_pendente_no_banco" (change)="onPendenteNoBanco()">
+                    <!-- Pergunta 22 -->
+                    <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario > 0"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_aprovacao_financiamento_banco"
+                                (change)="checkDates()" name="data_aprovacao_financiamento_banco"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
+
+                    <!-- Pergunta 23 -->
+                    <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && !angForm.get('data_aprovacao_financiamento_banco')?.value"
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                        <div>
+                            <label>Pendente no Banco?</label>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <div style="margin-right: 310px;">
+                                <input type="checkbox" name="pn_pendente_no_banco"
+                                    [checked]="this.angForm.get('pn_pendente_no_banco')?.value"
+                                    formControlName="pn_pendente_no_banco" (change)="onPendenteNoBanco()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 24 -->
+                    <div class="mb-3 d-flex justify-content-between mx-auto"
+                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value" style="width: 80%;">
+                        <div>
+                            <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
+                        </div>
+                        <div>
+                            <textarea formControlName="justificacao_pn_pendente_no_banco"
+                                [ngClass]="{ 'is-invalid': !angForm.get('justificacao_pn_pendente_no_banco')?.value && _touched }"
+                                name="justificacao_pn_pendente_no_banco" style="width: 350px;"
+                                class="form-control form-control-sm" required (blur)="_touched = true"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pergunta 22 -->
+                    <div *ngIf="angForm.get('data_aprovacao_financiamento_banco')?.value"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="data_primeiro_pedido_reembolso">Data 1° pedido de desembolso
+                            </label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_primeiro_pedido_reembolso" (change)="checkDates3()"
+                                name="data_primeiro_pedido_reembolso" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                 </div>
 
-                <!-- Pergunta 24 -->
-                <div class="mb-3 d-flex justify-content-between mx-auto" *ngIf="this.pn_pendente_no_banco"
-                    style="width: 80%;">
-                    <div>
-                        <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
-                    </div>
-                    <div>
-                        <textarea [(ngModel)]="justificacao_pn_pendente_no_banco"
-                            [ngClass]="{ 'is-invalid': !justificacao_pn_pendente_no_banco && _touched }"
-                            name="justificacao_pn_pendente_no_banco" style="width: 350px;"
-                            class="form-control form-control-sm" required (blur)="_touched = true"></textarea>
-                    </div>
-                </div>
-
-                <!-- Pergunta 22 -->
-                <div *ngIf="data_aprovacao_financiamento_banco" class="justify-content-between mx-auto d-flex mb-3"
-                    style="width: 80%;">
-                    <div>
-                        <label for="data_primeiro_pedido_reembolso">Data 1° pedido de desembolso
-                        </label>
-                    </div>
-                    <div>
-                        <input type="date" [(ngModel)]="data_primeiro_pedido_reembolso" (change)="checkDates3()"
-                            name="data_primeiro_pedido_reembolso" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                            [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
-                            class="form-control form-control-sm">
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <!--div>
-                    <button (click)="limparCampos()" class="btn btn-light btn-sm">Limpar campos
-                    </button>
-                </!--div-->
-                <div>
-                    <!--button class="btn btn-success btn-sm">Guardar
-                    </!--button-->
-                    <p>OBS: Formulario em desenvolvimento...</p>
-                </div>
-
-            </div>
+            </form>
         </div>
     </div>

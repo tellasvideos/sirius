@@ -356,6 +356,7 @@ export class InteressesComponent implements OnInit {
     // Error callback
     const errorCallback = (error: any) => {
       console.error('Erro ao enviar o formulário:', error);
+      this.alert_error()
       // Implemente o código para lidar com o erro aqui
       //this.hideLoading();
     };
