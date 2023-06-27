@@ -154,7 +154,9 @@
                     </div>
                     <div>
                         <textarea [(ngModel)]="justificacao_recusado_pelo_cti" name="justificacao_recusado_pelo_cti"
-                            style="width: 350px;" class="form-control form-control-sm"></textarea>
+                            [ngClass]="{ 'is-invalid': !justificacao_recusado_pelo_cti && _touched }" required
+                            (blur)="_touched = true" style="width: 350px;"
+                            class="form-control form-control-sm"></textarea>
                     </div>
                 </div>
 
@@ -214,8 +216,9 @@
                     </div>
                     <div>
                         <textarea [(ngModel)]="justificacao_pn_pendente_no_banco"
+                            [ngClass]="{ 'is-invalid': !justificacao_pn_pendente_no_banco && _touched }"
                             name="justificacao_pn_pendente_no_banco" style="width: 350px;"
-                            class="form-control form-control-sm"></textarea>
+                            class="form-control form-control-sm" required (blur)="_touched = true"></textarea>
                     </div>
                 </div>
 
@@ -236,14 +239,13 @@
 
             </div>
             <div class="modal-footer justify-content-between">
-                <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                 <div>
-                    <!--button 
-                        (click)="get_data_from_inquerito_e_BackOffice(inqueritoSelecionado?.id)"
-                        class="btn btn-success btn-sm">teste
-                    </!--button-->
-                    <label>OBS: Formulário em desenvolvimento...
-                    </label>
+                    <button (click)="limparCampos()" class="btn btn-light btn-sm">Limpar campos
+                    </button>
+                </div>
+                <div>
+                    <button class="btn btn-success btn-sm">Guardar
+                    </button>
                 </div>
             </div>
         </div>

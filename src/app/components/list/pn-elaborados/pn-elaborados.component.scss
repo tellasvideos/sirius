@@ -9,6 +9,20 @@ body {
     /* Hide scrollbars */
 }
 
+
+.is-invalid.ng-select-container {
+    border-color: red !important;
+}
+
+.is-invalid.form-select {
+    border-color: red !important;
+}
+
+.is-invalid.form-control {
+    border-color: red;
+}
+
+
 mat-drawer {
     overflow: hidden;
     width: 270px;

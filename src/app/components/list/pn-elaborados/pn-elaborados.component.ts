@@ -52,6 +52,8 @@ export class PnElaboradosComponent implements OnInit {
   pn_pendente_no_banco?: boolean;
   justificacao_pn_pendente_no_banco: any;
   data_primeiro_pedido_reembolso: any;
+  
+  _touched: boolean = false;
 
   constructor(
     private modalService: MdbModalService,
@@ -257,6 +259,16 @@ export class PnElaboradosComponent implements OnInit {
     return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
   }
 
-
+  limparCampos() {
+    this.data_analise_cti = null;
+    this.recusado_pelo_cti = false;
+    this.justificacao_recusado_pelo_cti = null;
+    this.data_aprovacao_financiamento_mg = null;
+    this.data_aprovacao_financiamento_banco = null;
+    this.pn_pendente_no_banco = undefined;
+    this.justificacao_pn_pendente_no_banco = null;
+    this.data_primeiro_pedido_reembolso = null;
+  }
+  
 
 }
