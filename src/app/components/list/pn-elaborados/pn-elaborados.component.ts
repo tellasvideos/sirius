@@ -43,7 +43,7 @@ export class PnElaboradosComponent implements OnInit {
     this.mostrarSegundoCampo = this.pn_pendente_no_banco;
   }
 
-  // DAdos do Formulario
+  // DAdos do this
   data_analise_cti: any;
   recusado_pelo_cti: boolean = false;
   justificacao_recusado_pelo_cti: any;
@@ -91,6 +91,31 @@ export class PnElaboradosComponent implements OnInit {
 
     this.getInqueritos();
     this.get_form_backoffice____();
+  }
+
+  enviarPN_elaborados() {
+
+    let pnElaborados = {
+      "recusado_pelo_cti": this.recusado_pelo_cti,
+      "justificacao_recusado_pelo_cti": this.justificacao_recusado_pelo_cti,
+      "data_aprovacao_financiamento_mg": this.data_aprovacao_financiamento_mg,
+      "data_aprovacao_financiamento_banco": this.data_aprovacao_financiamento_banco,
+      "pn_pendente_no_banco": this.pn_pendente_no_banco || false,
+      "justificacao_pn_pendente_no_banco": this.justificacao_pn_pendente_no_banco,
+      "data_primeiro_pedido_reembolso": this.data_primeiro_pedido_reembolso
+    };
+
+    this.dataService.Post_pnElaborados(pnElaborados)
+      .subscribe(
+        (response) => {
+          console.log('Dados enviados com sucesso!', response);
+          // Faça algo com a resposta da API, se necessário
+        },
+        (error) => {
+          console.error('Erro ao enviar os dados:', error);
+          // Trate o erro adequadamente
+        }
+      );
   }
 
   data_aprovacao_PGA_by_BM = '01/12/2023' // dados ficticios, futuramente substituido pelo pga

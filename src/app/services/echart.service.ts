@@ -20,7 +20,7 @@ export class EchartService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8001/api/v1/getinquirerformsnumberpermonth/', /*{ headers: headers }*/);
+    return this.httpClient.get<BasicEchartLineModel[]>('http://sirius.strongbox.ao:8001/api/v1/getinquirerformsnumberpermonth/', /*{ headers: headers }*/);
   }
 
   // to get chart data to Interst expressionn
@@ -28,7 +28,7 @@ export class EchartService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8001/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
+    return this.httpClient.get<BasicEchartLineModel[]>('http://sirius.strongbox.ao:8001/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
   }
 
   // to get Chart data to Value chain
@@ -36,7 +36,7 @@ export class EchartService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.httpClient.get<BasicEchartLineModel[]>('http://strongboxao.ddns.net:8001/api/v1/getvaluechainfrominterestexpressions/', /*{ headers: headers }*/);
+    return this.httpClient.get<BasicEchartLineModel[]>('http://sirius.strongbox.ao:8001/api/v1/getvaluechainfrominterestexpressions/', /*{ headers: headers }*/);
   }
 
 
