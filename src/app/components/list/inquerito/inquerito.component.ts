@@ -509,7 +509,7 @@ export class InqueritoComponent implements OnInit {
     } else if (resultado_Do_1_contacto_11) {
       return 'Recusada CV'
     } else {
-      return '';
+      return 'Não definido';
     }
   }
 

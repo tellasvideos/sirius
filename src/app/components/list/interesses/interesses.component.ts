@@ -165,7 +165,7 @@ export class InteressesComponent implements OnInit {
     } else if (Data_PN_entregue_ao_PDAC) {
       return 'PN em analise UIP PDAC'
     } {
-      return ''
+      return 'Não definido'
     }
   }
 

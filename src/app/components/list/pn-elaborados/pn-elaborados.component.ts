@@ -52,7 +52,7 @@ export class PnElaboradosComponent implements OnInit {
   pn_pendente_no_banco?: boolean;
   justificacao_pn_pendente_no_banco: any;
   data_primeiro_pedido_reembolso: any;
-  
+
   _touched: boolean = false;
 
   constructor(
@@ -90,20 +90,50 @@ export class PnElaboradosComponent implements OnInit {
     });
 
     this.getInqueritos();
-
-    /* this.activatedRoute.paramMap.subscribe(paramMap => {
-       this.id = paramMap.get('id');
-       this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.id).subscribe(data => {
-         // Converta data para um array se ainda não for
-         const dataArray = Array.isArray(data) ? data : [data];
-         this.backoffice_data = dataArray.reverse();
-         console.log('aquiiiiiiii', this.backoffice_data);
-       });
-     });*/
-
-    //this.get_form_backoffice()
-
     this.get_form_backoffice____();
+  }
+
+  data_aprovacao_PGA_by_BM = '01/12/2023' // dados ficticios, futuramente substituido pelo pga
+
+  // Estados PN (Part. 2)
+  getStatus_pn() {
+
+    const DataAnaliseCti0 = this.data_analise_cti === true;
+    const DataAnaliseCti = this.data_analise_cti && this.recusado_pelo_cti === false;
+    const PN_pendente_Banco = this.pn_pendente_no_banco === true;
+
+    const DataAnaliseCti_2 =
+      this.data_analise_cti &&
+      this.recusado_pelo_cti === false &&
+      this.data_aprovacao_financiamento_mg &&
+      this.selectedFinanciamentoBancario?.financiamento_bancario > 0;
+
+
+    const Data_Aprovacao_Financ_MG =
+      this.data_aprovacao_financiamento_mg &&
+      this.selectedFinanciamentoBancario?.financiamento_bancario === 0 ||
+      this.data_aprovacao_financiamento_mg &&
+      this.data_aprovacao_financiamento_banco;
+
+    const Data_1_pedido_desbolso =
+      this.data_primeiro_pedido_reembolso &&
+      this.data_aprovacao_PGA_by_BM;
+
+    if (DataAnaliseCti0) {
+      return 'PN pendente no CTI'
+    } else if (DataAnaliseCti) {
+      return 'PN aprovado pelo CTI, em análise MG'
+    } else if (DataAnaliseCti_2) {
+      return 'PN aprovado pelo CTI, MG aprovado, em análise no Banco'
+    } else if (PN_pendente_Banco) {
+      return 'PN pendente no banco'
+    } else if (Data_Aprovacao_Financ_MG) {
+      return 'Financiamento aprovado'
+    } else if (Data_1_pedido_desbolso) {
+      return 'PN implementado'
+    } else {
+      return 'N/D'
+    }
   }
 
   selectedFinanciamentoBancario: any;
@@ -269,6 +299,6 @@ export class PnElaboradosComponent implements OnInit {
     this.justificacao_pn_pendente_no_banco = null;
     this.data_primeiro_pedido_reembolso = null;
   }
-  
+
 
 }
