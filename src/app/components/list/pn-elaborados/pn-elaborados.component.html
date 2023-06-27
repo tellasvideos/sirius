@@ -88,7 +88,8 @@
                             </td>
 
                             <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'" class="not-it">
-                                <button (click)="mostrarFinanciamento(item.id)" type="button" class="btn btn-link btn-sm btn-rounded" *ngIf="
+                                <button (click)="mostrarFinanciamento(item.id)" type="button"
+                                    class="btn btn-link btn-sm btn-rounded" *ngIf="
                                 this.user_logged.department === 'Back Off' || this.user_logged.department === 'M&A'"
                                     data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>
@@ -118,7 +119,7 @@
 
                 <!--input type="checkbox" [(ngModel)]="primeiraSelecao" (change)="onPrimeiraSelecaoChange()">
                 <input type="text" [(ngModel)]="segundaTexto" *ngIf="mostrarSegundoCampo"-->
-
+                <!-- {{selectedFinanciamentoBancario?.data_pn_entregue_ao_pdac}}-->
                 <!-- Pergunta 19 -->
                 <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
                     <div>
@@ -159,12 +160,12 @@
 
                 <!-- Pergunta 21 -->
                 <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                    *ngIf="this.recusado_pelo_cti === false">
+                    *ngIf="!recusado_pelo_cti || false">
                     <div>
                         <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
                     </div>
                     <div>
-                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_mg"
+                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_mg" (change)="checkDates2()"
                             name="data_aprovacao_financiamento_mg" max="{{maxDate | date:'yyyy-MM-dd'}}"
                             [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                             class="form-control form-control-sm">
@@ -183,7 +184,7 @@
                         <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
                     </div>
                     <div>
-                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_banco"
+                        <input type="date" [(ngModel)]="data_aprovacao_financiamento_banco" (change)="checkDates()"
                             name="data_aprovacao_financiamento_banco" max="{{maxDate | date:'yyyy-MM-dd'}}"
                             [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                             class="form-control form-control-sm">
@@ -191,7 +192,7 @@
                 </div>
 
                 <!-- Pergunta 23 -->
-                <div *ngIf="data_aprovacao_financiamento_mg && data_aprovacao_financiamento_banco === '' "
+                <div *ngIf="data_aprovacao_financiamento_mg && !data_aprovacao_financiamento_banco"
                     class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                     <div>
                         <label>Pendente no Banco?</label>
@@ -226,7 +227,7 @@
                         </label>
                     </div>
                     <div>
-                        <input type="date" [(ngModel)]="data_primeiro_pedido_reembolso"
+                        <input type="date" [(ngModel)]="data_primeiro_pedido_reembolso" (change)="checkDates3()"
                             name="data_primeiro_pedido_reembolso" max="{{maxDate | date:'yyyy-MM-dd'}}"
                             [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                             class="form-control form-control-sm">

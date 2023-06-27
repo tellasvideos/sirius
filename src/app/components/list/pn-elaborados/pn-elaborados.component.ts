@@ -114,6 +114,48 @@ export class PnElaboradosComponent implements OnInit {
     }
   }
 
+  checkDates() {
+    const pnEntregueDate = this.selectedFinanciamentoBancario?.data_pn_entregue_ao_pdac;
+    const DataAnaliseCti = this.data_analise_cti;
+    const DataAprovFinancBanco = this.data_aprovacao_financiamento_banco;
+    const today = new Date();
+
+    if (DataAprovFinancBanco < DataAnaliseCti) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A Data de aprovação de financiamento no banco" não pode ser anterior à "Data de análise ao CTI".',
+      })
+    }
+
+  }
+
+  checkDates2() {
+    const DataAnaliseCti = this.data_analise_cti;
+    const DAtaAprovFinancMG = this.data_aprovacao_financiamento_mg;
+
+    if (DAtaAprovFinancMG < DataAnaliseCti) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A Data de aprovação de financiamento MG" não pode ser anterior à "Data de análise ao CTI".',
+      })
+    }
+  }
+
+  checkDates3() {
+    const DataAprovFinancBanco = this.data_aprovacao_financiamento_banco;
+    const DAtaAprovFinancMG = this.data_aprovacao_financiamento_mg;
+    const Data_1_pedido_de_desenbolso = this.data_primeiro_pedido_reembolso;
+
+    if (Data_1_pedido_de_desenbolso < DAtaAprovFinancMG || Data_1_pedido_de_desenbolso < DataAprovFinancBanco) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: '"A Data do 1º pedido de desembolso" não pode ser anterior à "Data de aprovação do financiamento ao MG ou Banco".',
+      })
+    }
+  }
 
 
   // Função de validação personalizada para justificacao_recusado_pelo_cti
@@ -202,7 +244,7 @@ export class PnElaboradosComponent implements OnInit {
           status_pn: item.status_pn,
           data_pn_entregue_ao_pdac: item.data_pn_entregue_ao_pdac,
           financiamento_bancario: item.financiamento_bancario,
-          inquerito: item.inquerito
+          inquerito: item.inquerito,
         };
       });
 
