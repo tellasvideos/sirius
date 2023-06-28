@@ -759,4 +759,15 @@ export class DataService {
   Post_pnElaborados(form_data: any) {
     return this.http.post(this.pn_elaborado_URL + '/pnelaborados/', form_data)
   }
+
+  // A function to get data in PNelaborados
+  get_pn_elaborado_URL = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/';
+  Get_pnElaborados() {
+    return this.http.get<any[]>(this.get_pn_elaborado_URL)
+  }
+
+   // Method to Delete pn elaborados
+   deletePnelaborados(id: any) {
+    return this.http.delete(`${this.get_pn_elaborado_URL}${id}/`).pipe(take(1));
+  }
 }

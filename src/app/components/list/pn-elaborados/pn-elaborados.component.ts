@@ -80,8 +80,11 @@ export class PnElaboradosComponent implements OnInit {
   }
 
   inqueritoSelecionado: any;
+  remove?: boolean;
 
   ngOnInit(): void {
+
+    this.remove === false;
 
     // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
@@ -102,6 +105,7 @@ export class PnElaboradosComponent implements OnInit {
 
     this.getInqueritos();
     this.get_form_backoffice____();
+
   }
 
   selecionarInquerito(item: any) {
@@ -226,14 +230,37 @@ export class PnElaboradosComponent implements OnInit {
     const statusPN = this.getStatus_pn();
 
     if (statusPN === 'PN implementado') {
-      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback2, errorCallback*/);
+      this.dataService.Post_pnElaborados(formData).subscribe(successCallback2, errorCallback);
       this.router.navigate(['pn-implementados']);
+      // Remover o item selecionado da lista inicial
+
     } else {
-      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback, errorCallback*/);
+      this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
     }
+
+
   }
 
 
+  get_pn: any;
+  get_pn_elaborados() {
+    this.dataService.Get_pnElaborados().subscribe(data => {
+      this.get_pn = data;
+      console.log('pn elab', this.get_pn)
+    })
+  }
+
+  delete_pn(id: any) {
+    this.dataService.deletePnelaborados(id).subscribe(
+      response => {
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success'
+        )
+      }
+    )
+  }
 
 
   selectedFinanciamentoBancario: any | number;
@@ -324,8 +351,6 @@ export class PnElaboradosComponent implements OnInit {
     });
   }
 
-
-
   alert_error() {
     Swal.fire({
       icon: 'error',
@@ -367,6 +392,7 @@ export class PnElaboradosComponent implements OnInit {
 
       console.log('dados mapeados: ', this.mappedFormBackoffice);
     });
+
   }
 
 

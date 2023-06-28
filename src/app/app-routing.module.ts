@@ -46,6 +46,7 @@ import { VisitasComponent } from './components/list/visitas/visitas.component';
 import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ver-inquerito.component';
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
 import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
+import { PnImplementadosComponent } from './components/list/pn-implementados/pn-implementados.component';
 
 
 // configuração de rotas
@@ -57,7 +58,7 @@ const routes: Routes = [
   { path: 'inquerito', component: InqueritoComponent, canActivate: [AuthGuard] },
   { path: 'inquiridor', component: InquiridorComponent, canActivate: [AuthGuard] },
   { path: 'interesses', component: InteressesComponent, canActivate: [AuthGuard] },
-  { path: 'recpass', component: RecpassComponent,  },
+  { path: 'recpass', component: RecpassComponent, },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'header', component: HeaderComponent, canActivate: [AuthGuard] },
   { path: 'footer', component: FooterComponent, canActivate: [AuthGuard] },
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: 'single-prop', component: SinglePropComponent, canActivate: [AuthGuard] },
   { path: 'pgas', component: PgasComponent, canActivate: [AuthGuard] },
   { path: 'pn-elaborados', component: PnElaboradosComponent, canActivate: [AuthGuard] },
+  { path: 'pn-implementados', component: PnImplementadosComponent, canActivate: [AuthGuard] },
   { path: 'visitas', component: VisitasComponent, canActivate: [AuthGuard] },
   { path: 'single-interest/:id', component: SingleInterestComponent, canActivate: [AuthGuard] },
   { path: 'edit-interest/:id', component: EditInterestComponent, canActivate: [AuthGuard] },
