@@ -187,6 +187,7 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
 
   backoffice_data: any;
 
+  pnelaborados: any;
 
   alldata: any;
 

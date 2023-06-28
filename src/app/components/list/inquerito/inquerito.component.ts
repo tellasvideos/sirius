@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { timer } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
 
@@ -378,6 +378,8 @@ export class InqueritoComponent implements OnInit {
     this.getUserFrontOFF();
     this.get_inquireFormsByPendentes();
 
+    this.get_MI_Duplicada()
+
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
@@ -414,6 +416,21 @@ export class InqueritoComponent implements OnInit {
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
+    })
+  }
+
+  mi: any;
+  get_MI_Duplicada() {
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.mi = data;
+      const simplifiedNames = data.map(mi => mi['s2gp/s2g1q1/prop_nome']);
+      this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
+
+      this.mi = data.map(mi => mi['s2gp/s2g1q1/prop_nome'])
+      this.mi = this.mi.sort(function (a: any, b: any) {
+        return b._id - a._id
+      })
+      console.log('MI duplicados', this.duplicateNames);
     })
   }
 
@@ -525,74 +542,55 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    const fileList: FileList = this.selectedFile;
-    const documents: FileList = fileList;
 
-    const fileList2: FileList = this.selectedFile2;
-    const inquerito_preenchido: FileList = fileList2;
+    const formData = new FormData()
 
-    const formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }
-
-    //formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
-    // formData.append("provincia", this.angForm.get('provincia')?.value);
-    // formData.append("municipio", this.angForm.get('municipio')?.value);
-    // formData.append("aldeia", this.angForm.get('aldeia')?.value);
-    // formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
-    //formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
-    //formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
-    //formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
-    //formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
-    //formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-    //formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
-    //formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
-    //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
-    //formData.append("que_tipo_de_negocio_esta", this.angForm.get('que_tipo_de_negocio_esta')?.value);
-    //formData.append("em_qual_cadeia_de_valor_vai_se_implementar_o_projecto", this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value);
-    //formData.append("que_tipo", this.angForm.get('que_tipo')?.value);
-    //formData.append("que_tipo_2", this.angForm.get('que_tipo_2')?.value);
-    //formData.append("que_tipo_3", this.angForm.get('que_tipo_3')?.value);
     formData.append("status", this.getStatus());
     formData.append("created_at", this.angForm.get('created_at')?.value);
-    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-    //formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    formData.append("manifestacao_de_interesse", (this.angForm.get('manifestacao_de_interesse')?.value));
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        this.alert_success(); // close modal
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
 
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
-      },
-      error => { this.alert_error(); }
-    );
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      //console.log('inquérito', data);
+
+      // Verificar se um campo do formData já existe localmente
+      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      if (campoExistente) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "Manifestação de Interesse já Existente.",
+        })
+      } else {
+        this.dataService.salvaInquireForm(formData).subscribe(
+          (response: any) => {
+            console.log(response.manifestacao_de_interesse)
+
+            this.alert_success();
+            // close modal
+            const modal = document.getElementById('exampleModalToggle');
+            if (modal) {
+              modal.style.display = 'none';
+
+              // Espera 3 segundos antes de recarregar a página
+              timer(2000).pipe(delay(2000)).subscribe(() => {
+                location.reload();
+              });
+            }
+
+          },
+          (error: any) => { this.alert_error(); }
+        );
+      }
+
+    });
 
     this.get_inquireForms();
-    //this.resetForm();
-    //this.fecharModal_();
-    //this.fecharModal();
-    // this.closeModal('exampleModalToggle');
-
 
   }
 
@@ -711,29 +709,44 @@ export class InqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      //console.log('inquérito', data);
 
+      // Verificar se um campo do formData já existe localmente
+      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      if (campoExistente) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "Manifestação de Interesse já Existente.",
+        })
+      } else {
+        this.dataService.salvaInquireForm(formData).subscribe(
+          (response: any) => {
+            console.log(response.manifestacao_de_interesse)
 
+            this.alert_success();
+            // close modal
+            const modal = document.getElementById('exampleModalToggle');
+            if (modal) {
+              modal.style.display = 'none';
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        this.alert_success();
-        // close modal
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
+              // Espera 3 segundos antes de recarregar a página
+              timer(2000).pipe(delay(2000)).subscribe(() => {
+                location.reload();
+              });
+            }
 
-        // Espera 2 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
-      },
-      error => { this.alert_error(); }
-    )
+          },
+          (error: any) => { this.alert_error(); }
+        );
+      }
+
+    });
 
     this.get_inquireForms();
-    //this.resetForm();
-    // this.closeModal('exampleModalToggle');
 
   }
 
@@ -859,25 +872,44 @@ export class InqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        this.alert_success();
-        // close modal
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
-      },
-      error => { this.alert_error(); }
-    )
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      //console.log('inquérito', data);
+
+      // Verificar se um campo do formData já existe localmente
+      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      if (campoExistente) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "Manifestação de Interesse já Existente.",
+        })
+      } else {
+        this.dataService.salvaInquireForm(formData).subscribe(
+          (response: any) => {
+            console.log(response.manifestacao_de_interesse)
+
+            this.alert_success();
+            // close modal
+            const modal = document.getElementById('exampleModalToggle');
+            if (modal) {
+              modal.style.display = 'none';
+
+              // Espera 3 segundos antes de recarregar a página
+              timer(2000).pipe(delay(2000)).subscribe(() => {
+                location.reload();
+              });
+            }
+
+          },
+          (error: any) => { this.alert_error(); }
+        );
+      }
+
+    });
 
     this.get_inquireForms();
-    this.resetForm();
-    //this.closeModal('exampleModalToggle');
 
 
   }
@@ -955,40 +987,6 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    /*if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      if (!this.angForm.get('data_validacao_inquerito')?.value) {
-        this.alert_error_Dat_val_inq();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-        this.alert_error_Que_tipo_negocio();
-      }
-      return;
-    }*/
-
-    /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-        this.alert_error_Em_qual_cadeia();
-      }
-      return;
-    }*/
 
 
     let fileList: FileList = this.selectedFile;
@@ -1042,25 +1040,44 @@ export class InqueritoComponent implements OnInit {
 
 
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        this.alert_success(); const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      //console.log('inquérito', data);
 
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
-      },
+      // Verificar se um campo do formData já existe localmente
+      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      if (campoExistente) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "Manifestação de Interesse já Existente.",
+        })
+      } else {
+        this.dataService.salvaInquireForm(formData).subscribe(
+          (response: any) => {
+            console.log(response.manifestacao_de_interesse)
 
-      error => { this.alert_error(); }
-    )
+            this.alert_success();
+            // close modal
+            const modal = document.getElementById('exampleModalToggle');
+            if (modal) {
+              modal.style.display = 'none';
+
+              // Espera 3 segundos antes de recarregar a página
+              timer(2000).pipe(delay(2000)).subscribe(() => {
+                location.reload();
+              });
+            }
+
+          },
+          (error: any) => { this.alert_error(); }
+        );
+      }
+
+    });
 
     this.get_inquireForms();
-    // this.resetForm();
-    //this.closeModal('exampleModalToggle');
 
 
   }
@@ -1152,33 +1169,6 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    /*if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-      if (!this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value) {
-        this.alert_error_Em_qual_cadeia();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('que_tipo')?.value) {
-      if (!this.angForm.get('que_tipo')?.value) {
-        this.alert_error_produtor();
-      }
-      return;
-    }
- 
-    if (!this.angForm.get('que_tipo_2')?.value) {
-      if (!this.angForm.get('que_tipo_2')?.value) {
-        this.alert_error_Agregador();
-      }
-      return;
-    }
- 
-    if (!this.angForm.get('que_tipo_3')?.value) {
-      if (!this.angForm.get('que_tipo_3')?.value) {
-        this.alert_error_Transform();
-      }
-      return;
-    }*/
 
     if (!this.angForm.get('inquerito_preenchido')?.value) {
       if (!this.angForm.get('inquerito_preenchido')?.value) {
@@ -1244,27 +1234,64 @@ export class InqueritoComponent implements OnInit {
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    this.dataService.salvaInquireForm(formData).subscribe(
-      success => {
-        this.alert_success();
-        // close modal
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
-        this.route.navigate(['interesses'])
-        // Executar o timer somente após a resposta da API ser recebida
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
+    /* this.dataService.salvaInquireForm(formData).subscribe(
+       success => {
+         this.alert_success();
+         // close modal
+         const modal = document.getElementById('exampleModalToggle');
+         if (modal) {
+           modal.style.display = 'none';
+         }
+         this.route.navigate(['interesses'])
+         // Executar o timer somente após a resposta da API ser recebida
+         timer(2000).pipe(delay(2000)).subscribe(() => {
+           location.reload();
+         });
+ 
+       },
+       error => { this.alert_error(); }
+     )
+ 
+     this.get_inquireForms();*/
 
-      },
-      error => { this.alert_error(); }
-    )
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+      //console.log('inquérito', data);
+
+      // Verificar se um campo do formData já existe localmente
+      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      if (campoExistente) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "Manifestação de Interesse já Existente.",
+        })
+      } else {
+        this.dataService.salvaInquireForm(formData).subscribe(
+          (response: any) => {
+            console.log(response.manifestacao_de_interesse)
+
+            this.alert_success();
+            // close modal
+            const modal = document.getElementById('exampleModalToggle');
+            if (modal) {
+              modal.style.display = 'none';
+              this.route.navigate(['interesses'])
+              // Espera 3 segundos antes de recarregar a página
+              timer(2000).pipe(delay(2000)).subscribe(() => {
+                location.reload();
+              });
+            }
+
+          },
+          (error: any) => { this.alert_error(); }
+        );
+      }
+
+    });
 
     this.get_inquireForms();
-    //this.resetForm();
-    
 
   }
 
@@ -1325,12 +1352,12 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  // nome_simplificado duplicados
+  // nome_simplificado MI duplicados
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
-      const simplifiedNames = data.map(inqueritos => inqueritos.nome_simplificado);
+      const simplifiedNames = data.map(inqueritos => inqueritos.manifestacao_de_interesse);
       this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
-      console.log('nome_simplificado duplicados', this.duplicateNames);
+      console.log('nome_simplificado da MI duplicados', this.duplicateNames);
     });
   }
 
@@ -1569,14 +1596,17 @@ export class InqueritoComponent implements OnInit {
   showDuplicatedInput_1: boolean = true;
   duplicatedName: string = '';
 
-  showInput(show: boolean) {
-    this.showDuplicatedInput = show;
-    if (!show) {
-      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    this.angForm.get('duplicada_da')?.reset();
+  showInput() {
+
+    this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
+
+    /* this.showDuplicatedInput = show;
+     if (!show) {
+       this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
+       this.duplicatedName = ''; // Limpa o valor do campo duplicado
+     }
+     // this.resetForm()
+     this.angForm.get('duplicada_da')?.reset();*/
   }
 
   showInputDidas(show: boolean) {
@@ -1594,7 +1624,7 @@ export class InqueritoComponent implements OnInit {
     console.log('doc selected', this.selectedFile)
   }
 
-  
+
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
     console.log('doc selected 2', this.selectedFile2)

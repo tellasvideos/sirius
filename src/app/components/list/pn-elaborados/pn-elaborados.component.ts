@@ -38,7 +38,7 @@ export class PnElaboradosComponent implements OnInit {
   mostrarSegundoCampo?: boolean;
 
   onPrimeiraSelecaoChange() {
-    this.mostrarSegundoCampo = this.angForm.get('pn_pendente_no_banco')?.value;
+    this.mostrarSegundoCampo = this.angForm.get('recusado_pelo_cti')?.value;
   }
 
   onPendenteNoBanco() {
@@ -84,8 +84,7 @@ export class PnElaboradosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.remove === false;
-
+    this.get_pn_elaborados()
     // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
@@ -251,15 +250,8 @@ export class PnElaboradosComponent implements OnInit {
   }
 
   delete_pn(id: any) {
-    this.dataService.deletePnelaborados(id).subscribe(
-      response => {
-        Swal.fire(
-          'Eliminado!',
-          'O seu registo foi eliminado.',
-          'success'
-        )
-      }
-    )
+    this.dataService.deletePnelaborados(id).subscribe()
+    this.get_pn_elaborados()
   }
 
 

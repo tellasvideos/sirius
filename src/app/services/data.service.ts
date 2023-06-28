@@ -766,8 +766,18 @@ export class DataService {
     return this.http.get<any[]>(this.get_pn_elaborado_URL)
   }
 
-   // Method to Delete pn elaborados
-   deletePnelaborados(id: any) {
+  // Method to Delete pn elaborados
+  deletePnelaborados(id: any) {
     return this.http.delete(`${this.get_pn_elaborado_URL}${id}/`).pipe(take(1));
   }
+
+  url_consulta_mi = 'http://sirius.strongbox.ao:8001/api/v1';
+
+  consultarManifestacaoExistente(manifestacao: any): Observable<any> {
+   // const encodedManifestacao = encodeURIComponent(manifestacao);
+    const params = new HttpParams().set('manifestacao_de_interesse', manifestacao);
+    return this.http.post(this.url_consulta_mi + '/inqueritos/', null, { params });
+  }
 }
+
+

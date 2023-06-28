@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'" >{{item.id}} </td>
+                            <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{item.id}} </td>
                             <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">
                                 {{item.nome_simplificado}} </td>
                             <td *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN finalizado'">{{item.provincia}}
@@ -101,6 +101,9 @@
             </div>
         </div>
 
+        <!--ul *ngFor="let item of get_pn">
+            <li> {{item.status_pn}} </li> <button (click)="delete_pn(item.id)">limpar</button>
+        </!--ul-->
 
     </mat-drawer-content>
 </mat-drawer-container>
@@ -223,7 +226,7 @@
 
                     <!-- Pergunta 24 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
-                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value" style="width: 80%;">
+                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value === true" style="width: 80%;">
                         <div>
                             <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
                         </div>
@@ -236,8 +239,7 @@
                     </div>
 
                     <!-- Pergunta 25 *ngIf="angForm.get('data_aprovacao_financiamento_banco')?.value" -->
-                    <div 
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
                         <div>
                             <label for="data_primeiro_pedido_reembolso">Data 1° pedido de desembolso
                             </label>
