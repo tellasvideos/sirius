@@ -94,6 +94,7 @@ import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ve
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
 import { LoadingComponent } from './loading/loading.component';
 import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
+import { PnImplementadosComponent } from './components/list/pn-implementados/pn-implementados.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +147,7 @@ import { VerInqueritoFromBackofficeComponent } from './components/single-view/ve
     DocumentosInqueritoComponent,
     LoadingComponent,
     VerInqueritoFromBackofficeComponent,
+    PnImplementadosComponent,
   ],
   imports: [
     NgxPrintModule,
