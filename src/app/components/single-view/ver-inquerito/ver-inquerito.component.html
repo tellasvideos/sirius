@@ -37,20 +37,20 @@
                             <div>
                                 <input type="text" readonly [attr.disabled]="true"
                                     style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
-                                    value="{{inqueritos['duplicada_da'] }}">
+                                    formControlName="duplicada_da">
                             </div>
                         </div>
 
                         <!-- Pergunta 2.1 -->
                         <div class="mb-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;"
-                            *ngIf="showDuplicatedInput">
+                            *ngIf="angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Duplicada Com:</label>
                             </div>
 
                             <div class="my-element" style="margin-left: 10%;">
                                 <ng-select style="width:350px;" [items]="duplicateNames" [readonly]="true"
-                                    bindLabel="nome_simplificado" formControlName="duplicada_da" [searchable]="true"
+                                    bindLabel="nome_simplificado" formControlName="duplicada_da_2" [searchable]="true"
                                     placeholder=""></ng-select>
                             </div>
                         </div>
@@ -65,14 +65,14 @@
                                 <div>
                                     <input type="text" readonly [attr.disabled]="true"
                                         style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
-                                        value="{{inqueritos['didasTeste'] }}">
+                                        formControlName="didasTeste">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Pergunta 4 -->
                         <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Nome simplificado:</label>
                             </div>
@@ -87,7 +87,7 @@
 
                         <!-- Pergunta 5 -->
                         <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Inquiridor:</label>
                             </div>
@@ -106,7 +106,7 @@
 
                         <!-- Pergunta 6 -->
                         <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Província:</label>
                             </div>
@@ -124,7 +124,7 @@
 
                         <!-- Pergunta 7 -->
                         <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Município:</label>
 
@@ -138,7 +138,7 @@
 
                         <!-- Pergunta 8 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label>Aldeia:</label>
                             </div>
@@ -153,7 +153,7 @@
 
                         <!-- Pergunta 9 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="!showDuplicatedInput">
+                            *ngIf="!angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label for="data_1_contacto">Data do primeiro contato:</label>
                             </div>
@@ -168,7 +168,7 @@
 
                         <!-- Pergunta 9.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('data_1_contacto')?.value">
+                            *ngIf="this.angForm.get('data_1_contacto')?.value || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                             </div>
@@ -208,7 +208,7 @@
 
                         <!-- Pergunta 10 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
+                            *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label for="exampleFormControlInput2" class="form-label">Data da
                                     primeira visita:</label>
@@ -225,7 +225,7 @@
 
                         <!-- Pergunta 10.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-1" style="width: 80%;"
-                            *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
+                            *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Resultado
                                     da Visita:</label>
@@ -288,7 +288,7 @@
 
                         <!-- Pergunta 11.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
-                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label class="form-label" for="customFile">Inquérito Preenchido:</label>
                             </div>
@@ -310,7 +310,7 @@
 
                         <!-- Pergunta 11.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
-                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label class="form-label" for="customFile">Documentos do Proponente:
                                 </label>

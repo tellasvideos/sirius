@@ -337,7 +337,6 @@ export class EditInqueritoComponent implements OnInit {
 
       duplicada_da: [''],
       data_1_visita: [null],
-
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
@@ -554,7 +553,7 @@ export class EditInqueritoComponent implements OnInit {
 
 
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -656,7 +655,7 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("status", this.getStatus());
 
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -734,19 +733,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
 
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
 
     let formData = new FormData();
 
@@ -762,7 +749,12 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
     formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-    formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
+    const data1Visita = this.angForm.get('data_1_visita')?.value;
+    const formattedData1Visita = data1Visita ? new Date(data1Visita).toISOString().split('T')[0] : null;
+
+    if (formattedData1Visita !== null) {
+      formData.append("data_1_visita", formattedData1Visita);
+    }
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
 
@@ -847,19 +839,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
 
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
 
 
     let formData = new FormData();
@@ -882,7 +862,7 @@ export class EditInqueritoComponent implements OnInit {
     //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
 
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -961,19 +941,6 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
 
     if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -1430,4 +1397,19 @@ export class EditInqueritoComponent implements OnInit {
   }
 
 
+
+  OnDatachange(event: any) {
+    const inputDate = event.target.value;
+    const dateParts = inputDate.split('/');
+  
+    if (dateParts.length === 3) {
+      const day = dateParts[0];
+      const month = dateParts[1];
+      const year = dateParts[2];
+  
+      const formattedDate = `${year}-${month}-${day}`;
+      this.angForm.patchValue({ data_1_visita: formattedDate });
+    }
+  }
+  
 }

@@ -18,8 +18,6 @@
                     <form enctype="multipart/form-data" [formGroup]="angForm">
                         <div class="card-body">
 
-
-
                             <!-- Pergunta 1 -->
                             <div class="mb-3 mt-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;">
                                 <div>
@@ -48,7 +46,7 @@
                                 <div class="d-flex justify-content-between" style="width: 18%; margin-right: 191px;">
                                     <div>
                                         <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
-                                            (change)="showInput()" > 
+                                            (change)="showInput()">
                                     </div>
                                 </div>
 
@@ -63,8 +61,8 @@
 
                                 <div class="my-element" style="margin-left: 10%;">
                                     <ng-select style="width:350px;" [items]="duplicateNames"
-                                        bindLabel="nome_simplificado" formControlName="duplicada_da_2" [searchable]="true"
-                                        placeholder=""></ng-select>
+                                        bindLabel="nome_simplificado" formControlName="duplicada_da_2"
+                                        [searchable]="true" placeholder=""></ng-select>
                                 </div>
                             </div>
 
@@ -78,14 +76,14 @@
                                     <div style="margin-right: 303px;">
                                         <input type="checkbox" name="checkboxOption" [value]="true"
                                             formControlName="didasTeste" (click)="showInputDidas(true)"
-                                            [checked]="showDuplicatedInput_1">
+                                            [checked]="angForm.get('didasTeste')?.value">
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Pergunta 4 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Nome simplificado:</label>
                                 </div>
@@ -104,7 +102,7 @@
 
                             <!-- Pergunta 5 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Inquiridor:</label>
                                 </div>
@@ -127,7 +125,7 @@
 
                             <!-- Pergunta 6 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Província:</label>
                                 </div>
@@ -149,7 +147,7 @@
 
                             <!-- Pergunta 7 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Município:</label>
 
@@ -168,7 +166,7 @@
 
                             <!-- Pergunta 8 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Aldeia:</label>
                                 </div>
@@ -186,7 +184,7 @@
 
                             <!-- Pergunta 9 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="!showDuplicatedInput">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label for="data_1_contacto">Data do primeiro contato:</label>
                                 </div>
@@ -284,12 +282,7 @@
                                 <div>
                                     <input type="date" formControlName="data_1_visita" name="data_1_visita"
                                         max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                        style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
-                                        [ngClass]="{ 'is-invalid': angForm.get('data_1_visita')?.invalid && (angForm.get('data_1_visita')?.touched) }">
-                                    <div class="invalid-feedback"
-                                        *ngIf="angForm.get('data_1_visita')?.invalid && (angForm.get('data_1_visita')?.touched)">
-                                        * Campo obrigatório.
-                                    </div>
+                                        style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                                 </div>
                             </div>
 
@@ -304,16 +297,12 @@
                                 <div>
                                     <select class="form-select form-select-sm" (change)="carregardocs3()"
                                         style="width: 350px;" id="documento_em_falta" name="resultado_da_visita"
-                                        formControlName="resultado_da_visita"
-                                        [ngClass]="{ 'is-invalid': angForm.get('resultado_da_visita')?.invalid && (angForm.get('resultado_da_visita')?.touched) }">
+                                        formControlName="resultado_da_visita">
                                         <option value="" disabled selected hidden></option>
                                         <option *ngFor="let mun of resultados_da_visita" [value]="mun">
                                             {{mun}}</option>
                                     </select>
-                                    <div class="invalid-feedback"
-                                        *ngIf="angForm.get('resultado_da_visita')?.invalid && (angForm.get('resultado_da_visita')?.touched)">
-                                        * Campo obrigatório.
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -384,14 +373,6 @@
                                 </div>
                             </div>
 
-                            <!-- Exemplo para o campo "documents" -->
-                            <!--input type="file" formControlName="documents" (change)="onFilesSelected($event)"
-                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value"-->
-                            <!-- Exemplo para o campo "inquerito_preenchido" -->
-                            <!--input type="file" formControlName="inquerito_preenchido" (change)="onFileSelected2($event)"
-                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value"-->
-
-
                             <!-- Pergunta 11.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                                 *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
@@ -401,20 +382,10 @@
                                 </div>
 
                                 <div class="d-block">
-                                    <!--div style="width: 350px;">
-                                        <!--ul>
-                                            <li>
-                                                <a [href]="this.angForm.get('inquerito_preenchido')?.value"
-                                                    target="_blank">{{
-                                                    this.angForm.get('inquerito_preenchido')?.value
-                                                    }}</a>
-                                            </li>
-                                        </!ul>
-                                    </!--div-->
-                                    <br>
+
                                     <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
-                                     formControlName="inquerito_preenchido"
-                                        class="form-control" id="customFile" style="width: 350px;"
+                                        formControlName="inquerito_preenchido" class="form-control" id="customFile"
+                                        style="width: 350px;"
                                         [ngClass]="{ 'is-invalid': angForm.get('inquerito_preenchido')?.invalid && (angForm.get('inquerito_preenchido')?.touched) }">
                                     <div class="invalid-feedback"
                                         *ngIf="angForm.get('inquerito_preenchido')?.invalid && (angForm.get('inquerito_preenchido')?.touched)">
@@ -433,14 +404,6 @@
                                 </div>
 
                                 <div class="d-block">
-                                    <!--div style="width: 350px;">
-                                        <ul>
-                                            <li *ngFor="let document of angForm.get('documents')?.value">
-                                                <a [href]="document" target="_blank">{{ document }}</a>
-                                            </li>
-                                        </ul>
-                                    </!--div-->
-                                    <br>
                                     <input type="file" multiple (change)="onSelectedFile($event)" name="documents"
                                         accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documents"
                                         class="form-control" id="customFile" style="width: 350px;"
@@ -566,45 +529,42 @@
 
                             </div>
 
-
-
-                            
                         </div>
+
                         <div class="card-footer text-muted justify-content-between d-flex">
 
-                            <div *ngIf="showDuplicatedInput">
+                            <div *ngIf="this.angForm.get('duplicada_da')?.value === true">
                                 <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
-                                    
+
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
                                 <button type="submit" (click)="save_inquerito_2_parte()"
-                                    class="btn btn-success btn-sm">Guardar 
+                                    class="btn btn-success btn-sm">Guardar
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
-                                <button type="submit" (click)="save_inquerito_3_parte()"
-                                    class="btn btn-success btn-sm">Guardar 
+                                *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !this.angForm.get('duplicada_da')?.value === true">
+                                <button type=" submit" (click)="save_inquerito_3_parte()"
+                                    class="btn btn-success btn-sm">Guardar
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
+                                *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !this.angForm.get('duplicada_da')?.value === true">
                                 <button type="submit" (click)="save_inquerito_4_parte()"
-                                    class="btn btn-success btn-sm">Guardar 
+                                    class="btn btn-success btn-sm">Guardar
                                 </button>
                             </div>
 
                             <div *ngIf="isGuardar5Visible()">
                                 <button type="submit" (click)="save_inquerito_5_parte()"
-                                    class="btn btn-success btn-sm">Salvar 
+                                    class="btn btn-success btn-sm">Salvar
                                 </button>
                             </div>
-
 
                         </div>
                     </form>

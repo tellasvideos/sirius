@@ -334,8 +334,8 @@ export class InqueritoComponent implements OnInit {
       documento_em_falta_4: [null],
 
       duplicada_da: [false],
-      data_1_visita: ['', Validators.required],
-      resultado_da_visita: ['', Validators.required],
+      data_1_visita: [''],
+      resultado_da_visita: [''],
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: ['', Validators.required],
@@ -809,13 +809,6 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
-
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
@@ -968,12 +961,6 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
 
 
 
@@ -1136,12 +1123,6 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('resultado_da_visita')?.value) {
-      if (!this.angForm.get('resultado_da_visita')?.value) {
-        this.alert_error_Result();
-      }
-      return;
-    }
 
     if (!this.angForm.get('data_validacao_inquerito')?.value) {
       if (!this.angForm.get('data_validacao_inquerito')?.value) {
