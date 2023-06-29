@@ -401,19 +401,19 @@
                                 </div>
 
                                 <div class="d-block">
-                                    <div style="width: 350px;">
-                                        <ul>
+                                    <!--div style="width: 350px;">
+                                        <!--ul>
                                             <li>
                                                 <a [href]="this.angForm.get('inquerito_preenchido')?.value"
                                                     target="_blank">{{
                                                     this.angForm.get('inquerito_preenchido')?.value
                                                     }}</a>
                                             </li>
-                                        </ul>
-                                    </div>
+                                        </!ul>
+                                    </!--div-->
                                     <br>
                                     <input type="file" (change)="onSelectedFile2($event)" name="inquerito_preenchido"
-                                        accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="inquerito_preenchido"
+                                     formControlName="inquerito_preenchido"
                                         class="form-control" id="customFile" style="width: 350px;"
                                         [ngClass]="{ 'is-invalid': angForm.get('inquerito_preenchido')?.invalid && (angForm.get('inquerito_preenchido')?.touched) }">
                                     <div class="invalid-feedback"

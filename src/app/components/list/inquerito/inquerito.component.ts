@@ -808,12 +808,6 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
 
     if (!this.angForm.get('resultado_da_visita')?.value) {
       if (!this.angForm.get('resultado_da_visita')?.value) {
@@ -973,12 +967,6 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('data_1_visita')?.value) {
-      if (!this.angForm.get('data_1_visita')?.value) {
-        this.alert_error_Dat_1_vis();
-      }
-      return;
-    }
 
     if (!this.angForm.get('resultado_da_visita')?.value) {
       if (!this.angForm.get('resultado_da_visita')?.value) {
