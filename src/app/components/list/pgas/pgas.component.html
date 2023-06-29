@@ -60,9 +60,7 @@
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Estado PGAS</th>
                             <th scope="col" class="text-black not-it">ver</th>
-                            <th *ngIf="
-                            this.user_logged.department === 'Back Off' || this.user_logged.department === 'M&A'"
-                                scope="col" class="text-black not-it">Colar info</th>
+                            <th scope="col" class="text-black not-it">Colar info</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,7 +115,7 @@
                         </div>
                         <div class="my-element" style="margin-left: 10%;">
                             <ng-select [items]="nomesSimplificados" bindLabel="nome_simplificado"
-                                class="form-control form-control-sm" bindValue="nome_simplificado" style="width: 350px;"
+                                class="ng-select form-control-sm" bindValue="nome_simplificado" style="width: 350px;"
                                 formControlName="nome_simplificado" [searchable]="true" placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }">
                             </ng-select>
@@ -217,8 +215,7 @@
                             <label for="justificacao_pgas_pendente">Justificação PGAS está pendente:</label>
                         </div>
                         <div>
-                            <textarea formControlName="justificacao_pgas_pendente"
-                                name="justificacao_pgas_pendente"
+                            <textarea formControlName="justificacao_pgas_pendente" name="justificacao_pgas_pendente"
                                 [ngClass]="{ 'is-invalid': !angForm.get('justificacao_pgas_pendente')?.value && _touched }"
                                 required (blur)="_touched = true" style="width: 350px;"
                                 class="form-control form-control-sm"></textarea>

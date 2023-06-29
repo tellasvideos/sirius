@@ -85,7 +85,7 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
       documento_em_falta_2: this.fb.array(Array(5).fill('')),
       documento_em_falta_3: this.fb.array(Array(5).fill('')),
       documento_em_falta_4: this.fb.array(Array(5).fill('')),
-      duplicada_da: ['', Validators.required],
+      duplicada_da: [false],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: ['', Validators.required],
@@ -99,7 +99,7 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
       created_at: ['', Validators.required],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
-      didasTeste: [''],
+      didasTeste: [false],
       inquerito_preenchido: [''],
       documents: ['']
 
@@ -191,16 +191,6 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
 
   alldata: any;
 
-  showInputDidas(show: boolean) {
-    this.showDuplicatedInput_1 = show;
-    if (!show) {
-      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    //this.angForm.get('didasTeste')?.reset();
-  }
-
   duplicateNames: any;
 
   // nome_simplificado duplicados
@@ -212,20 +202,19 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
     });
   }
 
-  // Manipulador de checkboxs
-  showDuplicatedInput: boolean = false;
-  showDuplicatedInput_1: boolean = true;
-  duplicatedName: string = '';
-
-  showInput(show: boolean) {
-    this.showDuplicatedInput = show;
-    if (!show) {
-      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    this.angForm.get('duplicada_da')?.reset();
-  }
+   // Manipulador de checkboxs
+   showDuplicatedInput?: boolean;
+   showDuplicatedInput_1?: boolean;
+   duplicatedName: string = '';
+ 
+   showInput() {
+     this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
+   }
+ 
+   showInputDidas() {
+     this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value; // Desmarca a opção "Sim"
+   }
+ 
 
   getInqueritoByIdDocs() {
     this.dataService.get_InquireForm().subscribe(data => {

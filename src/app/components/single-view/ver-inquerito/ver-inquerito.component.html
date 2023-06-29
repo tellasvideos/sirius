@@ -22,7 +22,7 @@
                                 <label>Manifestação de Interesse:</label>
                             </div>
                             <div class="my-element" style="margin-left: 10%;">
-                                <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" [readonly]="true"
+                                <ng-select class="ng-select" [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" [readonly]="true"
                                     bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                     formControlName="manifestacao_de_interesse" [searchable]="true" placeholder="">
                                 </ng-select>
@@ -34,21 +34,11 @@
                             <div>
                                 <label>M.I Duplicada?</label>
                             </div>
-
-                            <div class="d-flex justify-content-between" style="width: 18%; margin-right: 191px;">
-                                <div>
-                                    <input type="checkbox" name="checkboxOption" readonly [attr.disabled]="true"
-                                        formControlName="duplicada_da" (click)="showInput(true)"
-                                        [checked]="showDuplicatedInput"> Sim
-                                </div>
-
-                                <div>
-                                    <input type="checkbox" name="checkboxOption" (click)="showInput(false)" readonly
-                                        [attr.disabled]="true" [checked]="!showDuplicatedInput">
-                                    Não
-                                </div>
+                            <div>
+                                <input type="text" readonly [attr.disabled]="true"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                    value="{{inqueritos['duplicada_da'] ? 'Sim' : 'Não'}}">
                             </div>
-
                         </div>
 
                         <!-- Pergunta 2.1 -->
@@ -72,10 +62,10 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <div style="margin-right: 303px;">
-                                    <input type="checkbox" readonly [attr.disabled]="true" name="checkboxOption"
-                                        [value]="true" formControlName="didasTeste" (click)="showInputDidas(true)"
-                                        [checked]="showDuplicatedInput_1">
+                                <div>
+                                    <input type="text" readonly [attr.disabled]="true"
+                                        style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                        value="{{inqueritos['didasTeste'] ? 'Sim' : 'Não'}}">
                                 </div>
                             </div>
                         </div>
@@ -140,9 +130,8 @@
 
                             </div>
                             <div>
-                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    id="municipio" name="municipio" required style="width: 350px;"
-                                    formControlName="municipio">
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm" id="municipio"
+                                    name="municipio" required style="width: 350px;" formControlName="municipio">
                             </div>
 
                         </div>
@@ -437,7 +426,7 @@
 
                         </div>
                     </form>
-                   
+
                     <div class="card-footer text-muted">
                     </div>
                 </div>

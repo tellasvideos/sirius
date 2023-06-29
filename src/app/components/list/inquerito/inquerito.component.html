@@ -140,9 +140,10 @@
                             <label>Manifestação de Interesse:</label>
                         </div>
                         <div class="my-element" style="margin-left: 10%;">
-                            <ng-select class="ng-select" [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome"
-                                bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
-                                formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
+                            <ng-select class="ng-select form-control-sm" [items]="pdac"
+                                bindLabel="s2gp/s2g1q1/prop_nome" bindValue="s2gp/s2g1q1/prop_nome"
+                                style="width: 350px;" formControlName="manifestacao_de_interesse" [searchable]="true"
+                                placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
                             </ng-select>
                             <div class="invalid-feedback"
@@ -180,9 +181,10 @@
                             <label>Duplicada Com:</label>
                         </div>
 
-                        <div class="ng-select" style="margin-left: 10%;">
+                        <div class="ng-select " style="margin-left: 10%;">
                             <ng-select style="width:350px;" [items]="duplicateNames" bindLabel="nome_simplificado"
-                                formControlName="duplicada_da_2" [searchable]="true" placeholder=""></ng-select>
+                                class="form-control form-control-sm" formControlName="duplicada_da_2"
+                                [searchable]="true" placeholder=""></ng-select>
                         </div>
                     </div>
 
@@ -195,7 +197,7 @@
                         <div class="d-flex justify-content-between">
                             <div style="margin-right: 303px;">
                                 <input type="checkbox" name="checkboxOption" formControlName="didasTeste"
-                                    (click)="showInputDidas(true)" [checked]="showDuplicatedInput_1">
+                                    (change)="showInputDidas()" [checked]="angForm.get('didasTeste')?.value">
                             </div>
                         </div>
                     </div>
@@ -393,9 +395,10 @@
                         </div>
 
                         <div>
-                            <input type="date" formControlName="data_1_visita" name="data_1_visita" (change)="checkData1()"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            <input type="date" formControlName="data_1_visita" name="data_1_visita"
+                                (change)="checkData1()" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm">
                         </div>
                     </div>
 

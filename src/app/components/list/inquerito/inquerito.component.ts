@@ -333,7 +333,7 @@ export class InqueritoComponent implements OnInit {
       documento_em_falta_3: [null],
       documento_em_falta_4: [null],
 
-      duplicada_da: [''],
+      duplicada_da: [false],
       data_1_visita: ['', Validators.required],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
@@ -347,7 +347,7 @@ export class InqueritoComponent implements OnInit {
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
-      didasTeste: [''],
+      didasTeste: [false],
       inquerito_preenchido: [''],
       documents: ['']
     });
@@ -1592,22 +1592,16 @@ export class InqueritoComponent implements OnInit {
   }
 
   // Manipulador de checkboxs
-  showDuplicatedInput: any;
-  showDuplicatedInput_1: any;
+  showDuplicatedInput?: boolean;
+  showDuplicatedInput_1?: boolean;
   duplicatedName: string = '';
 
   showInput() {
     this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
   }
 
-  showInputDidas(show: any) {
-    this.showDuplicatedInput_1 = show;
-    if (!show) {
-      this.angForm.get('didasTeste')?.setValue('true'); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    //this.angForm.get('didasTeste')?.reset();
+  showInputDidas() {
+    this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value; // Desmarca a opção "Sim"
   }
 
   onSelectedFile(e: any) {
@@ -1636,7 +1630,7 @@ export class InqueritoComponent implements OnInit {
     const Data_1_contacto = this.angForm.get('data_1_contacto')?.value;
     const Data_1_visita = this.angForm.get('data_1_visita')?.value;
 
-    if (Data_1_contacto <= Data_1_visita) {
+    if (Data_1_contacto > Data_1_visita) {
       Swal.fire({
         icon: "error",
         //title: "Oops...",
@@ -1650,7 +1644,7 @@ export class InqueritoComponent implements OnInit {
     const Data_1_entrega_in = this.angForm.get('data_validacao_inquerito')?.value;
     const Data_1_visita = this.angForm.get('data_1_visita')?.value;
 
-    if (Data_1_entrega_in >= Data_1_visita) {
+    if (Data_1_entrega_in < Data_1_visita) {
       Swal.fire({
         icon: "error",
         //title: "Oops...",

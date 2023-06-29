@@ -127,11 +127,11 @@ export class VerInqueritoComponent implements OnInit {
 
     this.carregardocs2();
 
-    this.activatedRoute.params.subscribe(params => {
+   /* this.activatedRoute.params.subscribe(params => {
       const itemId = params['id'];
       // Use o ID do item para buscar os detalhes do item ou realizar qualquer ação necessária
       console.log('ID do item:', itemId);
-    });
+    });*/
 
    /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
       this.carregardocs2();
@@ -139,15 +139,6 @@ export class VerInqueritoComponent implements OnInit {
 
   }
 
-  showInputDidas(show: boolean) {
-    this.showDuplicatedInput_1 = show;
-    if (!show) {
-      this.angForm.get('didasTeste')?.setValue(true); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    //this.angForm.get('didasTeste')?.reset();
-  }
 
   duplicateNames:any;
 
@@ -160,20 +151,7 @@ export class VerInqueritoComponent implements OnInit {
     });
   }
 
-  // Manipulador de checkboxs
-  showDuplicatedInput: boolean = false;
-  showDuplicatedInput_1: boolean = true;
-  duplicatedName: string = '';
-
-  showInput(show: boolean) {
-    this.showDuplicatedInput = show;
-    if (!show) {
-      this.angForm.get('duplicada_da')?.setValue(''); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    this.angForm.get('duplicada_da')?.reset();
-  }
+ 
 
   getInqueritoByIdDocs() {
     this.dataService.get_InquireForm().subscribe(data => {
@@ -276,25 +254,17 @@ export class VerInqueritoComponent implements OnInit {
   }*/
 
 
-  // muda o comportamento da checkbox sim ou não
-  onChangeyes(event: any) {
-    this.duplicada_da = event.target.value;
-    if (this.duplicada_da === this.opcoes[0]) {
+  // Manipulador de checkboxs
+  showDuplicatedInput?: boolean;
+  showDuplicatedInput_1?: boolean;
+  duplicatedName: string = '';
 
-    } else {
-      // this.duplicada_da == false
-    }
-
+  showInput() {
+    this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
   }
 
-  onChangeDidasTeste(event: any) {
-    this.nome_simplificado = event.target.value;
-    if (this.nome_simplificado === this.opcoesDidasTeste) {
-      this.nome_simplificado = ''
-    } else {
-      //  this.nome_simplificado = false
-      this.nome_simplificado = ''
-    }
+  showInputDidas() {
+    this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value; // Desmarca a opção "Sim"
   }
 
 

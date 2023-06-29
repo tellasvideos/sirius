@@ -26,7 +26,7 @@
                                     <label>Manifestação de Interesse:</label>
                                 </div>
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome"
+                                    <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
                                         bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                         formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
                                         [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
