@@ -194,7 +194,7 @@
 
                         <div class="d-flex justify-content-between">
                             <div style="margin-right: 303px;">
-                                <input type="checkbox" name="checkboxOption" [value]="true" formControlName="didasTeste"
+                                <input type="checkbox" name="checkboxOption" formControlName="didasTeste"
                                     (click)="showInputDidas(true)" [checked]="showDuplicatedInput_1">
                             </div>
                         </div>
@@ -393,7 +393,7 @@
                         </div>
 
                         <div>
-                            <input type="date" formControlName="data_1_visita" name="data_1_visita"
+                            <input type="date" formControlName="data_1_visita" name="data_1_visita" (change)="checkData1()"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
                         </div>
@@ -477,7 +477,7 @@
                         </div>
 
                         <div>
-                            <input type="date" formControlName="data_validacao_inquerito"
+                            <input type="date" formControlName="data_validacao_inquerito" (change)="checkData2()"
                                 name="data_validacao_inquerito" max="{{maxDate | date:'yyyy-MM-dd'}}"
                                 [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                                 class="form-control form-control-sm"

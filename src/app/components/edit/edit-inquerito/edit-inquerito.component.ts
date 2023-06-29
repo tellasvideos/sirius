@@ -360,11 +360,6 @@ export class EditInqueritoComponent implements OnInit {
 
 
 
-
-
-
-
-
   ngOnInit(): void {
     this.get_farm_names();
     this.get_interest_express();
@@ -373,7 +368,7 @@ export class EditInqueritoComponent implements OnInit {
     this.getProvincia();
     this.getPdac();
     this.getUserFrontOFF();
-    this.get_inquireFormsByPendentes();
+    this.get_MI_Duplicada()
     this.carregarMunicipios();
 
     // Pegar dados do user logado
@@ -438,7 +433,7 @@ export class EditInqueritoComponent implements OnInit {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
 
-  
+
 
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
   public getStatus(): string {
@@ -557,6 +552,8 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("status", this.getStatus());
 
 
+
+
     this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
       success => {
         this.alert_success();
@@ -564,7 +561,7 @@ export class EditInqueritoComponent implements OnInit {
         if (modal) {
           modal.style.display = 'none';
         }
-
+        this.route.navigate(['inquerito']);
         // Espera 3 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
@@ -573,19 +570,11 @@ export class EditInqueritoComponent implements OnInit {
       error => { this.alert_error(); }
     )
 
+
+
     this.get_inquireForms();
-    this.resetForm();
-    this.route.navigate(['inquerito']);
+
   }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -666,25 +655,25 @@ export class EditInqueritoComponent implements OnInit {
 
     formData.append("status", this.getStatus());
 
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
-      success => {
-        this.alert_success();
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
 
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-        });
-      },
-      error => { this.alert_error(); }
-    )
+      this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+        success => {
+          this.alert_success();
+          const modal = document.getElementById('exampleModalToggle');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+          this.route.navigate(['inquerito']);
+          // Espera 3 segundos antes de recarregar a página
+          timer(2000).pipe(delay(2000)).subscribe(() => {
+            location.reload();
+          });
+        },
+        error => { this.alert_error(); }
+      )
 
     this.get_inquireForms();
-    this.resetForm();
-    this.route.navigate(['inquerito']);
+
   }
 
 
@@ -776,28 +765,27 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+
+
     
-
-    this.dataService.EditInquerito(this.id, formData).subscribe(
-      success => {
-        this.alert_success();
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
-
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-          this.location.back();
-        });
-      },
-      error => { this.alert_error(); }
-    )
+      this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+        success => {
+          this.alert_success();
+          const modal = document.getElementById('exampleModalToggle');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+          this.route.navigate(['inquerito']);
+          // Espera 3 segundos antes de recarregar a página
+          timer(2000).pipe(delay(2000)).subscribe(() => {
+            location.reload();
+          });
+        },
+        error => { this.alert_error(); }
+      )
 
     this.get_inquireForms();
-   // this.resetForm();
-   // this.route.navigate(['inquerito']);
+
   }
 
 
@@ -873,7 +861,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-   
+
     let formData = new FormData();
 
     formData.append("status", this.getStatus());
@@ -894,27 +882,26 @@ export class EditInqueritoComponent implements OnInit {
     //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
 
 
-    this.dataService.EditInquerito(this.id, formData).subscribe(
-      success => {
-        this.alert_success();
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
+      this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+        success => {
+          this.alert_success();
+          const modal = document.getElementById('exampleModalToggle');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+          this.route.navigate(['inquerito']);
+          // Espera 3 segundos antes de recarregar a página
+          timer(2000).pipe(delay(2000)).subscribe(() => {
+            location.reload();
+          });
+        },
+        error => { this.alert_error(); }
+      )
 
-        // Espera 2 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-          this.location.back();
-        });
-      },
-      error => { this.alert_error(); }
-    )
+  
 
     this.get_inquireForms();
-   // this.resetForm();
-    //this.route.navigate(['inquerito']);
-    //this.closeModal('exampleModalToggle');
+
   }
 
 
@@ -995,19 +982,19 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-     if (!this.angForm.get('inquerito_preenchido')?.value) {
-       if (!this.angForm.get('inquerito_preenchido')?.value) {
-         this.alert_error_Inq_pre();
-       }
-       return;
-     }
- 
-     if (!this.angForm.get('documents')?.value) {
-       if (!this.angForm.get('documents')?.value) {
-         this.alert_error_Docs();
-       }
-       return;
-     }
+    if (!this.angForm.get('inquerito_preenchido')?.value) {
+      if (!this.angForm.get('inquerito_preenchido')?.value) {
+        this.alert_error_Inq_pre();
+      }
+      return;
+    }
+
+    if (!this.angForm.get('documents')?.value) {
+      if (!this.angForm.get('documents')?.value) {
+        this.alert_error_Docs();
+      }
+      return;
+    }
 
 
     let fileList: FileList = this.selectedFile;
@@ -1059,24 +1046,22 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
-    this.dataService.EditInquerito(this.id, formData).subscribe(
-      success => {
-        this.alert_success();
-        // close modal
-        const modal = document.getElementById('exampleModalToggle');
-        if (modal) {
-          modal.style.display = 'none';
-        }
-        this.route.navigate(['interesses'])
-        // Espera 2 segundos antes de recarregar aa páginaa
-        timer(2000).pipe(delay(2000)).subscribe(() => {
-          location.reload();
-          //this.location.back();
-        });
-      },
-      error => { this.alert_error(); }
-
-    )
+    
+      this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+        success => {
+          this.alert_success();
+          const modal = document.getElementById('exampleModalToggle');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+          this.route.navigate(['inquerito']);
+          // Espera 3 segundos antes de recarregar a página
+          timer(2000).pipe(delay(2000)).subscribe(() => {
+            location.reload();
+          });
+        },
+        error => { this.alert_error(); }
+      )
 
     this.get_inquireForms();
 
@@ -1133,13 +1118,19 @@ export class EditInqueritoComponent implements OnInit {
     })
   }
 
-  // nome_simplificado duplicados
-  get_inquireFormsByPendentes() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      const simplifiedNames = data.map(inqueritos => inqueritos.nome_simplificado);
+  mi: any;
+  get_MI_Duplicada() {
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.mi = data;
+      const simplifiedNames = data.map(mi => mi['s2gp/s2g1q1/prop_nome']);
       this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
-      console.log('nome_simplificado duplicados', this.duplicateNames);
-    });
+
+      this.mi = data.map(mi => mi['s2gp/s2g1q1/prop_nome'])
+      this.mi = this.mi.sort(function (a: any, b: any) {
+        return b._id - a._id
+      })
+      console.log('MI duplicados', this.duplicateNames);
+    })
   }
 
   // Alert services
@@ -1373,18 +1364,12 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   // Manipulador de checkboxs
-  showDuplicatedInput: boolean = false;
+  showDuplicatedInput?: boolean = false;
   showDuplicatedInput_1: boolean = true;
   duplicatedName: string = '';
 
-  showInput(show: boolean) {
-    this.showDuplicatedInput = show;
-    if (!show) {
-      this.angForm.get('duplicada_da')?.setValue(null); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    this.angForm.get('duplicada_da')?.reset();
+  showInput() {
+    this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
   }
 
   showInputDidas(show: boolean) {

@@ -48,13 +48,7 @@
                                 <div class="d-flex justify-content-between" style="width: 18%; margin-right: 191px;">
                                     <div>
                                         <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
-                                            (click)="showInput(true)" [checked]="showDuplicatedInput"> Sim
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox" name="checkboxOption" (click)="showInput(false)"
-                                            [checked]="!showDuplicatedInput_1">
-                                        Não
+                                            (change)="showInput()" > 
                                     </div>
                                 </div>
 
@@ -62,14 +56,14 @@
 
                             <!-- Pergunta 2.1 -->
                             <div class="mb-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;"
-                                *ngIf="showDuplicatedInput">
+                                *ngIf="this.angForm.get('duplicada_da')?.value === true">
                                 <div>
                                     <label>Duplicada Com:</label>
                                 </div>
 
                                 <div class="my-element" style="margin-left: 10%;">
                                     <ng-select style="width:350px;" [items]="duplicateNames"
-                                        bindLabel="nome_simplificado" formControlName="duplicada_da" [searchable]="true"
+                                        bindLabel="nome_simplificado" formControlName="duplicada_da_2" [searchable]="true"
                                         placeholder=""></ng-select>
                                 </div>
                             </div>
