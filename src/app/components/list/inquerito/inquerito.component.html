@@ -210,11 +210,15 @@
                         </div>
 
                         <div>
-                            <input style="width:350px;" class="form-control form-control-sm"
+                            <input style="width:350px;" class="form-control form-control-sm mb-2"
                                 [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }"
                                 formControlName="nome_simplificado" type="text" required name="nome_simplificado"
                                 aria-label=".form-control-sm example">
+                            <p style="font-size: 11px; line-height: 1rem; width:350px;">* Escolha um nome simplificado para
+                                este projecto se necessário, caso contrário basta
+                                copiar o nome da fazenda-proponente</p>
                         </div>
+
                         <div class="invalid-feedback"
                             *ngIf="angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched">
                             * Campo obrigatório.
