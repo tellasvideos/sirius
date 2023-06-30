@@ -50,13 +50,13 @@
                     <input class="form-control form-control-sm" placeholder="Pesquisar Nome Simplificado..."
                         [(ngModel)]="keyWord" type="text" style="width: 300px;">
                 </div>
-                <div class="mb-3">
+                <!--div class="mb-3">
                     <select class="form-select form-select-sm" id="duplicateNames" name="duplicateNames"
                         style="width: 200px;">
                         <option value="" disabled selected hidden>Lista de MI Duplicada</option>
                         <option disabled *ngFor="let prov of duplicateNames" [value]="prov">{{prov}}</option>
                     </select>
-                </div>
+                </!--div-->
             </div>
 
             <div class="table-responsive" id="print-section-list-inquerito">
@@ -140,7 +140,7 @@
                             <label>Manifestação de Interesse:</label>
                         </div>
                         <div class="my-element" style="margin-left: 10%;">
-                            <ng-select class="ng-select form-control-sm" [items]="pdac"
+                            <ng-select class="ng-select form-control-sm" [items]="prop_name"
                                 bindLabel="s2gp/s2g1q1/prop_nome" bindValue="s2gp/s2g1q1/prop_nome"
                                 style="width: 350px;" formControlName="manifestacao_de_interesse" [searchable]="true"
                                 placeholder=""
@@ -181,10 +181,10 @@
                             <label>Duplicada Com:</label>
                         </div>
 
-                        <div class="ng-select " style="margin-left: 10%;">
-                            <ng-select style="width:350px;" [items]="duplicateNames" bindLabel="nome_simplificado"
-                                class="form-control form-control-sm" formControlName="duplicada_da_2"
-                                [searchable]="true" placeholder=""></ng-select>
+                        <div class="ng-select" style="margin-left: 10%;">
+                            <ng-select style="width:350px;" [items]="inqueritos" bindLabel="nome_simplificado"
+                                bindValue="nome_simplificado" formControlName="duplicada_da_2" [searchable]="true"
+                                placeholder=""></ng-select>
                         </div>
                     </div>
 
@@ -204,7 +204,7 @@
 
                     <!-- Pergunta 4 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Nome simplificado:</label>
                         </div>
@@ -214,7 +214,8 @@
                                 [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }"
                                 formControlName="nome_simplificado" type="text" required name="nome_simplificado"
                                 aria-label=".form-control-sm example">
-                            <p style="font-size: 11px; line-height: 1rem; width:350px;">* Escolha um nome simplificado para
+                            <p style="font-size: 11px; line-height: 1rem; width:350px;">* Escolha um nome simplificado
+                                para
                                 este projecto se necessário, caso contrário basta
                                 copiar o nome da fazenda-proponente</p>
                         </div>
@@ -227,7 +228,7 @@
 
                     <!-- Pergunta 5 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Inquiridor:</label>
                         </div>
@@ -248,7 +249,7 @@
 
                     <!-- Pergunta 6 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Província:</label>
                         </div>
@@ -268,7 +269,7 @@
 
                     <!-- Pergunta 7 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Município:</label>
 
@@ -290,7 +291,7 @@
 
                     <!-- Pergunta 8 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Aldeia:</label>
                         </div>
@@ -308,7 +309,7 @@
 
                     <!-- Pergunta 9 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="!showDuplicatedInput">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label for="data_1_contacto">Data do primeiro contato:</label>
                         </div>
@@ -370,7 +371,7 @@
 
                     <!-- Pergunta 9.1.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento'">
+                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
                         <div>
                             <label for="documento_em_falta" class="mb-2">Documento em falta: (Para
                                 selecionar múltiplos documentos,
@@ -650,25 +651,25 @@
                         <button (click)="resetForm()" class="btn btn-light btn-sm">Limpar Campos</button>
                     </!--div-->
 
-                    <div *ngIf="showDuplicatedInput">
+                    <div *ngIf="showDuplicatedInput || showDuplicatedInput_1">
                         <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
                         </button>
                     </div>
 
                     <div
-                        *ngIf="!showDuplicatedInput && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
+                        *ngIf="!showDuplicatedInput && !showDuplicatedInput_1 && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada' && !isGuardar5Visible()">
                         <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar
                         </button>
                     </div>
 
                     <div
-                        *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput">
+                        *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput && !showDuplicatedInput_1">
                         <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
                         </button>
                     </div>
 
                     <div
-                        *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput">
+                        *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput && !showDuplicatedInput_1">
                         <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
                         </button>
                     </div>

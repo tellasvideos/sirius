@@ -158,7 +158,7 @@
                             <!--th scope="col" class="text-black not-it">Estatuto</!--th-->
                             <!--th scope="col" class="text-black not-it">Cadeias</!--th-->
                             <th scope="col" class="text-black not-it" *ngIf="
-                            this.user_logged.department === 'Back Off'">Colar info</th>
+                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true">Colar info</th>
                             <!--th scope="col" class="text-black not-it">Add Back Office</!--th-->
                         </tr>
                     </thead>
@@ -221,7 +221,7 @@
                                 </button>
                             </|td-->
                             <td *ngIf="
-                            this.user_logged.department === 'Back Off'" class="not-it"> <button type="button"
+                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true " class="not-it"> <button type="button"
                                     class="btn btn-link btn-sm btn-rounded" (click)="selecionarInquerito(item)"
                                     data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>

@@ -24,7 +24,7 @@
                                     <label>Manifestação de Interesse:</label>
                                 </div>
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
+                                    <ng-select [items]="prop_name" bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
                                         bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                         formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
                                         [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select style="width:350px;" [items]="duplicateNames"
+                                    <ng-select style="width:350px;" [items]="inqueritos"
                                         bindLabel="nome_simplificado" formControlName="duplicada_da_2"
                                         [searchable]="true" placeholder=""></ng-select>
                                 </div>
@@ -83,7 +83,7 @@
 
                             <!-- Pergunta 4 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label>Nome simplificado:</label>
                                 </div>
@@ -102,7 +102,7 @@
 
                             <!-- Pergunta 5 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label>Inquiridor:</label>
                                 </div>
@@ -125,7 +125,7 @@
 
                             <!-- Pergunta 6 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label>Província:</label>
                                 </div>
@@ -147,7 +147,7 @@
 
                             <!-- Pergunta 7 -->
                             <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label>Município:</label>
 
@@ -166,7 +166,7 @@
 
                             <!-- Pergunta 8 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label>Aldeia:</label>
                                 </div>
@@ -184,7 +184,7 @@
 
                             <!-- Pergunta 9 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true">
                                 <div>
                                     <label for="data_1_contacto">Data do primeiro contato:</label>
                                 </div>

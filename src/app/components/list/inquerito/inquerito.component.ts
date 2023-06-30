@@ -380,6 +380,9 @@ export class InqueritoComponent implements OnInit {
 
     this.get_MI_Duplicada()
 
+    //this.getFilteredPdacList(); // retorna apenas as MI ainda não adicionadas num inquerito
+    this.get_Nomes_simplificados() // retorna nomes simplificados do inquerito
+
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
@@ -408,16 +411,6 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  getPdac() {
-    this.dataService.proponentPDAC().subscribe(data => {
-      this.pdac = data;
-      this.prop_name = data.map(pdac => pdac['s2gp/s2g1q1/prop_nome'])
-      console.log('array pdac apenas nomes', this.prop_name)
-      this.pdac = this.pdac.sort(function (a: any, b: any) {
-        return b._id - a._id
-      })
-    })
-  }
 
   mi: any;
   get_MI_Duplicada() {
@@ -1321,7 +1314,7 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  // nome_simplificado MI duplicados
+  // nome_simplificado e duplicados
   get_inquireFormsByPendentes() {
     this.dataService.get_InquireForm().subscribe(data => {
       const simplifiedNames = data.map(inqueritos => inqueritos.manifestacao_de_interesse);
@@ -1622,5 +1615,60 @@ export class InqueritoComponent implements OnInit {
       this.angForm.get('data_validacao_inquerito')?.setValue('')
     }
   }
+
+  // filtrar nomes do pdac que nao foram usados no inquerito
+  filteredPdac: any;
+  pdacPropNome: any;
+  getFilteredPdacList() {
+    this.filteredPdac = this.pdac.filter((pdac: any) => {
+      this.pdacPropNome = pdac['s2gp/s2g1q1/prop_nome'];
+
+      return !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === this.pdacPropNome);
+    });
+    console.log('lista filtrada', this.filteredPdac)
+    return this.filteredPdac;
+  }
+
+  /*getPdac() {
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.pdac = data;
+      this.prop_name = data.map(pdac => pdac['s2gp/s2g1q1/prop_nome'])
+      console.log('array pdac apenas nomes', this.prop_name)
+      this.pdac = this.pdac.sort(function (a: any, b: any) {
+        return b._id - a._id
+      })
+    })
+  }*/
+
+  // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
+  getPdac() {
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.pdac = data;
+      this.prop_name = this.pdac
+        .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
+        .filter((propNome: any) => !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
+
+      console.log('Array pdac apenas nomes filtrados:', this.prop_name);
+
+      this.get_inquireForms()
+    });
+  
+  }
+
+
+
+
+  // mapear apenas os nomes simplificados
+  nomes_simplificados: any;
+  get_Nomes_simplificados() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data;
+
+      this.nomes_simplificados = this.inqueritos.map((inquerito: any) => inquerito.nome_simplificado);
+      console.log('Nomes simplificados:', this.nomes_simplificados);
+    });
+  }
+  
+
 
 }
