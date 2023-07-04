@@ -143,9 +143,9 @@
                         </div>
                         <div class="my-element" style="margin-left: 10%;">
                             <ng-select class="ng-select form-control-sm" [items]="prop_name"
-                                bindLabel="s2gp/s2g1q1/prop_nome" bindValue="s2gp/s2g1q1/prop_nome"
-                                style="width: 350px;" formControlName="manifestacao_de_interesse" [searchable]="true"
-                                placeholder=""
+                                (change)="autoCompleteProvincia()" bindLabel="s2gp/s2g1q1/prop_nome"
+                                bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
+                                formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
                             </ng-select>
                             <div class="invalid-feedback"
@@ -250,16 +250,8 @@
                             <label>Província:</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" id="provincia" name="provincia" required
-                                style="width: 350px;" formControlName="provincia" (change)="carregarMunicipios()"
-                                [ngClass]="{ 'is-invalid': angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched }">
-                                <option value="" disabled selected hidden></option>
-                                <option *ngFor="let prov of provincias" [value]="prov">{{prov}}</option>
-                            </select>
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched">
-                                * Campo obrigatório.
-                            </div>
+                            <input class="form-control form-control-sm" id="provincia" name="provincia" required
+                                style="width: 350px;" formControlName="provincia" readonly [attr.disabled]="true">
                         </div>
                     </div>
 
@@ -268,19 +260,12 @@
                         *ngIf="!showDuplicatedInput && !showDuplicatedInput_1">
                         <div>
                             <label>Município:</label>
-
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" id="municipio" name="municipio" required
+                            <input class="form-control form-control-sm" id="municipio" name="municipio" required
                                 style="width: 350px;" formControlName="municipio"
-                                [ngClass]="{ 'is-invalid': angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched }">
-                                <option value="" disabled selected hidden></option>
-                                <option *ngFor="let mun of municipios" [value]="mun">{{mun}}</option>
-                            </select>
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched">
-                                * Campo obrigatório.
-                            </div>
+                                [value]="devolver_nome_municipio(angForm.get('municipio')?.value) | async" readonly
+                                [attr.disabled]="true">
                         </div>
 
                     </div>

@@ -16,12 +16,16 @@ import * as bootstrap from 'bootstrap';
 
 import { ViewChild } from '@angular/core';
 
+import { AsyncPipe } from '@angular/common';
+
+
 
 
 @Component({
   selector: 'app-inquerito',
   templateUrl: './inquerito.component.html',
-  styleUrls: ['./inquerito.component.scss']
+  styleUrls: ['./inquerito.component.scss'],
+  providers: [AsyncPipe]
 })
 export class InqueritoComponent implements OnInit {
 
@@ -131,13 +135,14 @@ export class InqueritoComponent implements OnInit {
     'Recusada: CV inelegível'
     //  'Didas teste'
   ];
+
   provincias = ['Huila', 'Huambo', 'Cuanza Sul', 'Bié'];
   municipios: any;
   municipio: any;
   docs: any;
   selectedParc: any;
   parceiros: any;
-
+  retorno: any;
 
 
   fecharModal() {
@@ -293,10 +298,43 @@ export class InqueritoComponent implements OnInit {
   }
 
 
+  autoCompleteProvincia() {
+    const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
 
+    // Encontrar a PDAC correspondente à manifestação de interesse selecionada
+    const Provincia = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
 
+    // Atualizar o valor do campo "provincia" com base na PDAC selecionada
+    if (Provincia) {
+      this.angForm.patchValue({
+        provincia: Provincia['s2gp/s2g3/rep_provincia'],
+        municipio: Provincia['s2gp/s2g3/rep_municipio']
+      });
+      console.log(Provincia['s2gp/s2g3/rep_provincia']);
+      console.log(Provincia['s2gp/s2g3/rep_municipio']);
+    }
+  }
 
+  async carregarDadosMunicipio() {
+    if (!this.municipio || this.municipio.length === 0) {
+      this.municipio = await this.dataService.getMunicipio().toPromise();
+    }
+  }  
 
+  async devolver_nome_municipio(id: any) {
+    await this.carregarDadosMunicipio(); // Aguarda o carregamento dos dados do município
+
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    console.log(municipioSelecionado);
+
+    return municipioSelecionado ? municipioSelecionado.name : 'N/D';
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+    })
+  }
 
   reloadOnce: any;
   inqueritos: any;
@@ -382,14 +420,13 @@ export class InqueritoComponent implements OnInit {
 
     //this.getFilteredPdacList(); // retorna apenas as MI ainda não adicionadas num inquerito
     this.get_Nomes_simplificados() // retorna nomes simplificados do inquerito
+    this.getMunicipio()
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
       console.log('User logado', this.user_logged)
     });
-    //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
-
   }
 
   closeModal(modalId: string) {
@@ -1309,7 +1346,7 @@ export class InqueritoComponent implements OnInit {
 
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter((item:any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
+      this.inqueritos = data.filter((item: any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
       console.log('inquérito', data)
     })
   }
@@ -1652,7 +1689,7 @@ export class InqueritoComponent implements OnInit {
 
       this.get_inquireForms()
     });
-  
+
   }
 
 
@@ -1668,7 +1705,7 @@ export class InqueritoComponent implements OnInit {
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
-  
+
 
   unDisplay_StatusItem(item: any): boolean {
     if (item.status === 'Incomunicavel' && item.novo_tel === 'Nº Tel errado') {
@@ -1676,8 +1713,8 @@ export class InqueritoComponent implements OnInit {
     }
     return true; // Exibir item
   }
-  
-  
+
+
 
 
 }
