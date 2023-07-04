@@ -81,37 +81,39 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <!--td>{{item.responsible}} </!--td-->
-                            <td>{{item.nome_simplificado}}</td>
-                            <td>{{item.provincia}}</td>
-                            <td>{{item.municipio}}</td>
-                            <td>{{item.inqueridor}}</td>
-                            <td>{{item.status}}</td>
-                            <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
-                            <td class="not-it">
-                                <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </td>
+                            <ng-container *ngIf="unDisplay_StatusItem(item)">
+                                <td>{{item.nome_simplificado}}</td>
+                                <td>{{item.provincia}}</td>
+                                <td>{{item.municipio}}</td>
+                                <td>{{item.inqueridor}}</td>
+                                <td>{{item.status}}
+                                </td>
+                                <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
+                                <td class="not-it">
+                                    <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
+                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </td>
 
-                            <!--td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
+                                <!--td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
                                 <button type="button" [routerLink]="['/documentos-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-file-lines"></i>
                                 </button>
                             </!--td-->
-                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
-                                <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                            </td>
-                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it"> <button
-                                    type="button" class="btn btn-link btn-sm btn-rounded"
-                                    (click)="deleteInquire(item.id)">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
+                                <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
+                                    <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
+                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </td>
+                                <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it"> <button
+                                        type="button" class="btn btn-link btn-sm btn-rounded"
+                                        (click)="deleteInquire(item.id)">
+                                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                                    </button></td>
+                            </ng-container>
                         </tr>
                     </tbody>
                 </table>
@@ -153,7 +155,6 @@
                         </div>
                     </div>
 
-
                     <!-- Pergunta 2 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;">
                         <div>
@@ -165,11 +166,6 @@
                                 <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
                                     (change)="showInput()" [checked]="angForm.get('duplicada_da')?.value">
                             </div>
-
-                            <!--div>
-                                <input type=" checkbox" name="checkboxOption" (click)="showInput(false)"
-                                    [checked]="!showDuplicatedInput"> Não
-                                </div-->
                         </div>
 
                     </div>

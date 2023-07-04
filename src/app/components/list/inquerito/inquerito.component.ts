@@ -1309,7 +1309,7 @@ export class InqueritoComponent implements OnInit {
 
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
+      this.inqueritos = data.filter((item:any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
       console.log('inquérito', data)
     })
   }
@@ -1668,6 +1668,15 @@ export class InqueritoComponent implements OnInit {
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
+  
+
+  unDisplay_StatusItem(item: any): boolean {
+    if (item.status === 'Incomunicavel' && item.novo_tel === 'Nº Tel errado') {
+      return false; // Não exibir item
+    }
+    return true; // Exibir item
+  }
+  
   
 
 
