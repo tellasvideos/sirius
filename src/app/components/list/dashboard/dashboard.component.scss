@@ -10,6 +10,27 @@ mat-drawer {
 
 }
 
+.image-container {
+    display: flex;
+  }
+  
+  .image-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px; /* Espaçamento entre as imagens */
+  }
+  
+  .image-container img {
+    width: 100px; /* Defina a largura desejada para as imagens */
+    height: 100px; /* Defina a altura desejada para as imagens */
+  }
+  
+  .caption {
+    margin-top: 8px; /* Espaçamento entre a imagem e a legenda */
+  }
+    
+
 
 .div-border {
     color: #eaeaea;

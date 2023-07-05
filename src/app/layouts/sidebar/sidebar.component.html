@@ -1,75 +1,79 @@
-<!-- FIRST SECTION -->
-<div class="container justify-content-center ">
-    <div class="text-center mt-2">
-        <button routerLink="/usuario" routerLinkActive="active" type="button"
-            style="background-color: #F2F2F2; border-color: #F2F2F2;" class="btn-outline-dark btn-rounded btn"><i
-                style="color: black;" class="fas fa-user-alt fa-3x"></i></button>
-        <!--h5 class="text-center text-black mt-1" style="font-size: 11px; font-weight: 200;">Conta:</!-->
-        <h5 class="text-center text-black" style="font-size: 11px; font-weight: 600;">Usuário: {{logged}}</h5>
-        <p class="text-center text-black" style="font-size: 11px; font-weight: 600;">Departamento: {{this.user_logged.department}}
-    </div>
-</div>
-<!-- FIRST SECTION -->
-<hr>
+<div class="menu-content" style="overflow: hidden;">
 
-<!-- THIRD SECTION -->
-<div class="container mb-3">
-    <div class="hello-user">
-        <h5 class="word-breack">M. Interesse</h5>
+    <!-- FIRST SECTION -->
+    <div class="container justify-content-center ">
+        <div class="text-center mt-2">
+            <button routerLink="/usuario" routerLinkActive="active" type="button"
+                style="background-color: #F2F2F2; border-color: #F2F2F2;" class="btn-outline-dark btn-rounded btn"><i
+                    style="color: black;" class="fas fa-user-alt fa-3x"></i></button>
+            <!--h5 class="text-center text-black mt-1" style="font-size: 11px; font-weight: 200;">Conta:</!-->
+            <h5 class="text-center text-black" style="font-size: 11px; font-weight: 600;">Usuário: {{logged}}</h5>
+            <p class="text-center text-black" style="font-size: 11px; font-weight: 600;">Departamento:
+                {{this.user_logged.department}}
+        </div>
     </div>
+    <!-- FIRST SECTION -->
+    <hr>
 
-    <div class="card card-user mb-3">
-        <div class="card-body">
-            <div class="d-block">
-                <!--div class="align-self-center">
+    <!-- THIRD SECTION -->
+    <div class=" mb-3">
+        <div class="hello-user">
+            <h5 class="word-breack">M. Interesse</h5>
+        </div>
+
+        <div class="card card-user mb-3">
+            <div class="card-body">
+                <div class="d-block">
+                    <!--div class="align-self-center">
                     <i class="far fa-user text-success fa-sm"></i>
                 </!--div-->
-                <div class="row">
-                    <h3 class="text-black font-user-list"> {{proponents[0]?.['s2gp/s2g1q1/prop_nome'].substring(0,
-                        36).toUpperCase()}}</h3>
+                    <div class="row">
+                        <h3 class="text-black font-user-list"> {{proponents[0]?.['s2gp/s2g1q1/prop_nome'].substring(0,
+                            36).toUpperCase()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-user mb-3">
+            <div class="card-body">
+                <div class="d-block">
+                    <!--div class="align-self-center">
+                    <i class="far fa-user text-success fa-sm"></i>
+                </!--div-->
+                    <div class="row">
+                        <h3 class="text-black font-user-list"> {{proponents[1]?.['s2gp/s2g1q1/prop_nome'].substring(0,
+                            36).toUpperCase()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-user mb-3">
+            <div class="card-body">
+                <div class="d-block">
+                    <!--div class="align-self-center">
+                    <i class="far fa-user text-success fa-sm"></i>
+                </!--div-->
+                    <div class="row">
+                        <h3 class="text-black font-user-list"> {{proponents[2]?.['s2gp/s2g1q1/prop_nome'].substring(0,
+                            36).toUpperCase()}}</h3>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card card-user mb-3">
-        <div class="card-body">
-            <div class="d-block">
-                <!--div class="align-self-center">
-                    <i class="far fa-user text-success fa-sm"></i>
-                </!--div-->
-                <div class="row">
-                    <h3 class="text-black font-user-list"> {{proponents[1]?.['s2gp/s2g1q1/prop_nome'].substring(0,
-                        36).toUpperCase()}}</h3>
-                </div>
-            </div>
+    <!-- THIRD SECTION -->
+    <hr style="color: #F2F2F2;">
+    <!-- FOURTH SECTION -->
+    <div class="container mb-3">
+        <div class="d-grid gap-2 mx-auto mb-3">
+            <button class="btn btn-add-user btn-sm" type="button" [routerLink]="['/usuario']"
+                routerLinkActive="router-link-active">Adicionar Usuário</button>
+        </div>
+        <div class="d-grid gap-2 mx-auto">
+            <button class="btn btn-danger btn-exit btn-sm" type="button" (click)="logout()">Terminar sessão</button>
         </div>
     </div>
-
-    <div class="card card-user mb-3">
-        <div class="card-body">
-            <div class="d-block">
-                <!--div class="align-self-center">
-                    <i class="far fa-user text-success fa-sm"></i>
-                </!--div-->
-                <div class="row">
-                    <h3 class="text-black font-user-list"> {{proponents[2]?.['s2gp/s2g1q1/prop_nome'].substring(0,
-                        36).toUpperCase()}}</h3>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- FOURTH SECTION -->
 </div>
-<!-- THIRD SECTION -->
-<hr style="color: #F2F2F2;">
-<!-- FOURTH SECTION -->
-<div class="container mb-3">
-    <div class="d-grid gap-2 mx-auto mb-3">
-        <button class="btn btn-add-user btn-sm" type="button" [routerLink]="['/usuario']"
-            routerLinkActive="router-link-active">Adicionar Usuário</button>
-    </div>
-    <div class="d-grid gap-2 mx-auto">
-        <button class="btn btn-danger btn-exit btn-sm" type="button" (click)="logout()">Terminar sessão</button>
-    </div>
-</div>
-<!-- FOURTH SECTION -->

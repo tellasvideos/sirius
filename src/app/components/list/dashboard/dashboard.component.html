@@ -288,6 +288,32 @@
                                 </span></td>
                         </tr>
                     </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="text-black">Total Geral</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span>38</span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -317,43 +343,515 @@
                     <thead class="linhas2">
                         <tr>
                             <th scope="col" class="text-black">Províncias</th>
-                            <th scope="col" class="text-black">Inquéritos Elaborados</th>
+                            <th scope="col" class="text-black">Inquéritos elaborados</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1º Ano</td>
-                            <td>12</td>
-                            <td>50</td>
+                            <td>Cuanza Sul</td>
                             <td>
                                 <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>50%</span>
+                                    <span>2</span>
                                 </span>
                             </td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td>2º Ano</td>
-                            <td>52</td>
-                            <td>80</td>
+                            <td>Huíla</td>
                             <td>
                                 <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>80%</span>
+                                    <span>7</span>
                                 </span>
                             </td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr>
-                            <td>mb-3 Ano</td>
-                            <td>12</td>
-                            <td>70</td>
+                            <td>Bié</td>
                             <td>
                                 <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>73%</span>
+                                    <span>5</span>
                                 </span>
                             </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="text-black">Total Geral</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span>38</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- PN elaborados – [periodo selecionado]” (= o n° de PN dos quais a data de entregue esta no periodo selecionado)-->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">PN elaborados</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Províncias</th>
+                            <th scope="col" class="text-black">PN Elaborados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cuanza Sul</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>2</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Huíla</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>7</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Bié</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="text-black">Total Geral</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- “FTAS elaborados – [periodo selecionado]” (= o n° de PN (sim PN, é os mesmos numéros que as FTAS) dos quais a data de entregue esta no periodo selecionado)-->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">FTAS elaborados</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Províncias</th>
+                            <th scope="col" class="text-black">FTAS Elaborados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cuanza Sul</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Huíla</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>8</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Bié</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="text-black">Total Geral</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 9. “Consultas publicas feitas – [periodo selecionado]” -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Consultas públicas feitas</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Províncias</th>
+                            <th scope="col" class="text-black">Nº</th>
+                            <th scope="col" class="text-black">Participantes (Total)</th>
+                            <th scope="col" class="text-black">Homens</th>
+                            <th scope="col" class="text-black">Mulheres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cuanza Sul</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>7</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>3</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>3</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Huambo</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>7</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>3</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>4</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Bié</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>7</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>5</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>6</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-success">
+                                    <span>3</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="text-black">Total Geral</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 10. PN analisados pelo CTI – [periodo selecionado]” ( = lista de todos PN que têm uma data de analise CTI(pergunta 20) no periodo selecionado) -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">PN analisados pelo CTI</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Data do CTI</th>
+                            <th scope="col" class="text-black">Fazenda/Nome Simplificado</th>
+                            <th scope="col" class="text-black">Proponente</th>
+                            <th scope="col" class="text-black">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01/01/2023</td>
+                            <td>Fazenda Yoyele</td>
+                            <td>Eugenio Maria</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>8</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>02/01/2023</td>
+                            <td>Fazenda Josielma</td>
+                            <td>Josiph Queiroz</td>
+                            <td>
+                                <span class="text-success">
+                                    <span>6</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 11. Tipo de PN desembolsados” Percentagem de cada reposta à pergunta 11.2 -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Tipo de PN desembolsados</h5>
+                </div>
+            </div>
+
+            <div class="mb-4 image-container d-flex">
+                <div>
+                    <img src="assets/img/products.png" alt="Imagem 1">
+                    <span class="text-success">
+                        <i class="fas fa-caret-up me-1"></i><span>90%</span>
+                    </span>
+                </div>
+                <div>
+                    <img src="assets/img/galinha.png" alt="Imagem 2">
+                    <span class="text-danger">
+                        <i class="fas fa-caret-down me-1"></i><span>18%</span>
+                    </span>
+                </div>
+                <div>
+                    <img src="assets/img/factory2.png" alt="Imagem 3">
+                    <span class="text-success">
+                        <i class="fas fa-caret-up me-1"></i><span>80%</span>
+                    </span>
+                </div>
+                <div>
+                    <img src="assets/img/transp2.png" alt="Imagem 4">
+                    <span class="text-danger">
+                        <i class="fas fa-caret-down me-1"></i><span>10%</span>
+                    </span>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!-- 12. “Tipo de produções” Percentagem de reposta à pergunta 11.2.1 por grupo :
+                - Grao e/ou tuberculos
+                - Café
+                - café e turberculos e/ou graos -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Tipo de produções</h5>
+                </div>
+            </div>
+
+            <div class="mb-4 image-container d-flex">
+                <div>
+                    <img src="assets/img/sweet-potato_8907579.png" alt="Imagem 2">
+                    <span class="text-success">
+                        <i class="fas fa-caret-up me-1"></i><span>57%</span>
+                    </span>
+                </div>
+                <div>
+                    <img src="assets/img/coffee-beans_3219300.png" alt="Imagem 1">
+                    <span class="text-danger">
+                        <i class="fas fa-caret-down me-1"></i><span>20%</span>
+                    </span>
+                </div>
+                <div>
+                    <img src="assets/img/corn_5990564.png" alt="Imagem 3">
+                    <span class="text-success">
+                        <i class="fas fa-caret-up me-1"></i><span>86%</span>
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- 13. “Plano de négocio desembolsados – [periodo]” : tabela/lista de todos PN dos quais a data de implementação (pergunta 26) esta no periodo selecionado -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Plano de négocio desembolsados</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Nome</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Município</th>
+                            <th scope="col" class="text-black">Tipo de negócio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Miguel</td>
+                            <td>Huila</td>
+                            <td>caluquembe</td>
+                            <td>Produtor</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>João Paulo</td>
+                            <td>Huambo</td>
+                            <td>bailundo</td>
+                            <td>Distribuidor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 14. “Distribuição dos PN Desembolsados por Províncias/Municípios – Cumulativo” (Apresenta por municipioos n° de -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Distribuição dos PN Desembolsados por
+                        Províncias/Municípios-Cumulativo</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr class="table-dark">
+                            <th scope="col" class="text-white">Província</th>
+                            <th scope="col" class="text-white">PN Desenbolsados</th>
+                            <th scope="col" class="text-white">%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-info">
+                            <td>Bié</td>
+                            <td>4</td>
+                            <td> <span class="text-danger">
+                                    <i class="fas fa-caret-down me-1"></i><span>15%</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Catabola</td>
+                            <td>1</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="table-info">
+                            <td>Huíla</td>
+                            <td>20</td>
+                            <td> <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>64%</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Caluquembe</td>
+                            <td>6</td>
+                            <td></td>
+                        </tr>
+                        <tr class="table-active">
+                            <td>Total</td>
+                            <td>31</td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
