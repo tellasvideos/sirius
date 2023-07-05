@@ -50,13 +50,6 @@
                     <input class="form-control form-control-sm" placeholder="Pesquisar Nome Simplificado..."
                         [(ngModel)]="keyWord" type="text" style="width: 300px;">
                 </div>
-                <!--div class="mb-3">
-                    <select class="form-select form-select-sm" id="duplicateNames" name="duplicateNames"
-                        style="width: 200px;">
-                        <option value="" disabled selected hidden>Lista de MI Duplicada</option>
-                        <option disabled *ngFor="let prov of duplicateNames" [value]="prov">{{prov}}</option>
-                    </select>
-                </!--div-->
             </div>
 
             <div class="table-responsive" id="print-section-list-inquerito">
@@ -81,39 +74,38 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container *ngIf="unDisplay_StatusItem(item)">
-                                <td>{{item.nome_simplificado}}</td>
-                                <td>{{item.provincia}}</td>
-                                <td>{{item.municipio}}</td>
-                                <td>{{item.inqueridor}}</td>
-                                <td>{{item.status}}
-                                </td>
-                                <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
-                                <td class="not-it">
-                                    <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
-                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                        <i class="far fa-eye"></i>
-                                    </button>
-                                </td>
 
-                                <!--td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
+                            <td>{{item.nome_simplificado}}</td>
+                            <td>{{item.provincia}}</td>
+                            <td>{{item.municipio}}</td>
+                            <td>{{item.inqueridor}}</td>
+                            <td>{{item.status}}
+                            </td>
+                            <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
+                            <td class="not-it">
+                                <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </td>
+
+                            <!--td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
                                 <button type="button" [routerLink]="['/documentos-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="far fa-file-lines"></i>
                                 </button>
                             </!--td-->
-                                <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
-                                    <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
-                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                </td>
-                                <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it"> <button
-                                        type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="deleteInquire(item.id)">
-                                        <i class="fas fa-trash-alt" style="color: red;"></i>
-                                    </button></td>
-                            </ng-container>
+                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
+                                <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </td>
+                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it"> <button
+                                    type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="deleteInquire(item.id)">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -263,9 +255,8 @@
                         </div>
                         <div>
                             <input class="form-control form-control-sm" id="municipio" name="municipio" required
-                                style="width: 350px;" formControlName="municipio"
-                                [value]="devolver_nome_municipio(angForm.get('municipio')?.value) | async" readonly
-                                [attr.disabled]="true">
+                                style="width: 350px;" formControlName="municipio" [value]="exibirNomeMunicipio()"
+                                readonly [attr.disabled]="true">
                         </div>
 
                     </div>

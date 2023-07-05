@@ -56,7 +56,7 @@
         <!-- Cadeia de valores e gráico de users-->
 
         <!-- Instituições / Departamentos / Manifestação de interesses-->
-        <div class="row mb-3" style="margin-left: 4%; margin-right: 4%;">
+        <div class="row mb-3 " style="margin-left: 4%; margin-right: 4%;">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -86,6 +86,280 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row mb-3 mt-4" style="margin-left: 4%; margin-right: 4%;">
+
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Progresso nas metas de produção de PN do Projecto
+                    </h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <!-- 1. Tabela - progresso nas metas de produção de PN do projecto -->
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Ano</th>
+                            <th scope="col" class="text-black">Metas</th>
+                            <th scope="col" class="text-black">Realizado</th>
+                            <th scope="col" class="text-black">Grau de Cumprimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1º Ano</td>
+                            <td>12</td>
+                            <td>12</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>90%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>2º Ano</td>
+                            <td>50</td>
+                            <td>5</td>
+                            <td>
+                                <span class="text-danger">
+                                    <i class="fas fa-caret-down me-1"></i><span>5%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 2. Tabela - progresso nas metas de produção de PGAS do projecto” (as metas são as mesmas -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Progresso nas metas de produção de PGAS do
+                        projecto</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Ano</th>
+                            <th scope="col" class="text-black">Metas</th>
+                            <th scope="col" class="text-black">Realizado</th>
+                            <th scope="col" class="text-black">Grau de Cumprimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1º Ano</td>
+                            <td>12</td>
+                            <td>50</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>50%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>2º Ano</td>
+                            <td>52</td>
+                            <td>80</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>80%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>mb-3 Ano</td>
+                            <td>12</td>
+                            <td>70</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>73%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 3. Tabela - MI Recebidas do PDAC – [periodo selecionado] -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">MI Recebidas do PDAC</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Estado</th>
+                            <th scope="col" class="text-black">Bié</th>
+                            <th scope="col" class="text-black">Huambo</th>
+                            <th scope="col" class="text-black">Huíla</th>
+                            <th scope="col" class="text-black">Cuanza Sul</th>
+                            <th scope="col" class="text-black">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> <span class="badge badge-success rounded-pill d-inline">Aprovado</span></td>
+                            <td><span class="text-success">
+                                    <span>18</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>30</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>47</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>28</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>123</span>
+                                </span></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="badge badge-primary rounded-pill d-inline">Em análise</span></td>
+                            <td><span class="text-success">
+                                    <span>12</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>3</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>4</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>8</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>27</span>
+                                </span></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td> <span class="badge badge-warning rounded-pill d-inline">Por contactar</span>
+                            </td>
+                            <td><span class="text-success">
+                                    <span>8</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>3</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>4</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>2</span>
+                                </span></td>
+                            <td><span class="text-success">
+                                    <span>17</span>
+                                </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--5. Grafico - Inquéritos feitos – [periodo selecionada]” 
+                (= o n° de inquéritos dos quais a data de entregue esta no
+                periodo selecionado) -->
+
+            <div class="justify-content-center mt-4">
+                <div id="getStatusMI" style="width:65%; height: 500%;"></div>
+            </div>
+
+            <!-- 5. Inquéritos feitos – [periodo selecionada]” (= o n° de inquéritos dos quais a data de entregue esta no
+            periodo selecionado) -->
+            <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black">Inquéritos feitos</h5>
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                        type="text" style="width: 300px;">
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                <table class="table table-sm table-hover text-center table-bordered">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Províncias</th>
+                            <th scope="col" class="text-black">Inquéritos Elaborados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1º Ano</td>
+                            <td>12</td>
+                            <td>50</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>50%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>2º Ano</td>
+                            <td>52</td>
+                            <td>80</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>80%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>mb-3 Ano</td>
+                            <td>12</td>
+                            <td>70</td>
+                            <td>
+                                <span class="text-success">
+                                    <i class="fas fa-caret-up me-1"></i><span>73%</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
 
     </mat-drawer-content>

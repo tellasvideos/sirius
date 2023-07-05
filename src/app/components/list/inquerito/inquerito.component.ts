@@ -16,16 +16,12 @@ import * as bootstrap from 'bootstrap';
 
 import { ViewChild } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
-
-
 
 
 @Component({
   selector: 'app-inquerito',
   templateUrl: './inquerito.component.html',
-  styleUrls: ['./inquerito.component.scss'],
-  providers: [AsyncPipe]
+  styleUrls: ['./inquerito.component.scss']
 })
 export class InqueritoComponent implements OnInit {
 
@@ -298,43 +294,19 @@ export class InqueritoComponent implements OnInit {
   }
 
 
-  autoCompleteProvincia() {
-    const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
 
-    // Encontrar a PDAC correspondente à manifestação de interesse selecionada
-    const Provincia = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
 
-    // Atualizar o valor do campo "provincia" com base na PDAC selecionada
-    if (Provincia) {
-      this.angForm.patchValue({
-        provincia: Provincia['s2gp/s2g3/rep_provincia'],
-        municipio: Provincia['s2gp/s2g3/rep_municipio']
-      });
-      console.log(Provincia['s2gp/s2g3/rep_provincia']);
-      console.log(Provincia['s2gp/s2g3/rep_municipio']);
-    }
-  }
 
-  async carregarDadosMunicipio() {
-    if (!this.municipio || this.municipio.length === 0) {
-      this.municipio = await this.dataService.getMunicipio().toPromise();
-    }
-  }  
+  /*devolver_nome_municipio(id: any) {
+      const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    console.log(municipioSelecionado)
+      if (municipioSelecionado) {
+        return municipioSelecionado.name;
+      }
+    
+      return 'N/D';
+    }*/
 
-  async devolver_nome_municipio(id: any) {
-    await this.carregarDadosMunicipio(); // Aguarda o carregamento dos dados do município
-
-    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
-    console.log(municipioSelecionado);
-
-    return municipioSelecionado ? municipioSelecionado.name : 'N/D';
-  }
-
-  getMunicipio() {
-    this.dataService.getMunicipio().subscribe(data => {
-      this.municipio = data;
-    })
-  }
 
   reloadOnce: any;
   inqueritos: any;
@@ -429,6 +401,22 @@ export class InqueritoComponent implements OnInit {
     });
   }
 
+  // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
+  getPdac() {
+    this.dataService.proponentPDAC().subscribe(data => {
+      this.pdac = data;
+      this.prop_name = this.pdac
+        .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
+        .filter((propNome: any) => !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
+
+      console.log('Array pdac apenas nomes filtrados:', this.prop_name);
+
+      this.get_inquireForms()
+    });
+
+  }
+
+
   closeModal(modalId: string) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -448,6 +436,51 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
+    })
+  }
+
+  get_inquireForms() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data.filter((item: any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
+      console.log('inquérito', data)
+    })
+  }
+
+  autoCompleteProvincia() {
+    const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+
+    // Encontrar a PDAC correspondente à manifestação de interesse selecionada
+    const Provincia = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
+
+    // Atualizar o valor do campo "provincia" com base na PDAC selecionada
+    if (Provincia) {
+      this.angForm.patchValue({
+        provincia: Provincia['s2gp/s2g3/rep_provincia'],
+        municipio: Provincia['s2gp/s2g3/rep_municipio']
+      });
+      console.log(Provincia['s2gp/s2g3/rep_provincia']);
+      console.log(Provincia['s2gp/s2g3/rep_municipio']);
+    }
+  }
+
+  exibirNomeMunicipio() {
+    const municipioId = this.angForm.get('municipio')?.value;
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === municipioId);
+    if (municipioSelecionado) {
+      return municipioSelecionado.name;
+    }
+
+    return 'N/D';
+  }
+
+  devolver_nome_municipio(id: any) {
+    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
+    return this.retorno
+  }
 
   mi: any;
   get_MI_Duplicada() {
@@ -1344,12 +1377,7 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  get_inquireForms() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter((item: any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
-      console.log('inquérito', data)
-    })
-  }
+
 
   // nome_simplificado e duplicados
   get_inquireFormsByPendentes() {
@@ -1677,20 +1705,6 @@ export class InqueritoComponent implements OnInit {
     })
   }*/
 
-  // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
-  getPdac() {
-    this.dataService.proponentPDAC().subscribe(data => {
-      this.pdac = data;
-      this.prop_name = this.pdac
-        .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
-        .filter((propNome: any) => !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
-
-      console.log('Array pdac apenas nomes filtrados:', this.prop_name);
-
-      this.get_inquireForms()
-    });
-
-  }
 
 
 
@@ -1705,16 +1719,6 @@ export class InqueritoComponent implements OnInit {
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
-
-
-  unDisplay_StatusItem(item: any): boolean {
-    if (item.status === 'Incomunicavel' && item.novo_tel === 'Nº Tel errado') {
-      return false; // Não exibir item
-    }
-    return true; // Exibir item
-  }
-
-
 
 
 }

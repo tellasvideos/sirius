@@ -30,6 +30,9 @@ export class DashboardComponent implements OnInit {
   _chartOption_Interesses_por_mes?: EChartsOption;
   _chartOption_CadeiaValor_por_mes?: EChartsOption;
 
+
+  keyWord: string = '';
+
   user: any;
   i: any;
   token: any;
@@ -56,11 +59,7 @@ export class DashboardComponent implements OnInit {
     private userService: DataService
   ) {
 
-    // exibe todas as informações do usuário contidas no token
-    //const user = this.localStorage.get('user')
-    //  console.log('nome do usuario', user); // exibe o nome do usuário
-    //  console.log('email do user', user.email); // exibe o email do usuário
-    //  console.log('departamento do user', user.department); // exibe o departamento do usuário
+
   }
 
   _cadeiaValorChart(chartData: any[]) {
@@ -175,12 +174,14 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
+
   ngOnInit(): void {
 
     // Pegar dados do user logado
     this.userService.getUserData().subscribe((data: any) => {
       this.user = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log( 'User logado', this.user)
+      console.log('User logado', this.user)
     });
 
 
@@ -194,11 +195,6 @@ export class DashboardComponent implements OnInit {
     // Subscribe chart for inqueritos
     this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
       this._inqueritosChart(data);
-
-      /* let numberArray = data[0].year.split(',');
-       let result = numberArray.join('');
-       console.log('virgula eliminada: ', result);*/
-      //console.log('inqueritos chart por mes:', data)
     });
 
     // subscribe Chart for interesses
@@ -207,7 +203,6 @@ export class DashboardComponent implements OnInit {
       //console.log('interesses chart por mes:', data)
     });
 
-    //this.isAdmin()
     this.getDeparet();
     this.getInquerito();
     this.getcadeia();
@@ -241,6 +236,54 @@ export class DashboardComponent implements OnInit {
       if (this.departamento[0] == 2)
         this.departamento++;
     }
+
+
+    // Status da MI recebidas
+    type EChartsOption = echarts.EChartsOption;
+
+    var chartDom = document.getElementById('getStatusMI')!;
+    var myChart = echarts.init(chartDom);
+    var option: EChartsOption;
+
+    option = {
+      title: {
+        text: 'Status das MI recebidas',
+        subtext: 'Período',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left'
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '50%',
+          data: [
+            { value: 1048, name: 'Por Contactar' },
+            { value: 735, name: 'Inquérito em Elaboração' },
+            { value: 580, name: 'Incomunicavel: não atende' },
+            { value: 484, name: 'Por visitar' },
+            { value: 300, name: 'Didas teste' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+
+    option && myChart.setOption(option);
+
+
 
   }
 
