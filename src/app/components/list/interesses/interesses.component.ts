@@ -66,7 +66,7 @@ export class InteressesComponent implements OnInit {
       area_cultivo_pn: ['', Validators.required],
       recursos_proprios: ['', Validators.required],
       financiamento: ['', Validators.required],
-      financiamento_bancario: ['', Validators.required],
+      financiamento_bancario: [false],
       historico_producao_2_anos: ['', Validators.required],
       area_cultura_2_anos: ['', Validators.required],
       producao_cultura_2_anos: ['', Validators.required],
@@ -121,6 +121,22 @@ export class InteressesComponent implements OnInit {
 
 
   }
+
+  checado?: boolean;
+  OnFinanciamento(option: string) {
+    if (option === 'MG') {
+      this.angForm.patchValue({
+        financiamento_bancario: true
+      });
+      this.checado = true;
+    } else if (option === 'MG e Banco') {
+      this.angForm.patchValue({
+        financiamento_bancario: false
+      });
+      this.checado = false;
+    }
+  }
+  
 
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {

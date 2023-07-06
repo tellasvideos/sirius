@@ -393,14 +393,19 @@
                             <label>Tipo de financiamento:</label>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                            <div style="margin-right: 310px;">
-                                <span>MG</span>
-                                <input type="checkbox" name="checkboxOption1" formControlName="financiamento_bancario">
+                        <div class="d-block" style="margin-right: 225px;">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" name="checkboxOption_1" [value]="true"
+                                    formControlName="financiamento_bancario" (change)="OnFinanciamento('MG')"
+                                    [checked]="checado">
+                                <label class="legend">MG</label>
                             </div>
-                            <div style="margin-right: 310px;">
-                                <span>MG e Banco</span>
-                                <input type="checkbox" name="checkboxOption2" formControlName="financiamento_bancario">
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" name="checkboxOption_2" [value]="false"
+                                    formControlName="financiamento_bancario" (change)="OnFinanciamento('MG e Banco')"
+                                    [checked]="!checado">
+                                <label class="legend">MG e Banco</label>
                             </div>
                         </div>
 

@@ -4,6 +4,22 @@
     height: 100%;
 }
 
+
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Espaçamento entre os grupos de checkbox */
+}
+
+.legend {
+    margin-left: 10px;
+    /* Espaçamento entre a legenda e a checkbox */
+}
+
+
+
 body {
     overflow: hidden;
     /* Hide scrollbars */
@@ -173,6 +189,7 @@ mat-drawer-container {
     .sidebar {
         display: none;
     }
+
     mat-drawer {
         width: 180px;
         background: #F2F2F2;
