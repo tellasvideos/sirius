@@ -95,7 +95,8 @@ export class InteressesComponent implements OnInit {
     this.getInqueritos()
     this.checkDates()
     this.getUserBackOFF()
-    this.get_form_backoffice()
+    this.get_form_backoffice();
+    this.getMunicipio();
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -119,6 +120,19 @@ export class InteressesComponent implements OnInit {
     });*/
 
 
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+    })
+  }
+
+  municipio:any;
+  retorno:any;
+  devolver_nome_municipio(id: any) {
+    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
+    return this.retorno
   }
 
   // to get all data from form backoffice

@@ -484,7 +484,7 @@ export class InqueritoComponent implements OnInit {
     this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
     return this.retorno
   }
-
+  
   mi: any;
   get_MI_Duplicada() {
     this.dataService.proponentPDAC().subscribe(data => {

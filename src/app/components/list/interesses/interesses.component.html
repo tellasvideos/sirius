@@ -150,15 +150,16 @@
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Tipo de Negócio</th>
-                            <th scope="col" class="text-black">Estado MI</th>
-                            <th scope="col" class="text-black">Inquérito preenchido</th>
-                            <th scope="col" class="text-black">Documentos</th>
+                            <th scope="col" class="text-black">Estado PN</th>
+                            <!--th scope="col" class="text-black">Inquérito preenchido</!--th-->
+                            <!--th scope="col" class="text-black">Documentos</!--th-->
                             <th scope="col" class="text-black not-it">Ver</th>
                             <!--th scope="col" class="text-black not-it">Progresso</!--th-->
                             <!--th scope="col" class="text-black not-it">Estatuto</!--th-->
                             <!--th scope="col" class="text-black not-it">Cadeias</!--th-->
                             <th scope="col" class="text-black not-it" *ngIf="
-                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true">Colar info</th>
+                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true">Colar
+                                info</th>
                             <!--th scope="col" class="text-black not-it">Add Back Office</!--th-->
                         </tr>
                     </thead>
@@ -167,29 +168,29 @@
                             <td>{{item.id}} </td>
                             <td>{{item.nome_simplificado}} </td>
                             <td>{{item.provincia}}</td>
-                            <td>{{item.municipio}}</td>
+                            <td>{{devolver_nome_municipio(item.municipio)}}</td>
                             <td>{{item.que_tipo_de_negocio_esta}}</td>
                             <!--td>{{item.inquerito_preenchido | slice:0:15}}</td>
                             <td>{{item.documents}}</td-->
                             <td>{{item.status}}</td>
 
-                            <td>
+                            <!--td>
                                 <ul style="list-style-type: none;">
                                     <li>
                                         <a href="javascript:void(0);" (click)="downloadFile(item.inquerito_preenchido)"
                                             style="text-align: left;">{{ item.inquerito_preenchido | slice:0:15 }}</a>
                                     </li>
                                 </ul>
-                            </td>
+                            </td-->
 
-                            <td>
+                            <!--td>
                                 <ul style="list-style-type: none;">
                                     <li *ngFor="let doc of item.documents">
                                         <a href="javascript:void(0);" (click)="downloadFile(doc)"
                                             style="text-align: left;">{{ doc | slice:0:15 }}</a>
                                     </li>
                                 </ul>
-                            </td>
+                            </td-->
 
                             <!--td class="not-it"> <button type="button" 
                                 routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
@@ -221,9 +222,10 @@
                                 </button>
                             </|td-->
                             <td *ngIf="
-                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true " class="not-it"> <button type="button"
-                                    class="btn btn-link btn-sm btn-rounded" (click)="selecionarInquerito(item)"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true "
+                                class="not-it"> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="selecionarInquerito(item)" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalToggle">
                                     <i class="fas fa-file-lines"></i>
                                 </button></td>
                         </tr>
@@ -295,7 +297,7 @@
 
 
 <!-- modal -->
-<div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+<div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -375,7 +377,7 @@
                     <div *ngIf="angForm.get('fim_elaboracao_pn')?.value"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
                         <div>
-                            <label for="fim_verificacao" style="width: 240px;">Data fim de verificação:</label>
+                            <label for="fim_verificacao" style="width: 240px;">Entregue ao PDAC:</label>
                         </div>
                         <div>
                             <input type="date" formControlName="fim_verificacao" name="fim_verificacao"
@@ -385,326 +387,28 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 15.1 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Área total da fazenda (ha):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="area_total_fazenda"
-                                name="area_total_fazenda" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched }"
-                                type="number" inputmode="numeric" pattern="[0-9]*">
-
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.2 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Área de cultivo pelo PN (ha):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="area_cultivo_pn"
-                                name="area_cultivo_pn" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched }"
-                                type="number" inputmode="numeric" pattern="[0-9]*">
-
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.3 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label style="width: 240px;">Recursos próprios (AOA):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="recursos_proprios"
-                                name="recursos_proprios" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched }"
-                                type="number">
-
-
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.4 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Financiamento PDAC (AOA):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="financiamento"
-                                name="financiamento" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched }"
-                                type="number">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.5 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Financiamento bancário (AOA):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="financiamento_bancario"
-                                name="financiamento_bancario" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched }"
-                                type="number">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.6 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value && inqueritoSelecionado?.que_tipo_de_negocio_esta === 'Productor'"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Histórico de produção: que culturas foram produzidas no
-                                ano agrícola de há dois anos?</label>
-                        </div>
-                        <div>
-
-                            <select class="form-select form-select-sm" formControlName="historico_producao_2_anos"
-                                name="historico_producao_2_anos" style="width:350px;" required
-                                aria-label="Default select example"
-                                [ngClass]="{ 'is-invalid': angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched }">
-                                <option value="" disabled selected hidden></option>
-                                <option *ngFor="let prod of historico_de_producao_" [value]="prod">{{prod}}</option>
-                            </select>
-
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.7 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Área de [cultura] cultivada á dois anos (ha):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="area_cultura_2_anos"
-                                name="area_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched }"
-                                type="number">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                        <div>
-                            <label>Produção de [cultura] obtida á dois anos (ton):</label>
-                        </div>
-                        <div>
-
-                            <input class="form-control form-control-sm" formControlName="producao_cultura_2_anos"
-                                name="producao_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
-                                [ngClass]="{ 'is-invalid': angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched }"
-                                type="number" inputmode="numeric" pattern="[0-9]*">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Estudo de viabilidade: ( .pdf ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="estudo_de_viabilidade" (change)="onSelectedFile1($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="estudo_de_viabilidade"
-                                class="form-control" id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('estudo_de_viabilidade')?.invalid && (angForm.get('estudo_de_viabilidade')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('estudo_de_viabilidade')?.invalid && (angForm.get('estudo_de_viabilidade')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Termo de compromisso assinado: ( .pdf ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="termo_compromisso_assinado" (change)="onSelectedFile2($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="termo_compromisso_assinado"
-                                class="form-control" id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('termo_compromisso_assinado')?.invalid && (angForm.get('termo_compromisso_assinado')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('termo_compromisso_assinado')?.invalid && (angForm.get('termo_compromisso_assinado')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Projeto RIV completo: ( .pdf ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="projeto_riv_completo" (change)="onSelectedFile3($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="projeto_riv_completo"
-                                class="form-control" id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('projeto_riv_completo')?.invalid && (angForm.get('projeto_riv_completo')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('projeto_riv_completo')?.invalid && (angForm.get('projeto_riv_completo')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">FTAS: ( .pdf ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="ftas" (change)="onSelectedFile4($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="ftas" class="form-control"
-                                id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('ftas')?.invalid && (angForm.get('ftas')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('ftas')?.invalid && (angForm.get('ftas')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Lista de trabalhadores (nome/idade/sexo): ( .pdf
-                                ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="lista_de_trabalhadores" (change)="onSelectedFile5($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="lista_de_trabalhadores"
-                                class="form-control" id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('lista_de_trabalhadores')?.invalid && (angForm.get('ftas')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('lista_de_trabalhadores')?.invalid && (angForm.get('lista_de_trabalhadores')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Documentos administrativos: ( .pdf ou .docx
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="documentos_administrativos" (change)="onSelectedFile6($event)"
-                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documentos_administrativos"
-                                class="form-control" id="customFile" style="width: 350px;"
-                                [ngClass]="{ 'is-invalid': angForm.get('documentos_administrativos')?.invalid && (angForm.get('documentos_administrativos')?.touched) }">
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('documentos_administrativos')?.invalid && (angForm.get('documentos_administrativos')?.touched)">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" name="ficheiro_riv" (change)="onSelectedFile7($event)" accept=".riv"
-                                formControlName="ficheiro_riv" class="form-control" id="customFile"
-                                style="width: 350px;">
-                        </div>
-                    </div>
-
-                    <!-- Pergunta 15.8.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('fim_verificacao')?.value">
-                        <div>
-                            <label class="form-label" for="customFile">Outros documentos (fichas técnicas, facturas): (
-                                .docx, .jpeg ou .pdf
-                                )</label>
-                        </div>
-                        <div>
-                            <input type="file" multiple name="outros_documentos" (change)="onSelectedFile8($event)"
-                                accept=".docx, .jpeg, .pdf" formControlName="outros_documentos" class="form-control"
-                                id="customFile" style="width: 350px;">
-                        </div>
-                    </div>
-
                     <!-- Pergunta 16 -->
-                    <div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                         <div>
-                            <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
+                            <label>Tipo de financiamento:</label>
                         </div>
-                        <div>
-                            <input type="date" formControlName="data_pn_entregue_ao_pdac"
-                                name="data_pn_entregue_ao_pdac" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
-                                class="form-control form-control-sm" (change)="checkDates()">
+
+                        <div class="d-flex justify-content-between">
+                            <div style="margin-right: 310px;">
+                                <span>MG</span>
+                                <input type="checkbox" name="checkboxOption1" formControlName="financiamento_bancario">
+                            </div>
+                            <div style="margin-right: 310px;">
+                                <span>MG e Banco</span>
+                                <input type="checkbox" name="checkboxOption2" formControlName="financiamento_bancario">
+                            </div>
                         </div>
+
                     </div>
 
-                    <!-- Pergunta 17 -->
+
+
+                    <!-- Pergunta 18 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                         <div>
                             <label>O PN está pendente?</label>
@@ -719,7 +423,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 17.1 -->
+                    <!-- Pergunta 18.1 -->
                     <div *ngIf="angForm.get('pn_pendente')?.value" class="mb-3 d-flex justify-content-between mx-auto"
                         style="width: 80%;">
                         <div>
@@ -731,7 +435,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 18 -->
+                    <!-- Pergunta 19 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                         <div>
                             <label>O proponente desistiu?</label>
@@ -767,3 +471,324 @@
 
     </div>
 </div>
+
+
+
+<!-- Pergunta 15.1 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Área total da fazenda (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_total_fazenda"
+                                name="area_total_fazenda" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_total_fazenda')?.invalid && angForm.get('area_total_fazenda')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!div-->
+
+<!-- Pergunta 15.2 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Área de cultivo pelo PN (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_cultivo_pn"
+                                name="area_cultivo_pn" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_cultivo_pn')?.invalid && angForm.get('area_cultivo_pn')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.3 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label style="width: 240px;">Recursos próprios (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="recursos_proprios"
+                                name="recursos_proprios" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched }"
+                                type="number">
+
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('recursos_proprios')?.invalid && angForm.get('recursos_proprios')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.4 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Financiamento PDAC (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="financiamento"
+                                name="financiamento" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched }"
+                                type="number">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('financiamento')?.invalid && angForm.get('financiamento')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.5 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Financiamento bancário (AOA):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="financiamento_bancario"
+                                name="financiamento_bancario" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched }"
+                                type="number">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('financiamento_bancario')?.invalid && angForm.get('financiamento_bancario')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!div-->
+
+<!-- Pergunta 15.6 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value && inqueritoSelecionado?.que_tipo_de_negocio_esta === 'Productor'"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Histórico de produção: que culturas foram produzidas no
+                                ano agrícola de há dois anos?</label>
+                        </div>
+                        <div>
+
+                            <select class="form-select form-select-sm" formControlName="historico_producao_2_anos"
+                                name="historico_producao_2_anos" style="width:350px;" required
+                                aria-label="Default select example"
+                                [ngClass]="{ 'is-invalid': angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched }">
+                                <option value="" disabled selected hidden></option>
+                                <option *ngFor="let prod of historico_de_producao_" [value]="prod">{{prod}}</option>
+                            </select>
+
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('historico_producao_2_anos')?.invalid && angForm.get('historico_producao_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.7 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Área de [cultura] cultivada á dois anos (ha):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="area_cultura_2_anos"
+                                name="area_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched }"
+                                type="number">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('area_cultura_2_anos')?.invalid && angForm.get('area_cultura_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Produção de [cultura] obtida á dois anos (ton):</label>
+                        </div>
+                        <div>
+
+                            <input class="form-control form-control-sm" formControlName="producao_cultura_2_anos"
+                                name="producao_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
+                                [ngClass]="{ 'is-invalid': angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched }"
+                                type="number" inputmode="numeric" pattern="[0-9]*">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('producao_cultura_2_anos')?.invalid && angForm.get('producao_cultura_2_anos')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Estudo de viabilidade: ( .pdf ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="estudo_de_viabilidade" (change)="onSelectedFile1($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="estudo_de_viabilidade"
+                                class="form-control" id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('estudo_de_viabilidade')?.invalid && (angForm.get('estudo_de_viabilidade')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('estudo_de_viabilidade')?.invalid && (angForm.get('estudo_de_viabilidade')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Termo de compromisso assinado: ( .pdf ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="termo_compromisso_assinado" (change)="onSelectedFile2($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="termo_compromisso_assinado"
+                                class="form-control" id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('termo_compromisso_assinado')?.invalid && (angForm.get('termo_compromisso_assinado')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('termo_compromisso_assinado')?.invalid && (angForm.get('termo_compromisso_assinado')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Projeto RIV completo: ( .pdf ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="projeto_riv_completo" (change)="onSelectedFile3($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="projeto_riv_completo"
+                                class="form-control" id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('projeto_riv_completo')?.invalid && (angForm.get('projeto_riv_completo')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('projeto_riv_completo')?.invalid && (angForm.get('projeto_riv_completo')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">FTAS: ( .pdf ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="ftas" (change)="onSelectedFile4($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="ftas" class="form-control"
+                                id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('ftas')?.invalid && (angForm.get('ftas')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('ftas')?.invalid && (angForm.get('ftas')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Lista de trabalhadores (nome/idade/sexo): ( .pdf
+                                ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="lista_de_trabalhadores" (change)="onSelectedFile5($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="lista_de_trabalhadores"
+                                class="form-control" id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('lista_de_trabalhadores')?.invalid && (angForm.get('ftas')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('lista_de_trabalhadores')?.invalid && (angForm.get('lista_de_trabalhadores')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Documentos administrativos: ( .pdf ou .docx
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="documentos_administrativos" (change)="onSelectedFile6($event)"
+                                accept=".pdf,.doc,.docx,.jpeg,.jpg .txt" formControlName="documentos_administrativos"
+                                class="form-control" id="customFile" style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('documentos_administrativos')?.invalid && (angForm.get('documentos_administrativos')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('documentos_administrativos')?.invalid && (angForm.get('documentos_administrativos')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </!div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" name="ficheiro_riv" (change)="onSelectedFile7($event)" accept=".riv"
+                                formControlName="ficheiro_riv" class="form-control" id="customFile"
+                                style="width: 350px;">
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                        *ngIf="angForm.get('fim_verificacao')?.value">
+                        <div>
+                            <label class="form-label" for="customFile">Outros documentos (fichas técnicas, facturas): (
+                                .docx, .jpeg ou .pdf
+                                )</label>
+                        </div>
+                        <div>
+                            <input type="file" multiple name="outros_documentos" (change)="onSelectedFile8($event)"
+                                accept=".docx, .jpeg, .pdf" formControlName="outros_documentos" class="form-control"
+                                id="customFile" style="width: 350px;">
+                        </div>
+                    </!--div-->
+
+<!-- Pergunta 16 -->
+<!--div *ngIf="angForm.get('fim_verificacao')?.value"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_pn_entregue_ao_pdac"
+                                name="data_pn_entregue_ao_pdac" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm" (change)="checkDates()">
+                        </div>
+                    </!--div-->
