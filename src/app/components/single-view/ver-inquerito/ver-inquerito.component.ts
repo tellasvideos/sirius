@@ -387,14 +387,14 @@ export class VerInqueritoComponent implements OnInit {
         break;
       case 'Pendente por falta de documento':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercial',
           'certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];

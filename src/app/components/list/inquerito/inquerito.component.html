@@ -25,7 +25,7 @@
                                 class="fas fa-print"></i> Imprimir</button>
                     </div>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group"
-                        *ngIf=" this.user_logged.department === 'Front Off'">
+                        *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
                         <button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
                             data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
                                 class="fas fa-plus-square text-black"></i> Add
@@ -56,32 +56,29 @@
                 <table class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
-                            <!--th scope="col" class="text-black">Inquiridor</!--th-->
                             <th scope="col" class="text-black">Nome Simplificado</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Inquiridor</th>
                             <th scope="col" class="text-black">Estado MI</th>
                             <th scope="col" class="text-black not-it">Ver</th>
-                            <!--th scope="col" class="text-black not-it"
-                                *ngIf="this.user_logged.department === 'Front Off'">Documentos</!--th-->
                             <th scope="col" class="text-black not-it"
-                                *ngIf="this.user_logged.department === 'Front Off'">Editar</th>
-                            <th *ngIf=" this.user_logged.department === 'Front Off'" scope="col"
-                                class="text-black not-it">Apagar
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                Editar</th>
+                            <th *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true "
+                                scope="col" class="text-black not-it">Apagar
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-
-                            <td>{{item.nome_simplificado}}</td>
-                            <td>{{item.provincia}}</td>
+                            <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
+                            <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
                             <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                            <td>{{item.inqueridor}}</td>
-                            <td>{{item.status}}
+                            <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
+                            <td>{{item.status ? item.status : 'N/D' }}
                             </td>
-                            <!--td>{{item.created_at | date:"dd/MM/yyyy"}}</!--td-->
+
                             <td class="not-it">
                                 <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
@@ -89,24 +86,22 @@
                                 </button>
                             </td>
 
-                            <!--td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
-                                <button type="button" [routerLink]="['/documentos-inquerito/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="far fa-file-lines"></i>
-                                </button>
-                            </!--td-->
-                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it">
+                            <td class="not-it"
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
                                 <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </td>
-                            <td *ngIf=" this.user_logged.department === 'Front Off'" class="not-it"> <button
-                                    type="button" class="btn btn-link btn-sm btn-rounded"
+                            <td class="not-it"
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                <button type="button" class="btn btn-link btn-sm btn-rounded"
                                     (click)="deleteInquire(item.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
+                                </button>
+                            </td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -510,7 +505,7 @@
 
                     <!-- Pergunta 11.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('data_1_contacto')?.value">
+                        *ngIf="angForm.get('data_validacao_inquerito')?.value">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio
                                 Está?</label>

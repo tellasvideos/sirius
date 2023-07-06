@@ -200,36 +200,36 @@ export class InqueritoComponent implements OnInit {
     switch (this.angForm.get('resultado_da_visita')?.value) {
       case 'A ser visitada':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercia',
+          'Certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercia',
+          'Certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Pendente por falta de documento':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercial',
+          'Certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
@@ -247,25 +247,25 @@ export class InqueritoComponent implements OnInit {
     switch (this.angForm.get('resultado_1_contacto')?.value) {
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercial',
+          'Certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Pendente por falta de documento':
         this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
+          'Croquis de localização',
+          'Alvará comercial',
+          'Certidão comercial',
+          'Certidão de Não devedor da AGT',
           'INSS',
           'BI',
           'NIF',
-          'Otro'];
+          'Outro'];
         break;
       case 'Recusada: MI duplicada':
         this.docs = ['Pendestes da M. Interesse'];
@@ -390,7 +390,7 @@ export class InqueritoComponent implements OnInit {
     this.getPdac();
     this.getUserFrontOFF();
     this.get_inquireFormsByPendentes();
-
+    this.getInqueritoParaPdac();
     this.get_MI_Duplicada()
 
     //this.getFilteredPdacList(); // retorna apenas as MI ainda não adicionadas num inquerito
@@ -410,7 +410,7 @@ export class InqueritoComponent implements OnInit {
       this.pdac = data;
       this.prop_name = this.pdac
         .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
-        .filter((propNome: any) => !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
+        .filter((propNome: any) => !this.inqueritoPdac.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
 
       console.log('Array pdac apenas nomes filtrados:', this.prop_name);
 
@@ -446,12 +446,25 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
-  get_inquireForms() {
+
+  inqueritoPdac: any;
+  getInqueritoParaPdac() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter((item: any) => item.status !== 'Incomunicavel: Nº Tel errado'); // filtro que oculta o status incomunicavel: nº tel errado
-      console.log('inquérito', data)
+      this.inqueritoPdac = data;
     })
   }
+
+  get_inquireForms() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data.filter((item: any) => {
+        return !['Incomunicavel: Nº Tel errado', 'Aprovado'].includes(item.status);
+      });
+
+      console.log('inquérito', this.inqueritos);
+    });
+  }
+
+
 
   autoCompleteProvincia() {
     const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
@@ -480,11 +493,11 @@ export class InqueritoComponent implements OnInit {
     return 'N/D';
   }
 
-  devolver_nome_municipio(id: any) {
-    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
-    return this.retorno
+  devolver_nome_municipio(id: any): string {
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    return municipioSelecionado ? municipioSelecionado.name : 'N/D';
   }
-  
+
   mi: any;
   get_MI_Duplicada() {
     this.dataService.proponentPDAC().subscribe(data => {
@@ -592,7 +605,7 @@ export class InqueritoComponent implements OnInit {
     } else if (resultado_Do_1_contacto_11) {
       return 'Recusada CV'
     } else {
-      return 'Não definido';
+      return 'N/D';
     }
   }
 
@@ -878,28 +891,30 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-    let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
 
-   /* let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
-    let formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
+    /* let fileList: FileList = this.selectedFile;
+     let documents: FileList = fileList;
+ 
+      let fileList2: FileList = this.selectedFile2;
+      let inquerito_preenchido: FileList = fileList2;
+      // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+  
+      let formData = new FormData();
+  
+      for (let i = 0; i < documents?.length; i++) {
+        formData.append("files", documents[i], documents[i].name);
       }
-    }*/
+  
+      // Verificar se há um arquivo selecionado
+      if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+        const inqueritoPreenchido = this.selectedFile2[0];
+  
+        // Verificar se o arquivo não está vazio
+        if (inqueritoPreenchido.size > 0) {
+          formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
+        }
+      }*/
 
     let formData = new FormData();
 
@@ -1032,32 +1047,39 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-
-
-
-
-   /* let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
-
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-    let formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
+    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+        this.alert_error_Que_tipo_negocio();
+      }
+      return;
     }
 
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
 
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }*/
+
+
+
+    /* let fileList: FileList = this.selectedFile;
+     let documents: FileList = fileList;
+ 
+     let fileList2: FileList = this.selectedFile2;
+     let inquerito_preenchido: FileList = fileList2;
+     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+ 
+     let formData = new FormData();
+ 
+     for (let i = 0; i < documents?.length; i++) {
+       formData.append("files", documents[i], documents[i].name);
+     }
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+       const inqueritoPreenchido = this.selectedFile2[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (inqueritoPreenchido.size > 0) {
+         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
+       }
+     }*/
 
     let formData = new FormData();
 
@@ -1199,12 +1221,12 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-    if (!this.angForm.get('data_validacao_inquerito')?.value) {
-      if (!this.angForm.get('data_validacao_inquerito')?.value) {
-        this.alert_error_Dat_val_inq();
-      }
-      return;
-    }
+    /* if (!this.angForm.get('data_validacao_inquerito')?.value) {
+       if (!this.angForm.get('data_validacao_inquerito')?.value) {
+         this.alert_error_Dat_val_inq();
+       }
+       return;
+     }*/
 
     if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
@@ -1214,19 +1236,19 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-   /* if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
-
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }*/
+    /* if (!this.angForm.get('inquerito_preenchido')?.value) {
+       if (!this.angForm.get('inquerito_preenchido')?.value) {
+         this.alert_error_Inq_pre();
+       }
+       return;
+     }
+ 
+     if (!this.angForm.get('documents')?.value) {
+       if (!this.angForm.get('documents')?.value) {
+         this.alert_error_Docs();
+       }
+       return;
+     }*/
 
 
     /*let fileList: FileList = this.selectedFile;
@@ -1318,7 +1340,8 @@ export class InqueritoComponent implements OnInit {
           (response: any) => {
             console.log(response.manifestacao_de_interesse)
 
-            this.alert_success();
+            //this.alert_success();
+            this.alert_success_MI_Aproved();
             // close modal
             const modal = document.getElementById('exampleModalToggle');
             if (modal) {
@@ -1416,7 +1439,7 @@ export class InqueritoComponent implements OnInit {
       icon: "success",
       title: "Salvo",
       showConfirmButton: false,
-      timer: 1500
+      timer: 1400
     })
   }
 

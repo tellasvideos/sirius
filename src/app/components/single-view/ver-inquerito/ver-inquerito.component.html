@@ -174,14 +174,9 @@
                                 <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                     style="width: 350px;" id="resultado_1_contacto" name="resultado_1_contacto"
-                                    formControlName="resultado_1_contacto" (change)="carregardocs2()">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let prov of resultados_De_Contacto" [value]="prov">{{prov}}
-                                    </option>
-                                </select>
-
+                                    formControlName="resultado_1_contacto">
                             </div>
                         </div>
 
@@ -233,17 +228,10 @@
                             </div>
 
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    (change)="carregardocs3()" style="width: 350px;" id="documento_em_falta"
-                                    name="resultado_da_visita" formControlName="resultado_da_visita"
-                                    [ngClass]="{ 'is-invalid': angForm.get('resultado_da_visita')?.invalid && (angForm.get('resultado_da_visita')?.touched) }">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let mun of resultados_da_visita" [value]="mun">
-                                        {{mun}}</option>
-                                </select>
-
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                    style="width: 350px;" id="resultado_da_visita" name="resultado_da_visita"
+                                    formControlName="resultado_da_visita">
                             </div>
-
                         </div>
 
                         <div class="mx-auto d-flex mb-1" style="width: 85%;">
@@ -331,7 +319,7 @@
 
                         <!-- Pergunta 11.2 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('data_1_contacto')?.value">
+                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo de
                                     Negócio Está?</label>
