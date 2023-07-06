@@ -387,6 +387,7 @@ export class EditInqueritoComponent implements OnInit {
     this.get_MI_Duplicada()
     this.carregarMunicipios();
     this.getMunicipio();
+    this.getInqueritoParaPdac();
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -444,13 +445,20 @@ export class EditInqueritoComponent implements OnInit {
     })
   }
 
+
+  inqueritoPdac: any;
+  getInqueritoParaPdac() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritoPdac = data;
+    })
+  }
   // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
   getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
       this.prop_name = this.pdac
         .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
-        .filter((propNome: any) => !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
+        .filter((propNome: any) => !this.inqueritoPdac.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
 
       console.log('Array pdac apenas nomes filtrados:', this.prop_name);
 
@@ -458,6 +466,7 @@ export class EditInqueritoComponent implements OnInit {
     });
 
   }
+
 
 
   onChangeValorSelecionado(event: any) {
@@ -1070,12 +1079,12 @@ export class EditInqueritoComponent implements OnInit {
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
-        this.alert_success();
+        this.alert_success_MI_Aproved();
         const modal = document.getElementById('exampleModalToggle');
         if (modal) {
           modal.style.display = 'none';
         }
-        this.route.navigate(['inquerito']);
+        this.route.navigate(['interesses']);
         // Espera 3 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();

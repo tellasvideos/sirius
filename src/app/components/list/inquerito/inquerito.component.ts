@@ -1228,12 +1228,12 @@ export class InqueritoComponent implements OnInit {
        return;
      }*/
 
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+    /*if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
         this.alert_error_Que_tipo_negocio();
       }
       return;
-    }
+    }*/
 
 
     /* if (!this.angForm.get('inquerito_preenchido')?.value) {

@@ -74,8 +74,8 @@
 
                                 <div class="d-flex justify-content-between">
                                     <div style="margin-right: 303px;">
-                                        <input type="checkbox" name="checkboxOption" [value]="true"
-                                            formControlName="didasTeste" (click)="showInputDidas(true)"
+                                        <input type="checkbox" name="checkboxOption" 
+                                            formControlName="didasTeste" (change)="showInputDidas(true)"
                                             [checked]="angForm.get('didasTeste')?.value">
                                     </div>
                                 </div>
@@ -130,12 +130,10 @@
                                     <label>Província:</label>
                                 </div>
                                 <div>
-                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                    <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                         id="provincia" name="provincia" required style="width: 350px;"
-                                        formControlName="provincia" (change)="carregarMunicipios()">
-                                        <option *ngFor="let prov of provincias" [value]="prov">{{prov}}
-                                        </option>
-                                    </select>
+                                        formControlName="provincia">
+                                        
                                 </div>
                             </div>
 
