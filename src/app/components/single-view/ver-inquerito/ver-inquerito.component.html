@@ -22,8 +22,8 @@
                                 <label>Manifestação de Interesse:</label>
                             </div>
                             <div class="my-element" style="margin-left: 10%;">
-                                <ng-select class="ng-select" [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome" [readonly]="true"
-                                    bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
+                                <ng-select class="ng-select" [items]="pdac" bindLabel="s2gp/s2g1q1/prop_nome"
+                                    [readonly]="true" bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                     formControlName="manifestacao_de_interesse" [searchable]="true" placeholder="">
                                 </ng-select>
                             </div>
@@ -131,7 +131,8 @@
                             </div>
                             <div>
                                 <input readonly [attr.disabled]="true" class="form-select form-select-sm" id="municipio"
-                                    name="municipio" required style="width: 350px;" formControlName="municipio">
+                                    name="municipio" required style="width: 350px;" formControlName="municipio"
+                                    value="{{exibirNomeMunicipio()}}">
                             </div>
 
                         </div>
@@ -287,7 +288,7 @@
                         </div>
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label class="form-label" for="customFile">Inquérito Preenchido:</label>
@@ -306,10 +307,10 @@
                                 </div>
                                 <br>
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value || !angForm.get('duplicada_da')?.value === true">
                             <div>
                                 <label class="form-label" for="customFile">Documentos do Proponente:
@@ -326,45 +327,35 @@
                                 </div>
                                 <br>
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 11.2 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                            *ngIf="this.angForm.get('data_1_contacto')?.value">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Que tipo de
                                     Negócio Está?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    (change)="loadTipoNegocio()" style="width: 350px;" id="que_tipo_de_negocio_esta"
-                                    name="que_tipo_de_negocio_esta" formControlName="que_tipo_de_negocio_esta">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_negococio" [value]="item">
-                                        {{item}}</option>
-                                </select>
-
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    style="width: 350px;" id="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta"
+                                    formControlName="que_tipo_de_negocio_esta">
                             </div>
                         </div>
 
                         <!-- Pergunta 11.2.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'">
+                            *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Em qual
                                     cadeia de Valor vai se
                                     implementar o projeto?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" style="width: 350px;"
-                                    class="form-select form-select-sm" id="tipodenegocio"
+                                <input readonly [attr.disabled]="true" style="width: 350px;"
+                                    class="form-control form-control-sm" id="tipodenegocio"
                                     name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                     formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
                         </div>
 
@@ -376,14 +367,8 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    style="width: 350px;" id="que_tipo" name="que_tipo" formControlName="que_tipo"
-                                    [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo') }">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_agregador" [value]="item">
-                                        {{item}}</option>
-                                </select>
-
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    style="width: 350px;" id="que_tipo" name="que_tipo" formControlName="que_tipo">
                             </div>
                         </div>
 
@@ -395,14 +380,9 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
                                     style="width: 350px;" id="que_tipo_2" name="que_tipo_2"
                                     formControlName="que_tipo_2">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
                         </div>
 
@@ -414,14 +394,9 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
                                     style="width: 350px;" id="que_tipo_3" name="que_tipo_3"
                                     formControlName="que_tipo_3">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
 
                         </div>

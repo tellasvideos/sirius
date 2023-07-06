@@ -25,7 +25,7 @@ export class VerInqueritoComponent implements OnInit {
   sideBarOpen = true;
   id: any;
 
-  id_bo:any;
+  id_bo: any;
 
   inquiridor: any;
   manifestacao: any;
@@ -118,7 +118,7 @@ export class VerInqueritoComponent implements OnInit {
     this.getInqueritoByIdDocs();
     this.get_inquireFormsInqueritoPreenchido();
 
-   this.activatedRoute.paramMap.subscribe(paramId => {
+    this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
           this.angForm.patchValue(data)
@@ -126,21 +126,28 @@ export class VerInqueritoComponent implements OnInit {
     });
 
     this.carregardocs2();
+    this.getMunicipio();
+    /* this.activatedRoute.params.subscribe(params => {
+       const itemId = params['id'];
+       // Use o ID do item para buscar os detalhes do item ou realizar qualquer ação necessária
+       console.log('ID do item:', itemId);
+     });*/
 
-   /* this.activatedRoute.params.subscribe(params => {
-      const itemId = params['id'];
-      // Use o ID do item para buscar os detalhes do item ou realizar qualquer ação necessária
-      console.log('ID do item:', itemId);
-    });*/
-
-   /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
-      this.carregardocs2();
-    });*/
+    /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
+       this.carregardocs2();
+     });*/
 
   }
 
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
+    })
+  }
 
-  duplicateNames:any;
+
+  duplicateNames: any;
 
   // nome_simplificado duplicados
   get_inquireFormsByPendentes() {
@@ -151,7 +158,7 @@ export class VerInqueritoComponent implements OnInit {
     });
   }
 
- 
+
 
   getInqueritoByIdDocs() {
     this.dataService.get_InquireForm().subscribe(data => {
@@ -253,6 +260,16 @@ export class VerInqueritoComponent implements OnInit {
     })
   }*/
 
+  exibirNomeMunicipio() {
+    const municipioId = this.angForm.get('municipio')?.value;
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === municipioId);
+    if (municipioSelecionado) {
+      return municipioSelecionado.name;
+    }
+
+    return 'N/D';
+  }
+
 
   // Manipulador de checkboxs
   showDuplicatedInput?: boolean;
@@ -277,7 +294,8 @@ export class VerInqueritoComponent implements OnInit {
   ]
 
   tipos_de_negococio = [
-    'Productor',
+    'Productor vegetais',
+    'Productor aves',
     'Agregador',
     'Transformador',
     'Distribuidor',
@@ -289,7 +307,7 @@ export class VerInqueritoComponent implements OnInit {
   tipos_de_agregador = [
     'Descasque',
     'Seleção',
-    'embalagem'
+    'Embalagem'
   ]
 
   tipos_de_cadeia_de_valor = [
@@ -434,8 +452,8 @@ export class VerInqueritoComponent implements OnInit {
   }
 
   loadTipoNegocio() {
-    switch (this.que_tipo_de_negocio_esta) {
-      case 'Productor':
+    switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+      case 'Productor vegetais':
         this.docs = [
           'Tuberculos',
           'Café',
@@ -447,7 +465,7 @@ export class VerInqueritoComponent implements OnInit {
         this.docs = [
           'Descasque',
           'Seleção',
-          'embalagem'
+          'Embalagem'
         ]
         break;
       case 'Transformador':

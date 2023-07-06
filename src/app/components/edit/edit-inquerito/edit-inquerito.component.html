@@ -24,7 +24,8 @@
                                     <label>Manifestação de Interesse:</label>
                                 </div>
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select [items]="prop_name" bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
+                                    <ng-select [items]="prop_name" (change)="autoCompleteProvincia()"
+                                        bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
                                         bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                         formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
                                         [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('manifestacao_de_interesse')?.touched }">
@@ -60,9 +61,8 @@
                                 </div>
 
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select style="width:350px;" [items]="inqueritos"
-                                        bindLabel="nome_simplificado" formControlName="duplicada_da_2"
-                                        [searchable]="true" placeholder=""></ng-select>
+                                    <ng-select style="width:350px;" [items]="inqueritos" bindLabel="nome_simplificado"
+                                        formControlName="duplicada_da_2" [searchable]="true" placeholder=""></ng-select>
                                 </div>
                             </div>
 
@@ -130,18 +130,12 @@
                                     <label>Província:</label>
                                 </div>
                                 <div>
-                                    <select class="form-select form-select-sm" id="provincia" name="provincia" required
-                                        style="width: 350px;" formControlName="provincia"
-                                        (change)="carregarMunicipios()"
-                                        [ngClass]="{ 'is-invalid': angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched }">
-                                        <option value="" disabled selected hidden></option>
+                                    <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                        id="provincia" name="provincia" required style="width: 350px;"
+                                        formControlName="provincia" (change)="carregarMunicipios()">
                                         <option *ngFor="let prov of provincias" [value]="prov">{{prov}}
                                         </option>
                                     </select>
-                                    <div class="invalid-feedback"
-                                        *ngIf="angForm.get('provincia')?.invalid && angForm.get('provincia')?.touched">
-                                        * Campo obrigatório.
-                                    </div>
                                 </div>
                             </div>
 
@@ -153,13 +147,9 @@
 
                                 </div>
                                 <div>
-                                    <input class="form-select form-select-sm" id="municipio" name="municipio" required
-                                        style="width: 350px; background-color: white;" formControlName="municipio"
-                                        [ngClass]="{ 'is-invalid': angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched }">
-                                    <div class="invalid-feedback"
-                                        *ngIf="angForm.get('municipio')?.invalid && angForm.get('municipio')?.touched">
-                                        * Campo obrigatório.
-                                    </div>
+                                    <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                        id="municipio" name="municipio" required
+                                        style="width: 350px; background-color: white;" formControlName="municipio" value="{{exibirNomeMunicipio()}}">
                                 </div>
 
                             </div>
@@ -374,7 +364,7 @@
                             </div>
 
                             <!-- Pergunta 11.1 -->
-                            <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                            <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                                 *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                                 <div>
                                     <label class="form-label" for="customFile">Inquérito Preenchido: (
@@ -392,10 +382,10 @@
                                         * Campo obrigatório.
                                     </div>
                                 </div>
-                            </div>
+                            </!--div-->
 
                             <!-- Pergunta 11.1 -->
-                            <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                            <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                                 *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                                 <div>
                                     <label class="form-label" for="customFile">Documentos do Proponente:
@@ -413,11 +403,11 @@
                                         * Campo obrigatório.
                                     </div>
                                 </div>
-                            </div>
+                            </!--div-->
 
                             <!-- Pergunta 11.2 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                                *ngIf="this.angForm.get('data_1_contacto')?.value">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Que tipo de
                                         Negócio Está?</label>
@@ -431,24 +421,20 @@
                                         <option *ngFor="let item of tipos_de_negococio" [value]="item">
                                             {{item}}</option>
                                     </select>
-                                    <div class="invalid-feedback"
-                                        *ngIf="angForm.get('que_tipo_de_negocio_esta')?.invalid && angForm.get('que_tipo_de_negocio_esta')?.touched">
-                                        * Campo obrigatório.
-                                    </div>
                                 </div>
                             </div>
 
                             <!-- Pergunta 11.2.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'">
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Em qual
                                         cadeia de Valor vai se
                                         implementar o projeto?</label>
                                 </div>
                                 <div>
-                                    <select style="width: 350px;" class="form-select form-select-sm" id="tipodenegocio"
-                                        name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
+                                    <select multiple style="width: 350px;" class="form-select form-select-sm"
+                                        id="tipodenegocio" name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                         formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                         [ngClass]="{ 'is-invalid': angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto') }">
                                         <option value="" disabled selected hidden></option>
@@ -470,8 +456,8 @@
                                         tipo?</label>
                                 </div>
                                 <div>
-                                    <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo"
-                                        name="que_tipo" formControlName="que_tipo"
+                                    <select multiple class="form-select form-select-sm" style="width: 350px;"
+                                        id="que_tipo" name="que_tipo" formControlName="que_tipo"
                                         [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo') }">
                                         <option value="" disabled selected hidden></option>
                                         <option *ngFor="let item of tipos_de_agregador" [value]="item">
@@ -492,8 +478,8 @@
                                         tipo?</label>
                                 </div>
                                 <div>
-                                    <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_2"
-                                        name="que_tipo_2" formControlName="que_tipo_2"
+                                    <select multiple class="form-select form-select-sm" style="width: 350px;"
+                                        id="que_tipo_2" name="que_tipo_2" formControlName="que_tipo_2"
                                         [ngClass]="{ 'is-invalid': angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2') }">
                                         <option value="" disabled selected hidden></option>
                                         <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}
@@ -514,8 +500,8 @@
                                         tipo?</label>
                                 </div>
                                 <div>
-                                    <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_3"
-                                        name="que_tipo_3" formControlName="que_tipo_3"
+                                    <select multiple class="form-select form-select-sm" style="width: 350px;"
+                                        id="que_tipo_3" name="que_tipo_3" formControlName="que_tipo_3"
                                         [ngClass]="{ 'is-invalid': angForm.get('que_tipo_3')?.invalid && angForm.get('que_tipo_3') }">
                                         <option value="" disabled selected hidden></option>
                                         <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}

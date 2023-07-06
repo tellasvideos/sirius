@@ -73,7 +73,8 @@ export class InqueritoComponent implements OnInit {
   ]
 
   tipos_de_negococio = [
-    'Productor',
+    'Productor vegetais',
+    'Productor aves',
     'Agregador',
     'Transformador',
     'Distribuidor',
@@ -160,7 +161,7 @@ export class InqueritoComponent implements OnInit {
 
   loadTipoNegocio() {
     switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      case 'Productor':
+      case 'Productor vegetais':
         this.docs = [
           'Tuberculos',
           'Café',
@@ -172,7 +173,7 @@ export class InqueritoComponent implements OnInit {
         this.docs = [
           'Descasque',
           'Seleção',
-          'embalagem'
+          'Embalagem'
         ]
         break;
       case 'Transformador':
@@ -349,10 +350,12 @@ export class InqueritoComponent implements OnInit {
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: ['', Validators.required],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
-      que_tipo: ['', Validators.required],
-      que_tipo_2: ['', Validators.required],
-      que_tipo_3: ['', Validators.required],
+
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [null, Validators.required],
+      que_tipo: [null, Validators.required],
+      que_tipo_2: [null, Validators.required],
+      que_tipo_3: [null, Validators.required],
+
       status: [''],
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
@@ -720,7 +723,7 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    let fileList: FileList = this.selectedFile;
+    /*let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
@@ -741,7 +744,10 @@ export class InqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    let formData = new FormData();
+
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
@@ -875,7 +881,7 @@ export class InqueritoComponent implements OnInit {
     let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
-    let fileList2: FileList = this.selectedFile2;
+   /* let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
@@ -893,7 +899,10 @@ export class InqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    let formData = new FormData();
+
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
@@ -1027,7 +1036,7 @@ export class InqueritoComponent implements OnInit {
 
 
 
-    let fileList: FileList = this.selectedFile;
+   /* let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
@@ -1048,7 +1057,10 @@ export class InqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    let formData = new FormData();
+
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
@@ -1202,7 +1214,7 @@ export class InqueritoComponent implements OnInit {
     }
 
 
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
+   /* if (!this.angForm.get('inquerito_preenchido')?.value) {
       if (!this.angForm.get('inquerito_preenchido')?.value) {
         this.alert_error_Inq_pre();
       }
@@ -1214,17 +1226,16 @@ export class InqueritoComponent implements OnInit {
         this.alert_error_Docs();
       }
       return;
-    }
+    }*/
 
 
-    let fileList: FileList = this.selectedFile;
+    /*let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
 
-    let formData = new FormData();
 
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
@@ -1238,7 +1249,10 @@ export class InqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    let formData = new FormData();
+
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);

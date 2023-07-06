@@ -73,7 +73,8 @@ export class EditInqueritoComponent implements OnInit {
   ]
 
   tipos_de_negococio = [
-    'Productor',
+    'Productor vegetais',
+    'Productor aves',
     'Agregador',
     'Transformador',
     'Distribuidor',
@@ -154,12 +155,28 @@ export class EditInqueritoComponent implements OnInit {
     }
   }
 
+  autoCompleteProvincia() {
+    const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
+
+    // Encontrar a PDAC correspondente à manifestação de interesse selecionada
+    const Provincia = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
+
+    // Atualizar o valor do campo "provincia" com base na PDAC selecionada
+    if (Provincia) {
+      this.angForm.patchValue({
+        provincia: Provincia['s2gp/s2g3/rep_provincia'],
+        municipio: Provincia['s2gp/s2g3/rep_municipio']
+      });
+      console.log(Provincia['s2gp/s2g3/rep_provincia']);
+      console.log(Provincia['s2gp/s2g3/rep_municipio']);
+    }
+  }
 
 
 
   loadTipoNegocio() {
     switch (this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      case 'Productor':
+      case 'Productor vegetais':
         this.docs = [
           'Tuberculos',
           'Café',
@@ -171,7 +188,7 @@ export class EditInqueritoComponent implements OnInit {
         this.docs = [
           'Descasque',
           'Seleção',
-          'embalagem'
+          'Embalagem'
         ]
         break;
       case 'Transformador':
@@ -341,17 +358,17 @@ export class EditInqueritoComponent implements OnInit {
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
       que_tipo_de_negocio_esta: ['', Validators.required],
-      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: ['', Validators.required],
-      que_tipo: ['', Validators.required],
-      que_tipo_2: ['', Validators.required],
-      que_tipo_3: ['', Validators.required],
+      em_qual_cadeia_de_valor_vai_se_implementar_o_projecto: [null, Validators.required],
+      que_tipo: [null, Validators.required],
+      que_tipo_2: [null, Validators.required],
+      que_tipo_3: [null, Validators.required],
       status: [''],
       created_at: [''],
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
       didasTeste: [false],
-      inquerito_preenchido: [''],
-      documents: ['']
+     // inquerito_preenchido: [''],
+     // documents: ['']
     });
   }
 
@@ -369,6 +386,7 @@ export class EditInqueritoComponent implements OnInit {
     this.getUserFrontOFF();
     this.get_MI_Duplicada()
     this.carregarMunicipios();
+    this.getMunicipio();
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
@@ -386,6 +404,25 @@ export class EditInqueritoComponent implements OnInit {
     });
 
   }
+
+  exibirNomeMunicipio() {
+    const municipioId = this.angForm.get('municipio')?.value;
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === municipioId);
+    if (municipioSelecionado) {
+      return municipioSelecionado.name;
+    }
+
+    return 'N/D';
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
+    })
+  }
+
+
 
 
   closeModal(modalId: string) {
@@ -407,8 +444,8 @@ export class EditInqueritoComponent implements OnInit {
     })
   }
 
-   // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
-   getPdac() {
+  // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
+  getPdac() {
     this.dataService.proponentPDAC().subscribe(data => {
       this.pdac = data;
       this.prop_name = this.pdac
@@ -419,7 +456,7 @@ export class EditInqueritoComponent implements OnInit {
 
       this.get_inquireForms()
     });
-  
+
   }
 
 
@@ -533,13 +570,12 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    const fileList: FileList = this.selectedFile;
+    /*const fileList: FileList = this.selectedFile;
     const documents: FileList = fileList;
 
     const fileList2: FileList = this.selectedFile2;
     const inquerito_preenchido: FileList = fileList2;
 
-    const formData = new FormData();
 
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
@@ -551,7 +587,9 @@ export class EditInqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    const formData = new FormData();
 
     formData.append("status", this.getStatus());
 
@@ -634,7 +672,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    let fileList: FileList = this.selectedFile;
+   /* let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
 
     let fileList2: FileList = this.selectedFile2;
@@ -655,7 +693,10 @@ export class EditInqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
       }
-    }
+    }*/
+
+    const formData = new FormData();
+
 
     formData.append("status", this.getStatus());
 
@@ -954,7 +995,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('inquerito_preenchido')?.value) {
+   /* if (!this.angForm.get('inquerito_preenchido')?.value) {
       if (!this.angForm.get('inquerito_preenchido')?.value) {
         this.alert_error_Inq_pre();
       }
@@ -966,10 +1007,10 @@ export class EditInqueritoComponent implements OnInit {
         this.alert_error_Docs();
       }
       return;
-    }
+    }*/
 
 
-    const fileList: FileList = this.selectedFile;
+   /* const fileList: FileList = this.selectedFile;
     const documents: FileList = fileList;
 
     const fileList2: FileList = this.selectedFile2;
@@ -987,7 +1028,10 @@ export class EditInqueritoComponent implements OnInit {
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", this.selectedFile2[0], this.selectedFile2[0].name);
       }
-    }
+    }*/
+
+    const formData = new FormData();
+
 
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
@@ -1406,12 +1450,12 @@ export class EditInqueritoComponent implements OnInit {
   OnDatachange(event: any) {
     const inputDate = event.target.value;
     const dateParts = inputDate.split('/');
-  
+
     if (dateParts.length === 3) {
       const day = dateParts[0];
       const month = dateParts[1];
       const year = dateParts[2];
-  
+
       const formattedDate = `${year}-${month}-${day}`;
       this.angForm.patchValue({ data_1_visita: formattedDate });
     }
@@ -1427,5 +1471,5 @@ export class EditInqueritoComponent implements OnInit {
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
-  
+
 }

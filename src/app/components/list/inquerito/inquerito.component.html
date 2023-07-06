@@ -255,7 +255,7 @@
                         </div>
                         <div>
                             <input class="form-control form-control-sm" id="municipio" name="municipio" required
-                                style="width: 350px;" formControlName="municipio" [value]="exibirNomeMunicipio()"
+                                style="width: 350px;" formControlName="municipio" value="{{exibirNomeMunicipio()}}"
                                 readonly [attr.disabled]="true">
                         </div>
 
@@ -471,7 +471,7 @@
                     </div>
 
                     <!-- Pergunta 11.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                    <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                         *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                         <div>
                             <label class="form-label" for="customFile">Inquérito Preenchido: ( .pdf ou .docx
@@ -487,10 +487,10 @@
                                 * Campo obrigatório.
                             </div>
                         </div>
-                    </div>
+                    </div-->
 
                     <!-- Pergunta 11.1 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                    <!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                         *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                         <div>
                             <label class="form-label" for="customFile">Documentos do Proponente: ( .pdf ou .docx
@@ -506,11 +506,11 @@
                                 * Campo obrigatório.
                             </div>
                         </div>
-                    </div>
+                    </div-->
 
                     <!-- Pergunta 11.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                        *ngIf="angForm.get('data_1_contacto')?.value">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio
                                 Está?</label>
@@ -532,13 +532,13 @@
 
                     <!-- Pergunta 11.2.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'">
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                                 implementar o projeto?</label>
                         </div>
                         <div>
-                            <select style="width: 350px;" class="form-select form-select-sm" id="tipodenegocio"
+                            <select multiple style="width: 350px;" class="form-select form-select-sm" id="tipodenegocio"
                                 name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                 formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                 [ngClass]="{ 'is-invalid': angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.invalid && angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto') }">
@@ -560,7 +560,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo"
+                            <select multiple class="form-select form-select-sm" style="width: 350px;" id="que_tipo"
                                 name="que_tipo" formControlName="que_tipo"
                                 [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo') }">
                                 <option value="" disabled selected hidden></option>
@@ -580,7 +580,7 @@
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
                         <div>
-                            <select class="form-select form-select-sm" style="width: 350px;" id="que_tipo_2"
+                            <select multiple class="form-select form-select-sm" style="width: 350px;" id="que_tipo_2"
                                 name="que_tipo_2" formControlName="que_tipo_2"
                                 [ngClass]="{ 'is-invalid': angForm.get('que_tipo_2')?.invalid && angForm.get('que_tipo_2') }">
                                 <option value="" disabled selected hidden></option>
