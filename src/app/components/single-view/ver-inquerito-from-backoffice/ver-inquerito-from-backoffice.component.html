@@ -288,7 +288,7 @@
                         </div>
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                             <div>
                                 <label class="form-label" for="customFile">Inquérito Preenchido:</label>
@@ -307,10 +307,10 @@
                                 </div>
                                 <br>
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 11.1 -->
-                        <div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
+                        <!--div class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;"
                             *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
                             <div>
                                 <label class="form-label" for="customFile">Documentos do Proponente:
@@ -327,7 +327,7 @@
                                 </div>
                                 <br>
                             </div>
-                        </div>
+                        </!--div-->
 
                         <!-- Pergunta 11.2 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
@@ -337,35 +337,25 @@
                                     Negócio Está?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    (change)="loadTipoNegocio()" style="width: 350px;" id="que_tipo_de_negocio_esta"
-                                    name="que_tipo_de_negocio_esta" formControlName="que_tipo_de_negocio_esta">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_negococio" [value]="item">
-                                        {{item}}</option>
-                                </select>
-
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                    style="width: 350px;" id="que_tipo_de_negocio_esta" name="que_tipo_de_negocio_esta"
+                                    formControlName="que_tipo_de_negocio_esta">
                             </div>
                         </div>
 
                         <!-- Pergunta 11.2.1 -->
                         <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                            *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'">
+                            *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
                             <div>
                                 <label for="exampleFormControlInput1" class="form-label">Em qual
                                     cadeia de Valor vai se
                                     implementar o projeto?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" style="width: 350px;"
+                                <input readonly [attr.disabled]="true" style="width: 350px;"
                                     class="form-select form-select-sm" id="tipodenegocio"
                                     name="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto"
                                     formControlName="em_qual_cadeia_de_valor_vai_se_implementar_o_projecto">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_cadeia_de_valor" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
                         </div>
 
@@ -377,14 +367,8 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
-                                    style="width: 350px;" id="que_tipo" name="que_tipo" formControlName="que_tipo"
-                                    [ngClass]="{ 'is-invalid': angForm.get('que_tipo')?.invalid && angForm.get('que_tipo') }">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_agregador" [value]="item">
-                                        {{item}}</option>
-                                </select>
-
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                    style="width: 350px;" id="que_tipo" name="que_tipo" formControlName="que_tipo">
                             </div>
                         </div>
 
@@ -396,14 +380,9 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                     style="width: 350px;" id="que_tipo_2" name="que_tipo_2"
                                     formControlName="que_tipo_2">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_transformador" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
                         </div>
 
@@ -415,16 +394,10 @@
                                     tipo?</label>
                             </div>
                             <div>
-                                <select readonly [attr.disabled]="true" class="form-select form-select-sm"
+                                <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                     style="width: 350px;" id="que_tipo_3" name="que_tipo_3"
                                     formControlName="que_tipo_3">
-                                    <option value="" disabled selected hidden></option>
-                                    <option *ngFor="let item of tipos_de_prestadores" [value]="item">{{item}}
-                                    </option>
-                                </select>
-
                             </div>
-
                         </div>
 
 
@@ -482,7 +455,7 @@
                         <div *ngIf="backoffice_data[0]?.inicio_elaboracao_pn"
                             class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
                             <div>
-                                <label for="fim_verificacao" style="width: 240px;">Data fim de verificação:</label>
+                                <label for="fim_verificacao" style="width: 240px;">Data fim de entrega ao PDAC:</label>
                             </div>
                             <div>
                                 <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
@@ -492,281 +465,22 @@
                             </div>
                         </div>
 
-                        <!-- Pergunta 15.1 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Área total da fazenda (ha):</label>
-                            </div>
-                            <div>
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.area_total_fazenda}}" name="area_total_fazenda"
-                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
-                                    [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.2 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Área de cultivo pelo PN (ha):</label>
-                            </div>
-                            <div>
-
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.area_cultivo_pn}}" name="area_cultivo_pn"
-                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
-                                    [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.3 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label style="width: 240px;">Recursos próprios (AOA):</label>
-                            </div>
-                            <div>
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.recursos_proprios }}" name="recursos_proprios"
-                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
-                                    [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.4 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Financiamento PDAC (AOA):</label>
-                            </div>
-                            <div>
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.financiamento }}" name="financiamento"
-                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
-                                    [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.5 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Financiamento bancário (AOA):</label>
-                            </div>
-                            <div>
-                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.financiamento }}" name="financiamento_bancario"
-                                    style="width: 150px; margin-right: 200px;" required type="number">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.6 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao && angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Histórico de produção: culturas produzidas no
-                                    ano agrícola de há dois anos?</label>
-                            </div>
-                            <div>
-                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.historico_producao_2_anos }}"
-                                    name="historico_producao_2_anos" style="width: 150px; margin-right: 200px;" required
-                                    type="number">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.7 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Área de [cultura] cultivada á dois anos (ha):</label>
-                            </div>
-                            <div>
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.area_cultura_2_anos }}" name="area_cultura_2_anos"
-                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
-                                    [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <!-- Pergunta 15.8 -->
-                        <div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
-                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
-                            <div>
-                                <label>Produção de [cultura] obtida á dois anos (ton):</label>
-                            </div>
-                            <div>
-
-                                <input class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.producao_cultura_2_anos }}"
-                                    name="producao_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
-                                    type="number" readonly [attr.disabled]="true">
-                            </div>
-                        </div>
-
-                        <div class="mx-auto mb-3 linhas1 p-2" style="width: 80%;">
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between d-flex mb-3 mt-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Estudo de viabilidade:</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.estudo_de_viabilidade|
-                                                slice:0:52 }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Termo de compromisso assinado:</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.termo_compromisso_assinado|
-                                                slice:0:52
-                                                }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Projeto RIV completo:</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.projeto_riv_completo |
-                                                slice:0:52}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between  d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">FTAS: </label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.ftas | slice:0:52}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between  d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Lista de trabalhadores
-                                        (nome/idade/sexo):</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.lista_de_trabalhadores |
-                                                slice:0:52
-                                                }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between  d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Documentos administrativos:</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.documentos_administrativos
-                                                |
-                                                slice:0:52
-                                                }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between  d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
-                                        )</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                                style="text-align: left;">{{backoffice_data[0]?.ficheiro_riv |
-                                                slice:0:52
-                                                }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Pergunta 15.8.1 -->
-                            <div class="justify-content-between  d-flex mb-3"
-                                *ngIf="backoffice_data[0]?.fim_verificacao">
-                                <div>
-                                    <label class="form-label" for="customFile">Outros documentos (fichas técnicas,
-                                        facturas)</label>
-                                </div>
-                                <div>
-                                    <ul style="list-style-type: none;">
-                                        <li *ngFor="let doc of backoffice_data[0]?.outros_documentos">
-                                            <a href="javascript:void(0);" style="text-align: left;">{{ doc | slice:0:52
-                                                }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
-                        </div>
-
+                       
                         <!-- Pergunta 16 -->
                         <div *ngIf="backoffice_data[0]?.fim_verificacao"
-                            class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
-                                <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
+                                <label>Tipo de Financiamento:</label>
                             </div>
                             <div>
-                                <input type="date"
-                                    value="{{backoffice_data[0]?.data_pn_entregue_ao_pdac | date:'yyyy-MM-dd'}}"
-                                    readonly [attr.disabled]="true" name="data_pn_entregue_ao_pdac"
-                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.financiamento_bancario}}" name="financiamento_bancario"
+                                    style="width: 150px; margin-right: 200px;" required type="text">
                             </div>
                         </div>
 
-                        <!-- Pergunta 17 -->
+                       
+                        <!-- Pergunta 18 -->
                         <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                             <div>
                                 <label>O PN está pendente?</label>
@@ -781,7 +495,7 @@
                             </div>
                         </div>
 
-                        <!-- Pergunta 17.1 -->
+                        <!-- Pergunta 18.1 -->
                         <div *ngIf="backoffice_data[0]?.pn_pendente" class="mb-3 d-flex justify-content-between mx-auto"
                             style="width: 80%;">
                             <div>
@@ -794,7 +508,7 @@
                             </div>
                         </div>
 
-                        <!-- Pergunta 18 -->
+                        <!-- Pergunta 19 -->
                         <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                             <div>
                                 <label>O proponente desistiu?</label>
@@ -835,3 +549,257 @@
     </mat-drawer-content>
 
 </mat-drawer-container>
+
+
+ <!-- Pergunta 15.1 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Área total da fazenda (ha):</label>
+                            </div>
+                            <div>
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.area_total_fazenda}}" name="area_total_fazenda"
+                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
+                                    [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.2 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Área de cultivo pelo PN (ha):</label>
+                            </div>
+                            <div>
+
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.area_cultivo_pn}}" name="area_cultivo_pn"
+                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
+                                    [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.3 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label style="width: 240px;">Recursos próprios (AOA):</label>
+                            </div>
+                            <div>
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.recursos_proprios }}" name="recursos_proprios"
+                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
+                                    [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.4 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Financiamento PDAC (AOA):</label>
+                            </div>
+                            <div>
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.financiamento }}" name="financiamento"
+                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
+                                    [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.5 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Financiamento bancário (AOA):</label>
+                            </div>
+                            <div>
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.financiamento }}" name="financiamento_bancario"
+                                    style="width: 150px; margin-right: 200px;" required type="number">
+                            </div>
+                        </div-->
+
+                        <!-- Pergunta 15.6 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Histórico de produção: culturas produzidas no
+                                    ano agrícola de há dois anos?</label>
+                            </div>
+                            <div>
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.historico_producao_2_anos }}"
+                                    name="historico_producao_2_anos" style="width: 150px; margin-right: 200px;" required
+                                    type="number">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.7 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Área de [cultura] cultivada á dois anos (ha):</label>
+                            </div>
+                            <div>
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.area_cultura_2_anos }}" name="area_cultura_2_anos"
+                                    style="width: 150px; margin-right: 200px;" required type="number" readonly
+                                    [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!-- Pergunta 15.8 -->
+                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
+                            class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                            <div>
+                                <label>Produção de [cultura] obtida á dois anos (ton):</label>
+                            </div>
+                            <div>
+
+                                <input class="form-control form-control-sm"
+                                    value="{{ backoffice_data[0]?.producao_cultura_2_anos }}"
+                                    name="producao_cultura_2_anos" style="width: 150px; margin-right: 200px;" required
+                                    type="number" readonly [attr.disabled]="true">
+                            </div>
+                        </!--div-->
+
+                        <!--div class="mx-auto mb-3 linhas1 p-2" style="width: 80%;"-->
+                            <!-- Pergunta 15.8.1 -->
+                            <!--div class="justify-content-between d-flex mb-3 mt-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Estudo de viabilidade:</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.estudo_de_viabilidade|
+                                                slice:0:52 }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </!div>
+
+                            <div class="justify-content-between d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Termo de compromisso assinado:</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.termo_compromisso_assinado|
+                                                slice:0:52
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Projeto RIV completo:</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.projeto_riv_completo |
+                                                slice:0:52}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between  d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">FTAS: </label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.ftas | slice:0:52}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between  d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Lista de trabalhadores
+                                        (nome/idade/sexo):</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.lista_de_trabalhadores |
+                                                slice:0:52
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between  d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Documentos administrativos:</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.documentos_administrativos
+                                                |
+                                                slice:0:52
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between  d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
+                                        )</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                style="text-align: left;">{{backoffice_data[0]?.ficheiro_riv |
+                                                slice:0:52
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-between  d-flex mb-3"
+                                *ngIf="backoffice_data[0]?.fim_verificacao">
+                                <div>
+                                    <label class="form-label" for="customFile">Outros documentos (fichas técnicas,
+                                        facturas)</label>
+                                </div>
+                                <div>
+                                    <ul style="list-style-type: none;">
+                                        <li *ngFor="let doc of backoffice_data[0]?.outros_documentos">
+                                            <a href="javascript:void(0);" style="text-align: left;">{{ doc | slice:0:52
+                                                }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </!div-->

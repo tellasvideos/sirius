@@ -10,8 +10,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { timer } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { forkJoin, timer } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-interesses',
@@ -110,6 +112,8 @@ export class InteressesComponent implements OnInit {
       this.inqueritoSelecionado = params;
     });
 
+
+
     /*/ leva os dados do backoffice para o inquerito selecionado
     this.route.queryParams.subscribe(params => {
       this.backofficeFormSelecionado = params;
@@ -122,6 +126,11 @@ export class InteressesComponent implements OnInit {
 
 
   }
+
+  id: any;
+
+  backoffice_data: any;
+
 
   checado?: boolean;
   atualizarFinanciamentoBancario(event: any) {
@@ -168,6 +177,36 @@ export class InteressesComponent implements OnInit {
   devolver_nome_municipio(id: any) {
     this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
     return this.retorno
+  }
+
+
+  devolve_pn(id:any){
+    this.dataService.Get_Backoffice_data_and_Inquerito_by_id(id).subscribe(data => {
+      // Converta data para um array se ainda não for
+      const dataArray = Array.isArray(data) ? data : [data];
+      this.backoffice_data = dataArray.reverse();
+      console.log('aquiiiiiiii', this.backoffice_data[0]);
+      return this.backoffice_data[0].status_pn;
+    });
+  }
+
+  devolver_status_pn(id: any): string {
+    const inqueritoSelecionado = this.formBackoffice.find((item: any) => item.inquerito === id);
+    return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
+  }
+
+  getBackofficesByInqueritoId(inqueritoId: any) {
+    return this.dataService.Get_Backoffice_data_and_Inquerito_by_id(inqueritoId).pipe(
+      switchMap((data: any) => {
+        const backoffices = Array.isArray(data) ? data : [data];
+        const backofficeIds = backoffices.map((backoffice: any) => backoffice.id);
+        return forkJoin(backofficeIds.map((backofficeId: any) =>
+          this.dataService.Get_Backoffice_data_and_Inquerito_by_id(backofficeId)
+        ));
+      })
+    ).subscribe(data =>{
+      console.log('yessss', data)
+    });
   }
 
   // to get all data from form backoffice
@@ -234,105 +273,105 @@ export class InteressesComponent implements OnInit {
     /* // Tratamento para upload de um arquivo (estudo de viabilidade)
      let fileList1: FileList = this.selectedFile1;
      let estudo_de_viabilidade: FileList = fileList1;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile1 && this.selectedFile1?.length > 0) {
        const Estudo_de_viabilidade = this.selectedFile1[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Estudo_de_viabilidade.size > 0) {
          formData.append("estudo_de_viabilidade", Estudo_de_viabilidade, Estudo_de_viabilidade.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (Termo de compromisso) 
      let fileList2: FileList = this.selectedFile2;
      let termo_compromisso_assinado: FileList = fileList2;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile2 && this.selectedFile2?.length > 0) {
        const Termo_compromisso_assinado = this.selectedFile2[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Termo_compromisso_assinado.size > 0) {
          formData.append('termo_compromisso_assinado', Termo_compromisso_assinado, Termo_compromisso_assinado.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (projeto_riv_completo) 
      let fileList3: FileList = this.selectedFile3;
      let projeto_riv_completo: FileList = fileList3;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile3 && this.selectedFile3?.length > 0) {
        const Projeto_riv_completo = this.selectedFile3[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Projeto_riv_completo.size > 0) {
          formData.append('projeto_riv_completo', Projeto_riv_completo, Projeto_riv_completo.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (Ftas) 
      let fileList4: FileList = this.selectedFile4;
      let ftas: FileList = fileList4;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile4 && this.selectedFile4?.length > 0) {
        const Ftas = this.selectedFile4[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Ftas.size > 0) {
          formData.append('ftas', Ftas, Ftas.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (lista_de_trabalhadores) 
      let fileList5: FileList = this.selectedFile5;
      let lista_de_trabalhadores: FileList = fileList5;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile5 && this.selectedFile5?.length > 0) {
        const Lista_de_trabalhadores = this.selectedFile5[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Lista_de_trabalhadores.size > 0) {
          formData.append('lista_de_trabalhadores', Lista_de_trabalhadores, Lista_de_trabalhadores.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (documentos_administrativos) 
      let fileList6: FileList = this.selectedFile6;
      let documentos_administrativos: FileList = fileList6;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile6 && this.selectedFile6?.length > 0) {
        const Documentos_administrativos = this.selectedFile6[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Documentos_administrativos.size > 0) {
          formData.append('documentos_administrativos', Documentos_administrativos, Documentos_administrativos.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (ficheiro_riv) 
      let fileList7: FileList = this.selectedFile7;
      let ficheiro_riv: FileList = fileList7;
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile7 && this.selectedFile7?.length > 0) {
        const Ficheiro_riv = this.selectedFile7[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (Ficheiro_riv.size > 0) {
          formData.append('ficheiro_riv', Ficheiro_riv, Ficheiro_riv.name);
        }
      }
- 
+   
      // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
      let fileList8: FileList = this.selectedFile8;
      let documents: FileList = fileList8;
- 
+   
      for (let i = 0; i < documents?.length; i++) {
        formData.append("files", documents[i], documents[i].name);
      }*/
@@ -344,12 +383,12 @@ export class InteressesComponent implements OnInit {
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
     formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
     formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
-    //formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
+    formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
     //formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
     //formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
     //formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
     //formData.append('financiamento', this.angForm.get('financiamento')?.value);
-    //formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
+    formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
     //formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
     //formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
     //formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
@@ -413,7 +452,7 @@ export class InteressesComponent implements OnInit {
     };
 
     // condição que define o status_pn
-    if (statusPN === 'PN em elaborção') {
+    if (statusPN === 'PN em analise UIP PDAC') {
       this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
       this.router.navigate(['pn-elaborados']);
     } else {

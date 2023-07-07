@@ -18,6 +18,7 @@ import { ViewChild } from '@angular/core';
 
 
 
+
 @Component({
   selector: 'app-inquerito',
   templateUrl: './inquerito.component.html',
@@ -27,7 +28,7 @@ export class InqueritoComponent implements OnInit {
 
   @ViewChild('exampleModalToggle')
   modal: any;
-
+  isLoading: boolean = true;
   selectedFile: any;
   selectedFile2: any;
 
@@ -457,7 +458,16 @@ export class InqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter((item: any) => {
-        return !['Incomunicavel: Nº Tel errado', 'Aprovado'].includes(item.status);
+        // Verifica se os dados foram filtrados
+        if (this.inqueritos.length > 0) {
+          this.isLoading = false; // Indica que os dados foram carregados
+        } else {
+          // Caso contrário, aguarde um curto período e tente novamente
+          setTimeout(() => {
+            this.get_inquireForms();
+          }, 300);
+        }
+        return ['Em Análise', 'A ser visitada'].includes(item.status);
       });
 
       console.log('inquérito', this.inqueritos);
@@ -551,17 +561,24 @@ export class InqueritoComponent implements OnInit {
     const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: zona inelegível';
     const resultado_Do_1_contacto_10 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de área';
     const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegível';
+    const resultado_Do_1_contacto_12 = this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' || this.angForm.get('data_1_visita')?.value !== '';
+
 
     const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
     const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
     const didasTeste = this.angForm.get('didasTeste')?.value === true;
+    const DataPrimeiroContacto = this.angForm.get('data_1_contacto')?.value === '';
 
     if (duplicadaDaValue) {
       return 'MI Duplicada';
+    } else if (resultado_Do_1_contacto_12) {
+      return 'A ser visitada'
     } else if (dataValidacaoInqueritoValue) {
       return 'Aprovado';
     } else if (resultadoDaVisita) {
       return 'Em Análise'
+    } else if (DataPrimeiroContacto) {
+      return 'Por contactar'
     } else if (resultado_Do_1_contacto) {
       return 'Incomunicavel: Não atende'
     } else if (resultado_Do_1_contacto_2) {
