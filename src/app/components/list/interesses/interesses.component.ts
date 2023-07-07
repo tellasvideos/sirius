@@ -62,11 +62,10 @@ export class InteressesComponent implements OnInit {
       inicio_elaboracao_pn: ['', Validators.required],
       fim_elaboracao_pn: [''],
       fim_verificacao: [''],
-      area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      /*area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       area_cultivo_pn: ['', Validators.required],
       recursos_proprios: ['', Validators.required],
       financiamento: ['', Validators.required],
-      financiamento_bancario: [false],
       historico_producao_2_anos: ['', Validators.required],
       area_cultura_2_anos: ['', Validators.required],
       producao_cultura_2_anos: ['', Validators.required],
@@ -78,14 +77,16 @@ export class InteressesComponent implements OnInit {
       lista_de_trabalhadores: new FormControl(null),
       documentos_administrativos: new FormControl(null),
       ficheiro_riv: new FormControl(null),
-      outros_documentos: new FormControl(null),
+      outros_documentos: new FormControl(null),*/
 
-
+      financiamento_bancario: [''],
       data_pn_entregue_ao_pdac: [''],
       pn_pendente: [false],
       justificacao_pn_pendente: ['', Validators.required],
       proponente_desistiu: [false],
       created_at: [''],
+      mgCheckbox: [false],
+      mgBancoCheckbox: [false]
     })
   }
 
@@ -123,20 +124,38 @@ export class InteressesComponent implements OnInit {
   }
 
   checado?: boolean;
-  OnFinanciamento(option: string) {
-    if (option === 'MG') {
-      this.angForm.patchValue({
-        financiamento_bancario: true
-      });
-      this.checado = true;
-    } else if (option === 'MG e Banco') {
-      this.angForm.patchValue({
-        financiamento_bancario: false
-      });
-      this.checado = false;
+  atualizarFinanciamentoBancario(event: any) {
+    const checkbox = event.target;
+    if (checkbox.checked) {
+      this.checado = true; // A primeira opção é verdadeira
+    } else {
+      this.checado = false; // A segunda opção é falsa
     }
   }
-  
+
+  showInput(checkboxValue: string) {
+    const financiamentoBancarioControl = this.angForm.get('financiamento_bancario');
+    const mgCheckboxControl = this.angForm.get('mgCheckbox');
+    const mgBancoCheckboxControl = this.angForm.get('mgBancoCheckbox');
+
+    if (checkboxValue === 'mg') {
+      financiamentoBancarioControl?.setValue('MG');
+      console.log(this.angForm.get('financiamento_bancario')?.value)
+
+      mgBancoCheckboxControl?.setValue(false);
+    } else if (checkboxValue === 'mgBanco') {
+      financiamentoBancarioControl?.setValue('MG e Banco');
+      console.log(this.angForm.get('financiamento_bancario')?.value)
+      mgCheckboxControl?.setValue(false);
+    }
+  }
+
+
+
+
+
+
+
 
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {
@@ -144,8 +163,8 @@ export class InteressesComponent implements OnInit {
     })
   }
 
-  municipio:any;
-  retorno:any;
+  municipio: any;
+  retorno: any;
   devolver_nome_municipio(id: any) {
     this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
     return this.retorno
@@ -175,7 +194,7 @@ export class InteressesComponent implements OnInit {
     const Estado_MI = this.inqueritoSelecionado?.status === 'Aprovado' && this.angForm.get('inicio_elaboracao_pn')?.value === '';
     const Data_inicio_elaboração_PN = this.angForm.get('inicio_elaboracao_pn')?.value && this.angForm.get('fim_elaboracao_pn')?.value === '';
     const Data_fim_elaboração_PN = this.angForm.get('fim_elaboracao_pn')?.value && this.angForm.get('fim_verificacao')?.value === '';
-    const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
+    //const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
     const O_proponente_desistiu = this.angForm.get('proponente_desistiu')?.value === true;
     const O_PN_esta_pendente = this.angForm.get('pn_pendente')?.value === true;
     const Data_PN_entregue_ao_PDAC = this.angForm.get('data_pn_entregue_ao_pdac')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
@@ -186,16 +205,16 @@ export class InteressesComponent implements OnInit {
       return 'PN em elaborção';
     } else if (Data_fim_elaboração_PN) {
       return 'PN em verificação'
-    } else if (Data_fim_verificacao) {
+    } /*else if (Data_fim_verificacao) {
       return 'PN finalizado'
-    } else if (O_proponente_desistiu) {
+    }*/ else if (O_proponente_desistiu) {
       return 'Desistência do proponente'
     } else if (O_PN_esta_pendente) {
       return 'PN pendente no BO'
     } else if (Data_PN_entregue_ao_PDAC) {
       return 'PN em analise UIP PDAC'
     } {
-      return 'Não definido'
+      return 'N/D'
     }
   }
 
@@ -211,128 +230,130 @@ export class InteressesComponent implements OnInit {
 
 
   enviarFormulario(data_: any) {
+
+    /* // Tratamento para upload de um arquivo (estudo de viabilidade)
+     let fileList1: FileList = this.selectedFile1;
+     let estudo_de_viabilidade: FileList = fileList1;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile1 && this.selectedFile1?.length > 0) {
+       const Estudo_de_viabilidade = this.selectedFile1[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Estudo_de_viabilidade.size > 0) {
+         formData.append("estudo_de_viabilidade", Estudo_de_viabilidade, Estudo_de_viabilidade.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (Termo de compromisso) 
+     let fileList2: FileList = this.selectedFile2;
+     let termo_compromisso_assinado: FileList = fileList2;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+       const Termo_compromisso_assinado = this.selectedFile2[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Termo_compromisso_assinado.size > 0) {
+         formData.append('termo_compromisso_assinado', Termo_compromisso_assinado, Termo_compromisso_assinado.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (projeto_riv_completo) 
+     let fileList3: FileList = this.selectedFile3;
+     let projeto_riv_completo: FileList = fileList3;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile3 && this.selectedFile3?.length > 0) {
+       const Projeto_riv_completo = this.selectedFile3[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Projeto_riv_completo.size > 0) {
+         formData.append('projeto_riv_completo', Projeto_riv_completo, Projeto_riv_completo.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (Ftas) 
+     let fileList4: FileList = this.selectedFile4;
+     let ftas: FileList = fileList4;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile4 && this.selectedFile4?.length > 0) {
+       const Ftas = this.selectedFile4[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Ftas.size > 0) {
+         formData.append('ftas', Ftas, Ftas.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (lista_de_trabalhadores) 
+     let fileList5: FileList = this.selectedFile5;
+     let lista_de_trabalhadores: FileList = fileList5;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile5 && this.selectedFile5?.length > 0) {
+       const Lista_de_trabalhadores = this.selectedFile5[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Lista_de_trabalhadores.size > 0) {
+         formData.append('lista_de_trabalhadores', Lista_de_trabalhadores, Lista_de_trabalhadores.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (documentos_administrativos) 
+     let fileList6: FileList = this.selectedFile6;
+     let documentos_administrativos: FileList = fileList6;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile6 && this.selectedFile6?.length > 0) {
+       const Documentos_administrativos = this.selectedFile6[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Documentos_administrativos.size > 0) {
+         formData.append('documentos_administrativos', Documentos_administrativos, Documentos_administrativos.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (ficheiro_riv) 
+     let fileList7: FileList = this.selectedFile7;
+     let ficheiro_riv: FileList = fileList7;
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile7 && this.selectedFile7?.length > 0) {
+       const Ficheiro_riv = this.selectedFile7[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (Ficheiro_riv.size > 0) {
+         formData.append('ficheiro_riv', Ficheiro_riv, Ficheiro_riv.name);
+       }
+     }
+ 
+     // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
+     let fileList8: FileList = this.selectedFile8;
+     let documents: FileList = fileList8;
+ 
+     for (let i = 0; i < documents?.length; i++) {
+       formData.append("files", documents[i], documents[i].name);
+     }*/
+
+    // formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
+
     const formData = new FormData();
 
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
     formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
     formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
-    formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
-    formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
-    formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
-    formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
-    formData.append('financiamento', this.angForm.get('financiamento')?.value);
-    formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
-    formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
-    formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
-    formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
+    //formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
+    //formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
+    //formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
+    //formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
+    //formData.append('financiamento', this.angForm.get('financiamento')?.value);
+    //formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
+    //formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
+    //formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
+    //formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
 
-    // Tratamento para upload de um arquivo (estudo de viabilidade)
-    let fileList1: FileList = this.selectedFile1;
-    let estudo_de_viabilidade: FileList = fileList1;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile1 && this.selectedFile1?.length > 0) {
-      const Estudo_de_viabilidade = this.selectedFile1[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Estudo_de_viabilidade.size > 0) {
-        formData.append("estudo_de_viabilidade", Estudo_de_viabilidade, Estudo_de_viabilidade.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (Termo de compromisso) 
-    let fileList2: FileList = this.selectedFile2;
-    let termo_compromisso_assinado: FileList = fileList2;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const Termo_compromisso_assinado = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Termo_compromisso_assinado.size > 0) {
-        formData.append('termo_compromisso_assinado', Termo_compromisso_assinado, Termo_compromisso_assinado.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (projeto_riv_completo) 
-    let fileList3: FileList = this.selectedFile3;
-    let projeto_riv_completo: FileList = fileList3;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile3 && this.selectedFile3?.length > 0) {
-      const Projeto_riv_completo = this.selectedFile3[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Projeto_riv_completo.size > 0) {
-        formData.append('projeto_riv_completo', Projeto_riv_completo, Projeto_riv_completo.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (Ftas) 
-    let fileList4: FileList = this.selectedFile4;
-    let ftas: FileList = fileList4;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile4 && this.selectedFile4?.length > 0) {
-      const Ftas = this.selectedFile4[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Ftas.size > 0) {
-        formData.append('ftas', Ftas, Ftas.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (lista_de_trabalhadores) 
-    let fileList5: FileList = this.selectedFile5;
-    let lista_de_trabalhadores: FileList = fileList5;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile5 && this.selectedFile5?.length > 0) {
-      const Lista_de_trabalhadores = this.selectedFile5[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Lista_de_trabalhadores.size > 0) {
-        formData.append('lista_de_trabalhadores', Lista_de_trabalhadores, Lista_de_trabalhadores.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (documentos_administrativos) 
-    let fileList6: FileList = this.selectedFile6;
-    let documentos_administrativos: FileList = fileList6;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile6 && this.selectedFile6?.length > 0) {
-      const Documentos_administrativos = this.selectedFile6[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Documentos_administrativos.size > 0) {
-        formData.append('documentos_administrativos', Documentos_administrativos, Documentos_administrativos.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (ficheiro_riv) 
-    let fileList7: FileList = this.selectedFile7;
-    let ficheiro_riv: FileList = fileList7;
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile7 && this.selectedFile7?.length > 0) {
-      const Ficheiro_riv = this.selectedFile7[0];
-
-      // Verificar se o arquivo não está vazio
-      if (Ficheiro_riv.size > 0) {
-        formData.append('ficheiro_riv', Ficheiro_riv, Ficheiro_riv.name);
-      }
-    }
-
-    // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
-    let fileList8: FileList = this.selectedFile8;
-    let documents: FileList = fileList8;
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
     formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
@@ -358,7 +379,7 @@ export class InteressesComponent implements OnInit {
         location.reload();
       });
 
-     // this.hideLoading();
+      // this.hideLoading();
     };
 
     // Success calback 2
@@ -380,7 +401,7 @@ export class InteressesComponent implements OnInit {
       timer(2000).pipe(delay(2000)).subscribe(() => {
         location.reload();
       });
-     // this.hideLoading();
+      // this.hideLoading();
     };
 
     // Error callback
@@ -392,7 +413,7 @@ export class InteressesComponent implements OnInit {
     };
 
     // condição que define o status_pn
-    if (statusPN === 'PN finalizado') {
+    if (statusPN === 'PN em elaborção') {
       this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
       this.router.navigate(['pn-elaborados']);
     } else {

@@ -395,16 +395,16 @@
 
                         <div class="d-block" style="margin-right: 225px;">
                             <div class="checkbox-wrapper">
-                                <input type="checkbox" name="checkboxOption_1" [value]="true"
-                                    formControlName="financiamento_bancario" (change)="OnFinanciamento('MG')"
-                                    [checked]="checado">
+                                <input type="checkbox" name="mgCheckbox" (change)="showInput('mg')"
+                                    [checked]="angForm.get('financiamento_bancario')?.value === 'MG'"
+                                    formControlName="mgCheckbox">
                                 <label class="legend">MG</label>
                             </div>
 
                             <div class="checkbox-wrapper">
-                                <input type="checkbox" name="checkboxOption_2" [value]="false"
-                                    formControlName="financiamento_bancario" (change)="OnFinanciamento('MG e Banco')"
-                                    [checked]="!checado">
+                                <input type="checkbox" name="mgBancoCheckbox" (change)="showInput('mgBanco')"
+                                    [checked]="angForm.get('financiamento_bancario')?.value === 'MG e Banco'"
+                                    formControlName="mgBancoCheckbox">
                                 <label class="legend">MG e Banco</label>
                             </div>
                         </div>
