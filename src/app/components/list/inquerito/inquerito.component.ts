@@ -102,7 +102,8 @@ export class InqueritoComponent implements OnInit {
     'Processamento e negócio grãos'
   ]
 
-  resultados_da_visita = ['Inquérito em Elaboração',
+  resultados_da_visita = [
+    'Inquérito em Elaboração',
     //'Incomunicavel: não atende',
     //'Incontactável: N° tel errado',
     'Pendente por falta de documento',
@@ -118,7 +119,8 @@ export class InqueritoComponent implements OnInit {
     //'Didas teste'
   ]
 
-  resultados_De_Contacto = ['A ser visitada',
+  resultados_De_Contacto = [
+    'A ser visitada',
     'Incomunicavel: Não atende',
     'Incomunicavel: Nº Tel errado',
     'Pendente por falta de documento',
@@ -199,17 +201,6 @@ export class InqueritoComponent implements OnInit {
 
   carregardocs3() {
     switch (this.angForm.get('resultado_da_visita')?.value) {
-      case 'A ser visitada':
-        this.docs = ['Título de terra',
-          'Croquis de localização',
-          'Alvará comercial',
-          'Certidão comercia',
-          'Certidão de Não devedor da AGT',
-          'INSS',
-          'BI',
-          'NIF',
-          'Outro'];
-        break;
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'Croquis de localização',
@@ -457,7 +448,7 @@ export class InqueritoComponent implements OnInit {
 
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter((item: any) => {
+      this.inqueritos = data /*.filter((item: any) => {
         // Verifica se os dados foram filtrados
         if (this.inqueritos.length > 0) {
           this.isLoading = false; // Indica que os dados foram carregados
@@ -467,9 +458,9 @@ export class InqueritoComponent implements OnInit {
             this.get_inquireForms();
           }, 300);
         }
-        return ['Em Análise', 'A ser visitada'].includes(item.status);
-      });
-
+        return ['Em Análise', 'A ser visitada',].includes(item.status);
+      });*/
+      this.isLoading = false;
       console.log('inquérito', this.inqueritos);
     });
   }
@@ -538,7 +529,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
-  public getStatus(): string {
+  getStatus(): string {
     const resultadoDaVisita = this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração';
     const resultadoDaVisita_2 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta dos 10%';
     const resultadoDaVisita_3 = this.angForm.get('resultado_da_visita')?.value === 'Recusado por dívida';
@@ -561,19 +552,17 @@ export class InqueritoComponent implements OnInit {
     const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: zona inelegível';
     const resultado_Do_1_contacto_10 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de área';
     const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegível';
-    const resultado_Do_1_contacto_12 = this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' || this.angForm.get('data_1_visita')?.value !== '';
+    const resultado_Do_1_contacto_12 = this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada';
 
 
-    const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
-    const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
+    const duplicadaDaValue = this.angForm.get('duplicada_da')?.value === true;
+    const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value || this.angForm.get('que_tipo_de_negocio_esta')?.value;
     const didasTeste = this.angForm.get('didasTeste')?.value === true;
     const DataPrimeiroContacto = this.angForm.get('data_1_contacto')?.value === '';
 
     if (duplicadaDaValue) {
       return 'MI Duplicada';
-    } else if (resultado_Do_1_contacto_12) {
-      return 'A ser visitada'
-    } else if (dataValidacaoInqueritoValue) {
+    }  else if (dataValidacaoInqueritoValue) {
       return 'Aprovado';
     } else if (resultadoDaVisita) {
       return 'Em Análise'
@@ -617,6 +606,8 @@ export class InqueritoComponent implements OnInit {
       return 'Recusada por falta de área'
     } else if (resultado_Do_1_contacto_10) {
       return 'Recusada por falta de área'
+    }else if (resultado_Do_1_contacto_12) {
+      return 'A ser visitada'
     } else if (resultadoDaVisita_10) {
       return 'Recusada CV'
     } else if (resultado_Do_1_contacto_11) {
@@ -1064,12 +1055,12 @@ export class InqueritoComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-        this.alert_error_Que_tipo_negocio();
-      }
-      return;
-    }
+    /*if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+          if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+            this.alert_error_Que_tipo_negocio();
+          }
+          return;
+        }*/
 
 
 
@@ -1172,11 +1163,6 @@ export class InqueritoComponent implements OnInit {
   }
 
 
-
-
-
-
-
   // Guarda todos os campos do formulário (botao 5)
   save_inquerito_5_parte() {
 
@@ -1245,12 +1231,12 @@ export class InqueritoComponent implements OnInit {
        return;
      }*/
 
-    /*if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
+    if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
       if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
         this.alert_error_Que_tipo_negocio();
       }
       return;
-    }*/
+    }
 
 
     /* if (!this.angForm.get('inquerito_preenchido')?.value) {
@@ -1677,13 +1663,28 @@ export class InqueritoComponent implements OnInit {
   showDuplicatedInput_1?: boolean;
   duplicatedName: string = '';
 
-  showInput() {
+
+  // Se duplicada checked = true : didastest = false
+  showInput_(checkboxValue: string) {
     this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
+    this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value;
+
+    if (checkboxValue === 'duplicada') {
+      this.showDuplicatedInput === true;
+      console.log(this.angForm.get('duplicada_da')?.value)
+      this.showDuplicatedInput_1 === false;
+      this.angForm.get('didasTeste')?.patchValue(false);
+      console.log(this.angForm.get('didasTeste')?.value)
+
+    } else if (checkboxValue === 'didasteste') {
+      this.showDuplicatedInput_1 === true;
+      console.log(this.angForm.get('didasTeste')?.value)
+      this.showDuplicatedInput === false;
+      this.angForm.get('duplicada_da')?.patchValue(false);
+      console.log(this.angForm.get('duplicada_da')?.value)
+    }
   }
 
-  showInputDidas() {
-    this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value; // Desmarca a opção "Sim"
-  }
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;

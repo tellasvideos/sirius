@@ -156,6 +156,7 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   autoCompleteProvincia() {
+    this.getInqueritoParaPdac();
     const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
 
     // Encontrar a PDAC correspondente à manifestação de interesse selecionada
@@ -367,8 +368,8 @@ export class EditInqueritoComponent implements OnInit {
       manifestacao_de_interesse: ['', Validators.required],
       inqueridor: ['', Validators.required],
       didasTeste: [false],
-     // inquerito_preenchido: [''],
-     // documents: ['']
+      // inquerito_preenchido: [''],
+      // documents: ['']
     });
   }
 
@@ -378,7 +379,6 @@ export class EditInqueritoComponent implements OnInit {
 
   ngOnInit(): void {
     this.get_farm_names();
-    this.get_interest_express();
     this.get_inquirier();
     this.get_inquireForms();
     this.getProvincia();
@@ -484,9 +484,8 @@ export class EditInqueritoComponent implements OnInit {
   }
 
 
-
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
-  public getStatus(): string {
+  getStatus(): string {
     const resultadoDaVisita = this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração';
     const resultadoDaVisita_2 = this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta dos 10%';
     const resultadoDaVisita_3 = this.angForm.get('resultado_da_visita')?.value === 'Recusado por dívida';
@@ -509,10 +508,13 @@ export class EditInqueritoComponent implements OnInit {
     const resultado_Do_1_contacto_9 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: zona inelegível';
     const resultado_Do_1_contacto_10 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de área';
     const resultado_Do_1_contacto_11 = this.angForm.get('resultado_1_contacto')?.value === 'Recusada: CV inelegível';
+    const resultado_Do_1_contacto_12 = this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada';
 
-    const duplicadaDaValue = this.angForm.get('duplicada_da')?.value;
-    const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value;
+
+    const duplicadaDaValue = this.angForm.get('duplicada_da')?.value === true;
+    const dataValidacaoInqueritoValue = this.angForm.get('data_validacao_inquerito')?.value || this.angForm.get('que_tipo_de_negocio_esta')?.value;
     const didasTeste = this.angForm.get('didasTeste')?.value === true;
+    const DataPrimeiroContacto = this.angForm.get('data_1_contacto')?.value === '';
 
     if (duplicadaDaValue) {
       return 'MI Duplicada';
@@ -520,6 +522,8 @@ export class EditInqueritoComponent implements OnInit {
       return 'Aprovado';
     } else if (resultadoDaVisita) {
       return 'Em Análise'
+    } else if (DataPrimeiroContacto) {
+      return 'Por contactar'
     } else if (resultado_Do_1_contacto) {
       return 'Incomunicavel: Não atende'
     } else if (resultado_Do_1_contacto_2) {
@@ -558,12 +562,14 @@ export class EditInqueritoComponent implements OnInit {
       return 'Recusada por falta de área'
     } else if (resultado_Do_1_contacto_10) {
       return 'Recusada por falta de área'
+    } else if (resultado_Do_1_contacto_12) {
+      return 'A ser visitada'
     } else if (resultadoDaVisita_10) {
       return 'Recusada CV'
     } else if (resultado_Do_1_contacto_11) {
       return 'Recusada CV'
     } else {
-      return '';
+      return 'N/D';
     }
   }
 
@@ -681,28 +687,28 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-   /* let fileList: FileList = this.selectedFile;
-    let documents: FileList = fileList;
-
-    let fileList2: FileList = this.selectedFile2;
-    let inquerito_preenchido: FileList = fileList2;
-    // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-    let formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    // Verificar se há um arquivo selecionado
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      // Verificar se o arquivo não está vazio
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }*/
+    /* let fileList: FileList = this.selectedFile;
+     let documents: FileList = fileList;
+ 
+     let fileList2: FileList = this.selectedFile2;
+     let inquerito_preenchido: FileList = fileList2;
+     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
+ 
+     let formData = new FormData();
+ 
+     for (let i = 0; i < documents?.length; i++) {
+       formData.append("files", documents[i], documents[i].name);
+     }
+ 
+     // Verificar se há um arquivo selecionado
+     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+       const inqueritoPreenchido = this.selectedFile2[0];
+ 
+       // Verificar se o arquivo não está vazio
+       if (inqueritoPreenchido.size > 0) {
+         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
+       }
+     }*/
 
     const formData = new FormData();
 
@@ -1011,40 +1017,40 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-   /* if (!this.angForm.get('inquerito_preenchido')?.value) {
-      if (!this.angForm.get('inquerito_preenchido')?.value) {
-        this.alert_error_Inq_pre();
-      }
-      return;
-    }
+    /* if (!this.angForm.get('inquerito_preenchido')?.value) {
+       if (!this.angForm.get('inquerito_preenchido')?.value) {
+         this.alert_error_Inq_pre();
+       }
+       return;
+     }
+ 
+     if (!this.angForm.get('documents')?.value) {
+       if (!this.angForm.get('documents')?.value) {
+         this.alert_error_Docs();
+       }
+       return;
+     }*/
 
-    if (!this.angForm.get('documents')?.value) {
-      if (!this.angForm.get('documents')?.value) {
-        this.alert_error_Docs();
-      }
-      return;
-    }*/
 
-
-   /* const fileList: FileList = this.selectedFile;
-    const documents: FileList = fileList;
-
-    const fileList2: FileList = this.selectedFile2;
-    const inquerito_preenchido: FileList = fileList2;
-
-    const formData = new FormData();
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", this.selectedFile2[0], this.selectedFile2[0].name);
-      }
-    }*/
+    /* const fileList: FileList = this.selectedFile;
+     const documents: FileList = fileList;
+ 
+     const fileList2: FileList = this.selectedFile2;
+     const inquerito_preenchido: FileList = fileList2;
+ 
+     const formData = new FormData();
+ 
+     for (let i = 0; i < documents?.length; i++) {
+       formData.append("files", documents[i], documents[i].name);
+     }
+ 
+     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
+       const inqueritoPreenchido = this.selectedFile2[0];
+ 
+       if (inqueritoPreenchido.size > 0) {
+         formData.append("inquerito_preenchido", this.selectedFile2[0], this.selectedFile2[0].name);
+       }
+     }*/
 
     const formData = new FormData();
 
