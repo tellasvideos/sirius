@@ -462,7 +462,6 @@ export class EditInqueritoComponent implements OnInit {
 
       console.log('Array pdac apenas nomes filtrados:', this.prop_name);
 
-      this.get_inquireForms()
     });
 
   }
