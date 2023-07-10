@@ -1797,8 +1797,8 @@ export class InqueritoComponent implements OnInit {
     this.angForm.get('documento_em_falta_2')?.value === '';
     this.angForm.get('documento_em_falta_3')?.value === '';
     this.angForm.get('documento_em_falta_4')?.value === '';
-    //this.angForm.get('data_1_visita')?.reset();
-   // this.angForm.get('data_validacao_inquerito')?.reset();
+    this.angForm.get('data_1_visita')?.value == '';
+    this.angForm.get('data_validacao_inquerito')?.value == '';
     this.angForm.get('que_tipo_de_negocio_esta')?.value === '';
     this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value === '';
     this.angForm.get('que_tipo')?.value === '';
@@ -1807,6 +1807,8 @@ export class InqueritoComponent implements OnInit {
     this.angForm.get('status')?.reset();
     this.angForm.get('inqueridor')?.reset();
     this.angForm.get('resultado_da_visita')?.reset();
+    this.angForm.get('que_tipo_de_negocio_esta')?.reset();
+
   }
 
 
