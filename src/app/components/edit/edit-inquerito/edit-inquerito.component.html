@@ -24,7 +24,7 @@
                                     <label>Manifestação de Interesse:</label>
                                 </div>
                                 <div class="my-element" style="margin-left: 10%;">
-                                    <ng-select [items]="prop_name" (change)="autoCompleteProvincia()"
+                                    <ng-select [items]="prop_name" (change)="autoCompleteProvincia()" [readonly]="true"
                                         bindLabel="s2gp/s2g1q1/prop_nome" class="ng-select"
                                         bindValue="s2gp/s2g1q1/prop_nome" style="width: 350px;"
                                         formControlName="manifestacao_de_interesse" [searchable]="true" placeholder=""
@@ -39,15 +39,15 @@
 
 
                             <!-- Pergunta 2 -->
-                            <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div class="mb-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;">
                                 <div>
                                     <label>M.I Duplicada?</label>
                                 </div>
 
-                                <div class="d-flex justify-content-between" style="width: 18%; margin-right: 191px;">
-                                    <div>
+                                <div class="d-flex justify-content-between">
+                                    <div style="margin-right: 336px;">
                                         <input type="checkbox" name="checkboxOption" formControlName="duplicada_da"
-                                            (change)="showInput()">
+                                            (change)="showInput_('duplicada')">
                                     </div>
                                 </div>
 
@@ -60,9 +60,10 @@
                                     <label>Duplicada Com:</label>
                                 </div>
 
-                                <div class="my-element" style="margin-left: 10%;">
+                                <div class="ng-select" style="margin-left: 10%;">
                                     <ng-select style="width:350px;" [items]="inqueritos" bindLabel="nome_simplificado"
-                                        formControlName="duplicada_da_2" [searchable]="true" placeholder=""></ng-select>
+                                        bindValue="nome_simplificado" formControlName="duplicada_da_2"
+                                        [searchable]="true" placeholder=""></ng-select>
                                 </div>
                             </div>
 
@@ -73,10 +74,9 @@
                                 </div>
 
                                 <div class="d-flex justify-content-between">
-                                    <div style="margin-right: 303px;">
-                                        <input type="checkbox" name="checkboxOption" 
-                                            formControlName="didasTeste" (change)="showInputDidas(true)"
-                                            [checked]="angForm.get('didasTeste')?.value">
+                                    <div style="margin-right: 336px;">
+                                        <input type="checkbox" name="checkboxOption" formControlName="didasTeste"
+                                            (change)="showInput_('didasteste')">
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                     <input readonly [attr.disabled]="true" class="form-select form-select-sm"
                                         id="provincia" name="provincia" required style="width: 350px;"
                                         formControlName="provincia">
-                                        
+
                                 </div>
                             </div>
 
@@ -147,7 +147,8 @@
                                 <div>
                                     <input readonly [attr.disabled]="true" class="form-control form-control-sm"
                                         id="municipio" name="municipio" required
-                                        style="width: 350px; background-color: white;" formControlName="municipio" value="{{exibirNomeMunicipio()}}">
+                                        style="width: 350px; background-color: white;" formControlName="municipio"
+                                        value="{{exibirNomeMunicipio()}}">
                                 </div>
 
                             </div>
@@ -192,7 +193,7 @@
 
                             <!-- Pergunta 9.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('data_1_contacto')?.value">
+                                *ngIf="this.angForm.get('data_1_contacto')?.value && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                                 </div>
@@ -215,7 +216,7 @@
 
                             <!-- Pergunta 9.1.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal'">
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="documento_em_falta" class="mb-2">Selecione os documentos
                                         em falta: (Para
@@ -238,7 +239,7 @@
 
                             <!-- Pergunta 9.1.2 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento'">
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="documento_em_falta" class="mb-2">Documento em falta:
                                         (Para
@@ -261,10 +262,10 @@
 
                             <!-- Pergunta 10 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
+                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput2" class="form-label">Data da
-                                        primeira visita:</label>
+                                        1ª visita:</label>
                                 </div>
 
                                 <div>
@@ -276,7 +277,7 @@
 
                             <!-- Pergunta 10.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
+                                *ngIf="this.angForm.get('data_1_visita')?.value">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Resultado
                                         da Visita:</label>
@@ -284,7 +285,7 @@
 
                                 <div>
                                     <select class="form-select form-select-sm" (change)="carregardocs3()"
-                                        style="width: 350px;" id="documento_em_falta" name="resultado_da_visita"
+                                        style="width: 350px;" id="resultado_da_visita" name="resultado_da_visita"
                                         formControlName="resultado_da_visita">
                                         <option value="" disabled selected hidden></option>
                                         <option *ngFor="let mun of resultados_da_visita" [value]="mun">
@@ -297,7 +298,7 @@
 
                             <!-- Pergunta 10.1.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="documento_em_falta_3" class="mb-2">Documento em Falta:
                                         (Para selecionar
@@ -321,7 +322,7 @@
 
                             <!-- Pergunta 10.1.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="documento_em_falta" class="mb-2">Documento em falta:
                                         (Para selecionar múltiplos
@@ -344,7 +345,7 @@
 
                             <!-- Pergunta 11 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração'">
+                                *ngIf="(angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração') && !(angForm.get('didasTeste')?.value && angForm.get('duplicada_da')?.value)">
                                 <div>
                                     <label for="exampleFormControlInput2" class="form-label">Data de
                                         entrega do Inquérito ao
@@ -405,7 +406,7 @@
 
                             <!-- Pergunta 11.2 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value">
+                                *ngIf="this.angForm.get('data_validacao_inquerito')?.value && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Que tipo de
                                         Negócio Está?</label>
@@ -424,7 +425,7 @@
 
                             <!-- Pergunta 11.2.1 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Em qual
                                         cadeia de Valor vai se
@@ -448,7 +449,7 @@
 
                             <!-- Pergunta 11.2.2 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador'">
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Que
                                         tipo?</label>
@@ -470,7 +471,7 @@
 
                             <!-- Pergunta 11.2.3 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador'">
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Que
                                         tipo?</label>
@@ -492,7 +493,7 @@
 
                             <!-- Pergunta 11.2.4 -->
                             <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços'">
+                                *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <div>
                                     <label for="exampleFormControlInput1" class="form-label">Que
                                         tipo?</label>
@@ -517,36 +518,44 @@
 
                         <div class="card-footer text-muted justify-content-between d-flex">
 
-                            <div *ngIf="this.angForm.get('duplicada_da')?.value === true">
+                            <div>
+                                <button type="submit" (click)="limpar_form()" class="btn btn-danger btn-sm">Limpar
+                                    Campos
+                                </button>
+                            </div>
+
+                            <div
+                                *ngIf="this.angForm.get('duplicada_da')?.value === true || this.angForm.get('didasTeste')?.value === true">
                                 <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
-
+                                    
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="!this.angForm.get('duplicada_da')?.value === true && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
-                                <button type="submit" (click)="save_inquerito_2_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                *ngIf="(!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true) && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada'">
+                                <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
+                                    
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <button type=" submit" (click)="save_inquerito_3_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 
                                 </button>
                             </div>
 
                             <div
-                                *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !this.angForm.get('duplicada_da')?.value === true">
+                                *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <button type="submit" (click)="save_inquerito_4_parte()"
-                                    class="btn btn-success btn-sm">Guardar
+                                    class="btn btn-success btn-sm">Guardar 
                                 </button>
                             </div>
 
-                            <div *ngIf="isGuardar5Visible()">
+                            <div
+                                *ngIf="isGuardar5Visible() && (!this.angForm.get('duplicada_da')?.value === true && !this.angForm.get('didasTeste')?.value === true)">
                                 <button type="submit" (click)="save_inquerito_5_parte()"
-                                    class="btn btn-success btn-sm">Salvar
+                                    class="btn btn-success btn-sm">Salvar 5
                                 </button>
                             </div>
 

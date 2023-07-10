@@ -236,7 +236,7 @@ export class InteressesComponent implements OnInit {
     //const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
     const O_proponente_desistiu = this.angForm.get('proponente_desistiu')?.value === true;
     const O_PN_esta_pendente = this.angForm.get('pn_pendente')?.value === true;
-    const Data_PN_entregue_ao_PDAC = this.angForm.get('data_pn_entregue_ao_pdac')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
+    const Data_PN_entregue_ao_PDAC = this.angForm.get('fim_verificacao')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
 
     if (Estado_MI) {
       return 'Inquérito em stock';

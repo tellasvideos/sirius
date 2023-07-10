@@ -406,7 +406,7 @@ export class InqueritoComponent implements OnInit {
 
       console.log('Array pdac apenas nomes filtrados:', this.prop_name);
 
-      this.get_inquireForms()
+      //this.get_inquireForms()
     });
 
   }
@@ -438,17 +438,30 @@ export class InqueritoComponent implements OnInit {
     })
   }
 
+  // filtra apenas o status aprovado da lista de inqueritos
+  inqueritoTodos: any;
+  getInqueritoTodos() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritoTodos = data.filter((item: any) => {
+        return !['Aprovado'].includes(item.status)
+      });
+    });
 
+  }
+
+  // filtra apenas o status aprovado da lista de inqueritos
   inqueritoPdac: any;
   getInqueritoParaPdac() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoPdac = data;
-    })
+    });
+
   }
 
+  // filtra status do inquerito, apresentando apenas os status em análise e a ser visitada
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data /*.filter((item: any) => {
+      this.inqueritos = data.filter((item: any) => {
         // Verifica se os dados foram filtrados
         if (this.inqueritos.length > 0) {
           this.isLoading = false; // Indica que os dados foram carregados
@@ -459,7 +472,7 @@ export class InqueritoComponent implements OnInit {
           }, 300);
         }
         return ['Em Análise', 'A ser visitada',].includes(item.status);
-      });*/
+      });
       this.isLoading = false;
       console.log('inquérito', this.inqueritos);
     });
@@ -562,7 +575,7 @@ export class InqueritoComponent implements OnInit {
 
     if (duplicadaDaValue) {
       return 'MI Duplicada';
-    }  else if (dataValidacaoInqueritoValue) {
+    } else if (dataValidacaoInqueritoValue) {
       return 'Aprovado';
     } else if (resultadoDaVisita) {
       return 'Em Análise'
@@ -606,7 +619,7 @@ export class InqueritoComponent implements OnInit {
       return 'Recusada por falta de área'
     } else if (resultado_Do_1_contacto_10) {
       return 'Recusada por falta de área'
-    }else if (resultado_Do_1_contacto_12) {
+    } else if (resultado_Do_1_contacto_12) {
       return 'A ser visitada'
     } else if (resultadoDaVisita_10) {
       return 'Recusada CV'
@@ -684,7 +697,17 @@ export class InqueritoComponent implements OnInit {
 
 
 
-
+  close_this_modal() {
+    // close modal
+    const modal = document.getElementById('exampleModalToggle_1');
+    if (modal) {
+      modal.style.display = 'none';
+      // Espera 1 segundos antes de recarregar a página
+      timer(1000).pipe(delay(1000)).subscribe(() => {
+        location.reload();
+      });
+    }
+  }
 
 
 
@@ -1415,6 +1438,7 @@ export class InqueritoComponent implements OnInit {
         )
       }
     })
+    this.getInqueritoParaPdac()
   }
 
 
@@ -1661,11 +1685,11 @@ export class InqueritoComponent implements OnInit {
   // Manipulador de checkboxs
   showDuplicatedInput?: boolean;
   showDuplicatedInput_1?: boolean;
-  duplicatedName: string = '';
-
 
   // Se duplicada checked = true : didastest = false
   showInput_(checkboxValue: string) {
+    this.limpar_form()
+
     this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
     this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value;
 
@@ -1749,18 +1773,6 @@ export class InqueritoComponent implements OnInit {
     return this.filteredPdac;
   }
 
-  /*getPdac() {
-    this.dataService.proponentPDAC().subscribe(data => {
-      this.pdac = data;
-      this.prop_name = data.map(pdac => pdac['s2gp/s2g1q1/prop_nome'])
-      console.log('array pdac apenas nomes', this.prop_name)
-      this.pdac = this.pdac.sort(function (a: any, b: any) {
-        return b._id - a._id
-      })
-    })
-  }*/
-
-
 
 
 
@@ -1773,6 +1785,28 @@ export class InqueritoComponent implements OnInit {
       this.nomes_simplificados = this.inqueritos.map((inquerito: any) => inquerito.nome_simplificado);
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
+  }
+
+  limpar_form() {
+    // this.angForm.reset();
+    this.angForm.get('nome_simplificado')?.reset();
+    this.angForm.get('aldeia')?.reset();
+    this.angForm.get('data_1_contacto')?.reset();
+    this.angForm.get('resultado_1_contacto')?.reset();
+    this.angForm.get('documento_em_falta')?.value === '';
+    this.angForm.get('documento_em_falta_2')?.value === '';
+    this.angForm.get('documento_em_falta_3')?.value === '';
+    this.angForm.get('documento_em_falta_4')?.value === '';
+    //this.angForm.get('data_1_visita')?.reset();
+   // this.angForm.get('data_validacao_inquerito')?.reset();
+    this.angForm.get('que_tipo_de_negocio_esta')?.value === '';
+    this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value === '';
+    this.angForm.get('que_tipo')?.value === '';
+    this.angForm.get('que_tipo_2')?.value === '';
+    this.angForm.get('que_tipo_3')?.value === '';
+    this.angForm.get('status')?.reset();
+    this.angForm.get('inqueridor')?.reset();
+    this.angForm.get('resultado_da_visita')?.reset();
   }
 
 

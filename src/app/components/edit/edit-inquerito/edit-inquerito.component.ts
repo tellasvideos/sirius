@@ -11,11 +11,14 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import * as moment from 'moment';
+
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
 
 import { ViewChild } from '@angular/core';
+
 
 
 @Component({
@@ -101,7 +104,8 @@ export class EditInqueritoComponent implements OnInit {
     'Processamento e negócio grãos'
   ]
 
-  resultados_da_visita = ['Inquérito em Elaboração',
+  resultados_da_visita = [
+    'Inquérito em Elaboração',
     //'Incomunicavel: não atende',
     //'Incontactável: N° tel errado',
     'Pendente por falta de documento',
@@ -117,7 +121,8 @@ export class EditInqueritoComponent implements OnInit {
     //'Didas teste'
   ]
 
-  resultados_De_Contacto = ['A ser visitada',
+  resultados_De_Contacto = [
+    'A ser visitada',
     'Incomunicavel: Não atende',
     'Incomunicavel: Nº Tel errado',
     'Pendente por falta de documento',
@@ -156,7 +161,6 @@ export class EditInqueritoComponent implements OnInit {
   }
 
   autoCompleteProvincia() {
-    this.getInqueritoParaPdac();
     const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
 
     // Encontrar a PDAC correspondente à manifestação de interesse selecionada
@@ -214,17 +218,6 @@ export class EditInqueritoComponent implements OnInit {
 
   carregardocs3() {
     switch (this.angForm.get('resultado_da_visita')?.value) {
-      case 'A ser visitada':
-        this.docs = ['Título de terra',
-          'croquis de localização',
-          'alvará comercial',
-          'certidão comercia',
-          'certidão de Não devedor da AGT',
-          'INSS',
-          'BI',
-          'NIF',
-          'Otro'];
-        break;
       case 'Recusada por falta de documentação legal':
         this.docs = ['Título de terra',
           'croquis de localização',
@@ -354,7 +347,7 @@ export class EditInqueritoComponent implements OnInit {
       documento_em_falta_4: [null],
 
       duplicada_da: [''],
-      data_1_visita: [null],
+      data_1_visita: [''],
       resultado_da_visita: ['', Validators.required],
       duplicada_da_2: [''],
       data_validacao_inquerito: [''],
@@ -406,6 +399,29 @@ export class EditInqueritoComponent implements OnInit {
 
   }
 
+  limpar_form() {
+    // this.angForm.reset();
+    this.angForm.get('nome_simplificado')?.reset();
+    this.angForm.get('aldeia')?.reset();
+    this.angForm.get('data_1_contacto')?.reset();
+    this.angForm.get('resultado_1_contacto')?.reset();
+    this.angForm.get('documento_em_falta')?.value === '';
+    this.angForm.get('documento_em_falta_2')?.value === '';
+    this.angForm.get('documento_em_falta_3')?.value === '';
+    this.angForm.get('documento_em_falta_4')?.value === '';
+    this.angForm.get('data_1_visita')?.reset();
+    this.angForm.get('data_validacao_inquerito')?.reset();
+    this.angForm.get('que_tipo_de_negocio_esta')?.value === '';
+    this.angForm.get('em_qual_cadeia_de_valor_vai_se_implementar_o_projecto')?.value === '';
+    this.angForm.get('que_tipo')?.value === '';
+    this.angForm.get('que_tipo_2')?.value === '';
+    this.angForm.get('que_tipo_3')?.value === '';
+    this.angForm.get('status')?.reset();
+    this.angForm.get('inqueridor')?.reset();
+    this.angForm.get('resultado_da_visita')?.reset();
+  }
+
+
   exibirNomeMunicipio() {
     const municipioId = this.angForm.get('municipio')?.value;
     const municipioSelecionado = this.municipio.find((item: any) => item.id === municipioId);
@@ -422,9 +438,6 @@ export class EditInqueritoComponent implements OnInit {
       //console.log(data)
     })
   }
-
-
-
 
   closeModal(modalId: string) {
     const modal = document.getElementById(modalId);
@@ -481,6 +494,34 @@ export class EditInqueritoComponent implements OnInit {
   openModal() {
     this.modalRef = this.modalService.open(AddInqueritoComponent)
   }
+
+  // Manipulador de checkboxs
+  showDuplicatedInput?: boolean;
+  showDuplicatedInput_1?: boolean;
+
+  // Se duplicada checked = true : didastest = false
+  showInput_(checkboxValue: string) {
+    this.limpar_form()
+
+    this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
+    this.showDuplicatedInput_1 = this.angForm.get('didasTeste')?.value;
+
+    if (checkboxValue === 'duplicada') {
+      this.showDuplicatedInput === true;
+      console.log(this.angForm.get('duplicada_da')?.value)
+      this.showDuplicatedInput_1 === false;
+      this.angForm.get('didasTeste')?.patchValue(false);
+      console.log(this.angForm.get('didasTeste')?.value)
+
+    } else if (checkboxValue === 'didasteste') {
+      this.showDuplicatedInput_1 === true;
+      console.log(this.angForm.get('didasTeste')?.value)
+      this.showDuplicatedInput === false;
+      this.angForm.get('duplicada_da')?.patchValue(false);
+      console.log(this.angForm.get('duplicada_da')?.value)
+    }
+  }
+
 
 
   // Estados manifestações de interesse “Estado MI” atribui automaticamente
@@ -577,38 +618,16 @@ export class EditInqueritoComponent implements OnInit {
 
   // Guarda dados do form caso a MI for duplicada (Botao 1)
   save_inquerito2() {
-    if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-      if (!this.angForm.get('manifestacao_de_interesse')?.value) {
-        this.alert_error_MI();
-      }
-      return;
-    }
-
-    /*const fileList: FileList = this.selectedFile;
-    const documents: FileList = fileList;
-
-    const fileList2: FileList = this.selectedFile2;
-    const inquerito_preenchido: FileList = fileList2;
-
-
-    for (let i = 0; i < documents?.length; i++) {
-      formData.append("files", documents[i], documents[i].name);
-    }
-
-    if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-      const inqueritoPreenchido = this.selectedFile2[0];
-
-      if (inqueritoPreenchido.size > 0) {
-        formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-      }
-    }*/
 
     const formData = new FormData();
 
     formData.append("status", this.getStatus());
-
-
-
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
+    formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
@@ -625,13 +644,8 @@ export class EditInqueritoComponent implements OnInit {
       },
       error => { this.alert_error(); }
     )
-
-
-
     this.get_inquireForms();
-
   }
-
 
 
   // Guarda até a opção resultado da visita no campo resultado do primeiro contacto (Botao 2)
@@ -686,33 +700,24 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    /* let fileList: FileList = this.selectedFile;
-     let documents: FileList = fileList;
- 
-     let fileList2: FileList = this.selectedFile2;
-     let inquerito_preenchido: FileList = fileList2;
-     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
- 
-     let formData = new FormData();
- 
-     for (let i = 0; i < documents?.length; i++) {
-       formData.append("files", documents[i], documents[i].name);
-     }
- 
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-       const inqueritoPreenchido = this.selectedFile2[0];
- 
-       // Verificar se o arquivo não está vazio
-       if (inqueritoPreenchido.size > 0) {
-         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
-       }
-     }*/
-
     const formData = new FormData();
 
-
     formData.append("status", this.getStatus());
+    formData.append("resultado_1_contacto", this.angForm.get('resultado_1_contacto')?.value);
+    formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
+    formData.append("aldeia", this.angForm.get('aldeia')?.value);
+    formData.append("data_1_contacto", this.angForm.get('data_1_contacto')?.value);
+    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
+    formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+
+    formData.append("documento_em_falta", this.angForm.get('documento_em_falta')?.value);
+    formData.append("documento_em_falta_2", this.angForm.get('documento_em_falta_2')?.value);
+    formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
+    formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
 
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
@@ -723,8 +728,8 @@ export class EditInqueritoComponent implements OnInit {
           modal.style.display = 'none';
         }
         this.route.navigate(['inquerito']);
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
+        // Espera 1 segundos antes de recarregar a página
+        timer(1000).pipe(delay(1000)).subscribe(() => {
           location.reload();
         });
       },
@@ -734,10 +739,6 @@ export class EditInqueritoComponent implements OnInit {
     this.get_inquireForms();
 
   }
-
-
-
-
 
 
   // Guarda até o campo resultado da visita (Botao 3)
@@ -785,7 +786,6 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-
     if (!this.angForm.get('resultado_1_contacto')?.value) {
       if (!this.angForm.get('resultado_1_contacto')?.value) {
         this.alert_error_Result_1_con();
@@ -794,10 +794,10 @@ export class EditInqueritoComponent implements OnInit {
     }
 
 
-
     let formData = new FormData();
 
     formData.append("status", this.getStatus());
+
     formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
     formData.append("provincia", this.angForm.get('provincia')?.value);
     formData.append("municipio", this.angForm.get('municipio')?.value);
@@ -809,18 +809,23 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("documento_em_falta_3", this.angForm.get('documento_em_falta_3')?.value);
     formData.append("documento_em_falta_4", this.angForm.get('documento_em_falta_4')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
-    const data1Visita = this.angForm.get('data_1_visita')?.value;
-    const formattedData1Visita = data1Visita ? new Date(data1Visita).toISOString().split('T')[0] : null;
+    formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
+    formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
-    if (formattedData1Visita !== null) {
-      formData.append("data_1_visita", formattedData1Visita);
+
+    let data_1_visita = this.angForm.get('data_1_visita')?.value;
+    if (data_1_visita === '') {
+      data_1_visita = '1111-11-11'; // Defina um valor de data padrão se estiver vazio
+    } else {
+      const formattedDate = moment(data_1_visita).format('YYYY-MM-DD');
+      data_1_visita = formattedDate;
     }
+
+    formData.append("data_1_visita", data_1_visita);
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
 
-
-
-    this.dataService.EditInquerito(this.id, this.angForm.value).subscribe(
+    this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
         this.alert_success();
         const modal = document.getElementById('exampleModalToggle');
@@ -828,21 +833,15 @@ export class EditInqueritoComponent implements OnInit {
           modal.style.display = 'none';
         }
         this.route.navigate(['inquerito']);
-        // Espera 3 segundos antes de recarregar a página
-        timer(2000).pipe(delay(2000)).subscribe(() => {
+        // Espera 1 segundos antes de recarregar a página
+        timer(1000).pipe(delay(1000)).subscribe(() => {
           location.reload();
         });
       },
       error => { this.alert_error(); }
     )
-
     this.get_inquireForms();
-
   }
-
-
-
-
 
 
 
@@ -899,15 +898,6 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    /*if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-      if (!this.angForm.get('que_tipo_de_negocio_esta')?.value) {
-        this.alert_error_Que_tipo_negocio();
-      }
-      return;
-    }*/
-
-
-
 
     let formData = new FormData();
 
@@ -926,7 +916,6 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("data_1_visita", this.angForm.get('data_1_visita')?.value);
     formData.append("resultado_da_visita", this.angForm.get('resultado_da_visita')?.value);
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
-    //formData.append("data_validacao_inquerito", this.angForm.get('data_validacao_inquerito')?.value);
 
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
@@ -950,9 +939,6 @@ export class EditInqueritoComponent implements OnInit {
     this.get_inquireForms();
 
   }
-
-
-
 
 
   // Guarda todos os campos do formulário (botao 5)
@@ -1016,40 +1002,7 @@ export class EditInqueritoComponent implements OnInit {
       return;
     }
 
-    /* if (!this.angForm.get('inquerito_preenchido')?.value) {
-       if (!this.angForm.get('inquerito_preenchido')?.value) {
-         this.alert_error_Inq_pre();
-       }
-       return;
-     }
- 
-     if (!this.angForm.get('documents')?.value) {
-       if (!this.angForm.get('documents')?.value) {
-         this.alert_error_Docs();
-       }
-       return;
-     }*/
 
-
-    /* const fileList: FileList = this.selectedFile;
-     const documents: FileList = fileList;
- 
-     const fileList2: FileList = this.selectedFile2;
-     const inquerito_preenchido: FileList = fileList2;
- 
-     const formData = new FormData();
- 
-     for (let i = 0; i < documents?.length; i++) {
-       formData.append("files", documents[i], documents[i].name);
-     }
- 
-     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-       const inqueritoPreenchido = this.selectedFile2[0];
- 
-       if (inqueritoPreenchido.size > 0) {
-         formData.append("inquerito_preenchido", this.selectedFile2[0], this.selectedFile2[0].name);
-       }
-     }*/
 
     const formData = new FormData();
 
@@ -1079,8 +1032,6 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("manifestacao_de_interesse", this.angForm.get('manifestacao_de_interesse')?.value);
     formData.append("inqueridor", this.angForm.get('inqueridor')?.value);
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
-
-
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {
@@ -1398,24 +1349,6 @@ export class EditInqueritoComponent implements OnInit {
     });
   }
 
-  // Manipulador de checkboxs
-  showDuplicatedInput?: boolean = false;
-  showDuplicatedInput_1: boolean = true;
-  duplicatedName: string = '';
-
-  showInput() {
-    this.showDuplicatedInput = this.angForm.get('duplicada_da')?.value;
-  }
-
-  showInputDidas(show: boolean) {
-    this.showDuplicatedInput_1 = show;
-    if (!show) {
-      this.angForm.get('didasTeste')?.setValue(null); // Desmarca a opção "Sim"
-      this.duplicatedName = ''; // Limpa o valor do campo duplicado
-    }
-    // this.resetForm()
-    //this.angForm.get('didasTeste')?.reset();
-  }
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
@@ -1492,5 +1425,14 @@ export class EditInqueritoComponent implements OnInit {
       console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
+
+  isVisitInProgress(): boolean {
+    const resultado_1_contacto = this.angForm.get('resultado_1_contacto')?.value;
+    const duplicada_da = this.angForm.get('duplicada_da')?.value;
+    const didasTeste = this.angForm.get('didasTeste')?.value;
+
+    return resultado_1_contacto === 'A ser visitada' && !duplicada_da && !didasTeste;
+  }
+
 
 }

@@ -50,6 +50,12 @@
                     <input class="form-control form-control-sm" placeholder="Pesquisar Nome Simplificado..."
                         [(ngModel)]="keyWord" type="text" style="width: 300px;">
                 </div>
+
+                <div *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                    <button data-bs-toggle="modal" href="#exampleModalToggle_1" type="button"
+                        style="text-transform: capitalize;" data-bs-target="#exampleModalToggle_1"
+                        class="btn btn-light btn-sm"> Outros Estados de MI</button>
+                </div>
             </div>
 
             <ng-container *ngIf="isLoading; else dataLoaded">
@@ -177,8 +183,8 @@
 
                         <div class="ng-select" style="margin-left: 10%;">
                             <ng-select style="width:350px;" [items]="inqueritos" bindLabel="nome_simplificado"
-                                bindValue="nome_simplificado" formControlName="duplicada_da_2" [searchable]="true"
-                                placeholder=""></ng-select>
+                                bindValue="nome_simplificado ? nome_simplificado : 'N/D'"
+                                formControlName="duplicada_da_2" [searchable]="true" placeholder=""></ng-select>
                         </div>
                     </div>
 
@@ -306,7 +312,7 @@
 
                     <!-- Pergunta 9.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('data_1_contacto')?.value">
+                        *ngIf="this.angForm.get('data_1_contacto')?.value && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="resultado_1_contacto">Resultado do 1º Contacto:</label>
                         </div>
@@ -328,7 +334,7 @@
 
                     <!-- Pergunta 9.1.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal'">
+                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Recusada por falta de documentação legal' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="documento_em_falta" class="mb-2">Selecione os documentos em falta: (Para
                                 selecionar múltiplos documentos,
@@ -349,7 +355,7 @@
 
                     <!-- Pergunta 9.1.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' ">
+                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'Pendente por falta de documento' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="documento_em_falta" class="mb-2">Documento em falta: (Para
                                 selecionar múltiplos documentos,
@@ -371,9 +377,9 @@
 
                     <!-- Pergunta 10 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada'">
+                        *ngIf="this.angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
-                            <label for="exampleFormControlInput2" class="form-label">Data da primeira
+                            <label for="exampleFormControlInput2" class="form-label">Data da 1ª
                                 visita:</label>
                         </div>
 
@@ -387,7 +393,7 @@
 
                     <!-- Pergunta 10.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('data_1_visita')?.value">
+                        *ngIf="this.angForm.get('data_1_visita')?.value && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Resultado da Visita:</label>
                         </div>
@@ -405,7 +411,7 @@
 
                     <!-- Pergunta 10.1.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal'">
+                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Recusada por falta de documentação legal' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="documento_em_falta_3" class="mb-2">Documento em Falta: (Para selecionar
                                 múltiplos
@@ -428,7 +434,7 @@
 
                     <!-- Pergunta 10.1.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento'">
+                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Pendente por falta de documento' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="documento_em_falta" class="mb-2">Documento em falta: (Para selecionar
                                 múltiplos
@@ -451,7 +457,7 @@
 
                     <!-- Pergunta 11 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração'">
+                        *ngIf="this.angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput2" class="form-label">Data de entrega do Inquérito ao
                                 Back Office: (Com todos os Documentos)
@@ -512,7 +518,7 @@
 
                     <!-- Pergunta 11.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="angForm.get('data_validacao_inquerito')?.value">
+                        *ngIf="angForm.get('data_validacao_inquerito')?.value && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo de Negócio
                                 Está?</label>
@@ -534,7 +540,7 @@
 
                     <!-- Pergunta 11.2.1 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais'">
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor vegetais' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Em qual cadeia de Valor vai se
                                 implementar o projeto?</label>
@@ -557,7 +563,7 @@
 
                     <!-- Pergunta 11.2.2 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador'">
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Agregador' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
@@ -577,7 +583,7 @@
 
                     <!-- Pergunta 11.2.3 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador'">
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Transformador' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
@@ -597,7 +603,7 @@
 
                     <!-- Pergunta 11.2.4 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
-                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços'">
+                        *ngIf="this.angForm.get('que_tipo_de_negocio_esta')?.value === 'Prestador de serviços' && (!showDuplicatedInput && !showDuplicatedInput_1)">
                         <div>
                             <label for="exampleFormControlInput1" class="form-label">Que tipo?</label>
                         </div>
@@ -621,35 +627,37 @@
                 </div>
 
                 <div class="modal-footer justify-content-between">
-                    <!--div>
-                        <button (click)="resetForm()" class="btn btn-light btn-sm">Limpar Campos</button>
-                    </!--div-->
+                    <div>
+                        <button type="submit" (click)="limpar_form()" class="btn btn-danger btn-sm">Limpar
+                            Campos
+                        </button>
+                    </div>
 
                     <div *ngIf="showDuplicatedInput || showDuplicatedInput_1">
-                        <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito2()" class="btn btn-success btn-sm">Guardar 1
                         </button>
                     </div>
 
                     <div
                         *ngIf="!showDuplicatedInput && !showDuplicatedInput_1 && angForm.get('resultado_1_contacto')?.value !== 'A ser visitada' && !isGuardar5Visible()">
-                        <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_2_parte()" class="btn btn-success btn-sm">Guardar 2
                         </button>
                     </div>
 
                     <div
                         *ngIf="angForm.get('resultado_1_contacto')?.value === 'A ser visitada' && angForm.get('resultado_da_visita')?.value !== 'Inquérito em Elaboração' && !showDuplicatedInput && !showDuplicatedInput_1">
-                        <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_3_parte()" class="btn btn-success btn-sm">Guardar 3
                         </button>
                     </div>
 
                     <div
                         *ngIf="showGuardar4() && angForm.get('resultado_da_visita')?.value === 'Inquérito em Elaboração' && angForm.get('que_tipo_de_negocio_esta')?.value !== 'Agregador' && !showDuplicatedInput && !showDuplicatedInput_1">
-                        <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_4_parte()" class="btn btn-success btn-sm">Guardar 4
                         </button>
                     </div>
 
                     <div *ngIf="isGuardar5Visible()">
-                        <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar
+                        <button type="submit" (click)="save_inquerito_5_parte()" class="btn btn-success btn-sm">Guardar 5
                         </button>
                     </div>
 
@@ -662,3 +670,78 @@
 </form>
 
 <!--*ngIf="showDuplicatedInput"-->
+
+
+<!-- modal outras MI -->
+<div class="modal fade" id="exampleModalToggle_1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalToggleLabel_1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel_1">Outros Estados de MI</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="table-responsive mt-3" id="print-section-list-inquerito">
+                    <table class="table table-sm table-hover text-center">
+                        <thead class="linhas2">
+                            <tr>
+                                <th scope="col" class="text-black">Nome Simplificado</th>
+                                <th scope="col" class="text-black">Província</th>
+                                <th scope="col" class="text-black">Município</th>
+                                <th scope="col" class="text-black">Inquiridor</th>
+                                <th scope="col" class="text-black">Estado MI</th>
+                                <th scope="col" class="text-black not-it">Ver</th>
+                                <th scope="col" class="text-black not-it"
+                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                    Editar</th>
+                                <th *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true "
+                                    scope="col" class="text-black not-it">Apagar
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of inqueritoTodos | search:'nome_simplificado':keyWord">
+                                <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
+                                <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
+                                <td>{{devolver_nome_municipio(item.municipio)}}</td>
+                                <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
+                                <td>{{item.status ? item.status : 'N/D' }}
+                                </td>
+
+                                <td class="not-it">
+                                    <button type="button" (click)="close_this_modal()"
+                                        [routerLink]="['/ver-inquerito/', item.id]" routerLinkActive="active"
+                                        class="btn btn-link btn-sm btn-rounded">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </td>
+
+                                <td class="not-it"
+                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                    <button type="button" (click)="close_this_modal()"
+                                        [routerLink]="['/edit-inquerito/', item.id]" routerLinkActive="active"
+                                        class="btn btn-link btn-sm btn-rounded">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </td>
+                                <td class="not-it"
+                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                    <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                        (click)="deleteInquire(item.id)">
+                                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
