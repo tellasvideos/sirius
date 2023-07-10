@@ -181,12 +181,20 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
       });
     });
 
-
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      this.id = paramMap.get('id');
+      this.dataService.Get_PN_elaborados_data_join_to_Inquerito_by_id(this.id).subscribe(data => {
+        // Converta data para um array se ainda não for
+        const dataArray = Array.isArray(data) ? data : [data];
+        this.pnelaborados_data = dataArray.reverse();
+        console.log('pn elaborads data', this.pnelaborados_data[0]);
+      });
+    });
 
   }
 
   backoffice_data: any;
-
+  pnelaborados_data: any;
   pnelaborados: any;
 
   alldata: any;

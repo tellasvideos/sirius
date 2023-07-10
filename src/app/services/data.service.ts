@@ -754,6 +754,12 @@ export class DataService {
     return this.http.get(`${this.dados_agrupados_url}${id}`, /*{ headers: headers }*/).pipe(take(1));
   }
 
+  // Pegar dados do formulario Pn elaborados junto ao id do inquerito selecionado
+  dados_agrupados_url_2 = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/?inquerito=';
+  Get_PN_elaborados_data_join_to_Inquerito_by_id(id: any) {
+    return this.http.get(`${this.dados_agrupados_url_2}${id}`, /*{ headers: headers }*/).pipe(take(1));
+  }
+
   // A function to post data in PNelaborados
   pn_elaborado_URL = 'http://sirius.strongbox.ao:8001/api/v1';
   Post_pnElaborados(form_data: any) {

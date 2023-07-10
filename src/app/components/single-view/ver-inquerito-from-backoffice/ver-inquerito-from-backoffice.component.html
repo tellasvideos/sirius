@@ -368,7 +368,8 @@
                             </div>
                             <div>
                                 <textarea readonly [attr.disabled]="true" class="form-control form-control-sm"
-                                    style="width: 350px;" id="que_tipo" name="que_tipo" formControlName="que_tipo"></textarea>
+                                    style="width: 350px;" id="que_tipo" name="que_tipo"
+                                    formControlName="que_tipo"></textarea>
                             </div>
                         </div>
 
@@ -465,7 +466,7 @@
                             </div>
                         </div>
 
-                       
+
                         <!-- Pergunta 16 -->
                         <div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
@@ -474,12 +475,13 @@
                             </div>
                             <div>
                                 <input readonly [attr.disabled]="true" class="form-control form-control-sm"
-                                    value="{{ backoffice_data[0]?.financiamento_bancario}}" name="financiamento_bancario"
-                                    style="width: 150px; margin-right: 200px;" required type="text">
+                                    value="{{ backoffice_data[0]?.financiamento_bancario}}"
+                                    name="financiamento_bancario" style="width: 150px; margin-right: 200px;" required
+                                    type="text">
                             </div>
                         </div>
 
-                       
+
                         <!-- Pergunta 18 -->
                         <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                             <div>
@@ -524,6 +526,120 @@
 
                         </div>
 
+                        <!-- Pergunta 20 -->
+                        <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                            <div>
+                                <label for="data_analise_cti" style="width: 240px;">Data de análise no CTI:</label>
+                            </div>
+                            <div>
+                                <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
+                                    name="data_analise_cti"
+                                    value="{{ pnelaborados_data[0]?.data_analise_cti | date:'yyyy-MM-dd' }}"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 21 -->
+                        <div *ngIf="pnelaborados_data[0]?.data_analise_cti"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label>Recusado pelo CTI?</label>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <input type="text" name="recusado_pelo_cti" readonly [attr.disabled]="true"
+                                        style="width: 350px;" class="form-control form-control-sm"
+                                        [value]="pnelaborados_data[0]?.recusado_pelo_cti ? 'Sim' : 'Não'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 21.1 -->
+                        <div *ngIf="backoffice_data[0]?.pn_pendente === true"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label for="justificacao_recusado_pelo_cti">Justificação por ser recusado pelo
+                                    CTI:</label>
+                            </div>
+                            <div>
+                                <textarea value="{{pnelaborados_data[0]?.justificacao_recusado_pelo_cti}}"
+                                    name="justificacao_recusado_pelo_cti" readonly [attr.disabled]="true"
+                                    style="width: 350px;" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 22 -->
+                        <div *ngIf="pnelaborados_data[0]?.pn_pendente === true"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label for="data_aprovacao_financiamento_mg">Data Aprovação financiamento MG:</label>
+                            </div>
+                            <div>
+                                <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
+                                    name="data_analise_cti"
+                                    value="{{ pnelaborados_data[0]?.data_aprovacao_financiamento_mg | date:'yyyy-MM-dd' }}"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 23 -->
+                        <div *ngIf="pnelaborados_data[0]?.data_aprovacao_financiamento_mg === '' && backoffice_data[0]?.financiamento_bancario === 'MG e Banco'"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label for="data_aprovacao_financiamento_mg">Data Aprovação financiamento Banco:</label>
+                            </div>
+                            <div>
+                                <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
+                                    name="data_analise_cti"
+                                    value="{{ pnelaborados_data[0]?.data_aprovacao_financiamento_banco | date:'yyyy-MM-dd' }}"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 24 -->
+                        <div *ngIf="pnelaborados_data[0]?.data_aprovacao_financiamento_mg !== '' && pnelaborados_data[0]?.data_aprovacao_financiamento_banco === ''"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label>PN pedndente no banco</label>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <input type="text" name="pn_pendente_no_banco" readonly [attr.disabled]="true"
+                                        style="width: 350px;" class="form-control form-control-sm"
+                                        [value]="pnelaborados_data[0]?.pn_pendente_no_banco ? 'Sim' : 'Não'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 25 -->
+                        <div *ngIf="backoffice_data[0]?.pn_pendente_no_banco === true"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label for="justificacao_pn_pendente_no_banco">Justificação por estar pendente no
+                                    Banco:</label>
+                            </div>
+                            <div>
+                                <textarea value="{{pnelaborados_data[0]?.justificacao_pn_pendente_no_banco}}"
+                                    name="justificacao_pn_pendente_no_banco" readonly [attr.disabled]="true"
+                                    style="width: 350px;" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 23 -->
+                        <div *ngIf="pnelaborados_data[0]?.data_aprovacao_financiamento_banco !== ''"
+                            class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                            <div>
+                                <label for="data_aprovacao_financiamento_mg">Data Implementação:</label>
+                            </div>
+                            <div>
+                                <input type="date" readonly [attr.disabled]="true" formControlName="fim_verificacao"
+                                    name="data_analise_cti"
+                                    value="{{ pnelaborados_data[0]?.data_primeiro_pedido_reembolso | date:'yyyy-MM-dd' }}"
+                                    style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            </div>
+                        </div>
                         <!--div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                             <div>
                                 <label>Status PN:</label>
@@ -551,8 +667,8 @@
 </mat-drawer-container>
 
 
- <!-- Pergunta 15.1 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+<!-- Pergunta 15.1 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Área total da fazenda (ha):</label>
@@ -565,8 +681,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.2 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+<!-- Pergunta 15.2 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Área de cultivo pelo PN (ha):</label>
@@ -580,8 +696,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.3 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+<!-- Pergunta 15.3 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label style="width: 240px;">Recursos próprios (AOA):</label>
@@ -594,8 +710,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.4 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+<!-- Pergunta 15.4 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Financiamento PDAC (AOA):</label>
@@ -608,8 +724,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.5 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao"
+<!-- Pergunta 15.5 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Financiamento bancário (AOA):</label>
@@ -621,8 +737,8 @@
                             </div>
                         </div-->
 
-                        <!-- Pergunta 15.6 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'"
+<!-- Pergunta 15.6 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao && angForm.get('que_tipo_de_negocio_esta')?.value === 'Productor'"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Histórico de produção: culturas produzidas no
@@ -636,8 +752,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.7 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
+<!-- Pergunta 15.7 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Área de [cultura] cultivada á dois anos (ha):</label>
@@ -650,8 +766,8 @@
                             </div>
                         </!--div-->
 
-                        <!-- Pergunta 15.8 -->
-                        <!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
+<!-- Pergunta 15.8 -->
+<!--div *ngIf="backoffice_data[0]?.fim_verificacao && backoffice_data[0]?.historico_producao_2_anos"
                             class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                             <div>
                                 <label>Produção de [cultura] obtida á dois anos (ton):</label>
@@ -665,9 +781,9 @@
                             </div>
                         </!--div-->
 
-                        <!--div class="mx-auto mb-3 linhas1 p-2" style="width: 80%;"-->
-                            <!-- Pergunta 15.8.1 -->
-                            <!--div class="justify-content-between d-flex mb-3 mt-3"
+<!--div class="mx-auto mb-3 linhas1 p-2" style="width: 80%;"-->
+<!-- Pergunta 15.8.1 -->
+<!--div class="justify-content-between d-flex mb-3 mt-3"
                                 *ngIf="backoffice_data[0]?.fim_verificacao">
                                 <div>
                                     <label class="form-label" for="customFile">Estudo de viabilidade:</label>

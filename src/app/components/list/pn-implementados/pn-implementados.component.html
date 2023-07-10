@@ -58,31 +58,29 @@
                             <th scope="col" class="text-black">Nome Simplificado</th>
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
-                            <th scope="col" class="text-black">Estado PGAS</th>
-                            <th scope="col" class="text-black not-it">ver</th>
-                            <th scope="col" class="text-black not-it">Colar info</th>
+                            <th scope="col" class="text-black">Telefone</th>
+                            <th scope="col" class="text-black not-it">Tipo de negócio</th>
+                            <th scope="col" class="text-black not-it">Actividade</th>
+                            <th scope="col" class="text-black not-it">Mais info.</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <td>{{item.id}} </td>
-                            <td>{{item.nome_simplificado}} </td>
-                            <td>{{item.provincia}}</td>
-                            <td>{{item.municipio}}</td>
-                            <td>{{''}}</td>
-                            <td class="not-it"><button type="button" routerLinkActive="active"
-                                    [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
-                                    class="btn btn-link btn-sm btn-rounded ">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </td>
-
-                            <td class="not-it">
-                                <button type="button" class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalToggle">
-                                    <i class="fas fa-file-lines"></i>
-                                </button>
-                            </td>
+                            <ng-container *ngIf="getFormPN_elaborado_Data(item.id)?.status_pn === 'PN implementado'">
+                                <td>{{item.id}} </td>
+                                <td>{{item.nome_simplificado}} </td>
+                                <td>{{item.provincia}}</td>
+                                <td>{{devolver_nome_municipio(item.municipio)}}</td>
+                                <td>{{item.telefone}}</td>
+                                <td>{{item.que_tipo_de_negocio_esta}}</td>
+                                <td>{{item.atividades}}</td>
+                                <td class="not-it"><button type="button" routerLinkActive="active"
+                                        [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
+                                        class="btn btn-link btn-sm btn-rounded ">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </td>
+                            </ng-container>
                         </tr>
                     </tbody>
                 </table>
@@ -102,7 +100,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário PGAS</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ver informações</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form enctype="multipart/form-data" [formGroup]="angForm">
