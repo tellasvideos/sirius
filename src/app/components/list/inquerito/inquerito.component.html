@@ -54,7 +54,8 @@
                 <div *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
                     <button data-bs-toggle="modal" href="#exampleModalToggle_1" type="button"
                         style="text-transform: capitalize;" data-bs-target="#exampleModalToggle_1"
-                        class="btn btn-light btn-sm"> Outros Estados de MI</button>
+                        class="btn btn-light btn-sm"><i class="far fa-clock"></i>
+                        Outros Estados de MI</button>
                 </div>
             </div>
 
@@ -68,57 +69,57 @@
 
             <div class="table-responsive" id="print-section-list-inquerito">
                 <!--ng-template #dataLoaded-->
-                    <table class="table table-sm table-hover text-center">
-                        <thead class="linhas2">
-                            <tr>
-                                <th scope="col" class="text-black">Nome Simplificado</th>
-                                <th scope="col" class="text-black">Província</th>
-                                <th scope="col" class="text-black">Município</th>
-                                <th scope="col" class="text-black">Inquiridor</th>
-                                <th scope="col" class="text-black">Estado MI</th>
-                                <th scope="col" class="text-black not-it">Ver</th>
-                                <th scope="col" class="text-black not-it"
-                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                    Editar</th>
-                                <th *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true "
-                                    scope="col" class="text-black not-it">Apagar
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of inqueritos___ | search:'nome_simplificado':keyWord">
-                                <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
-                                <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
-                                <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                                <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
-                                <td>{{item.status ? item.status : 'N/D' }}
-                                </td>
+                <table class="table table-sm table-hover text-center">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Nome Simplificado</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Município</th>
+                            <th scope="col" class="text-black">Inquiridor</th>
+                            <th scope="col" class="text-black">Estado MI</th>
+                            <th scope="col" class="text-black not-it">Ver</th>
+                            <th scope="col" class="text-black not-it"
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                Editar</th>
+                            <th *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true "
+                                scope="col" class="text-black not-it">Apagar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of inqueritos___ | search:'nome_simplificado':keyWord">
+                            <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
+                            <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
+                            <td>{{devolver_nome_municipio(item.municipio)}}</td>
+                            <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
+                            <td>{{item.status ? item.status : 'N/D' }}
+                            </td>
 
-                                <td class="not-it">
-                                    <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
-                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                        <i class="far fa-eye"></i>
-                                    </button>
-                                </td>
+                            <td class="not-it">
+                                <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </td>
 
-                                <td class="not-it"
-                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                    <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
-                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                </td>
-                                <td class="not-it"
-                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                    <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="deleteInquire(item.id)">
-                                        <i class="fas fa-trash-alt" style="color: red;"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            <td class="not-it"
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
+                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </td>
+                            <td class="not-it"
+                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                    (click)="deleteInquire(item.id)">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button>
+                            </td>
+                        </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
                 <!--/ng-template-->
             </div>
         </div>

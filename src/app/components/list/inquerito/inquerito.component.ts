@@ -1440,7 +1440,8 @@ export class InqueritoComponent implements OnInit {
     }).then((apagar) => {
       if (apagar.isConfirmed) {
         this.dataService.deleteInquireForm(id).subscribe(
-          success => { this.get_inquireForms___() },
+          success => { this.get_inquireForms___(), this.getInqueritoTodos()
+          },
           error => { this.alert_error() }
         )
         Swal.fire(
@@ -1450,6 +1451,7 @@ export class InqueritoComponent implements OnInit {
         )
       }
     })
+    this.getInqueritoTodos()
     this.get_inquireForms___()
   }
 

@@ -180,18 +180,10 @@ export class InteressesComponent implements OnInit {
   }
 
 
-  devolve_pn(id:any){
-    this.dataService.Get_Backoffice_data_and_Inquerito_by_id(id).subscribe(data => {
-      // Converta data para um array se ainda não for
-      const dataArray = Array.isArray(data) ? data : [data];
-      this.backoffice_data = dataArray.reverse();
-      console.log('aquiiiiiiii', this.backoffice_data[0]);
-      return this.backoffice_data[0].status_pn;
-    });
-  }
 
   devolver_status_pn(id: any): string {
     const inqueritoSelecionado = this.formBackoffice.find((item: any) => item.inquerito === id);
+    console.log('devolvendo ',inqueritoSelecionado)
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
   }
 
@@ -204,7 +196,7 @@ export class InteressesComponent implements OnInit {
           this.dataService.Get_Backoffice_data_and_Inquerito_by_id(backofficeId)
         ));
       })
-    ).subscribe(data =>{
+    ).subscribe(data => {
       console.log('yessss', data)
     });
   }
@@ -214,7 +206,7 @@ export class InteressesComponent implements OnInit {
   get_form_backoffice() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
       this.formBackoffice = data;
-      console.log(this.formBackoffice)
+      console.log( 'backofficeForm', this.formBackoffice)
     })
   }
 
@@ -263,10 +255,7 @@ export class InteressesComponent implements OnInit {
     this.inqueritoSelecionado = item;
   }
 
-  // ver backoffice form deste inquérito
-  ver_Backoffice_form_inquerito(itemId: number) {
-  }
-
+  
 
   enviarFormulario(data_: any) {
 
@@ -378,6 +367,30 @@ export class InteressesComponent implements OnInit {
 
     // formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
 
+    if (!this.angForm.get('consultor_pn')?.value) {
+      if (!this.angForm.get('consultor_pn')?.value) {
+        Swal.fire({
+          icon: 'error',
+          //title: 'Oops...',
+          text: 'Preencha o campo Consultor PN.',
+        })
+      }
+      return;
+    }
+
+    if (!this.angForm.get('inicio_elaboracao_pn')?.value) {
+      if (!this.angForm.get('inicio_elaboracao_pn')?.value) {
+        Swal.fire({
+          icon: 'error',
+          //title: 'Oops...',
+          text: 'Preencha o campo Data início elaboração do PN.',
+        })
+      }
+      return;
+    }
+
+
+
     const formData = new FormData();
 
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
@@ -427,7 +440,7 @@ export class InteressesComponent implements OnInit {
       // Implemente o código para lidar com a resposta da API aqui
       Swal.fire({
         icon: "success",
-        title: "PN Elaborado",
+        title: "PN em analise UIP PDAC",
         showConfirmButton: false,
         timer: 1500
       });
@@ -461,18 +474,8 @@ export class InteressesComponent implements OnInit {
 
   }
 
-  isLoading: boolean = false;
-  showLoading() {
-    // Exibir o indicador de loading
-    // Por exemplo, definir uma variável de controle no componente para mostrar/ocultar o indicador
-    this.isLoading = true;
-  }
 
-  hideLoading() {
-    // Ocultar o indicador de loading
-    // Por exemplo, alterar o valor da variável de controle no componente
-    this.isLoading = false;
-  }
+
 
   alert_success() {
     Swal.fire({
