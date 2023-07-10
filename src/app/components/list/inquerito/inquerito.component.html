@@ -58,17 +58,16 @@
                 </div>
             </div>
 
-            <ng-container *ngIf="isLoading; else dataLoaded">
-                <!-- Exibir o elemento de carregamento -->
+            <!--ng-container *ngIf="isLoading === true; else dataLoaded">
                 <div class="loading-container">
                     <div class="spinner-border text-warning" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-            </ng-container>
+            </!ng-container-->
 
             <div class="table-responsive" id="print-section-list-inquerito">
-                <ng-template #dataLoaded>
+                <!--ng-template #dataLoaded-->
                     <table class="table table-sm table-hover text-center">
                         <thead class="linhas2">
                             <tr>
@@ -87,7 +86,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
+                            <tr *ngFor="let item of inqueritos___ | search:'nome_simplificado':keyWord">
                                 <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
                                 <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio)}}</td>
@@ -120,7 +119,7 @@
 
                         </tbody>
                     </table>
-                </ng-template>
+                <!--/ng-template-->
             </div>
         </div>
 

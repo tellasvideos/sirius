@@ -302,7 +302,7 @@ export class InqueritoComponent implements OnInit {
 
 
   reloadOnce: any;
-  inqueritos: any;
+
   sideBarOpen = true;
   modalRef: MdbModalRef<AddInqueritoComponent> | null = null;
 
@@ -384,6 +384,9 @@ export class InqueritoComponent implements OnInit {
     this.get_inquireFormsByPendentes();
     this.getInqueritoParaPdac();
     this.get_MI_Duplicada()
+    this.getInqueritoTodos()
+
+    this.get_inquireForms___()
 
     //this.getFilteredPdacList(); // retorna apenas as MI ainda não adicionadas num inquerito
     this.get_Nomes_simplificados() // retorna nomes simplificados do inquerito
@@ -443,7 +446,7 @@ export class InqueritoComponent implements OnInit {
   getInqueritoTodos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoTodos = data.filter((item: any) => {
-        return !['Aprovado'].includes(item.status)
+        return !['Aprovado', 'Em Análise', 'A ser visitada'].includes(item.status)
       });
     });
 
@@ -459,24 +462,52 @@ export class InqueritoComponent implements OnInit {
   }
 
   // filtra status do inquerito, apresentando apenas os status em análise e a ser visitada
+  inqueritos: any;
   get_inquireForms() {
+    // this.isLoading = true; // Define isLoading como true para exibir o loading
+
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter((item: any) => {
-        // Verifica se os dados foram filtrados
-        if (this.inqueritos.length > 0) {
-          this.isLoading = false; // Indica que os dados foram carregados
-        } else {
-          // Caso contrário, aguarde um curto período e tente novamente
-          setTimeout(() => {
-            this.get_inquireForms();
-          }, 300);
-        }
-        return ['Em Análise', 'A ser visitada',].includes(item.status);
+        return ['Em Análise', 'A ser visitada'].includes(item.status);
       });
-      this.isLoading = false;
+
+      /* if (this.inqueritos.length > 0) {
+         this.isLoading = false; // Indica que os dados foram carregados
+       } else {
+         // Caso contrário, aguarde um curto período e tente novamente
+         setTimeout(() => {
+           this.get_inquireForms();
+         }, 500);
+       }*/
+
       console.log('inquérito', this.inqueritos);
     });
   }
+
+  // filtra status do inquerito, apresentando apenas os status em análise e a ser visitada
+  inqueritos___: any;
+  get_inquireForms___() {
+    // this.isLoading = true; // Define isLoading como true para exibir o loading
+
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos___ = data.filter((item: any) => {
+        return ['Em Análise', 'A ser visitada'].includes(item.status);
+      });
+
+      /* if (this.inqueritos.length > 0) {
+         this.isLoading = false; // Indica que os dados foram carregados
+       } else {
+         // Caso contrário, aguarde um curto período e tente novamente
+         setTimeout(() => {
+           this.get_inquireForms();
+         }, 500);
+       }*/
+
+      console.log('inquérito', this.inqueritos___);
+    });
+  }
+
+
 
 
 
@@ -653,45 +684,26 @@ export class InqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
 
 
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
-      //console.log('inquérito', data);
+    this.dataService.salvaInquireForm(formData).subscribe(
 
-      // Verificar se um campo do formData já existe localmente
-      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
-      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
-      if (campoExistente) {
-        Swal.fire({
-          icon: "error",
-          //title: "Oops...",
-          text: "Manifestação de Interesse já Existente.",
-        })
-      } else {
-        this.dataService.salvaInquireForm(formData).subscribe(
-          (response: any) => {
-            console.log(response.manifestacao_de_interesse)
+      success => {
 
-            this.alert_success();
-            // close modal
-            const modal = document.getElementById('exampleModalToggle');
-            if (modal) {
-              modal.style.display = 'none';
+        this.alert_success();
+        // close modal
+        const modal = document.getElementById('exampleModalToggle');
+        if (modal) {
+          modal.style.display = 'none';
 
-              // Espera 3 segundos antes de recarregar a página
-              timer(2000).pipe(delay(2000)).subscribe(() => {
-                location.reload();
-              });
-            }
+          // Espera 3 segundos antes de recarregar a página
+          timer(2000).pipe(delay(2000)).subscribe(() => {
+            location.reload();
+          });
+        }
 
-          },
-          (error: any) => { this.alert_error(); }
-        );
-      }
-
-    });
-
+      },
+      error => { this.alert_error(); },
+    );
     this.get_inquireForms();
-
   }
 
 
@@ -769,21 +781,21 @@ export class InqueritoComponent implements OnInit {
 
     /*let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
-
+  
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
+  
     let formData = new FormData();
-
+  
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
     }
-
+  
     // Verificar se há um arquivo selecionado
     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
       const inqueritoPreenchido = this.selectedFile2[0];
-
+  
       // Verificar se o arquivo não está vazio
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
@@ -823,22 +835,22 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
+      this.inqueritoPdac = data;
       //console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
-      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
-      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
+      const campoExistente = this.inqueritoPdac.some((inquerito: any) => inquerito.nome_simplificado === manifestacaoInteresse);
       if (campoExistente) {
         Swal.fire({
           icon: "error",
           //title: "Oops...",
-          text: "Manifestação de Interesse já Existente.",
+          text: "Nome Simplificado já Existente.",
         })
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.manifestacao_de_interesse)
+            console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -926,21 +938,21 @@ export class InqueritoComponent implements OnInit {
 
     /* let fileList: FileList = this.selectedFile;
      let documents: FileList = fileList;
- 
+   
       let fileList2: FileList = this.selectedFile2;
       let inquerito_preenchido: FileList = fileList2;
       // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-  
+   
       let formData = new FormData();
-  
+   
       for (let i = 0; i < documents?.length; i++) {
         formData.append("files", documents[i], documents[i].name);
       }
-  
+   
       // Verificar se há um arquivo selecionado
       if (this.selectedFile2 && this.selectedFile2?.length > 0) {
         const inqueritoPreenchido = this.selectedFile2[0];
-  
+   
         // Verificar se o arquivo não está vazio
         if (inqueritoPreenchido.size > 0) {
           formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
@@ -978,22 +990,22 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
+      this.inqueritoPdac = data;
       //console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
-      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
-      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
+      const campoExistente = this.inqueritoPdac.some((inquerito: any) => inquerito.nome_simplificado === manifestacaoInteresse);
       if (campoExistente) {
         Swal.fire({
           icon: "error",
           //title: "Oops...",
-          text: "Manifestação de Interesse já Existente.",
+          text: "Nome simplificado já Existente.",
         })
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.manifestacao_de_interesse)
+            console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -1091,21 +1103,21 @@ export class InqueritoComponent implements OnInit {
 
     /* let fileList: FileList = this.selectedFile;
      let documents: FileList = fileList;
- 
+   
      let fileList2: FileList = this.selectedFile2;
      let inquerito_preenchido: FileList = fileList2;
      // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
- 
+   
      let formData = new FormData();
- 
+   
      for (let i = 0; i < documents?.length; i++) {
        formData.append("files", documents[i], documents[i].name);
      }
- 
+   
      // Verificar se há um arquivo selecionado
      if (this.selectedFile2 && this.selectedFile2?.length > 0) {
        const inqueritoPreenchido = this.selectedFile2[0];
- 
+   
        // Verificar se o arquivo não está vazio
        if (inqueritoPreenchido.size > 0) {
          formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
@@ -1144,22 +1156,22 @@ export class InqueritoComponent implements OnInit {
 
 
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
+      this.inqueritoPdac = data;
       //console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
-      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
-      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
+      const campoExistente = this.inqueritoPdac.some((inquerito: any) => inquerito.nome_simplificado === manifestacaoInteresse);
       if (campoExistente) {
         Swal.fire({
           icon: "error",
           //title: "Oops...",
-          text: "Manifestação de Interesse já Existente.",
+          text: "Nome simplificado já Existente.",
         })
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.manifestacao_de_interesse)
+            console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -1268,7 +1280,7 @@ export class InqueritoComponent implements OnInit {
        }
        return;
      }
- 
+   
      if (!this.angForm.get('documents')?.value) {
        if (!this.angForm.get('documents')?.value) {
          this.alert_error_Docs();
@@ -1279,20 +1291,20 @@ export class InqueritoComponent implements OnInit {
 
     /*let fileList: FileList = this.selectedFile;
     let documents: FileList = fileList;
-
+  
     let fileList2: FileList = this.selectedFile2;
     let inquerito_preenchido: FileList = fileList2;
     // let inquerito_preenchido: File | undefined = fileList2.length > 0 ? fileList2[0] : undefined;
-
-
+  
+  
     for (let i = 0; i < documents?.length; i++) {
       formData.append("files", documents[i], documents[i].name);
     }
-
+  
     // Verificar se há um arquivo selecionado
     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
       const inqueritoPreenchido = this.selectedFile2[0];
-
+  
       // Verificar se o arquivo não está vazio
       if (inqueritoPreenchido.size > 0) {
         formData.append("inquerito_preenchido", inqueritoPreenchido, inqueritoPreenchido.name);
@@ -1341,30 +1353,30 @@ export class InqueritoComponent implements OnInit {
          timer(2000).pipe(delay(2000)).subscribe(() => {
            location.reload();
          });
- 
+   
        },
        error => { this.alert_error(); }
      )
- 
+   
      this.get_inquireForms();*/
 
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data;
+      this.inqueritoPdac = data;
       //console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
-      const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
-      const campoExistente = this.inqueritos.some((inquerito: any) => inquerito.manifestacao_de_interesse === manifestacaoInteresse);
+      const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
+      const campoExistente = this.inqueritoPdac.some((inquerito: any) => inquerito.nome_simplificado === manifestacaoInteresse);
       if (campoExistente) {
         Swal.fire({
           icon: "error",
           //title: "Oops...",
-          text: "Manifestação de Interesse já Existente.",
+          text: "Nome simplificado já Existente.",
         })
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.manifestacao_de_interesse)
+            console.log(response.nome_simplificado)
 
             //this.alert_success();
             this.alert_success_MI_Aproved();
@@ -1428,7 +1440,7 @@ export class InqueritoComponent implements OnInit {
     }).then((apagar) => {
       if (apagar.isConfirmed) {
         this.dataService.deleteInquireForm(id).subscribe(
-          success => { this.get_inquireForms() },
+          success => { this.get_inquireForms___() },
           error => { this.alert_error() }
         )
         Swal.fire(
@@ -1438,7 +1450,7 @@ export class InqueritoComponent implements OnInit {
         )
       }
     })
-    this.getInqueritoParaPdac()
+    this.get_inquireForms___()
   }
 
 
@@ -1760,18 +1772,18 @@ export class InqueritoComponent implements OnInit {
     }
   }
 
-  // filtrar nomes do pdac que nao foram usados no inquerito
+  /*/ filtrar nomes do pdac que nao foram usados no inquerito
   filteredPdac: any;
   pdacPropNome: any;
   getFilteredPdacList() {
     this.filteredPdac = this.pdac.filter((pdac: any) => {
       this.pdacPropNome = pdac['s2gp/s2g1q1/prop_nome'];
-
+  
       return !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === this.pdacPropNome);
     });
     console.log('lista filtrada', this.filteredPdac)
     return this.filteredPdac;
-  }
+  }*/
 
 
 
