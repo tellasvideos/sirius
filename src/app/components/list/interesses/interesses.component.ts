@@ -182,10 +182,12 @@ export class InteressesComponent implements OnInit {
 
 
   devolver_status_pn(id: any): string {
-    const inqueritoSelecionado = this.formBackoffice.find((item: any) => item.inquerito === id);
-    console.log('devolvendo ',inqueritoSelecionado)
+    const formBackofficeCopy = [...this.formBackoffice].reverse();
+    const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
+    console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
   }
+  
 
   getBackofficesByInqueritoId(inqueritoId: any) {
     return this.dataService.Get_Backoffice_data_and_Inquerito_by_id(inqueritoId).pipe(
@@ -591,15 +593,11 @@ export class InteressesComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log(this.inqueritos);
-      this.inqueritos.sort((a, b) => {
-        const dateA = new Date(a.created_at);
-        const dateB = new Date(b.created_at);
-        return dateB.getTime() - dateA.getTime();
-      });
+      console.log('inqueritos reverse', this.inqueritos);
+      this.inqueritos.reverse();
     });
   }
-
+  
 
   downloadFile(url: string): void {
     const link = document.createElement('a');
