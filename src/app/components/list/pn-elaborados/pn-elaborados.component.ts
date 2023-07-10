@@ -104,6 +104,7 @@ export class PnElaboradosComponent implements OnInit {
 
     this.getInqueritos();
     this.get_form_backoffice____();
+    this.getMunicipio();
 
   }
 
@@ -334,12 +335,8 @@ export class PnElaboradosComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log('inqueritos', this.inqueritos);
-      this.inqueritos.sort((a, b) => {
-        const dateA = new Date(a.created_at);
-        const dateB = new Date(b.created_at);
-        return dateB.getTime() - dateA.getTime();
-      });
+      console.log('inqueritos reverse', this.inqueritos);
+      this.inqueritos.reverse();
     });
   }
 
@@ -389,7 +386,9 @@ export class PnElaboradosComponent implements OnInit {
 
 
   getFormBackofficeData(inqueritoId: string): any {
+    console.log(inqueritoId)
     return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    
   }
 
   /*limparCampos() {
@@ -403,5 +402,24 @@ export class PnElaboradosComponent implements OnInit {
     this.data_primeiro_pedido_reembolso = null;
   }*/
 
+  municipio: any;
+  retorno: any;
+  devolver_nome_municipio(id: any) {
+    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
+    return this.retorno
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+    })
+  }
+
+  devolver_data_entregue_pdcac(id: any) {
+    const formBackofficeCopy = [...this.formBackoffice].reverse();
+    const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
+    console.log('devolvendo ', inqueritoSelecionado);
+    return inqueritoSelecionado ? inqueritoSelecionado.data_pn_entregue_ao_pdac : 'N/D';
+  }
 
 }
