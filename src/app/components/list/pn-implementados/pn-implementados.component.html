@@ -71,9 +71,9 @@
                                 <td>{{item.nome_simplificado}} </td>
                                 <td>{{item.provincia}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                                <td>{{item.telefone}}</td>
+                                <td>{{getTelefoneManifestacao(item.manifestacao_de_interesse)}}</td>
                                 <td>{{item.que_tipo_de_negocio_esta}}</td>
-                                <td>{{item.atividades}}</td>
+                                <td>{{getActividadeManifestacao(item.manifestacao_de_interesse)}}</td>
                                 <td class="not-it"><button type="button" routerLinkActive="active"
                                         [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
                                         class="btn btn-link btn-sm btn-rounded ">

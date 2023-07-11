@@ -59,30 +59,43 @@
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Estado PGAS</th>
-                            <th scope="col" class="text-black not-it">ver</th>
+                            <th scope="col" class="text-black not-it">Mais info</th>
+                            <th scope="col" class="text-black not-it">Modificação</th>
                             <th scope="col" class="text-black not-it">Colar info</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <td>{{item.id}} </td>
-                            <td>{{item.nome_simplificado}} </td>
-                            <td>{{item.provincia}}</td>
-                            <td>{{item.municipio}}</td>
-                            <td>{{''}}</td>
-                            <td class="not-it"><button type="button" routerLinkActive="active"
-                                    [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
-                                    class="btn btn-link btn-sm btn-rounded ">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </td>
+                            <ng-container *ngIf="getFormPGAsData(item.id)?.status_pn === 'PGAS a ser elaborado' 
+                                || 'PGAS em elaboração' 
+                                || 'PGAS em revisão ou analise pelo PDAC/BM'
+                                || 'PGAS aprovado pelo BM' ">
 
-                            <td class="not-it">
-                                <button type="button" class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalToggle">
-                                    <i class="fas fa-file-lines"></i>
-                                </button>
-                            </td>
+                                <td>{{item.id}} </td>
+                                <td>{{item.nome_simplificado}} </td>
+                                <td>{{item.provincia}}</td>
+                                <td>{{item.municipio}}</td>
+                                <td>{{getFormPGAsData(item.id)?.status_pn}}</td>
+                                <td class="not-it"><button type="button" routerLinkActive="active"
+                                        [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
+                                        class="btn btn-link btn-sm btn-rounded ">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </td>
+
+                                <td class="not-it"><button type="button" routerLinkActive="active"
+                                        class="btn btn-link btn-sm btn-rounded ">
+                                        <i class="far fa-pen"></i>
+                                    </button>
+                                </td>
+
+                                <td class="not-it">
+                                    <button type="button" (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalToggle">
+                                        <i class="fas fa-file-lines"></i>
+                                    </button>
+                                </td>
+                            </ng-container>
                         </tr>
                     </tbody>
                 </table>
@@ -105,27 +118,11 @@
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário PGAS</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form enctype="multipart/form-data" [formGroup]="angForm">
+            <form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="enviarFormulario()">
+
+                {{inqueritoSelecionado?.id | json}}
 
                 <div class="modal-body">
-                    <!-- Pergunta 26 -->
-                    <div class="mb-3 mt-3 d-flex justify-content-between mx-auto mx-auto" style="width: 80%;">
-                        <div>
-                            <label> Nome Simplificado:</label>
-                        </div>
-                        <div class="my-element" style="margin-left: 10%;">
-                            <ng-select [items]="nomesSimplificados" bindLabel="nome_simplificado"
-                                class="ng-select form-control-sm" bindValue="nome_simplificado" style="width: 350px;"
-                                formControlName="nome_simplificado" [searchable]="true" placeholder=""
-                                [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }">
-                            </ng-select>
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched">
-                                * Campo obrigatório.
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Pergunta 27 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                         <div>
@@ -133,15 +130,10 @@
                         </div>
                         <div>
                             <select class="form-select form-select-sm" formControlName="consultor_pgas"
-                                name="consultor_pgas" style="width:350px;" required aria-label="Default select example"
-                                [ngClass]="{ 'is-invalid': angForm.get('consultor_pgas')?.invalid && angForm.get('consultor_pgas')?.touched }">
+                                name="consultor_pgas" style="width:350px;" required aria-label="Default select example">
                                 <option value="" disabled selected hidden></option>
                                 <option *ngFor="let item of userSalvaGuarde" [value]="item.name">{{item.name}}</option>
                             </select>
-                            <div class="invalid-feedback"
-                                *ngIf="angForm.get('consultor_pgas')?.invalid && angForm.get('consultor_pgas')?.touched">
-                                * Campo obrigatório.
-                            </div>
                         </div>
                     </div>
 
@@ -169,6 +161,7 @@
                         *ngIf="this.angForm.get('data_inicio_elaboracao_pgas')?.value">
                         <div>
                             <label for="data_fim_elaboracao_pgas">Data fim elaboração PGAS:
+                                <p style="font-size: 10px;">Primeiro Envio do PGAS ao UIP PDAC</p>
                             </label>
                         </div>
                         <div>
@@ -180,6 +173,32 @@
                     </div>
 
                     <!-- Pergunta 30 -->
+                    <div class="mb-3 d-flex justify-content-between mx-auto"
+                        *ngIf="this.angForm.get('data_fim_elaboracao_pgas')?.value" style="width: 80%;">
+                        <div>
+                            <label>Coordenadas:</label>
+                        </div>
+                        <div>
+                            <input type="number" formControlName="latitude" name="latitude" placeholder="Latitude"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm mb-2"
+                                [ngClass]="{ 'is-invalid': angForm.get('latitude')?.invalid && angForm.get('latitude')?.touched }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('latitude')?.invalid && angForm.get('latitude')?.touched">
+                                * Campo obrigatório.
+                            </div>
+
+                            <input type="number" formControlName="logitude" name="logitude" placeholder="Logitude"
+                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('logitude')?.invalid && angForm.get('logitude')?.touched }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('logitude')?.invalid && angForm.get('logitude')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Pergunta 31 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
                         *ngIf="this.angForm.get('data_fim_elaboracao_pgas')?.value">
                         <div>
@@ -194,7 +213,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 31 -->
+                    <!-- Pergunta 32 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
                         <div>
                             <label>A elaboração do PGAS esta pendente ?</label>
@@ -208,7 +227,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 20.1 -->
+                    <!-- Pergunta 33 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
                         *ngIf="this.angForm.get('elaboracao_ogas_pendente')?.value === true" style="width: 80%;">
                         <div>
@@ -220,6 +239,10 @@
                                 required (blur)="_touched = true" style="width: 350px;"
                                 class="form-control form-control-sm"></textarea>
                         </div>
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('justificacao_pgas_pendente')?.invalid && angForm.get('justificacao_pgas_pendente')?.touched">
+                            * Campo obrigatório.
+                        </div>
                     </div>
 
                 </div>
@@ -227,6 +250,9 @@
                 <div class="modal-footer justify-content-between">
                     <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                 </div>
+
+
+                <!--{{formBackoffice[0] | json }}-->
 
             </form>
         </div>

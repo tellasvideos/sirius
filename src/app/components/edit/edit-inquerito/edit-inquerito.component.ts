@@ -628,6 +628,8 @@ export class EditInqueritoComponent implements OnInit {
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
     formData.append("duplicada_da_2", this.angForm.get('duplicada_da_2')?.value);
     formData.append("duplicada_da", this.angForm.get('duplicada_da')?.value);
+    formData.append("nome_simplificado", this.angForm.get('nome_simplificado')?.value);
+
 
     this.dataService.EditInquerito(this.id, formData).subscribe(
       success => {

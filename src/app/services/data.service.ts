@@ -777,12 +777,24 @@ export class DataService {
     return this.http.delete(`${this.get_pn_elaborado_URL}${id}/`).pipe(take(1));
   }
 
+  // teste
   url_consulta_mi = 'http://sirius.strongbox.ao:8001/api/v1';
-
   consultarManifestacaoExistente(manifestacao: any): Observable<any> {
-   // const encodedManifestacao = encodeURIComponent(manifestacao);
+    // const encodedManifestacao = encodeURIComponent(manifestacao);
     const params = new HttpParams().set('manifestacao_de_interesse', manifestacao);
     return this.http.post(this.url_consulta_mi + '/inqueritos/', null, { params });
+  }
+
+  // to get all pgas
+  get_pgas_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/';
+  Get_Pgas() {
+    return this.http.get<any[]>(this.get_pgas_url);
+  }
+
+  // To save a PGAS form
+  post_pga_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  Save_PGAS(pgasData: any) {
+    return this.http.post(this.post_pga_url + '/formulariojanelapgas/', pgasData)
   }
 }
 

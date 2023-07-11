@@ -703,7 +703,7 @@ export class InqueritoComponent implements OnInit {
       },
       error => { this.alert_error(); },
     );
-    this.get_inquireForms();
+   // this.get_inquireForms();
   }
 
 
@@ -871,7 +871,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-    this.get_inquireForms();
+   // this.get_inquireForms();
 
   }
 
@@ -1026,7 +1026,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-    this.get_inquireForms();
+   // this.get_inquireForms();
 
 
   }
@@ -1192,7 +1192,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-    this.get_inquireForms();
+  //  this.get_inquireForms();
 
 
   }
@@ -1398,7 +1398,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-    this.get_inquireForms();
+  //  this.get_inquireForms();
 
   }
 
@@ -1440,7 +1440,8 @@ export class InqueritoComponent implements OnInit {
     }).then((apagar) => {
       if (apagar.isConfirmed) {
         this.dataService.deleteInquireForm(id).subscribe(
-          success => { this.get_inquireForms___(), this.getInqueritoTodos()
+          success => {
+            this.get_inquireForms___(), this.getInqueritoTodos()
           },
           error => { this.alert_error() }
         )

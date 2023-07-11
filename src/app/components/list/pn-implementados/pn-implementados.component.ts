@@ -62,6 +62,8 @@ export class PnImplementadosComponent implements OnInit {
     })
   }
 
+  pn_implementado:any;
+
 
   mappedFormBackoffice: any;
   formBackoffice: any;
@@ -126,9 +128,17 @@ export class PnImplementadosComponent implements OnInit {
     });
   }
 
-  getTelefoneManifestacao(idManifestacao: number): string {
-    const manifestacao = this.pdac.find((item:any) => item['s2gp/s2g2/rep_telemovel'] === idManifestacao);
-    console.log(manifestacao['s2gp/s2g2/rep_telemovel'])
-    return manifestacao ? manifestacao['s2gp/s2g2/rep_telemovel'] : 'N/D';
+  //s2gp/objetivo1/objetivo2
+
+  getActividadeManifestacao(manifestacao_de_interesse: any): string {
+    const manifestacao = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
+    return manifestacao ? manifestacao['s2gp/objetivo1/objetivo2'] : 'N/D';
   }
+
+
+getTelefoneManifestacao(manifestacao_de_interesse: any): string {
+  const manifestacao = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
+  return manifestacao ? manifestacao['s2gp/s2g2/rep_telemovel'] : 'N/D';
+}
+
 }
