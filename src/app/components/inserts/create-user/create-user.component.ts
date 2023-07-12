@@ -4,6 +4,8 @@ import { Route, Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { DataService } from 'src/app/services/data.service';
 import Swal from "sweetalert2";
+import { timer } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-user',
@@ -62,6 +64,10 @@ export class CreateUserComponent implements OnInit {
         this.user = success;
         this.alert_success();
         // console.log('salvo', data)
+         // Espera 3 segundos antes de recarregar a página
+         timer(1800).pipe(delay(1800)).subscribe(() => {
+          location.reload();
+        });
       },
 
       error => {

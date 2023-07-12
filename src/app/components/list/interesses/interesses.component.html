@@ -165,17 +165,17 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">
+                            <ng-container *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                 <!--td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">{{item.id}} </!--td-->
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     {{item.nome_simplificado}} </td>
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">{{item.provincia}}
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">{{item.provincia}}
                                 </td>
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     {{devolver_nome_municipio(item.municipio)}}</td>
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     {{item.que_tipo_de_negocio_esta}}</td>
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'">
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     {{devolver_status_pn(item.id)}}</td>
 
                                 <!--td>
@@ -201,7 +201,7 @@
                                 <i class="fas fa-file-lines"></i>
                             </button></!--td-->
                                 <td class="not-it"><button type="button"
-                                        *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'"
+                                        *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'"
                                         (click)="selecionarInquerito(item)"
                                         [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
                                         routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
@@ -227,12 +227,13 @@
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </|td-->
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em analise UIP PDAC'" class="not-it">
+                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'" class="not-it">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
                                         (click)="selecionarInquerito(item)" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-file-lines"></i>
-                                    </button></td>
+                                    </button>
+                                </td>
                             </ng-container>
                         </tr>
                     </tbody>
@@ -358,8 +359,7 @@
                                 [ngClass]="{ 'is-invalid': angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched }">
                             <div class="invalid-feedback" style="width: 350px;"
                                 *ngIf="angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched">
-                                * Campo obrigatório. Pois, e a data não pode ser posterior à data de hoje (não é
-                                possível antecipar)
+                                * Campo obrigatório.
                             </div>
                         </div>
                     </div>
@@ -424,12 +424,10 @@
                         <div>
                             <label>O PN está pendente?</label>
                         </div>
-
                         <div class="d-flex justify-content-between">
                             <div style="margin-right: 310px;">
-                                <input type="checkbox" name="checkboxOption"
-                                    [checked]="angForm.get('pn_pendente')?.value" formControlName="pn_pendente"
-                                    (change)="toggleJustificacaoPnPendente()">
+                                <input type="checkbox" name="Checkbox1" [checked]="angForm.get('pn_pendente')?.value"
+                                    formControlName="pn_pendente" (change)="showInput_2(angForm.get('pn_pendente')?.value)">
                             </div>
                         </div>
                     </div>
@@ -442,7 +440,12 @@
                         </div>
                         <div>
                             <textarea formControlName="justificacao_pn_pendente" name="justificacao_pn_pendente"
-                                style="width: 350px;" class="form-control form-control-sm"></textarea>
+                                style="width: 350px;" class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('justificacao_pn_pendente')?.invalid && angForm.get('justificacao_pn_pendente') }"></textarea>
+                        </div>
+                        <div class="invalid-feedback" style="width: 350px;"
+                            *ngIf="angForm.get('justificacao_pn_pendente')?.invalid">
+                            * Campo obrigatório.
                         </div>
                     </div>
 
@@ -451,14 +454,12 @@
                         <div>
                             <label>O proponente desistiu?</label>
                         </div>
-
                         <div class="d-flex justify-content-between">
                             <div style="margin-right: 310px;">
-                                <input type="checkbox" name="checkboxOption" formControlName="proponente_desistiu"
-                                    (change)="toggleProponenteDesistiu()">
+                                <input type="checkbox" name="Checkbox2" formControlName="proponente_desistiu"
+                                    (change)="showInput_2('proponente_desistiu')">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="modal-footer justify-content-between">

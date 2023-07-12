@@ -60,7 +60,7 @@ export class InteressesComponent implements OnInit {
 
     this.angForm = this.fb.group({
 
-      consultor_pn: ['', Validators.required],
+      consultor_pn: [''],
       inicio_elaboracao_pn: ['', Validators.required],
       fim_elaboracao_pn: [''],
       fim_verificacao: [''],
@@ -82,7 +82,7 @@ export class InteressesComponent implements OnInit {
       outros_documentos: new FormControl(null),*/
 
       financiamento_bancario: [''],
-      data_pn_entregue_ao_pdac: [''],
+      //data_pn_entregue_ao_pdac: [''],
       pn_pendente: [false],
       justificacao_pn_pendente: ['', Validators.required],
       proponente_desistiu: [false],
@@ -93,6 +93,15 @@ export class InteressesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.angForm.patchValue({
+      consultor_pn: this.formBackoffice[0].consultor_pn,
+      inicio_elaboracao_pn: this.formBackoffice[0].inicio_elaboracao_pn,
+      fim_elaboracao_pn: this.formBackoffice[0].fim_elaboracao_pn,
+      fim_verificacao: this.formBackoffice[0].fim_verificacao
+    }); 
+
+
     this.getProvincias()
     this.list_interest()
     this.getInqueritos()
@@ -187,7 +196,7 @@ export class InteressesComponent implements OnInit {
     console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
   }
-  
+
 
   getBackofficesByInqueritoId(inqueritoId: any) {
     return this.dataService.Get_Backoffice_data_and_Inquerito_by_id(inqueritoId).pipe(
@@ -208,7 +217,7 @@ export class InteressesComponent implements OnInit {
   get_form_backoffice() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
       this.formBackoffice = data;
-      console.log( 'backofficeForm', this.formBackoffice)
+      console.log('backofficeForm', this.formBackoffice)
     })
   }
 
@@ -223,31 +232,44 @@ export class InteressesComponent implements OnInit {
 
   // Estados PN (Part. 1)
   getStatus_pn() {
-
     const Estado_MI = this.inqueritoSelecionado?.status === 'Aprovado' && this.angForm.get('inicio_elaboracao_pn')?.value === '';
-    const Data_inicio_elaboração_PN = this.angForm.get('inicio_elaboracao_pn')?.value && this.angForm.get('fim_elaboracao_pn')?.value === '';
+    const Data_inicio_elaboração_PN = this.angForm.get('inicio_elaboracao_pn')?.value && this.angForm.get('consultor_pn')?.value !== '';
     const Data_fim_elaboração_PN = this.angForm.get('fim_elaboracao_pn')?.value && this.angForm.get('fim_verificacao')?.value === '';
-    //const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
+    // const Data_fim_verificacao = this.angForm.get('fim_verificacao')?.value && this.angForm.get('data_pn_entregue_ao_pdac')?.value === '';
     const O_proponente_desistiu = this.angForm.get('proponente_desistiu')?.value === true;
+
     const O_PN_esta_pendente = this.angForm.get('pn_pendente')?.value === true;
+
     const Data_PN_entregue_ao_PDAC = this.angForm.get('fim_verificacao')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
+
+    console.log(Estado_MI, Data_inicio_elaboração_PN,
+      Data_fim_elaboração_PN, O_proponente_desistiu,
+      O_PN_esta_pendente, Data_PN_entregue_ao_PDAC)
 
     if (Estado_MI) {
       return 'Inquérito em stock';
-    } else if (Data_inicio_elaboração_PN) {
+    }
+
+    if (Data_inicio_elaboração_PN) {
       return 'PN em elaboração';
-    } else if (Data_fim_elaboração_PN) {
-      return 'PN em verificação'
-    } /*else if (Data_fim_verificacao) {
-      return 'PN finalizado'
-    }*/ else if (O_proponente_desistiu) {
-      return 'Desistência do proponente'
-    } else if (O_PN_esta_pendente) {
-      return 'PN pendente no BO'
-    } else if (Data_PN_entregue_ao_PDAC) {
-      return 'PN em analise UIP PDAC'
-    } {
-      return 'N/D'
+    }
+
+    if (Data_fim_elaboração_PN) {
+      return 'PN em verificação';
+    }
+
+    if (O_proponente_desistiu) {
+      return 'Desistência do proponente';
+    }
+
+    if (O_PN_esta_pendente) {
+      return 'PN pendente no BO';
+    }
+
+    if (Data_PN_entregue_ao_PDAC) {
+      return 'PN em análise UIP PDAC';
+    } else {
+      return 'N/D';
     }
   }
 
@@ -257,7 +279,7 @@ export class InteressesComponent implements OnInit {
     this.inqueritoSelecionado = item;
   }
 
-  
+
 
   enviarFormulario(data_: any) {
 
@@ -412,11 +434,27 @@ export class InteressesComponent implements OnInit {
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
     formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
     formData.append('created_at', this.angForm.get('created_at')?.value);
-    formData.append('status_pn', this.getStatus_pn());
 
+    let status_pn_salvo = 'N/D';
+
+    if (this.angForm.get('proponente_desistiu')?.value === true) {
+      status_pn_salvo = 'Desistência do proponente';
+    } else if (this.angForm.get('pn_pendente')?.value === true) {
+      status_pn_salvo = 'PN pendente no BO';
+    } else if (this.inqueritoSelecionado?.status === 'Aprovado' && this.angForm.get('inicio_elaboracao_pn')?.value === '') {
+      status_pn_salvo = 'Inquérito em stock';
+    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && this.angForm.get('fim_elaboracao_pn')?.value === '') {
+      status_pn_salvo = 'PN em elaboração';
+    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && this.angForm.get('fim_verificacao')?.value === '') {
+      status_pn_salvo = 'PN em verificação';
+    } else if (this.angForm.get('fim_verificacao')?.value !== '') {
+      status_pn_salvo = 'PN em análise UIP PDAC';
+    }
+
+    formData.append('status_pn', status_pn_salvo);
     formData.append('inquerito', this.inqueritoSelecionado?.id);
 
-    const statusPN = this.getStatus_pn();
+    //const statusPN = this.getStatus_pn();
 
     // Success callback
     const successCallback = (response: any) => {
@@ -467,11 +505,11 @@ export class InteressesComponent implements OnInit {
     };
 
     // condição que define o status_pn
-    if (statusPN === 'PN em analise UIP PDAC') {
-      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
+    if (status_pn_salvo === 'PN em análise UIP PDAC') {
+      this.dataService.Send_Backoffice_form(formData).subscribe(/*successCallback2, errorCallback*/);
       //this.router.navigate(['pn-elaborados']);
     } else {
-      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
+      this.dataService.Send_Backoffice_form(formData).subscribe(/*successCallback, errorCallback*/);
     }
 
   }
@@ -509,6 +547,7 @@ export class InteressesComponent implements OnInit {
         //title: 'Oops...',
         text: 'A "Data PN entregue ao PDAC" não pode ser posterior à data de hoje.',
       })
+      this.angForm.get('data_pn_entregue_ao_pdac')?.setValue('');
     }
 
     if (pnEntregueDate < fimVerificacaoDate) {
@@ -517,6 +556,7 @@ export class InteressesComponent implements OnInit {
         //title: 'Oops...',
         text: 'A "Data PN entregue ao PDAC" não pode ser anterior à "Data fim verificacção PN".',
       })
+      this.angForm.get('data_pn_entregue_ao_pdac')?.setValue('');
     }
   }
 
@@ -539,6 +579,7 @@ export class InteressesComponent implements OnInit {
         //title: 'Oops...',
         text: 'A "Data fim elaboracao PN" não pode ser anterior à "Data inicio elaboração PN".',
       })
+      this.angForm.get('fim_elaboracao_pn')?.setValue('')
     }
   }
 
@@ -554,7 +595,7 @@ export class InteressesComponent implements OnInit {
         //title: 'Oops...',
         text: 'A "Data Fim de elaboração PN" não pode ser posterior à data de hoje.',
       })
-
+      this.angForm.get('fim_elaboracao_pn')?.setValue('')
     }
 
     if (fimElaboracaoDate > fimVerificacaoDate) {
@@ -563,22 +604,20 @@ export class InteressesComponent implements OnInit {
         //title: 'Oops...',
         text: 'A "Data fim verificação" não pode ser anterior à "Data fim elaboração PN".',
       })
+      this.angForm.get('fim_elaboracao_pn')?.setValue('')
     }
   }
 
   toggleProponenteDesistiu() {
     const proponenteDesistiu = this.angForm.get('proponente_desistiu')?.value;
+    const pnPendente = this.angForm.get('pn_pendente')?.value;
     this.angForm.get('proponente_desistiu')?.setValue(proponenteDesistiu);
 
     if (proponenteDesistiu) {
       //alert('O proponente desistiu!');
+      this.angForm.get('justificacao_pn_pendente')?.disable();
     }
-  }
 
-
-
-  toggleJustificacaoPnPendente() {
-    const pnPendente = this.angForm.get('pn_pendente')?.value;
     if (pnPendente) {
       this.angForm.get('justificacao_pn_pendente')?.enable();
     } else {
@@ -586,6 +625,61 @@ export class InteressesComponent implements OnInit {
     }
   }
 
+  showDuplicatedInput?: boolean;
+  showDuplicatedInput_1?: boolean;
+
+  showInput_2(checkboxValue: any) {
+    // this.limpar_form();
+    console.log(checkboxValue)
+    if (checkboxValue === true) {
+      checkboxValue = 'pn_pendente'
+    }
+    if (checkboxValue === 'pn_pendente') {
+      if (this.showDuplicatedInput) {
+        return; // Retorna se o checkbox já estiver marcado
+      }
+
+      this.showDuplicatedInput = true;
+      console.log(this.angForm.get('pn_pendente')?.value);
+      this.showDuplicatedInput_1 = false;
+      this.angForm.get('proponente_desistiu')?.patchValue(false);
+      console.log(this.angForm.get('proponente_desistiu')?.value);
+    } else if (checkboxValue === 'proponente_desistiu') {
+      if (this.showDuplicatedInput_1) {
+        return; // Retorna se o checkbox já estiver marcado
+      }
+
+      this.showDuplicatedInput_1 = true;
+      console.log(this.angForm.get('proponente_desistiu')?.value);
+      this.showDuplicatedInput = false;
+      this.angForm.get('pn_pendente')?.patchValue(false);
+      console.log(this.angForm.get('pn_pendente')?.value);
+    }
+  }
+
+
+
+  showInput__2(checkboxValue: string) {
+    const pnPendente = this.angForm.get('pn_pendente');
+    const proponenteDesistiu = this.angForm.get('proponente_desistiu');
+
+    const mgCheckboxControl = this.angForm.get('mgCheckbox');
+    const mgBancoCheckboxControl = this.angForm.get('mgBancoCheckbox');
+
+    if (pnPendente && proponenteDesistiu) {
+      if (checkboxValue === 'pnPendente') {
+        pnPendente.setValue(true);
+        proponenteDesistiu.setValue(false);
+
+        mgBancoCheckboxControl?.setValue(false);
+      } else if (checkboxValue === 'proponenteDesistiu') {
+        pnPendente.setValue(false);
+        proponenteDesistiu.setValue(true);
+
+        mgCheckboxControl?.setValue(false);
+      }
+    }
+  }
 
 
   inqueritos: any[] = [];
@@ -597,7 +691,7 @@ export class InteressesComponent implements OnInit {
       this.inqueritos.reverse();
     });
   }
-  
+
 
   downloadFile(url: string): void {
     const link = document.createElement('a');
