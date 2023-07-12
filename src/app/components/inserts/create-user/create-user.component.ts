@@ -38,12 +38,20 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     //  console.log(this.angForm.value);
     this.getDepartaments();
+    this.getAllUsers();
   }
 
   getDepartaments() {
     this.dataService.get_Departaments().subscribe(data => {
       this.departamento = data;
       // console.log(data)
+    })
+  }
+
+  user_: any;
+  getAllUsers() {
+    this.dataService.getUser().subscribe(data => {
+      this.user_ = data;
     })
   }
 
@@ -59,8 +67,9 @@ export class CreateUserComponent implements OnInit {
       error => {
         this.alert_error();
       }
-      
+
     );
+    this.getAllUsers();
     this.modalRef.close();
   }
 

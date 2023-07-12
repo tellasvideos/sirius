@@ -39,6 +39,7 @@ export class UsuarioComponent implements OnInit {
       this.usuario = data;
       //console.log('all  users: ', data)
     })
+    this.getUser();
   }
 
   // delete uma dep de valor

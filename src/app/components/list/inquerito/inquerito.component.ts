@@ -94,7 +94,6 @@ export class InqueritoComponent implements OnInit {
     'Tuberculos',
     'Café',
     'Grãos',
-    'Avicultura'
   ]
 
   tipos_de_transformador = [
@@ -703,7 +702,7 @@ export class InqueritoComponent implements OnInit {
       },
       error => { this.alert_error(); },
     );
-   // this.get_inquireForms();
+    // this.get_inquireForms();
   }
 
 
@@ -871,7 +870,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-   // this.get_inquireForms();
+    // this.get_inquireForms();
 
   }
 
@@ -1026,7 +1025,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-   // this.get_inquireForms();
+    // this.get_inquireForms();
 
 
   }
@@ -1192,7 +1191,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-  //  this.get_inquireForms();
+    //  this.get_inquireForms();
 
 
   }
@@ -1384,7 +1383,7 @@ export class InqueritoComponent implements OnInit {
             const modal = document.getElementById('exampleModalToggle');
             if (modal) {
               modal.style.display = 'none';
-              this.route.navigate(['interesses'])
+              //this.route.navigate(['interesses'])
               // Espera 3 segundos antes de recarregar a página
               timer(2000).pipe(delay(2000)).subscribe(() => {
                 location.reload();
@@ -1398,7 +1397,7 @@ export class InqueritoComponent implements OnInit {
 
     });
 
-  //  this.get_inquireForms();
+    //  this.get_inquireForms();
 
   }
 

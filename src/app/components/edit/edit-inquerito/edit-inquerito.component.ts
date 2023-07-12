@@ -95,8 +95,7 @@ export class EditInqueritoComponent implements OnInit {
   tipos_de_cadeia_de_valor = [
     'Tuberculos',
     'Café',
-    'Grãos',
-    'Avicultura'
+    'Grãos'
   ]
 
   tipos_de_transformador = [

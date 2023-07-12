@@ -61,10 +61,10 @@ export class PgasComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
 
-    // leva os dados do pnelaborados ao form pgas
+   /* // leva os dados do pnelaborados ao form pgas
     this.route.queryParams.subscribe(params => {
       this.pnElaborados = params;
-    });
+    });*/
 
     // leva os dados do inquerito ao form pgas
     this.route.queryParams.subscribe(params => {
@@ -73,10 +73,10 @@ export class PgasComponent implements OnInit {
 
     //inqueritoSelecionado
 
-    // leva os dados do backoffice para o  form pgas
+    /*// leva os dados do backoffice para o  form pgas
     this.route.queryParams.subscribe(params => {
       this.mappedFormBackoffice = params;
-    });
+    });*/
 
     this.getInqueritos()
     this.get_farm_names()
@@ -84,6 +84,7 @@ export class PgasComponent implements OnInit {
     this.get_pnElaborados()
     this.get_form_backoffice____()
     this.get_pgas();
+    this.getMunicipio();
   }
 
   sideBarToggler() {
@@ -94,7 +95,7 @@ export class PgasComponent implements OnInit {
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('inq ',item)
+    console.log('inq ', item)
   }
 
   pnElaborados: any;
@@ -233,10 +234,19 @@ export class PgasComponent implements OnInit {
     })
   }
 
-  getFormPGAsData(inqueritoId: string): any {
+  getFormPGAsData_(inqueritoId: string): any {
     console.log(inqueritoId)
     return this.pgas.find((item: any) => item.inquerito === inqueritoId);
   }
+
+  getFormPGAsData(inqueritoId: any): string {
+    const pga = this.pgas.find((item: any) => item.inquerito === inqueritoId);
+    console.log('pgas', this.pgas)
+    console.log('pga const', pga)
+    console.log('id inq', inqueritoId)
+    return pga ? pga.status_pgas : 'N/D';
+  }
+  
 
   enviarFormulario() {
 
@@ -249,7 +259,7 @@ export class PgasComponent implements OnInit {
     formData.append('justificacao_pgas_pendente', this.angForm.value.justificacao_pgas_pendente);
     formData.append('latitude', this.angForm.value.latitude);
     formData.append('longitude', this.angForm.value.longitude);
-    formData.append('inquerito', this.formBackoffice?.inquerito);
+    formData.append('inquerito', this.inqueritoSelecionado);
     formData.append('status_pgas', this.getEstadosPGAs());
 
     // Success callback 1
@@ -303,6 +313,19 @@ export class PgasComponent implements OnInit {
       this.dataService.Save_PGAS(formData).subscribe(successCallback, errorCallback);
     }
 
+  }
+
+  municipio: any;
+  retorno: any;
+  devolver_nome_municipio(id: any) {
+    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
+    return this.retorno
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+    })
   }
 
   alert_success() {

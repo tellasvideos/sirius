@@ -235,7 +235,7 @@ export class InteressesComponent implements OnInit {
     if (Estado_MI) {
       return 'Inquérito em stock';
     } else if (Data_inicio_elaboração_PN) {
-      return 'PN em elaborção';
+      return 'PN em elaboração';
     } else if (Data_fim_elaboração_PN) {
       return 'PN em verificação'
     } /*else if (Data_fim_verificacao) {
@@ -469,7 +469,7 @@ export class InteressesComponent implements OnInit {
     // condição que define o status_pn
     if (statusPN === 'PN em analise UIP PDAC') {
       this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
-      this.router.navigate(['pn-elaborados']);
+      //this.router.navigate(['pn-elaborados']);
     } else {
       this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
     }
