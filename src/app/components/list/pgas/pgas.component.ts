@@ -61,14 +61,15 @@ export class PgasComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
 
-   /* // leva os dados do pnelaborados ao form pgas
-    this.route.queryParams.subscribe(params => {
-      this.pnElaborados = params;
-    });*/
+    /* // leva os dados do pnelaborados ao form pgas
+     this.route.queryParams.subscribe(params => {
+       this.pnElaborados = params;
+     });*/
 
     // leva os dados do inquerito ao form pgas
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
+      console.log(params)
     });
 
     //inqueritoSelecionado
@@ -92,10 +93,21 @@ export class PgasComponent implements OnInit {
   }
 
   // levar dados do inquerito selecionado para o formulario pgas
+  nome_simplificado_finded: any;
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('inq ', item)
+    console.log('id inq selected', item)
+    // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
+    this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === this.inqueritoSelecionado);
+
+    if (this.nome_simplificado_finded) {
+      console.log('Inquérito encontrado:', this.nome_simplificado_finded);
+    } else {
+      console.log('Inquérito não encontrado na lista.');
+    }
+    console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
+    return this.nome_simplificado_finded ? this.nome_simplificado_finded.nome_simplificado : 'N/D';
   }
 
   pnElaborados: any;
@@ -246,7 +258,7 @@ export class PgasComponent implements OnInit {
     console.log('id inq', inqueritoId)
     return pga ? pga.status_pgas : 'N/D';
   }
-  
+
 
   enviarFormulario() {
 
@@ -260,9 +272,10 @@ export class PgasComponent implements OnInit {
     formData.append('latitude', this.angForm.value.latitude);
     formData.append('longitude', this.angForm.value.longitude);
     formData.append('inquerito', this.inqueritoSelecionado);
+    formData.append('nome_simplificado', this.nome_simplificado_finded?.nome_simplificado);
     formData.append('status_pgas', this.getEstadosPGAs());
 
-    // Success callback 1
+    // Success callback 1 nome_simplificado_finded?.nome_simplificado
     const successCallback = (response: any) => {
       console.log('Formulário enviado com sucesso!', response);
       this.alert_success();

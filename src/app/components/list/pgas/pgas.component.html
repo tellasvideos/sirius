@@ -126,6 +126,20 @@
 
 
                 <div class="modal-body">
+
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Nome simplificado:</label>
+                        </div>
+
+                        <div>
+                            <input style="width:350px;" class="form-control form-control-sm mb-2"
+                                formControlName="nome_simplificado" type="text" [attr.disabled]="true" readonly
+                                value="{{nome_simplificado_finded?.nome_simplificado}}" required name="nome_simplificado"
+                                aria-label=".form-control-sm example">
+                        </div>
+                    </div>
+
                     <!-- Pergunta 27 -->
                     <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
                         <div>
@@ -257,7 +271,7 @@
 
                 <!--{{formBackoffice[0] | json }}-->
 
-                <p>ID: {{ inqueritoSelecionado | json }}</p>
+                <!--p>ID: {{ inqueritoSelecionado | json }}</!p-->
 
             </form>
         </div>
