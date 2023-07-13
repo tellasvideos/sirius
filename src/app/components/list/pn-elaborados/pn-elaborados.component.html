@@ -78,7 +78,7 @@
                                 <td>{{item.provincia}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio)}}</td>
                                 <td>{{getFormBackofficeData(item.id)?.fim_verificacao | date: 'yyyy-MM-dd' }}</td>
-                                <td>{{getFormBackofficeData(item.id)?.status_pn}}</td>
+                                <td>{{getFormPN_STATUS_Data(item.id)?.status_pn}}</td>
 
                                 <td class=" not-it"><button type="button" routerLinkActive="active"
                                         [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
@@ -92,7 +92,7 @@
                                     this.user_logged.department === 'M&A' )&&
                                     this.user_logged.is_admin === true" class="not-it">
                                     <button (click)="mostrarFinanciamento(item.id)" type="button"
-                                        (click)="selecionarInquerito(item)" class="btn btn-link btn-sm btn-rounded"
+                                        (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
                                     </button>
@@ -280,20 +280,33 @@
                             <tbody>
                                 <tr>
                                     <ng-container>
-                                        <td>{{get_pn[0].data_analise_cti ?
-                                            get_pn[0].data_analise_cti : 'N/D'}}</td>
-                                        <td>{{get_pn[0].recusado_pelo_cti ? 'Sim' : 'Não' }}</td>
-                                        <td>{{get_pn[0].justificacao_recusado_pelo_cti ?
-                                            get_pn[0].justificacao_recusado_pelo_cti : 'N/D'}}</td>
-                                        <td>{{get_pn[0].data_aprovacao_financiamento_mg ?
-                                            get_pn[0].data_aprovacao_financiamento_mg : 'N/D'}}</td>
-                                        <td>{{get_pn[0].data_aprovacao_financiamento_banco ?
-                                            get_pn[0].data_aprovacao_financiamento_banco : 'N/D'}}</td>
-                                        <td>{{get_pn[0].pn_pendente_no_banco ? 'Sim' : 'Não'}}</td>
-                                        <td>{{get_pn[0].justificacao_pn_pendente_no_banco ?
-                                            get_pn[0].justificacao_pn_pendente_no_banco : 'N/D' }}</td>
-                                        <td>{{get_pn[0].data_primeiro_pedido_reembolso ?
-                                            get_pn[0].data_primeiro_pedido_reembolso : 'N/D'}}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.data_analise_cti ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.data_analise_cti : 'N/D'}}
+                                        </td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.recusado_pelo_cti ? 'Sim' :
+                                            'Não' }}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.justificacao_recusado_pelo_cti
+                                            ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.justificacao_recusado_pelo_cti
+                                            : 'N/D'}}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.data_aprovacao_financiamento_mg
+                                            ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.data_aprovacao_financiamento_mg
+                                            : 'N/D'}}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.data_aprovacao_financiamento_banco
+                                            ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.data_aprovacao_financiamento_banco
+                                            : 'N/D'}}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.pn_pendente_no_banco ?
+                                            'Sim' : 'Não'}}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.justificacao_pn_pendente_no_banco
+                                            ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.justificacao_pn_pendente_no_banco
+                                            : 'N/D' }}</td>
+                                        <td>{{getFormPN_Data_entradas(inqueritoSelecionado)?.data_primeiro_pedido_reembolso
+                                            ?
+                                            getFormPN_Data_entradas(inqueritoSelecionado)?.data_primeiro_pedido_reembolso
+                                            : 'N/D'}}</td>
                                     </ng-container>
                                 </tr>
                             </tbody>

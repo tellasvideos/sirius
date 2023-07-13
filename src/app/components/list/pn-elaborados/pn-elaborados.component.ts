@@ -79,7 +79,7 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
-  inqueritoSelecionado: any;
+  // inqueritoSelecionado: any;
   remove?: boolean;
 
   ngOnInit(): void {
@@ -97,10 +97,10 @@ export class PnElaboradosComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
 
-    // leva os dados do backoffice para o pnelaborados form
+    /*/ leva os dados do backoffice para o pnelaborados form
     this.route.queryParams.subscribe(params => {
       this.mappedFormBackoffice = params;
-    });
+    });*/
 
     this.getInqueritos();
     this.get_form_backoffice____();
@@ -108,10 +108,10 @@ export class PnElaboradosComponent implements OnInit {
 
   }
 
-  selecionarInquerito(item: any) {
-    this.inqueritoSelecionado = item;
-    console.log(' to get inquerito selected', this.inqueritoSelecionado?.id)
-  }
+  /* selecionarInquerito(item: any) {
+     this.inqueritoSelecionado = item;
+     console.log(' to get inquerito selected', this.inqueritoSelecionado?.id)
+   }*/
 
 
   alert_success() {
@@ -158,12 +158,12 @@ export class PnElaboradosComponent implements OnInit {
 
     if (PN_pendente_no_CTI) {
       return 'PN pendente no CTI';
+    } else if (pnPendenteBanco) {
+      return 'PN pendente no banco';
     } else if (PN_aprovado_pelo_CTI_em_análise_MG) {
       return 'PN aprovado pelo CTI, em análise MG';
     } else if (PN_aprovado_pelo_CTI_MG_aprovado_em_analise_BC) {
       return 'PN aprovado pelo CTI, MG aprovado, em análise BC';
-    } else if (pnPendenteBanco) {
-      return 'PN pendente no banco';
     } else if ((dataAprovacaoFinancMg && this.selectedFinanciamentoBancario?.financiamento_bancario === 0) || (dataAprovacaoFinancMg && dataAprovacaoFinancBanco)) {
       return 'Financiamento aprovado';
     } else if (data1PedidoDesembolso && dataAprovacaoPgasBm) {
@@ -184,7 +184,7 @@ export class PnElaboradosComponent implements OnInit {
     formData.append('pn_pendente_no_banco', this.angForm.value.pn_pendente_no_banco || false);
     formData.append('justificacao_pn_pendente_no_banco', this.angForm.value.justificacao_pn_pendente_no_banco);
     formData.append('data_primeiro_pedido_reembolso', this.angForm.value.data_primeiro_pedido_reembolso);
-    formData.append('inquerito', this.inqueritoSelecionado?.id);
+    formData.append('inquerito', this.inqueritoSelecionado);
     formData.append('data_aprovacao_pgas_bm', this.angForm.value.data_aprovacao_pgas_bm)
     formData.append('status_pn', this.getStatus_pn());
 
@@ -250,13 +250,23 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
-   // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formpnelaborados
-   pn_entrados:any;
-   getFormPN_Data_entradas(inqueritoId: any) {
-     this.pn_entrados = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
-     console.log('pgas', this.pn_entrados)
-     return this.pn_entrados ? this.pn_entrados : 'N/D';
-   }
+  // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formpnelaborados
+  pn_entrados: any;
+  getFormPN_Data_entradas(inqueritoId: any) {
+    this.pn_entrados = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
+    console.log('pgas', this.pn_entrados)
+    return this.pn_entrados ? this.pn_entrados : 'N/D';
+  }
+
+  // levar dados do inquerito selecionado para o formulario pnelaborado
+  nome_simplificado_finded: any;
+  inqueritoSelecionado: any | null = null;
+  selecionarInquerito(item: any) {
+    this.inqueritoSelecionado = item;
+    console.log('id inq selected', item)
+    // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
+    return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item);
+  }
 
   delete_pn(id: any) {
     this.dataService.deletePnelaborados(id).subscribe()
@@ -396,7 +406,12 @@ export class PnElaboradosComponent implements OnInit {
   getFormBackofficeData(inqueritoId: string): any {
     console.log(inqueritoId)
     return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    
+
+  }
+
+  getFormPN_STATUS_Data(inqueritoId: string): any {
+    console.log(inqueritoId)
+    return this.get_pn.find((item: any) => item.inquerito === inqueritoId);
   }
 
   /*limparCampos() {

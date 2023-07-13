@@ -240,8 +240,7 @@ export class PgasComponent implements OnInit {
   pgas: any;
   get_pgas() {
     this.dataService.Get_Pgas().subscribe(data => {
-      this.pgas = data;
-      this.pgas.reverse()
+      this.pgas = data.reverse();
       console.log('Pgas form', this.pgas)
     })
   }
