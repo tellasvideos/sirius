@@ -208,7 +208,7 @@ export class InteressesComponent implements OnInit {
   backoffice_entrados: any;
   getFormBackofficeData_entradas(inqueritoId: any) {
     this.backoffice_entrados = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    console.log('pgas', this.backoffice_entrados)
+    console.log('back/?=inq', this.backoffice_entrados)
     return this.backoffice_entrados ? this.backoffice_entrados : 'N/D';
   }
 
@@ -231,7 +231,7 @@ export class InteressesComponent implements OnInit {
   formBackoffice: any;
   get_form_backoffice() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
-      this.formBackoffice = data;
+      this.formBackoffice = data.reverse();
       console.log('backofficeForm', this.formBackoffice)
     })
   }
@@ -302,9 +302,9 @@ export class InteressesComponent implements OnInit {
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('id inq selected', item?.id)
+    console.log('id inq selected', item)
     // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
-    return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item?.id);
+    return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item);
 
     /* if (this.nome_simplificado_finded) {
        console.log('Inquérito encontrado:', this.nome_simplificado_finded);
@@ -487,7 +487,7 @@ export class InteressesComponent implements OnInit {
     }
 
     formData.append('status_pn', status_pn_salvo);
-    formData.append('inquerito', this.inqueritoSelecionado?.id);
+    formData.append('inquerito', this.inqueritoSelecionado);
 
     //const statusPN = this.getStatus_pn();
 
