@@ -63,14 +63,14 @@
                             <th scope="col" class="text-black not-it">Modificação</th>
                             <th scope="col" class="text-black not-it">Colar info</th>
                         </tr>
-                    </thead>
+                    </thead> <!-- *ngIf="
+                        getFormPGAsData(item.id) === 'PGAS em elaboração' 
+                    || getFormPGAsData(item.id) === 'PGAS a ser elaborado' 
+                    || getFormPGAsData(item.id) === 'PGAS em revisão ou analise pelo PDAC/BM' 
+                    || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'"-->
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container *ngIf="
-                                                    getFormPGAsData(item.id) === 'PGAS em elaboração' 
-                                                || getFormPGAsData(item.id) === 'PGAS a ser elaborado' 
-                                                || getFormPGAsData(item.id) === 'PGAS em revisão ou analise pelo PDAC/BM' 
-                                                || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'">
+                            <ng-container>
 
                                 <!--td>{{item.id}}</!--td-->
                                 <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}} </td>

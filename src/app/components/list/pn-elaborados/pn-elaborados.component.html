@@ -124,20 +124,20 @@
 
                 <div class="modal-body">
 
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
                         </div>
                         <div>
                             <input type="date" formControlName="data_analise_cti" name="data_analise_cti"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
                     <!-- Pergunta 20 -->
                     <div *ngIf="angForm.get('data_analise_cti')?.value"
-                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
                             <label>Recusado pelo CTI</label>
                         </div>
@@ -153,7 +153,7 @@
 
                     <!-- Pergunta 20.1 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
-                        *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 70%;">
+                        *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 60%;">
                         <div>
                             <label for="justificacao_recusado_pelo_cti">Justificação:</label>
                         </div>
@@ -167,7 +167,7 @@
                     </div>
 
                     <!-- Pergunta 21 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;"
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="!angForm.get('recusado_pelo_cti')?.value || false">
                         <div>
                             <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
@@ -176,11 +176,11 @@
                             <input type="date" formControlName="data_aprovacao_financiamento_mg"
                                 (change)="checkDates2()" name="data_aprovacao_financiamento_mg"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="data_aprovacao_pgas_bm">Data de aprovação do PGAS pelo Banco
                                 Mundial:</label>
@@ -188,7 +188,7 @@
                         <div>
                             <input type="date" formControlName="data_aprovacao_pgas_bm" name="data_aprovacao_pgas_bm"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -199,7 +199,7 @@
 
                     <!-- Pergunta 22 -->
                     <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario > 0"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
                         </div>
@@ -207,13 +207,13 @@
                             <input type="date" formControlName="data_aprovacao_financiamento_banco"
                                 (change)="checkDates()" name="data_aprovacao_financiamento_banco"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                                style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
                         </div>
                     </div>
 
                     <!-- Pergunta 23 -->
                     <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && !angForm.get('data_aprovacao_financiamento_banco')?.value"
-                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
                             <label>Pendente no Banco?</label>
                         </div>
@@ -229,7 +229,7 @@
 
                     <!-- Pergunta 24 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
-                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value === true" style="width: 70%;">
+                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value === true" style="width: 60%;">
                         <div>
                             <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
                         </div>
@@ -242,7 +242,7 @@
                     </div>
 
                     <!-- Pergunta 25 *ngIf="angForm.get('data_aprovacao_financiamento_banco')?.value" -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="data_primeiro_pedido_reembolso">Data Implementação
                             </label>
@@ -250,12 +250,12 @@
                         <div>
                             <input type="date" formControlName="data_primeiro_pedido_reembolso" (change)="checkDates3()"
                                 name="data_primeiro_pedido_reembolso" max="{{maxDate | date:'yyyy-MM-dd'}}"
-                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-left: 200px;"
                                 class="form-control form-control-sm">
                         </div>
                     </div>
                     <br>
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <label>.</label>
                         <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                     </div>
