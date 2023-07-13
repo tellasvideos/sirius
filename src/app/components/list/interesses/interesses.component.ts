@@ -115,31 +115,31 @@ export class InteressesComponent implements OnInit {
 
 
 
-    // leva os dados do backoffice 
+    /*/ leva os dados do backoffice 
     this.route.queryParams.subscribe(params => {
       this.formBackoffice = params;
 
       /*this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.inqueritoSelecionado?.id).subscribe(data => {
         this.alldata = data;
         console.log(data)
-      })*/
-    });
-
-   /* // Fazer a chamada à API e carregar os dados no formulário
-    this.dataService.getBackofficeByID(this.formBackoffice_rev[0].id).subscribe((data: any) => {
-      console.log(data); // Verifique se os dados foram retornados corretamente
-
-      if (data && data.consultor_pn) {
-        // Carregar os dados no formulário usando o patchValue
-        this.angForm.patchValue({
-          consultor_pn: data.consultor_pn,
-          status_pn: data.status_pn
-        });
-      } else {
-        // Tratar a ausência do campo consultor_pn ou dos dados
-        console.log("Dados de consultor_pn não encontrados ou inválidos.");
-      }
+      })
     });*/
+
+    /* // Fazer a chamada à API e carregar os dados no formulário
+     this.dataService.getBackofficeByID(this.formBackoffice_rev[0].id).subscribe((data: any) => {
+       console.log(data); // Verifique se os dados foram retornados corretamente
+ 
+       if (data && data.consultor_pn) {
+         // Carregar os dados no formulário usando o patchValue
+         this.angForm.patchValue({
+           consultor_pn: data.consultor_pn,
+           status_pn: data.status_pn
+         });
+       } else {
+         // Tratar a ausência do campo consultor_pn ou dos dados
+         console.log("Dados de consultor_pn não encontrados ou inválidos.");
+       }
+     });*/
 
   }
 
@@ -202,6 +202,14 @@ export class InteressesComponent implements OnInit {
     const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
     //console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
+  }
+
+  // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formbackoffice
+  backoffice_entrados: any;
+  getFormBackofficeData_entradas(inqueritoId: any) {
+    this.backoffice_entrados = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    console.log('pgas', this.backoffice_entrados)
+    return this.backoffice_entrados ? this.backoffice_entrados : 'N/D';
   }
 
 
@@ -290,11 +298,22 @@ export class InteressesComponent implements OnInit {
   }
 
   // levar dados do inquerito selecionado para o formulario backoffice
+  nome_simplificado_finded: any;
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-  }
+    console.log('id inq selected', item?.id)
+    // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
+    return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item?.id);
 
+    /* if (this.nome_simplificado_finded) {
+       console.log('Inquérito encontrado:', this.nome_simplificado_finded);
+     } else {
+       console.log('Inquérito não encontrado na lista.');
+     }
+     console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
+     return this.nome_simplificado_finded ? this.nome_simplificado_finded.nome_simplificado : 'N/D';*/
+  }
 
 
   enviarFormulario(data_: any) {

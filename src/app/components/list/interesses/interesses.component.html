@@ -226,7 +226,7 @@
                             </|td-->
                                 <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'" class="not-it">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="selecionarInquerito(item)" data-bs-toggle="modal"
+                                        (click)="selecionarInquerito(item.id)" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
                                     </button>
@@ -485,20 +485,33 @@
                                 <tbody>
                                     <tr>
                                         <ng-container>
-                                            <td>{{formBackoffice_rev[0].consultor_pn ?
-                                                formBackoffice_rev[0].consultor_pn : 'N/D'}}</td>
-                                            <td>{{formBackoffice_rev[0].inicio_elaboracao_pn ?
-                                                formBackoffice_rev[0].inicio_elaboracao_pn : 'N/D' }}</td>
-                                            <td>{{formBackoffice_rev[0].fim_elaboracao_pn ?
-                                                formBackoffice_rev[0].fim_elaboracao_pn : 'N/D'}}</td>
-                                            <td>{{formBackoffice_rev[0].fim_verificacao ?
-                                                formBackoffice_rev[0].fim_verificacao : 'N/D'}}</td>
-                                            <td>{{formBackoffice_rev[0].financiamento_bancario ?
-                                                formBackoffice_rev[0].financiamento_bancario : 'N/D'}}</td>
-                                            <td>{{formBackoffice_rev[0].pn_pendente ? 'Sim' : 'Não'}}</td>
-                                            <td>{{formBackoffice_rev[0].justificacao_pn_pendente ?
-                                                formBackoffice_rev[0].justificacao_pn_pendente : 'N/D' }}</td>
-                                            <td>{{formBackoffice_rev[0].proponente_desistiu ? 'Sim' : 'Não'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.consultor_pn ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.consultor_pn :
+                                                'N/D'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.inicio_elaboracao_pn
+                                                ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.inicio_elaboracao_pn
+                                                : 'N/D' }}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.fim_elaboracao_pn
+                                                ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.fim_elaboracao_pn
+                                                : 'N/D'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.fim_verificacao
+                                                ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.fim_verificacao :
+                                                'N/D'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.financiamento_bancario
+                                                ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.financiamento_bancario
+                                                : 'N/D'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.pn_pendente ?
+                                                'Sim' : 'Não'}}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.justificacao_pn_pendente
+                                                ?
+                                                getFormBackofficeData_entradas(inqueritoSelecionado)?.justificacao_pn_pendente
+                                                : 'N/D' }}</td>
+                                            <td>{{getFormBackofficeData_entradas(inqueritoSelecionado)?.proponente_desistiu
+                                                ? 'Sim' : 'Não'}}</td>
                                         </ng-container>
                                     </tr>
                                 </tbody>

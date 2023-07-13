@@ -96,7 +96,7 @@
                                     <button type="button" (click)="selecionarInquerito(item.id)"
                                         class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalToggle">
-                                        <i class="fas fa-file-lines"></i>
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
                             </ng-container>
@@ -135,8 +135,8 @@
                         <div>
                             <input style="width:350px;" class="form-control form-control-sm mb-2"
                                 formControlName="nome_simplificado" type="text" [attr.disabled]="true" readonly
-                                value="{{nome_simplificado_finded?.nome_simplificado}}" required name="nome_simplificado"
-                                aria-label=".form-control-sm example">
+                                value="{{nome_simplificado_finded?.nome_simplificado}}" required
+                                name="nome_simplificado" aria-label=".form-control-sm example">
                         </div>
                     </div>
 
@@ -264,11 +264,63 @@
 
                 </div>
 
-                <div class="modal-footer justify-content-between">
+                <br>
+                <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
+                    <label>.</label>
                     <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                 </div>
 
+                <div class="modal-footer justify-content-between">
 
+                    <div class="table-responsive" id="print-section-list-interest">
+                        <table class="table table-sm table-hover text-center">
+                            <thead class="linhas2">
+                                <tr>
+                                    <th scope="col" class="text-black">Nome Simplificado</th>
+                                    <th scope="col" class="text-black">Consultor PGAS</th>
+                                    <th scope="col" class="text-black">Início Elaboração PGAS</th>
+                                    <th scope="col" class="text-black">Fim Elaboração PGAS</th>
+                                    <th scope="col" class="text-black not-it">PGAS esta pendente ?</th>
+                                    <th scope="col" class="text-black not-it">Coordenadas</th>
+                                    <th scope="col" class="text-black not-it">Aprovação PGAS pelo BM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <ng-container>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.nome_simplificado ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.nome_simplificado : 'N/D'}}
+                                        </td>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.consultor_pgas ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.consultor_pgas : 'N/D'}}
+                                        </td>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.data_inicio_elaboracao_pgas
+                                            ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.data_inicio_elaboracao_pgas
+                                            : 'N/D'}}
+                                        </td>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.data_fim_elaboracao_pgas ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.data_fim_elaboracao_pgas :
+                                            'N/D'}}
+                                        </td>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.elaboracao_ogas_pendente ?
+                                            'Sim' : 'Não'}}
+                                        </td>
+                                        <td class="d-block">{{'X: '}}{{getFormPGAsData_entradas(inqueritoSelecionado)?.latitude ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.latitude : 'N/D'}} {{''}}
+                                            {{'Y: '}} {{getFormPGAsData_entradas(inqueritoSelecionado)?.longitude ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.longitude : 'N/D'}}</td>
+                                        <td>{{getFormPGAsData_entradas(inqueritoSelecionado)?.data_aprovacao_pgas_banco_mundial
+                                            ?
+                                            getFormPGAsData_entradas(inqueritoSelecionado)?.data_aprovacao_pgas_banco_mundial
+                                            : 'N/D'}}
+                                        </td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <!--{{formBackoffice[0] | json }}-->
 
                 <!--p>ID: {{ inqueritoSelecionado | json }}</!p-->

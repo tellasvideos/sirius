@@ -259,6 +259,13 @@ export class PgasComponent implements OnInit {
     return pga ? pga.status_pgas : 'N/D';
   }
 
+  pgas_entrados:any;
+  getFormPGAsData_entradas(inqueritoId: any) {
+    this.pgas_entrados = this.pgas.find((item: any) => item.inquerito === inqueritoId);
+    console.log('pgas', this.pgas_entrados)
+    return this.pgas_entrados ? this.pgas_entrados : 'N/D';
+  }
+
 
   enviarFormulario() {
 

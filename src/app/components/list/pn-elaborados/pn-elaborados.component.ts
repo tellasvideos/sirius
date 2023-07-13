@@ -250,6 +250,14 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
+   // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formpnelaborados
+   pn_entrados:any;
+   getFormPN_Data_entradas(inqueritoId: any) {
+     this.pn_entrados = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
+     console.log('pgas', this.pn_entrados)
+     return this.pn_entrados ? this.pn_entrados : 'N/D';
+   }
+
   delete_pn(id: any) {
     this.dataService.deletePnelaborados(id).subscribe()
     this.get_pn_elaborados()
