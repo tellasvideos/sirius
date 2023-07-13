@@ -245,7 +245,7 @@ export class PnElaboradosComponent implements OnInit {
   get_pn: any;
   get_pn_elaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
-      this.get_pn = data;
+      this.get_pn = data.reverse();
       console.log('pn elab', this.get_pn)
     })
   }
@@ -302,7 +302,7 @@ export class PnElaboradosComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
-        text: '"A Data do 1º pedido de desembolso" não pode ser anterior à "Data de aprovação do financiamento ao MG ou Banco".',
+        text: '"A Data de implementação" não pode ser anterior à "Data de aprovação do financiamento ao MG ou Banco".',
       })
     }
   }

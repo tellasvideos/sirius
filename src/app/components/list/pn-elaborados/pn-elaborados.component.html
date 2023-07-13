@@ -60,7 +60,7 @@
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Data fim entregue ao PDAC</th>
                             <th scope="col" class="text-black">Estado PN</th>
-                            <th scope="col" class="text-black not-it">ver</th>
+                            <th scope="col" class="text-black not-it">Mais info</th>
                             <th *ngIf="
                                 (this.user_logged.department === 'Back Off' || 
                                 this.user_logged.department === 'M&A') &&
@@ -94,7 +94,7 @@
                                     <button (click)="mostrarFinanciamento(item.id)" type="button"
                                         (click)="selecionarInquerito(item)" class="btn btn-link btn-sm btn-rounded"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
-                                        <i class="fas fa-file-lines"></i>
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
                             </ng-container>
@@ -124,7 +124,7 @@
 
                 <div class="modal-body">
 
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
                         <div>
                             <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
                         </div>
@@ -137,7 +137,7 @@
 
                     <!-- Pergunta 20 -->
                     <div *ngIf="angForm.get('data_analise_cti')?.value"
-                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
                         <div>
                             <label>Recusado pelo CTI</label>
                         </div>
@@ -153,7 +153,7 @@
 
                     <!-- Pergunta 20.1 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
-                        *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 80%;">
+                        *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 70%;">
                         <div>
                             <label for="justificacao_recusado_pelo_cti">Justificação:</label>
                         </div>
@@ -167,7 +167,7 @@
                     </div>
 
                     <!-- Pergunta 21 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;"
                         *ngIf="!angForm.get('recusado_pelo_cti')?.value || false">
                         <div>
                             <label for="data_aprovacao_financiamento_mg">Data aprovação financiamento MG:</label>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
 
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
                         <div>
                             <label for="data_aprovacao_pgas_bm">Data de aprovação do PGAS pelo Banco
                                 Mundial:</label>
@@ -195,11 +195,11 @@
                     <!--div>
                     <p>Valor do financiamento bancário selecionado: {{ selectedFinanciamentoBancario?.financiamento_bancario 
                         }}</p>
-                </!--div-->
+                    </!--div-->
 
                     <!-- Pergunta 22 -->
                     <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario > 0"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
                         <div>
                             <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
                         </div>
@@ -213,7 +213,7 @@
 
                     <!-- Pergunta 23 -->
                     <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && !angForm.get('data_aprovacao_financiamento_banco')?.value"
-                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                        class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
                         <div>
                             <label>Pendente no Banco?</label>
                         </div>
@@ -229,7 +229,7 @@
 
                     <!-- Pergunta 24 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
-                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value === true" style="width: 80%;">
+                        *ngIf="this.angForm.get('pn_pendente_no_banco')?.value === true" style="width: 70%;">
                         <div>
                             <label for="justificacao_pn_pendente_no_banco">Justificação:</label>
                         </div>
@@ -242,9 +242,9 @@
                     </div>
 
                     <!-- Pergunta 25 *ngIf="angForm.get('data_aprovacao_financiamento_banco')?.value" -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 70%;">
                         <div>
-                            <label for="data_primeiro_pedido_reembolso">Data 1° pedido de desembolso
+                            <label for="data_primeiro_pedido_reembolso">Data Implementação
                             </label>
                         </div>
                         <div>
@@ -254,10 +254,51 @@
                                 class="form-control form-control-sm">
                         </div>
                     </div>
-
+                    <br>
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 70%;">
+                        <label>.</label>
+                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+                    </div>
                 </div>
+
+
                 <div class="modal-footer justify-content-between">
-                    <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+                    <div class="table-responsive" id="print-section-list-interest">
+                        <table class="table table-sm table-hover text-center">
+                            <thead class="linhas2">
+                                <tr>
+                                    <th scope="col" class="text-black">Data de analise no CTI</th>
+                                    <th scope="col" class="text-black">Recusado pelo CTI</th>
+                                    <th scope="col" class="text-black">Justificação CTI</th>
+                                    <th scope="col" class="text-black">Aprovação financiamento MG</th>
+                                    <th scope="col" class="text-black">Aprovação financiamento Banco</th>
+                                    <th scope="col" class="text-black not-it">PN pendente no Banco?</th>
+                                    <th scope="col" class="text-black not-it">Justificação Banco</th>
+                                    <th scope="col" class="text-black not-it">Data implementação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <ng-container>
+                                        <td>{{get_pn[0].data_analise_cti ?
+                                            get_pn[0].data_analise_cti : 'N/D'}}</td>
+                                        <td>{{get_pn[0].recusado_pelo_cti ? 'Sim' : 'Não' }}</td>
+                                        <td>{{get_pn[0].justificacao_recusado_pelo_cti ?
+                                            get_pn[0].justificacao_recusado_pelo_cti : 'N/D'}}</td>
+                                        <td>{{get_pn[0].data_aprovacao_financiamento_mg ?
+                                            get_pn[0].data_aprovacao_financiamento_mg : 'N/D'}}</td>
+                                        <td>{{get_pn[0].data_aprovacao_financiamento_banco ?
+                                            get_pn[0].data_aprovacao_financiamento_banco : 'N/D'}}</td>
+                                        <td>{{get_pn[0].pn_pendente_no_banco ? 'Sim' : 'Não'}}</td>
+                                        <td>{{get_pn[0].justificacao_pn_pendente_no_banco ?
+                                            get_pn[0].justificacao_pn_pendente_no_banco : 'N/D' }}</td>
+                                        <td>{{get_pn[0].data_primeiro_pedido_reembolso ?
+                                            get_pn[0].data_primeiro_pedido_reembolso : 'N/D'}}</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </form>
