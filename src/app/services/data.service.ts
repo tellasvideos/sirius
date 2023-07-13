@@ -502,6 +502,11 @@ export class DataService {
     return this.http.get(`${this.get_Iquerito_byId_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
 
+  get_backoffice_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
+  getBackofficeByID(id: any){
+    return this.http.get(`${this.get_backoffice_byId_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
+  }
+
   // Method to Get all value Chain
   getValueChains() {
     /*var headers = new HttpHeaders();

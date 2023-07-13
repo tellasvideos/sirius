@@ -93,15 +93,6 @@ export class InteressesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.angForm.patchValue({
-      consultor_pn: this.formBackoffice[0].consultor_pn,
-      inicio_elaboracao_pn: this.formBackoffice[0].inicio_elaboracao_pn,
-      fim_elaboracao_pn: this.formBackoffice[0].fim_elaboracao_pn,
-      fim_verificacao: this.formBackoffice[0].fim_verificacao
-    }); 
-
-
     this.getProvincias()
     this.list_interest()
     this.getInqueritos()
@@ -109,11 +100,12 @@ export class InteressesComponent implements OnInit {
     this.getUserBackOFF()
     this.get_form_backoffice();
     this.getMunicipio();
+    this.get_form_backoffice_rev()
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
 
     // leva os dados do inquerito para o backoffice form
@@ -123,16 +115,31 @@ export class InteressesComponent implements OnInit {
 
 
 
-    /*/ leva os dados do backoffice para o inquerito selecionado
+    // leva os dados do backoffice 
     this.route.queryParams.subscribe(params => {
-      this.backofficeFormSelecionado = params;
+      this.formBackoffice = params;
 
-      this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.inqueritoSelecionado?.id).subscribe(data => {
+      /*this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.inqueritoSelecionado?.id).subscribe(data => {
         this.alldata = data;
         console.log(data)
-      })
-    });*/
+      })*/
+    });
 
+   /* // Fazer a chamada à API e carregar os dados no formulário
+    this.dataService.getBackofficeByID(this.formBackoffice_rev[0].id).subscribe((data: any) => {
+      console.log(data); // Verifique se os dados foram retornados corretamente
+
+      if (data && data.consultor_pn) {
+        // Carregar os dados no formulário usando o patchValue
+        this.angForm.patchValue({
+          consultor_pn: data.consultor_pn,
+          status_pn: data.status_pn
+        });
+      } else {
+        // Tratar a ausência do campo consultor_pn ou dos dados
+        console.log("Dados de consultor_pn não encontrados ou inválidos.");
+      }
+    });*/
 
   }
 
@@ -193,7 +200,7 @@ export class InteressesComponent implements OnInit {
   devolver_status_pn(id: any): string {
     const formBackofficeCopy = [...this.formBackoffice].reverse();
     const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
-    console.log('devolvendo ', inqueritoSelecionado);
+    //console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
   }
 
@@ -208,7 +215,7 @@ export class InteressesComponent implements OnInit {
         ));
       })
     ).subscribe(data => {
-      console.log('yessss', data)
+      //  console.log('yessss', data)
     });
   }
 
@@ -218,6 +225,15 @@ export class InteressesComponent implements OnInit {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
       this.formBackoffice = data;
       console.log('backofficeForm', this.formBackoffice)
+    })
+  }
+
+  // to get all data from form backoffice
+  formBackoffice_rev: any;
+  get_form_backoffice_rev() {
+    this.dataService.Get_Backoffice_Form().subscribe(data => {
+      this.formBackoffice_rev = data.reverse();
+      console.log('backofficeForm', this.formBackoffice_rev)
     })
   }
 
@@ -506,10 +522,10 @@ export class InteressesComponent implements OnInit {
 
     // condição que define o status_pn
     if (status_pn_salvo === 'PN em análise UIP PDAC') {
-      this.dataService.Send_Backoffice_form(formData).subscribe(/*successCallback2, errorCallback*/);
+      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
       //this.router.navigate(['pn-elaborados']);
     } else {
-      this.dataService.Send_Backoffice_form(formData).subscribe(/*successCallback, errorCallback*/);
+      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
     }
 
   }

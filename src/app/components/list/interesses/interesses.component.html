@@ -135,6 +135,8 @@
             </!--div-->
         </div>
 
+
+
         <!-- Man-interesse table -->
         <div class=" row mt-3" style="margin-left: 1%; margin-right: 1%;">
             <div class="bm-3">
@@ -328,7 +330,7 @@
                     </!div-->
 
                     <!-- Pergunta 12 -->
-                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Consultor PN:</label>
                         </div>
@@ -347,7 +349,7 @@
                     </div>
 
                     <!-- Pergunta 13 -->
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="inicio_elaboracao_pn">Data início de elaboração do
                                 PN:</label>
@@ -366,7 +368,7 @@
 
                     <!-- Pergunta 14 -->
                     <div *ngIf="angForm.get('inicio_elaboracao_pn')?.value"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="fim_elaboracao_pn">Data fim elaboração PN (início de
                                 verificação):</label>
@@ -381,7 +383,7 @@
 
                     <!-- Pergunta 15 -->
                     <div *ngIf="angForm.get('fim_elaboracao_pn')?.value"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="fim_verificacao" style="width: 240px;">Data fim de entrega ao PDAC:</label>
                         </div>
@@ -394,7 +396,7 @@
                     </div>
 
                     <!-- Pergunta 16 -->
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
                             <label>Tipo de financiamento:</label>
                         </div>
@@ -420,21 +422,22 @@
 
 
                     <!-- Pergunta 18 -->
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
                             <label>O PN está pendente?</label>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div style="margin-right: 310px;">
                                 <input type="checkbox" name="Checkbox1" [checked]="angForm.get('pn_pendente')?.value"
-                                    formControlName="pn_pendente" (change)="showInput_2(angForm.get('pn_pendente')?.value)">
+                                    formControlName="pn_pendente"
+                                    (change)="showInput_2(angForm.get('pn_pendente')?.value)">
                             </div>
                         </div>
                     </div>
 
                     <!-- Pergunta 18.1 -->
                     <div *ngIf="angForm.get('pn_pendente')?.value" class="mb-3 d-flex justify-content-between mx-auto"
-                        style="width: 80%;">
+                        style="width: 60%;">
                         <div>
                             <label for="justificacao_pn_pendente">Justificação PN pendente:</label>
                         </div>
@@ -450,7 +453,7 @@
                     </div>
 
                     <!-- Pergunta 19 -->
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 80%;">
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
                             <label>O proponente desistiu?</label>
                         </div>
@@ -461,16 +464,51 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
+                        <label>.</label>
+                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+                    </div>
 
                     <div class="modal-footer justify-content-between">
-                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
-                        <div>
-                            <!--button 
-                                (click)="get_data_from_inquerito_e_BackOffice(inqueritoSelecionado?.id)"
-                                class="btn btn-success btn-sm">teste
-                            </!--button-->
-                        </div>
 
+                        <div class="table-responsive" id="print-section-list-interest">
+                            <table class="table table-sm table-hover text-center">
+                                <thead class="linhas2">
+                                    <tr>
+                                        <th scope="col" class="text-black">Consultor PN</th>
+                                        <th scope="col" class="text-black">Início de elaboração do
+                                            PN</th>
+                                        <th scope="col" class="text-black">Fim elaboração do PN</th>
+                                        <th scope="col" class="text-black">Fim de entrega ao PDAC</th>
+                                        <th scope="col" class="text-black">Tipo de financiamento</th>
+                                        <th scope="col" class="text-black not-it">O PN está pendente?</th>
+                                        <th scope="col" class="text-black not-it">Justificação PN pendente</th>
+                                        <th scope="col" class="text-black not-it">O proponente desistiu?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <ng-container>
+                                            <td>{{formBackoffice_rev[0].consultor_pn ?
+                                                formBackoffice_rev[0].consultor_pn : 'N/D'}}</td>
+                                            <td>{{formBackoffice_rev[0].inicio_elaboracao_pn ?
+                                                formBackoffice_rev[0].inicio_elaboracao_pn : 'N/D' }}</td>
+                                            <td>{{formBackoffice_rev[0].fim_elaboracao_pn ?
+                                                formBackoffice_rev[0].fim_elaboracao_pn : 'N/D'}}</td>
+                                            <td>{{formBackoffice_rev[0].fim_verificacao ?
+                                                formBackoffice_rev[0].fim_verificacao : 'N/D'}}</td>
+                                            <td>{{formBackoffice_rev[0].financiamento_bancario ?
+                                                formBackoffice_rev[0].financiamento_bancario : 'N/D'}}</td>
+                                            <td>{{formBackoffice_rev[0].pn_pendente ? 'Sim' : 'Não'}}</td>
+                                            <td>{{formBackoffice_rev[0].justificacao_pn_pendente ?
+                                                formBackoffice_rev[0].justificacao_pn_pendente : 'N/D' }}</td>
+                                            <td>{{formBackoffice_rev[0].proponente_desistiu ? 'Sim' : 'Não'}}</td>
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -488,7 +526,7 @@
 
 <!-- Pergunta 15.1 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Área total da fazenda (ha):</label>
                         </div>
@@ -508,7 +546,7 @@
 
 <!-- Pergunta 15.2 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Área de cultivo pelo PN (ha):</label>
                         </div>
@@ -528,7 +566,7 @@
 
 <!-- Pergunta 15.3 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label style="width: 240px;">Recursos próprios (AOA):</label>
                         </div>
@@ -549,7 +587,7 @@
 
 <!-- Pergunta 15.4 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Financiamento PDAC (AOA):</label>
                         </div>
@@ -568,7 +606,7 @@
 
 <!-- Pergunta 15.5 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Financiamento bancário (AOA):</label>
                         </div>
@@ -587,7 +625,7 @@
 
 <!-- Pergunta 15.6 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value && inqueritoSelecionado?.que_tipo_de_negocio_esta === 'Productor'"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Histórico de produção: que culturas foram produzidas no
                                 ano agrícola de há dois anos?</label>
@@ -611,7 +649,7 @@
 
 <!-- Pergunta 15.7 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Área de [cultura] cultivada á dois anos (ha):</label>
                         </div>
@@ -630,7 +668,7 @@
 
 <!-- Pergunta 15.8 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value && angForm.get('historico_producao_2_anos')?.value"
-                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 60%;">
                         <div>
                             <label>Produção de [cultura] obtida á dois anos (ton):</label>
                         </div>
@@ -648,7 +686,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Estudo de viabilidade: ( .pdf ou .docx
@@ -667,7 +705,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Termo de compromisso assinado: ( .pdf ou .docx
@@ -686,7 +724,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Projeto RIV completo: ( .pdf ou .docx
@@ -705,7 +743,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">FTAS: ( .pdf ou .docx
@@ -724,7 +762,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Lista de trabalhadores (nome/idade/sexo): ( .pdf
@@ -744,7 +782,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Documentos administrativos: ( .pdf ou .docx
@@ -763,7 +801,7 @@
                     </!div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Ficheiro .riv: ( .riv
@@ -777,7 +815,7 @@
                     </!--div-->
 
 <!-- Pergunta 15.8.1 -->
-<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;"
+<!--div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="angForm.get('fim_verificacao')?.value">
                         <div>
                             <label class="form-label" for="customFile">Outros documentos (fichas técnicas, facturas): (
@@ -793,7 +831,7 @@
 
 <!-- Pergunta 16 -->
 <!--div *ngIf="angForm.get('fim_verificacao')?.value"
-                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="data_pn_entregue_ao_pdac">Data PN entregue ao PDAC:</label>
                         </div>
