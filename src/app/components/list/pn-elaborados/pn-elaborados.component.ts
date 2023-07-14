@@ -160,14 +160,14 @@ export class PnElaboradosComponent implements OnInit {
       return 'PN pendente no CTI';
     } else if (pnPendenteBanco) {
       return 'PN pendente no banco';
+    } else if (data1PedidoDesembolso && dataAprovacaoPgasBm) {
+      return 'PN implementado';
     } else if (PN_aprovado_pelo_CTI_em_análise_MG) {
       return 'PN aprovado pelo CTI, em análise MG';
     } else if (PN_aprovado_pelo_CTI_MG_aprovado_em_analise_BC) {
       return 'PN aprovado pelo CTI, MG aprovado, em análise BC';
     } else if ((dataAprovacaoFinancMg && this.selectedFinanciamentoBancario?.financiamento_bancario === 0) || (dataAprovacaoFinancMg && dataAprovacaoFinancBanco)) {
       return 'Financiamento aprovado';
-    } else if (data1PedidoDesembolso && dataAprovacaoPgasBm) {
-      return 'PN implementado';
     } else {
       return 'N/D';
     }

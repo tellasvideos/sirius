@@ -801,6 +801,18 @@ export class DataService {
   Save_PGAS(pgasData: any) {
     return this.http.post(this.post_pga_url + '/formulariojanelapgas/', pgasData)
   }
+
+  // to Save visitas
+  url_visitas = 'http://sirius.strongbox.ao:8001/api/v1';
+  Save_Visitas(visitasForm: any){
+    return this.http.post(this.url_visitas + '/registrosdasvisitas/', visitasForm)
+  }
+
+  // to get visitas
+  url_get_visitas = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
+  Get_visitas(){
+    return this.http.get<any[]>(this.url_get_visitas);
+  }
 }
 
 

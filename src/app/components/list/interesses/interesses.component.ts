@@ -198,7 +198,7 @@ export class InteressesComponent implements OnInit {
 
 
   devolver_status_pn(id: any): string {
-    const formBackofficeCopy = [...this.formBackoffice].reverse();
+    const formBackofficeCopy = [...this.formBackoffice];
     const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
     //console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
@@ -207,7 +207,7 @@ export class InteressesComponent implements OnInit {
   // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formbackoffice
   backoffice_entrados: any;
   getFormBackofficeData_entradas(inqueritoId: any) {
-    this.backoffice_entrados = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    this.backoffice_entrados = this.formBackoffice_rev.find((item: any) => item.inquerito === inqueritoId);
     console.log('back/?=inq', this.backoffice_entrados)
     return this.backoffice_entrados ? this.backoffice_entrados : 'N/D';
   }
@@ -721,9 +721,8 @@ export class InteressesComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado');
+      this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
       console.log('inqueritos reverse', this.inqueritos);
-      this.inqueritos.reverse();
     });
   }
 

@@ -1,1 +1,291 @@
-<p>visitas works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <!-- departamento full content-->
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <!-- departamento list-->
+        <div class="d-flex mt-4 userlist justify-content-between" style="margin-left: 2%; margin-right: 2%;">
+            <div class=" esp1">
+                <h5 class="list-user-text text-black mb-4">Visitas</h5>
+            </div>
+
+            <div class=" justify-content-between px-md-1">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                        <button type="button" printSectionId="print-section-list-depart" ngxPrint
+                            printTitle="Departamentos" styleSheetFile="assets/print.scss" [useExistingCss]="true"
+                            class="btn btn-light text-black" style="text-transform: capitalize;"><i
+                                class="fas fa-print"></i> Imprimir</button>
+                    </div>
+
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                        <button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
+                            data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
+                                class="fas fa-plus-square text-black"></i> Add Visitas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- departamento list-->
+
+        <!-- Second section for filtering data -->
+        <div class="row mt-3 linhas1 " style="margin-left: 1%; margin-right: 1%; height: 15%;">
+            <div class="mt-3">
+
+            </div>
+        </div>
+
+        <div class=" row mt-3" style="margin-left: 1%; margin-right: 1%;">
+            <div class="bm-3">
+                <input class="form-control form-control-sm mb-2" placeholder="Pesquisar por nome simplificado..."
+                    formControlName="keyWord" type="text" style="width: 300px;">
+            </div>
+            <div class="table-responsive" id="print-section-list-interest">
+                <table class="table table-sm table-hover text-center">
+                    <thead class="linhas2">
+                        <tr>
+                            <th scope="col" class="text-black">Nome Simplificado</th>
+                            <th scope="col" class="text-black">Província</th>
+                            <th scope="col" class="text-black">Município</th>
+                            <th scope="col" class="text-black">Nº ficha de acompanhamento</th>
+                            <th scope="col" class="text-black">Datada visita</th>
+                            <th scope="col" class="text-black">Tipo de visita</th>
+                            <th scope="col" class="text-black not-it">Principais constatações</th>
+                            <th scope="col" class="text-black not-it">Recomendações ao Produtor</th>
+                            <th scope="col" class="text-black not-it">Consultor visita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of visitasData" >
+                            <td>{{item.nome_simplificado}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+<form enctype="multipart/form-data" [formGroup]="angForm">
+
+    <!-- modal -->
+    <div class="modal fade" id="exampleModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Registro de Visitas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Nome simplificado:</label>
+                        </div>
+
+                        <div>
+                            <input style="width:350px;" class="form-control form-control-sm mb-2"
+                                [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }"
+                                formControlName="nome_simplificado" type="text" required name="nome_simplificado"
+                                aria-label="form-control-sm example">
+                        </div>
+
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched">
+                            * Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="data_da_visista">Data da visita:</label>
+                        </div>
+                        <div>
+                            <input type="date" formControlName="data_da_visista" name="data_da_visista"
+                                max="{{maxDate | date:'yyyy-MM-dd'}}" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm"
+                                [ngClass]="{ 'is-invalid': angForm.get('data_da_visista')?.invalid && angForm.get('data_da_visista')?.touched }">
+                            <div class="invalid-feedback" style="width: 350px;"
+                                *ngIf="angForm.get('data_da_visista')?.invalid && angForm.get('data_da_visista')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label>Tipo
+                                de Visita:</label>
+                        </div>
+
+                        <div>
+                            <select class="form-select form-select-sm" style="width: 350px;" id="tipo_de_visita"
+                                (change)="carregartipo_visita()" name="tipo_de_visita" formControlName="tipo_de_visita">
+                                <option value="" disabled selected hidden></option>
+                                <option *ngFor="let item of visitaOPtions" [value]="item">
+                                    {{item}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="angForm.get('tipo_de_visita')?.value === 'Acompanhamento técnico'"
+                        class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Nº ficha de acompanhamento:</label>
+                        </div>
+
+                        <div>
+                            <input style="width: 350px;" class="form-control form-control-sm mb-2"
+                                [ngClass]="{ 'is-invalid': angForm.get('numero_ficha_acompanhamento')?.invalid && angForm.get('numero_ficha_acompanhamento')?.touched }"
+                                formControlName="numero_ficha_acompanhamento" type="text" required
+                                name="numero_ficha_acompanhamento" aria-label=".form-control-sm example"
+                                inputmode="numeric" pattern="[0-9]*" maxlength="3">
+                        </div>
+
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('numero_ficha_acompanhamento')?.invalid && angForm.get('numero_ficha_acompanhamento')?.touched">
+                            * Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div *ngIf="angForm.get('tipo_de_visita')?.value === 'Acompanhamento técnico'"
+                        class="justify-content-between mx-auto d-flex mb-3 linhas1 p-2" style="width: 80%;">
+                        <div>
+                            <label class="form-label" for="customFile">Descarregar a ficha de acompanhamento
+                                digitalizada: (
+                                .jpg, .png ou .pdf )</label>
+                        </div>
+
+                        <div class="d-block">
+
+                            <input type="file" (change)="onSelectedFile($event)" name="ficha_acompanhamento"
+                                formControlName="ficha_acompanhamento" class="form-control" id="customFile"
+                                style="width: 350px;"
+                                [ngClass]="{ 'is-invalid': angForm.get('ficha_acompanhamento')?.invalid && (angForm.get('ficha_acompanhamento')?.touched) }">
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('ficha_acompanhamento')?.invalid && (angForm.get('ficha_acompanhamento')?.touched)">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Principais constatações:</label>
+                        </div>
+
+                        <div>
+                            <textarea style="width:350px;" class="form-control form-control-sm mb-2"
+                                [ngClass]="{ 'is-invalid': angForm.get('principais_constatacoes')?.invalid && angForm.get('principais_constatacoes')?.touched }"
+                                formControlName="principais_constatacoes" type="text" required
+                                name="principais_constatacoes" aria-label=".form-control-sm example"></textarea>
+                        </div>
+
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('principais_constatacoes')?.invalid && angForm.get('principais_constatacoes')?.touched">
+                            * Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mx-auto mb-3" style="width: 80%;">
+                        <div>
+                            <label>Recomendações ao produtor:</label>
+                        </div>
+
+                        <div>
+                            <textarea style="width:350px;" class="form-control form-control-sm mb-2"
+                                [ngClass]="{ 'is-invalid': angForm.get('recomendacao_ao_produtor')?.invalid && angForm.get('recomendacao_ao_produtor')?.touched }"
+                                formControlName="recomendacao_ao_produtor" type="text" required
+                                name="recomendacao_ao_produtor" aria-label=".form-control-sm example"></textarea>
+                        </div>
+
+                        <div class="invalid-feedback"
+                            *ngIf="angForm.get('recomendacao_ao_produtor')?.invalid && angForm.get('recomendacao_ao_produtor')?.touched">
+                            * Campo obrigatório.
+                        </div>
+                    </div>
+
+                    <div *ngIf="angForm.get('tipo_de_visita')?.value === 'Acompanhamento técnico'"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="consultor_visita1" class="mb-2">Consultor de visita (Para
+                                selecionar múltiplos usuarios do Apoio técnico,
+                                mantenha premido a tecla CTRL no teclado)</label>
+                        </div>
+                        <div>
+                            <select multiple class="form-select form-select-sm" style="width: 350px;"
+                                id="consultor_visita1" name="consultor_visita1" formArrayName="consultor_visita1"
+                                [ngClass]="{ 'is-invalid': angForm.get('consultor_visita1')?.invalid && (angForm.get('consultor_visita1')?.touched) }">
+                                <option *ngFor="let item of UserapoioTecnico" [value]="item.name">{{item.name}}</option>
+                            </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('consultor_visita1')?.invalid && angForm.get('consultor_visita1')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="angForm.get('tipo_de_visita')?.value === 'Salvaguarde'"
+                        class="justify-content-between mx-auto d-flex mb-3" style="width: 80%;">
+                        <div>
+                            <label for="consultor_visita2" class="mb-2">Consultor de visita (Para
+                                selecionar múltiplos usuarios do Salvaguarde,
+                                mantenha premido a tecla CTRL no teclado)</label>
+                        </div>
+                        <div>
+                            <select multiple class="form-select form-select-sm" style="width: 350px;"
+                                id="consultor_visita2" name="consultor_visita2" formArrayName="consultor_visita2"
+                                [ngClass]="{ 'is-invalid': angForm.get('consultor_visita2')?.invalid && (angForm.get('consultor_visita2')?.touched) }">
+                                <option *ngFor="let item of userSalvaGuarde" [value]="item.name">{{item.name}}</option>
+                            </select>
+                            <div class="invalid-feedback"
+                                *ngIf="angForm.get('consultor_visita2')?.invalid && angForm.get('consultor_visita2')?.touched">
+                                * Campo obrigatório.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <!--div>
+                        <button type="submit" class="btn btn-danger btn-sm">Limpar
+                            Campos
+                        </button>
+                    </!--div-->
+
+                    <div>
+                        <button type="submit" (click)="saveVisitas()" class="btn btn-success btn-sm">Guardar
+                        </button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
