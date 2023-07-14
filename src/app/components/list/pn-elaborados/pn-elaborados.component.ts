@@ -105,6 +105,7 @@ export class PnElaboradosComponent implements OnInit {
     this.getInqueritos();
     this.get_form_backoffice____();
     this.getMunicipio();
+    this.get_pgas();
 
   }
 
@@ -122,6 +123,23 @@ export class PnElaboradosComponent implements OnInit {
       timer: 1500
     })
   }
+
+  selectedFinanciamentoBancario: any | number;
+  mostrarFinanciamento(inqueritoId: string) {
+    this.selectedFinanciamentoBancario = this.getFormBackofficeData(inqueritoId);
+    if (this.selectedFinanciamentoBancario) {
+      console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
+    }
+  }
+
+  selected_data_aprovacao_pgas_BM: any;
+  mostrar_Data_aprovada_pgas_BM(inqueritoId: string) {
+    this.selected_data_aprovacao_pgas_BM = this.get_Form_PGAS_Data(inqueritoId);
+    if (this.selected_data_aprovacao_pgas_BM) {
+      console.log(this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial);
+    }
+  }
+
 
   // Estados PN (Part. 2)
   getStatus_pn() {
@@ -156,11 +174,13 @@ export class PnElaboradosComponent implements OnInit {
     const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '';
     const dataAprovacaoPgasBm = this.angForm.get('data_aprovacao_pgas_bm')?.value !== '';
 
+    const Data_Aprovacao_do_PGAS_pelo_BM = this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial !== ''; // vindo do PGAS atravez do id correspondente
+
     if (PN_pendente_no_CTI) {
       return 'PN pendente no CTI';
     } else if (pnPendenteBanco) {
       return 'PN pendente no banco';
-    } else if (data1PedidoDesembolso && dataAprovacaoPgasBm) {
+    } else if (data1PedidoDesembolso && Data_Aprovacao_do_PGAS_pelo_BM) {
       return 'PN implementado';
     } else if (PN_aprovado_pelo_CTI_em_análise_MG) {
       return 'PN aprovado pelo CTI, em análise MG';
@@ -230,12 +250,12 @@ export class PnElaboradosComponent implements OnInit {
     const statusPN = this.getStatus_pn();
 
     if (statusPN === 'PN implementado') {
-      this.dataService.Post_pnElaborados(formData).subscribe(successCallback2, errorCallback);
+      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback2, errorCallback*/);
       //this.router.navigate(['pn-implementados']);
       // Remover o item selecionado da lista inicial
 
     } else {
-      this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
+      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback, errorCallback*/);
     }
 
 
@@ -274,13 +294,6 @@ export class PnElaboradosComponent implements OnInit {
   }
 
 
-  selectedFinanciamentoBancario: any | number;
-  mostrarFinanciamento(inqueritoId: string) {
-    this.selectedFinanciamentoBancario = this.getFormBackofficeData(inqueritoId);
-    if (this.selectedFinanciamentoBancario) {
-      console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
-    }
-  }
 
   checkDates() {
     const pnEntregueDate = this.selectedFinanciamentoBancario?.data_pn_entregue_ao_pdac;
@@ -407,6 +420,21 @@ export class PnElaboradosComponent implements OnInit {
     console.log(inqueritoId)
     return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
 
+  }
+
+  get_Form_PGAS_Data(inqueritoId: string): any {
+    console.log(inqueritoId)
+    return this.pgas.find((item: any) => item.inquerito === inqueritoId);
+
+  }
+
+  // to get Pgas
+  pgas: any;
+  get_pgas() {
+    this.dataService.Get_Pgas().subscribe(data => {
+      this.pgas = data.reverse();
+      console.log('Pgas form', this.pgas)
+    })
   }
 
   getFormPN_STATUS_Data(inqueritoId: string): any {

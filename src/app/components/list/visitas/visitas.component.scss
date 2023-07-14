@@ -4,6 +4,44 @@
     height: 100%;
 }
 
+::ng-deep.ng-select-container {
+    border-bottom: 1px solid #ccc !important;
+    padding: .25rem .5rem;
+    font-size: .875rem;
+   // line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+  }
+  
+
+::ng-deep.ng-option-highlighted  {
+    background-color: #ccc;
+}
+
+::ng-deep.ng-select .ng-dropdown-panel {
+    display: block;
+    padding-left: .70rem;
+    padding-top: .40rem;
+  //  line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    //border-radius: .25rem;
+    //transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+::ng-deep.ng-dropdown-panel .ng-option.ng-option-marked:hover {
+    background-color: #ccc;
+    /* substitua pela cor desejada para quando o item for passado com o mouse */
+}
+
 body {
     overflow: hidden; /* Hide scrollbars */
   }

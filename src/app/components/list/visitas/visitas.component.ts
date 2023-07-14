@@ -50,6 +50,7 @@ export class VisitasComponent implements OnInit {
     this.getUserSalvaguarde();
     this.getUserapoioTecnico();
     this.get_visitas();
+    this.get_pnElaborados();;
   }
 
   sideBarToggler() {
@@ -170,6 +171,14 @@ export class VisitasComponent implements OnInit {
     this.dataService.Get_visitas().subscribe(data =>{
       this.visitasData = data;
       console.log('visitasdata', this.visitasData)
+    })
+  }
+
+  pnElaborados: any;
+  get_pnElaborados() {
+    this.dataService.Get_pnElaborados().subscribe(data => {
+      this.pnElaborados = data.filter((item:any) => item.status_pn === 'PN implementado' && item.nome_simplificado );
+      console.log('Planos elaborados, com Nome_simply e status = PN implement', this.pnElaborados)
     })
   }
 

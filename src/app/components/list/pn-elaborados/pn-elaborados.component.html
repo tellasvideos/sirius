@@ -91,7 +91,9 @@
                                     (this.user_logged.department === 'Back Off' || 
                                     this.user_logged.department === 'M&A' )&&
                                     this.user_logged.is_admin === true" class="not-it">
-                                    <button (click)="mostrarFinanciamento(item.id)" type="button"
+                                    <button 
+                                        (click)="mostrarFinanciamento(item.id)"
+                                        (click)="mostrar_Data_aprovada_pgas_BM(item.id)" type="button"
                                         (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
@@ -135,7 +137,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 20 -->
+                    <!-- Pergunta 21 -->
                     <div *ngIf="angForm.get('data_analise_cti')?.value"
                         class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
                         <div>
@@ -151,7 +153,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 20.1 -->
+                    <!-- Pergunta 21.1 -->
                     <div class="mb-3 d-flex justify-content-between mx-auto"
                         *ngIf="this.angForm.get('recusado_pelo_cti')?.value === true" style="width: 60%;">
                         <div>
@@ -166,7 +168,7 @@
                         </div>
                     </div>
 
-                    <!-- Pergunta 21 -->
+                    <!-- Pergunta 22 -->
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;"
                         *ngIf="!angForm.get('recusado_pelo_cti')?.value || false">
                         <div>
@@ -180,25 +182,16 @@
                         </div>
                     </div>
 
-                    <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
-                        <div>
-                            <label for="data_aprovacao_pgas_bm">Data de aprovação do PGAS pelo Banco
-                                Mundial:</label>
-                        </div>
-                        <div>
-                            <input type="date" formControlName="data_aprovacao_pgas_bm" name="data_aprovacao_pgas_bm"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
-                        </div>
-                    </div>
 
-                    <!--div>
-                    <p>Valor do financiamento bancário selecionado: {{ selectedFinanciamentoBancario?.financiamento_bancario 
-                        }}</p>
+                    <!--div class="mb-3">
+                        <p>Valor do financiamento bancário selecionado: {{
+                            selectedFinanciamentoBancario?.financiamento_bancario ?
+                            selectedFinanciamentoBancario?.financiamento_bancario : 'N/D'
+                            }}</p>
                     </!--div-->
 
-                    <!-- Pergunta 22 -->
-                    <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario > 0"
+                    <!-- Pergunta 23 -->
+                    <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario === 'MG e Banco'"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
