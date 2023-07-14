@@ -52,7 +52,7 @@ export class VisitasComponent implements OnInit {
     this.get_visitas();
     this.get_pnElaborados();
     this.getInqueritos();
-    this.isStatusPnImplementado();
+    this.getNomes_simplificados_com_status_pn_implementado();
   }
 
   sideBarToggler() {
@@ -192,14 +192,18 @@ export class VisitasComponent implements OnInit {
     });
   }
 
-  /*getNomes_simplificados_com_status_pn_implementado() {
+  // pendenteeee
+  getNomes_simplificados_com_status_pn_implementado() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log('Planos elaborados, com Nome_simply e status = PN implement', this.pnElaborados)
-     return this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos.id)?.status_pn === 'PN implementado'
+      let retorno = this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos[0].id)?.status_pn === 'PN implementado'
+      console.log(retorno)
+      return retorno
     });
-  }*/
 
+  }
+
+  // pendenteee
   isStatusPnImplementado(): boolean {
     console.log('yeeeee', this.pnElaborados)
     return this.pnElaborados.some((pnItem: any) =>
