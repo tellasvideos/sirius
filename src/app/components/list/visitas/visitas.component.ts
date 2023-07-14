@@ -50,7 +50,9 @@ export class VisitasComponent implements OnInit {
     this.getUserSalvaguarde();
     this.getUserapoioTecnico();
     this.get_visitas();
-    this.get_pnElaborados();;
+    this.get_pnElaborados();
+    this.getInqueritos();
+    this.isStatusPnImplementado();
   }
 
   sideBarToggler() {
@@ -154,10 +156,10 @@ export class VisitasComponent implements OnInit {
         if (modal) {
           modal.style.display = 'none';
 
-          /*/ Espera 3 segundos antes de recarregar a página
+          // Espera 3 segundos antes de recarregar a página
           timer(2000).pipe(delay(2000)).subscribe(() => {
             location.reload();
-          });*/
+          });
         }
 
       },
@@ -167,8 +169,8 @@ export class VisitasComponent implements OnInit {
   }
 
   visitasData: any;
-  get_visitas(){
-    this.dataService.Get_visitas().subscribe(data =>{
+  get_visitas() {
+    this.dataService.Get_visitas().subscribe(data => {
       this.visitasData = data;
       console.log('visitasdata', this.visitasData)
     })
@@ -177,11 +179,40 @@ export class VisitasComponent implements OnInit {
   pnElaborados: any;
   get_pnElaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
-      this.pnElaborados = data.filter((item:any) => item.status_pn === 'PN implementado' && item.nome_simplificado );
-      console.log('Planos elaborados, com Nome_simply e status = PN implement', this.pnElaborados)
+      this.pnElaborados = data/*.filter((item:any) => item.status_pn === 'PN implementado' && item.nome_simplificado );*/
     })
   }
 
+  // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
+  inqueritos: any;
+  getInqueritos() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data.filter(item => item.status === 'Aprovado');
+      console.log('inqueritos reverse', this.inqueritos);
+    });
+  }
+
+  /*getNomes_simplificados_com_status_pn_implementado() {
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.inqueritos = data.filter(item => item.status === 'Aprovado');
+      console.log('Planos elaborados, com Nome_simply e status = PN implement', this.pnElaborados)
+     return this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos.id)?.status_pn === 'PN implementado'
+    });
+  }*/
+
+  isStatusPnImplementado(): boolean {
+    console.log('yeeeee', this.pnElaborados)
+    return this.pnElaborados.some((pnItem: any) =>
+      this.inqueritos.some((inqItem: any) => pnItem.inquerito === inqItem.id && pnItem.status_pn === 'PN implementado')
+    );
+  }
+
+  del(id: any) {
+    this.dataService.delete_visitas(id).subscribe(
+      success => { this.alert_success(); },
+      error => { this.alert_error(); }
+    )
+  }
 
 }
 

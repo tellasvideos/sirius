@@ -56,7 +56,7 @@
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Nº ficha de acompanhamento</th>
-                            <th scope="col" class="text-black">Datada visita</th>
+                            <th scope="col" class="text-black">Data da visita</th>
                             <th scope="col" class="text-black">Tipo de visita</th>
                             <th scope="col" class="text-black not-it">Principais constatações</th>
                             <th scope="col" class="text-black not-it">Recomendações ao Produtor</th>
@@ -66,14 +66,15 @@
                     <tbody>
                         <tr *ngFor="let item of visitasData">
                             <td>{{item.nome_simplificado}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td> {{item.provincia}} </td>
+                            <td> {{item.municipio}} </td>
+                            <td>{{item.numero_ficha_acompanhamento}}</td>
+                            <td>{{item.data_da_visista}}</td>
+                            <td>{{item.tipo_de_visita}}</td>
+                            <td>{{item.principais_constatacoes}}</td>
+                            <td>{{item.recomendacao_ao_produtor}}</td>
+                            <td>{{item.consultor_visita1 ? item.consultor_visita1 : item.consultor_visita2 }}</td>
+                            <!--td><button (click)="del(item.id)" >del</button></!--td-->
                         </tr>
                     </tbody>
                 </table>
@@ -104,11 +105,11 @@
                             <label>Nome simplificado:</label>
                         </div>
 
-                        <!---->
+                        <!--[items]="pnElaborados" bindLabel="nome_simplificado" bindValue="nome_simplificado"-->
 
                         <div class="my-element" style="margin-left: 10%;">
-                            <ng-select class="ng-select form-control-sm" [items]="pnElaborados"
-                                bindLabel="nome_simplificado" bindValue="nome_simplificado" style="width: 350px;"
+                            <ng-select class="ng-select form-control-sm" 
+                                 style="width: 350px;"
                                 formControlName="nome_simplificado" [searchable]="true" placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('nome_simplificado')?.touched }">
                             </ng-select>

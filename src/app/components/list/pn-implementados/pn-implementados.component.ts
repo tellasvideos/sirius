@@ -48,10 +48,10 @@ export class PnImplementadosComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
       console.log('inqueritos reverse', this.inqueritos);
-      this.inqueritos.reverse();
     });
   }
 
+  
 
   pnElaborados: any;
   get_pnElaborados() {

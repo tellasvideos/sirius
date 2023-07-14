@@ -250,12 +250,12 @@ export class PnElaboradosComponent implements OnInit {
     const statusPN = this.getStatus_pn();
 
     if (statusPN === 'PN implementado') {
-      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback2, errorCallback*/);
+      this.dataService.Post_pnElaborados(formData).subscribe(successCallback2, errorCallback);
       //this.router.navigate(['pn-implementados']);
       // Remover o item selecionado da lista inicial
 
     } else {
-      this.dataService.Post_pnElaborados(formData).subscribe(/*successCallback, errorCallback*/);
+      this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
     }
 
 

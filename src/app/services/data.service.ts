@@ -503,7 +503,7 @@ export class DataService {
   }
 
   get_backoffice_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
-  getBackofficeByID(id: any){
+  getBackofficeByID(id: any) {
     return this.http.get(`${this.get_backoffice_byId_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
 
@@ -602,6 +602,11 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
     return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
+  }
+
+  delete_visitas_url = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/';
+  delete_visitas(id: any) {
+    return this.http.delete(`${this.delete_visitas_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
 
   // Method to Get all Proposal Agreement
@@ -804,13 +809,13 @@ export class DataService {
 
   // to Save visitas
   url_visitas = 'http://sirius.strongbox.ao:8001/api/v1';
-  Save_Visitas(visitasForm: any){
+  Save_Visitas(visitasForm: any) {
     return this.http.post(this.url_visitas + '/registrosdasvisitas/', visitasForm)
   }
 
   // to get visitas
   url_get_visitas = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
-  Get_visitas(){
+  Get_visitas() {
     return this.http.get<any[]>(this.url_get_visitas);
   }
 }
