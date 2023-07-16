@@ -226,8 +226,9 @@
                             </|td-->
                                 <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'" class="not-it">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="selecionarInquerito(item.id)" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalToggle">
+                                        (click)="selecionarInquerito(item.id)"
+                                        (click)="getFormBackofficeData_entradas(inqueritoSelecionado)"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
@@ -459,13 +460,13 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
-                        <label>.</label>
-                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+                   
+
+                    <div class="modal-footer justify-content-between">                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
                     </div>
 
-                    <div class="modal-footer justify-content-between">
+
+                    <!--div class="modal-footer justify-content-between">
 
                         <div class="table-responsive" id="print-section-list-interest">
                             <table class="table table-sm table-hover text-center">
@@ -519,7 +520,7 @@
                         </div>
 
 
-                    </div>
+                    </div-->
                 </form>
             </div>
         </div>

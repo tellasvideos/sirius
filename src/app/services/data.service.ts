@@ -412,7 +412,12 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
     return this.http.patch(`${this.edit_inquerito_url}${id}/`, inquerito, /*{ headers: headers }*/).pipe(take(1));
-  }
+  } 
+
+   // A funccion to update backoffice form
+   Update_Backoffice_form(id:any, form_data: any) {
+    return this.http.patch(`${this.url_formbackofficebyid}${id}/`, form_data, /*{ headers: headers }*/).pipe(take(1));
+   }
 
   // get chartData 
   getBasicAreaEchartData(): Observable<BasicEchartLineModel[]> {
@@ -752,6 +757,8 @@ export class DataService {
     return this.http.post(this.formBackoffice_url + '/formulariosbackoffice/', form_data)
   }
 
+ 
+
   // A function to get all backoffice data and inquires data
   get_backoffice_Url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
   Get_Backoffice_Form() {
@@ -762,6 +769,11 @@ export class DataService {
   dados_agrupados_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/?inquerito=';
   Get_Backoffice_data_and_Inquerito_by_id(id: any) {
     return this.http.get(`${this.dados_agrupados_url}${id}`, /*{ headers: headers }*/).pipe(take(1));
+  }
+
+  url_formbackofficebyid = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
+  getFormBackofficeByid(id: any){
+    return this.http.get(`${this.url_formbackofficebyid}${id}` ).pipe(take(2));
   }
 
   // Pegar dados do formulario Pn elaborados junto ao id do inquerito selecionado

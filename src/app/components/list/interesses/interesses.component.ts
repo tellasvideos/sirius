@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { forkJoin, timer } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
+import { delay, map, switchMap, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
@@ -62,8 +62,8 @@ export class InteressesComponent implements OnInit {
 
       consultor_pn: [''],
       inicio_elaboracao_pn: ['', Validators.required],
-      fim_elaboracao_pn: [''],
-      fim_verificacao: [''],
+      fim_elaboracao_pn: [null],
+      fim_verificacao: [null],
       /*area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       area_cultivo_pn: ['', Validators.required],
       recursos_proprios: ['', Validators.required],
@@ -88,9 +88,11 @@ export class InteressesComponent implements OnInit {
       proponente_desistiu: [false],
       created_at: [''],
       mgCheckbox: [false],
-      mgBancoCheckbox: [false]
+      mgBancoCheckbox: [false],
+      //  status_pn: [this.getStatusPN()]
     })
   }
+
 
   ngOnInit(): void {
     this.getProvincias()
@@ -112,6 +114,16 @@ export class InteressesComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
     });
+
+
+
+    /*/ receber valores no formulario vindo da api para editar
+    this.route.paramMap.subscribe(paramId => {
+     this.id = paramId.get('id'),
+       this.dataService.getInqueritoByid(this.id).subscribe(data => {
+         this.angForm.patchValue(data)
+       });
+   });*/
 
 
 
@@ -205,12 +217,17 @@ export class InteressesComponent implements OnInit {
   }
 
   // recebe como parametro o id do inquerito e devolve dados aonde o idnquerito é igual a FK inquerito na tabela formbackoffice
-  backoffice_entrados: any;
+  public foundItem: any;
   getFormBackofficeData_entradas(inqueritoId: any) {
-    this.backoffice_entrados = this.formBackoffice_rev.find((item: any) => item.inquerito === inqueritoId);
-    console.log('back/?=inq', this.backoffice_entrados)
-    return this.backoffice_entrados ? this.backoffice_entrados : 'N/D';
+    this.foundItem = this.formBackoffice_rev.find((item: any) => item.inquerito === inqueritoId);
+    this.dataService.getFormBackofficeByid(this.foundItem.id).subscribe(data => {
+      this.angForm.patchValue(data)
+    });
+    console.log('formbackoffice single', this.foundItem.status_pn);
+    return this.foundItem ? this.foundItem.id : 'N/D';
   }
+
+
 
 
   getBackofficesByInqueritoId(inqueritoId: any) {
@@ -454,16 +471,14 @@ export class InteressesComponent implements OnInit {
 
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
     formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
-    formData.append('fim_elaboracao_pn', (this.angForm.get('fim_elaboracao_pn')?.value));
-    formData.append('fim_verificacao', (this.angForm.get('fim_verificacao')?.value));
-    //formData.append('area_total_fazenda', this.angForm.get('area_total_fazenda')?.value);
-    //formData.append('area_cultivo_pn', this.angForm.get('area_cultivo_pn')?.value);
-    //formData.append('recursos_proprios', this.angForm.get('recursos_proprios')?.value);
-    //formData.append('financiamento', this.angForm.get('financiamento')?.value);
+
+    const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
+    formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : '');
+
+    const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
+    formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '');
+
     formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
-    //formData.append('historico_producao_2_anos', this.angForm.get('historico_producao_2_anos')?.value);
-    //formData.append('area_cultura_2_anos', this.angForm.get('area_cultura_2_anos')?.value);
-    //formData.append('producao_cultura_2_anos', this.angForm.get('producao_cultura_2_anos')?.value);
 
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
@@ -482,7 +497,9 @@ export class InteressesComponent implements OnInit {
       status_pn_salvo = 'PN em elaboração';
     } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && this.angForm.get('fim_verificacao')?.value === '') {
       status_pn_salvo = 'PN em verificação';
-    } else if (this.angForm.get('fim_verificacao')?.value !== '') {
+    } else if (
+      this.angForm.get('fim_verificacao')?.value !== ''
+    ) {
       status_pn_salvo = 'PN em análise UIP PDAC';
     }
 
@@ -539,13 +556,16 @@ export class InteressesComponent implements OnInit {
       //this.hideLoading();
     };
 
-    // condição que define o status_pn
-    if (status_pn_salvo === 'PN em análise UIP PDAC') {
-      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback2, errorCallback);
-      //this.router.navigate(['pn-elaborados']);
-    } else {
-      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
+    try {
+      if (this.foundItem.id) {
+        this.dataService.Update_Backoffice_form(this.foundItem.id, formData).subscribe();
+      } else {
+        console.log('')
+      }
+    } catch (error) {
+      this.dataService.Send_Backoffice_form(formData).subscribe();
     }
+
 
   }
 
