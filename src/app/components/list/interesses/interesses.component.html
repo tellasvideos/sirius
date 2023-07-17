@@ -157,7 +157,7 @@
                             <th scope="col" class="text-black not-it" *ngIf="
                             this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true">Colar
                                 info</th>
-                            <!--th scope="col" class="text-black not-it">Add Back Office</!--th-->
+                            <!--th scope="col" class="text-black not-it">Add Back Office  *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'"</!--th-->
                         </tr>
                     </thead>
                     <tbody>
@@ -217,14 +217,14 @@
                                     <i class="far fa-lemon"></i> </button></td-->
 
                                 <!--td class="not-it" *ngIf="
-                            this.user_logged.department === 'Back Off'">
+                            this.user_logged.department === 'Back Off'"  *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
 
                                 <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
                                     routerLinkActive="active" class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button>
                             </|td-->
-                                <td *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'" class="not-it">
+                                <td class="not-it" *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
                                         (click)="selecionarInquerito(item.id)"
                                         (click)="getFormBackofficeData_entradas(inqueritoSelecionado)"
@@ -460,9 +460,10 @@
                             </div>
                         </div>
                     </div>
-                   
 
-                    <div class="modal-footer justify-content-between">                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
+
+                    <div class="modal-footer justify-content-between"> <input type="submit" name="submit"
+                            value="Guardar" class="btn btn-success btn-sm">
                     </div>
 
 

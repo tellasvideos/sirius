@@ -22,7 +22,7 @@ export class VisitasComponent implements OnInit {
   departamento: any;
   depart: any;
   sideBarOpen = true;
-
+  pnFiltrado: any;
   angForm!: FormGroup;
 
   constructor(
@@ -194,13 +194,21 @@ export class VisitasComponent implements OnInit {
 
   // pendenteeee
   getNomes_simplificados_com_status_pn_implementado() {
-    this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      let retorno = this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos[0].id)?.status_pn === 'PN implementado'
-      console.log(retorno)
-      return retorno
-    });
 
+
+    this.dataService.get_InquireForm().subscribe(data => {
+      this.pnFiltrado = this.pnElaborados.filter((item: any) => (item.status_pn === 'PN implementado' && (item.nome_simplificado !== '' || item.nome_simplificado !== null)));
+      //console.log('okkkkk', pnFiltrado)
+      //let pnFiltrados_implementados = pnFiltrado.filter((item:any) => item.inquerito === )
+
+
+      /* this.inqueritos = data.filter(item => item.status === 'Aprovado');
+       console.log(this.pnElaborados)
+       let retorno = this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos[0].id)?.status_pn === 'PN implementado'
+       console.log(retorno)*/
+
+    });
+    return this.pnFiltrado
   }
 
   // pendenteee

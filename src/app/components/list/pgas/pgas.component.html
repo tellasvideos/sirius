@@ -61,7 +61,6 @@
                             <th scope="col" class="text-black">Estado PGAS</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th scope="col" class="text-black not-it">Modificação</th>
-                            <th scope="col" class="text-black not-it">Colar info</th>
                         </tr>
                     </thead> <!-- *ngIf="
                         getFormPGAsData(item.id) === 'PGAS em elaboração' 
@@ -86,16 +85,10 @@
                                     </button>
                                 </td>
 
-                                <td class="not-it"><button type="button" routerLinkActive="active"
-                                        class="btn btn-link btn-sm btn-rounded ">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                </td>
-
                                 <td class="not-it">
-                                    <button type="button" (click)="selecionarInquerito(item.id)"
-                                        class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalToggle">
+                                    <button type="button" (click)="getForm_PGAS_Data_entradas(inqueritoSelecionado)"
+                                        (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
@@ -264,13 +257,11 @@
 
                 </div>
 
-                <br>
-                <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
-                    <label>.</label>
-                    <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
-                </div>
 
-                <div class="modal-footer justify-content-between">
+                <div class="modal-footer justify-content-between"> <input type="submit" name="submit" value="Guardar"
+                        class="btn btn-success btn-sm">
+                </div>
+                <!--div class="modal-footer justify-content-between">
 
                     <div class="table-responsive" id="print-section-list-interest">
                         <table class="table table-sm table-hover text-center">
@@ -320,7 +311,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </!--div-->
                 <!--{{formBackoffice[0] | json }}-->
 
                 <!--p>ID: {{ inqueritoSelecionado | json }}</!p-->

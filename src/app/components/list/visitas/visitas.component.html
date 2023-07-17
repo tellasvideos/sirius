@@ -105,11 +105,12 @@
                             <label>Nome simplificado:</label>
                         </div>
 
-                        <!--[items]="pnElaborados" bindLabel="nome_simplificado" bindValue="nome_simplificado"-->
+                        <!-- -->
 
                         <div class="my-element" style="margin-left: 10%;">
-                            <ng-select class="ng-select form-control-sm" 
-                                 style="width: 350px;"
+                            <ng-select class="ng-select form-control-sm" style="width: 350px;"
+                                [items]="getNomes_simplificados_com_status_pn_implementado()"
+                                bindLabel="nome_simplificado" bindValue="nome_simplificado"
                                 formControlName="nome_simplificado" [searchable]="true" placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('nome_simplificado')?.touched }">
                             </ng-select>

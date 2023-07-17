@@ -124,6 +124,16 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
+  public foundItem: any;
+  getForm_PN_Data_entradas(inqueritoId: any) {
+    this.foundItem = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
+    this.dataService.getFormPN_elaborado_Byid(this.foundItem.id).subscribe(data => {
+      this.angForm.patchValue(data)
+    });
+    console.log('form_pn id item', this.foundItem.id);
+    return this.foundItem ? this.foundItem.id : 'N/D';
+  }
+
   selectedFinanciamentoBancario: any | number;
   mostrarFinanciamento(inqueritoId: string) {
     this.selectedFinanciamentoBancario = this.getFormBackofficeData(inqueritoId);
@@ -153,28 +163,28 @@ export class PnElaboradosComponent implements OnInit {
 
     // PN aprovado pelo CTI, em análise MG  
     const PN_aprovado_pelo_CTI_em_análise_MG =
-      this.angForm.get('data_analise_cti')?.value !== '' &&
+      this.angForm.get('data_analise_cti')?.value !== '' || null &&
       this.angForm.get('recusado_pelo_cti')?.value === false
 
     // PN aprovado pelo CTI, MG aprovado, em análise BC
     const PN_aprovado_pelo_CTI_MG_aprovado_em_analise_BC =
-      this.angForm.get('data_analise_cti')?.value !== '' &&
+      this.angForm.get('data_analise_cti')?.value !== '' || null &&
       !this.angForm.get('recusado_pelo_cti')?.value &&
-      this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '' &&
-      Number(this.selectedFinanciamentoBancario?.financiamento_bancario || 0) > 0;
+      this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '' || null &&
+      (this.selectedFinanciamentoBancario?.financiamento_bancario || 0) > 0;
 
     // Pendente no Banco
     const pnPendenteBanco = this.angForm.get('pn_pendente_no_banco')?.value === true;
 
     // Financiamento Aprovado
-    const dataAprovacaoFinancMg = this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '';
-    const dataAprovacaoFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value !== '';
+    const dataAprovacaoFinancMg = this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '' || null;
+    const dataAprovacaoFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value !== '' || null;
 
     // PN implementado
-    const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '';
-    const dataAprovacaoPgasBm = this.angForm.get('data_aprovacao_pgas_bm')?.value !== '';
+    const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '' || null;
+    const dataAprovacaoPgasBm = this.angForm.get('data_aprovacao_pgas_bm')?.value !== '' || null;
 
-    const Data_Aprovacao_do_PGAS_pelo_BM = this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial !== ''; // vindo do PGAS atravez do id correspondente
+    const Data_Aprovacao_do_PGAS_pelo_BM = this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial !== '' || null; // vindo do PGAS atravez do id correspondente
 
     if (PN_pendente_no_CTI) {
       return 'PN pendente no CTI';
@@ -197,15 +207,31 @@ export class PnElaboradosComponent implements OnInit {
   enviarFormulario() {
 
     const formData = new FormData();
+
+    try {
+      console.log(this.angForm.get('data_analise_cti')?.value, this.angForm.get('data_analise_cti')?.value)
+      const dataAnaliseValue = this.angForm.get('data_analise_cti')?.value;
+      console.log(this.angForm.get('data_aprovacao_financiamento_mg')?.value, this.angForm.get('data_aprovacao_financiamento_mg')?.value)
+      const dataAnaliseValue2 = this.angForm.get('data_aprovacao_financiamento_mg')?.value;
+      console.log(this.angForm.get('data_aprovacao_financiamento_banco')?.value, this.angForm.get('data_aprovacao_financiamento_banco')?.value)
+      const dataAnaliseValue3 = this.angForm.get('data_aprovacao_financiamento_banco')?.value;
+      console.log(this.angForm.get('data_primeiro_pedido_reembolso')?.value, this.angForm.get('data_primeiro_pedido_reembolso')?.value)
+      const dataAnaliseValue4 = this.angForm.get('data_primeiro_pedido_reembolso')?.value;
+      console.log(this.angForm.get('data_aprovacao_pgas_bm')?.value, this.angForm.get('data_aprovacao_pgas_bm')?.value)
+      const dataAnaliseValue5 = this.angForm.get('data_aprovacao_pgas_bm')?.value;
+    } catch (error) {
+      formData.append('data_analise_cti', this.angForm.value.data_analise_cti);
+      formData.append('data_aprovacao_financiamento_mg', this.angForm.value.data_aprovacao_financiamento_mg);
+      formData.append('data_aprovacao_financiamento_banco', this.angForm.value.data_aprovacao_financiamento_banco);
+      formData.append('data_primeiro_pedido_reembolso', this.angForm.value.data_primeiro_pedido_reembolso);
+      formData.append('data_aprovacao_pgas_bm', this.angForm.value.data_aprovacao_pgas_bm)
+    }
+
     formData.append('recusado_pelo_cti', this.angForm.value.recusado_pelo_cti);
     formData.append('justificacao_recusado_pelo_cti', this.angForm.value.justificacao_recusado_pelo_cti);
-    formData.append('data_aprovacao_financiamento_mg', this.angForm.value.data_aprovacao_financiamento_mg);
-    formData.append('data_aprovacao_financiamento_banco', this.angForm.value.data_aprovacao_financiamento_banco);
-    formData.append('pn_pendente_no_banco', this.angForm.value.pn_pendente_no_banco || false);
+    formData.append('pn_pendente_no_banco', this.angForm.value.pn_pendente_no_banco);
     formData.append('justificacao_pn_pendente_no_banco', this.angForm.value.justificacao_pn_pendente_no_banco);
-    formData.append('data_primeiro_pedido_reembolso', this.angForm.value.data_primeiro_pedido_reembolso);
     formData.append('inquerito', this.inqueritoSelecionado);
-    formData.append('data_aprovacao_pgas_bm', this.angForm.value.data_aprovacao_pgas_bm)
     formData.append('status_pn', this.getStatus_pn());
 
     // Success callback 1
@@ -249,18 +275,15 @@ export class PnElaboradosComponent implements OnInit {
 
     const statusPN = this.getStatus_pn();
 
-    if (statusPN === 'PN implementado') {
-      this.dataService.Post_pnElaborados(formData).subscribe(successCallback2, errorCallback);
-      //this.router.navigate(['pn-implementados']);
-      // Remover o item selecionado da lista inicial
-
-    } else {
+    try {
+      if (this.foundItem.id) {
+        this.dataService.Update_PN_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
+      } else {
+      }
+    } catch (error) {
       this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
     }
-
-
   }
-
 
   get_pn: any;
   get_pn_elaborados() {

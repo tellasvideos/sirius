@@ -71,7 +71,7 @@
                     <tbody>
                         <tr *ngFor=" let item of inqueritos | search:'nome_simplificado':keyWord">
                             <ng-container
-                                *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN em análise UIP PDAC'">
+                                *ngIf="getFormBackofficeData(item.id)?.status_pn === 'PN em análise UIP PDAC' && getFormPN_STATUS_Data(item.id)?.status_pn !== 'PN implementado' ">
 
                                 <!--td>{{item.id}}</!--td-->
                                 <td>{{item.nome_simplificado}}</td>
@@ -91,8 +91,8 @@
                                     (this.user_logged.department === 'Back Off' || 
                                     this.user_logged.department === 'M&A' )&&
                                     this.user_logged.is_admin === true" class="not-it">
-                                    <button 
-                                        (click)="mostrarFinanciamento(item.id)"
+                                    <button (click)="mostrarFinanciamento(item.id)"
+                                        (click)="getForm_PN_Data_entradas(inqueritoSelecionado)"
                                         (click)="mostrar_Data_aprovada_pgas_BM(item.id)" type="button"
                                         (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
@@ -247,15 +247,15 @@
                                 class="form-control form-control-sm">
                         </div>
                     </div>
-                    <br>
-                    <div class="mb-3 d-flex justify-content-between mx-auto" style="width: 60%;">
-                        <label>.</label>
-                        <input type="submit" name="submit" value="Guardar" class="btn btn-success btn-sm">
-                    </div>
                 </div>
 
 
-                <div class="modal-footer justify-content-between">
+                <div class="modal-footer justify-content-between"> <input type="submit" name="submit" value="Guardar"
+                        class="btn btn-success btn-sm">
+                </div>
+
+
+                <!--div class="modal-footer justify-content-between">
                     <div class="table-responsive" id="print-section-list-interest">
                         <table class="table table-sm table-hover text-center">
                             <thead class="linhas2">
@@ -305,7 +305,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </!--div-->
 
             </form>
         </div>

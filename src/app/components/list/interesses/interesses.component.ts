@@ -472,14 +472,20 @@ export class InteressesComponent implements OnInit {
     formData.append('consultor_pn', this.angForm.get('consultor_pn')?.value);
     formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
 
-    const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
-    formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : '');
-
-    const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
-    formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '');
+    try {
+      console.log(this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
+      const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
+      formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : '');
+      const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
+      formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '');
+      console.log(fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '')
+    } catch (error) {
+      console.log(error, this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
+      formData.append('fim_elaboracao_pn', this.angForm.get('fim_elaboracao_pn')?.value)
+      formData.append('fim_verificacao', this.angForm.get('fim_verificacao')?.value);
+    }
 
     formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
-
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
     formData.append('proponente_desistiu', this.angForm.get('proponente_desistiu')?.value);
@@ -487,21 +493,34 @@ export class InteressesComponent implements OnInit {
 
     let status_pn_salvo = 'N/D';
 
+    console.log(this.angForm.get('fim_verificacao')?.value)
     if (this.angForm.get('proponente_desistiu')?.value === true) {
+
       status_pn_salvo = 'Desistência do proponente';
+
     } else if (this.angForm.get('pn_pendente')?.value === true) {
+
       status_pn_salvo = 'PN pendente no BO';
+
     } else if (this.inqueritoSelecionado?.status === 'Aprovado' && this.angForm.get('inicio_elaboracao_pn')?.value === '') {
+
       status_pn_salvo = 'Inquérito em stock';
-    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && this.angForm.get('fim_elaboracao_pn')?.value === '') {
+
+    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && (this.angForm.get('fim_elaboracao_pn')?.value === '' || this.angForm.get('fim_elaboracao_pn')?.value === null)) {
+
       status_pn_salvo = 'PN em elaboração';
-    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && this.angForm.get('fim_verificacao')?.value === '') {
+
+    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && (this.angForm.get('fim_verificacao')?.value === '' || this.angForm.get('fim_verificacao')?.value === null)) {
+
       status_pn_salvo = 'PN em verificação';
-    } else if (
-      this.angForm.get('fim_verificacao')?.value !== ''
-    ) {
+
+    } else if (this.angForm.get('fim_verificacao')?.value !== '' || this.angForm.get('fim_verificacao')?.value !== null) {
+
       status_pn_salvo = 'PN em análise UIP PDAC';
+
     }
+
+
 
     formData.append('status_pn', status_pn_salvo);
     formData.append('inquerito', this.inqueritoSelecionado);
@@ -558,12 +577,12 @@ export class InteressesComponent implements OnInit {
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_Backoffice_form(this.foundItem.id, formData).subscribe();
+        this.dataService.Update_Backoffice_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
       } else {
         console.log('')
       }
     } catch (error) {
-      this.dataService.Send_Backoffice_form(formData).subscribe();
+      this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
     }
 
 
