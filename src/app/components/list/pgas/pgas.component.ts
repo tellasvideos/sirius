@@ -213,7 +213,7 @@ export class PgasComponent implements OnInit {
   // estados pgas
   getEstadosPGAs() {
 
-    const PGA_a_ser_elaborado = this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '';
+    const PGA_a_ser_elaborado = this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value === null;
     const PGA_em_elaboracao = this.angForm.get('data_inicio_elaboracao_pgas')?.value !== '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value !== null;
     const PGA_Revisao_ou_Analise_PDA_BM = this.angForm.get('data_fim_elaboracao_pgas')?.value !== '' || this.angForm.get('data_fim_elaboracao_pgas')?.value !== null;
     const PGA_Aprovada_BM = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' || this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== null;
@@ -344,11 +344,11 @@ export class PgasComponent implements OnInit {
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PGAS_form(this.foundItem.id, formData).subscribe();
+        this.dataService.Update_PGAS_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
       } else {
       }
     } catch (error) {
-      this.dataService.Save_PGAS(formData).subscribe();
+      this.dataService.Save_PGAS(formData).subscribe(successCallback, errorCallback );
     }
 
   }
