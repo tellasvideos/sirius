@@ -5,7 +5,8 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 
 import { Observable, timer } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-visitas',
@@ -28,7 +29,8 @@ export class VisitasComponent implements OnInit {
   constructor(
     private modalService: MdbModalService,
     private dataService: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {
 
     this.angForm = this.fb.group({
@@ -39,12 +41,14 @@ export class VisitasComponent implements OnInit {
       ficha_acompanhamento: [''],
       principais_constatacoes: [''],
       recomendacao_ao_produtor: [''],
-      consultor_visita1: [''],
-      consultor_visita2: [''],
+      consultor_visita1: [null],
+      consultor_visita2: [null],
       created_at: ['']
     });
 
   }
+
+  inqueritoSelecionado: any;
 
   ngOnInit(): void {
     this.getUserSalvaguarde();
@@ -53,6 +57,11 @@ export class VisitasComponent implements OnInit {
     this.get_pnElaborados();
     this.getInqueritos();
     this.getNomes_simplificados_com_status_pn_implementado();
+    this.getMunicipio()
+
+    /* this.route.queryParams.subscribe(params => {
+       this.inqueritoSelecionado = params;
+     });*/
   }
 
   sideBarToggler() {
@@ -65,6 +74,22 @@ export class VisitasComponent implements OnInit {
       title: "Salvo",
       showConfirmButton: false,
       timer: 1400
+    })
+  }
+
+  alert_error_NS() {
+    Swal.fire({
+      icon: 'error',
+      // title: 'Oops...',
+      text: 'Por favor, preencha o campo Nome simplificado.',
+    })
+  }
+
+  alert_error_TV() {
+    Swal.fire({
+      icon: 'error',
+      // title: 'Oops...',
+      text: 'Por favor, preencha o campo Tipo de visita.',
     })
   }
 
@@ -121,6 +146,16 @@ export class VisitasComponent implements OnInit {
     })
   }
 
+  public foundItem: any;
+  getForm_Visitas_Data_entradas(inqueritoId: any) {
+    this.foundItem = this.visitasData.find((item: any) => item.inquerito === inqueritoId);
+    this.dataService.getForm_visitas_Byid(this.foundItem.id).subscribe(data => {
+      this.angForm.patchValue(data)
+    });
+    console.log('form_pn id item', this.foundItem.id);
+    return this.foundItem ? this.foundItem.id : 'N/D';
+  }
+
   saveVisitas() {
 
     const formData = new FormData()
@@ -134,7 +169,7 @@ export class VisitasComponent implements OnInit {
 
       // Verificar se o arquivo não está vazio
       if (ficha_acompanhamento.size > 0) {
-        formData.append("ficha_acompanhamento", this.angForm.get('ficha_acompanhamento')?.value);
+        formData.append("ficha_acompanhamento", ficha_acompanhamento, ficha_acompanhamento.name);
       }
     }
 
@@ -143,11 +178,39 @@ export class VisitasComponent implements OnInit {
     formData.append("tipo_de_visita", this.angForm.get('tipo_de_visita')?.value);
     formData.append("numero_ficha_acompanhamento", (this.angForm.get('numero_ficha_acompanhamento')?.value));
     formData.append("principais_constatacoes", this.angForm.get('principais_constatacoes')?.value);
+    formData.append("recomendacao_ao_produtor", this.angForm.get('recomendacao_ao_produtor')?.value);
     formData.append("consultor_visita1", this.angForm.get('consultor_visita1')?.value);
     formData.append("consultor_visita2", this.angForm.get('consultor_visita2')?.value);
     formData.append("created_at", this.angForm.get('created_at')?.value);
 
+    if (!this.angForm.get('nome_simplificado')?.value) {
+      if (!this.angForm.get('nome_simplificado')?.value) {
+        this.alert_error_NS();
+      }
+      return;
+    }
+
+    if (!this.angForm.get('tipo_de_visita')?.value) {
+      if (!this.angForm.get('tipo_de_visita')?.value) {
+        this.alert_error_TV();
+      }
+      return;
+    }
+
+    if (!this.angForm.get('data_da_visista')?.value) {
+      if (!this.angForm.get('data_da_visista')?.value) {
+        Swal.fire({
+          icon: 'error',
+          // title: 'Oops...',
+          text: 'Por favor, preencha o campo Data da visita.',
+        })
+      }
+      return;
+    }
+
+
     this.dataService.Save_Visitas(formData).subscribe(
+
       success => {
 
         this.alert_success();
@@ -165,7 +228,7 @@ export class VisitasComponent implements OnInit {
       },
       error => { this.alert_error(); },
     );
-    // this.get_inquireForms();
+
   }
 
   visitasData: any;
@@ -192,31 +255,70 @@ export class VisitasComponent implements OnInit {
     });
   }
 
-  // pendenteeee
+  // works
   getNomes_simplificados_com_status_pn_implementado() {
 
-
     this.dataService.get_InquireForm().subscribe(data => {
-      this.pnFiltrado = this.pnElaborados.filter((item: any) => (item.status_pn === 'PN implementado' && (item.nome_simplificado !== '' || item.nome_simplificado !== null)));
+      this.pnFiltrado = this.pnElaborados.filter((item: any) =>
+        (item.status_pn === 'PN implementado' && (item.nome_simplificado !== '' || item.nome_simplificado !== null)));
       //console.log('okkkkk', pnFiltrado)
-      //let pnFiltrados_implementados = pnFiltrado.filter((item:any) => item.inquerito === )
-
-
-      /* this.inqueritos = data.filter(item => item.status === 'Aprovado');
-       console.log(this.pnElaborados)
-       let retorno = this.pnElaborados.find((item: any) => item.inquerito === this.inqueritos[0].id)?.status_pn === 'PN implementado'
-       console.log(retorno)*/
-
     });
-    return this.pnFiltrado
+    //  return this.pnFiltrado
   }
 
-  // pendenteee
-  isStatusPnImplementado(): boolean {
-    console.log('yeeeee', this.pnElaborados)
-    return this.pnElaborados.some((pnItem: any) =>
-      this.inqueritos.some((inqItem: any) => pnItem.inquerito === inqItem.id && pnItem.status_pn === 'PN implementado')
+  // encontra a provincia do nome_simplificado passado em visitas na lista inqueritos
+  get_Provincia_nome_simplificado(nome_simplificado: any) {
+    const inqueritoCorrespondente = this.inqueritos.find(
+      (item: any) => item.nome_simplificado === nome_simplificado
     );
+
+    if (inqueritoCorrespondente) {
+      console.log(inqueritoCorrespondente.provincia);
+      return inqueritoCorrespondente.provincia;
+    } else {
+      // Caso o item não seja encontrado na lista 'inqueritos', você pode retornar um valor padrão ou tratar essa situação de acordo com a sua necessidade.
+      return "N/D";
+    }
+  }
+
+  // encontra o municipio desse nome simplificado na lista inqueritos
+  get_Municipio_nome_simplificado(nome_simplificado: any) {
+    const inqueritoCorrespondente = this.inqueritos.find(
+      (item: any) => item.nome_simplificado === nome_simplificado
+    );
+
+    if (inqueritoCorrespondente) {
+      console.log(inqueritoCorrespondente.municipio);
+      return inqueritoCorrespondente.municipio;
+    } else {
+      // Caso o item não seja encontrado na lista 'inqueritos', você pode retornar um valor padrão ou tratar essa situação de acordo com a sua necessidade.
+      return "N/D";
+    }
+  }
+
+
+  municipio: any;
+  retorno: any;
+  devolver_nome_municipio(id: string) {
+    if (!this.municipio) {
+      // Se a lista de municípios ainda não foi carregada, retorne um valor padrão ou trate essa situação de acordo com a necessidade.
+      return "N/D";
+    }
+
+    const municipioCorrespondente = this.municipio.find((municipio: any) => municipio.id === id);
+    console.log(municipioCorrespondente)
+    if (municipioCorrespondente) {
+      return municipioCorrespondente.name;
+    } else {
+      // Se o município não for encontrado na lista, retorne um valor padrão ou trate essa situação de acordo com a necessidade.
+      return "N/D";
+    }
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+    })
   }
 
   del(id: any) {

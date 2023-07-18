@@ -425,6 +425,11 @@ export class DataService {
     return this.http.patch(`${this.url_update_pn_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
    }
 
+   url_Update_visitas_form = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
+   Update_Visitas_form(id:any, form:any){
+    return this.http.patch(`${this.url_Update_visitas_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
+   }
+
    url_update_PGAS_form = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/'
    Update_PGAS_form(id:any, form:any){
     return this.http.patch(`${this.url_update_PGAS_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
@@ -694,7 +699,7 @@ export class DataService {
     //var headers = new HttpHeaders();
     // headers = headers.append('Content-Type', 'application/json');
     // headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));
-    return this.http.get<any[]>(this.get_inquireForms_url)
+    return this.http.get<any[]>(this.get_inquireForms_url).pipe(take(2));
   }
 
   // Method to save inquire form
@@ -790,6 +795,11 @@ export class DataService {
   url_form_pn_elaborado_byid = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/';
   getFormPN_elaborado_Byid(id: any){
     return this.http.get(`${this.url_form_pn_elaborado_byid}${id}` ).pipe(take(2));
+  }
+
+  url_form_visitas_byid = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/';
+  getForm_visitas_Byid(id: any){
+    return this.http.get(`${this.url_form_visitas_byid}${id}` ).pipe(take(2));
   }
 
   url_form_pgas_byid = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/';

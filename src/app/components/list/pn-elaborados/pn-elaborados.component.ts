@@ -442,7 +442,6 @@ export class PnElaboradosComponent implements OnInit {
   getFormBackofficeData(inqueritoId: string): any {
     console.log(inqueritoId)
     return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-
   }
 
   get_Form_PGAS_Data(inqueritoId: string): any {

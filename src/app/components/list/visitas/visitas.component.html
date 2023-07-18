@@ -66,15 +66,20 @@
                     <tbody>
                         <tr *ngFor="let item of visitasData">
                             <td>{{item.nome_simplificado}}</td>
-                            <td> {{item.provincia}} </td>
-                            <td> {{item.municipio}} </td>
+                            <td> {{get_Provincia_nome_simplificado(item.nome_simplificado)}} </td>
+                            <td>{{ devolver_nome_municipio(get_Municipio_nome_simplificado(item.nome_simplificado)) }}
+                            </td>
                             <td>{{item.numero_ficha_acompanhamento}}</td>
                             <td>{{item.data_da_visista}}</td>
                             <td>{{item.tipo_de_visita}}</td>
                             <td>{{item.principais_constatacoes}}</td>
                             <td>{{item.recomendacao_ao_produtor}}</td>
-                            <td>{{item.consultor_visita1 ? item.consultor_visita1 : item.consultor_visita2 }}</td>
-                            <!--td><button (click)="del(item.id)" >del</button></!--td-->
+                            <td> {{
+                                (item.consultor_visita1 ?? '') && (item.consultor_visita2 ?? '') ?
+                                item.consultor_visita1 + ' ' + item.consultor_visita2 :
+                                item.consultor_visita1 ?? item.consultor_visita2 ?? ''
+                                }}</td>
+                            <td><button (click)="del(item.id)">del</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -108,8 +113,7 @@
                         <!-- -->
 
                         <div class="my-element" style="margin-left: 10%;">
-                            <ng-select class="ng-select form-control-sm" style="width: 350px;"
-                                [items]="getNomes_simplificados_com_status_pn_implementado()"
+                            <ng-select class="ng-select form-control-sm" style="width: 350px;" [items]="pnFiltrado"
                                 bindLabel="nome_simplificado" bindValue="nome_simplificado"
                                 formControlName="nome_simplificado" [searchable]="true" placeholder=""
                                 [ngClass]="{ 'is-invalid': angForm.get('manifestacao_de_interesse')?.invalid && angForm.get('nome_simplificado')?.touched }">
@@ -161,7 +165,7 @@
                         </div>
 
                         <div>
-                            <input style="width: 350px;" class="form-control form-control-sm mb-2"
+                            <input style="width: 80px; margin-right: 200px;" class="form-control form-control-sm mb-2"
                                 [ngClass]="{ 'is-invalid': angForm.get('numero_ficha_acompanhamento')?.invalid && angForm.get('numero_ficha_acompanhamento')?.touched }"
                                 formControlName="numero_ficha_acompanhamento" type="text" required
                                 name="numero_ficha_acompanhamento" aria-label=".form-control-sm example"
@@ -240,7 +244,7 @@
                         </div>
                         <div>
                             <select multiple class="form-select form-select-sm" style="width: 350px;"
-                                id="consultor_visita1" name="consultor_visita1" formArrayName="consultor_visita1"
+                                id="consultor_visita1" name="consultor_visita1" formControlName="consultor_visita1"
                                 [ngClass]="{ 'is-invalid': angForm.get('consultor_visita1')?.invalid && (angForm.get('consultor_visita1')?.touched) }">
                                 <option *ngFor="let item of UserapoioTecnico" [value]="item.name">{{item.name}}</option>
                             </select>
@@ -260,7 +264,7 @@
                         </div>
                         <div>
                             <select multiple class="form-select form-select-sm" style="width: 350px;"
-                                id="consultor_visita2" name="consultor_visita2" formArrayName="consultor_visita2"
+                                id="consultor_visita2" name="consultor_visita2" formControlName="consultor_visita2"
                                 [ngClass]="{ 'is-invalid': angForm.get('consultor_visita2')?.invalid && (angForm.get('consultor_visita2')?.touched) }">
                                 <option *ngFor="let item of userSalvaGuarde" [value]="item.name">{{item.name}}</option>
                             </select>
