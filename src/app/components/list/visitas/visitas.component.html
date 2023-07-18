@@ -61,6 +61,7 @@
                             <th scope="col" class="text-black not-it">Principais constatações</th>
                             <th scope="col" class="text-black not-it">Recomendações ao Produtor</th>
                             <th scope="col" class="text-black not-it">Consultor visita</th>
+                            <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +70,7 @@
                             <td> {{get_Provincia_nome_simplificado(item.nome_simplificado)}} </td>
                             <td>{{ devolver_nome_municipio(get_Municipio_nome_simplificado(item.nome_simplificado)) }}
                             </td>
-                            <td>{{item.numero_ficha_acompanhamento}}</td>
+                            <td>{{item.numero_ficha_acompanhamento ? item.numero_ficha_acompanhamento : 'N/D'}}</td>
                             <td>{{item.data_da_visista}}</td>
                             <td>{{item.tipo_de_visita}}</td>
                             <td>{{item.principais_constatacoes}}</td>
@@ -79,7 +80,9 @@
                                 item.consultor_visita1 + ' ' + item.consultor_visita2 :
                                 item.consultor_visita1 ?? item.consultor_visita2 ?? ''
                                 }}</td>
-                            <td><button (click)="del(item.id)">del</button></td>
+                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="del(item.id)">
+                                    <i class="fas fa-trash-alt" style="color: red;"></i>
+                                </button></td>
                         </tr>
                     </tbody>
                 </table>

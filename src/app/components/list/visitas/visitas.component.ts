@@ -322,10 +322,30 @@ export class VisitasComponent implements OnInit {
   }
 
   del(id: any) {
-    this.dataService.delete_visitas(id).subscribe(
-      success => { this.alert_success(); },
-      error => { this.alert_error(); }
-    )
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar este registo!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        this.dataService.delete_visitas(id).subscribe(
+          success => {
+            this.get_visitas(), this.get_visitas()
+          },
+          error => { this.alert_error() }
+        )
+        Swal.fire(
+          'Eliminado!',
+          'O seu registo foi eliminado.',
+          'success',
+        )
+      }
+    })
+    this.get_visitas()
   }
 
 }
