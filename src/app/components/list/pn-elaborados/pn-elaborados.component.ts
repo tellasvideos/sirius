@@ -136,10 +136,14 @@ export class PnElaboradosComponent implements OnInit {
 
   selectedFinanciamentoBancario: any | number;
   mostrarFinanciamento(inqueritoId: string) {
-    this.selectedFinanciamentoBancario = this.getFormBackofficeData(inqueritoId);
+    this.selectedFinanciamentoBancario = this.get_Id_inq_from_backoffice(inqueritoId);
     if (this.selectedFinanciamentoBancario) {
       console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
     }
+  }
+
+  get_Id_inq_from_backoffice(inqueritoId: any) {
+    return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
   }
 
   selected_data_aprovacao_pgas_BM: any;
@@ -318,18 +322,17 @@ export class PnElaboradosComponent implements OnInit {
 
 
 
-  checkDates() {
-    const pnEntregueDate = this.selectedFinanciamentoBancario?.data_pn_entregue_ao_pdac;
+  checkDates1() {
     const DataAnaliseCti = this.angForm.get('data_analise_cti')?.value;
     const DataAprovFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value;
-    const today = new Date();
 
     if (DataAprovFinancBanco < DataAnaliseCti) {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
-        text: 'A Data de aprovação de financiamento no banco" não pode ser anterior à "Data de análise ao CTI".',
+        text: 'A Data de aprovação de financiamento no banco não pode ser anterior à "Data de análise ao CTI".',
       })
+      this.angForm.get('data_aprovacao_financiamento_banco')?.setValue('')
     }
 
   }
@@ -344,6 +347,7 @@ export class PnElaboradosComponent implements OnInit {
         //title: 'Oops...',
         text: 'A Data de aprovação de financiamento MG" não pode ser anterior à "Data de análise ao CTI".',
       })
+      this.angForm.get('data_aprovacao_financiamento_mg')?.setValue('')
     }
   }
 
@@ -358,6 +362,7 @@ export class PnElaboradosComponent implements OnInit {
         //title: 'Oops...',
         text: '"A Data de implementação" não pode ser anterior à "Data de aprovação do financiamento ao MG ou Banco".',
       })
+      this.angForm.get('data_primeiro_pedido_reembolso')?.setValue('')
     }
   }
 
@@ -439,7 +444,7 @@ export class PnElaboradosComponent implements OnInit {
   }
 
 
-  getFormBackofficeData(inqueritoId: string): any {
+  get_Data_entregue_ao_PDAC(inqueritoId: string): any {
     const data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
     console.log('data entregue ao pdac', data_de_entregue_pdac.fim_verificacao)
     return data_de_entregue_pdac.fim_verificacao
@@ -448,7 +453,6 @@ export class PnElaboradosComponent implements OnInit {
   get_Form_PGAS_Data(inqueritoId: string): any {
     console.log(inqueritoId)
     return this.pgas.find((item: any) => item.inquerito === inqueritoId);
-
   }
 
   // to get Pgas
@@ -460,10 +464,10 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
-  getFormPN_STATUS_Data(inqueritoId: string): any {
+  get_PN_STATUS_Data(inqueritoId: string): any {
     const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    console.log('status_pn', status_pn.status_pn)
-    return status_pn.status_pn
+    // console.log('status_pn', status_pn.status_pn)
+    return status_pn?.status_pn
   }
 
   /*limparCampos() {

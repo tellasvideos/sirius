@@ -62,22 +62,22 @@
                             <th scope="col" class="text-black">Estado PN</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th *ngIf="
-                                (this.user_logged.department === 'Back Off' || 
-                                this.user_logged.department === 'M&A') &&
-                                this.user_logged.is_admin === true" scope="col" class="text-black not-it">Colar info
+                                (this.user_logged?.department === 'Back Off' || 
+                                this.user_logged?.department === 'M&A') &&
+                                this.user_logged?.is_admin === true" scope="col" class="text-black not-it">Colar info
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor=" let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container>
+                            <ng-container *ngIf="get_PN_STATUS_Data(item.id) === 'PN em análise UIP PDAC'">
 
                                 <!--td>{{item.id}} *ngIf="getFormBackofficeData(item.id) === 'PN em análise UIP PDAC' && getFormPN_STATUS_Data(item.id) !== 'PN implementado' "</!--td-->
                                 <td>{{item.nome_simplificado}}</td>
                                 <td>{{item.provincia}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                                <td>{{getFormBackofficeData(item.id) | date: 'yyyy-MM-dd' }}</td>
-                                <td>{{getFormPN_STATUS_Data(item.id)}}</td>
+                                <td>{{get_Data_entregue_ao_PDAC(item.id) | date: 'yyyy-MM-dd' }}</td>
+                                <td>{{get_PN_STATUS_Data(item.id)}}</td>
 
                                 <td class=" not-it"><button type="button" routerLinkActive="active"
                                         [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
@@ -193,11 +193,11 @@
                     <div *ngIf="angForm.get('data_aprovacao_financiamento_mg')?.value && this.selectedFinanciamentoBancario?.financiamento_bancario === 'MG e Banco'"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
-                            <label for="data_aprovacao_financiamento_banco">Data aprovação financiamento Banco:</label>
+                            <label>Data aprovação financiamento Banco:</label>
                         </div>
                         <div>
                             <input type="date" formControlName="data_aprovacao_financiamento_banco"
-                                (change)="checkDates()" name="data_aprovacao_financiamento_banco"
+                                (change)="checkDates1()" name="data_aprovacao_financiamento_banco"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-left: 200px;" class="form-control form-control-sm">
                         </div>

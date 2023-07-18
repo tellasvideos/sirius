@@ -67,7 +67,7 @@
                         class="fas fa-chart-pie fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">PGAS</span></div>
             </div>
-            <div class="d-block text-center" *ngIf="user.is_admin === true">
+            <div class="d-block text-center" *ngIf="user?.is_admin === true">
                 <button routerLink="/usuario" routerLinkActive="active" type="button" class="btn"><i
                         class="fas fa-user-alt fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">Usuário</span></div>

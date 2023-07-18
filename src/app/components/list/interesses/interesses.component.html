@@ -29,7 +29,7 @@
                             style="text-transform: capitalize;">Exportar</button>
                     </!--div-->
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group" *ngIf="
-                    this.user_logged.department === 'Back Off' || this.user_logged.is_admin === true">
+                    this.user_logged?.department === 'Back Off' || this.user_logged?.is_admin === true">
                         <!--button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
                                 class="fas fa-plus-square text-black"></i> Add Back Off
                         </!--button--> <!--button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
