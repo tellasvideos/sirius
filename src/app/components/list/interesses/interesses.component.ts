@@ -223,7 +223,7 @@ export class InteressesComponent implements OnInit {
     this.dataService.getFormBackofficeByid(this.foundItem.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('formbackoffice single', this.foundItem.status_pn);
+    console.log('formbackoffice single', this.foundItem);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 

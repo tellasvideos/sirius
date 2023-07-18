@@ -88,13 +88,14 @@ export class PnElaboradosComponent implements OnInit {
     // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
+      console.log('id param', this.inqueritoSelecionado)
     });
 
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      // console.log('User logado', this.user_logged)
     });
 
     /*/ leva os dados do backoffice para o pnelaborados form
@@ -124,13 +125,14 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
+  
   public foundItem: any;
   getForm_PN_Data_entradas(inqueritoId: any) {
     this.foundItem = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
     this.dataService.getFormPN_elaborado_Byid(this.foundItem.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('form_pn id item', this.foundItem.id);
+    console.log('Items carregados', this.foundItem);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 
@@ -212,24 +214,12 @@ export class PnElaboradosComponent implements OnInit {
 
     const formData = new FormData();
 
-    try {
-      console.log(this.angForm.get('data_analise_cti')?.value, this.angForm.get('data_analise_cti')?.value)
-      const dataAnaliseValue = this.angForm.get('data_analise_cti')?.value;
-      console.log(this.angForm.get('data_aprovacao_financiamento_mg')?.value, this.angForm.get('data_aprovacao_financiamento_mg')?.value)
-      const dataAnaliseValue2 = this.angForm.get('data_aprovacao_financiamento_mg')?.value;
-      console.log(this.angForm.get('data_aprovacao_financiamento_banco')?.value, this.angForm.get('data_aprovacao_financiamento_banco')?.value)
-      const dataAnaliseValue3 = this.angForm.get('data_aprovacao_financiamento_banco')?.value;
-      console.log(this.angForm.get('data_primeiro_pedido_reembolso')?.value, this.angForm.get('data_primeiro_pedido_reembolso')?.value)
-      const dataAnaliseValue4 = this.angForm.get('data_primeiro_pedido_reembolso')?.value;
-      console.log(this.angForm.get('data_aprovacao_pgas_bm')?.value, this.angForm.get('data_aprovacao_pgas_bm')?.value)
-      const dataAnaliseValue5 = this.angForm.get('data_aprovacao_pgas_bm')?.value;
-    } catch (error) {
-      formData.append('data_analise_cti', this.angForm.value.data_analise_cti);
-      formData.append('data_aprovacao_financiamento_mg', this.angForm.value.data_aprovacao_financiamento_mg);
-      formData.append('data_aprovacao_financiamento_banco', this.angForm.value.data_aprovacao_financiamento_banco);
-      formData.append('data_primeiro_pedido_reembolso', this.angForm.value.data_primeiro_pedido_reembolso);
-      formData.append('data_aprovacao_pgas_bm', this.angForm.value.data_aprovacao_pgas_bm)
-    }
+
+    formData.append('data_analise_cti', this.angForm.value.data_analise_cti);
+    formData.append('data_aprovacao_financiamento_mg', this.angForm.value.data_aprovacao_financiamento_mg);
+    formData.append('data_aprovacao_financiamento_banco', this.angForm.value.data_aprovacao_financiamento_banco);
+    formData.append('data_primeiro_pedido_reembolso', this.angForm.value.data_primeiro_pedido_reembolso);
+    formData.append('data_aprovacao_pgas_bm', this.angForm.value.data_aprovacao_pgas_bm);
 
     formData.append('recusado_pelo_cti', this.angForm.value.recusado_pelo_cti);
     formData.append('justificacao_recusado_pelo_cti', this.angForm.value.justificacao_recusado_pelo_cti);
@@ -281,11 +271,11 @@ export class PnElaboradosComponent implements OnInit {
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PN_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
+        this.dataService.Update_PN_form(this.foundItem.id, formData).subscribe();
       } else {
       }
     } catch (error) {
-      this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
+      this.dataService.Post_pnElaborados(formData).subscribe();
     }
   }
 
@@ -446,8 +436,8 @@ export class PnElaboradosComponent implements OnInit {
 
   get_Data_entregue_ao_PDAC(inqueritoId: string): any {
     const data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    console.log('data entregue ao pdac', data_de_entregue_pdac.fim_verificacao)
-    return data_de_entregue_pdac.fim_verificacao
+    console.log('data entregue ao pdac', data_de_entregue_pdac?.fim_verificacao)
+    return data_de_entregue_pdac?.fim_verificacao
   }
 
   get_Form_PGAS_Data(inqueritoId: string): any {
