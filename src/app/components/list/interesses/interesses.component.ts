@@ -89,7 +89,7 @@ export class InteressesComponent implements OnInit {
       created_at: [''],
       mgCheckbox: [false],
       mgBancoCheckbox: [false],
-      //  status_pn: [this.getStatusPN()]
+      status_pn: ['']
     })
   }
 
@@ -335,113 +335,6 @@ export class InteressesComponent implements OnInit {
 
   enviarFormulario(data_: any) {
 
-    /* // Tratamento para upload de um arquivo (estudo de viabilidade)
-     let fileList1: FileList = this.selectedFile1;
-     let estudo_de_viabilidade: FileList = fileList1;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile1 && this.selectedFile1?.length > 0) {
-       const Estudo_de_viabilidade = this.selectedFile1[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Estudo_de_viabilidade.size > 0) {
-         formData.append("estudo_de_viabilidade", Estudo_de_viabilidade, Estudo_de_viabilidade.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (Termo de compromisso) 
-     let fileList2: FileList = this.selectedFile2;
-     let termo_compromisso_assinado: FileList = fileList2;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile2 && this.selectedFile2?.length > 0) {
-       const Termo_compromisso_assinado = this.selectedFile2[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Termo_compromisso_assinado.size > 0) {
-         formData.append('termo_compromisso_assinado', Termo_compromisso_assinado, Termo_compromisso_assinado.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (projeto_riv_completo) 
-     let fileList3: FileList = this.selectedFile3;
-     let projeto_riv_completo: FileList = fileList3;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile3 && this.selectedFile3?.length > 0) {
-       const Projeto_riv_completo = this.selectedFile3[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Projeto_riv_completo.size > 0) {
-         formData.append('projeto_riv_completo', Projeto_riv_completo, Projeto_riv_completo.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (Ftas) 
-     let fileList4: FileList = this.selectedFile4;
-     let ftas: FileList = fileList4;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile4 && this.selectedFile4?.length > 0) {
-       const Ftas = this.selectedFile4[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Ftas.size > 0) {
-         formData.append('ftas', Ftas, Ftas.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (lista_de_trabalhadores) 
-     let fileList5: FileList = this.selectedFile5;
-     let lista_de_trabalhadores: FileList = fileList5;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile5 && this.selectedFile5?.length > 0) {
-       const Lista_de_trabalhadores = this.selectedFile5[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Lista_de_trabalhadores.size > 0) {
-         formData.append('lista_de_trabalhadores', Lista_de_trabalhadores, Lista_de_trabalhadores.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (documentos_administrativos) 
-     let fileList6: FileList = this.selectedFile6;
-     let documentos_administrativos: FileList = fileList6;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile6 && this.selectedFile6?.length > 0) {
-       const Documentos_administrativos = this.selectedFile6[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Documentos_administrativos.size > 0) {
-         formData.append('documentos_administrativos', Documentos_administrativos, Documentos_administrativos.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (ficheiro_riv) 
-     let fileList7: FileList = this.selectedFile7;
-     let ficheiro_riv: FileList = fileList7;
-   
-     // Verificar se há um arquivo selecionado
-     if (this.selectedFile7 && this.selectedFile7?.length > 0) {
-       const Ficheiro_riv = this.selectedFile7[0];
-   
-       // Verificar se o arquivo não está vazio
-       if (Ficheiro_riv.size > 0) {
-         formData.append('ficheiro_riv', Ficheiro_riv, Ficheiro_riv.name);
-       }
-     }
-   
-     // Tratamento para upload de um arquivo (outros_documentos) inqueritoSelecionado?.id
-     let fileList8: FileList = this.selectedFile8;
-     let documents: FileList = fileList8;
-   
-     for (let i = 0; i < documents?.length; i++) {
-       formData.append("files", documents[i], documents[i].name);
-     }*/
-
-    // formData.append('data_pn_entregue_ao_pdac', (this.angForm.get('data_pn_entregue_ao_pdac')?.value));
 
     if (!this.angForm.get('consultor_pn')?.value) {
       if (!this.angForm.get('consultor_pn')?.value) {
@@ -575,9 +468,12 @@ export class InteressesComponent implements OnInit {
       //this.hideLoading();
     };
 
+    this.angForm.get('status_pn')?.setValue(status_pn_salvo);
+
+
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_Backoffice_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
+        this.dataService.Update_Backoffice_form(this.foundItem.id, this.angForm.value).subscribe(successCallback, errorCallback);
       } else {
         console.log('')
       }

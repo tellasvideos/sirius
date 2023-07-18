@@ -440,8 +440,9 @@ export class PnElaboradosComponent implements OnInit {
 
 
   getFormBackofficeData(inqueritoId: string): any {
-    console.log(inqueritoId)
-    return this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    const data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    console.log('data entregue ao pdac', data_de_entregue_pdac.fim_verificacao)
+    return data_de_entregue_pdac.fim_verificacao
   }
 
   get_Form_PGAS_Data(inqueritoId: string): any {
@@ -460,8 +461,9 @@ export class PnElaboradosComponent implements OnInit {
   }
 
   getFormPN_STATUS_Data(inqueritoId: string): any {
-    console.log(inqueritoId)
-    return this.get_pn.find((item: any) => item.inquerito === inqueritoId);
+    const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    console.log('status_pn', status_pn.status_pn)
+    return status_pn.status_pn
   }
 
   /*limparCampos() {
