@@ -75,7 +75,8 @@ export class PnElaboradosComponent implements OnInit {
       pn_pendente_no_banco: [false],
       justificacao_pn_pendente_no_banco: ['', Validators.required],
       data_primeiro_pedido_reembolso: [''],
-      created_at: ['']
+      created_at: [''],
+      status_pn: ['']
     })
   }
 
@@ -269,9 +270,11 @@ export class PnElaboradosComponent implements OnInit {
 
     const statusPN = this.getStatus_pn();
 
+    this.angForm.get('status_pn')?.setValue(this.getStatus_pn());
+
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PN_form(this.foundItem.id, formData).subscribe();
+        this.dataService.Update_PN_form(this.foundItem.id, this.angForm.value).subscribe();
       } else {
       }
     } catch (error) {
@@ -383,7 +386,7 @@ export class PnElaboradosComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado');
+      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted);
       console.log('inqueritos reverse', this.inqueritos);
       this.inqueritos.reverse();
     });
@@ -457,6 +460,12 @@ export class PnElaboradosComponent implements OnInit {
   get_PN_STATUS_Data(inqueritoId: string): any {
     const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
     // console.log('status_pn', status_pn.status_pn)
+    return status_pn?.status_pn
+  }
+
+  get_PN_STATUS_implementado_Data(inqueritoId: string): any {
+    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
+    console.log('status_pn implementado', status_pn.status_pn)
     return status_pn?.status_pn
   }
 

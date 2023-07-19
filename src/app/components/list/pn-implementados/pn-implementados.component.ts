@@ -46,12 +46,12 @@ export class PnImplementadosComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado');
+      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted);
       console.log('inqueritos reverse', this.inqueritos);
     });
   }
 
-  
+
 
   pnElaborados: any;
   get_pnElaborados() {

@@ -353,13 +353,10 @@ export class InqueritoComponent implements OnInit {
       inqueridor: ['', Validators.required],
       didasTeste: [false],
       inquerito_preenchido: [''],
-      documents: ['']
+      documents: [''],
+      is_deleted: [false]
     });
   }
-
-
-
-
 
 
   buildDocumentosEmFaltaArray(numElements: number): FormArray {
@@ -445,7 +442,7 @@ export class InqueritoComponent implements OnInit {
   getInqueritoTodos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoTodos = data.filter((item: any) => {
-        return !['Aprovado', 'Em Análise', 'A ser visitada'].includes(item.status)
+        return !['Aprovado', 'Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted
       });
     });
 
@@ -467,7 +464,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter((item: any) => {
-        return ['Em Análise', 'A ser visitada'].includes(item.status);
+        return ['Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted;
       });
 
       /* if (this.inqueritos.length > 0) {
@@ -490,7 +487,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos___ = data.filter((item: any) => {
-        return ['Em Análise', 'A ser visitada'].includes(item.status);
+        return ['Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted;
       });
 
       /* if (this.inqueritos.length > 0) {
@@ -1426,6 +1423,61 @@ export class InqueritoComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  apagar() {
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: 'Você está prestes a eliminar este Inquérito!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    });
+  }
+
+  is_deleted_(id: any) {
+    Swal.fire({
+      title: 'De certeza que quer eliminar?',
+      text: "Você está prestes a eliminar este Inquérito!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2CBF04',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, eliminar!'
+    }).then((apagar) => {
+      if (apagar.isConfirmed) {
+        try {
+          // Set the value of angForm.get('is_delete')?.value to true
+          this.angForm.get('is_deleted')?.patchValue(true);
+
+          // Fetch the data for the identified record
+          const data = this.dataService.getInqueritoByid(id);
+
+          // Patch the form with the data obtained
+          this.angForm.patchValue(data);
+
+          // Update the is_delete field to true using the HTTP PATCH request
+          this.dataService.is_deleted(id, { is_deleted: true }).toPromise();
+
+          // Perform actions after a successful update
+          this.get_inquireForms___();
+          this.getInqueritoTodos();
+
+          Swal.fire('Eliminado!', 'O seu registo foi eliminado.', 'success');
+        } catch (error) {
+          this.alert_error();
+        }
+      }
+    });
+
+    // Perform actions after a successful update
+    this.getInqueritoTodos();
+    this.get_inquireForms___();
+  }
+
+
+
 
   deleteInquire(id: any) {
     Swal.fire({

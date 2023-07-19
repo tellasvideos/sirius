@@ -412,28 +412,35 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
     return this.http.patch(`${this.edit_inquerito_url}${id}/`, inquerito, /*{ headers: headers }*/).pipe(take(1));
-  } 
+  }
 
-   // A funccion to update backoffice form
-   Update_Backoffice_form(id:any, form_data: any) {
+
+  // pacth to disable a inquire
+  is_deleted_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
+  is_deleted(id: number, field: any) {
+    return this.http.patch(`${this.is_deleted_url}${id}/`, field).pipe(take(1));
+  }
+
+  // A funccion to update backoffice form
+  Update_Backoffice_form(id: any, form_data: any) {
     return this.http.patch(`${this.url_formbackofficebyid}${id}/`, form_data, /*{ headers: headers }*/).pipe(take(1));
-   }
+  }
 
 
-   url_update_pn_form = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/'
-   Update_PN_form(id:any, form:any){
+  url_update_pn_form = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/'
+  Update_PN_form(id: any, form: any) {
     return this.http.patch(`${this.url_update_pn_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
-   }
+  }
 
-   url_Update_visitas_form = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
-   Update_Visitas_form(id:any, form:any){
+  url_Update_visitas_form = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
+  Update_Visitas_form(id: any, form: any) {
     return this.http.patch(`${this.url_Update_visitas_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
-   }
+  }
 
-   url_update_PGAS_form = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/'
-   Update_PGAS_form(id:any, form:any){
+  url_update_PGAS_form = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/'
+  Update_PGAS_form(id: any, form: any) {
     return this.http.patch(`${this.url_update_PGAS_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
-   }
+  }
 
   // get chartData 
   getBasicAreaEchartData(): Observable<BasicEchartLineModel[]> {
@@ -773,7 +780,7 @@ export class DataService {
     return this.http.post(this.formBackoffice_url + '/formulariosbackoffice/', form_data)
   }
 
- 
+
 
   // A function to get all backoffice data and inquires data
   get_backoffice_Url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
@@ -788,23 +795,23 @@ export class DataService {
   }
 
   url_formbackofficebyid = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
-  getFormBackofficeByid(id: any){
-    return this.http.get(`${this.url_formbackofficebyid}${id}` ).pipe(take(2));
+  getFormBackofficeByid(id: any) {
+    return this.http.get(`${this.url_formbackofficebyid}${id}`).pipe(take(2));
   }
 
   url_form_pn_elaborado_byid = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/';
-  getFormPN_elaborado_Byid(id: any){
-    return this.http.get(`${this.url_form_pn_elaborado_byid}${id}` ).pipe(take(1));
+  getFormPN_elaborado_Byid(id: any) {
+    return this.http.get(`${this.url_form_pn_elaborado_byid}${id}`).pipe(take(1));
   }
 
   url_form_visitas_byid = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/';
-  getForm_visitas_Byid(id: any){
-    return this.http.get(`${this.url_form_visitas_byid}${id}` ).pipe(take(2));
+  getForm_visitas_Byid(id: any) {
+    return this.http.get(`${this.url_form_visitas_byid}${id}`).pipe(take(2));
   }
 
   url_form_pgas_byid = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/';
-  getForm_PGAS_Byid(id: any){
-    return this.http.get(`${this.url_form_pgas_byid}${id}` ).pipe(take(2));
+  getForm_PGAS_Byid(id: any) {
+    return this.http.get(`${this.url_form_pgas_byid}${id}`).pipe(take(2));
   }
 
   // Pegar dados do formulario Pn elaborados junto ao id do inquerito selecionado

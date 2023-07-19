@@ -88,36 +88,37 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos___ | search:'nome_simplificado':keyWord">
-                            <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
-                            <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
-                            <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                            <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
-                            <td>{{item.status ? item.status : 'N/D' }}
-                            </td>
+                            <ng-container *ngIf="!item.is_deleted">
+                                <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
+                                <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
+                                <td>{{devolver_nome_municipio(item.municipio)}}</td>
+                                <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
+                                <td>{{item.status ? item.status : 'N/D' }}
+                                </td>
 
-                            <td class="not-it">
-                                <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="far fa-eye"></i>
-                                </button>
-                            </td>
+                                <td class="not-it">
+                                    <button type="button" [routerLink]="['/ver-inquerito/', item.id]"
+                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </td>
 
-                            <td class="not-it"
-                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
-                                    routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                            </td>
-                            <td class="not-it"
-                                *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                    (click)="deleteInquire(item.id)">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button>
-                            </td>
+                                <td class="not-it"
+                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                    <button type="button" [routerLink]="['/edit-inquerito/', item.id]"
+                                        routerLinkActive="active" class="btn btn-link btn-sm btn-rounded">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </td>
+                                <td class="not-it"
+                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                    <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                        (click)="is_deleted_(item.id)">
+                                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                                    </button>
+                                </td>
+                            </ng-container>
                         </tr>
-
                     </tbody>
                 </table>
                 <!--/ng-template-->
@@ -388,9 +389,10 @@
                         </div>
 
                         <div>
-                            <input type="date" (change)="checkData1()" formControlName="data_1_visita" name="data_1_visita"
-                                max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
-                                style="width: 150px; margin-right: 200px;" class="form-control form-control-sm">
+                            <input type="date" (change)="checkData1()" formControlName="data_1_visita"
+                                name="data_1_visita" max="{{maxDate | date:'yyyy-MM-dd'}}"
+                                [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
+                                class="form-control form-control-sm">
                         </div>
                     </div>
 
@@ -722,36 +724,38 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of inqueritoTodos | search:'nome_simplificado':keyWord">
-                                <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
-                                <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
-                                <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                                <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
-                                <td>{{item.status ? item.status : 'N/D' }}
-                                </td>
+                                <ng-container *ngIf="!item.is_deleted">
+                                    <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
+                                    <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
+                                    <td>{{devolver_nome_municipio(item.municipio)}}</td>
+                                    <td>{{item.inqueridor ? item.inqueridor : 'N/D'}}</td>
+                                    <td>{{item.status ? item.status : 'N/D' }}
+                                    </td>
 
-                                <td class="not-it">
-                                    <button type="button" (click)="close_this_modal()"
-                                        [routerLink]="['/ver-inquerito/', item.id]" routerLinkActive="active"
-                                        class="btn btn-link btn-sm btn-rounded">
-                                        <i class="far fa-eye"></i>
-                                    </button>
-                                </td>
+                                    <td class="not-it">
+                                        <button type="button" (click)="close_this_modal()"
+                                            [routerLink]="['/ver-inquerito/', item.id]" routerLinkActive="active"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </td>
 
-                                <td class="not-it"
-                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                    <button type="button" (click)="close_this_modal()"
-                                        [routerLink]="['/edit-inquerito/', item.id]" routerLinkActive="active"
-                                        class="btn btn-link btn-sm btn-rounded">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                </td>
-                                <td class="not-it"
-                                    *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
-                                    <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="deleteInquire(item.id)">
-                                        <i class="fas fa-trash-alt" style="color: red;"></i>
-                                    </button>
-                                </td>
+                                    <td class="not-it"
+                                        *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                        <button type="button" (click)="close_this_modal()"
+                                            [routerLink]="['/edit-inquerito/', item.id]" routerLinkActive="active"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                    </td>
+                                    <td class="not-it"
+                                        *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
+                                        <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                            (click)="is_deleted_(item.id)">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button>
+                                    </td>
+                                </ng-container>
                             </tr>
 
                         </tbody>

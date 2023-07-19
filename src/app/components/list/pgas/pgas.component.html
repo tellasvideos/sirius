@@ -69,7 +69,7 @@
                     || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'"-->
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container>
+                            <ng-container *ngIf="!item.is_deleted">
 
                                 <!--td>{{item.id}}</!--td-->
                                 <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}} </td>

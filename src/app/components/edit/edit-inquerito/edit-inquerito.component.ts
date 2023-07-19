@@ -1041,7 +1041,7 @@ export class EditInqueritoComponent implements OnInit {
         if (modal) {
           modal.style.display = 'none';
         }
-        this.route.navigate(['interesses']);
+        this.route.navigate(['inquerito']);
         // Espera 3 segundos antes de recarregar a página
         timer(2000).pipe(delay(2000)).subscribe(() => {
           location.reload();
