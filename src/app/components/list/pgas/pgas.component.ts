@@ -328,28 +328,26 @@ export class PgasComponent implements OnInit {
     formData.append('nome_simplificado', this.nome_simplificado_finded?.nome_simplificado);
 
 
+    // Definir o status_pgas com base nas condições
     let status_pgas_salvo = 'PGAS a ser elaborado';
+    const data_inicio_elaboracao_pgas = this.angForm.get('data_inicio_elaboracao_pgas')?.value;
+    const data_fim_elaboracao_pgas = this.angForm.get('data_fim_elaboracao_pgas')?.value;
+    const data_aprovacao_pgas_banco_mundial = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value;
+    const formBackofficeStatusPN = this.formBackoffice.length > 0 ? this.formBackoffice[0].status_pn : '';
 
-    if (this.angForm.get('data_inicio_elaboracao_pgas')?.value !== '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value !== null) {
+    console.log(data_inicio_elaboracao_pgas, data_fim_elaboracao_pgas, data_aprovacao_pgas_banco_mundial, formBackofficeStatusPN )
 
+    if (data_inicio_elaboracao_pgas !== '' && data_inicio_elaboracao_pgas !== null) {
       status_pgas_salvo = 'PGAS em elaboração';
 
-    } else if (this.angForm.get('data_fim_elaboracao_pgas')?.value !== '' || this.angForm.get('data_fim_elaboracao_pgas')?.value !== null) {
+    } else if (data_fim_elaboracao_pgas !== '' && data_fim_elaboracao_pgas !== null) {
+      status_pgas_salvo = 'PGAS em revisão ou análise pelo PDAC/BM';
 
-      status_pgas_salvo = 'PGAS em revisão ou analise pelo PDAC/BM';
-
-    } else if (this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' || this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== null) {
-
+    } else if (data_aprovacao_pgas_banco_mundial !== '' && data_aprovacao_pgas_banco_mundial !== null) {
       status_pgas_salvo = 'PGAS aprovado pelo BM';
 
-    } else if (this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' && this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC') {
-
+    } else if (data_aprovacao_pgas_banco_mundial !== '' && formBackofficeStatusPN === 'PN em Análise UIP PDAC') {
       status_pgas_salvo = 'PGAS em implementação';
-
-    } else if (this.formBackoffice[0].status_pn === 'PN em Análise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value === null) {
-
-      status_pgas_salvo = 'PGAS a ser elaborado';
-
     }
 
     formData.append('status_pgas', status_pgas_salvo);
@@ -454,16 +452,22 @@ export class PgasComponent implements OnInit {
   }
 
 
-  fechar_modal(){
-     // close modal
-     const modal = document.getElementById('exampleModalToggle');
-     if (modal) {
-       modal.style.display = 'none';
-     }
-     // Executar o timer somente após a resposta da API ser recebida
-     timer(100).pipe(delay(100)).subscribe(() => {
-       location.reload();
-     });
+  fechar_modal() {
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    // Executar o timer somente após a resposta da API ser recebida
+    timer(100).pipe(delay(100)).subscribe(() => {
+      location.reload();
+    });
+  }
+
+  get_STATUS_pn_from_backoffice(inqueritoId: string): any {
+    const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    // console.log('status_pn', status_pn.status_pn)
+    return status_pn?.status_pn
   }
 
 

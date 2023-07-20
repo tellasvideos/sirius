@@ -68,28 +68,36 @@
                     || getFormPGAsData(item.id) === 'PGAS em revisão ou analise pelo PDAC/BM' 
                     || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'"-->
                     <tbody>
-                        <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
+                        <tr *ngFor="let item of inqueritos.slice().reverse() | search:'nome_simplificado':keyWord">
+
                             <ng-container *ngIf="isItemNotDeleted(item)">
-                                <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}} </td>
-                                <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
-                                <td>{{devolver_nome_municipio(item.municipio) ? devolver_nome_municipio(item.municipio)
-                                    : 'N/D'}}</td>
-                                <td>{{getFormPGAsData(item.id)}}</td>
 
-                                <td class="not-it"><button type="button" routerLinkActive="active"
-                                        [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
-                                        class="btn btn-link btn-sm btn-rounded ">
-                                        <i class="far fa-eye"></i>
-                                    </button>
-                                </td>
+                                <ng-container
+                                    *ngIf="get_STATUS_pn_from_backoffice(item.id) === 'PN em análise UIP PDAC' ">
 
-                                <td class="not-it">
-                                    <button type="button" (click)="getForm_PGAS_Data_entradas(item.id)"
-                                        (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </td>
+                                    <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}} </td>
+                                    <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
+                                    <td>{{devolver_nome_municipio(item.municipio) ?
+                                        devolver_nome_municipio(item.municipio)
+                                        : 'N/D'}}</td>
+                                    <td>{{getFormPGAsData(item.id)}}</td>
+
+                                    <td class="not-it"><button type="button" routerLinkActive="active"
+                                            [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
+                                            class="btn btn-link btn-sm btn-rounded ">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </td>
+
+                                    <td class="not-it">
+                                        <button type="button" (click)="getForm_PGAS_Data_entradas(item.id)"
+                                            (click)="selecionarInquerito(item.id)"
+                                            class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalToggle">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </ng-container>
                             </ng-container>
                         </tr>
                     </tbody>

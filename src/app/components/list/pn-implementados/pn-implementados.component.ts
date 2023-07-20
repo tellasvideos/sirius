@@ -46,7 +46,7 @@ export class PnImplementadosComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted);
+      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted).reverse();
       console.log('inqueritos reverse', this.inqueritos);
     });
   }
@@ -56,9 +56,8 @@ export class PnImplementadosComponent implements OnInit {
   pnElaborados: any;
   get_pnElaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
-      this.pnElaborados = data;
+      this.pnElaborados = data.reverse();
       console.log('Planos elaborados', this.pnElaborados)
-      this.pnElaborados.reverse();
     })
   }
 

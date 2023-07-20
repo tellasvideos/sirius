@@ -386,7 +386,7 @@ export class PnElaboradosComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
+      this.inqueritos = data.filter(item => item.status === 'Aprovado');
       console.log('inqueritos reverse', this.inqueritos);
     });
   }
@@ -453,11 +453,13 @@ export class PnElaboradosComponent implements OnInit {
     return status_pn?.status_pn
   }
 
-  get_PN_STATUS_implementado_Data(inqueritoId: string): any {
-    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
-    console.log('status_pn implementado', status_pn.status_pn)
-    return status_pn?.status_pn
+  // encontra o status_pn do inqueritoID passado na lista de pn_elaborados e omite o item.id  com status_pn implementado
+  get_PN_STATUS_implementado_Data(inqueritoId: any){
+    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId && item.status_pn !== 'PN implementado');
+    console.log('status_pn implementado', status_pn?.status_pn);
+    return status_pn?.status_pn;
   }
+  
 
   /*limparCampos() {
     this.data_analise_cti = null;
