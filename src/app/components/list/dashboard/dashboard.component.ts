@@ -208,6 +208,7 @@ export class DashboardComponent implements OnInit {
     this.getcadeia();
     this.getManInterest();
     this.proponentes();
+    this.Get_metas_de_producaode_pn_do_projecto();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -323,4 +324,61 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  // get  metas_de_producaode_pn_do_projecto
+  metas_de_producaode_pn_do_projecto: any;
+  Get_metas_de_producaode_pn_do_projecto() {
+    this.ds.Get_metas_de_producaode_pn_do_projecto().subscribe(data => {
+      this.metas_de_producaode_pn_do_projecto = data;
+      console.log(data)
+    })
+  }
+
+  calcularPorcentagem(metas: number, realizado: number): number {
+    const porcentagem = Math.min((realizado / metas) * 100, 100);
+    return parseFloat(porcentagem.toFixed(1)); // Converte para número com uma casa decimal
+  }  
+
+  metas?: number;
+  realizado?: number;
+  ano?: number;
+
+  post_progresso_pn() {
+    let progress = {
+      "metas": this.metas,
+      "realizado": this.realizado,
+      "ano_numerico": this.ano
+    };
+
+    this.ds.Save_Progress_PN(progress).subscribe(
+      success => {
+        console.log(success);
+        // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
+        this.metas_de_producaode_pn_do_projecto.push(progress);
+
+        // Limpe os campos após o sucesso da operação
+        this.metas = 0;
+        this.realizado = 0;
+        this.ano = 0;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+   // Função para calcular o total das colunas "Metas" e "Realizado"
+   calcularTotal(coluna: string): number {
+    let total = 0;
+
+    for (let item of this.metas_de_producaode_pn_do_projecto) {
+      total += item[coluna];
+    }
+
+    return total;
+  }
+
+
+
 }
+
+

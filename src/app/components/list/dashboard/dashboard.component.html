@@ -23,7 +23,7 @@
                             <h5 class="card-title-card text-black mb-1 ">Cadeia de Valor</h5>
                         </div>
                         <div class="justify-content-center">
-                            <div id="cadeiaValorChart" style="width:100%; height: 200%;"></div>
+                            <div id="cadeiaValorChart" style="width:65%; height: 300%;"></div>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                                 <h3 class="card-title text-center" style="font-size: 35px; color:black;">
                                     {{interestExpress.length}} </h3>
                                 <div>
-                                    <div id="interessesChart" style="width:115%; height: 250%;"></div>
+                                    <div id="interessesChart" style="width:65%; height: 300%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -96,15 +96,23 @@
                     </h5>
                 </div>
 
-                <div class="mb-3">
-                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                        type="text" style="width: 300px;">
+                <div class="mb-3 d-flex justify-content-between">
+                    <button (click)="post_progresso_pn()" class="btn btn-sm btn-success ms-2"
+                        style="text-transform: capitalize;">Adicionar</button>
+                    <input [(ngModel)]="metas" placeholder="Meta" class="form-control form-control-sm ms-2" type="text"
+                        style="width: 60px; height: 20px;">
+                    <input [(ngModel)]="realizado" placeholder="Reali." class="form-control form-control-sm ms-2"
+                        type="text" style=" width: 60px; height: 20px;">
+                    <input [(ngModel)]="ano" placeholder="Ano" class="form-control form-control-sm ms-2" type="text"
+                        style=" width: 60px; height: 20px;">
                 </div>
+
             </div>
 
             <!-- 1. Tabela - progresso nas metas de produção de PN do projecto -->
             <div class="table-responsive mb-3" id="print-section-list-inquerito">
                 <table class="table table-sm table-hover text-center table-bordered">
+                    <!-- ... Cabeçalho da tabela ... -->
                     <thead class="linhas2">
                         <tr>
                             <th scope="col" class="text-black">Ano</th>
@@ -113,31 +121,41 @@
                             <th scope="col" class="text-black">Grau de Cumprimento</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td>1º Ano</td>
-                            <td>12</td>
-                            <td>12</td>
+                        <!-- Linhas da tabela com os dados -->
+                        <tr *ngFor="let item of metas_de_producaode_pn_do_projecto">
+                            <td>{{ item.ano_numerico }}</td>
+                            <td>{{ item.metas }}</td>
+                            <td>{{ item.realizado }}</td>
                             <td>
-                                <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>90%</span>
+                                <span [ngClass]="{
+                            'text-success': calcularPorcentagem(item.metas, item.realizado) > 10,
+                            'text-danger': calcularPorcentagem(item.metas, item.realizado) <= 10
+                          }">
+                                    <i class="fas" [ngClass]="{
+                              'fa-caret-up': calcularPorcentagem(item.metas, item.realizado) > 10,
+                              'fa-caret-down': calcularPorcentagem(item.metas, item.realizado) <= 10
+                            }"></i>
+                                    <span>{{ calcularPorcentagem(item.metas, item.realizado) }}%</span>
                                 </span>
                             </td>
                         </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>2º Ano</td>
-                            <td>50</td>
-                            <td>5</td>
+
+                        <!-- Linha fixa para exibir o total -->
+                        <tr class="text-black" style="font-weight: bold;">
+                            <td>Total</td>
+                            <td>{{ calcularTotal('metas') }}</td>
+                            <td>{{ calcularTotal('realizado') }}</td>
                             <td>
-                                <span class="text-danger">
-                                    <i class="fas fa-caret-down me-1"></i><span>5%</span>
-                                </span>
+                                <!-- Calcula o total das porcentagens das colunas "Metas" e "Realizado" -->
+                                <span>{{ calcularPorcentagem(calcularTotal('metas'), calcularTotal('realizado'))
+                                    }}%</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+
             </div>
 
             <!-- 2. Tabela - progresso nas metas de produção de PGAS do projecto” (as metas são as mesmas -->
@@ -725,7 +743,7 @@
 
             <br>
             <br>
-            
+
             <!-- 12. “Tipo de produções” Percentagem de reposta à pergunta 11.2.1 por grupo :
                 - Grao e/ou tuberculos
                 - Café
@@ -864,8 +882,8 @@
             <br>
             <br>
 
-             <!-- “Distribuição dos PN Desembolsados – Cumulativo” = Mapa de Angola onde podemos ver a localizaçãode cada fazenda com um PN desembolsado -->
-             <div class="d-flex justify-content-between mx-auto">
+            <!-- “Distribuição dos PN Desembolsados – Cumulativo” = Mapa de Angola onde podemos ver a localizaçãode cada fazenda com um PN desembolsado -->
+            <div class="d-flex justify-content-between mx-auto">
                 <div class="mb-3 esp1">
                     <h5 class="card-title card-title-card text-black">Distribuição dos PN Desembolsados-Cumulativo</h5>
                 </div>

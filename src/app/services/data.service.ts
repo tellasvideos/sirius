@@ -868,6 +868,18 @@ export class DataService {
   Get_visitas() {
     return this.http.get<any[]>(this.url_get_visitas);
   }
+
+  // Get_metas_de_producaode_pn_do_projecto
+  url_metas_pn = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepndoprojecto/';
+  Get_metas_de_producaode_pn_do_projecto() {
+    return this.http.get<any[]>(this.url_metas_pn);
+  }
+
+   // To save a progress metas
+   post_progress_PN__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Save_Progress_PN(Data: any) {
+     return this.http.post(this.post_pga_url + '/metasdeproducaodepndoprojecto/', Data)
+   }
 }
 
 
