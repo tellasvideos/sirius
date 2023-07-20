@@ -133,13 +133,15 @@
                             'text-success': calcularPorcentagem(item.metas, item.realizado) > 10,
                             'text-danger': calcularPorcentagem(item.metas, item.realizado) <= 10
                           }">
-                                    <i class="fas" [ngClass]="{
+                                    <i class="fas me-1" [ngClass]="{
                               'fa-caret-up': calcularPorcentagem(item.metas, item.realizado) > 10,
                               'fa-caret-down': calcularPorcentagem(item.metas, item.realizado) <= 10
                             }"></i>
                                     <span>{{ calcularPorcentagem(item.metas, item.realizado) }}%</span>
                                 </span>
                             </td>
+                            <!--td (click)="Delete_Progress_PN(item.id)">remove</!--td-->
+
                         </tr>
 
                         <!-- Linha fixa para exibir o total -->
@@ -165,9 +167,15 @@
                         projecto</h5>
                 </div>
 
-                <div class="mb-3">
-                    <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                        type="text" style="width: 300px;">
+                <div class="mb-3 d-flex justify-content-between">
+                    <button (click)="post_progresso_PGAS()" class="btn btn-sm btn-success ms-2"
+                        style="text-transform: capitalize;">Adicionar</button>
+                    <input [(ngModel)]="metas_pgas" placeholder="Meta" class="form-control form-control-sm ms-2"
+                        type="text" style="width: 60px; height: 20px;">
+                    <input [(ngModel)]="realizado_pgas" placeholder="Reali." class="form-control form-control-sm ms-2"
+                        type="text" style=" width: 60px; height: 20px;">
+                    <input [(ngModel)]="ano_pgas" placeholder="Ano" class="form-control form-control-sm ms-2"
+                        type="text" style=" width: 60px; height: 20px;">
                 </div>
             </div>
 
@@ -182,38 +190,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1º Ano</td>
-                            <td>12</td>
-                            <td>50</td>
+                        <!-- Linhas da tabela com os dados -->
+                        <tr *ngFor="let item of metas_de_producaode_PGAS_do_projecto">
+                            <td>{{ item.ano_numerico }}</td>
+                            <td>{{ item.metas }}</td>
+                            <td>{{ item.realizado }}</td>
                             <td>
-                                <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>50%</span>
+                                <span [ngClass]="{
+                                    'text-success': calcularPorcentagem(item.metas, item.realizado) > 10,
+                                    'text-danger': calcularPorcentagem(item.metas, item.realizado) <= 10
+                                }">
+                                    <i class="fas me-1" [ngClass]="{
+                                        'fa-caret-up': calcularPorcentagem(item.metas, item.realizado) > 10,
+                                        'fa-caret-down': calcularPorcentagem(item.metas, item.realizado) <= 10
+                                        }"></i>
+                                    <span>{{ calcularPorcentagem(item.metas, item.realizado) }}%</span>
                                 </span>
                             </td>
                         </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>2º Ano</td>
-                            <td>52</td>
-                            <td>80</td>
+
+                        <!-- Linha fixa para exibir o total -->
+                        <tr class="text-black" style="font-weight: bold;">
+                            <td>Total</td>
+                            <td>{{ calcularTotal_PGAS('metas') }}</td>
+                            <td>{{ calcularTotal_PGAS('realizado') }}</td>
                             <td>
-                                <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>80%</span>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>mb-3 Ano</td>
-                            <td>12</td>
-                            <td>70</td>
-                            <td>
-                                <span class="text-success">
-                                    <i class="fas fa-caret-up me-1"></i><span>73%</span>
-                                </span>
+                                <!-- Calcula o total das porcentagens das colunas "Metas" e "Realizado" -->
+                                <span>{{ calcularPorcentagem(calcularTotal_PGAS('metas'),
+                                    calcularTotal_PGAS('realizado'))
+                                    }}%</span>
                             </td>
                         </tr>
                     </tbody>

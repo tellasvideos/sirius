@@ -880,6 +880,26 @@ export class DataService {
    Save_Progress_PN(Data: any) {
      return this.http.post(this.post_pga_url + '/metasdeproducaodepndoprojecto/', Data)
    }
+
+   // To delete a progress metas PN
+   delete_progress_PN__url = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepndoprojecto/';
+   Delete_Progress_PN(id: any) {
+    return this.http.delete(`${this.delete_progress_PN__url}${id}/`).pipe(take(1));
+   }
+
+
+   // Get_metas_de_producao_PGAS
+  url_metas_PGAS = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepgasdoprojecto/';
+  Get_metas_de_producao_de_PGAS_do_projecto() {
+    return this.http.get<any[]>(this.url_metas_PGAS);
+  }
+
+  // To save a progress metas PGAS
+  post_progress_PGAS__url = 'http://sirius.strongbox.ao:8001/api/v1';
+  Save_Progress_PGAS(Data: any) {
+    return this.http.post(this.post_progress_PGAS__url + '/metasdeproducaodepgasdoprojecto/', Data)
+  }
+
 }
 
 

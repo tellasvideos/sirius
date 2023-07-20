@@ -3,7 +3,7 @@ import { HeaderComponent } from 'src/app/layouts/header/header.component';
 import { LocalStorageService } from 'angular-web-storage';
 import * as echarts from 'echarts';
 import { DataService } from 'src/app/services/data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, delay, timer } from 'rxjs';
 import { EchartService } from 'src/app/services/echart.service';
 import { BasicEchartLineModel } from 'src/app/models/echart.models';
 import { EChartsOption } from 'echarts';
@@ -209,6 +209,7 @@ export class DashboardComponent implements OnInit {
     this.getManInterest();
     this.proponentes();
     this.Get_metas_de_producaode_pn_do_projecto();
+    this.Get_metas_de_producao_de_PGAS_do_projecto();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -333,16 +334,41 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  Delete_Progress_PN(id: any) {
+    this.ds.Delete_Progress_PN(id).subscribe(
+      success => {
+        this.metas_de_producaode_pn_do_projecto.push(id);
+      },
+      error => { }
+    )
+  }
+
+  // get  metas_de_producaode_PGAS_do_projecto
+  metas_de_producaode_PGAS_do_projecto: any;
+  Get_metas_de_producao_de_PGAS_do_projecto() {
+    this.ds.Get_metas_de_producao_de_PGAS_do_projecto().subscribe(data => {
+      this.metas_de_producaode_PGAS_do_projecto = data;
+      console.log(data)
+    })
+  }
+
   calcularPorcentagem(metas: number, realizado: number): number {
     const porcentagem = Math.min((realizado / metas) * 100, 100);
     return parseFloat(porcentagem.toFixed(1)); // Converte para número com uma casa decimal
-  }  
+  }
 
   metas?: number;
   realizado?: number;
   ano?: number;
 
   post_progresso_pn() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.metas || !this.realizado || !this.ano) {
+      alert('Os campos devem ser preenchidos corretamente.');
+      return;
+    }
+
     let progress = {
       "metas": this.metas,
       "realizado": this.realizado,
@@ -355,6 +381,16 @@ export class DashboardComponent implements OnInit {
         // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
         this.metas_de_producaode_pn_do_projecto.push(progress);
 
+
+        // Espera uns segundos antes de recarregar a página
+        timer(500).pipe(delay(500)).subscribe(() => {
+          location.reload();
+        });
+
+
+        this.calcularTotal('metas')
+        this.calcularTotal('realizado')
+
         // Limpe os campos após o sucesso da operação
         this.metas = 0;
         this.realizado = 0;
@@ -366,12 +402,82 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-   // Função para calcular o total das colunas "Metas" e "Realizado"
-   calcularTotal(coluna: string): number {
+  metas_pgas?: number;
+  realizado_pgas?: number;
+  ano_pgas?: number;
+
+  post_progresso_PGAS() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.metas_pgas || !this.realizado_pgas || !this.ano_pgas) {
+      alert('Os campos devem ser preenchidos corretamente.');
+      return;
+    }
+
+    let progress = {
+      "metas": this.metas_pgas,
+      "realizado": this.realizado_pgas,
+      "ano_numerico": this.ano_pgas
+    };
+
+    this.ds.Save_Progress_PGAS(progress).subscribe(
+      success => {
+        console.log(success);
+        // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
+        this.metas_de_producaode_PGAS_do_projecto.push(progress);
+
+        // Espera uns segundos antes de recarregar a página
+        timer(500).pipe(delay(500)).subscribe(() => {
+          location.reload();
+        });
+
+        this.calcularTotal('metas')
+        this.calcularTotal('realizado')
+        // Limpe os campos após o sucesso da operação
+        this.metas_pgas = 0;
+        this.realizado_pgas = 0;
+        this.ano_pgas = 0;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  totalMetas: number = 0;
+  totalRealizado: number = 0;
+
+  // Função para calcular o total das colunas "Metas" e "Realizado" de PN
+  calcularTotal(coluna: string): number {
+
     let total = 0;
 
     for (let item of this.metas_de_producaode_pn_do_projecto) {
       total += item[coluna];
+    }
+
+    if (coluna === 'metas') {
+      this.totalMetas = total;
+    } else if (coluna === 'realizado') {
+      this.totalRealizado = total;
+    }
+
+    return total;
+
+  }
+
+  // Função para calcular o total das colunas "Metas" e "Realizado" de PGAS
+  calcularTotal_PGAS(coluna: string): number {
+    let total = 0;
+
+    for (let item of this.metas_de_producaode_pn_do_projecto) {
+      total += item[coluna];
+    }
+
+    if (coluna === 'metas') {
+      this.totalMetas = total;
+    } else if (coluna === 'realizado') {
+      this.totalRealizado = total;
     }
 
     return total;
