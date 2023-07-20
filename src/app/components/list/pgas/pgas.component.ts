@@ -38,16 +38,17 @@ export class PgasComponent implements OnInit {
 
     this.angForm = this.fb.group({
       // nome_simplificado: [null, Validators.required], // Nome simplificado
-      consultor_pgas: [null], // Consultor pgas
+      consultor_pgas: [''], // Consultor pgas
       data_inicio_elaboracao_pgas: ['', Validators.required], // Data inicio elaboracao pgas
       data_fim_elaboracao_pgas: [''], // Data fim elaboracao pgas
       data_aprovacao_pgas_banco_mundial: [''], // Data aprovacao pgas banco mundial
       elaboracao_ogas_pendente: [false], // Elaboracao ogas pendente
-      justificacao_pgas_pendente: [null, Validators.required], // Justificacao pgas pendente
+      justificacao_pgas_pendente: ['', Validators.required], // Justificacao pgas pendente
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       //created_at: [''], // Created at
       inquerito: [null], // Referência ao inquérito (pode ser um objeto ou apenas o ID, dependendo da implementação)
+      status_pgas: ['']
     });
 
   }
@@ -121,8 +122,7 @@ export class PgasComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      this.inqueritos.reverse()
+      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted).reverse();
       console.log('inqueritos', this.inqueritos);
     });
   }
@@ -213,11 +213,11 @@ export class PgasComponent implements OnInit {
   // estados pgas
   getEstadosPGAs() {
 
-    const PGA_a_ser_elaborado = this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value === null;
+    const PGA_a_ser_elaborado = this.formBackoffice[0].status_pn === 'PN em Análise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value === null;
     const PGA_em_elaboracao = this.angForm.get('data_inicio_elaboracao_pgas')?.value !== '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value !== null;
     const PGA_Revisao_ou_Analise_PDA_BM = this.angForm.get('data_fim_elaboracao_pgas')?.value !== '' || this.angForm.get('data_fim_elaboracao_pgas')?.value !== null;
     const PGA_Aprovada_BM = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' || this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== null;
-    const PGAS_em_Impleme = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' || (this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== null) && this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC';
+    const PGAS_em_Impleme = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' && this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC';
 
     if (PGA_a_ser_elaborado) {
       return 'PGAS a ser elaborado';
@@ -251,10 +251,34 @@ export class PgasComponent implements OnInit {
 
   getFormPGAsData(inqueritoId: any): string {
     const pga = this.pgas.find((item: any) => item.inquerito === inqueritoId);
-    console.log('pgas', this.pgas)
-    console.log('pga const', pga)
-    console.log('id inq', inqueritoId)
-    return pga ? pga.status_pgas : 'N/D';
+    const dataInicioElaboracaoPGAS = this.angForm.get('data_inicio_elaboracao_pgas')?.value;
+
+    if (pga && pga.status_pgas) {
+      return pga.status_pgas;
+    }
+
+    if (
+      this.getstatus_from_backoffice_to_pgas(inqueritoId) === 'PN em Análise UIP PDAC' &&
+      dataInicioElaboracaoPGAS === ''
+    ) {
+      return 'PGAS a ser elaborado';
+    }
+
+    return 'PGAS a ser elaborado';
+  }
+
+
+  getstatus_from_backoffice_to_pgas(inqueritoId: any): string {
+    const pga = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+
+    // Verifica se encontrou um item com o inqueritoId fornecido
+    if (pga && pga.status_pn) {
+      return pga.status_pn;
+    }
+
+    // Se não encontrou um item correspondente ou o status_pn é nulo, retorne um valor padrão ou trate o erro, conforme necessário.
+    // Por exemplo, você pode retornar uma string vazia ou definir um valor padrão de status_pn.
+    return 'N/D';
   }
 
   pgas_entrados: any;
@@ -280,26 +304,55 @@ export class PgasComponent implements OnInit {
     const formData = new FormData();
 
     try {
-      console.log(this.angForm.get('data_inicio_elaboracao_pgas')?.value, this.angForm.get('data_inicio_elaboracao_pgas')?.value)
       const dataAnaliseValue = this.angForm.get('data_inicio_elaboracao_pgas')?.value;
-      console.log(this.angForm.get('data_fim_elaboracao_pgas')?.value, this.angForm.get('data_fim_elaboracao_pgas')?.value)
+      formData.append('data_inicio_elaboracao_pgas', dataAnaliseValue instanceof Date ? dataAnaliseValue.toISOString() : dataAnaliseValue.toISOString());
+
       const dataAnaliseValue2 = this.angForm.get('data_fim_elaboracao_pgas')?.value;
-      console.log(this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value, this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value)
+      formData.append('data_fim_elaboracao_pgas', dataAnaliseValue2 instanceof Date ? dataAnaliseValue2.toISOString() : dataAnaliseValue2.toISOString());
+
       const dataAnaliseValue3 = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value;
+      formData.append('data_fim_elaboracao_pgas', dataAnaliseValue3 instanceof Date ? dataAnaliseValue3.toISOString() : dataAnaliseValue3.toISOString());
+
     } catch (error) {
-      formData.append('data_inicio_elaboracao_pgas', this.angForm.value.data_inicio_elaboracao_pgas);
-      formData.append('data_fim_elaboracao_pgas', this.angForm.value.data_fim_elaboracao_pgas);
-      formData.append('data_aprovacao_pgas_banco_mundial', this.angForm.value.data_aprovacao_pgas_banco_mundial);
+      formData.append('data_inicio_elaboracao_pgas', this.angForm.get('data_inicio_elaboracao_pgas')?.value);
+      formData.append('data_fim_elaboracao_pgas', this.angForm.get('data_fim_elaboracao_pgas')?.value);
+      formData.append('data_aprovacao_pgas_banco_mundial', this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value);
     }
 
-    formData.append('consultor_pgas', this.angForm.value.consultor_pgas);
-    formData.append('elaboracao_ogas_pendente', this.angForm.value.elaboracao_ogas_pendente);
-    formData.append('justificacao_pgas_pendente', this.angForm.value.justificacao_pgas_pendente);
-    formData.append('latitude', this.angForm.value.latitude);
-    formData.append('longitude', this.angForm.value.longitude);
+    formData.append('consultor_pgas', this.angForm.get('consultor_pgas')?.value);
+    formData.append('elaboracao_ogas_pendente', this.angForm.get('elaboracao_ogas_pendente')?.value);
+    formData.append('justificacao_pgas_pendente', this.angForm.get('justificacao_pgas_pendente')?.value);
+    formData.append('latitude', this.angForm.get('latitude')?.value);
+    formData.append('longitude', this.angForm.get('longitude')?.value);
     formData.append('inquerito', this.inqueritoSelecionado);
     formData.append('nome_simplificado', this.nome_simplificado_finded?.nome_simplificado);
-    formData.append('status_pgas', this.getEstadosPGAs());
+
+
+    let status_pgas_salvo = 'PGAS a ser elaborado';
+
+    if (this.angForm.get('data_inicio_elaboracao_pgas')?.value !== '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value !== null) {
+
+      status_pgas_salvo = 'PGAS em elaboração';
+
+    } else if (this.angForm.get('data_fim_elaboracao_pgas')?.value !== '' || this.angForm.get('data_fim_elaboracao_pgas')?.value !== null) {
+
+      status_pgas_salvo = 'PGAS em revisão ou analise pelo PDAC/BM';
+
+    } else if (this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' || this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== null) {
+
+      status_pgas_salvo = 'PGAS aprovado pelo BM';
+
+    } else if (this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value !== '' && this.formBackoffice[0].status_pn === 'PN em Analise UIP PDAC') {
+
+      status_pgas_salvo = 'PGAS em implementação';
+
+    } else if (this.formBackoffice[0].status_pn === 'PN em Análise UIP PDAC' && this.angForm.get('data_inicio_elaboracao_pgas')?.value === '' || this.angForm.get('data_inicio_elaboracao_pgas')?.value === null) {
+
+      status_pgas_salvo = 'PGAS a ser elaborado';
+
+    }
+
+    formData.append('status_pgas', status_pgas_salvo);
 
     // Success callback 1 nome_simplificado_finded?.nome_simplificado
     const successCallback = (response: any) => {
@@ -340,15 +393,26 @@ export class PgasComponent implements OnInit {
       this.alert_error()
     };
 
-    const statusPGas = this.getEstadosPGAs();
+    this.angForm.get('data_inicio_elaboracao_pgas')?.value;
+    this.angForm.get('data_fim_elaboracao_pgas')?.value
+    this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value
+    this.angForm.get('consultor_pgas')?.value
+    this.angForm.get('elaboracao_ogas_pendente')?.value
+    this.angForm.get('justificacao_pgas_pendente')?.value
+    this.angForm.get('latitude')?.value
+    this.angForm.get('longitude')?.value
+    this.angForm.get('nome_simplificado')?.value
+
+    this.angForm.get('status_pgas')?.setValue(status_pgas_salvo)
+
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PGAS_form(this.foundItem.id, formData).subscribe(successCallback, errorCallback);
+        this.dataService.Update_PGAS_form(this.foundItem.id, this.angForm.value).subscribe();
       } else {
       }
     } catch (error) {
-      this.dataService.Save_PGAS(formData).subscribe(successCallback, errorCallback );
+      this.dataService.Save_PGAS(formData).subscribe();
     }
 
   }
@@ -356,9 +420,10 @@ export class PgasComponent implements OnInit {
   municipio: any;
   retorno: any;
   devolver_nome_municipio(id: any) {
-    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
-    return this.retorno
+    const municipioEncontrado = this.municipio.find((emp: any) => emp.id === id);
+    return municipioEncontrado ? municipioEncontrado.name : 'N/D';
   }
+
 
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {
@@ -382,5 +447,24 @@ export class PgasComponent implements OnInit {
       text: 'Alguma coisa correu mal, tente mais tarde.',
     })
   }
+
+  // Função para verificar se o item não foi excluído (is_deleted === false)
+  isItemNotDeleted(item: any): boolean {
+    return !item.is_deleted;
+  }
+
+
+  fechar_modal(){
+     // close modal
+     const modal = document.getElementById('exampleModalToggle');
+     if (modal) {
+       modal.style.display = 'none';
+     }
+     // Executar o timer somente após a resposta da API ser recebida
+     timer(100).pipe(delay(100)).subscribe(() => {
+       location.reload();
+     });
+  }
+
 
 }

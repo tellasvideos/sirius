@@ -227,7 +227,7 @@
                                 <td class="not-it" *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
                                         (click)="selecionarInquerito(item.id)"
-                                        (click)="getFormBackofficeData_entradas(inqueritoSelecionado)"
+                                        (click)="getFormBackofficeData_entradas(item.id)"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
                                     </button>
@@ -308,7 +308,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário Backoffice</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" (click)="fechar_modal()" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">

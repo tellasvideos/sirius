@@ -62,8 +62,8 @@ export class InteressesComponent implements OnInit {
 
       consultor_pn: [''],
       inicio_elaboracao_pn: ['', Validators.required],
-      fim_elaboracao_pn: [null],
-      fim_verificacao: [null],
+      fim_elaboracao_pn: [''],
+      fim_verificacao: [''],
       /*area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       area_cultivo_pn: ['', Validators.required],
       recursos_proprios: ['', Validators.required],
@@ -368,9 +368,9 @@ export class InteressesComponent implements OnInit {
     try {
       console.log(this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
       const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
-      formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : '');
+      formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : fimElaboracaoValue.toISOString());
       const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
-      formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '');
+      formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : fimVerificacaoValue.toISOString());
       console.log(fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '')
     } catch (error) {
       console.log(error, this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
@@ -378,6 +378,7 @@ export class InteressesComponent implements OnInit {
       formData.append('fim_verificacao', this.angForm.get('fim_verificacao')?.value);
     }
 
+   
     formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
@@ -417,6 +418,7 @@ export class InteressesComponent implements OnInit {
 
     formData.append('status_pn', status_pn_salvo);
     formData.append('inquerito', this.inqueritoSelecionado);
+
 
     //const statusPN = this.getStatus_pn();
 
@@ -469,7 +471,13 @@ export class InteressesComponent implements OnInit {
     };
 
     this.angForm.get('status_pn')?.setValue(status_pn_salvo);
-
+    this.angForm.get('fim_elaboracao_pn')?.value
+    this.angForm.get('fim_verificacao')?.value
+    this.angForm.get('consultor_pn')?.value
+    this.angForm.get('inicio_elaboracao_pn')?.value
+    this.angForm.get('financiamento_bancario')?.value
+    this.angForm.get('pn_pendente')?.value
+    this.angForm.get('proponente_desistiu')?.value
 
     try {
       if (this.foundItem.id) {
@@ -841,5 +849,17 @@ export class InteressesComponent implements OnInit {
     this.selectedFile8 = e.target.files;
     console.log('Doc outros docs', this.selectedFile8)
   }
+
+  fechar_modal(){
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    // Executar o timer somente após a resposta da API ser recebida
+    timer(100).pipe(delay(100)).subscribe(() => {
+      location.reload();
+    });
+ }
 
 }

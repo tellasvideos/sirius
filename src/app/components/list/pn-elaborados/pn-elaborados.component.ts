@@ -126,7 +126,7 @@ export class PnElaboradosComponent implements OnInit {
     })
   }
 
-  
+
   public foundItem: any;
   getForm_PN_Data_entradas(inqueritoId: any) {
     this.foundItem = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
@@ -188,10 +188,10 @@ export class PnElaboradosComponent implements OnInit {
     const dataAprovacaoFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value !== '' || null;
 
     // PN implementado
-    const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '' || null;
+    const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '';
     const dataAprovacaoPgasBm = this.angForm.get('data_aprovacao_pgas_bm')?.value !== '' || null;
 
-    const Data_Aprovacao_do_PGAS_pelo_BM = this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial !== '' || null; // vindo do PGAS atravez do id correspondente
+    const Data_Aprovacao_do_PGAS_pelo_BM = this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial !== ''; // vindo do PGAS atravez do id correspondente
 
     if (PN_pendente_no_CTI) {
       return 'PN pendente no CTI';
@@ -274,11 +274,11 @@ export class PnElaboradosComponent implements OnInit {
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PN_form(this.foundItem.id, this.angForm.value).subscribe();
+        this.dataService.Update_PN_form(this.foundItem.id, this.angForm.value).subscribe(successCallback, errorCallback);
       } else {
       }
     } catch (error) {
-      this.dataService.Post_pnElaborados(formData).subscribe();
+      this.dataService.Post_pnElaborados(formData).subscribe(successCallback, errorCallback);
     }
   }
 
@@ -386,9 +386,8 @@ export class PnElaboradosComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted);
+      this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
       console.log('inqueritos reverse', this.inqueritos);
-      this.inqueritos.reverse();
     });
   }
 
@@ -404,20 +403,10 @@ export class PnElaboradosComponent implements OnInit {
   formBackoffice: any;
   get_form_backoffice____() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
-      this.formBackoffice = data;
-      this.formBackoffice.sort((a: any, b: any) => {
-        const dateA = new Date(a.created_at);
-        const dateB = new Date(b.created_at);
-        return dateB.getTime() - dateA.getTime();
-      });
-
+      this.formBackoffice = data.reverse()
       // Filtrar os dados com base no ID do inquérito
       const filteredFormBackoffice = this.formBackoffice.filter((item: any) => {
-        this.inqueritos.sort((a, b) => {
-          const dateA = new Date(a.created_at);
-          const dateB = new Date(b.created_at);
-          return dateB.getTime() - dateA.getTime();
-        });
+        this.inqueritos.reverse()
         return this.inqueritos.some(inquerito => inquerito.id === item.inquerito);
       });
 
@@ -428,6 +417,7 @@ export class PnElaboradosComponent implements OnInit {
           data_pn_entregue_ao_pdac: item.data_pn_entregue_ao_pdac,
           financiamento_bancario: item.financiamento_bancario,
           inquerito: item.inquerito,
+          fim_verificacao: item.fim_verificacao
         };
       });
 
@@ -437,7 +427,7 @@ export class PnElaboradosComponent implements OnInit {
   }
 
 
-  get_Data_entregue_ao_PDAC(inqueritoId: string): any {
+  get_Data_entregue_ao_PDAC(inqueritoId: any) {
     const data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
     console.log('data entregue ao pdac', data_de_entregue_pdac?.fim_verificacao)
     return data_de_entregue_pdac?.fim_verificacao
@@ -499,5 +489,36 @@ export class PnElaboradosComponent implements OnInit {
     console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.data_pn_entregue_ao_pdac : 'N/D';
   }
+
+
+  // Função para verificar se o status do item é 'PN em análise UIP PDAC'
+  isStatusPNEmAnalise(item: any): boolean {
+    return this.get_PN_STATUS_Data(item.id) === 'PN em análise UIP PDAC';
+  }
+
+  // Função para verificar se o status do inquérito selecionado é diferente de 'PN implementado'
+  isStatusPNImplementado(): boolean {
+    const statusPN = this.getForm_PN_Data_entradas(this.inqueritoSelecionado)?.status_pn;
+    console.log(statusPN)
+    return statusPN !== 'PN implementado';
+  }
+
+  // Função para verificar se o item não foi excluído (is_deleted === false)
+  isItemNotDeleted(item: any): boolean {
+    return !item.is_deleted;
+  }
+
+  fechar_modal(){
+    // close modal
+    const modal = document.getElementById('exampleModalToggle');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    // Executar o timer somente após a resposta da API ser recebida
+    timer(100).pipe(delay(100)).subscribe(() => {
+      location.reload();
+    });
+ }
+
 
 }

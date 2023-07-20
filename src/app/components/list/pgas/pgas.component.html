@@ -69,14 +69,12 @@
                     || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'"-->
                     <tbody>
                         <tr *ngFor="let item of inqueritos | search:'nome_simplificado':keyWord">
-                            <ng-container *ngIf="!item.is_deleted">
-
-                                <!--td>{{item.id}}</!--td-->
+                            <ng-container *ngIf="isItemNotDeleted(item)">
                                 <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}} </td>
                                 <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio) ? devolver_nome_municipio(item.municipio)
                                     : 'N/D'}}</td>
-                                <td>{{getFormPGAsData(item.id) ? getFormPGAsData(item.id) : 'N/D'}}</td>
+                                <td>{{getFormPGAsData(item.id)}}</td>
 
                                 <td class="not-it"><button type="button" routerLinkActive="active"
                                         [routerLink]="['/ver-inquerito-from-backoffice/', item.id]"
@@ -86,7 +84,7 @@
                                 </td>
 
                                 <td class="not-it">
-                                    <button type="button" (click)="getForm_PGAS_Data_entradas(inqueritoSelecionado)"
+                                    <button type="button" (click)="getForm_PGAS_Data_entradas(item.id)"
                                         (click)="selecionarInquerito(item.id)" class="btn btn-link btn-sm btn-rounded"
                                         data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                                         <i class="fas fa-plus"></i>
@@ -113,7 +111,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Formulário PGAS</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" (click)="fechar_modal()" aria-label="Close"></button>
             </div>
             <form enctype="multipart/form-data" [formGroup]="angForm" (ngSubmit)="enviarFormulario()">
 

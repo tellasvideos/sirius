@@ -403,7 +403,7 @@ export class InqueritoComponent implements OnInit {
         .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
         .filter((propNome: any) => !this.inqueritoPdac.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
 
-      console.log('Array pdac apenas nomes filtrados:', this.prop_name);
+      console.log('Array pdac apenas nomes filtrados por MI ja existentes:', this.prop_name);
 
       //this.get_inquireForms()
     });
@@ -448,7 +448,7 @@ export class InqueritoComponent implements OnInit {
 
   }
 
-  // filtra apenas o status aprovado da lista de inqueritos
+  // lista de inqueritos total
   inqueritoPdac: any;
   getInqueritoParaPdac() {
     this.dataService.get_InquireForm().subscribe(data => {
