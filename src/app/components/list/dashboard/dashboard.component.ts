@@ -25,6 +25,12 @@ interface User {
 })
 export class DashboardComponent implements OnInit {
 
+  activeTab = 1;
+
+  showTab(tabNumber: number) {
+    this.activeTab = tabNumber;
+  }
+
   subscripition?: Subscription;
   _chartOption_Inqueritos_por_mes?: EChartsOption;
   _chartOption_Interesses_por_mes?: EChartsOption;
@@ -210,6 +216,7 @@ export class DashboardComponent implements OnInit {
     this.proponentes();
     this.Get_metas_de_producaode_pn_do_projecto();
     this.Get_metas_de_producao_de_PGAS_do_projecto();
+    this.getInquerito_com_mi_aprovado();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -322,6 +329,64 @@ export class DashboardComponent implements OnInit {
     this.ds.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
     })
+  }
+
+  // para filtrar os itens do objeto data, onde o status seja verdadeiro e a províncias
+  inqueritos_mi_recebidas: any;
+  getInquerito_com_mi_aprovado() {
+    this.ds.get_InquireForm().subscribe(data => {
+      this.inqueritos_mi_recebidas = data.filter((item: any) =>
+        item.status &&
+        (item.provincia === 'Bié' ||
+          item.provincia === 'Huambo' ||
+          item.provincia === 'Huila' ||
+          item.provincia === 'Cuanza Sul')
+      );
+      console.log(this.inqueritos_mi_recebidas);
+    });
+  }
+
+  // Total de cada status em todas as províncias
+  getStatusCountByProvincia(status: string, provincia: string): number {
+    return this.inqueritos_mi_recebidas.filter((item: any) => item.status === status && item.provincia === provincia).length;
+  }
+
+  //statusList é uma matriz que contém todos os possíveis status
+  statusList: string[] = ['Aprovado', 'Em Análise', 'Por contactar', 'Incomunicavel: Não atende',
+    'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento', 'Recusada por falta de documentação legal',
+    'Recusada por falta dos 10%', 'Recusada por dívida', 'Recusada: Actividade inelegível', 'Recusada: proponente desistiu',
+    'Recusada: zona inelegível', 'Recusada por falta de área', 'Recusada CV'
+  ];
+
+  getTotalByProvincia(provincia: string): number {
+    return this.statusList.reduce((total: number, status: string) => {
+      total += this.getStatusCountByProvincia(status, provincia);
+      return total;
+    }, 0);
+  }
+
+  // Função para calcular o "Total geral" em todas as províncias
+  getTotalGeral(): number {
+    const provinces = ['Bié', 'Huambo', 'Huila', 'CuanzaSul'];
+    return provinces.reduce((total: number, province: string) => {
+        total += this.getTotalByProvincia(province);
+        return total;
+    }, 0);
+}
+
+
+  // modificar as classes do elemento <span> com base nos diferentes estados, você pode usar a diretiva ngClass. Vamos criar uma função que receberá o status como argumento e retornará a classe apropriada
+  getStatusBadgeClass(status: string): string {
+    switch (status) {
+      case 'Aprovado':
+        return 'badge badge-success rounded-pill d-inline text-black';
+      case 'Em Análise':
+        return 'badge badge-warning rounded-pill d-inline text-black';
+      case 'Por contactar':
+        return 'badge badge-primary rounded-pill d-inline text-black';
+      default:
+        return 'badge badge-danger rounded-pill d-inline text-black';
+    }
   }
 
 
