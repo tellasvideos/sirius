@@ -75,11 +75,13 @@
                             <td>{{item.tipo_de_visita}}</td>
                             <td>{{item.principais_constatacoes}}</td>
                             <td>{{item.recomendacao_ao_produtor}}</td>
-                            <td> {{
-                                (item.consultor_visita1 ?? '') && (item.consultor_visita2 ?? '') ?
-                                item.consultor_visita1 + ' ' + item.consultor_visita2 :
-                                item.consultor_visita1 ?? item.consultor_visita2 ?? ''
-                                }}</td>
+                            <td> 
+                            
+                                <span *ngIf="item.consultor_visita1" > {{ item.consultor_visita1  }} </span>
+                                <span *ngIf="item.consultor_visita2" > {{ item.consultor_visita2  }} </span>
+                            
+                            </td>
+                            
                             <td> <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="del(item.id)">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>
                                 </button></td>

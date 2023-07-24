@@ -357,14 +357,17 @@ export class PgasComponent implements OnInit {
 
     if (data_inicio_elaboracao_pgas !== '' || data_inicio_elaboracao_pgas !== null) {
       status_pgas_salvo = 'PGAS em elaboração';
-
-    } else if (data_fim_elaboracao_pgas !== '' || data_fim_elaboracao_pgas !== null) {
+    } 
+    
+    if (data_fim_elaboracao_pgas !== '' || data_fim_elaboracao_pgas !== null) {
       status_pgas_salvo = 'PGAS em revisão ou análise pelo PDAC/BM';
-
-    } else if (data_aprovacao_pgas_banco_mundial !== '' || data_aprovacao_pgas_banco_mundial !== null) {
+    } 
+    
+    if (data_aprovacao_pgas_banco_mundial !== '' || data_aprovacao_pgas_banco_mundial !== null) {
       status_pgas_salvo = 'PGAS aprovado pelo BM';
-
-    } else if (data_aprovacao_pgas_banco_mundial !== '' && formBackofficeStatusPN === 'PN em Análise UIP PDAC') {
+    } 
+    
+    if (data_aprovacao_pgas_banco_mundial !== '' && formBackofficeStatusPN === 'PN em Análise UIP PDAC') {
       status_pgas_salvo = 'PGAS em implementação';
     }
 
