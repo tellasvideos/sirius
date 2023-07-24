@@ -1,0 +1,113 @@
+<mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+        <app-sidenav></app-sidenav>
+    </mat-drawer>
+    <mat-drawer class="sidebar" mode="side" position="end" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <!-- Man interesses full content-->
+    <mat-drawer-content>
+        <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+
+        <!-- Man interesses list-->
+        <div class="d-flex mt-4 userlist justify-content-between" style="margin-left: 2%; margin-right: 2%;">
+            <div class=" esp1">
+                <h5 class="list-user-text text-black mb-4">Painel Administrativo</h5>
+            </div>
+
+            <div class=" justify-content-between px-md-1">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
+                        <button type="button" printSectionId="print-section-list-interest" ngxPrint
+                            printTitle="Manisfestação de Interesse" class="btn btn-light text-black"
+                            styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
+                            style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <!--div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button type="button" class="btn btn-light text-black"
+                            style="text-transform: capitalize;">Exportar</button>
+                    </!--div-->
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
+                        <!--button type="button" class="btn btn-success btn-top" (click)="openModal()"><i
+                                class="fas fa-plus-square text-black"></i> Add Back Off
+                        </!--button--> <!--button data-bs-toggle="modal" href="#exampleModalToggle" type="button"
+                            data-bs-target="#exampleModalToggle" class="btn btn-success btn-top"><i
+                                class="fas fa-plus-square text-black"></i> Add Back Office</button-->
+
+                        <!-- Botão para abrir o modal -->
+                        <!--button data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#exampleModalToggle' + inqueritoSelecionadoId" type="button"
+                            class="btn btn-success btn-top">
+                            <i class="fas fa-plus-square text-black"></i> Add
+                        </!--button-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fim list-->
+
+        <!-- Second section for filtering data -->
+        <div class="row mt-3 linhas1 " style="margin-left: 1%; margin-right: 1%; height: 15%;">
+            <div class="mt-3 mb-3">
+                <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3 justify-content-between d-flex mx-auto p-3" style="margin-left: 2%; margin-right: 2%;">
+
+            <div>
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black" style="font-weight: bold;">Progresso nas metas de
+                        produção de PN do
+                        Projecto
+                    </h5>
+                </div>
+
+                <div class="d-flex justify-content-between mx-auto mb-3">
+
+                    <div class="mb-3 d-flex justify-content-between">
+                        <button (click)="post_progresso_pn()" class="btn btn-sm btn-success ms-2"
+                            style="text-transform: capitalize;">Adicionar</button>
+                        <input [(ngModel)]="metas" placeholder="Meta" class="form-control form-control-sm ms-2"
+                            type="text" style="width: 60px; height: 20px;">
+                        <input [(ngModel)]="realizado" placeholder="Elabor." class="form-control form-control-sm ms-2"
+                            type="text" style=" width: 60px; height: 20px;">
+                        <input [(ngModel)]="ano" placeholder="Ano" class="form-control form-control-sm ms-2" type="text"
+                            style=" width: 60px; height: 20px;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <div class="mb-3 esp1">
+                    <h5 class="card-title card-title-card text-black" style="font-weight: bold;">Progresso nas metas de
+                        produção de PGAS do
+                        projecto</h5>
+                </div>
+                <div class="d-flex justify-content-between mx-auto">
+
+                    <div class="mb-3 d-flex justify-content-between">
+                        <button (click)="post_progresso_PGAS()" class="btn btn-sm btn-success ms-2"
+                            style="text-transform: capitalize;">Adicionar</button>
+                        <input [(ngModel)]="metas_pgas" placeholder="Meta" class="form-control form-control-sm ms-2"
+                            type="text" style="width: 60px; height: 20px;">
+                        <input [(ngModel)]="realizado_pgas" placeholder="Elabor."
+                            class="form-control form-control-sm ms-2" type="text" style=" width: 60px; height: 20px;">
+                        <input [(ngModel)]="ano_pgas" placeholder="Ano" class="form-control form-control-sm ms-2"
+                            type="text" style=" width: 60px; height: 20px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </mat-drawer-content>
+    <!-- Man interesses full content -->
+</mat-drawer-container>

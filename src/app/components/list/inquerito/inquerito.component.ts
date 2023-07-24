@@ -1798,6 +1798,23 @@ export class InqueritoComponent implements OnInit {
     return !this.isGuardar5Visible();
   }
 
+  checkData_0() {
+    const Data_1_contacto = this.angForm.get('data_1_contacto')?.value;
+    const Data_1_visita = this.angForm.get('data_1_visita')?.value;
+    if (Data_1_visita) {
+      
+      if (Data_1_contacto > Data_1_visita) {
+        Swal.fire({
+          icon: "error",
+          //title: "Oops...",
+          text: "A Data da 1ª visita não pode ser anterior a Data do 1º contacto.",
+        })
+        this.angForm.get('data_1_visita')?.setValue('')
+      }
+    }
+  }
+
+
   checkData1() {
     const Data_1_contacto = this.angForm.get('data_1_contacto')?.value;
     const Data_1_visita = this.angForm.get('data_1_visita')?.value;

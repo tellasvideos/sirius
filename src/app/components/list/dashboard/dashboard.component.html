@@ -119,7 +119,7 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex-with-icons-tab-3" (click)="showTab(3)" role="tab"
                         aria-controls="ex-with-icons-tabs-3" [class.active]="activeTab === 3"><i
-                            class="fas fa-cogs fa-fw me-2"></i>Administração</a>
+                            class="fas fa-seedling me-2"></i>PN desembolsados</a>
                 </li>
             </ul>
             <!-- Tabs navs -->
@@ -281,7 +281,8 @@
                                     </td>
                                     <td><span class="text-success">{{getStatusCountByProvincia(status, 'Huila')}}</span>
                                     </td>
-                                    <td><span class="text-success">{{getStatusCountByProvincia(status, 'CuanzaSul')}}</span>
+                                    <td><span class="text-success">{{getStatusCountByProvincia(status,
+                                            'CuanzaSul')}}</span>
                                     </td>
                                     <!-- Total de cada status em todas as províncias -->
                                     <td><span class="text-success">{{
@@ -298,7 +299,8 @@
                                     <td class="text-success"><strong>{{ getTotalByProvincia('Bié') }}</strong></td>
                                     <td class="text-success"><strong>{{ getTotalByProvincia('Huambo') }}</strong></td>
                                     <td class="text-success"><strong>{{ getTotalByProvincia('Huila') }}</strong></td>
-                                    <td class="text-success"><strong>{{ getTotalByProvincia('CuanzaSul') }}</strong></td>
+                                    <td class="text-success"><strong>{{ getTotalByProvincia('CuanzaSul') }}</strong>
+                                    </td>
                                     <td class="text-success"><strong>{{ getTotalGeral() }}</strong></td>
                                 </tr>
                             </tfoot>
@@ -681,6 +683,20 @@
                     </div>
 
 
+
+
+                    <!--div class="tab-pane fade show" id="ex-with-icons-tabs-5" role="tabpanel"
+                    aria-labelledby="ex-with-icons-tab-5" [class.active]="activeTab === 5">
+                    Tab 5 content
+                    </!--div-->
+
+
+
+                </div>
+
+                <div class="tab-pane fade show" id="ex-with-icons-tabs-3" role="tabpanel"
+                    aria-labelledby="ex-with-icons-tab-3" [class.active]="activeTab === 3">
+
                     <!-- 11. Tipo de PN desembolsados” Percentagem de cada reposta à pergunta 11.2 -->
                     <div class="d-flex justify-content-between mx-auto">
                         <div class="mb-3 esp1">
@@ -719,9 +735,9 @@
                     <br>
 
                     <!-- 12. “Tipo de produções” Percentagem de reposta à pergunta 11.2.1 por grupo :
-                - Grao e/ou tuberculos
-                - Café
-                - café e turberculos e/ou graos -->
+                    - Grao e/ou tuberculos
+                    - Café
+                    - café e turberculos e/ou graos -->
                     <div class="d-flex justify-content-between mx-auto">
                         <div class="mb-3 esp1">
                             <h5 class="card-title card-title-card text-black">Tipo de produções</h5>
@@ -867,54 +883,6 @@
 
                 </div>
 
-                <!--div class="tab-pane fade show" id="ex-with-icons-tabs-5" role="tabpanel"
-                    aria-labelledby="ex-with-icons-tab-5" [class.active]="activeTab === 5">
-                    Tab 5 content
-                </!--div-->
-
-                <div class="tab-pane fade show" id="ex-with-icons-tabs-3" role="tabpanel"
-                    aria-labelledby="ex-with-icons-tab-3" [class.active]="activeTab === 3">
-
-                    <div class="d-flex justify-content-between mx-auto mb-3">
-                        <div class="mb-3 esp1">
-                            <h5 class="card-title card-title-card text-black">Progresso nas metas de produção de PN do
-                                Projecto
-                            </h5>
-                        </div>
-
-                        <div class="mb-3 d-flex justify-content-between">
-                            <button (click)="post_progresso_pn()" class="btn btn-sm btn-success ms-2"
-                                style="text-transform: capitalize;">Adicionar</button>
-                            <input [(ngModel)]="metas" placeholder="Meta" class="form-control form-control-sm ms-2"
-                                type="text" style="width: 60px; height: 20px;">
-                            <input [(ngModel)]="realizado" placeholder="Reali."
-                                class="form-control form-control-sm ms-2" type="text"
-                                style=" width: 60px; height: 20px;">
-                            <input [(ngModel)]="ano" placeholder="Ano" class="form-control form-control-sm ms-2"
-                                type="text" style=" width: 60px; height: 20px;">
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex justify-content-between mx-auto">
-                        <div class="mb-3 esp1">
-                            <h5 class="card-title card-title-card text-black">Progresso nas metas de produção de PGAS do
-                                projecto</h5>
-                        </div>
-
-                        <div class="mb-3 d-flex justify-content-between">
-                            <button (click)="post_progresso_PGAS()" class="btn btn-sm btn-success ms-2"
-                                style="text-transform: capitalize;">Adicionar</button>
-                            <input [(ngModel)]="metas_pgas" placeholder="Meta" class="form-control form-control-sm ms-2"
-                                type="text" style="width: 60px; height: 20px;">
-                            <input [(ngModel)]="realizado_pgas" placeholder="Reali."
-                                class="form-control form-control-sm ms-2" type="text"
-                                style=" width: 60px; height: 20px;">
-                            <input [(ngModel)]="ano_pgas" placeholder="Ano" class="form-control form-control-sm ms-2"
-                                type="text" style=" width: 60px; height: 20px;">
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Tabs content -->
 

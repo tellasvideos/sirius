@@ -47,6 +47,7 @@ import { VerInqueritoComponent } from './components/single-view/ver-inquerito/ve
 import { DocumentosInqueritoComponent } from './components/list/documentos-inquerito/documentos-inquerito.component';
 import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
 import { PnImplementadosComponent } from './components/list/pn-implementados/pn-implementados.component';
+import { AdminComponent } from './components/list/admin/admin.component';
 
 
 // configuração de rotas
@@ -95,6 +96,7 @@ const routes: Routes = [
   { path: 'ver-inquerito/:id', component: VerInqueritoComponent, canActivate: [AuthGuard] },
   { path: 'ver-inquerito-from-backoffice/:id', component: VerInqueritoFromBackofficeComponent, canActivate: [AuthGuard] },
   { path: 'documentos-inquerito/:id', component: DocumentosInqueritoComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 
 ];
 

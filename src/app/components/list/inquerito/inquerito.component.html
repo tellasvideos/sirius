@@ -299,7 +299,7 @@
                             <label for="data_1_contacto">Data do primeiro contato:</label>
                         </div>
                         <div>
-                            <input type="date" formControlName="data_1_contacto" name="data_1_contacto"
+                            <input  (change)="checkData_0()" type="date" formControlName="data_1_contacto" name="data_1_contacto"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
                                 [ngClass]="{ 'is-invalid': angForm.get('data_1_contacto')?.invalid && angForm.get('data_1_contacto')?.touched }">
