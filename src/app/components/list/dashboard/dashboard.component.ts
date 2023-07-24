@@ -217,6 +217,7 @@ export class DashboardComponent implements OnInit {
     this.Get_metas_de_producaode_pn_do_projecto();
     this.Get_metas_de_producao_de_PGAS_do_projecto();
     this.getInquerito_com_mi_aprovado();
+    this.getInquerito_status_mi();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -247,7 +248,7 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    // Status da MI recebidas
+    /*/ Status da MI recebidas
     type EChartsOption = echarts.EChartsOption;
 
     var chartDom = document.getElementById('getStatusMI')!;
@@ -290,7 +291,7 @@ export class DashboardComponent implements OnInit {
       ]
     };
 
-    option && myChart.setOption(option);
+    option && myChart.setOption(option);*/
 
 
 
@@ -351,6 +352,7 @@ export class DashboardComponent implements OnInit {
     return this.inqueritos_mi_recebidas.filter((item: any) => item.status === status && item.provincia === provincia).length;
   }
 
+
   //statusList é uma matriz que contém todos os possíveis status
   statusList: string[] = ['Aprovado', 'Em Análise', 'Por contactar', 'Incomunicavel: Não atende',
     'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento', 'Recusada por falta de documentação legal',
@@ -369,10 +371,10 @@ export class DashboardComponent implements OnInit {
   getTotalGeral(): number {
     const provinces = ['Bié', 'Huambo', 'Huila', 'CuanzaSul'];
     return provinces.reduce((total: number, province: string) => {
-        total += this.getTotalByProvincia(province);
-        return total;
+      total += this.getTotalByProvincia(province);
+      return total;
     }, 0);
-}
+  }
 
 
   // modificar as classes do elemento <span> com base nos diferentes estados, você pode usar a diretiva ngClass. Vamos criar uma função que receberá o status como argumento e retornará a classe apropriada
@@ -547,6 +549,74 @@ export class DashboardComponent implements OnInit {
 
     return total;
   }
+
+  // ...
+
+  // Dentro da função getInquerito_com_mi_aprovado():
+  getInquerito_status_mi() {
+    this.ds.get_InquireForm().subscribe(data => {
+      this.inqueritos_mi_recebidas = data.filter((item: any) =>
+        item.status &&
+        (item.provincia === 'Bié' ||
+          item.provincia === 'Huambo' ||
+          item.provincia === 'Huila' ||
+          item.provincia === 'Cuanza Sul')
+      );
+      console.log(this.inqueritos_mi_recebidas);
+
+      // Contar a quantidade de cada status na lista
+      const statusCount: Record<string, number> = {};
+      for (const item of this.inqueritos_mi_recebidas) {
+        if (item.status in statusCount) {
+          statusCount[item.status]++;
+        } else {
+          statusCount[item.status] = 1;
+        }
+      }
+
+      // Formatar os dados para o gráfico
+      const chartData = [];
+      for (const status of Object.keys(statusCount)) {
+        chartData.push({ value: statusCount[status], name: status });
+      }
+
+      // Atualizar o gráfico com os dados formatados
+      const chartDom = document.getElementById('getStatusMI') as HTMLElement;
+      const myChart = echarts.init(chartDom);
+      const option: echarts.EChartsOption = {
+        title: {
+          text: 'Status das MI recebidas',
+          subtext: 'Período',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left'
+        },
+        series: [
+          {
+            name: 'Access From',
+            type: 'pie',
+            radius: '50%',
+            data: chartData, // Usando os dados formatados aqui
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      };
+
+      option && myChart.setOption(option);
+    });
+  }
+
 
 
 
