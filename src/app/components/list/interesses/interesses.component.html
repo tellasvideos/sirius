@@ -50,7 +50,7 @@
         <!-- fim Man interesses list-->
 
         <!-- Second section for filtering data -->
-        <div class="row mt-3 linhas1 " style="margin-left: 1%; margin-right: 1%; height: 15% auto;">
+        <div class="row mt-3 linhas1 " style="margin-left: 1%; margin-right: 1%; height: 15%;">
             <div class="mt-3 mb-3">
                 <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
                     <!--div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
@@ -351,7 +351,7 @@
                                 PN:</label>
                         </div>
                         <div>
-                            <input type="date" formControlName="inicio_elaboracao_pn" name="inicio_elaboracao_pn"
+                            <input (change)="checkDates_0()" type="date" formControlName="inicio_elaboracao_pn" name="inicio_elaboracao_pn"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
                                 [ngClass]="{ 'is-invalid': angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched }">

@@ -184,8 +184,8 @@ export class PnElaboradosComponent implements OnInit {
     const pnPendenteBanco = this.angForm.get('pn_pendente_no_banco')?.value === true;
 
     // Financiamento Aprovado
-    const dataAprovacaoFinancMg = this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '' || null;
-    const dataAprovacaoFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value !== '' || null;
+    const dataAprovacaoFinancMg = this.angForm.get('data_aprovacao_financiamento_mg')?.value !== '' ;
+    const dataAprovacaoFinancBanco = this.angForm.get('data_aprovacao_financiamento_banco')?.value !== '' ;
 
     // PN implementado
     const data1PedidoDesembolso = this.angForm.get('data_primeiro_pedido_reembolso')?.value !== '';
@@ -314,6 +314,23 @@ export class PnElaboradosComponent implements OnInit {
   }
 
 
+  checkDates_0() {
+    const DataAnaliseCti = this.angForm.get('data_analise_cti')?.value;
+    const Data_entregue_ao_pdac = this.data_de_entregue_pdac?.fim_verificacao;
+
+    if (DataAnaliseCti) {
+
+      if (Data_entregue_ao_pdac > DataAnaliseCti) {
+        Swal.fire({
+          icon: 'error',
+          //title: 'Oops...',
+          text: 'A "Data de análise ao CTI" não pode ser anterior Data de entregue ao PDAC.',
+        })
+        this.angForm.get('data_analise_cti')?.setValue('')
+      }
+    }
+  }
+
 
   checkDates1() {
     const DataAnaliseCti = this.angForm.get('data_analise_cti')?.value;
@@ -427,10 +444,12 @@ export class PnElaboradosComponent implements OnInit {
   }
 
 
+  // retorna a data de entrega ao pdac
+  data_de_entregue_pdac: any;
   get_Data_entregue_ao_PDAC(inqueritoId: any) {
-    const data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    console.log('data entregue ao pdac', data_de_entregue_pdac?.fim_verificacao)
-    return data_de_entregue_pdac?.fim_verificacao
+    this.data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
+    console.log('data entregue ao pdac', this.data_de_entregue_pdac?.fim_verificacao)
+    return this.data_de_entregue_pdac?.fim_verificacao
   }
 
   get_Form_PGAS_Data(inqueritoId: string): any {
@@ -454,12 +473,12 @@ export class PnElaboradosComponent implements OnInit {
   }
 
   // encontra o status_pn do inqueritoID passado na lista de pn_elaborados e omite o item.id  com status_pn implementado
-  get_PN_STATUS_implementado_Data(inqueritoId: any){
+  get_PN_STATUS_implementado_Data(inqueritoId: any) {
     const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId && item.status_pn !== 'PN implementado');
     console.log('status_pn implementado', status_pn?.status_pn);
     return status_pn?.status_pn;
   }
-  
+
 
   /*limparCampos() {
     this.data_analise_cti = null;
@@ -510,7 +529,7 @@ export class PnElaboradosComponent implements OnInit {
     return !item.is_deleted;
   }
 
-  fechar_modal(){
+  fechar_modal() {
     // close modal
     const modal = document.getElementById('exampleModalToggle');
     if (modal) {
@@ -520,7 +539,7 @@ export class PnElaboradosComponent implements OnInit {
     timer(100).pipe(delay(100)).subscribe(() => {
       location.reload();
     });
- }
+  }
 
 
 }

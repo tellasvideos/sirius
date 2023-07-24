@@ -88,7 +88,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of inqueritos___ | search:'nome_simplificado':keyWord">
-                            <ng-container *ngIf="!item.is_deleted">
+                            <ng-container>
                                 <td>{{item.nome_simplificado ? item.nome_simplificado : 'N/D'}}</td>
                                 <td>{{item.provincia ? item.provincia : 'N/D'}}</td>
                                 <td>{{devolver_nome_municipio(item.municipio)}}</td>
@@ -113,7 +113,7 @@
                                 <td class="not-it"
                                     *ngIf=" this.user_logged.department === 'Front Off' || this.user_logged.is_admin === true ">
                                     <button type="button" class="btn btn-link btn-sm btn-rounded"
-                                        (click)="is_deleted_(item.id)">
+                                        (click)="deleteInquire(item.id)">
                                         <i class="fas fa-trash-alt" style="color: red;"></i>
                                     </button>
                                 </td>
@@ -214,7 +214,7 @@
                             <input style="width:350px;" class="form-control form-control-sm mb-2"
                                 [ngClass]="{ 'is-invalid': angForm.get('nome_simplificado')?.invalid && angForm.get('nome_simplificado')?.touched }"
                                 formControlName="nome_simplificado" type="text" required name="nome_simplificado"
-                                aria-label=".form-control-sm example">
+                                aria-label=".form-control-sm example" maxlength="70">
                             <p style="font-size: 11px; line-height: 1rem; width:350px;">* Escolha um nome simplificado
                                 para
                                 este projecto se necessário, caso contrário basta

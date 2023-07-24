@@ -218,6 +218,7 @@ export class DashboardComponent implements OnInit {
     this.Get_metas_de_producao_de_PGAS_do_projecto();
     this.getInquerito_com_mi_aprovado();
     this.getInquerito_status_mi();
+    this.Get_tipo_de_producao();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -247,51 +248,6 @@ export class DashboardComponent implements OnInit {
         this.departamento++;
     }
 
-
-    /*/ Status da MI recebidas
-    type EChartsOption = echarts.EChartsOption;
-
-    var chartDom = document.getElementById('getStatusMI')!;
-    var myChart = echarts.init(chartDom);
-    var option: EChartsOption;
-
-    option = {
-      title: {
-        text: 'Status das MI recebidas',
-        subtext: 'Período',
-        left: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [
-        {
-          name: 'Access From',
-          type: 'pie',
-          radius: '50%',
-          data: [
-            { value: 1048, name: 'Por Contactar' },
-            { value: 735, name: 'Inquérito em Elaboração' },
-            { value: 580, name: 'Incomunicavel: não atende' },
-            { value: 484, name: 'Por visitar' },
-            { value: 300, name: 'Didas teste' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-    };
-
-    option && myChart.setOption(option);*/
 
 
 
@@ -598,7 +554,7 @@ export class DashboardComponent implements OnInit {
         },
         series: [
           {
-            name: 'Access From',
+            name: 'Estado MI',
             type: 'pie',
             radius: '50%',
             data: chartData, // Usando os dados formatados aqui
@@ -618,6 +574,14 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  // get tipo de producoes
+  tipo_prod: any;
+  Get_tipo_de_producao() {
+    this.ds.Get_tipo_producoes().subscribe(data => {
+      this.tipo_prod = data;
+      console.log(data)
+    })
+  }
 
 
 }

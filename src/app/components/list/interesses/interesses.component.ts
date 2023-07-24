@@ -378,7 +378,7 @@ export class InteressesComponent implements OnInit {
       formData.append('fim_verificacao', this.angForm.get('fim_verificacao')?.value);
     }
 
-   
+
     formData.append('financiamento_bancario', this.angForm.get('financiamento_bancario')?.value);
     formData.append('pn_pendente', this.angForm.get('pn_pendente')?.value);
     formData.append('justificacao_pn_pendente', this.angForm.get('justificacao_pn_pendente')?.value);
@@ -538,6 +538,35 @@ export class InteressesComponent implements OnInit {
     }
   }
 
+
+  checkDates_0() {
+    const pnEntregueDate = this.angForm.get('inicio_elaboracao_pn')?.value;
+    const fimVerificacaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
+    const today = new Date();
+
+    if (pnEntregueDate > today) {
+      Swal.fire({
+        icon: 'error',
+        //title: 'Oops...',
+        text: 'A "Data inicio elaboração" não pode ser posterior à data de hoje.',
+      })
+    }
+
+    if (fimVerificacaoDate) {
+
+      if (pnEntregueDate > fimVerificacaoDate) {
+        Swal.fire({
+          icon: 'error',
+          //title: 'Oops...',
+          text: 'A "Data fim elaboracao PN" não pode ser anterior à "Data inicio elaboração PN".',
+        })
+        this.angForm.get('inicio_elaboracao_pn')?.setValue('')
+        this.angForm.get('fim_elaboracao_pn')?.setValue('')
+      }
+    }
+  }
+
+
   checkDates_1() {
     const pnEntregueDate = this.angForm.get('inicio_elaboracao_pn')?.value;
     const fimVerificacaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
@@ -664,7 +693,7 @@ export class InteressesComponent implements OnInit {
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
-      this.inqueritos = data.filter(item => item.status === 'Aprovado' && !item.is_deleted).reverse();
+      this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
       console.log('inqueritos reverse', this.inqueritos);
     });
   }
@@ -850,7 +879,7 @@ export class InteressesComponent implements OnInit {
     console.log('Doc outros docs', this.selectedFile8)
   }
 
-  fechar_modal(){
+  fechar_modal() {
     // close modal
     const modal = document.getElementById('exampleModalToggle');
     if (modal) {
@@ -860,6 +889,6 @@ export class InteressesComponent implements OnInit {
     timer(100).pipe(delay(100)).subscribe(() => {
       location.reload();
     });
- }
+  }
 
 }

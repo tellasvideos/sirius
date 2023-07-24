@@ -323,7 +323,7 @@ export class InqueritoComponent implements OnInit {
     private modalService_: NgbModal
   ) {
     this.angForm = this.fb.group({
-      nome_simplificado: [''],
+      nome_simplificado: ['', [Validators.required, Validators.maxLength(70)]],
       provincia: ['', Validators.required],
       municipio: ['', Validators.required],
       aldeia: ['', Validators.required],
@@ -442,7 +442,7 @@ export class InqueritoComponent implements OnInit {
   getInqueritoTodos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoTodos = data.filter((item: any) => {
-        return !['Aprovado', 'Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted
+        return !['Aprovado', 'Em Análise', 'A ser visitada'].includes(item.status)
       });
     });
 
@@ -464,7 +464,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter((item: any) => {
-        return ['Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted;
+        return ['Em Análise', 'A ser visitada'].includes(item.status);
       });
 
       /* if (this.inqueritos.length > 0) {
@@ -487,7 +487,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos___ = data.filter((item: any) => {
-        return ['Em Análise', 'A ser visitada'].includes(item.status) && !item.is_deleted;
+        return ['Em Análise', 'A ser visitada'].includes(item.status);
       });
 
       /* if (this.inqueritos.length > 0) {

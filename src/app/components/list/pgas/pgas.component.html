@@ -70,7 +70,7 @@
                     <tbody>
                         <tr *ngFor="let item of inqueritos.slice().reverse() | search:'nome_simplificado':keyWord">
 
-                            <ng-container *ngIf="isItemNotDeleted(item)">
+                            <ng-container>
 
                                 <ng-container
                                     *ngIf="get_STATUS_pn_from_backoffice(item.id) === 'PN em análise UIP PDAC' ">
@@ -160,7 +160,7 @@
                             </label>
                         </div>
                         <div>
-                            <input type="date" formControlName="data_inicio_elaboracao_pgas"
+                            <input type="date" formControlName="data_inicio_elaboracao_pgas" (change)="checkDates_0()"
                                 name="data_inicio_elaboracao_pgas" max="{{maxDate | date:'yyyy-MM-dd'}}"
                                 [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                                 class="form-control form-control-sm"
