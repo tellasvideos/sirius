@@ -320,36 +320,34 @@
                     aria-labelledby="ex-with-icons-tab-4" [class.active]="activeTab === 4">
 
                     <!-- 5. Inquéritos feitos – [periodo selecionada]” (= o n° de inquéritos dos quais a data de entregue esta no
-                            periodo selecionado) -->
+                    periodo selecionado) -->
+
                     <div class="d-flex justify-content-between mx-auto mt-3">
                         <div class="mb-3 esp1">
                             <h5 class="card-title card-title-card text-black">Inquéritos feitos</h5>
                         </div>
 
-                        <div class="mb-3 d-flex justify-content-between">
-                            <!--input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;"-->
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div>
                                 <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio"
-                                    style="width: 140px; margin-right: 350px;"
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
                                     class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
                                 <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim"
-                                    style="width: 140px; margin-right: 350px;"
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
                                     class="form-control form-control-sm me-2">
                             </div>
 
-                            <button (click)="post_Inquerittos_feitos()" class="btn btn-success btn-sm me-2"
-                                style="height: 35px;">Consultar</button>
-
-                            <button (click)="limpar_0()" class="btn btn-danger btn-sm me-2"
-                                style="height: 35px;">Limpar</button>
-
+                            <div class="d-flex mb-2">
+                                <button (click)="post_Inquerittos_feitos()" class="btn btn-success btn-sm me-2"
+                                   >Consultar</button>
+                                <button (click)="limpar_0()" class="btn btn-danger btn-sm me-2"
+                                    >Limpar</button>
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="table-responsive mb-3" id="print-section-list-inquerito">
@@ -361,7 +359,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--tr>
+                                <!--tr *ngIf="inqueritos_feitos['Cuanza Sul']">
                                     <td>Cuanza Sul</td>
                                     <td>
                                         <span class="text-success">
@@ -372,18 +370,18 @@
                                 </!--tr-->
                             </tbody>
                             <tbody>
-                                <!--tr>
+                                <!--tr *ngIf="inqueritos_feitos?.Huambo">
                                     <td>Huambo</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>{{inqueritos_feitos['Huambo'] ?
-                                                inqueritos_feitos['Huambo'] : 'Não encontrado'}}</span>
+                                            <span>{{inqueritos_feitos?.Huambo ?
+                                                inqueritos_feitos?.Huambo : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </!--tr-->
                             </tbody>
                             <tbody>
-                                <!--tr>
+                                <!--tr *ngIf="inqueritos_feitos['Bié']">
                                     <td>Bié</td>
                                     <td>
                                         <span class="text-success">
@@ -394,7 +392,7 @@
                                 </!--tr-->
                             </tbody>
                             <tbody>
-                                <!--tr>
+                                <!--tr *ngIf="inqueritos_feitos['Huila']">
                                     <td>Huíla</td>
                                     <td>
                                         <span class="text-success">

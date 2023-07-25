@@ -29,6 +29,10 @@ export class DashboardComponent implements OnInit {
   metas_de_producaode_PGAS_do_projecto: any;
   inqueritos_mi_recebidas: any;
 
+  data_inicio?: any;
+  data_fim?: any;
+  inqueritos_feitos?: any;
+
 
   activeTab = 1;
 
@@ -382,16 +386,6 @@ export class DashboardComponent implements OnInit {
     return parseFloat(porcentagem.toFixed(1)); // Converte para número com uma casa decimal
   }
 
-  metas?: number;
-  realizado?: number;
-  ano?: number;
-
-
-
-  metas_pgas?: number;
-  realizado_pgas?: number;
-  ano_pgas?: number;
-
 
   totalMetas: number = 0;
   totalRealizado: number = 0;
@@ -511,9 +505,7 @@ export class DashboardComponent implements OnInit {
 
 
   // send date and return Inqueritos feitos data
-  data_inicio: any;
-  data_fim: any;
-  inqueritos_feitos: any;
+  
   post_Inquerittos_feitos() {
 
     // Verificar se os campos estão preenchidos corretamente
