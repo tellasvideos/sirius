@@ -340,11 +340,11 @@
                                     class="form-control form-control-sm me-2">
                             </div>
 
-                            <div class="d-flex mb-2">
+                            <div>
                                 <button (click)="post_Inquerittos_feitos()" class="btn btn-success btn-sm me-2"
-                                   >Consultar</button>
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
                                 <button (click)="limpar_0()" class="btn btn-danger btn-sm me-2"
-                                    >Limpar</button>
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
 
@@ -423,9 +423,25 @@
                             <h5 class="card-title card-title-card text-black">PN elaborados</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
@@ -486,9 +502,25 @@
                             <h5 class="card-title card-title-card text-black">FTAS elaborados</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
@@ -549,9 +581,25 @@
                             <h5 class="card-title card-title-card text-black">Consultas públicas feitas</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
@@ -672,9 +720,25 @@
                             <h5 class="card-title card-title-card text-black">PN analisados pelo CTI</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
@@ -816,9 +880,25 @@
                             <h5 class="card-title card-title-card text-black">Plano de négocio desembolsados</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
@@ -858,9 +938,25 @@
                                 Províncias/Municípios-Cumulativo</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <button class="btn btn-success btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Consultar</button>
+                                <button class="btn btn-danger btn-sm me-2"
+                                    style="width: 140px; margin-top: 6%;">Limpar</button>
+                            </div>
                         </div>
                     </div>
 
