@@ -167,9 +167,10 @@
                                             <span>{{ calcularPorcentagem(item.metas, item.realizado) }}%</span>
                                         </span>
                                     </td>
-                                    <!--td (click)="Delete_Progress_PN(item.id)">remove</!--td-->
 
                                 </tr>
+
+                                <!--td (click)="Delete_Progress_PN(item.id)">remove</!--td-->
 
                                 <!-- Linha fixa para exibir o total -->
                                 <tr class="text-black" style="font-weight: bold;">
@@ -177,7 +178,6 @@
                                     <td>{{ calcularTotal('metas') }}</td>
                                     <td>{{ calcularTotal('realizado') }}</td>
                                     <td>
-                                        <!-- Calcula o total das porcentagens das colunas "Metas" e "Realizado" -->
                                         <span>{{ calcularPorcentagem(calcularTotal('metas'), calcularTotal('realizado'))
                                             }}%</span>
                                     </td>
@@ -309,7 +309,7 @@
 
                     <!-- 4 - Status das MI recebidas – [periodo] -->
 
-                    <div class="justify-content-center mt-4">
+                    <div class="justify-content-center mt-4 w-50">
                         <div id="getStatusMI" style="width:900%; height: 500%;"></div>
                     </div>
 
@@ -321,14 +321,34 @@
 
                     <!-- 5. Inquéritos feitos – [periodo selecionada]” (= o n° de inquéritos dos quais a data de entregue esta no
                             periodo selecionado) -->
-                    <div class="d-flex justify-content-between mx-auto">
+                    <div class="d-flex justify-content-between mx-auto mt-3">
                         <div class="mb-3 esp1">
                             <h5 class="card-title card-title-card text-black">Inquéritos feitos</h5>
                         </div>
 
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
-                                type="text" style="width: 300px;">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <!--input class="form-control form-control-sm" placeholder="Pesquisar..." [(ngModel)]="keyWord"
+                                type="text" style="width: 300px;"-->
+                            <div>
+                                <label for="data_inicio">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio"
+                                    style="width: 140px; margin-right: 350px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim" name="data_fim"
+                                    style="width: 140px; margin-right: 350px;"
+                                    class="form-control form-control-sm me-2">
+                            </div>
+
+                            <button (click)="post_Inquerittos_feitos()" class="btn btn-success btn-sm me-2"
+                                style="height: 35px;">Consultar</button>
+
+                            <button (click)="limpar_0()" class="btn btn-danger btn-sm me-2"
+                                style="height: 35px;">Limpar</button>
+
                         </div>
                     </div>
 
@@ -341,44 +361,59 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!--tr>
                                     <td>Cuanza Sul</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>2</span>
+                                            <span>{{inqueritos_feitos['Cuanza Sul'] ? inqueritos_feitos['Cuanza Sul'] :
+                                                'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </tr>
+                                </!--tr-->
                             </tbody>
                             <tbody>
-                                <tr>
-                                    <td>Huíla</td>
+                                <!--tr>
+                                    <td>Huambo</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>7</span>
+                                            <span>{{inqueritos_feitos['Huambo'] ?
+                                                inqueritos_feitos['Huambo'] : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </tr>
+                                </!--tr-->
                             </tbody>
                             <tbody>
-                                <tr>
+                                <!--tr>
                                     <td>Bié</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>5</span>
+                                            <span>{{inqueritos_feitos['Bié']
+                                                ? inqueritos_feitos['Bié'] : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </tr>
+                                </!--tr-->
                             </tbody>
                             <tbody>
-                                <tr>
+                                <!--tr>
+                                    <td>Huíla</td>
+                                    <td>
+                                        <span class="text-success">
+                                            <span>{{inqueritos_feitos['Huila'] ?
+                                                inqueritos_feitos['Huila'] : 'Não encontrado'}}</span>
+                                        </span>
+                                    </td>
+                                </!--tr-->
+                            </tbody>
+
+                            <tbody>
+                                <!--tr>
                                     <td> <span class="text-black">Total Geral</span>
                                     </td>
                                     <td><span class="text-success">
-                                            <span>38</span>
+                                            <span>{{inqueritos_feitos['Total']}}</span>
                                         </span>
                                     </td>
-                                </tr>
+                                </!--tr-->
                             </tbody>
                         </table>
                     </div>
@@ -766,11 +801,11 @@
                         <div>
                             <img src="assets/img/corn_5990564.png" alt="Imagem 3">
                             <span
-                            [ngClass]="{'text-danger': tipo_prod['Grãos'] < 10, 'text-success': tipo_prod['Grãos'] >= 10}">
-                            <i class="fas me-1"
-                                [ngClass]="{'fa-caret-down': tipo_prod['Grãos'] < 10, 'fa-caret-up': tipo_prod['Grãos'] >= 10}"></i>
-                            <span>{{ tipo_prod['Grãos'] | number: '1.1-1' }} %</span>
-                        </span>
+                                [ngClass]="{'text-danger': tipo_prod['Grãos'] < 10, 'text-success': tipo_prod['Grãos'] >= 10}">
+                                <i class="fas me-1"
+                                    [ngClass]="{'fa-caret-down': tipo_prod['Grãos'] < 10, 'fa-caret-up': tipo_prod['Grãos'] >= 10}"></i>
+                                <span>{{ tipo_prod['Grãos'] | number: '1.1-1' }} %</span>
+                            </span>
                         </div>
                     </div>
 

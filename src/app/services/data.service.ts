@@ -900,16 +900,16 @@ export class DataService {
     return this.http.post(this.post_progress_PGAS__url + '/metasdeproducaodepgasdoprojecto/', Data)
   }
 
-  // To send a inquires done
+  // To get a inquires done
   post_inquires_done__url = 'http://sirius.strongbox.ao:8001/api/v1';
-  Send_inqueres_done(Data: any) {
+  Send_inqueres_done_date(Data: any) {
     return this.http.post(this.post_inquires_done__url + '/inqueritosfeitosdashboard/', Data)
   }
 
-   // To get inquires done
-   get_inquires_done__url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritosfeitosdashboard/';
-   Get_inqueres_done() {
-     return this.http.get<any[]>(this.get_inquires_done__url);
+   // To get PN elaborados
+   Post_inquires_done__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Send_PN_elaborados_date(date:any) {
+     return this.http.post(this.Post_inquires_done__url + '/pnelaboradosdashboard/', date);
    }
 
    // To get tipo de producoes

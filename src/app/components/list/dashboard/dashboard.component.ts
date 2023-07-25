@@ -25,6 +25,11 @@ interface User {
 })
 export class DashboardComponent implements OnInit {
 
+  metas_de_producaode_pn_do_projecto: any;
+  metas_de_producaode_PGAS_do_projecto: any;
+  inqueritos_mi_recebidas: any;
+
+
   activeTab = 1;
 
   showTab(tabNumber: number) {
@@ -289,7 +294,6 @@ export class DashboardComponent implements OnInit {
   }
 
   // para filtrar os itens do objeto data, onde o status seja verdadeiro e a províncias
-  inqueritos_mi_recebidas: any;
   getInquerito_com_mi_aprovado() {
     this.ds.get_InquireForm().subscribe(data => {
       this.inqueritos_mi_recebidas = data.filter((item: any) =>
@@ -349,11 +353,10 @@ export class DashboardComponent implements OnInit {
 
 
   // get  metas_de_producaode_pn_do_projecto
-  metas_de_producaode_pn_do_projecto: any;
   Get_metas_de_producaode_pn_do_projecto() {
     this.ds.Get_metas_de_producaode_pn_do_projecto().subscribe(data => {
       this.metas_de_producaode_pn_do_projecto = data;
-      console.log(data)
+      console.log('metas PN', data)
     })
   }
 
@@ -367,7 +370,6 @@ export class DashboardComponent implements OnInit {
   }
 
   // get  metas_de_producaode_PGAS_do_projecto
-  metas_de_producaode_PGAS_do_projecto: any;
   Get_metas_de_producao_de_PGAS_do_projecto() {
     this.ds.Get_metas_de_producao_de_PGAS_do_projecto().subscribe(data => {
       this.metas_de_producaode_PGAS_do_projecto = data;
@@ -384,94 +386,18 @@ export class DashboardComponent implements OnInit {
   realizado?: number;
   ano?: number;
 
-  post_progresso_pn() {
 
-    // Verificar se os campos estão preenchidos corretamente
-    if (!this.metas || !this.realizado || !this.ano) {
-      alert('Os campos devem ser preenchidos corretamente.');
-      return;
-    }
-
-    let progress = {
-      "metas": this.metas,
-      "realizado": this.realizado,
-      "ano_numerico": this.ano
-    };
-
-    this.ds.Save_Progress_PN(progress).subscribe(
-      success => {
-        console.log(success);
-        // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
-        this.metas_de_producaode_pn_do_projecto.push(progress);
-
-
-        // Espera uns segundos antes de recarregar a página
-        timer(500).pipe(delay(500)).subscribe(() => {
-          location.reload();
-        });
-
-
-        this.calcularTotal('metas')
-        this.calcularTotal('realizado')
-
-        // Limpe os campos após o sucesso da operação
-        this.metas = 0;
-        this.realizado = 0;
-        this.ano = 0;
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
 
   metas_pgas?: number;
   realizado_pgas?: number;
   ano_pgas?: number;
 
-  post_progresso_PGAS() {
-
-    // Verificar se os campos estão preenchidos corretamente
-    if (!this.metas_pgas || !this.realizado_pgas || !this.ano_pgas) {
-      alert('Os campos devem ser preenchidos corretamente.');
-      return;
-    }
-
-    let progress = {
-      "metas": this.metas_pgas,
-      "realizado": this.realizado_pgas,
-      "ano_numerico": this.ano_pgas
-    };
-
-    this.ds.Save_Progress_PGAS(progress).subscribe(
-      success => {
-        console.log(success);
-        // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
-        this.metas_de_producaode_PGAS_do_projecto.push(progress);
-
-        // Espera uns segundos antes de recarregar a página
-        timer(500).pipe(delay(500)).subscribe(() => {
-          location.reload();
-        });
-
-        this.calcularTotal('metas')
-        this.calcularTotal('realizado')
-        // Limpe os campos após o sucesso da operação
-        this.metas_pgas = 0;
-        this.realizado_pgas = 0;
-        this.ano_pgas = 0;
-      },
-      error => {
-        console.error(error);
-      }
-    );
-  }
 
   totalMetas: number = 0;
   totalRealizado: number = 0;
 
   // Função para calcular o total das colunas "Metas" e "Realizado" de PN
-  calcularTotal(coluna: string): number {
+  calcularTotal(coluna: any): number {
 
     let total = 0;
 
@@ -490,10 +416,10 @@ export class DashboardComponent implements OnInit {
   }
 
   // Função para calcular o total das colunas "Metas" e "Realizado" de PGAS
-  calcularTotal_PGAS(coluna: string): number {
+  calcularTotal_PGAS(coluna: 'metas' | 'realizado'): number {
     let total = 0;
 
-    for (let item of this.metas_de_producaode_pn_do_projecto) {
+    for (const item of this.metas_de_producaode_PGAS_do_projecto) {
       total += item[coluna];
     }
 
@@ -506,7 +432,7 @@ export class DashboardComponent implements OnInit {
     return total;
   }
 
-  // ...
+  //
 
   // Dentro da função getInquerito_com_mi_aprovado():
   getInquerito_status_mi() {
@@ -582,6 +508,43 @@ export class DashboardComponent implements OnInit {
       console.log(data)
     })
   }
+
+
+  // send date and return Inqueritos feitos data
+  data_inicio: any;
+  data_fim: any;
+  inqueritos_feitos: any;
+  post_Inquerittos_feitos() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.data_fim || !this.data_inicio) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    let Data_Inicio = {
+      "data_inicio": this.data_inicio,
+      "data_fim": this.data_fim
+    }
+
+    this.ds.Send_inqueres_done_date(Data_Inicio).subscribe(data => {
+      this.inqueritos_feitos = data;
+      console.log('inqueritos feitos', data);
+    })
+
+    // Limpar os campos após receber os dados
+    this.data_inicio = '';
+    this.data_fim = '';
+  }
+
+
+
+  limpar_0() {
+    // Limpar os campos após receber os dados
+    this.data_inicio = '';
+    this.data_fim = '';
+  }
+
 
 
 }
