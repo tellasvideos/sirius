@@ -182,7 +182,7 @@ import { AdminComponent } from './components/list/admin/admin.component';
     MatGridListModule,
     HttpClientModule,
     NgbModule,
-    NgSelectModule  
+    NgSelectModule,  
     //NgSelectModule
     
   ],
