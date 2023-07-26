@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   data_inicio?: any;
   data_fim?: any;
-  inqueritos_feitos?: any;
+  inqueritos_feitos?: any | undefined;
 
 
   activeTab = 1;
@@ -223,11 +223,15 @@ export class DashboardComponent implements OnInit {
     this.getcadeia();
     this.getManInterest();
     this.proponentes();
+
     this.Get_metas_de_producaode_pn_do_projecto();
     this.Get_metas_de_producao_de_PGAS_do_projecto();
     this.getInquerito_com_mi_aprovado();
     this.getInquerito_status_mi();
     this.Get_tipo_de_producao();
+    this.Get_tipo_de_PN_desenbolsado();
+    this.getMunicipio();
+    this.Get_PN_desenmbolsados_por_provincias();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -494,6 +498,15 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  // get Distribuição dos PN Desembolsados por Províncias/Municípios-Cumulativo
+  PN_desenmbolsados_por_provincias: any;
+  Get_PN_desenmbolsados_por_provincias() {
+    this.ds.Get_PN_desemb_por_prov().subscribe(data => {
+      this.PN_desenmbolsados_por_provincias = data;
+      console.log('PN_desenmbolsados_por_provincias', data)
+    })
+  }
+
   // get tipo de producoes
   tipo_prod: any;
   Get_tipo_de_producao() {
@@ -503,9 +516,22 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  // get tipo de PN desembolsados
+  tipo_pn_desenbolsado: any;
+  Get_tipo_de_PN_desenbolsado() {
+    this.ds.Get_tipo_PN_desenbolsado().subscribe(data => {
+      this.tipo_pn_desenbolsado = {};
+      for (const key in data) {
+        this.tipo_pn_desenbolsado[key] = data[key].toFixed(1);
+      }
+      console.log('Tipo pn desebolsado', this.tipo_pn_desenbolsado);
+
+      this.calcularTotalMunicipiosGeral();
+    });
+  }
+
 
   // send date and return Inqueritos feitos data
-  
   post_Inquerittos_feitos() {
 
     // Verificar se os campos estão preenchidos corretamente
@@ -523,22 +549,221 @@ export class DashboardComponent implements OnInit {
       this.inqueritos_feitos = data;
       console.log('inqueritos feitos', data);
     })
-
-    // Limpar os campos após receber os dados
-    this.data_inicio = '';
-    this.data_fim = '';
   }
 
+  // send date and return PN elaborados data
+  data_fim_pn: any;
+  data_inicio_pn: any;
+  pn_elaborados: any;
+  post_PN_elaborados() {
 
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.data_fim_pn || !this.data_inicio_pn) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    let Dados = {
+      "data_inicio": this.data_inicio_pn,
+      "data_fim": this.data_fim_pn
+    }
+
+    this.ds.Send_PN_elaborados_date(Dados).subscribe(data => {
+      this.pn_elaborados = data;
+      console.log('PN elaborados', data);
+    })
+
+  }
+
+  // send date and return FTAS elaborados data
+  data_fim_ftas: any;
+  data_inicio_ftas: any;
+  ftas: any;
+  post_FTAS() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.data_fim_ftas || !this.data_inicio_ftas) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    let Dados = {
+      "data_inicio": this.data_inicio_ftas,
+      "data_fim": this.data_fim_ftas
+    }
+
+    this.ds.Send_FTAS_date(Dados).subscribe(data => {
+      this.ftas = data;
+      console.log('FTAS', data);
+    })
+
+  }
+
+  // send date and return PN analisados pelo CTI data
+  data_fim_pn_desenbolsado: any;
+  data_inicio_pn_desenbolsado: any;
+  pn_desenbolsado: any;
+  post_PN_Desenbolsado() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.data_fim_pn_desenbolsado || !this.data_inicio_pn_desenbolsado) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    let Dados = {
+      "data_inicio": this.data_inicio_pn_desenbolsado,
+      "data_fim": this.data_fim_pn_desenbolsado
+    }
+
+    this.ds.Send_PN_Desenbolsado_date(Dados).subscribe(data => {
+      this.pn_desenbolsado = data;
+      console.log('PN_desenbolsado', data);
+    })
+
+  }
+
+  limparArray(arr: any[]): void {
+    arr.length = 0;
+
+    this.data_inicio_pn_desenbolsado = '';
+    this.data_fim_pn_desenbolsado = '';
+  }
+
+  limpar_4() {
+    // Limpar os campos após receber os dados
+    this.data_inicio_pn_desenbolsado = '';
+    this.data_fim_pn_desenbolsado = '';
+
+    this.pn_desenbolsado = {};
+  }
+
+  // send date and return PN analisados pelo CTI data
+  data_fim_pn_cti: any;
+  data_inicio_pn_cti: any;
+  pn_by_cti: any;
+  post_PN_by_Cti() {
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!this.data_fim_pn_cti || !this.data_inicio_pn_cti) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    let Dados = {
+      "data_inicio": this.data_inicio_pn_cti,
+      "data_fim": this.data_fim_pn_cti
+    }
+
+    this.ds.Send_PN_by_CTI_date(Dados).subscribe(data => {
+      this.PN_by_CTI = data;
+      console.log('PN_by_CTI', data);
+    })
+
+  }
+
+  limpar_3() {
+    // Limpar os campos após receber os dados
+    this.data_inicio_pn_cti = '';
+    this.data_fim_pn_cti = '';
+
+    this.PN_by_CTI = {};
+  }
+
+  limpar_2() {
+    // Limpar os campos após receber os dados
+    this.data_inicio_ftas = '';
+    this.data_fim_ftas = '';
+
+    this.ftas = {};
+  }
+
+  limpar_1() {
+    // Limpar os campos após receber os dados
+    this.data_inicio_pn = '';
+    this.data_fim_pn = '';
+
+    this.pn_elaborados = {};
+  }
 
   limpar_0() {
     // Limpar os campos após receber os dados
     this.data_inicio = '';
     this.data_fim = '';
+
+    this.inqueritos_feitos = {};
   }
 
 
+  // Object:any;
+
+  PN_by_CTI: any;
+
+  // Function to get the keys of PN_by_CTI.resultados_por_data_cti
+  getPNDataKeys(): any[] {
+    if (this.PN_by_CTI && this.PN_by_CTI.resultados_por_data_cti) {
+      return Object.keys(this.PN_by_CTI.resultados_por_data_cti);
+    }
+    return [];
+  }
+
+  // Function to get the resultados for a specific date
+  getResultadosForData(data: any): any[] {
+    if (this.PN_by_CTI && this.PN_by_CTI.resultados_por_data_cti && this.PN_by_CTI.resultados_por_data_cti[data]) {
+      return this.PN_by_CTI.resultados_por_data_cti[data].resultados;
+    }
+    return [];
+  }
+
+  // Function to get the total for a specific date
+  getTotalForData(data: any): number {
+    if (this.PN_by_CTI && this.PN_by_CTI.resultados_por_data_cti && this.PN_by_CTI.resultados_por_data_cti[data]) {
+      return this.PN_by_CTI.resultados_por_data_cti[data].total;
+    }
+    return 0;
+  }
+
+  devolver_nome_municipio(id: any): string {
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    return municipioSelecionado ? municipioSelecionado.name : 'N/D';
+  }
+
+  municipio:any;
+  getMunicipio() {
+    this.ds.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
+    })
+  }
+
+  totalMunicipios: number = 0;
+
+  totalMunicipiosGeral: number = 0;
+
+  // para calcular o número total de PN desembolsados dos municípios:
+  calcularTotalMunicipios(provincia: any): number {
+    let total = 0;
+    if (provincia && provincia['Municípios']) {
+      for (let municipio of provincia['Municípios']) {
+        total += municipio['Numero PN Desembolsados'];
+      }
+    }
+    return total;
+  }
+
+  calcularTotalMunicipiosGeral(): void {
+    let totalGeral = 0;
+    for (let provincia of this.PN_desenmbolsados_por_provincias) {
+      totalGeral += this.calcularTotalMunicipios(provincia);
+    }
+    this.totalMunicipiosGeral = totalGeral;
+  }
+
+
+  
+
 
 }
+
 
 

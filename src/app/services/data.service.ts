@@ -912,11 +912,41 @@ export class DataService {
      return this.http.post(this.Post_inquires_done__url + '/pnelaboradosdashboard/', date);
    }
 
+   // To get FTAS elaborados per date 
+   Post_ftas_date__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Send_FTAS_date(date:any) {
+     return this.http.post(this.Post_ftas_date__url + '/ftaselaboradosdashboard/', date);
+   }
+
+   // To get PN by CTI per date 
+   Post_pn_by_cti__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Send_PN_by_CTI_date(date:any) {
+     return this.http.post(this.Post_pn_by_cti__url + '/pnanalisadospeloctidashboard/', date);
+   }
+
+    // To get Desenbolsado per date 
+    Post_pn_desenbolsado__url = 'http://sirius.strongbox.ao:8001/api/v1';
+    Send_PN_Desenbolsado_date(date:any) {
+      return this.http.post(this.Post_pn_desenbolsado__url + '/planodenegociodesembolsadosdashboard/', date);
+    }
+
    // To get tipo de producoes
    get_tipo_de_producoes_url = 'http://sirius.strongbox.ao:8001/api/v1/tipodeproducoesdashboard/';
    Get_tipo_producoes() {
      return this.http.get<any[]>(this.get_tipo_de_producoes_url);
    }
+
+    // To get Distribuição dos PN Desembolsados por Províncias/Municípios-Cumulativo
+    get_PN_por_prov_url = 'http://sirius.strongbox.ao:8001/api/v1/pndesembolsadosporprovinciasmunicipiosdashboard/';
+    Get_PN_desemb_por_prov() {
+      return this.http.get<any[]>(this.get_PN_por_prov_url);
+    }
+
+    // To get tipo de PN desembolsado
+    get_tipo_de_pn_dese_url = 'http://sirius.strongbox.ao:8001/api/v1/tipopndesembolsadosdashboard/';
+    Get_tipo_PN_desenbolsado() {
+      return this.http.get<any[]>(this.get_tipo_de_pn_dese_url);
+    }
 
 }
 

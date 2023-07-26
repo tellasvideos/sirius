@@ -359,7 +359,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--tr *ngIf="inqueritos_feitos['Cuanza Sul']">
+                                <tr *ngIf="inqueritos_feitos && inqueritos_feitos['Cuanza Sul'] !== undefined">
                                     <td>Cuanza Sul</td>
                                     <td>
                                         <span class="text-success">
@@ -367,10 +367,10 @@
                                                 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </!--tr-->
+                                </tr>
                             </tbody>
                             <tbody>
-                                <!--tr *ngIf="inqueritos_feitos?.Huambo">
+                                <tr *ngIf="inqueritos_feitos?.Huambo">
                                     <td>Huambo</td>
                                     <td>
                                         <span class="text-success">
@@ -378,10 +378,10 @@
                                                 inqueritos_feitos?.Huambo : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </!--tr-->
+                                </tr>
                             </tbody>
                             <tbody>
-                                <!--tr *ngIf="inqueritos_feitos['Bié']">
+                                <tr *ngIf="inqueritos_feitos && inqueritos_feitos['Bié']  !== undefined">
                                     <td>Bié</td>
                                     <td>
                                         <span class="text-success">
@@ -389,18 +389,18 @@
                                                 ? inqueritos_feitos['Bié'] : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </!--tr-->
+                                </tr>
                             </tbody>
                             <tbody>
-                                <!--tr *ngIf="inqueritos_feitos['Huila']">
+                                <tr *ngIf="inqueritos_feitos?.Huila">
                                     <td>Huíla</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>{{inqueritos_feitos['Huila'] ?
-                                                inqueritos_feitos['Huila'] : 'Não encontrado'}}</span>
+                                            <span>{{inqueritos_feitos?.Huila ?
+                                                inqueritos_feitos?.Huila : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
-                                </!--tr-->
+                                </tr>
                             </tbody>
 
                             <tbody>
@@ -425,21 +425,21 @@
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                <label for="data_inicio_pn">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio_pn" name="data_inicio_pn"
+                                    style="width: 140px;" class="form-control form-control-sm me-2">
+                            </div>
+
+                            <div>
+                                <label for="data_fim_pn">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim_pn" name="data_fim_pn" style="width: 140px;"
                                     class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
-                            </div>
-
-                            <div>
-                                <button class="btn btn-success btn-sm me-2"
+                                <button (click)="post_PN_elaborados()" class="btn btn-success btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Consultar</button>
-                                <button class="btn btn-danger btn-sm me-2"
+                                <button (click)="limpar_1()" class="btn btn-danger btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
@@ -454,41 +454,56 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="pn_elaborados && pn_elaborados['Cuanza Sul'] !== undefined">
                                     <td>Cuanza Sul</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>2</span>
+                                            <span>{{pn_elaborados['Cuanza Sul'] ? pn_elaborados['Cuanza Sul'] :
+                                                'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
-                                    <td>Huíla</td>
+                                <tr *ngIf="pn_elaborados?.Huambo">
+                                    <td>Huambo</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>7</span>
+                                            <span>{{pn_elaborados?.Huambo ?
+                                                pn_elaborados?.Huambo : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="pn_elaborados && pn_elaborados['Bié']  !== undefined">
                                     <td>Bié</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>5</span>
+                                            <span>{{pn_elaborados['Bié']
+                                                ? pn_elaborados['Bié'] : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="pn_elaborados?.Huila">
+                                    <td>Huíla</td>
+                                    <td>
+                                        <span class="text-success">
+                                            <span>{{pn_elaborados?.Huila ?
+                                                pn_elaborados?.Huila : 'Não encontrado'}}</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tbody>
+                                <tr *ngIf="pn_elaborados && pn_elaborados['Total'] !== undefined">
                                     <td> <span class="text-black">Total Geral</span>
                                     </td>
                                     <td><span class="text-success">
-                                            <span></span>
+                                            <span>{{pn_elaborados['Total']}}</span>
                                         </span>
                                     </td>
                                 </tr>
@@ -504,21 +519,21 @@
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
+                                <label for="data_inicio_ftas">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio_ftas" name="data_inicio_ftas"
+                                    style="width: 140px;" class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
+                                <label for="data_fim_ftas">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim_ftas" name="data_fim_ftas"
+                                    style="width: 140px;" class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <button class="btn btn-success btn-sm me-2"
+                                <button (click)="post_FTAS()" class="btn btn-success btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Consultar</button>
-                                <button class="btn btn-danger btn-sm me-2"
+                                <button (click)="limpar_2()" class="btn btn-danger btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
@@ -533,41 +548,56 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="ftas && ftas['Cuanza Sul'] !== undefined">
                                     <td>Cuanza Sul</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>5</span>
+                                            <span>{{ftas['Cuanza Sul'] ? ftas['Cuanza Sul'] :
+                                                'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
-                                    <td>Huíla</td>
+                                <tr *ngIf="ftas?.Huambo">
+                                    <td>Huambo</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>8</span>
+                                            <span>{{ftas?.Huambo ?
+                                                ftas?.Huambo : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="ftas && ftas['Bié']  !== undefined">
                                     <td>Bié</td>
                                     <td>
                                         <span class="text-success">
-                                            <span>5</span>
+                                            <span>{{ftas['Bié']
+                                                ? ftas['Bié'] : 'Não encontrado'}}</span>
                                         </span>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
+                                <tr *ngIf="ftas?.Huila">
+                                    <td>Huíla</td>
+                                    <td>
+                                        <span class="text-success">
+                                            <span>{{ftas?.Huila ?
+                                                ftas?.Huila : 'Não encontrado'}}</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tbody>
+                                <tr *ngIf="ftas && ftas['Total'] !== undefined">
                                     <td> <span class="text-black">Total Geral</span>
                                     </td>
                                     <td><span class="text-success">
-                                            <span></span>
+                                            <span>{{ftas['Total']}}</span>
                                         </span>
                                     </td>
                                 </tr>
@@ -576,7 +606,7 @@
                     </div>
 
                     <!-- 9. “Consultas publicas feitas – [periodo selecionado]” -->
-                    <div class="d-flex justify-content-between mx-auto">
+                    <!--div class="d-flex justify-content-between mx-auto">
                         <div class="mb-3 esp1">
                             <h5 class="card-title card-title-card text-black">Consultas públicas feitas</h5>
                         </div>
@@ -601,9 +631,9 @@
                                     style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
-                    </div>
+                    </!--div-->
 
-                    <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                    <!--div class="table-responsive mb-3" id="print-section-list-inquerito">
                         <table class="table table-sm table-hover text-center table-bordered">
                             <thead class="linhas2">
                                 <tr>
@@ -712,7 +742,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div-->
 
                     <!-- 10. PN analisados pelo CTI – [periodo selecionado]” ( = lista de todos PN que têm uma data de analise CTI(pergunta 20) no periodo selecionado) -->
                     <div class="d-flex justify-content-between mx-auto">
@@ -722,21 +752,21 @@
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
+                                <label for="data_inicio_pn_cti">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio_pn_cti" name="data_inicio_pn_cti"
+                                    style="width: 140px;" class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
+                                <label for="data_fim_pn_cti">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim_pn_cti" name="data_fim_pn_cti"
+                                    style="width: 140px;" class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <button class="btn btn-success btn-sm me-2"
+                                <button (click)="post_PN_by_Cti()" class="btn btn-success btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Consultar</button>
-                                <button class="btn btn-danger btn-sm me-2"
+                                <button (click)="limpar_3()" class="btn btn-danger btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
@@ -753,29 +783,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>01/01/2023</td>
-                                    <td>Fazenda Yoyele</td>
-                                    <td>Eugenio Maria</td>
+                                <!-- Iterate over the keys of PN_by_CTI.resultados_por_data_cti -->
+                                <tr *ngFor="let data of getPNDataKeys()">
+                                    <td>{{ data }}</td>
                                     <td>
-                                        <span class="text-success">
-                                            <span>8</span>
-                                        </span>
+                                        <!-- Iterate over the resultados for the current date -->
+                                        <div *ngFor="let resultado of getResultadosForData(data)">{{
+                                            resultado.nome_simplificado }}</div>
+                                    </td>
+                                    <td>
+                                        <!-- Iterate over the resultados for the current date -->
+                                        <div *ngFor="let resultado of getResultadosForData(data)">{{
+                                            resultado.inqueridor }}</div>
+                                    </td>
+                                    <td>
+                                        {{ getTotalForData(data) }}
                                     </td>
                                 </tr>
                             </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>02/01/2023</td>
-                                    <td>Fazenda Josielma</td>
-                                    <td>Josiph Queiroz</td>
-                                    <td>
-                                        <span class="text-success">
-                                            <span>6</span>
-                                        </span>
-                                    </td>
+                            <tfoot>
+                                <tr *ngIf="PN_by_CTI && PN_by_CTI.total_por_data_cti !== undefined">
+                                    <td class="text-center" colspan="1"><strong>Total Geral</strong></td>
+                                    <td colspan="2"></td>
+                                    <td class="text-center" colspan="1"><strong>{{ PN_by_CTI.total_por_data_cti
+                                            }}</strong></td>
                                 </tr>
-                            </tbody>
+                            </tfoot>
                         </table>
                     </div>
 
@@ -804,27 +837,39 @@
                     <div class="mb-4 image-container d-flex">
                         <div>
                             <img src="assets/img/products.png" alt="Imagem 1">
-                            <span class="text-success">
-                                <i class="fas fa-caret-up me-1"></i><span>90%</span>
+                            <span
+                                [ngClass]="{'text-danger': tipo_pn_desenbolsado['Productor vegetais'] < 10, 'text-success': tipo_pn_desenbolsado['Productor vegetais'] >= 10}">
+                                <i class="fas me-1"
+                                    [ngClass]="{'fa-caret-down': tipo_pn_desenbolsado['Productor vegetais'] < 10, 'fa-caret-up': tipo_pn_desenbolsado['Productor vegetais'] >= 10}"></i>
+                                <span>{{ tipo_pn_desenbolsado['Productor vegetais'] ? tipo_pn_desenbolsado['Productor vegetais'] : 0 | number: '1.1-1' }} %</span>
                             </span>
                         </div>
                         <div>
                             <img src="assets/img/galinha.png" alt="Imagem 2">
-                            <span class="text-danger">
-                                <i class="fas fa-caret-down me-1"></i><span>18%</span>
+                            <span
+                                [ngClass]="{'text-danger': tipo_pn_desenbolsado['Productor aves'] < 10, 'text-success': tipo_pn_desenbolsado['Productor aves'] >= 10}">
+                                <i class="fas me-1"
+                                    [ngClass]="{'fa-caret-down': tipo_pn_desenbolsado['Productor aves'] < 10, 'fa-caret-up': tipo_pn_desenbolsado['Productor aves'] >= 10}"></i>
+                                <span>{{ tipo_pn_desenbolsado['Productor aves'] ? tipo_pn_desenbolsado['Productor aves'] : 0 | number: '1.1-1' }} %</span>
                             </span>
                         </div>
                         <div>
                             <img src="assets/img/factory2.png" alt="Imagem 3">
-                            <span class="text-success">
-                                <i class="fas fa-caret-up me-1"></i><span>80%</span>
+                            <span
+                                [ngClass]="{'text-danger': tipo_pn_desenbolsado['Transformador'] < 10, 'text-success': tipo_pn_desenbolsado['Transformador'] >= 10}">
+                                <i class="fas me-1"
+                                    [ngClass]="{'fa-caret-down': tipo_pn_desenbolsado['Transformador'] < 10, 'fa-caret-up': tipo_pn_desenbolsado['Transformador'] >= 10}"></i>
+                                <span>{{ tipo_pn_desenbolsado['Transformador'] ? tipo_pn_desenbolsado['Transformador'] : 0 | number: '1.1-1' }} %</span>
                             </span>
                         </div>
                         <div>
                             <img src="assets/img/transp2.png" alt="Imagem 4">
-                            <span class="text-danger">
-                                <i class="fas fa-caret-down me-1"></i><span>10%</span>
-                            </span>
+                            <span
+                            [ngClass]="{'text-danger': tipo_pn_desenbolsado['Distribuidor'] < 10, 'text-success': tipo_pn_desenbolsado['Distribuidor'] >= 10}">
+                            <i class="fas me-1"
+                                [ngClass]="{'fa-caret-down': tipo_pn_desenbolsado['Distribuidor'] < 10, 'fa-caret-up': tipo_pn_desenbolsado['Distribuidor'] >= 10}"></i>
+                            <span>{{ tipo_pn_desenbolsado['Distribuidor'] ? tipo_pn_desenbolsado['Distribuidor'] : 0 | number: '1.1-1' }} %</span>
+                        </span>
                         </div>
                     </div>
 
@@ -882,21 +927,21 @@
 
                         <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
+                                <label for="data_inicio_pn_desenbolsado">Data Início:</label>
+                                <input type="date" [(ngModel)]="data_inicio_pn_desenbolsado" name="data_inicio_pn_desenbolsado" style="width: 140px;"
                                     class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
+                                <label for="data_fim_pn_desenbolsado">Data Fim:</label>
+                                <input type="date" [(ngModel)]="data_fim_pn_desenbolsado" name="data_fim_pn_desenbolsado" style="width: 140px;"
                                     class="form-control form-control-sm me-2">
                             </div>
 
                             <div>
-                                <button class="btn btn-success btn-sm me-2"
+                                <button  (click)="post_PN_Desenbolsado()" class="btn btn-success btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Consultar</button>
-                                <button class="btn btn-danger btn-sm me-2"
+                                <button (click)="limparArray(pn_desenbolsado)" class="btn btn-danger btn-sm me-2"
                                     style="width: 140px; margin-top: 6%;">Limpar</button>
                             </div>
                         </div>
@@ -913,19 +958,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Miguel</td>
-                                    <td>Huila</td>
-                                    <td>caluquembe</td>
-                                    <td>Produtor</td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>João Paulo</td>
-                                    <td>Huambo</td>
-                                    <td>bailundo</td>
-                                    <td>Distribuidor</td>
+                                <tr *ngFor="let item of pn_desenbolsado">
+                                    <td>{{item.Nome}}</td>
+                                    <td>{{item.Provincia}}</td>
+                                    <td>{{devolver_nome_municipio(item['Município'])}}</td>
+                                    <td>{{item['Tipo de negocio']}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -938,73 +975,46 @@
                                 Províncias/Municípios-Cumulativo</h5>
                         </div>
 
-                        <div class="mb-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <label for="data_inicio">Data Início:</label>
-                                <input type="date" [(ngModel)]="data_inicio" name="data_inicio" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
-                            </div>
-
-                            <div>
-                                <label for="data_fim">Data Fim:</label>
-                                <input type="date" [(ngModel)]="data_fim" name="data_fim" style="width: 140px;"
-                                    class="form-control form-control-sm me-2">
-                            </div>
-
-                            <div>
-                                <button class="btn btn-success btn-sm me-2"
-                                    style="width: 140px; margin-top: 6%;">Consultar</button>
-                                <button class="btn btn-danger btn-sm me-2"
-                                    style="width: 140px; margin-top: 6%;">Limpar</button>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="table-responsive mb-3" id="print-section-list-inquerito">
                         <table class="table table-sm table-hover text-center table-bordered">
                             <thead class="linhas2">
-                                <tr class="table-dark">
-                                    <th scope="col" class="text-white">Província</th>
-                                    <th scope="col" class="text-white">PN Desenbolsados</th>
-                                    <th scope="col" class="text-white">%</th>
-                                </tr>
+                              <tr class="table-dark">
+                                <th scope="col" class="text-white">Província</th>
+                                <th scope="col" class="text-white">PN Desenbolsados</th>
+                                <th scope="col" class="text-white">%</th>
+                              </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-info">
-                                    <td>Bié</td>
-                                    <td>4</td>
-                                    <td> <span class="text-danger">
-                                            <i class="fas fa-caret-down me-1"></i><span>15%</span>
-                                        </span>
-                                    </td>
+                              <ng-container *ngFor="let provincia of PN_desenmbolsados_por_provincias">
+                                <tr *ngIf="provincia.Provincia"s>
+                                  <td class="table-info" >{{ provincia.Provincia }}</td>
+                                  <td class="table-info">{{ provincia['PN Desembolsados'] }}</td>
+                                  <td class="table-info">
+                                   <!-- Verifica se a propriedade % existe e se é uma string antes de usar o método includes -->
+                                   <ng-container *ngIf="provincia['%'] !== undefined">
+                                    <span class="text-{{ provincia['%'].includes('-') ? 'danger' : 'success' }}">
+                                      <i class="fas fa-caret-{{ provincia['%'].includes('-') ? 'down' : 'up' }} me-1"></i>
+                                      <span>{{ provincia['%'] }}</span>
+                                    </span>
+                                  </ng-container>
+                                  </td>
                                 </tr>
-                                <tr>
-                                    <td>Catabola</td>
-                                    <td>1</td>
-                                    <td></td>
+                                <tr *ngFor="let municipio of provincia['Municípios']">
+                                  <td>{{ devolver_nome_municipio(municipio['Município']) }}</td>
+                                  <td>{{ municipio['Numero PN Desembolsados'] }}</td>
+                                  <td></td>
                                 </tr>
+
+                                <!--tr>
+                                    <td colspan="2" class="text-end"><strong>Total</strong></td>
+                                    <td class="text-start"><strong>{{ calcularTotalMunicipios(provincia) }}</strong></td>
+                                  </!--tr-->
+                              </ng-container>
                             </tbody>
-                            <tbody>
-                                <tr class="table-info">
-                                    <td>Huíla</td>
-                                    <td>20</td>
-                                    <td> <span class="text-success">
-                                            <i class="fas fa-caret-up me-1"></i><span>64%</span>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Caluquembe</td>
-                                    <td>6</td>
-                                    <td></td>
-                                </tr>
-                                <tr class="table-active">
-                                    <td>Total</td>
-                                    <td>31</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                          </table>
+                          
                     </div>
 
                     <br>
@@ -1016,6 +1026,10 @@
                             <h5 class="card-title card-title-card text-black">Distribuição dos PN
                                 Desembolsados-Cumulativo</h5>
                         </div>
+
+
+                        <div id="angola-map" style="width: 100%; height: 500px;"></div>
+
 
                     </div>
 
