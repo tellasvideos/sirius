@@ -243,6 +243,11 @@ export class DataService {
     return this.http.get('http://sirius.strongbox.ao:8001/api/v1/municipios/');
   }
 
+   // Method to get coordenadas
+   getCoordenadas_map() {
+    return this.http.get('http://sirius.strongbox.ao:8001/api/v1/distribuicaodospndesembolsadosdashboard/');
+  }
+
   // Method to Get all proponents from PDAC Data-Base
   proponentPDAC() {
     //var headers = new HttpHeaders();
@@ -886,6 +891,12 @@ export class DataService {
    Delete_Progress_PN(id: any) {
     return this.http.delete(`${this.delete_progress_PN__url}${id}/`).pipe(take(1));
    }
+
+    // To delete a progress metas PGAS
+    delete_progress_PGAS__url = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepgasdoprojecto/';
+    Delete_Progress_PGAS(id: any) {
+     return this.http.delete(`${this.delete_progress_PGAS__url}${id}/`).pipe(take(1));
+    }
 
 
    // Get_metas_de_producao_PGAS

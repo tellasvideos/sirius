@@ -131,8 +131,8 @@
 
                             </div>
                             <div>
-                                <input readonly [attr.disabled]="true" class="form-select form-select-sm" id="municipio"
-                                    name="municipio" required style="width: 350px;" formControlName="municipio">
+                                <input readonly [attr.disabled]="true" class="form-control form-control-sm" id="municipio"
+                                    name="municipio" required style="width: 350px;" value="{{devolver_nome_municipio(inquerito[0]?.municipio)}}">
                             </div>
 
                         </div>

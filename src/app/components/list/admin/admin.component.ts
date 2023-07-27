@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { delay, timer } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-admin',
@@ -39,7 +41,11 @@ export class AdminComponent implements OnInit {
 
     // Verificar se os campos estão preenchidos corretamente
     if (!this.metas || !this.realizado || !this.ano) {
-      alert('Os campos devem ser preenchidos corretamente.');
+      Swal.fire({
+        icon: "error",
+        title: "Os campos devem ser preenchidos corretamente.",
+        showConfirmButton: true,
+      })      
       return;
     }
 
@@ -80,7 +86,11 @@ export class AdminComponent implements OnInit {
 
     // Verificar se os campos estão preenchidos corretamente
     if (!this.metas_pgas || !this.realizado_pgas || !this.ano_pgas) {
-      alert('Os campos devem ser preenchidos corretamente.');
+      Swal.fire({
+        icon: "error",
+        title: "Os campos devem ser preenchidos corretamente.",
+        showConfirmButton: true,
+      })
       return;
     }
 
@@ -169,6 +179,38 @@ export class AdminComponent implements OnInit {
       this.metas_de_producaode_PGAS_do_projecto = data;
       console.log(data)
     })
+  }
+
+  Delete_Progress_PN(id: any) {
+    this.ds.Delete_Progress_PN(id).subscribe(
+      success => {
+        Swal.fire({
+          icon: "success",
+          title: "Removido",
+          showConfirmButton: false,
+          timer: 1400
+        })
+        this.metas_de_producaode_pn_do_projecto.push(id);
+      },
+      error => { }
+    )
+    this.Get_metas_de_producaode_pn_do_projecto();
+  }
+
+  Delete_Progress_PGAS(id: any) {
+    this.ds.Delete_Progress_PGAS(id).subscribe(
+      success => {
+        Swal.fire({
+          icon: "success",
+          title: "Removido",
+          showConfirmButton: false,
+          timer: 1400
+        })
+        this.metas_de_producaode_PGAS_do_projecto.push(id);
+      },
+      error => { }
+    )
+    this.Get_metas_de_producao_de_PGAS_do_projecto();
   }
 
 

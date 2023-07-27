@@ -157,6 +157,8 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
     this.getInqueritoByIdDocs();
     this.get_inquireFormsInqueritoPreenchido();
 
+    this.getMunicipio()
+
     this.activatedRoute.paramMap.subscribe(paramId => {
       this.id = paramId.get('id'),
         this.dataService.getInqueritoByid(this.id).subscribe(data => {
@@ -279,6 +281,18 @@ export class VerInqueritoFromBackofficeComponent implements OnInit {
   get_inquerito() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inquerito = data;
+    })
+  }
+
+  devolver_nome_municipio(id: any): string {
+    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    return municipioSelecionado ? municipioSelecionado.name : 'N/D';
+  }
+
+  getMunicipio() {
+    this.dataService.getMunicipio().subscribe(data => {
+      this.municipio = data;
+      //console.log(data)
     })
   }
 

@@ -57,27 +57,63 @@
             </div>
         </div>
 
-        <div class="mt-3 justify-content-between d-flex mx-auto p-3" style="margin-left: 2%; margin-right: 2%;">
+        <div class="mt-3" style="margin-left: 2%; margin-right: 2%;">
 
             <div>
                 <div class="mb-3 esp1">
-                    <h5 class="card-title card-title-card text-black" style="font-weight: bold;">Progresso nas metas de
+                    <h5 class="card-title card-title-card text-black" style="font-weight: bold; font-size: 13px;">
+                        Progresso nas metas de
                         produção de PN do
                         Projecto
                     </h5>
                 </div>
 
-                <div class="d-flex justify-content-between mx-auto mb-3">
+                <div class="mx-auto mb-3">
 
-                    <div class="mb-3 d-flex justify-content-between">
+                    <div class="mb-3 d-flex">
                         <button (click)="post_progresso_pn()" class="btn btn-sm btn-success ms-2"
                             style="text-transform: capitalize;">Adicionar</button>
                         <input [(ngModel)]="metas" placeholder="Meta" class="form-control form-control-sm ms-2"
-                            type="text" style="width: 60px; height: 20px;">
+                            type="text" style="width: 70px; height: 20px;">
                         <input [(ngModel)]="realizado" placeholder="Elabor." class="form-control form-control-sm ms-2"
-                            type="text" style=" width: 60px; height: 20px;">
+                            type="text" style=" width: 70px; height: 20px;">
                         <input [(ngModel)]="ano" placeholder="Ano" class="form-control form-control-sm ms-2" type="text"
-                            style=" width: 60px; height: 20px;">
+                            style=" width: 70px; height: 20px;">
+                    </div>
+
+                    <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                        <table class="table table-sm table-hover text-center">
+                            <!-- ... Cabeçalho da tabela ... -->
+                            <thead class="linhas2">
+                                <tr>
+                                    <th scope="col" class="text-black">Ano</th>
+                                    <th scope="col" class="text-black">Metas</th>
+                                    <th scope="col" class="text-black">Elaborado</th>
+                                    <!--th scope="col" class="text-black">Editar</!--th-->
+                                    <th scope="col" class="text-black">Remover</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- Linhas da tabela com os dados -->
+                                <tr *ngFor="let item of metas_de_producaode_pn_do_projecto.slice().reverse()">
+                                    <td>{{item.ano_numerico}}</td>
+                                    <td>{{item.metas}}</td>
+                                    <td>{{item.realizado}}</td>
+
+                                    <!--td scope="col" class="text-black"><button type="button" routerLinkActive="active"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button></!td-->
+
+                                    <td scope="col" class="text-black"><button (click)="Delete_Progress_PN(item.id)" type="button"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
 
                 </div>
@@ -85,21 +121,57 @@
 
             <div>
                 <div class="mb-3 esp1">
-                    <h5 class="card-title card-title-card text-black" style="font-weight: bold;">Progresso nas metas de
+                    <h5 class="card-title card-title-card text-black" style="font-weight: bold; font-size: 13px;">
+                        Progresso nas metas de
                         produção de PGAS do
                         projecto</h5>
                 </div>
-                <div class="d-flex justify-content-between mx-auto">
+                <div class="mb-3 mx-auto">
 
-                    <div class="mb-3 d-flex justify-content-between">
+                    <div class="mb-3 d-flex">
                         <button (click)="post_progresso_PGAS()" class="btn btn-sm btn-success ms-2"
                             style="text-transform: capitalize;">Adicionar</button>
                         <input [(ngModel)]="metas_pgas" placeholder="Meta" class="form-control form-control-sm ms-2"
-                            type="text" style="width: 60px; height: 20px;">
+                            type="text" style="width: 70px; height: 20px;">
                         <input [(ngModel)]="realizado_pgas" placeholder="Elabor."
-                            class="form-control form-control-sm ms-2" type="text" style=" width: 60px; height: 20px;">
+                            class="form-control form-control-sm ms-2" type="text" style=" width: 70px; height: 20px;">
                         <input [(ngModel)]="ano_pgas" placeholder="Ano" class="form-control form-control-sm ms-2"
-                            type="text" style=" width: 60px; height: 20px;">
+                            type="text" style=" width: 70px; height: 20px;">
+                    </div>
+
+                    <div class="table-responsive mb-3" id="print-section-list-inquerito">
+                        <table class="table table-sm table-hover text-center">
+                            <!-- ... Cabeçalho da tabela ... -->
+                            <thead class="linhas2">
+                                <tr>
+                                    <th scope="col" class="text-black">Ano</th>
+                                    <th scope="col" class="text-black">Metas</th>
+                                    <th scope="col" class="text-black">Elaborado</th>
+                                    <!--th scope="col" class="text-black">Editar</!th-->
+                                    <th scope="col" class="text-black">Remover</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- Linhas da tabela com os dados -->
+                                <tr *ngFor="let item of metas_de_producaode_PGAS_do_projecto.slice().reverse()">
+                                    <td>{{item.ano_numerico}}</td>
+                                    <td>{{item.metas}}</td>
+                                    <td>{{item.realizado}}</td>
+
+                                    <!--td scope="col" class="text-black"><button type="button" routerLinkActive="active"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-pen"></i>
+                                        </button></!td-->
+
+                                    <td scope="col" class="text-black"><button (click)="Delete_Progress_PGAS(item.id)" type="button"
+                                            class="btn btn-link btn-sm btn-rounded">
+                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

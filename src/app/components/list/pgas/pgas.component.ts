@@ -44,8 +44,8 @@ export class PgasComponent implements OnInit {
       data_aprovacao_pgas_banco_mundial: [''], // Data aprovacao pgas banco mundial
       elaboracao_ogas_pendente: [false], // Elaboracao ogas pendente
       justificacao_pgas_pendente: ['', Validators.required], // Justificacao pgas pendente
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
+      lat: ['', Validators.required],
+      lng: ['', Validators.required],
       //created_at: [''], // Created at
       inquerito: [null], // Referência ao inquérito (pode ser um objeto ou apenas o ID, dependendo da implementação)
       status_pgas: ['']
@@ -340,8 +340,8 @@ export class PgasComponent implements OnInit {
     formData.append('consultor_pgas', this.angForm.get('consultor_pgas')?.value);
     formData.append('elaboracao_ogas_pendente', this.angForm.get('elaboracao_ogas_pendente')?.value);
     formData.append('justificacao_pgas_pendente', this.angForm.get('justificacao_pgas_pendente')?.value);
-    formData.append('latitude', this.angForm.get('latitude')?.value);
-    formData.append('longitude', this.angForm.get('longitude')?.value);
+    formData.append('lat', this.angForm.get('lat')?.value);
+    formData.append('lng', this.angForm.get('lng')?.value);
     formData.append('inquerito', this.inqueritoSelecionado);
     formData.append('nome_simplificado', this.nome_simplificado_finded?.nome_simplificado);
 
@@ -418,8 +418,8 @@ export class PgasComponent implements OnInit {
     this.angForm.get('consultor_pgas')?.value
     this.angForm.get('elaboracao_ogas_pendente')?.value
     this.angForm.get('justificacao_pgas_pendente')?.value
-    this.angForm.get('latitude')?.value
-    this.angForm.get('longitude')?.value
+    this.angForm.get('lat')?.value
+    this.angForm.get('lng')?.value
     this.angForm.get('nome_simplificado')?.value
 
     this.angForm.get('status_pgas')?.setValue(status_pgas_salvo)
@@ -427,11 +427,11 @@ export class PgasComponent implements OnInit {
 
     try {
       if (this.foundItem.id) {
-        this.dataService.Update_PGAS_form(this.foundItem.id, this.angForm.value).subscribe();
+        this.dataService.Update_PGAS_form(this.foundItem.id, this.angForm.value).subscribe(successCallback, errorCallback);
       } else {
       }
     } catch (error) {
-      this.dataService.Save_PGAS(formData).subscribe();
+      this.dataService.Save_PGAS(formData).subscribe(successCallback, errorCallback);
     }
 
   }

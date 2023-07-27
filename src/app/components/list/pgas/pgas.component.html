@@ -195,19 +195,19 @@
                             <label>Coordenadas:</label>
                         </div>
                         <div>
-                            <input type="number" formControlName="latitude" name="latitude" placeholder="Latitude"
+                            <input type="number" formControlName="lat" name="lat" placeholder="Latitude"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm mb-2"
-                                [ngClass]="{ 'is-invalid': angForm.get('latitude')?.invalid && angForm.get('latitude')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('lat')?.invalid && angForm.get('lat')?.touched }">
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('latitude')?.invalid && angForm.get('latitude')?.touched">
+                                *ngIf="angForm.get('lat')?.invalid && angForm.get('lat')?.touched">
                                 * Campo obrigatório.
                             </div>
 
-                            <input type="number" formControlName="longitude" name="longitude" placeholder="Longitude"
+                            <input type="number" formControlName="lng" name="lng" placeholder="Longitude"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
-                                [ngClass]="{ 'is-invalid': angForm.get('longitude')?.invalid && angForm.get('longitude')?.touched }">
+                                [ngClass]="{ 'is-invalid': angForm.get('lng')?.invalid && angForm.get('lng')?.touched }">
                             <div class="invalid-feedback"
-                                *ngIf="angForm.get('longitude')?.invalid && angForm.get('longitude')?.touched">
+                                *ngIf="angForm.get('lng')?.invalid && angForm.get('lng')?.touched">
                                 * Campo obrigatório.
                             </div>
                         </div>

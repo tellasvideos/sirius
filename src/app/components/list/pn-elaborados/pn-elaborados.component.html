@@ -73,7 +73,7 @@
 
                             <ng-container *ngIf="get_PN_STATUS_Data(item.id) === 'PN em análise UIP PDAC'">
 
-                                <ng-container *ngIf="get_PN_STATUS_implementado_Data(item.id)">
+                                <ng-container *ngIf="!get_PN_STATUS_implementado_Data(item.id)">
                                     <!-- *ngIf="get_PN_STATUS_implementado_Data(item.id)" -->
                                     <ng-container>
                                         <td>{{item.nome_simplificado}}</td>
@@ -134,7 +134,7 @@
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
-                            {{this.data_de_entregue_pdac?.fim_verificacao}}
+                           <!-- {{this.data_de_entregue_pdac?.fim_verificacao}}--> 
                         </div>
                         <div>
                             <input type="date" (change)="checkDates_0()" formControlName="data_analise_cti"

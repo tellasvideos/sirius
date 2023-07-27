@@ -8,6 +8,8 @@ import { EchartService } from 'src/app/services/echart.service';
 import { BasicEchartLineModel } from 'src/app/models/echart.models';
 import { EChartsOption } from 'echarts';
 import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2'
+
 import { HttpClient } from '@angular/common/http';
 import { Loader } from "@googlemaps/js-api-loader"
 
@@ -191,62 +193,56 @@ export class DashboardComponent implements OnInit {
 
 
 
-  iniciarmapa(){
+  iniciarmapa() {
     const loader = new Loader({
       apiKey: "AIzaSyCCNYB328tgoskXkN9sdMXdqX3FuLvLve4",
     });
-    
+
     loader.load().then(async () => {
       const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-     let map = new Map(document.getElementById("map") as HTMLElement, {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+      const angolaCenter = { lat: -12.3542, lng: 17.7918 }; // Coordenadas aproximadas do centro de Angola
+      let map = new Map(document.getElementById("map") as HTMLElement, {
+        center: angolaCenter,
+        zoom: 6,
       });
-   
-    
-    
-  // The following example creates five accessible and
-  // focusable markers.
-  
-    // Set LatLng and title text for the markers. The first marker (Boynton Pass)
-    // receives the initial focus when tab is pressed. Use arrow keys to
-    // move between markers; press tab again to cycle through the map controls.
-    const tourStops: [google.maps.LatLngLiteral, string][] = [
-      [{ lat: 34.8791806, lng: -111.8265049 }, "Boynton Pass"],
-      [{ lat: 34.8559195, lng: -111.7988186 }, "Airport Mesa"],
-      [{ lat: 34.832149, lng: -111.7695277 }, "Chapel of the Holy Cross"],
-      [{ lat: 34.823736, lng: -111.8001857 }, "Red Rock Crossing"],
-      [{ lat: 34.800326, lng: -111.7665047 }, "Bell Rock"],
-    ];
-    console.log(tourStops)
-   
-   
-    // Create an info window to share between markers.
-    const infoWindow = new google.maps.InfoWindow();
-  
-    // Create the markers.
-    tourStops.forEach(([position, title], i) => {
-      const marker = new google.maps.Marker({
-        position,
-        map,
-        title: `${i + 1}. ${title}`,
-        label: `${i + 1}`,
-        optimized: false,
+
+
+      // The following example creates five accessible and
+      // focusable markers.
+
+      // Set LatLng and title text for the markers. The first marker (Boynton Pass)
+      // receives the initial focus when tab is pressed. Use arrow keys to
+      // move between markers; press tab again to cycle through the map controls.
+      const tourStops: [google.maps.LatLngLiteral, string][] = this.coordenadas
+      console.log( 'COORDENADAS', tourStops)
+
+
+      // Create an info window to share between markers.
+      const infoWindow = new google.maps.InfoWindow();
+
+      // Create the markers.
+      tourStops.forEach(([position, title], i) => {
+        const marker = new google.maps.Marker({
+          position,
+          map,
+          title: `${i + 1}. ${title}`,
+          label: `${i + 1}`,
+          optimized: false,
+        });
+
+        // Add a click listener for each marker, and set up the info window.
+        marker.addListener("click", () => {
+          infoWindow.close();
+          infoWindow.setContent(marker.getTitle());
+          infoWindow.open(marker.getMap(), marker);
+        });
+        marker.setMap(map);
+
       });
-  
-      // Add a click listener for each marker, and set up the info window.
-      marker.addListener("click", () => {
-        infoWindow.close();
-        infoWindow.setContent(marker.getTitle());
-        infoWindow.open(marker.getMap(), marker);
-      });
-      marker.setMap(map);
-  
+
     });
-  
-  });
   }
-  
+
   ngOnInit(): void {
     this.iniciarmapa()
     // Pegar dados do user logado
@@ -288,6 +284,8 @@ export class DashboardComponent implements OnInit {
     this.Get_tipo_de_PN_desenbolsado();
     this.getMunicipio();
     this.Get_PN_desenmbolsados_por_provincias();
+
+    this.getCoordenadas();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -378,7 +376,7 @@ export class DashboardComponent implements OnInit {
 
 
   //statusList é uma matriz que contém todos os possíveis status
-  statusList: string[] = ['Aprovado', 'Em Análise', 'Por contactar', 'Incomunicavel: Não atende',
+  statusList: string[] = ['Aprovado', 'Em Análise', 'Por contactar', 'Incomunicavel: Não atende', 'Candidatura Inválida',
     'Incomunicavel: Nº Tel errado', 'Pendente por falta de documento', 'Recusada por falta de documentação legal',
     'Recusada por falta dos 10%', 'Recusada por dívida', 'Recusada: Actividade inelegível', 'Recusada: proponente desistiu',
     'Recusada: zona inelegível', 'Recusada por falta de área', 'Recusada CV'
@@ -393,7 +391,7 @@ export class DashboardComponent implements OnInit {
 
   // Função para calcular o "Total geral" em todas as províncias
   getTotalGeral(): number {
-    const provinces = ['Bié', 'Huambo', 'Huila', 'CuanzaSul'];
+    const provinces = ['Bié', 'Huambo', 'Huila', 'Cuanza Sul'];
     return provinces.reduce((total: number, province: string) => {
       total += this.getTotalByProvincia(province);
       return total;
@@ -521,8 +519,8 @@ export class DashboardComponent implements OnInit {
       const myChart = echarts.init(chartDom);
       const option: echarts.EChartsOption = {
         title: {
-          text: 'Status das MI recebidas',
-          subtext: 'Período',
+          text: '',
+          subtext: '',
           left: 'center'
         },
         tooltip: {
@@ -784,11 +782,20 @@ export class DashboardComponent implements OnInit {
     return municipioSelecionado ? municipioSelecionado.name : 'N/D';
   }
 
-  municipio:any;
+  municipio: any;
   getMunicipio() {
     this.ds.getMunicipio().subscribe(data => {
       this.municipio = data;
       //console.log(data)
+    })
+  }
+
+  // get coordenadas das fazendas
+  coordenadas: any;
+  getCoordenadas() {
+    this.ds.getCoordenadas_map().subscribe(data => {
+      this.coordenadas = data;
+      console.log('Coordenadas', data)
     })
   }
 
@@ -816,7 +823,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  
+
 
 
 }

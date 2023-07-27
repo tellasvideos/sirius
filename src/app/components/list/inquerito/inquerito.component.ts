@@ -678,6 +678,9 @@ export class InqueritoComponent implements OnInit {
     formData.append("created_at", this.angForm.get('created_at')?.value);
     formData.append("manifestacao_de_interesse", (this.angForm.get('manifestacao_de_interesse')?.value));
     formData.append("didasTeste", this.angForm.get('didasTeste')?.value);
+    
+    formData.append("provincia", this.angForm.get('provincia')?.value);
+    formData.append("municipio", this.angForm.get('municipio')?.value);
 
 
     this.dataService.salvaInquireForm(formData).subscribe(

@@ -474,7 +474,7 @@ export class PnElaboradosComponent implements OnInit {
 
   // encontra o status_pn do inqueritoID passado na lista de pn_elaborados e omite o item.id  com status_pn implementado
   get_PN_STATUS_implementado_Data(inqueritoId: any) {
-    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId && item.status_pn !== 'PN implementado');
+    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId && item.status_pn === 'PN implementado');
     console.log('status_pn implementado', status_pn?.status_pn);
     return status_pn?.status_pn;
   }
