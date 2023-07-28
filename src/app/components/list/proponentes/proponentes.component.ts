@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DataService } from 'src/app/services/data.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-proponentes',
@@ -49,6 +51,16 @@ export class ProponentesComponent implements OnInit {
   
       console.log(array3);*/
 
+  }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-mi'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Manifestacao de interesse');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'manifestacao-interesse.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
   }
 
   devolve_nome_provincia(id: any) {

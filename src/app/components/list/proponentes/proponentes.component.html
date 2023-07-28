@@ -20,6 +20,11 @@
                             styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
                             style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
                     </div>
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button (click)="exportToExcel()" style="text-transform: capitalize;"
+                            class="btn btn-light text-black"><i class="fas fa-print"></i> Exportar para
+                            Excel</button>
+                    </div>
                     <!--div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
                             style="text-transform: capitalize;">Exportar</button>
@@ -97,7 +102,7 @@
                     [(ngModel)]="keyWord" type="text" style="width: 300px;">
             </!--div-->
             <div class="table-responsive" id="print-section-list-prop">
-                <table class="table table-sm table-hover text-center">
+                <table id="tabela-mi" class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
                             <th scope="col" class="text-black">Nome</th>

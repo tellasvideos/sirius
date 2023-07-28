@@ -14,6 +14,8 @@ import { Observable, timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
 
+import * as XLSX from 'xlsx';
+
 import { ViewChild } from '@angular/core';
 
 
@@ -394,6 +396,27 @@ export class InqueritoComponent implements OnInit {
       console.log('User logado', this.user_logged)
     });
   }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-inquerito'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Inquerito');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'inqueritos.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
+  }
+
+  exportToExcel_2(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-inquerito2'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Inquerito');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'inqueritos.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
+  }
+  
 
   // Tras a lista do pdac e filtra omitindo as MI usadas na lista de inquerito
   getPdac() {

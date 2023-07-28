@@ -19,10 +19,14 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" printSectionId="print-section-list-depart" ngxPrint
-                            printTitle="Departamentos" styleSheetFile="assets/print.scss" [useExistingCss]="true"
+                        <button type="button" printSectionId="print-pn" ngxPrint
+                            printTitle="pn-implementados" styleSheetFile="assets/print.scss" [useExistingCss]="true"
                             class="btn btn-light text-black" style="text-transform: capitalize;"><i
                                 class="fas fa-print"></i> Imprimir</button>
+                    </div>
+                    <div (click)="exportToExcel()" class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button style="text-transform: capitalize;" class="btn btn-light text-black"><i
+                            class="fas fa-print"></i> Exportar para Excel</button>
                     </div>
                     <!--div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
@@ -50,8 +54,8 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar por nome simplificado..."
                     formControlName="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive" id="print-section-list-interest">
-                <table class="table table-sm table-hover text-center">
+            <div class="table-responsive" id="print-pn">
+                <table  id="tabela-pn" class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
                             <!--th scope="col" class="text-black">Id</!--th-->
@@ -59,8 +63,8 @@
                             <th scope="col" class="text-black">Província</th>
                             <th scope="col" class="text-black">Município</th>
                             <th scope="col" class="text-black">Telefone</th>
-                            <th scope="col" class="text-black not-it">Tipo de negócio</th>
-                            <th scope="col" class="text-black not-it">Actividade</th>
+                            <th scope="col" class="text-black">Tipo de negócio</th>
+                            <th scope="col" class="text-black">Actividade</th>
                             <th scope="col" class="text-black not-it">Mais info.</th>
                         </tr>
                     </thead>

@@ -13,6 +13,8 @@ import { Location } from '@angular/common';
 import { forkJoin, timer } from 'rxjs';
 import { delay, map, switchMap, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -153,6 +155,16 @@ export class InteressesComponent implements OnInit {
        }
      });*/
 
+  }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-backoffice'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Interesses');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'Backoffice.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
   }
 
   id: any;

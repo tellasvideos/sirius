@@ -19,10 +19,15 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" printSectionId="print-section-list-depart" ngxPrint
-                            printTitle="Departamentos" styleSheetFile="assets/print.scss" [useExistingCss]="true"
-                            class="btn btn-light text-black" style="text-transform: capitalize;"><i
-                                class="fas fa-print"></i> Imprimir</button>
+                        <button type="button" printSectionId="print-pn-elaborado" ngxPrint printTitle="PN Elaborados"
+                            styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
+                            style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button (click)="exportToExcel()" style="text-transform: capitalize;"
+                            class="btn btn-light text-black"><i class="fas fa-print"></i> Exportar para
+                            Excel</button>
                     </div>
                     <!--div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
@@ -50,8 +55,8 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar por nome simplificado..."
                     formControlName="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive" id="print-section-list-interest">
-                <table class="table table-sm table-hover text-center">
+            <div class="table-responsive" id="print-pn-elaborado">
+                <table id="tabela-pn-elaborado"  class="table table-sm table-hover text-center">
                     <thead class="linhas2">
                         <tr>
                             <!--th scope="col" class="text-black">Id</!--th-->
@@ -79,7 +84,7 @@
                                         <td>{{item.nome_simplificado}}</td>
                                         <td>{{item.provincia}}</td>
                                         <td>{{devolver_nome_municipio(item.municipio)}}</td>
-                                        <td>{{get_Data_entregue_ao_PDAC(item.id) | date: 'yyyy-MM-dd' }}</td>
+                                        <td>{{get_Data_entregue_ao_PDAC(item.id) | date:"dd/MM/yyyy" }}</td>
                                         <td>{{get_PN_STATUS_Data(item.id)}}</td>
 
                                         <td class=" not-it"><button type="button" routerLinkActive="active"

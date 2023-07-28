@@ -4,6 +4,8 @@ import { CadeiaVal } from 'src/app/interfaces/cadeiaVal';
 import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { AddCadeiaValorComponent } from '../../inserts/add-cadeia-valor/add-cadeia-valor.component';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-cadeiadevalor',
@@ -27,6 +29,17 @@ export class CadeiadevalorComponent implements OnInit {
   ngOnInit(): void {
     this.atualizarlista();
   }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-cadeia'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'cadeiadevalor');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'cadeia-de-valor.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
+  }
+
 
   // atualiza a lista depois de uma ação
   atualizarlista() {

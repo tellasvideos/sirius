@@ -5,6 +5,8 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import * as XLSX from 'xlsx';
+
 
 
 
@@ -90,6 +92,16 @@ export class PgasComponent implements OnInit {
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-pgas'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'PGAS');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'pgas.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
   }
 
   // levar dados do inquerito selecionado para o formulario pgas

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DataService } from 'src/app/services/data.service';
@@ -7,14 +7,18 @@ import Swal from 'sweetalert2';
 import { Observable, timer } from 'rxjs';
 import { delay, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-visitas',
   templateUrl: './visitas.component.html',
   styleUrls: ['./visitas.component.scss']
 })
-export class VisitasComponent implements OnInit {
 
+export class VisitasComponent implements OnInit {
+    
   today: Date = new Date();
   maxDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 0);
 
@@ -30,7 +34,8 @@ export class VisitasComponent implements OnInit {
     private modalService: MdbModalService,
     private dataService: DataService,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private exportAsService: ExportAsService
   ) {
 
     this.angForm = this.fb.group({
@@ -64,6 +69,17 @@ export class VisitasComponent implements OnInit {
      });*/
   }
 
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-visitas'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Visitas');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'visitas.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
+  }
+
+ 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
@@ -232,12 +248,14 @@ export class VisitasComponent implements OnInit {
   }
 
   visitasData: any;
+
   get_visitas() {
     this.dataService.Get_visitas().subscribe(data => {
       this.visitasData = data;
-      console.log('visitasdata', this.visitasData)
-    })
+      console.log('visitasdata', this.visitasData);
+    });
   }
+  
 
   pnElaborados: any;
   get_pnElaborados() {

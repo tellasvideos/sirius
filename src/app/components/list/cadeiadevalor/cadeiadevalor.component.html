@@ -24,6 +24,11 @@
                             styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
                             style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
                     </div>
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button (click)="exportToExcel()" style="text-transform: capitalize;"
+                            class="btn btn-light text-black"><i class="fas fa-print"></i> Exportar para
+                            Excel</button>
+                    </div>
                     <!--div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-light text-black"
                             style="text-transform: capitalize;">Exportar</button>
@@ -65,15 +70,11 @@
                     type="text" style="width: 300px;">
             </div>
             <div class="table-responsive" id="print-section-list-cadeia">
-                <table class="table table-hover table-sm text-center">
+                <table id="tabela-cadeia" class="table table-hover table-sm text-center">
                     <thead class="linhas2">
                         <tr>
-                            <th scope="col" class="text-black">Id</th>
                             <th scope="col" class="text-black">Cadeia de Valor</th>
                             <th scope="col" class="text-black">Descrição</th>
-                            <th scope="col" class="text-black"></th>
-                            <th scope="col" class="text-black"></th>
-                            <th scope="col" class="text-black"></th>
                             <th scope="col" class="text-black not-it">Editar</th>
                             <th scope="col" class="text-black not-it">Apagar</th>
                         </tr>
@@ -81,13 +82,10 @@
                     <tbody>
                         <!--*ngFor="let user of users"-->
                         <tr *ngFor="let item of cadeiaDeValor | search:'name':keyWord ">
-                            <td> {{item.id}} </td>
                             <td> {{item.name}} </td>
                             <td> {{item.description}} </td>
-                            <td> {{ ' ' }} </td>
-                            <td> {{ ' ' }} </td>
-                            <td> {{ ' ' }} </td>
-                            <td class="not-it"> <button type="button" [routerLink]="['/edit-cadeia/', item.id]" class="btn btn-link btn-sm btn-rounded ">
+                            <td class="not-it"> <button type="button" [routerLink]="['/edit-cadeia/', item.id]"
+                                    class="btn btn-link btn-sm btn-rounded ">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
                             <td class="not-it"> <button (click)="deleteCadeia(item.id)" type="button"

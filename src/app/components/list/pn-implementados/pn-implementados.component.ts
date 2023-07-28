@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-pn-implementados',
@@ -37,6 +39,16 @@ export class PnImplementadosComponent implements OnInit {
     this.get_form_backoffice____();
     this.getMunicipio();
     this.getPdac();
+  }
+
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-pn'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Pn-implementados');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'pn-implementados.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
   }
 
   sideBarToggler() {

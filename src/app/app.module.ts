@@ -96,6 +96,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { VerInqueritoFromBackofficeComponent } from './components/single-view/ver-inquerito-from-backoffice/ver-inquerito-from-backoffice.component';
 import { PnImplementadosComponent } from './components/list/pn-implementados/pn-implementados.component';
 import { AdminComponent } from './components/list/admin/admin.component';
+import { ExportAsModule } from 'ngx-export-as'; // Importe o módulo ExportAsModule
+
 
 @NgModule({
   declarations: [
@@ -182,7 +184,8 @@ import { AdminComponent } from './components/list/admin/admin.component';
     MatGridListModule,
     HttpClientModule,
     NgbModule,
-    NgSelectModule,  
+    NgSelectModule,
+    ExportAsModule  
     //NgSelectModule
     
   ],

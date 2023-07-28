@@ -19,10 +19,14 @@
             <div class=" justify-content-between px-md-1">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group btn-group-sm me-2" role="group" aria-label="First group">
-                        <button type="button" printSectionId="print-section-list-depart" ngxPrint
-                            printTitle="Departamentos" styleSheetFile="assets/print.scss" [useExistingCss]="true"
-                            class="btn btn-light text-black" style="text-transform: capitalize;"><i
-                                class="fas fa-print"></i> Imprimir</button>
+                        <button type="button" printSectionId="print-visita" ngxPrint printTitle="visitas"
+                            styleSheetFile="assets/print.scss" [useExistingCss]="true" class="btn btn-light text-black"
+                            style="text-transform: capitalize;"><i class="fas fa-print"></i> Imprimir</button>
+                    </div>
+
+                    <div class="btn-group btn-group-sm me-2" role="group" aria-label="Second group">
+                        <button (click)="exportToExcel()" style="text-transform: capitalize;"
+                            class="btn btn-light text-black"><i class="fas fa-print"></i> Exportar para Excel</button>
                     </div>
 
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
@@ -48,47 +52,51 @@
                 <input class="form-control form-control-sm mb-2" placeholder="Pesquisar por nome simplificado..."
                     formControlName="keyWord" type="text" style="width: 300px;">
             </div>
-            <div class="table-responsive" id="print-section-list-interest">
-                <table class="table table-sm table-hover text-center">
-                    <thead class="linhas2">
-                        <tr>
-                            <th scope="col" class="text-black">Nome Simplificado</th>
-                            <th scope="col" class="text-black">Província</th>
-                            <th scope="col" class="text-black">Município</th>
-                            <th scope="col" class="text-black">Nº ficha de acompanhamento</th>
-                            <th scope="col" class="text-black">Data da visita</th>
-                            <th scope="col" class="text-black">Tipo de visita</th>
-                            <th scope="col" class="text-black not-it">Principais constatações</th>
-                            <th scope="col" class="text-black not-it">Recomendações ao Produtor</th>
-                            <th scope="col" class="text-black not-it">Consultor visita</th>
-                            <th scope="col" class="text-black not-it">Apagar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of visitasData.slice().reverse() | search:'nome_simplificado':keyWord">
-                            <td>{{item.nome_simplificado}}</td>
-                            <td> {{get_Provincia_nome_simplificado(item.nome_simplificado)}} </td>
-                            <td>{{ devolver_nome_municipio(get_Municipio_nome_simplificado(item.nome_simplificado)) }}
-                            </td>
-                            <td>{{item.numero_ficha_acompanhamento ? item.numero_ficha_acompanhamento : 'N/D'}}</td>
-                            <td>{{item.data_da_visista}}</td>
-                            <td>{{item.tipo_de_visita}}</td>
-                            <td>{{item.principais_constatacoes}}</td>
-                            <td>{{item.recomendacao_ao_produtor}}</td>
-                            <td> 
-                            
-                                <span *ngIf="item.consultor_visita1"> {{ item.consultor_visita1 }} </span>
-                                <span *ngIf="item.consultor_visita2" > {{ item.consultor_visita2 }} </span>
-                            
-                            </td>
-                            
-                            <td> <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="del(item.id)">
-                                    <i class="fas fa-trash-alt" style="color: red;"></i>
-                                </button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="table-responsive" id="print-visita">
+                <div>
+                    <table id="tabela-visitas" class="table table-sm table-hover text-center">
+                        <thead class="linhas2">
+                            <tr>
+                                <th scope="col" class="text-black">Nome Simplificado</th>
+                                <th scope="col" class="text-black">Província</th>
+                                <th scope="col" class="text-black">Município</th>
+                                <th scope="col" class="text-black">Nº ficha de acompanhamento</th>
+                                <th scope="col" class="text-black">Data da visita</th>
+                                <th scope="col" class="text-black">Tipo de visita</th>
+                                <th scope="col" class="text-black not-it">Principais constatações</th>
+                                <th scope="col" class="text-black not-it">Recomendações ao Produtor</th>
+                                <th scope="col" class="text-black not-it">Consultor visita Area Técnica</th>
+                                <th scope="col" class="text-black not-it">Consultor visita Salvaguarda</th>
+                                <th scope="col" class="text-black not-it">Apagar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of visitasData.slice().reverse() | search:'nome_simplificado':keyWord">
+                                <td>{{item.nome_simplificado}}</td>
+                                <td> {{get_Provincia_nome_simplificado(item.nome_simplificado)}} </td>
+                                <td>{{ devolver_nome_municipio(get_Municipio_nome_simplificado(item.nome_simplificado))
+                                    }}
+                                </td>
+                                <td>{{item.numero_ficha_acompanhamento ? item.numero_ficha_acompanhamento : 'N/D'}}</td>
+                                <td>{{item.data_da_visista | date:"dd/MM/yyyy"}}</td>
+                                <td>{{item.tipo_de_visita}}</td>
+                                <td>{{item.principais_constatacoes}}</td>
+                                <td>{{item.recomendacao_ao_produtor}}</td>
+                                <td>
+                                    <span> {{ item.consultor_visita1 ? item.consultor_visita1 : 'Indisponível' }} </span>
+                                </td>
+                                <td>
+                                    <span> {{ item.consultor_visita2 ? item.consultor_visita2 : 'Indisponível' }} </span>
+                                </td>
 
+                                <td> <button type="button" class="btn btn-link btn-sm btn-rounded"
+                                        (click)="del(item.id)">
+                                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                                    </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

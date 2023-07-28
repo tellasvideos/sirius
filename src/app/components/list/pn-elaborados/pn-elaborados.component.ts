@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import * as XLSX from 'xlsx';
+
 
 
 @Component({
@@ -116,6 +118,15 @@ export class PnElaboradosComponent implements OnInit {
      console.log(' to get inquerito selected', this.inqueritoSelecionado?.id)
    }*/
 
+   exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('tabela-pn-elaborado'));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'PN-Elaborado');
+
+    /* salvar o arquivo */
+    const nomeDoArquivo: string = 'pn-elaborado.xlsx';
+    XLSX.writeFile(wb, nomeDoArquivo);
+  }
 
   alert_success() {
     Swal.fire({
