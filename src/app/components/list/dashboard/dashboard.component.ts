@@ -286,6 +286,7 @@ export class DashboardComponent implements OnInit {
     this.Get_PN_desenmbolsados_por_provincias();
 
     this.getCoordenadas();
+    this.get_pnElaborados();
 
     // loop para contar e atualizar props in real time
     for (this.prop = 0; this.prop < this.prop.length; this.prop++) {
@@ -318,6 +319,14 @@ export class DashboardComponent implements OnInit {
 
 
 
+  }
+
+  pnElaborados: any;
+  get_pnElaborados() {
+    this.ds.Get_pnElaborados().subscribe(data => {
+      this.pnElaborados = data.filter((item:any) => item.status_pn === 'PN implementado')
+      console.log('Planos elaborados', this.pnElaborados)
+    })
   }
 
   sideBarToggler() {
