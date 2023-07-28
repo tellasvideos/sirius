@@ -62,9 +62,9 @@
                             <th scope="col" class="text-black">Estado PN</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th *ngIf="
-                                (this.user_logged?.department === 'Back Off' || 
-                                this.user_logged?.department === 'M&A') &&
-                                this.user_logged?.is_admin === true" scope="col" class="text-black not-it">Modificação
+                            this.user_logged.department === 'Back Off' || 
+                            this.user_logged.department === 'M&A' ||
+                            this.user_logged.is_admin === true" scope="col" class="text-black not-it">Modificação
                             </th>
                         </tr>
                     </thead>
@@ -90,9 +90,10 @@
                                         </td>
 
                                         <td *ngIf="
-                                    (this.user_logged.department === 'Back Off' || 
-                                    this.user_logged.department === 'M&A' )&&
-                                    this.user_logged.is_admin === true" class="not-it">
+                                        this.user_logged.department === 'Front Off' || 
+                                        this.user_logged.department === 'Back Off' || 
+                                        this.user_logged.department === 'M&A' ||
+                                        this.user_logged.is_admin === true" class="not-it">
                                             <button (click)="getForm_PN_Data_entradas(item.id)"
                                                 (click)="mostrarFinanciamento(item.id)"
                                                 (click)="mostrar_Data_aprovada_pgas_BM(item.id)" type="button"
@@ -134,7 +135,7 @@
                     <div class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="inicio_elaboracao_pn">Data de analise no CTI:</label>
-                           <!-- {{this.data_de_entregue_pdac?.fim_verificacao}}--> 
+                            <!-- {{this.data_de_entregue_pdac?.fim_verificacao}}-->
                         </div>
                         <div>
                             <input type="date" (change)="checkDates_0()" formControlName="data_analise_cti"

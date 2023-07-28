@@ -16,6 +16,8 @@ export class DepartamentoComponent implements OnInit {
   depart: any;
   sideBarOpen = true;
 
+  user_logged: any;
+
   modalRef: MdbModalRef<AddDepartamentoComponent> | null = null;
 
   constructor(
@@ -24,6 +26,13 @@ export class DepartamentoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+     // Pegar dados do user logado
+     this.ds.getUserData().subscribe((data: any) => {
+      this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
+      console.log('User logado', this.user_logged)
+    });
+
     this.getDepartaments();
     this.filterDsc();
   }

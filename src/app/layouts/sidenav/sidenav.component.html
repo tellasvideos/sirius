@@ -79,7 +79,7 @@
                         class="far fa-circle-check fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">PN Implem.</span></div>
             </div>
-            <div class="d-block text-center">
+            <div class="d-block text-center" *ngIf="this.user?.is_admin === true">
                 <button routerLink="/admin" routerLinkActive="active" type="button" class="btn"><i
                         class="fas fa-screwdriver-wrench fa-2x"></i></button>
                 <div><span style="font-size:xx-small; color: black;">Admin</span></div>
