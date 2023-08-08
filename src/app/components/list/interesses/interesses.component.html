@@ -160,7 +160,7 @@
                             <th scope="col" class="text-black">Estado PN</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th scope="col" class="text-black not-it" *ngIf="
-                            this.user_logged.department === 'Back Off' || this.user_logged.is_admin	=== true">Colar
+                            this.user_logged?.department === 'Back Off' || this.user_logged?.is_admin	=== true">Colar
                                 info</th>
                             <!--th scope="col" class="text-black not-it">Add Back Office  *ngIf="devolver_status_pn(item.id) !== 'PN em análise UIP PDAC'"</!--th-->
                         </tr>

@@ -130,7 +130,7 @@ export class VerInqueritoComponent implements OnInit {
     /* this.activatedRoute.params.subscribe(params => {
        const itemId = params['id'];
        // Use o ID do item para buscar os detalhes do item ou realizar qualquer ação necessária
-       console.log('ID do item:', itemId);
+      // console.log('ID do item:', itemId);
      });*/
 
     /* this.angForm.get('resultado_1_contacto')?.valueChanges.subscribe(value => {
@@ -142,7 +142,7 @@ export class VerInqueritoComponent implements OnInit {
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {
       this.municipio = data;
-      //console.log(data)
+      ////console.log(data)
     })
   }
 
@@ -154,7 +154,7 @@ export class VerInqueritoComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       const simplifiedNames = data.map(inqueritos => inqueritos.nome_simplificado);
       this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
-      console.log('nome_simplificado duplicados', this.duplicateNames);
+     // console.log('nome_simplificado duplicados', this.duplicateNames);
     });
   }
 
@@ -163,7 +163,7 @@ export class VerInqueritoComponent implements OnInit {
   getInqueritoByIdDocs() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.listaDocsEmFalta = data;
-      console.log('o que qero ver: ', data)
+     // console.log('o que qero ver: ', data)
     })
   }
 
@@ -178,7 +178,7 @@ export class VerInqueritoComponent implements OnInit {
       this.pdac = this.pdac.sort(function (a: any, b: any) {
         return b._id - a._id
       })
-      //console.log(data)
+      ////console.log(data)
 
     })
 
@@ -197,7 +197,7 @@ export class VerInqueritoComponent implements OnInit {
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
       this.userFrontOff = data.filter(user => user.department === 'Front Off');
-      console.log('users do front off: ', data)
+     // console.log('users do front off: ', data)
     })
   }
 
@@ -222,7 +222,7 @@ export class VerInqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      console.log('inquérito', this.inqueritos['inquerito_preenchido'])
+     //// console.log('inquérito', this.inqueritos['inquerito_preenchido'])
     })
   }
 
@@ -231,7 +231,7 @@ export class VerInqueritoComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
       this.InqueritoPreenchido = data.map(item => item.inquerito_preenchido)
-      console.log('link inquérito preenchido', this.InqueritoPreenchido)
+      ////console.log('link inquérito preenchido', this.InqueritoPreenchido)
     })
   }
 
@@ -256,7 +256,7 @@ export class VerInqueritoComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       this.Inquerito_pendente = data.filter(inqueritos => inqueritos.status === 'Pendente')
       //.map(inqueritos => inqueritos.nome_simplificado);;
-      console.log('inquéritos pendentes', this.Inquerito_pendente)
+     // console.log('inquéritos pendentes', this.Inquerito_pendente)
     })
   }*/
 

@@ -109,7 +109,7 @@ export class InteressesComponent implements OnInit {
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      //console.log('User logado', this.user_logged)
+      ////console.log('User logado', this.user_logged)
     });
 
     // leva os dados do inquerito para o backoffice form
@@ -135,13 +135,13 @@ export class InteressesComponent implements OnInit {
 
       /*this.dataService.Get_Backoffice_data_and_Inquerito_by_id(this.inqueritoSelecionado?.id).subscribe(data => {
         this.alldata = data;
-        console.log(data)
+        //console.log(data)
       })
     });*/
 
     /* // Fazer a chamada à API e carregar os dados no formulário
      this.dataService.getBackofficeByID(this.formBackoffice_rev[0].id).subscribe((data: any) => {
-       console.log(data); // Verifique se os dados foram retornados corretamente
+       //console.log(data); // Verifique se os dados foram retornados corretamente
  
        if (data && data.consultor_pn) {
          // Carregar os dados no formulário usando o patchValue
@@ -151,7 +151,7 @@ export class InteressesComponent implements OnInit {
          });
        } else {
          // Tratar a ausência do campo consultor_pn ou dos dados
-         console.log("Dados de consultor_pn não encontrados ou inválidos.");
+         //console.log("Dados de consultor_pn não encontrados ou inválidos.");
        }
      });*/
 
@@ -189,12 +189,12 @@ export class InteressesComponent implements OnInit {
 
     if (checkboxValue === 'mg') {
       financiamentoBancarioControl?.setValue('MG');
-      console.log(this.angForm.get('financiamento_bancario')?.value)
+      //console.log(this.angForm.get('financiamento_bancario')?.value)
 
       mgBancoCheckboxControl?.setValue(false);
     } else if (checkboxValue === 'mgBanco') {
       financiamentoBancarioControl?.setValue('MG e Banco');
-      console.log(this.angForm.get('financiamento_bancario')?.value)
+      //console.log(this.angForm.get('financiamento_bancario')?.value)
       mgCheckboxControl?.setValue(false);
     }
   }
@@ -224,7 +224,7 @@ export class InteressesComponent implements OnInit {
   devolver_status_pn(id: any): string {
     const formBackofficeCopy = [...this.formBackoffice];
     const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
-    //console.log('devolvendo ', inqueritoSelecionado);
+    ////console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.status_pn : 'N/D';
   }
 
@@ -235,7 +235,7 @@ export class InteressesComponent implements OnInit {
     this.dataService.getFormBackofficeByid(this.foundItem.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('formbackoffice single', this.foundItem);
+    //console.log('formbackoffice single', this.foundItem);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 
@@ -252,7 +252,7 @@ export class InteressesComponent implements OnInit {
         ));
       })
     ).subscribe(data => {
-      //  console.log('yessss', data)
+      //  //console.log('yessss', data)
     });
   }
 
@@ -261,7 +261,7 @@ export class InteressesComponent implements OnInit {
   get_form_backoffice() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
       this.formBackoffice = data.reverse();
-      console.log('backofficeForm', this.formBackoffice)
+      //console.log('backofficeForm', this.formBackoffice)
     })
   }
 
@@ -270,7 +270,7 @@ export class InteressesComponent implements OnInit {
   get_form_backoffice_rev() {
     this.dataService.Get_Backoffice_Form().subscribe(data => {
       this.formBackoffice_rev = data.reverse();
-      console.log('backofficeForm', this.formBackoffice_rev)
+      //console.log('backofficeForm', this.formBackoffice_rev)
     })
   }
 
@@ -279,7 +279,7 @@ export class InteressesComponent implements OnInit {
   get_data_from_inquerito_e_BackOffice(id_inquerito: any) {
     this.dataService.Get_Backoffice_data_and_Inquerito_by_id(id_inquerito).subscribe(data => {
       this.alldata = data;
-      console.log('data: ', data)
+      //console.log('data: ', data)
     })
   }*/
 
@@ -295,9 +295,7 @@ export class InteressesComponent implements OnInit {
 
     const Data_PN_entregue_ao_PDAC = this.angForm.get('fim_verificacao')?.value; // linha pendente !!! “Data PN entregue ao PDAC” (pergunta 16) <> ”” & “Data analise pelo CTI” (pergunta 19) = “”
 
-    console.log(Estado_MI, Data_inicio_elaboração_PN,
-      Data_fim_elaboração_PN, O_proponente_desistiu,
-      O_PN_esta_pendente, Data_PN_entregue_ao_PDAC)
+    //console.log(Estado_MI, Data_inicio_elaboração_PN,Data_fim_elaboração_PN, O_proponente_desistiu, O_PN_esta_pendente, Data_PN_entregue_ao_PDAC)
 
     if (Estado_MI) {
       return 'Inquérito em stock';
@@ -331,16 +329,16 @@ export class InteressesComponent implements OnInit {
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('id inq selected', item)
+    //console.log('id inq selected', item)
     // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
     return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item);
 
     /* if (this.nome_simplificado_finded) {
-       console.log('Inquérito encontrado:', this.nome_simplificado_finded);
+       //console.log('Inquérito encontrado:', this.nome_simplificado_finded);
      } else {
-       console.log('Inquérito não encontrado na lista.');
+       //console.log('Inquérito não encontrado na lista.');
      }
-     console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
+     //console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
      return this.nome_simplificado_finded ? this.nome_simplificado_finded.nome_simplificado : 'N/D';*/
   }
 
@@ -378,14 +376,14 @@ export class InteressesComponent implements OnInit {
     formData.append('inicio_elaboracao_pn', (this.angForm.get('inicio_elaboracao_pn')?.value));
 
     try {
-      console.log(this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
+      //console.log(this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
       const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
       formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : fimElaboracaoValue.toISOString());
       const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
       formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : fimVerificacaoValue.toISOString());
-      console.log(fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '')
+      //console.log(fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '')
     } catch (error) {
-      console.log(error, this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
+      //console.log(error, this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
       formData.append('fim_elaboracao_pn', this.angForm.get('fim_elaboracao_pn')?.value)
       formData.append('fim_verificacao', this.angForm.get('fim_verificacao')?.value);
     }
@@ -399,7 +397,7 @@ export class InteressesComponent implements OnInit {
 
     let status_pn_salvo = 'N/D';
 
-    console.log(this.angForm.get('fim_verificacao')?.value)
+    //console.log(this.angForm.get('fim_verificacao')?.value)
     if (this.angForm.get('proponente_desistiu')?.value === true) {
 
       status_pn_salvo = 'Desistência do proponente';
@@ -436,7 +434,7 @@ export class InteressesComponent implements OnInit {
 
     // Success callback
     const successCallback = (response: any) => {
-      console.log('Formulário enviado com sucesso!', response);
+      //console.log('Formulário enviado com sucesso!', response);
       // Implemente o código para lidar com a resposta da API aqui
       this.alert_success();
       // close modal
@@ -454,7 +452,7 @@ export class InteressesComponent implements OnInit {
 
     // Success calback 2
     const successCallback2 = (response: any) => {
-      console.log('Formulário enviado com sucesso e plano de negocio finalizado!', response);
+      //console.log('Formulário enviado com sucesso e plano de negocio finalizado!', response);
       // Implemente o código para lidar com a resposta da API aqui
       Swal.fire({
         icon: "success",
@@ -495,7 +493,7 @@ export class InteressesComponent implements OnInit {
       if (this.foundItem.id) {
         this.dataService.Update_Backoffice_form(this.foundItem.id, this.angForm.value).subscribe(successCallback, errorCallback);
       } else {
-        console.log('')
+        //console.log('')
       }
     } catch (error) {
       this.dataService.Send_Backoffice_form(formData).subscribe(successCallback, errorCallback);
@@ -522,7 +520,7 @@ export class InteressesComponent implements OnInit {
   getUserBackOFF() {
     this.dataService.getUser().subscribe(data => {
       this.userbackOff = data.filter(user => user.department === 'Back Off');
-      console.log('users do back off: ', data)
+      //console.log('users do back off: ', data)
     })
   }
 
@@ -649,7 +647,7 @@ export class InteressesComponent implements OnInit {
 
   showInput_2(checkboxValue: any) {
     // this.limpar_form();
-    console.log(checkboxValue)
+    //console.log(checkboxValue)
     if (checkboxValue === true) {
       checkboxValue = 'pn_pendente'
     }
@@ -659,20 +657,20 @@ export class InteressesComponent implements OnInit {
       }
 
       this.showDuplicatedInput = true;
-      console.log(this.angForm.get('pn_pendente')?.value);
+      //console.log(this.angForm.get('pn_pendente')?.value);
       this.showDuplicatedInput_1 = false;
       this.angForm.get('proponente_desistiu')?.patchValue(false);
-      console.log(this.angForm.get('proponente_desistiu')?.value);
+      //console.log(this.angForm.get('proponente_desistiu')?.value);
     } else if (checkboxValue === 'proponente_desistiu') {
       if (this.showDuplicatedInput_1) {
         return; // Retorna se o checkbox já estiver marcado
       }
 
       this.showDuplicatedInput_1 = true;
-      console.log(this.angForm.get('proponente_desistiu')?.value);
+      //console.log(this.angForm.get('proponente_desistiu')?.value);
       this.showDuplicatedInput = false;
       this.angForm.get('pn_pendente')?.patchValue(false);
-      console.log(this.angForm.get('pn_pendente')?.value);
+      //console.log(this.angForm.get('pn_pendente')?.value);
     }
   }
 
@@ -706,7 +704,7 @@ export class InteressesComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
-      console.log('inqueritos reverse', this.inqueritos);
+      //console.log('inqueritos reverse', this.inqueritos);
     });
   }
 
@@ -761,7 +759,7 @@ export class InteressesComponent implements OnInit {
   buscar(id: any) {
     this.dataService.interestExpressionByProvince(id).subscribe(data => {
       this.man_Int_por_provincia = data;
-      //console.log('man interest by province', data)
+      ////console.log('man interest by province', data)
     })
   }
 
@@ -781,7 +779,7 @@ export class InteressesComponent implements OnInit {
   list_interest() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.interest = data;
-      //console.log('man interest',data)
+      ////console.log('man interest',data)
     })
   }
 
@@ -814,7 +812,7 @@ export class InteressesComponent implements OnInit {
   getProvincias() {
     this.dataService.get_Provinces().subscribe(data => {
       this.provincias = data;
-      //console.log('provincias', data)
+      ////console.log('provincias', data)
     })
   }
 
@@ -838,28 +836,28 @@ export class InteressesComponent implements OnInit {
   selectedFile1: any;
   onSelectedFile1(e: any) {
     this.selectedFile1 = e.target.files;
-    console.log('Doc estudo de viabilidade', this.selectedFile1)
+    //console.log('Doc estudo de viabilidade', this.selectedFile1)
   }
 
   // change de files 2
   selectedFile2: any;
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
-    console.log('Doc termo de compromisso', this.selectedFile2)
+    //console.log('Doc termo de compromisso', this.selectedFile2)
   }
 
   // change de files 3
   selectedFile3: any;
   onSelectedFile3(e: any) {
     this.selectedFile3 = e.target.files;
-    console.log('Doc projecto riv', this.selectedFile3)
+    //console.log('Doc projecto riv', this.selectedFile3)
   }
 
   // change de files 4
   selectedFile4: any;
   onSelectedFile4(e: any) {
     this.selectedFile4 = e.target.files;
-    console.log('Doc ftas', this.selectedFile4)
+    //console.log('Doc ftas', this.selectedFile4)
 
   }
 
@@ -867,28 +865,28 @@ export class InteressesComponent implements OnInit {
   selectedFile5: any;
   onSelectedFile5(e: any) {
     this.selectedFile5 = e.target.files;
-    console.log('Doc lista de trabalhadores', this.selectedFile5)
+    //console.log('Doc lista de trabalhadores', this.selectedFile5)
   }
 
   // change de files 6
   selectedFile6: any;
   onSelectedFile6(e: any) {
     this.selectedFile6 = e.target.files;
-    console.log('Doc docs admins', this.selectedFile6)
+    //console.log('Doc docs admins', this.selectedFile6)
   }
 
   // change de files 7
   selectedFile7: any;
   onSelectedFile7(e: any) {
     this.selectedFile7 = e.target.files;
-    console.log('Doc riv file', this.selectedFile7)
+    //console.log('Doc riv file', this.selectedFile7)
   }
 
   // change de files 8
   selectedFile8: any;
   onSelectedFile8(e: any) {
     this.selectedFile8 = e.target.files;
-    console.log('Doc outros docs', this.selectedFile8)
+    //console.log('Doc outros docs', this.selectedFile8)
   }
 
   fechar_modal() {

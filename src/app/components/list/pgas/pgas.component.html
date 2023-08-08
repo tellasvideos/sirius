@@ -65,8 +65,8 @@
                             <th scope="col" class="text-black">Estado PGAS</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th scope="col" class="text-black not-it" *ngIf="
-                            this.user_logged.department === 'Salvaguarde' ||
-                            this.user_logged.is_admin === true">Modificação</th>
+                            this.user_logged?.department === 'Salvaguarde' ||
+                            this.user_logged?.is_admin === true">Modificação</th>
                         </tr>
                     </thead> <!-- *ngIf="
                         getFormPGAsData(item.id) !== 'PGAS em implementação' 
@@ -74,7 +74,7 @@
                     || getFormPGAsData(item.id) === 'PGAS em revisão ou analise pelo PDAC/BM' 
                     || getFormPGAsData(item.id) === 'PGAS aprovado pelo BM'"-->
                     <tbody>
-                        <tr *ngFor="let item of inqueritos.slice().reverse() | search:'nome_simplificado':keyWord">
+                        <tr *ngFor="let item of inqueritos?.slice()?.reverse() | search:'nome_simplificado':keyWord">
 
                             <ng-container *ngIf="getFormPGAsData(item.id) !== 'PGAS em implementação'">
 
@@ -96,8 +96,8 @@
                                     </td>
 
                                     <td class="not-it" *ngIf="
-                                    this.user_logged.department === 'Salvaguarde' ||
-                                    this.user_logged.is_admin === true">
+                                    this.user_logged?.department === 'Salvaguarde' ||
+                                    this.user_logged?.is_admin === true">
                                         <button type="button" (click)="getForm_PGAS_Data_entradas(item.id)"
                                             (click)="selecionarInquerito(item.id)"
                                             class="btn btn-link btn-sm btn-rounded" data-bs-toggle="modal"

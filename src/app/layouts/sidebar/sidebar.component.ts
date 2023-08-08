@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
     // Pegar dados do user logado
     this.ds.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logadooooo', this.user_logged.department)
+      //console.log('User logadooooo', this.user_logged.department)
     });
   }
 

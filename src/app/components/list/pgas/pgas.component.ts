@@ -39,7 +39,7 @@ export class PgasComponent implements OnInit {
   ) {
 
     this.angForm = this.fb.group({
-      // nome_simplificado: [null, Validators.required], // Nome simplificado
+      nome_simplificado: [''], // Nome simplificado
       consultor_pgas: [''], // Consultor pgas
       data_inicio_elaboracao_pgas: ['', Validators.required], // Data inicio elaboracao pgas
       data_fim_elaboracao_pgas: [''], // Data fim elaboracao pgas
@@ -60,7 +60,7 @@ export class PgasComponent implements OnInit {
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
 
     /* // leva os dados do pnelaborados ao form pgas
@@ -71,7 +71,7 @@ export class PgasComponent implements OnInit {
     // leva os dados do inquerito ao form pgas
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
-      console.log(params)
+      //console.log(params)
     });
 
     //inqueritoSelecionado
@@ -109,16 +109,16 @@ export class PgasComponent implements OnInit {
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('id inq selected', item)
+    //console.log('id inq selected', item)
     // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
-    this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === this.inqueritoSelecionado);
+    this.nome_simplificado_finded = this.inqueritos?.find((inquerito: any) => inquerito.id === this.inqueritoSelecionado);
 
     if (this.nome_simplificado_finded) {
-      console.log('Inquérito encontrado:', this.nome_simplificado_finded);
+      //console.log('Inquérito encontrado:', this.nome_simplificado_finded);
     } else {
-      console.log('Inquérito não encontrado na lista.');
+      //console.log('Inquérito não encontrado na lista.');
     }
-    console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
+    //console.log('Inquérito encontrado NS:', this.nome_simplificado_finded.nome_simplificado)
     return this.nome_simplificado_finded ? this.nome_simplificado_finded.nome_simplificado : 'N/D';
   }
 
@@ -126,7 +126,7 @@ export class PgasComponent implements OnInit {
   get_pnElaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
       this.pnElaborados = data;
-      console.log('Planos elaborados', this.pnElaborados)
+      //console.log('Planos elaborados', this.pnElaborados)
       this.pnElaborados.reverse();
     })
   }
@@ -135,7 +135,7 @@ export class PgasComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
-      console.log('inqueritos', this.inqueritos);
+      //console.log('inqueritos', this.inqueritos);
     });
   }
 
@@ -145,7 +145,7 @@ export class PgasComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
       this.nomesSimplificados = data.map(item => item.nome_simplificado);
-      console.log('farm_names ou nomes simplificados: ', this.nomesSimplificados);
+      //console.log('farm_names ou nomes simplificados: ', this.nomesSimplificados);
     });
   }
 
@@ -157,7 +157,7 @@ export class PgasComponent implements OnInit {
       this.formBackoffice.reverse()
 
       // Filtrar os dados com base no ID do inquérito
-      const filteredFormBackoffice = this.formBackoffice.filter((item: any) => {
+      const filteredFormBackoffice = this.formBackoffice?.filter((item: any) => {
         this.inqueritos.reverse()
         return this.inqueritos.some(inquerito => inquerito.id === item.inquerito);
       });
@@ -172,7 +172,7 @@ export class PgasComponent implements OnInit {
         };
       }).reverse();
 
-      console.log('dados mapeados: ', this.mappedFormBackoffice);
+      //console.log('dados mapeados: ', this.mappedFormBackoffice);
     });
 
   }
@@ -183,7 +183,7 @@ export class PgasComponent implements OnInit {
   getUserSalvaguarde() {
     this.dataService.getUser().subscribe(data => {
       this.userSalvaGuarde = data.filter(user => user.department === 'Salvaguarde');
-      console.log('users do Salvaguarde: ', data)
+      //console.log('users do Salvaguarde: ', data)
     })
   }
 
@@ -270,17 +270,17 @@ export class PgasComponent implements OnInit {
   get_pgas() {
     this.dataService.Get_Pgas().subscribe(data => {
       this.pgas = data.reverse();
-      console.log('Pgas form', this.pgas)
+      //console.log('Pgas form', this.pgas)
     })
   }
 
   getFormPGAsData_(inqueritoId: string): any {
-    console.log(inqueritoId)
-    return this.pgas.find((item: any) => item.inquerito === inqueritoId);
+    //console.log(inqueritoId)
+    return this.pgas?.find((item: any) => item.inquerito === inqueritoId);
   }
 
   getFormPGAsData(inqueritoId: any): string {
-    const pga = this.pgas.find((item: any) => item.inquerito === inqueritoId);
+    const pga = this.pgas?.find((item: any) => item.inquerito === inqueritoId);
     const dataInicioElaboracaoPGAS = this.angForm.get('data_inicio_elaboracao_pgas')?.value;
 
     if (pga && pga.status_pgas) {
@@ -314,17 +314,17 @@ export class PgasComponent implements OnInit {
   pgas_entrados: any;
   getFormPGAsData_entradas(inqueritoId: any) {
     this.pgas_entrados = this.pgas.find((item: any) => item.inquerito === inqueritoId);
-    console.log('pgas', this.pgas_entrados)
+    //console.log('pgas', this.pgas_entrados)
     return this.pgas_entrados ? this.pgas_entrados : 'N/D';
   }
 
   public foundItem: any;
   getForm_PGAS_Data_entradas(inqueritoId: any) {
     this.foundItem = this.pgas.find((item: any) => item.inquerito === inqueritoId);
-    this.dataService.getForm_PGAS_Byid(this.foundItem.id).subscribe(data => {
+    this.dataService.getForm_PGAS_Byid(this.foundItem?.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('form_pn id item', this.foundItem.id);
+    //console.log('form_pn id item', this.foundItem.id);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 
@@ -365,20 +365,20 @@ export class PgasComponent implements OnInit {
     const data_aprovacao_pgas_banco_mundial = this.angForm.get('data_aprovacao_pgas_banco_mundial')?.value;
     const formBackofficeStatusPN = this.formBackoffice.length > 0 ? this.formBackoffice[0].status_pn : '';
 
-    console.log(data_inicio_elaboracao_pgas, data_fim_elaboracao_pgas, data_aprovacao_pgas_banco_mundial, formBackofficeStatusPN)
+    //console.log(data_inicio_elaboracao_pgas, data_fim_elaboracao_pgas, data_aprovacao_pgas_banco_mundial, formBackofficeStatusPN)
 
     if (data_inicio_elaboracao_pgas !== '' || data_inicio_elaboracao_pgas !== null) {
       status_pgas_salvo = 'PGAS em elaboração';
-    } 
-    
+    }
+
     if (data_fim_elaboracao_pgas !== '' || data_fim_elaboracao_pgas !== null) {
       status_pgas_salvo = 'PGAS em revisão ou análise pelo PDAC/BM';
-    } 
-    
+    }
+
     if (data_aprovacao_pgas_banco_mundial !== '' || data_aprovacao_pgas_banco_mundial !== null) {
       status_pgas_salvo = 'PGAS aprovado pelo BM';
-    } 
-    
+    }
+
     if (data_aprovacao_pgas_banco_mundial !== '' && formBackofficeStatusPN === 'PN em Análise UIP PDAC') {
       status_pgas_salvo = 'PGAS em implementação';
     }
@@ -387,7 +387,7 @@ export class PgasComponent implements OnInit {
 
     // Success callback 1 nome_simplificado_finded?.nome_simplificado
     const successCallback = (response: any) => {
-      console.log('Formulário enviado com sucesso!', response);
+      //console.log('Formulário enviado com sucesso!', response);
       this.alert_success();
       const modal = document.getElementById('exampleModalToggle');
       if (modal) {
@@ -400,7 +400,7 @@ export class PgasComponent implements OnInit {
 
     // Success calback 2
     const successCallback2 = (response: any) => {
-      console.log('Formulário enviado com sucesso PGAS em Implementação!', response);
+      //console.log('Formulário enviado com sucesso PGAS em Implementação!', response);
       Swal.fire({
         icon: "success",
         title: "PGAS em implementação",
@@ -451,7 +451,7 @@ export class PgasComponent implements OnInit {
   municipio: any;
   retorno: any;
   devolver_nome_municipio(id: any) {
-    const municipioEncontrado = this.municipio.find((emp: any) => emp.id === id);
+    const municipioEncontrado = this.municipio?.find((emp: any) => emp.id === id);
     return municipioEncontrado ? municipioEncontrado.name : 'N/D';
   }
 
@@ -498,8 +498,8 @@ export class PgasComponent implements OnInit {
   }
 
   get_STATUS_pn_from_backoffice(inqueritoId: string): any {
-    const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    // console.log('status_pn', status_pn.status_pn)
+    const status_pn = this.formBackoffice?.find((item: any) => item.inquerito === inqueritoId);
+    // //console.log('status_pn', status_pn.status_pn)
     return status_pn?.status_pn
   }
 

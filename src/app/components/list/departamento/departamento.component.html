@@ -30,7 +30,7 @@
                     </!--div-->
                     <div class="btn-group btn-group-sm" role="group" aria-label="Third group">
                         <button type="button" class="btn btn-success btn-top" (click)="openModal()"
-                            *ngIf="this.user_logged.is_admin === true"><i class="fas fa-plus-square text-black"></i> Add
+                            *ngIf="this.user_logged?.is_admin === true"><i class="fas fa-plus-square text-black"></i> Add
                             Departamento
                         </button>
                     </div>
@@ -72,9 +72,9 @@
                             <th scope="col" class="text-black">Departamento</th>
                             <th scope="col" class="text-black">Descrição</th>
 
-                            <th scope="col" class="text-black not-it" *ngIf="this.user_logged.is_admin === true">Editar
+                            <th scope="col" class="text-black not-it" *ngIf="this.user_logged?.is_admin === true">Editar
                             </th>
-                            <th scope="col" class="text-black not-it" *ngIf="this.user_logged.is_admin === true">Apagar
+                            <th scope="col" class="text-black not-it" *ngIf="this.user_logged?.is_admin === true">Apagar
                             </th>
                         </tr>
                     </thead>
@@ -84,11 +84,11 @@
                             <td> {{item.name}} </td>
                             <td> {{item.description}} </td>
 
-                            <td class="not-it" *ngIf="this.user_logged.is_admin === true"> <button type="button"
+                            <td class="not-it" *ngIf="this.user_logged?.is_admin === true"> <button type="button"
                                     [routerLink]="['/edit-depart/', item.id]" class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-pen"></i>
                                 </button></td>
-                            <td class="not-it" *ngIf="this.user_logged.is_admin === true"> <button
+                            <td class="not-it" *ngIf="this.user_logged?.is_admin === true"> <button
                                     (click)="deleteDepartamento(item.id)" type="button"
                                     class="btn btn-link btn-sm btn-rounded">
                                     <i class="fas fa-trash-alt" style="color: red;"></i>

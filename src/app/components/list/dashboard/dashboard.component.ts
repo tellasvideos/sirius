@@ -27,9 +27,9 @@ interface User {
 })
 export class DashboardComponent implements OnInit {
 
-  metas_de_producaode_pn_do_projecto: any;
-  metas_de_producaode_PGAS_do_projecto: any;
-  inqueritos_mi_recebidas: any;
+  metas_de_producaode_pn_do_projecto: any[] = [];
+  metas_de_producaode_PGAS_do_projecto: any[] = [];
+  inqueritos_mi_recebidas: any | undefined;
 
   data_inicio?: any;
   data_fim?: any;
@@ -214,14 +214,14 @@ export class DashboardComponent implements OnInit {
       // receives the initial focus when tab is pressed. Use arrow keys to
       // move between markers; press tab again to cycle through the map controls.
       const tourStops: [google.maps.LatLngLiteral, string][] = this.coordenadas
-      console.log( 'COORDENADAS', tourStops)
+      //console.log( 'COORDENADAS', tourStops)
 
 
       // Create an info window to share between markers.
       const infoWindow = new google.maps.InfoWindow();
 
       // Create the markers.
-      tourStops.forEach(([position, title], i) => {
+      tourStops?.forEach(([position, title], i) => {
         const marker = new google.maps.Marker({
           position,
           map,
@@ -248,27 +248,26 @@ export class DashboardComponent implements OnInit {
     // Pegar dados do user logado
     this.userService.getUserData().subscribe((data: any) => {
       this.user = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user)
+      //console.log('User logado', this.user)
     });
 
 
     // Subscribe chart for VAlue chain from interestExpression
-    this.subscripition = this.echartService.get_CadeiaValor_EchartData().subscribe(data => {
-      this._cadeiaValorChart(data);
-      //console.log('value chain from interest', data)
-
-    });
+    //this.subscripition = this.echartService.get_CadeiaValor_EchartData().subscribe(data => {
+    //this._cadeiaValorChart(data);
+    ////console.log('value chain from interest', data)
+    //});
 
     // Subscribe chart for inqueritos
-    this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
-      this._inqueritosChart(data);
-    });
+    // this.subscripition = this.echartService.get_Inquerito_EchartData().subscribe(data => {
+    // this._inqueritosChart(data);
+    //});
 
     // subscribe Chart for interesses
-    this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
-      this._interessesChart(data);
-      //console.log('interesses chart por mes:', data)
-    });
+    // this.subscripition = this.echartService.get_Interesses_EchartData().subscribe(data => {
+    // this._interessesChart(data);
+    ////console.log('interesses chart por mes:', data)
+    //});
 
     this.getDeparet();
     this.getInquerito();
@@ -324,8 +323,8 @@ export class DashboardComponent implements OnInit {
   pnElaborados: any;
   get_pnElaborados() {
     this.ds.Get_pnElaborados().subscribe(data => {
-      this.pnElaborados = data.filter((item:any) => item.status_pn === 'PN implementado')
-      console.log('Planos elaborados', this.pnElaborados)
+      this.pnElaborados = data.filter((item: any) => item.status_pn === 'PN implementado')
+      //console.log('Planos elaborados', this.pnElaborados)
     })
   }
 
@@ -336,7 +335,7 @@ export class DashboardComponent implements OnInit {
   proponentes() {
     this.ds.proponentPDAC().subscribe(data => {
       this.prop = data;
-      ////console.log(data)
+      //////console.log(data)
     })
   }
 
@@ -374,13 +373,13 @@ export class DashboardComponent implements OnInit {
           item.provincia === 'Huila' ||
           item.provincia === 'Cuanza Sul')
       );
-      console.log(this.inqueritos_mi_recebidas);
+      //console.log(this.inqueritos_mi_recebidas);
     });
   }
 
   // Total de cada status em todas as províncias
   getStatusCountByProvincia(status: string, provincia: string): number {
-    return this.inqueritos_mi_recebidas.filter((item: any) => item.status === status && item.provincia === provincia).length;
+    return this.inqueritos_mi_recebidas?.filter((item: any) => item.status === status && item.provincia === provincia).length;
   }
 
 
@@ -427,7 +426,7 @@ export class DashboardComponent implements OnInit {
   Get_metas_de_producaode_pn_do_projecto() {
     this.ds.Get_metas_de_producaode_pn_do_projecto().subscribe(data => {
       this.metas_de_producaode_pn_do_projecto = data;
-      console.log('metas PN', data)
+      //console.log('metas PN', data)
     })
   }
 
@@ -444,7 +443,7 @@ export class DashboardComponent implements OnInit {
   Get_metas_de_producao_de_PGAS_do_projecto() {
     this.ds.Get_metas_de_producao_de_PGAS_do_projecto().subscribe(data => {
       this.metas_de_producaode_PGAS_do_projecto = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -505,7 +504,7 @@ export class DashboardComponent implements OnInit {
           item.provincia === 'Huila' ||
           item.provincia === 'Cuanza Sul')
       );
-      console.log(this.inqueritos_mi_recebidas);
+      //console.log(this.inqueritos_mi_recebidas);
 
       // Contar a quantidade de cada status na lista
       const statusCount: Record<string, number> = {};
@@ -562,11 +561,11 @@ export class DashboardComponent implements OnInit {
 
 
   // get Distribuição dos PN Desembolsados por Províncias/Municípios-Cumulativo
-  PN_desenmbolsados_por_provincias: any;
+  PN_desenmbolsados_por_provincias: any[] = [];
   Get_PN_desenmbolsados_por_provincias() {
     this.ds.Get_PN_desemb_por_prov().subscribe(data => {
       this.PN_desenmbolsados_por_provincias = data;
-      console.log('PN_desenmbolsados_por_provincias', data)
+      //console.log('PN_desenmbolsados_por_provincias', data)
     })
   }
 
@@ -575,7 +574,7 @@ export class DashboardComponent implements OnInit {
   Get_tipo_de_producao() {
     this.ds.Get_tipo_producoes().subscribe(data => {
       this.tipo_prod = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -587,7 +586,7 @@ export class DashboardComponent implements OnInit {
       for (const key in data) {
         this.tipo_pn_desenbolsado[key] = data[key].toFixed(1);
       }
-      console.log('Tipo pn desebolsado', this.tipo_pn_desenbolsado);
+      //console.log('Tipo pn desebolsado', this.tipo_pn_desenbolsado);
 
       this.calcularTotalMunicipiosGeral();
     });
@@ -610,7 +609,7 @@ export class DashboardComponent implements OnInit {
 
     this.ds.Send_inqueres_done_date(Data_Inicio).subscribe(data => {
       this.inqueritos_feitos = data;
-      console.log('inqueritos feitos', data);
+      //console.log('inqueritos feitos', data);
     })
   }
 
@@ -633,7 +632,7 @@ export class DashboardComponent implements OnInit {
 
     this.ds.Send_PN_elaborados_date(Dados).subscribe(data => {
       this.pn_elaborados = data;
-      console.log('PN elaborados', data);
+      //console.log('PN elaborados', data);
     })
 
   }
@@ -657,7 +656,7 @@ export class DashboardComponent implements OnInit {
 
     this.ds.Send_FTAS_date(Dados).subscribe(data => {
       this.ftas = data;
-      console.log('FTAS', data);
+      //console.log('FTAS', data);
     })
 
   }
@@ -681,7 +680,7 @@ export class DashboardComponent implements OnInit {
 
     this.ds.Send_PN_Desenbolsado_date(Dados).subscribe(data => {
       this.pn_desenbolsado = data;
-      console.log('PN_desenbolsado', data);
+      //console.log('PN_desenbolsado', data);
     })
 
   }
@@ -720,7 +719,7 @@ export class DashboardComponent implements OnInit {
 
     this.ds.Send_PN_by_CTI_date(Dados).subscribe(data => {
       this.PN_by_CTI = data;
-      console.log('PN_by_CTI', data);
+      //console.log('PN_by_CTI', data);
     })
 
   }
@@ -787,7 +786,7 @@ export class DashboardComponent implements OnInit {
   }
 
   devolver_nome_municipio(id: any): string {
-    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    const municipioSelecionado = this.municipio?.find((item: any) => item.id === id);
     return municipioSelecionado ? municipioSelecionado.name : 'N/D';
   }
 
@@ -795,7 +794,7 @@ export class DashboardComponent implements OnInit {
   getMunicipio() {
     this.ds.getMunicipio().subscribe(data => {
       this.municipio = data;
-      //console.log(data)
+      ////console.log(data)
     })
   }
 
@@ -804,7 +803,7 @@ export class DashboardComponent implements OnInit {
   getCoordenadas() {
     this.ds.getCoordenadas_map().subscribe(data => {
       this.coordenadas = data;
-      console.log('Coordenadas', data)
+      //console.log('Coordenadas', data)
     })
   }
 
@@ -833,6 +832,100 @@ export class DashboardComponent implements OnInit {
 
 
 
+  executarConsulta(tipoConsulta: number) {
+    let dataInicio, dataFim, targetData;
+
+    // Definir qual conjunto de dados utilizar com base no tipoConsulta
+    switch (tipoConsulta) {
+      case 0:
+        dataInicio = this.data_inicio;
+        dataFim = this.data_fim;
+        targetData = this.inqueritos_feitos;
+        break;
+      case 1:
+        dataInicio = this.data_inicio_pn;
+        dataFim = this.data_fim_pn;
+        targetData = this.pn_elaborados;
+        break;
+      case 2:
+        dataInicio = this.data_inicio_ftas;
+        dataFim = this.data_fim_ftas;
+        targetData = this.ftas;
+        break;
+      case 3:
+        dataInicio = this.data_inicio_pn_cti;
+        dataFim = this.data_fim_pn_cti;
+        targetData = this.PN_by_CTI;
+        break;
+      default:
+        return;
+    }
+
+    // Verificar se os campos estão preenchidos corretamente
+    if (!dataFim || !dataInicio) {
+      alert('Preencha a data início e fim para fazer a consulta.');
+      return;
+    }
+
+    const requestData = {
+      "data_inicio": dataInicio,
+      "data_fim": dataFim
+    };
+
+    // Chamar o serviço correspondente com base no tipoConsulta
+    switch (tipoConsulta) {
+      case 0:
+        this.ds.Send_inqueres_done_date(requestData).subscribe(data => {
+          targetData = data;
+        });
+        break;
+      case 1:
+        this.ds.Send_PN_elaborados_date(requestData).subscribe(data => {
+          targetData = data;
+        });
+        break;
+      case 2:
+        this.ds.Send_FTAS_date(requestData).subscribe(data => {
+          targetData = data;
+        });
+        break;
+      case 3:
+        this.ds.Send_PN_by_CTI_date(requestData).subscribe(data => {
+          targetData = data;
+        });
+        break;
+      default:
+        return;
+    }
+  }
+
+
+  limparCampos(tipoConsulta: number) {
+    switch (tipoConsulta) {
+      case 0:
+        this.data_inicio = '';
+        this.data_fim = '';
+        this.inqueritos_feitos = {};
+        break;
+      case 1:
+        this.data_inicio_pn = '';
+        this.data_fim_pn = '';
+        this.pn_elaborados = {};
+        break;
+      case 2:
+        this.data_inicio_ftas = '';
+        this.data_fim_ftas = '';
+        this.ftas = {};
+        break;
+      case 3:
+        this.data_inicio_pn_cti = '';
+        this.data_fim_pn_cti = '';
+        this.PN_by_CTI = {};
+        break;
+      default:
+        return;
+    }
+  }
 
 
 }

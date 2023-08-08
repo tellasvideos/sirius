@@ -57,7 +57,7 @@ export class AdminComponent implements OnInit {
 
     this.ds.Save_Progress_PN(progress).subscribe(
       success => {
-        console.log(success);
+        //console.log(success);
         // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
         this.metas_de_producaode_pn_do_projecto.push(progress);
 
@@ -102,7 +102,7 @@ export class AdminComponent implements OnInit {
 
     this.ds.Save_Progress_PGAS(progress).subscribe(
       success => {
-        console.log(success);
+        //console.log(success);
         // Após o sucesso da requisição, atualize a lista manualmente adicionando o novo progresso
         this.metas_de_producaode_PGAS_do_projecto.push(progress);
 
@@ -164,11 +164,11 @@ export class AdminComponent implements OnInit {
   }
 
   // get  metas_de_producaode_pn_do_projecto
-  metas_de_producaode_pn_do_projecto: any;
+  metas_de_producaode_pn_do_projecto: any ;
   Get_metas_de_producaode_pn_do_projecto() {
     this.ds.Get_metas_de_producaode_pn_do_projecto().subscribe(data => {
       this.metas_de_producaode_pn_do_projecto = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 
@@ -177,7 +177,7 @@ export class AdminComponent implements OnInit {
   Get_metas_de_producao_de_PGAS_do_projecto() {
     this.ds.Get_metas_de_producao_de_PGAS_do_projecto().subscribe(data => {
       this.metas_de_producaode_PGAS_do_projecto = data;
-      console.log(data)
+      //console.log(data)
     })
   }
 

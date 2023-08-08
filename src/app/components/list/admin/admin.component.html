@@ -96,7 +96,7 @@
 
                             <tbody>
                                 <!-- Linhas da tabela com os dados -->
-                                <tr *ngFor="let item of metas_de_producaode_pn_do_projecto.slice().reverse()">
+                                <tr *ngFor="let item of metas_de_producaode_pn_do_projecto?.slice()?.reverse()">
                                     <td>{{item.ano_numerico}}</td>
                                     <td>{{item.metas}}</td>
                                     <td>{{item.realizado}}</td>
@@ -154,7 +154,7 @@
 
                             <tbody>
                                 <!-- Linhas da tabela com os dados -->
-                                <tr *ngFor="let item of metas_de_producaode_PGAS_do_projecto.slice().reverse()">
+                                <tr *ngFor="let item of metas_de_producaode_PGAS_do_projecto?.slice()?.reverse()">
                                     <td>{{item.ano_numerico}}</td>
                                     <td>{{item.metas}}</td>
                                     <td>{{item.realizado}}</td>

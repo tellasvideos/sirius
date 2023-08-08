@@ -125,7 +125,7 @@ export class VisitasComponent implements OnInit {
   selectedFile: any;
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
-    console.log('doc selected', this.selectedFile)
+    //console.log('doc selected', this.selectedFile)
   }
 
   option: any;
@@ -133,7 +133,7 @@ export class VisitasComponent implements OnInit {
     switch (this.angForm.get('tipo_de_visita')?.value) {
       case 'Acompanhamento técnico':
         this.option = this.UserapoioTecnico;
-        console.log(this.angForm.get('tipo_de_visita')?.value)
+        //console.log(this.angForm.get('tipo_de_visita')?.value)
         break;
       case 'Salvaguarde':
         this.option = this.userSalvaGuarde;
@@ -148,7 +148,7 @@ export class VisitasComponent implements OnInit {
   getUserSalvaguarde() {
     this.dataService.getUser().subscribe(data => {
       this.userSalvaGuarde = data.filter(user => user.department === 'Salvaguarde');
-      console.log('salva', this.userSalvaGuarde)
+      //console.log('salva', this.userSalvaGuarde)
     })
   }
 
@@ -158,17 +158,17 @@ export class VisitasComponent implements OnInit {
   getUserapoioTecnico() {
     this.dataService.getUser().subscribe(data => {
       this.UserapoioTecnico = data.filter(user => user.department === 'Apoio Técnico');
-      console.log('apoio', this.UserapoioTecnico)
+      //console.log('apoio', this.UserapoioTecnico)
     })
   }
 
   public foundItem: any;
   getForm_Visitas_Data_entradas(inqueritoId: any) {
-    this.foundItem = this.visitasData.find((item: any) => item.inquerito === inqueritoId);
+    this.foundItem = this.visitasData?.find((item: any) => item.inquerito === inqueritoId);
     this.dataService.getForm_visitas_Byid(this.foundItem.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('form_pn id item', this.foundItem.id);
+    //console.log('form_pn id item', this.foundItem.id);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 
@@ -247,12 +247,12 @@ export class VisitasComponent implements OnInit {
 
   }
 
-  visitasData: any;
+  visitasData?: any[] = [];
 
   get_visitas() {
     this.dataService.Get_visitas().subscribe(data => {
       this.visitasData = data;
-      console.log('visitasdata', this.visitasData);
+      //console.log('visitasdata', this.visitasData);
     });
   }
   
@@ -265,11 +265,11 @@ export class VisitasComponent implements OnInit {
   }
 
   // lista os inqueritos por ordem do ultimo inquerito gravado e só os inqueritos com estado aprovado
-  inqueritos: any;
+  inqueritos: any[] = [];
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log('inqueritos reverse', this.inqueritos);
+      //console.log('inqueritos reverse', this.inqueritos);
     });
   }
 
@@ -279,19 +279,19 @@ export class VisitasComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       this.pnFiltrado = this.pnElaborados.filter((item: any) =>
         (item.status_pn === 'PN implementado' && (item.nome_simplificado !== '' || item.nome_simplificado !== null)));
-      //console.log('okkkkk', pnFiltrado)
+      ////console.log('okkkkk', pnFiltrado)
     });
     //  return this.pnFiltrado
   }
 
   // encontra a provincia do nome_simplificado passado em visitas na lista inqueritos
   get_Provincia_nome_simplificado(nome_simplificado: any) {
-    const inqueritoCorrespondente = this.inqueritos.find(
+    const inqueritoCorrespondente = this.inqueritos?.find(
       (item: any) => item.nome_simplificado === nome_simplificado
     );
 
     if (inqueritoCorrespondente) {
-      console.log(inqueritoCorrespondente.provincia);
+      //console.log(inqueritoCorrespondente.provincia);
       return inqueritoCorrespondente.provincia;
     } else {
       // Caso o item não seja encontrado na lista 'inqueritos', você pode retornar um valor padrão ou tratar essa situação de acordo com a sua necessidade.
@@ -301,12 +301,12 @@ export class VisitasComponent implements OnInit {
 
   // encontra o municipio desse nome simplificado na lista inqueritos
   get_Municipio_nome_simplificado(nome_simplificado: any) {
-    const inqueritoCorrespondente = this.inqueritos.find(
+    const inqueritoCorrespondente = this.inqueritos?.find(
       (item: any) => item.nome_simplificado === nome_simplificado
     );
 
     if (inqueritoCorrespondente) {
-      console.log(inqueritoCorrespondente.municipio);
+      //console.log(inqueritoCorrespondente.municipio);
       return inqueritoCorrespondente.municipio;
     } else {
       // Caso o item não seja encontrado na lista 'inqueritos', você pode retornar um valor padrão ou tratar essa situação de acordo com a sua necessidade.
@@ -323,8 +323,8 @@ export class VisitasComponent implements OnInit {
       return "N/D";
     }
 
-    const municipioCorrespondente = this.municipio.find((municipio: any) => municipio.id === id);
-    console.log(municipioCorrespondente)
+    const municipioCorrespondente = this.municipio?.find((municipio: any) => municipio.id === id);
+    //console.log(municipioCorrespondente)
     if (municipioCorrespondente) {
       return municipioCorrespondente.name;
     } else {

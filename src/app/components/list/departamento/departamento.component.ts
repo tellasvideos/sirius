@@ -12,7 +12,7 @@ import { AddDepartamentoComponent } from '../../inserts/add-departamento/add-dep
 })
 export class DepartamentoComponent implements OnInit {
   keyWord: string = '';
-  departamento: any;
+  departamento: any[] = [];
   depart: any;
   sideBarOpen = true;
 
@@ -30,7 +30,7 @@ export class DepartamentoComponent implements OnInit {
      // Pegar dados do user logado
      this.ds.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
 
     this.getDepartaments();
@@ -77,7 +77,7 @@ export class DepartamentoComponent implements OnInit {
   }
 
   filterDsc() {
-    this.departamento = this.departamento.sort(function (a: any, b: any) {
+    this.departamento = this.departamento?.sort(function (a: any, b: any) {
       return b._id - a._id
     })
   }

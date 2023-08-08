@@ -171,8 +171,8 @@ export class EditInqueritoComponent implements OnInit {
         provincia: Provincia['s2gp/s2g3/rep_provincia'],
         municipio: Provincia['s2gp/s2g3/rep_municipio']
       });
-      console.log(Provincia['s2gp/s2g3/rep_provincia']);
-      console.log(Provincia['s2gp/s2g3/rep_municipio']);
+      //console.log(Provincia['s2gp/s2g3/rep_provincia']);
+      //console.log(Provincia['s2gp/s2g3/rep_municipio']);
     }
   }
 
@@ -384,7 +384,7 @@ export class EditInqueritoComponent implements OnInit {
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
     //this.resultados_De_Contacto.sort((a, b) => a.localeCompare(b));
 
@@ -434,7 +434,7 @@ export class EditInqueritoComponent implements OnInit {
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {
       this.municipio = data;
-      //console.log(data)
+      ////console.log(data)
     })
   }
 
@@ -472,7 +472,7 @@ export class EditInqueritoComponent implements OnInit {
         .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
         .filter((propNome: any) => !this.inqueritoPdac.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
 
-      console.log('Array pdac apenas nomes filtrados:', this.prop_name);
+      //console.log('Array pdac apenas nomes filtrados:', this.prop_name);
 
     });
 
@@ -482,7 +482,7 @@ export class EditInqueritoComponent implements OnInit {
 
   onChangeValorSelecionado(event: any) {
     this.prop_name = event;
-    console.log(this.prop_name['s2gp/s2g1q1/prop_nome'])
+    //console.log(this.prop_name['s2gp/s2g1q1/prop_nome'])
     //this.prop_name); // Chamada da sua função com o valor selecionado
   }
 
@@ -507,17 +507,17 @@ export class EditInqueritoComponent implements OnInit {
 
     if (checkboxValue === 'duplicada') {
       this.showDuplicatedInput === true;
-      console.log(this.angForm.get('duplicada_da')?.value)
+      //console.log(this.angForm.get('duplicada_da')?.value)
       this.showDuplicatedInput_1 === false;
       this.angForm.get('didasTeste')?.patchValue(false);
-      console.log(this.angForm.get('didasTeste')?.value)
+      //console.log(this.angForm.get('didasTeste')?.value)
 
     } else if (checkboxValue === 'didasteste') {
       this.showDuplicatedInput_1 === true;
-      console.log(this.angForm.get('didasTeste')?.value)
+      //console.log(this.angForm.get('didasTeste')?.value)
       this.showDuplicatedInput === false;
       this.angForm.get('duplicada_da')?.patchValue(false);
-      console.log(this.angForm.get('duplicada_da')?.value)
+      //console.log(this.angForm.get('duplicada_da')?.value)
     }
   }
 
@@ -1101,7 +1101,7 @@ export class EditInqueritoComponent implements OnInit {
   get_inquireForms() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data;
-      console.log('inquérito', data)
+      //console.log('inquérito', data)
     })
   }
 
@@ -1116,7 +1116,7 @@ export class EditInqueritoComponent implements OnInit {
       this.mi = this.mi.sort(function (a: any, b: any) {
         return b._id - a._id
       })
-      console.log('MI duplicados', this.duplicateNames);
+      //console.log('MI duplicados', this.duplicateNames);
     })
   }
 
@@ -1294,7 +1294,7 @@ export class EditInqueritoComponent implements OnInit {
   get_interest_express() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
-      //console.log('manifestacao: ', data)
+      ////console.log('manifestacao: ', data)
 
     })
 
@@ -1305,7 +1305,7 @@ export class EditInqueritoComponent implements OnInit {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
       const farmNames = data.map(item => item.farm_name);
-      console.log('farm_names ou nomes simplificados: ', farmNames);
+      //console.log('farm_names ou nomes simplificados: ', farmNames);
     });
   }
 
@@ -1313,7 +1313,7 @@ export class EditInqueritoComponent implements OnInit {
   get_inquirier() {
     this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridor = data;
-      //console.log('inqiridor: ', data)
+      ////console.log('inqiridor: ', data)
     })
   }
 
@@ -1321,7 +1321,7 @@ export class EditInqueritoComponent implements OnInit {
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
       this.userFrontOff = data.filter(user => user.department === 'Front Off');
-      console.log('users do front off: ', data)
+      //console.log('users do front off: ', data)
     })
   }
 
@@ -1353,12 +1353,12 @@ export class EditInqueritoComponent implements OnInit {
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
-    console.log('multiple docs selected', this.selectedFile)
+    //console.log('multiple docs selected', this.selectedFile)
   }
 
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
-    console.log('inquerito selected ', this.selectedFile2)
+    //console.log('inquerito selected ', this.selectedFile2)
   }
 
 
@@ -1423,7 +1423,7 @@ export class EditInqueritoComponent implements OnInit {
       this.inqueritos = data;
 
       this.nomes_simplificados = this.inqueritos.map((inquerito: any) => inquerito.nome_simplificado);
-      console.log('Nomes simplificados:', this.nomes_simplificados);
+      //console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
 

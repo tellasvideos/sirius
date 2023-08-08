@@ -31,6 +31,17 @@ export class AddCadeiaValorComponent implements OnInit {
   }
 
   salvarCadeiaValor() {
+
+    if(!this.cadeiaVal || !this.desc){
+      this.modalRef.close()
+      Swal.fire({
+        icon: "error",
+        title: "Os campos devem ser preenchidos corretamente.",
+        showConfirmButton: true,
+      })
+      return;
+    }
+
     let cadeia = { "name": this.cadeiaVal, "description": this.desc }
     this.ds.salvaCadeiaDeValor(cadeia).subscribe(
       success => { this.atualizardados() },
@@ -43,6 +54,7 @@ export class AddCadeiaValorComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     })
+    this.valueChain?.push(cadeia);
     this.atualizardados();
     this.modalRef.close();
   }

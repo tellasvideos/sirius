@@ -20,7 +20,7 @@ export class PnImplementadosComponent implements OnInit {
 
   angForm!: FormGroup;
 
-  inqueritos: any;
+  inqueritos: any[] = [];
 
   constructor(
     private dataService: DataService,
@@ -31,7 +31,7 @@ export class PnImplementadosComponent implements OnInit {
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
 
     this.getInqueritos()
@@ -59,7 +59,7 @@ export class PnImplementadosComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado').reverse();
-      console.log('inqueritos reverse', this.inqueritos);
+      //console.log('inqueritos reverse', this.inqueritos);
     });
   }
 
@@ -69,7 +69,7 @@ export class PnImplementadosComponent implements OnInit {
   get_pnElaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
       this.pnElaborados = data.reverse();
-      console.log('Planos elaborados', this.pnElaborados)
+      //console.log('Planos elaborados', this.pnElaborados)
     })
   }
 
@@ -89,7 +89,7 @@ export class PnImplementadosComponent implements OnInit {
 
       // Filtrar os dados com base no ID do inquérito
       const filteredFormBackoffice = this.formBackoffice.filter((item: any) => {
-        this.inqueritos.sort((a: any, b: any) => {
+        this.inqueritos?.sort((a: any, b: any) => {
           const dateA = new Date(a.created_at);
           const dateB = new Date(b.created_at);
           return dateB.getTime() - dateA.getTime();
@@ -107,21 +107,21 @@ export class PnImplementadosComponent implements OnInit {
         };
       });
 
-      console.log('dados mapeados: ', this.mappedFormBackoffice);
+      //console.log('dados mapeados: ', this.mappedFormBackoffice);
     });
 
   }
 
   getFormPN_elaborado_Data(inqueritoId: string): any {
-    console.log(inqueritoId)
-    return this.pnElaborados.find((item: any) => item.inquerito === inqueritoId);
+    //console.log(inqueritoId)
+    return this.pnElaborados?.find((item: any) => item.inquerito === inqueritoId);
 
   }
 
   municipio: any;
   retorno: any;
   devolver_nome_municipio(id: any) {
-    this.retorno = this.municipio.filter((emp: any) => emp.id === id)[0].name
+    this.retorno = this.municipio?.filter((emp: any) => emp.id === id)[0].name
     return this.retorno
   }
 
@@ -142,13 +142,13 @@ export class PnImplementadosComponent implements OnInit {
   //s2gp/objetivo1/objetivo2
 
   getActividadeManifestacao(manifestacao_de_interesse: any): string {
-    const manifestacao = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
+    const manifestacao = this.pdac?.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
     return manifestacao ? manifestacao['s2gp/objetivo1/objetivo2'] : 'N/D';
   }
 
 
   getTelefoneManifestacao(manifestacao_de_interesse: any): string {
-    const manifestacao = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
+    const manifestacao = this.pdac?.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacao_de_interesse);
     return manifestacao ? manifestacao['s2gp/s2g2/rep_telemovel'] : 'N/D';
   }
 

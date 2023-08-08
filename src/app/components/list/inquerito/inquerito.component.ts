@@ -293,7 +293,7 @@ export class InqueritoComponent implements OnInit {
 
   /*devolver_nome_municipio(id: any) {
       const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
-    console.log(municipioSelecionado)
+    //console.log(municipioSelecionado)
       if (municipioSelecionado) {
         return municipioSelecionado.name;
       }
@@ -393,7 +393,7 @@ export class InqueritoComponent implements OnInit {
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      console.log('User logado', this.user_logged)
+      //console.log('User logado', this.user_logged)
     });
   }
 
@@ -426,7 +426,7 @@ export class InqueritoComponent implements OnInit {
         .map((pdac: any) => pdac['s2gp/s2g1q1/prop_nome'])
         .filter((propNome: any) => !this.inqueritoPdac.some((inq: any) => inq.manifestacao_de_interesse === propNome)).reverse();
 
-      console.log('Array pdac apenas nomes filtrados por MI ja existentes:', this.prop_name);
+      //console.log('Array pdac apenas nomes filtrados por MI ja existentes:', this.prop_name);
 
       //this.get_inquireForms()
     });
@@ -456,7 +456,7 @@ export class InqueritoComponent implements OnInit {
   getMunicipio() {
     this.dataService.getMunicipio().subscribe(data => {
       this.municipio = data;
-      //console.log(data)
+      ////console.log(data)
     })
   }
 
@@ -499,7 +499,7 @@ export class InqueritoComponent implements OnInit {
          }, 500);
        }*/
 
-      console.log('inquérito', this.inqueritos);
+      //console.log('inquérito', this.inqueritos);
     });
   }
 
@@ -522,7 +522,7 @@ export class InqueritoComponent implements OnInit {
          }, 500);
        }*/
 
-      console.log('inquérito', this.inqueritos___);
+      //console.log('inquérito', this.inqueritos___);
     });
   }
 
@@ -534,7 +534,7 @@ export class InqueritoComponent implements OnInit {
     const manifestacaoInteresse = this.angForm.get('manifestacao_de_interesse')?.value;
 
     // Encontrar a PDAC correspondente à manifestação de interesse selecionada
-    const Provincia = this.pdac.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
+    const Provincia = this.pdac?.find((item: any) => item['s2gp/s2g1q1/prop_nome'] === manifestacaoInteresse);
 
     // Atualizar o valor do campo "provincia" com base na PDAC selecionada
     if (Provincia) {
@@ -542,14 +542,14 @@ export class InqueritoComponent implements OnInit {
         provincia: Provincia['s2gp/s2g3/rep_provincia'],
         municipio: Provincia['s2gp/s2g3/rep_municipio']
       });
-      console.log(Provincia['s2gp/s2g3/rep_provincia']);
-      console.log(Provincia['s2gp/s2g3/rep_municipio']);
+      //console.log(Provincia['s2gp/s2g3/rep_provincia']);
+      //console.log(Provincia['s2gp/s2g3/rep_municipio']);
     }
   }
 
   exibirNomeMunicipio() {
     const municipioId = this.angForm.get('municipio')?.value;
-    const municipioSelecionado = this.municipio.find((item: any) => item.id === municipioId);
+    const municipioSelecionado = this.municipio?.find((item: any) => item.id === municipioId);
     if (municipioSelecionado) {
       return municipioSelecionado.name;
     }
@@ -558,7 +558,7 @@ export class InqueritoComponent implements OnInit {
   }
 
   devolver_nome_municipio(id: any): string {
-    const municipioSelecionado = this.municipio.find((item: any) => item.id === id);
+    const municipioSelecionado = this.municipio?.find((item: any) => item.id === id);
     return municipioSelecionado ? municipioSelecionado.name : 'N/D';
   }
 
@@ -573,13 +573,13 @@ export class InqueritoComponent implements OnInit {
       this.mi = this.mi.sort(function (a: any, b: any) {
         return b._id - a._id
       })
-      console.log('MI duplicados', this.duplicateNames);
+      //console.log('MI duplicados', this.duplicateNames);
     })
   }
 
   onChangeValorSelecionado(event: any) {
     this.prop_name = event;
-    console.log(this.prop_name['s2gp/s2g1q1/prop_nome'])
+    //console.log(this.prop_name['s2gp/s2g1q1/prop_nome'])
     //this.prop_name); // Chamada da sua função com o valor selecionado
   }
 
@@ -858,7 +858,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoPdac = data;
-      //console.log('inquérito', data);
+      ////console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
       const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
@@ -872,7 +872,7 @@ export class InqueritoComponent implements OnInit {
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.nome_simplificado)
+            //console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -1013,7 +1013,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoPdac = data;
-      //console.log('inquérito', data);
+      ////console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
       const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
@@ -1027,7 +1027,7 @@ export class InqueritoComponent implements OnInit {
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.nome_simplificado)
+            //console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -1179,7 +1179,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoPdac = data;
-      //console.log('inquérito', data);
+      ////console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
       const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
@@ -1193,7 +1193,7 @@ export class InqueritoComponent implements OnInit {
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.nome_simplificado)
+            //console.log(response.nome_simplificado)
 
             this.alert_success();
             // close modal
@@ -1384,7 +1384,7 @@ export class InqueritoComponent implements OnInit {
 
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritoPdac = data;
-      //console.log('inquérito', data);
+      ////console.log('inquérito', data);
 
       // Verificar se um campo do formData já existe localmente
       const manifestacaoInteresse = this.angForm.get('nome_simplificado')?.value;
@@ -1398,7 +1398,7 @@ export class InqueritoComponent implements OnInit {
       } else {
         this.dataService.salvaInquireForm(formData).subscribe(
           (response: any) => {
-            console.log(response.nome_simplificado)
+            //console.log(response.nome_simplificado)
 
             //this.alert_success();
             this.alert_success_MI_Aproved();
@@ -1540,7 +1540,7 @@ export class InqueritoComponent implements OnInit {
     this.dataService.get_InquireForm().subscribe(data => {
       const simplifiedNames = data.map(inqueritos => inqueritos.manifestacao_de_interesse);
       this.duplicateNames = simplifiedNames.filter((name, index) => simplifiedNames.indexOf(name) !== index);
-      console.log('nome_simplificado da MI duplicados', this.duplicateNames);
+      //console.log('nome_simplificado da MI duplicados', this.duplicateNames);
     });
   }
 
@@ -1718,7 +1718,7 @@ export class InqueritoComponent implements OnInit {
   get_interest_express() {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
-      //console.log('manifestacao: ', data)
+      ////console.log('manifestacao: ', data)
 
     })
 
@@ -1729,7 +1729,7 @@ export class InqueritoComponent implements OnInit {
     this.dataService.getInterestExpress().subscribe(data => {
       this.manifestacao = data;
       const farmNames = data.map(item => item.farm_name);
-      console.log('farm_names ou nomes simplificados: ', farmNames);
+      //console.log('farm_names ou nomes simplificados: ', farmNames);
     });
   }
 
@@ -1737,7 +1737,7 @@ export class InqueritoComponent implements OnInit {
   get_inquirier() {
     this.dataService.get_Inquiriers().subscribe(data => {
       this.inquiridor = data;
-      //console.log('inqiridor: ', data)
+      ////console.log('inqiridor: ', data)
     })
   }
 
@@ -1745,7 +1745,7 @@ export class InqueritoComponent implements OnInit {
   getUserFrontOFF() {
     this.dataService.getUser().subscribe(data => {
       this.userFrontOff = data.filter(user => user.department === 'Front Off');
-      console.log('users do front off: ', data)
+      //console.log('users do front off: ', data)
     })
   }
 
@@ -1787,30 +1787,30 @@ export class InqueritoComponent implements OnInit {
 
     if (checkboxValue === 'duplicada') {
       this.showDuplicatedInput === true;
-      console.log(this.angForm.get('duplicada_da')?.value)
+      //console.log(this.angForm.get('duplicada_da')?.value)
       this.showDuplicatedInput_1 === false;
       this.angForm.get('didasTeste')?.patchValue(false);
-      console.log(this.angForm.get('didasTeste')?.value)
+      //console.log(this.angForm.get('didasTeste')?.value)
 
     } else if (checkboxValue === 'didasteste') {
       this.showDuplicatedInput_1 === true;
-      console.log(this.angForm.get('didasTeste')?.value)
+      //console.log(this.angForm.get('didasTeste')?.value)
       this.showDuplicatedInput === false;
       this.angForm.get('duplicada_da')?.patchValue(false);
-      console.log(this.angForm.get('duplicada_da')?.value)
+      //console.log(this.angForm.get('duplicada_da')?.value)
     }
   }
 
 
   onSelectedFile(e: any) {
     this.selectedFile = e.target.files;
-    console.log('doc selected', this.selectedFile)
+    //console.log('doc selected', this.selectedFile)
   }
 
 
   onSelectedFile2(e: any) {
     this.selectedFile2 = e.target.files;
-    console.log('doc selected 2', this.selectedFile2)
+    //console.log('doc selected 2', this.selectedFile2)
   }
 
 
@@ -1878,7 +1878,7 @@ export class InqueritoComponent implements OnInit {
   
       return !this.inqueritos.some((inq: any) => inq.manifestacao_de_interesse === this.pdacPropNome);
     });
-    console.log('lista filtrada', this.filteredPdac)
+    //console.log('lista filtrada', this.filteredPdac)
     return this.filteredPdac;
   }*/
 
@@ -1892,7 +1892,7 @@ export class InqueritoComponent implements OnInit {
       this.inqueritos = data;
 
       this.nomes_simplificados = this.inqueritos.map((inquerito: any) => inquerito.nome_simplificado);
-      console.log('Nomes simplificados:', this.nomes_simplificados);
+      //console.log('Nomes simplificados:', this.nomes_simplificados);
     });
   }
 

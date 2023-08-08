@@ -41,6 +41,17 @@ export class AddDepartamentoComponent implements OnInit {
   }
 
   SaveDepartamento() {
+
+    if(!this.name || !this.description){
+      this.modalRef.close()
+      Swal.fire({
+        icon: "error",
+        title: "Os campos devem ser preenchidos corretamente.",
+        showConfirmButton: true,
+      })
+      return;
+    }
+
     let depart = {
       "name": this.name,
       "description": this.description

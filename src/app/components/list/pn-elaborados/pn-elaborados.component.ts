@@ -91,14 +91,14 @@ export class PnElaboradosComponent implements OnInit {
     // leva os dados do inquerito para o backoffice form
     this.route.queryParams.subscribe(params => {
       this.inqueritoSelecionado = params;
-      console.log('id param', this.inqueritoSelecionado)
+      //console.log('id param', this.inqueritoSelecionado)
     });
 
 
     // Pegar dados do user logado
     this.dataService.getUserData().subscribe((data: any) => {
       this.user_logged = data.find((user: any) => user.email === localStorage.getItem('user'));
-      // console.log('User logado', this.user_logged)
+      // //console.log('User logado', this.user_logged)
     });
 
     /*/ leva os dados do backoffice para o pnelaborados form
@@ -115,7 +115,7 @@ export class PnElaboradosComponent implements OnInit {
 
   /* selecionarInquerito(item: any) {
      this.inqueritoSelecionado = item;
-     console.log(' to get inquerito selected', this.inqueritoSelecionado?.id)
+     //console.log(' to get inquerito selected', this.inqueritoSelecionado?.id)
    }*/
 
    exportToExcel(): void {
@@ -144,7 +144,7 @@ export class PnElaboradosComponent implements OnInit {
     this.dataService.getFormPN_elaborado_Byid(this.foundItem.id).subscribe(data => {
       this.angForm.patchValue(data)
     });
-    console.log('Items carregados', this.foundItem);
+    //console.log('Items carregados', this.foundItem);
     return this.foundItem ? this.foundItem.id : 'N/D';
   }
 
@@ -152,7 +152,7 @@ export class PnElaboradosComponent implements OnInit {
   mostrarFinanciamento(inqueritoId: string) {
     this.selectedFinanciamentoBancario = this.get_Id_inq_from_backoffice(inqueritoId);
     if (this.selectedFinanciamentoBancario) {
-      console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
+      //console.log(this.selectedFinanciamentoBancario?.financiamento_bancario);
     }
   }
 
@@ -164,7 +164,7 @@ export class PnElaboradosComponent implements OnInit {
   mostrar_Data_aprovada_pgas_BM(inqueritoId: string) {
     this.selected_data_aprovacao_pgas_BM = this.get_Form_PGAS_Data(inqueritoId);
     if (this.selected_data_aprovacao_pgas_BM) {
-      console.log(this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial);
+      //console.log(this.selected_data_aprovacao_pgas_BM?.data_aprovacao_pgas_banco_mundial);
     }
   }
 
@@ -173,7 +173,7 @@ export class PnElaboradosComponent implements OnInit {
   getStatus_pn() {
 
     this.selectedFinanciamentoBancario?.financiamento_bancario // inicialização 
-    console.log('Financiamento bancario:', this.selectedFinanciamentoBancario?.financiamento_bancario)
+    //console.log('Financiamento bancario:', this.selectedFinanciamentoBancario?.financiamento_bancario)
 
     // PN pendente no CTI
     const PN_pendente_no_CTI =
@@ -242,7 +242,7 @@ export class PnElaboradosComponent implements OnInit {
 
     // Success callback 1
     const successCallback = (response: any) => {
-      console.log('Formulário enviado com sucesso!', response);
+      //console.log('Formulário enviado com sucesso!', response);
       this.alert_success();
       const modal = document.getElementById('exampleModalToggle');
       if (modal) {
@@ -255,7 +255,7 @@ export class PnElaboradosComponent implements OnInit {
 
     // Success calback 2
     const successCallback2 = (response: any) => {
-      console.log('Formulário enviado com sucesso PN implementado!', response);
+      //console.log('Formulário enviado com sucesso PN implementado!', response);
       Swal.fire({
         icon: "success",
         title: "PN Implementado",
@@ -297,7 +297,7 @@ export class PnElaboradosComponent implements OnInit {
   get_pn_elaborados() {
     this.dataService.Get_pnElaborados().subscribe(data => {
       this.get_pn = data.reverse();
-      console.log('pn elab', this.get_pn)
+      //console.log('pn elab', this.get_pn)
     })
   }
 
@@ -305,7 +305,7 @@ export class PnElaboradosComponent implements OnInit {
   pn_entrados: any;
   getFormPN_Data_entradas(inqueritoId: any) {
     this.pn_entrados = this.get_pn.find((item: any) => item.inquerito === inqueritoId);
-    console.log('pgas', this.pn_entrados)
+    //console.log('pgas', this.pn_entrados)
     return this.pn_entrados ? this.pn_entrados : 'N/D';
   }
 
@@ -314,7 +314,7 @@ export class PnElaboradosComponent implements OnInit {
   inqueritoSelecionado: any | null = null;
   selecionarInquerito(item: any) {
     this.inqueritoSelecionado = item;
-    console.log('id inq selected', item)
+    //console.log('id inq selected', item)
     // com base no id do inquerito local, encontra o item completo do inquerito e me devolve o seu nome_simplificado
     return this.nome_simplificado_finded = this.inqueritos.find((inquerito: any) => inquerito.id === item);
   }
@@ -415,7 +415,7 @@ export class PnElaboradosComponent implements OnInit {
   getInqueritos() {
     this.dataService.get_InquireForm().subscribe(data => {
       this.inqueritos = data.filter(item => item.status === 'Aprovado');
-      console.log('inqueritos reverse', this.inqueritos);
+      //console.log('inqueritos reverse', this.inqueritos);
     });
   }
 
@@ -449,7 +449,7 @@ export class PnElaboradosComponent implements OnInit {
         };
       });
 
-      console.log('dados mapeados: ', this.mappedFormBackoffice);
+      //console.log('dados mapeados: ', this.mappedFormBackoffice);
     });
 
   }
@@ -459,13 +459,13 @@ export class PnElaboradosComponent implements OnInit {
   data_de_entregue_pdac: any;
   get_Data_entregue_ao_PDAC(inqueritoId: any) {
     this.data_de_entregue_pdac = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    console.log('data entregue ao pdac', this.data_de_entregue_pdac?.fim_verificacao)
+    //console.log('data entregue ao pdac', this.data_de_entregue_pdac?.fim_verificacao)
     return this.data_de_entregue_pdac?.fim_verificacao
   }
 
   get_Form_PGAS_Data(inqueritoId: string): any {
-    console.log(inqueritoId)
-    return this.pgas.find((item: any) => item.inquerito === inqueritoId);
+    //console.log(inqueritoId)
+    return this.pgas?.find((item: any) => item.inquerito === inqueritoId);
   }
 
   // to get Pgas
@@ -473,20 +473,20 @@ export class PnElaboradosComponent implements OnInit {
   get_pgas() {
     this.dataService.Get_Pgas().subscribe(data => {
       this.pgas = data.reverse();
-      console.log('Pgas form', this.pgas)
+      //console.log('Pgas form', this.pgas)
     })
   }
 
   get_PN_STATUS_Data(inqueritoId: string): any {
-    const status_pn = this.formBackoffice.find((item: any) => item.inquerito === inqueritoId);
-    // console.log('status_pn', status_pn.status_pn)
+    const status_pn = this.formBackoffice?.find((item: any) => item.inquerito === inqueritoId);
+    // //console.log('status_pn', status_pn.status_pn)
     return status_pn?.status_pn
   }
 
   // encontra o status_pn do inqueritoID passado na lista de pn_elaborados e omite o item.id  com status_pn implementado
   get_PN_STATUS_implementado_Data(inqueritoId: any) {
-    const status_pn = this.get_pn.find((item: any) => item.inquerito === inqueritoId && item.status_pn === 'PN implementado');
-    console.log('status_pn implementado', status_pn?.status_pn);
+    const status_pn = this.get_pn?.find((item: any) => item.inquerito === inqueritoId && item.status_pn === 'PN implementado');
+    //console.log('status_pn implementado', status_pn?.status_pn);
     return status_pn?.status_pn;
   }
 
@@ -518,7 +518,7 @@ export class PnElaboradosComponent implements OnInit {
   devolver_data_entregue_pdcac(id: any) {
     const formBackofficeCopy = [...this.formBackoffice].reverse();
     const inqueritoSelecionado = formBackofficeCopy.find((item: any) => item.inquerito === id);
-    console.log('devolvendo ', inqueritoSelecionado);
+    //console.log('devolvendo ', inqueritoSelecionado);
     return inqueritoSelecionado ? inqueritoSelecionado.data_pn_entregue_ao_pdac : 'N/D';
   }
 
@@ -531,7 +531,7 @@ export class PnElaboradosComponent implements OnInit {
   // Função para verificar se o status do inquérito selecionado é diferente de 'PN implementado'
   isStatusPNImplementado(): boolean {
     const statusPN = this.getForm_PN_Data_entradas(this.inqueritoSelecionado)?.status_pn;
-    console.log(statusPN)
+    //console.log(statusPN)
     return statusPN !== 'PN implementado';
   }
 

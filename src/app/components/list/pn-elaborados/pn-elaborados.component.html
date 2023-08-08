@@ -67,9 +67,9 @@
                             <th scope="col" class="text-black">Estado PN</th>
                             <th scope="col" class="text-black not-it">Mais info</th>
                             <th *ngIf="
-                            this.user_logged.department === 'Back Off' || 
-                            this.user_logged.department === 'M&A' ||
-                            this.user_logged.is_admin === true" scope="col" class="text-black not-it">Modificação
+                            this.user_logged?.department === 'Back Off' || 
+                            this.user_logged?.department === 'M&A' ||
+                            this.user_logged?.is_admin === true" scope="col" class="text-black not-it">Modificação
                             </th>
                         </tr>
                     </thead>
@@ -95,10 +95,10 @@
                                         </td>
 
                                         <td *ngIf="
-                                        this.user_logged.department === 'Front Off' || 
-                                        this.user_logged.department === 'Back Off' || 
-                                        this.user_logged.department === 'M&A' ||
-                                        this.user_logged.is_admin === true" class="not-it">
+                                        this.user_logged?.department === 'Front Off' || 
+                                        this.user_logged?.department === 'Back Off' || 
+                                        this.user_logged?.department === 'M&A' ||
+                                        this.user_logged?.is_admin === true" class="not-it">
                                             <button (click)="getForm_PN_Data_entradas(item.id)"
                                                 (click)="mostrarFinanciamento(item.id)"
                                                 (click)="mostrar_Data_aprovada_pgas_BM(item.id)" type="button"
