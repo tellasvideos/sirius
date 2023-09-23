@@ -359,16 +359,12 @@
                             <input (change)="checkDates_0()" type="date" formControlName="inicio_elaboracao_pn" name="inicio_elaboracao_pn"
                                 max="{{maxDate | date:'yyyy-MM-dd'}}" [value]="today | date:'yyyy-MM-dd'"
                                 style="width: 150px; margin-right: 200px;" class="form-control form-control-sm"
-                                [ngClass]="{ 'is-invalid': angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched }">
-                            <div class="invalid-feedback" style="width: 350px;"
-                                *ngIf="angForm.get('inicio_elaboracao_pn')?.invalid && angForm.get('inicio_elaboracao_pn')?.touched">
-                                * Campo obrigatório.
-                            </div>
+                                >
                         </div>
                     </div>
 
                     <!-- Pergunta 14 -->
-                    <div *ngIf="angForm.get('inicio_elaboracao_pn')?.value"
+                    <!--div *ngIf="angForm.get('inicio_elaboracao_pn')?.value"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="fim_elaboracao_pn">Data fim elaboração PN (início de
@@ -380,10 +376,10 @@
                                 [value]="today | date:'yyyy-MM-dd'" style="width: 150px; margin-right: 200px;"
                                 class="form-control form-control-sm">
                         </div>
-                    </div>
+                    </!--div-->
 
                     <!-- Pergunta 15 -->
-                    <div *ngIf="angForm.get('fim_elaboracao_pn')?.value"
+                    <div *ngIf="angForm.get('inicio_elaboracao_pn')?.value"
                         class="justify-content-between mx-auto d-flex mb-3" style="width: 60%;">
                         <div>
                             <label for="fim_verificacao" style="width: 240px;">Data fim de entrega ao PDAC:</label>

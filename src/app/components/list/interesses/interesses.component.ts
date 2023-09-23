@@ -64,7 +64,7 @@ export class InteressesComponent implements OnInit {
 
       consultor_pn: [''],
       inicio_elaboracao_pn: ['', Validators.required],
-      fim_elaboracao_pn: [''],
+      //fim_elaboracao_pn: [''],
       fim_verificacao: [''],
       /*area_total_fazenda: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       area_cultivo_pn: ['', Validators.required],
@@ -357,7 +357,7 @@ export class InteressesComponent implements OnInit {
       return;
     }
 
-    if (!this.angForm.get('inicio_elaboracao_pn')?.value) {
+   /* if (!this.angForm.get('inicio_elaboracao_pn')?.value) {
       if (!this.angForm.get('inicio_elaboracao_pn')?.value) {
         Swal.fire({
           icon: 'error',
@@ -366,7 +366,7 @@ export class InteressesComponent implements OnInit {
         })
       }
       return;
-    }
+    }*/
 
 
 
@@ -377,14 +377,14 @@ export class InteressesComponent implements OnInit {
 
     try {
       //console.log(this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
-      const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
-      formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : fimElaboracaoValue.toISOString());
+     // const fimElaboracaoValue = this.angForm.get('fim_elaboracao_pn')?.value;
+     // formData.append('fim_elaboracao_pn', fimElaboracaoValue instanceof Date ? fimElaboracaoValue.toISOString() : fimElaboracaoValue.toISOString());
       const fimVerificacaoValue = this.angForm.get('fim_verificacao')?.value;
       formData.append('fim_verificacao', fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : fimVerificacaoValue.toISOString());
       //console.log(fimVerificacaoValue instanceof Date ? fimVerificacaoValue.toISOString() : '')
     } catch (error) {
       //console.log(error, this.angForm.get('fim_elaboracao_pn')?.value, this.angForm.get('fim_verificacao')?.value)
-      formData.append('fim_elaboracao_pn', this.angForm.get('fim_elaboracao_pn')?.value)
+     // formData.append('fim_elaboracao_pn', this.angForm.get('fim_elaboracao_pn')?.value)
       formData.append('fim_verificacao', this.angForm.get('fim_verificacao')?.value);
     }
 
@@ -397,7 +397,7 @@ export class InteressesComponent implements OnInit {
 
     let status_pn_salvo = 'N/D';
 
-    //console.log(this.angForm.get('fim_verificacao')?.value)
+    //console.log(this.angForm.get('fim_verificacao')?.value) && (this.angForm.get('fim_elaboracao_pn')?.value === '' || this.angForm.get('fim_elaboracao_pn')?.value === null
     if (this.angForm.get('proponente_desistiu')?.value === true) {
 
       status_pn_salvo = 'Desistência do proponente';
@@ -410,7 +410,7 @@ export class InteressesComponent implements OnInit {
 
       status_pn_salvo = 'Inquérito em stock';
 
-    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' && (this.angForm.get('fim_elaboracao_pn')?.value === '' || this.angForm.get('fim_elaboracao_pn')?.value === null)) {
+    } else if (this.angForm.get('inicio_elaboracao_pn')?.value !== '' ) {
 
       status_pn_salvo = 'PN em elaboração';
 
@@ -481,7 +481,7 @@ export class InteressesComponent implements OnInit {
     };
 
     this.angForm.get('status_pn')?.setValue(status_pn_salvo);
-    this.angForm.get('fim_elaboracao_pn')?.value
+    //this.angForm.get('fim_elaboracao_pn')?.value
     this.angForm.get('fim_verificacao')?.value
     this.angForm.get('consultor_pn')?.value
     this.angForm.get('inicio_elaboracao_pn')?.value
@@ -562,7 +562,7 @@ export class InteressesComponent implements OnInit {
       })
     }
 
-    if (fimVerificacaoDate) {
+   /* if (fimVerificacaoDate) {
 
       if (pnEntregueDate > fimVerificacaoDate) {
         Swal.fire({
@@ -573,7 +573,7 @@ export class InteressesComponent implements OnInit {
         this.angForm.get('inicio_elaboracao_pn')?.setValue('')
         this.angForm.get('fim_elaboracao_pn')?.setValue('')
       }
-    }
+    }*/
   }
 
 
@@ -590,38 +590,38 @@ export class InteressesComponent implements OnInit {
       })
     }
 
-    if (pnEntregueDate > fimVerificacaoDate) {
+   /* if (pnEntregueDate > fimVerificacaoDate) {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
         text: 'A "Data fim elaboracao PN" não pode ser anterior à "Data inicio elaboração PN".',
       })
       this.angForm.get('fim_elaboracao_pn')?.setValue('')
-    }
+    }*/
   }
 
   checkDates_2() {
     const fimVerificacaoDate = this.angForm.get('fim_verificacao')?.value;
-    const fimElaboracaoDate = this.angForm.get('fim_elaboracao_pn')?.value;
+    const inicioElaboracaoDate = this.angForm.get('inicio_elaboracao_pn')?.value;
     const today = new Date();
 
-    if (fimElaboracaoDate > today) {
+    if (inicioElaboracaoDate > today) {
 
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
-        text: 'A "Data Fim de elaboração PN" não pode ser posterior à data de hoje.',
+        text: 'A "Data inicio de elaboração PN" não pode ser posterior à data de hoje.',
       })
-      this.angForm.get('fim_elaboracao_pn')?.setValue('')
+     // this.angForm.get('fim_elaboracao_pn')?.setValue('')
     }
 
-    if (fimElaboracaoDate > fimVerificacaoDate) {
+    if (inicioElaboracaoDate > fimVerificacaoDate) {
       Swal.fire({
         icon: 'error',
         //title: 'Oops...',
-        text: 'A "Data fim verificação" não pode ser anterior à "Data fim elaboração PN".',
+        text: 'A "Data fim verificação" não pode ser anterior à "Data inicio elaboração PN".',
       })
-      this.angForm.get('fim_elaboracao_pn')?.setValue('')
+      this.angForm.get('fim_verificacao')?.setValue('')
     }
   }
 
