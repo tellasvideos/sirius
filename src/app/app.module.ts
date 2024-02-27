@@ -151,7 +151,7 @@ import { ExportAsModule } from 'ngx-export-as'; // Importe o módulo ExportAsMod
     LoadingComponent,
     VerInqueritoFromBackofficeComponent,
     PnImplementadosComponent,
-    AdminComponent,
+    AdminComponent
   ],
   imports: [
     NgxPrintModule,

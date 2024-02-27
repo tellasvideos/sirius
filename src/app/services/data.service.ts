@@ -51,157 +51,157 @@ export class DataService {
   private messageSource = new BehaviorSubject([]);
   currentMessage = this.messageSource.asObservable();
 
-  // development  http://sirius.strongbox.ao:8001/
+  // development  https://api.biplan.ao/
 
   // url to get provinces and add an man. interest
-  get_Provinces_url = 'http://sirius.strongbox.ao:8001/api/v1/provinces/';
+  get_Provinces_url = 'https://api.biplan.ao/api/v1/provinces/';
 
   //url to proposal agreeement
-  get_Proposal_Agreement_url = 'http://sirius.strongbox.ao:8001/api/v1/proposeragreements/';
-  delete_Proposal_Agreement_url = 'http://sirius.strongbox.ao:8001/api/v1/proposeragreements/';
-  save_Proposal_Agreement_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  get_Proposal_Agreement_url = 'https://api.biplan.ao/api/v1/proposeragreements/';
+  delete_Proposal_Agreement_url = 'https://api.biplan.ao/api/v1/proposeragreements/';
+  save_Proposal_Agreement_url = 'https://api.biplan.ao/api/v1';
 
   // url to get inquiriers
-  get_inquiriers_url = 'http://sirius.strongbox.ao:8001/api/v1/inquirers/';
-  save_inquiriers_url = 'http://sirius.strongbox.ao:8001/api/v1';
-  delete_inquiriers_url = 'http://sirius.strongbox.ao:8001/api/v1/inquirers/';
+  get_inquiriers_url = 'https://api.biplan.ao/api/v1/inquirers/';
+  save_inquiriers_url = 'https://api.biplan.ao/api/v1';
+  delete_inquiriers_url = 'https://api.biplan.ao/api/v1/inquirers/';
 
   // Value chain to interest expression
-  delete_ValueChainsToInterestExpress_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechaintointerestexpressions/';
-  get_ValueChainsToInterestExpress_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechaintointerestexpressions/';
-  save_ValueChainsToInterestExpress_url = 'http://sirius.strongbox.ao:8001/api/v1'
+  delete_ValueChainsToInterestExpress_url = 'https://api.biplan.ao/api/v1/valuechaintointerestexpressions/';
+  get_ValueChainsToInterestExpress_url = 'https://api.biplan.ao/api/v1/valuechaintointerestexpressions/';
+  save_ValueChainsToInterestExpress_url = 'https://api.biplan.ao/api/v1'
 
   // url to get departaments
-  get_departaments_url = 'http://sirius.strongbox.ao:8001/api/v1/departments/';
-  save_departaments_url = 'http://sirius.strongbox.ao:8001/api/v1';
-  delete_departaments_url = 'http://sirius.strongbox.ao:8001/api/v1/departments/';
+  get_departaments_url = 'https://api.biplan.ao/api/v1/departments/';
+  save_departaments_url = 'https://api.biplan.ao/api/v1';
+  delete_departaments_url = 'https://api.biplan.ao/api/v1/departments/';
 
   // url to inquireform
-  get_inquireForms_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
-  save_inquireForms_url = 'http://sirius.strongbox.ao:8001/api/v1';
-  delete_inquireForms_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
+  get_inquireForms_url = 'https://api.biplan.ao/api/v1/inqueritos/';
+  save_inquireForms_url = 'https://api.biplan.ao/api/v1';
+  delete_inquireForms_url = 'https://api.biplan.ao/api/v1/inqueritos/';
 
   // url to delete BP status
-  delete_Status_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatus/';
+  delete_Status_url = 'https://api.biplan.ao/api/v1/businessplanstatus/';
 
   // url to delete business plan statute
-  delete_Statutes_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatutes/';
+  delete_Statutes_url = 'https://api.biplan.ao/api/v1/businessplanstatutes/';
 
   // to get all business plan statutos
-  get_BusPlanStatutos_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatutes/';
+  get_BusPlanStatutos_url = 'https://api.biplan.ao/api/v1/businessplanstatutes/';
 
   // to save any business plan statutos
-  Save_BusPlanStatutos_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  Save_BusPlanStatutos_url = 'https://api.biplan.ao/api/v1';
 
   // to get all business plan status
-  get_BusPlanStatus_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatus/';
+  get_BusPlanStatus_url = 'https://api.biplan.ao/api/v1/businessplanstatus/';
 
   // to save any business plan status
-  Save_BusPlanStatus_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  Save_BusPlanStatus_url = 'https://api.biplan.ao/api/v1';
 
-  proponent_PDAC_url = 'http://sirius.strongbox.ao:8001/api/v1/getkoboforms/';
+  proponent_PDAC_url = 'https://api.biplan.ao/api/v1/getkoboforms/';
 
   // To get all users
-  GET_USERS_URL = 'http://sirius.strongbox.ao:8001/accounts/users/';
+  GET_USERS_URL = 'https://api.biplan.ao/accounts/users/';
 
   // save user url
-  save_user_url = 'http://sirius.strongbox.ao:8001/accounts';
+  save_user_url = 'https://api.biplan.ao/accounts';
 
   // forgot password
-  forgot_pass_url = 'http://sirius.strongbox.ao:8001/accounts';
+  forgot_pass_url = 'https://api.biplan.ao/accounts';
 
   // delete user url
-  delete_user_url = 'http://sirius.strongbox.ao:8001/accounts/user/';
+  delete_user_url = 'https://api.biplan.ao/accounts/user/';
 
   // Auth Token
-  getToken_url = 'http://sirius.strongbox.ao:8001/token/';
+  getToken_url = 'https://api.biplan.ao/token/';
 
   // add valuechains
-  base = 'http://sirius.strongbox.ao:8001/api/v1';
+  base = 'https://api.biplan.ao/api/v1';
 
   // to get all value chain
-  get_ValueChain_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechains/'
+  get_ValueChain_url = 'https://api.biplan.ao/api/v1/valuechains/'
 
   // to delete any valueChain
-  delete_ValueChain_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechains/';
+  delete_ValueChain_url = 'https://api.biplan.ao/api/v1/valuechains/';
 
   // to create interest expression
-  interest_Express_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  interest_Express_url = 'https://api.biplan.ao/api/v1';
 
   // to get value chain by id
-  get_ValueChainInExpress_By_Id_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechaintointerestexpressions/';
+  get_ValueChainInExpress_By_Id_url = 'https://api.biplan.ao/api/v1/valuechaintointerestexpressions/';
 
   // to get all interest expression
-  get_Interest_Exp_url = 'http://sirius.strongbox.ao:8001/api/v1/interestexpressions/';
+  get_Interest_Exp_url = 'https://api.biplan.ao/api/v1/interestexpressions/';
 
   // to get user by id
-  get_User_byId_url = 'http://sirius.strongbox.ao:8001/accounts/user/';
+  get_User_byId_url = 'https://api.biplan.ao/accounts/user/';
 
   // to get value chain by id
-  get_Cadeia_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechains/'
+  get_Cadeia_byId_url = 'https://api.biplan.ao/api/v1/valuechains/'
 
   // to get inquirier by id
-  get_Iquiridor_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/inquirers/';
+  get_Iquiridor_byId_url = 'https://api.biplan.ao/api/v1/inquirers/';
 
   // to get departament by id
-  get_Depart_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/departments/';
+  get_Depart_byId_url = 'https://api.biplan.ao/api/v1/departments/';
 
   // to get agreement proposer by id
-  get_agreement_proposer_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/proposeragreements/';
+  get_agreement_proposer_byId_url = 'https://api.biplan.ao/api/v1/proposeragreements/';
 
   // to get business plan status by id
-  get_Status_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatus/';
+  get_Status_byId_url = 'https://api.biplan.ao/api/v1/businessplanstatus/';
 
   // to get business plan estatute
-  get_Estatute_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatutes/';
+  get_Estatute_byId_url = 'https://api.biplan.ao/api/v1/businessplanstatutes/';
 
   // to get inquire by id
-  get_Iquerito_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
+  get_Iquerito_byId_url = 'https://api.biplan.ao/api/v1/inqueritos/';
 
   // to get all interest expression
-  edit_Interest_Exp_url = 'http://sirius.strongbox.ao:8001/api/v1/interestexpressions/';
+  edit_Interest_Exp_url = 'https://api.biplan.ao/api/v1/interestexpressions/';
 
   // to update value chain to interest express
-  edit_cadeiaManIn_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechaintointerestexpressions/';
+  edit_cadeiaManIn_url = 'https://api.biplan.ao/api/v1/valuechaintointerestexpressions/';
 
   // to update value chain
-  edit__Cadeia_url = 'http://sirius.strongbox.ao:8001/api/v1/valuechains/';
+  edit__Cadeia_url = 'https://api.biplan.ao/api/v1/valuechains/';
 
   // to update data of the inquirier
-  edit_inquiridor_url = 'http://sirius.strongbox.ao:8001/api/v1/inquirers/';
+  edit_inquiridor_url = 'https://api.biplan.ao/api/v1/inquirers/';
 
   // to update departaments
-  edit_depart_url = 'http://sirius.strongbox.ao:8001/api/v1/departments/';
+  edit_depart_url = 'https://api.biplan.ao/api/v1/departments/';
 
   // to update proposer agreement
-  edit_acordo_url = 'http://sirius.strongbox.ao:8001/api/v1/proposeragreements/';
+  edit_acordo_url = 'https://api.biplan.ao/api/v1/proposeragreements/';
 
   // to update business plan status
-  edit_status_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatus/';
+  edit_status_url = 'https://api.biplan.ao/api/v1/businessplanstatus/';
 
   // to update business plan statutes
-  edit_statutes_url = 'http://sirius.strongbox.ao:8001/api/v1/businessplanstatutes/';
+  edit_statutes_url = 'https://api.biplan.ao/api/v1/businessplanstatutes/';
 
   // to update data to inquire
-  edit_inquerito_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
+  edit_inquerito_url = 'https://api.biplan.ao/api/v1/inqueritos/';
 
   // to edit user
-  edit_User_url = 'http://sirius.strongbox.ao:8001/accounts/user/';
+  edit_User_url = 'https://api.biplan.ao/accounts/user/';
 
   // to delete any interest espression
-  delete_Interest_url = 'http://sirius.strongbox.ao:8001/api/v1/interestexpressions/';
+  delete_Interest_url = 'https://api.biplan.ao/api/v1/interestexpressions/';
 
   // to edit data of interest expression
-  edit_Interest_url = 'http://sirius.strongbox.ao:8001/api/v1/';
+  edit_Interest_url = 'https://api.biplan.ao/api/v1/';
 
   // InterestExpression by province
-  interestExpressByProv_url = 'http://sirius.strongbox.ao:8001/api/v1/interestexpressions/?province=';
+  interestExpressByProv_url = 'https://api.biplan.ao/api/v1/interestexpressions/?province=';
 
-  InquiriersByProv_url = 'http://sirius.strongbox.ao:8001/api/v1/inquirers/?province=';
+  InquiriersByProv_url = 'https://api.biplan.ao/api/v1/inquirers/?province=';
 
-  proponentsByProv_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  proponentsByProv_url = 'https://api.biplan.ao/api/v1';
 
-  apiUrl = 'http://sirius.strongbox.ao:8001/accounts/users';
+  apiUrl = 'https://api.biplan.ao/accounts/users';
 
   token = '1c644080bc6af5e8990a30c964157719cbb6576c';
 
@@ -215,7 +215,7 @@ export class DataService {
     var params = new HttpParams().set('user_id', 1);
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Bearer 1c644080bc6af5e8990a30c964157719cbb6576c');
-    return this.http.get('http://sirius.strongbox.ao:8001/accounts/users/', { headers: headers, params: params })
+    return this.http.get('https://api.biplan.ao/accounts/users/', { headers: headers, params: params })
   }
 
   // To get user login data
@@ -230,22 +230,22 @@ export class DataService {
 
   // Method to get company name
   getCompanyName() {
-    return this.http.get('http://sirius.strongbox.ao:8001/api/v1/empresas/');
+    return this.http.get('https://api.biplan.ao/api/v1/empresas/');
   }
 
   // Method to get Category
   getCategory() {
-    return this.http.get('http://sirius.strongbox.ao:8001/api/v1/categorias/');
+    return this.http.get('https://api.biplan.ao/api/v1/categorias/');
   }
 
   // Method to get village
   getMunicipio() {
-    return this.http.get('http://sirius.strongbox.ao:8001/api/v1/municipios/');
+    return this.http.get('https://api.biplan.ao/api/v1/municipios/');
   }
 
    // Method to get coordenadas
    getCoordenadas_map() {
-    return this.http.get('http://sirius.strongbox.ao:8001/api/v1/distribuicaodospndesembolsadosdashboard/');
+    return this.http.get('https://api.biplan.ao/api/v1/distribuicaodospndesembolsadosdashboard/');
   }
 
   // Method to Get all proponents from PDAC Data-Base
@@ -256,7 +256,7 @@ export class DataService {
     return this.http.get<any[]>(this.proponent_PDAC_url, /*{ headers: headers }*/).pipe(take(1))
   }
 
-  apiUrl_Inquerito_by_id = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos';
+  apiUrl_Inquerito_by_id = 'https://api.biplan.ao/api/v1/inqueritos';
 
   getInqueritoDetalhes(id: number): Observable<any> {
     const url = `${this.apiUrl_Inquerito_by_id}/${id}`;
@@ -421,7 +421,7 @@ export class DataService {
 
 
   // pacth to disable a inquire
-  is_deleted_url = 'http://sirius.strongbox.ao:8001/api/v1/inqueritos/';
+  is_deleted_url = 'https://api.biplan.ao/api/v1/inqueritos/';
   is_deleted(id: number, field: any) {
     return this.http.patch(`${this.is_deleted_url}${id}/`, field).pipe(take(1));
   }
@@ -432,17 +432,17 @@ export class DataService {
   }
 
 
-  url_update_pn_form = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/'
+  url_update_pn_form = 'https://api.biplan.ao/api/v1/pnelaborados/'
   Update_PN_form(id: any, form: any) {
     return this.http.patch(`${this.url_update_pn_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
   }
 
-  url_Update_visitas_form = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
+  url_Update_visitas_form = 'https://api.biplan.ao/api/v1/registrosdasvisitas/'
   Update_Visitas_form(id: any, form: any) {
     return this.http.patch(`${this.url_Update_visitas_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
   }
 
-  url_update_PGAS_form = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/'
+  url_update_PGAS_form = 'https://api.biplan.ao/api/v1/formulariojanelapgas/'
   Update_PGAS_form(id: any, form: any) {
     return this.http.patch(`${this.url_update_PGAS_form}${id}/`, form, /*{ headers: headers }*/).pipe(take(1));
   }
@@ -452,7 +452,7 @@ export class DataService {
     /*var headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Token ' + String(localStorage.getItem('userToken')));*/
-    return this.http.get<BasicEchartLineModel[]>('http://sirius.strongbox.ao:8001/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
+    return this.http.get<BasicEchartLineModel[]>('https://api.biplan.ao/api/v1/getinterestexpressionsnumberpermonth/', /*{ headers: headers }*/);
   }
 
   // Method to Get an interest Expression by id
@@ -535,7 +535,7 @@ export class DataService {
     return this.http.get(`${this.get_Iquerito_byId_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
 
-  get_backoffice_byId_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
+  get_backoffice_byId_url = 'https://api.biplan.ao/api/v1/formulariosbackoffice/';
   getBackofficeByID(id: any) {
     return this.http.get(`${this.get_backoffice_byId_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
@@ -637,7 +637,7 @@ export class DataService {
     return this.http.delete(`${this.delete_ValueChainsToInterestExpress_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
 
-  delete_visitas_url = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/';
+  delete_visitas_url = 'https://api.biplan.ao/api/v1/registrosdasvisitas/';
   delete_visitas(id: any) {
     return this.http.delete(`${this.delete_visitas_url}${id}/`, /*{ headers: headers }*/).pipe(take(1));
   }
@@ -780,7 +780,7 @@ export class DataService {
   }
 
   // A funccion to post backoffice form
-  formBackoffice_url = 'http://sirius.strongbox.ao:8001/api/v1'
+  formBackoffice_url = 'https://api.biplan.ao/api/v1'
   Send_Backoffice_form(form_data: any) {
     return this.http.post(this.formBackoffice_url + '/formulariosbackoffice/', form_data)
   }
@@ -788,51 +788,51 @@ export class DataService {
 
 
   // A function to get all backoffice data and inquires data
-  get_backoffice_Url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
+  get_backoffice_Url = 'https://api.biplan.ao/api/v1/formulariosbackoffice/';
   Get_Backoffice_Form() {
     return this.http.get<any[]>(this.get_backoffice_Url);
   }
 
   // Pegar dados do formulario Backoffice junto ao id do inquerito selecionado
-  dados_agrupados_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/?inquerito=';
+  dados_agrupados_url = 'https://api.biplan.ao/api/v1/formulariosbackoffice/?inquerito=';
   Get_Backoffice_data_and_Inquerito_by_id(id: any) {
     return this.http.get(`${this.dados_agrupados_url}${id}`, /*{ headers: headers }*/).pipe(take(1));
   }
 
-  url_formbackofficebyid = 'http://sirius.strongbox.ao:8001/api/v1/formulariosbackoffice/';
+  url_formbackofficebyid = 'https://api.biplan.ao/api/v1/formulariosbackoffice/';
   getFormBackofficeByid(id: any) {
     return this.http.get(`${this.url_formbackofficebyid}${id}`).pipe(take(2));
   }
 
-  url_form_pn_elaborado_byid = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/';
+  url_form_pn_elaborado_byid = 'https://api.biplan.ao/api/v1/pnelaborados/';
   getFormPN_elaborado_Byid(id: any) {
     return this.http.get(`${this.url_form_pn_elaborado_byid}${id}`).pipe(take(1));
   }
 
-  url_form_visitas_byid = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/';
+  url_form_visitas_byid = 'https://api.biplan.ao/api/v1/registrosdasvisitas/';
   getForm_visitas_Byid(id: any) {
     return this.http.get(`${this.url_form_visitas_byid}${id}`).pipe(take(2));
   }
 
-  url_form_pgas_byid = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/';
+  url_form_pgas_byid = 'https://api.biplan.ao/api/v1/formulariojanelapgas/';
   getForm_PGAS_Byid(id: any) {
     return this.http.get(`${this.url_form_pgas_byid}${id}`).pipe(take(2));
   }
 
   // Pegar dados do formulario Pn elaborados junto ao id do inquerito selecionado
-  dados_agrupados_url_2 = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/?inquerito=';
+  dados_agrupados_url_2 = 'https://api.biplan.ao/api/v1/pnelaborados/?inquerito=';
   Get_PN_elaborados_data_join_to_Inquerito_by_id(id: any) {
     return this.http.get(`${this.dados_agrupados_url_2}${id}` /*{ headers: headers }*/).pipe(take(1));
   }
 
   // A function to post data in PNelaborados
-  pn_elaborado_URL = 'http://sirius.strongbox.ao:8001/api/v1';
+  pn_elaborado_URL = 'https://api.biplan.ao/api/v1';
   Post_pnElaborados(form_data: any) {
     return this.http.post(this.pn_elaborado_URL + '/pnelaborados/', form_data)
   }
 
   // A function to get data in PNelaborados
-  get_pn_elaborado_URL = 'http://sirius.strongbox.ao:8001/api/v1/pnelaborados/';
+  get_pn_elaborado_URL = 'https://api.biplan.ao/api/v1/pnelaborados/';
   Get_pnElaborados() {
     return this.http.get<any[]>(this.get_pn_elaborado_URL)
   }
@@ -843,7 +843,7 @@ export class DataService {
   }
 
   // teste
-  url_consulta_mi = 'http://sirius.strongbox.ao:8001/api/v1';
+  url_consulta_mi = 'https://api.biplan.ao/api/v1';
   consultarManifestacaoExistente(manifestacao: any): Observable<any> {
     // const encodedManifestacao = encodeURIComponent(manifestacao);
     const params = new HttpParams().set('manifestacao_de_interesse', manifestacao);
@@ -851,110 +851,110 @@ export class DataService {
   }
 
   // to get all pgas
-  get_pgas_url = 'http://sirius.strongbox.ao:8001/api/v1/formulariojanelapgas/';
+  get_pgas_url = 'https://api.biplan.ao/api/v1/formulariojanelapgas/';
   Get_Pgas() {
     return this.http.get<any[]>(this.get_pgas_url);
   }
 
   // To save a PGAS form
-  post_pga_url = 'http://sirius.strongbox.ao:8001/api/v1';
+  post_pga_url = 'https://api.biplan.ao/api/v1';
   Save_PGAS(pgasData: any) {
     return this.http.post(this.post_pga_url + '/formulariojanelapgas/', pgasData)
   }
 
   // to Save visitas
-  url_visitas = 'http://sirius.strongbox.ao:8001/api/v1';
+  url_visitas = 'https://api.biplan.ao/api/v1';
   Save_Visitas(visitasForm: any) {
     return this.http.post(this.url_visitas + '/registrosdasvisitas/', visitasForm)
   }
 
   // to get visitas
-  url_get_visitas = 'http://sirius.strongbox.ao:8001/api/v1/registrosdasvisitas/'
+  url_get_visitas = 'https://api.biplan.ao/api/v1/registrosdasvisitas/'
   Get_visitas() {
     return this.http.get<any[]>(this.url_get_visitas);
   }
 
   // Get_metas_de_producaode_pn_do_projecto
-  url_metas_pn = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepndoprojecto/';
+  url_metas_pn = 'https://api.biplan.ao/api/v1/metasdeproducaodepndoprojecto/';
   Get_metas_de_producaode_pn_do_projecto() {
     return this.http.get<any[]>(this.url_metas_pn);
   }
 
    // To save a progress metas
-   post_progress_PN__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   post_progress_PN__url = 'https://api.biplan.ao/api/v1';
    Save_Progress_PN(Data: any) {
      return this.http.post(this.post_pga_url + '/metasdeproducaodepndoprojecto/', Data)
    }
 
    // To delete a progress metas PN
-   delete_progress_PN__url = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepndoprojecto/';
+   delete_progress_PN__url = 'https://api.biplan.ao/api/v1/metasdeproducaodepndoprojecto/';
    Delete_Progress_PN(id: any) {
     return this.http.delete(`${this.delete_progress_PN__url}${id}/`).pipe(take(1));
    }
 
     // To delete a progress metas PGAS
-    delete_progress_PGAS__url = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepgasdoprojecto/';
+    delete_progress_PGAS__url = 'https://api.biplan.ao/api/v1/metasdeproducaodepgasdoprojecto/';
     Delete_Progress_PGAS(id: any) {
      return this.http.delete(`${this.delete_progress_PGAS__url}${id}/`).pipe(take(1));
     }
 
 
    // Get_metas_de_producao_PGAS
-  url_metas_PGAS = 'http://sirius.strongbox.ao:8001/api/v1/metasdeproducaodepgasdoprojecto/';
+  url_metas_PGAS = 'https://api.biplan.ao/api/v1/metasdeproducaodepgasdoprojecto/';
   Get_metas_de_producao_de_PGAS_do_projecto() {
     return this.http.get<any[]>(this.url_metas_PGAS);
   }
 
   // To save a progress metas PGAS
-  post_progress_PGAS__url = 'http://sirius.strongbox.ao:8001/api/v1';
+  post_progress_PGAS__url = 'https://api.biplan.ao/api/v1';
   Save_Progress_PGAS(Data: any) {
     return this.http.post(this.post_progress_PGAS__url + '/metasdeproducaodepgasdoprojecto/', Data)
   }
 
   // To get a inquires done
-  post_inquires_done__url = 'http://sirius.strongbox.ao:8001/api/v1';
+  post_inquires_done__url = 'https://api.biplan.ao/api/v1';
   Send_inqueres_done_date(Data: any) {
     return this.http.post(this.post_inquires_done__url + '/inqueritosfeitosdashboard/', Data)
   }
 
    // To get PN elaborados
-   Post_inquires_done__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Post_inquires_done__url = 'https://api.biplan.ao/api/v1';
    Send_PN_elaborados_date(date:any) {
      return this.http.post(this.Post_inquires_done__url + '/pnelaboradosdashboard/', date);
    }
 
    // To get FTAS elaborados per date 
-   Post_ftas_date__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Post_ftas_date__url = 'https://api.biplan.ao/api/v1';
    Send_FTAS_date(date:any) {
      return this.http.post(this.Post_ftas_date__url + '/ftaselaboradosdashboard/', date);
    }
 
    // To get PN by CTI per date 
-   Post_pn_by_cti__url = 'http://sirius.strongbox.ao:8001/api/v1';
+   Post_pn_by_cti__url = 'https://api.biplan.ao/api/v1';
    Send_PN_by_CTI_date(date:any) {
      return this.http.post(this.Post_pn_by_cti__url + '/pnanalisadospeloctidashboard/', date);
    }
 
     // To get Desenbolsado per date 
-    Post_pn_desenbolsado__url = 'http://sirius.strongbox.ao:8001/api/v1';
+    Post_pn_desenbolsado__url = 'https://api.biplan.ao/api/v1';
     Send_PN_Desenbolsado_date(date:any) {
       return this.http.post(this.Post_pn_desenbolsado__url + '/planodenegociodesembolsadosdashboard/', date);
     }
 
    // To get tipo de producoes
-   get_tipo_de_producoes_url = 'http://sirius.strongbox.ao:8001/api/v1/tipodeproducoesdashboard/';
+   get_tipo_de_producoes_url = 'https://api.biplan.ao/api/v1/tipodeproducoesdashboard/';
    Get_tipo_producoes() {
      return this.http.get<any[]>(this.get_tipo_de_producoes_url);
    }
 
     // To get Distribuição dos PN Desembolsados por Províncias/Municípios-Cumulativo
-    get_PN_por_prov_url = 'http://sirius.strongbox.ao:8001/api/v1/pndesembolsadosporprovinciasmunicipiosdashboard/';
+    get_PN_por_prov_url = 'https://api.biplan.ao/api/v1/pndesembolsadosporprovinciasmunicipiosdashboard/';
     Get_PN_desemb_por_prov() {
       return this.http.get<any[]>(this.get_PN_por_prov_url);
     }
 
     // To get tipo de PN desembolsado
-    get_tipo_de_pn_dese_url = 'http://sirius.strongbox.ao:8001/api/v1/tipopndesembolsadosdashboard/';
+    get_tipo_de_pn_dese_url = 'https://api.biplan.ao/api/v1/tipopndesembolsadosdashboard/';
     Get_tipo_PN_desenbolsado() {
       return this.http.get<any[]>(this.get_tipo_de_pn_dese_url);
     }
